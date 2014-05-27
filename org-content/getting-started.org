@@ -1,7 +1,11 @@
 #+TITLE: Creating a site with Pelican and org-mode
-#+DATE: 2001-01-02
+#+DATE: 2014-05-26
 #+CATEGORY: org-mode
 #+PROPERTY: TAGS org-mode, pelican, elisp
+
+Never one to pass up the opportunity for yak-shaving, I thought I'd
+finally try to settle on a publishing platform for various notes and
+other content that I have scattered about on the web.
 
 I much prefer to generate content in org-mode, but I just couldn't
 manage to get org-publish to work as I wanted. When I learned that the
@@ -11,59 +15,30 @@ to use the two together, I thought I'd give it a shot.
 Pelican is pretty easy to get started with:
 
 #+BEGIN_SRC python :eval no
-virtualenv pelican-env
-source pelican-env/bin/activate
-pip install pelican markdown
+virtualenv borborygmi-env
+source borborygmi-env/bin/activate
+pip install pelican ghp-import
+pelican-quickstart
 #+END_SRC
 
-We'll also want to check out some themes:
+Which was enough to determine that it would be pretty smooth sailing.
 
-#+BEGIN_SRC sh :eval no
-git clone https://github.com/getpelican/pelican-themes
-#+END_SRC
+* org-mode integration
 
-This is the structure of the project
-
-#+BEGIN_SRC sh :results output
-tree -L 1 ..
-#+END_SRC
-
-#+RESULTS:
-#+begin_example
-..
-|-- Makefile
-|-- content
-|   `-- getting-started.html
-|-- develop_server.sh
-|-- fabfile.py
-|-- notes.html
-|-- org-content
-|   `-- getting-started.org
-|-- output
-|   |-- archives.html
-|   |-- author
-|   |-- authors.html
-|   |-- categories.html
-|   |-- category
-|   |-- creating-a-site-with-pelican-and-org-mode.html
-|   |-- index.html
-|   |-- tag
-|   |-- tags.html
-|   `-- theme
-|-- pelican-env
-|   |-- bin
-|   |-- include
-|   `-- lib
-|-- pelicanconf.py
-|-- pelicanconf.pyc
-`-- publishconf.py
-
-11 directories, 15 files
-#+end_example
+Since I already have some tools for exporting org-mode from the
+command line, it was pretty easy to write an exporter for this
+purpose. Pelican can import html content with page metadata provided
+in the header.
 
 * Choosing a theme
 
-Themes I liked
+There are plenty of choices over at [[https://github.com/getpelican/pelican-themes][the pelican-themes repository]], and
+there were a number that seemed to work well (for the time being)
+without any modification at all.
+
+For convenience, I just added the themes repository as a git submodule.
+
+Here are some I liked:
 
 - bootstrap
 - bootlex
@@ -71,6 +46,14 @@ Themes I liked
 - tuxlite_tbs
 - tuxlite_zf (although I prefer more contrast between text and code)
 - zurb-F5-basic
+
+Settled on tuxlite_tbs (thanks, [[https://github.com/chanux][chanux]]).
+
+* Hosting on github pages
+
+Thanks to the magical [[https://github.com/davisp/ghp-import][ghp-import]], hosting on GitHub pages is as easy as
+
+: ghp-import -p output
 
 * Experiments
 
@@ -102,8 +85,3 @@ pwd
 ls
 #+END_SRC
 
-* TODO
-
-- images
-- pages
-- page data
