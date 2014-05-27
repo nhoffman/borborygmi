@@ -25,8 +25,11 @@ vars.Add('theme', 'theme name', ARGUMENTS.get('theme', 'tuxlite_tbs'))
 
 paths = ['~/src/org-export'] + environ['PATH'].split(':')
 if not 'VIRTUAL_ENV' in environ:
-    venv = glob.glob('*-env')[0]
-    paths.insert(0, path.join(venv, 'bin'))
+    try:
+        venv = glob.glob('*-env')[0]
+        paths.insert(0, path.join(venv, 'bin'))
+    except IndexError:
+        pass
 
 env = Environment(ENV=dict(environ, PATH=':'.join(paths)),
                   variables=vars)
