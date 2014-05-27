@@ -1,0 +1,109 @@
+#+TITLE: Creating a site with Pelican and org-mode
+#+DATE: 2001-01-02
+#+CATEGORY: org-mode
+#+PROPERTY: TAGS org-mode, pelican, elisp
+
+I much prefer to generate content in org-mode, but I just couldn't
+manage to get org-publish to work as I wanted. When I learned that the
+[[http://docs.getpelican.com/en/latest/index.html][Pelican]] static site generator could import html and saw [[http://msnyder.info/posts/2013/12/introducing-pelicorg/][another effort]]
+to use the two together, I thought I'd give it a shot.
+
+Pelican is pretty easy to get started with:
+
+#+BEGIN_SRC python :eval no
+virtualenv pelican-env
+source pelican-env/bin/activate
+pip install pelican markdown
+#+END_SRC
+
+We'll also want to check out some themes:
+
+#+BEGIN_SRC sh :eval no
+git clone https://github.com/getpelican/pelican-themes
+#+END_SRC
+
+This is the structure of the project
+
+#+BEGIN_SRC sh :results output
+tree -L 1 ..
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+..
+|-- Makefile
+|-- content
+|   `-- getting-started.html
+|-- develop_server.sh
+|-- fabfile.py
+|-- notes.html
+|-- org-content
+|   `-- getting-started.org
+|-- output
+|   |-- archives.html
+|   |-- author
+|   |-- authors.html
+|   |-- categories.html
+|   |-- category
+|   |-- creating-a-site-with-pelican-and-org-mode.html
+|   |-- index.html
+|   |-- tag
+|   |-- tags.html
+|   `-- theme
+|-- pelican-env
+|   |-- bin
+|   |-- include
+|   `-- lib
+|-- pelicanconf.py
+|-- pelicanconf.pyc
+`-- publishconf.py
+
+11 directories, 15 files
+#+end_example
+
+* Choosing a theme
+
+Themes I liked
+
+- bootstrap
+- bootlex
+- dev-random2 (though I'd have to do some translation)
+- tuxlite_tbs
+- tuxlite_zf (although I prefer more contrast between text and code)
+- zurb-F5-basic
+
+* Experiments
+
+** Second-level headline
+
+So let's try out some org-mode markup:
+
+| here's | a    | table  |
+|--------+------+--------|
+| with   |      | values |
+| in     | some | cells  |
+
+Hey, a [[http://en.wikipedia.org/wiki/File:Perameles_gunni.jpg][bandicoot]]!
+
+[[file:getting-started/Perameles_gunni.jpg]]
+
+#+BEGIN_SRC R :exports both :results output
+png('getting-started/qnorm.png')
+plot(qnorm)
+invisible(dev.off())
+#+END_SRC
+
+#+RESULTS:
+
+[[file:getting-started/qnorm.png]]
+
+#+BEGIN_SRC sh :results output
+pwd
+ls
+#+END_SRC
+
+* TODO
+
+- images
+- pages
+- page data

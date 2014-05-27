@@ -1,0 +1,5 @@
+output
+content
+.sconsign.dblite
+*.pyc
+*-env
