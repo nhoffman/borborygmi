@@ -1,2 +1,4 @@
 pelican
 ghp-import
+pygments
+lxml
