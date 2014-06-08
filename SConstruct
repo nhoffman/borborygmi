@@ -47,7 +47,8 @@ for post_name in posts:
     html, = e.Command(
         target='$content/${post}.html',
         source='$org_content/${post}.org',
-        action=('org-export pelican --infile $SOURCE --outfile $TARGET')
+        action=('org-export pelican --infile $SOURCE --outfile $TARGET && '
+                './colorize.py $TARGET')
     )
 
     content.append(html)
@@ -56,19 +57,19 @@ for post_name in posts:
     if path.isdir(post_dir):
         post_files = glob.glob(path.join(post_dir, '*'))
         for fn in post_files:
-            print fn
             copy, = e.Command(
                 target='$output/$post/{}'.format(path.basename(fn)),
                 source=fn,
                 action=Copy('$TARGET', '$SOURCE')
             )
+            Depends(copy, html)
 
 index, = env.Command(
     target='$output/index.html',
     source=content,
     action=('pelican content -t pelican-themes/$theme')
 )
-Depends(index, ['pelicanconf.py'])
+Depends(index, Flatten([content, 'pelicanconf.py']))
 
 
 

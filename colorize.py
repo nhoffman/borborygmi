@@ -15,6 +15,27 @@ from pygments import highlight
 from pygments.lexers import get_all_lexers, get_lexer_by_name
 from pygments.formatters import get_formatter_by_name
 
+from pygments_pprint_sql import SqlFilter
+
+def get_lexer(css_class):
+    """Associate css-classes in code blocks with pygemnts lexer names
+
+    """
+
+    lexers = {'src-python': 'python',
+              'src-sh': 'bash',
+              'src-sqlite': 'sql',
+              'emacs-lisp': 'cl'}
+
+    try:
+        lexer = get_lexer_by_name(lexers[css_class])
+    except KeyError:
+        lexer = None
+    else:
+        if 'sql' in css_class:
+            lexer.add_filter(SqlFilter())
+
+    return lexer
 
 def main(arguments):
 
@@ -33,12 +54,6 @@ def main(arguments):
             print x
         sys.exit()
 
-    # associate css-classes in code blocks with pygemnts lexer names
-    lexers = {'src-python': 'python',
-              'src-sh': 'bash',
-              'src-sqlite': 'sql',
-              'emacs-lisp': 'cl'}
-
     formatter = get_formatter_by_name('html')
 
     with open(args.infile) as f:
@@ -48,20 +63,18 @@ def main(arguments):
     for block in code_blocks:
         css_class = block.get('class').split()[-1]
 
-        try:
-            lexer = get_lexer_by_name(lexers[css_class])
-        except KeyError:
-            continue
+        lexer = get_lexer(css_class)
 
-        colorized = html.fragment_fromstring(
-            highlight(block.text, lexer, formatter),
-            create_parent=False)
+        if lexer:
+            colorized = html.fragment_fromstring(
+                highlight(block.text, lexer, formatter),
+                create_parent=False)
 
-        parent = block.getparent()
-        parent.replace(block, colorized)
+            parent = block.getparent()
+            parent.replace(block, colorized)
 
-    with open(args.outfile or args.infile, 'w') as f:
-        f.write(html.tostring(tree))
+            with open(args.outfile or args.infile, 'w') as f:
+                f.write(html.tostring(tree))
 
 
 if __name__ == '__main__':
