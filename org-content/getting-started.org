@@ -14,21 +14,122 @@ to use the two together, I thought I'd give it a shot.
 
 Pelican is pretty easy to get started with:
 
-#+BEGIN_SRC python :eval no
+#+BEGIN_SRC sh :eval no
 virtualenv borborygmi-env
 source borborygmi-env/bin/activate
-pip install pelican ghp-import
+pip install pelican
 pelican-quickstart
 #+END_SRC
 
-Which was enough to determine that it would be pretty smooth sailing.
-
 * org-mode integration
 
-Since I already have some tools for exporting org-mode from the
-command line, it was pretty easy to write an exporter for this
-purpose. Pelican can import html content with page metadata provided
-in the header.
+At a basic level, integration with org-mode is pretty simple: Pelican
+can import html content with page metadata provided in the
+header. Since I already have some tools for exporting org-mode from
+the command line (the project is named [[https://github.com/nhoffman/org-export][org-export]]), it was pretty easy
+to write a utility for this purpose.
+
+#+BEGIN_SRC sh :results output
+org-export pelican -h
+#+END_SRC
+
+The utility renders the just body of the page (leaving all of the
+styling, etc to Pelican) and provides page metadata in the header, for
+example:
+
+#+BEGIN_SRC sh :results output
+head ../content/getting-started.html
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+<html>
+    <head>
+        <title>Creating a site with Pelican and org-mode</title>
+        <meta name="authors" content="Noah Hoffman">
+        <meta name="date" content="2014-05-26">
+        <meta name="category" content="org-mode">
+        <meta name="tags" content="org-mode, pelican, elisp">
+        <meta name="save_as" content="getting-started.html">
+        <meta name="url" content="getting-started.html">
+    </head>
+#+end_example
+
+Specifying "save_as" and "url" was more convenient than trying to
+guess how Pelican would name the page.
+
+The org-mode source for each post is compiled to html and placed in
+pelican's =content= directory, where it is subsequently added to the
+site using =pelican content=. I liked that compiling each org-mode
+file to html is performed separately from rendering the content with
+Pelican: the former step is relatively slow, and a build tool can
+easily be used to render only pages that have changed (I use [[http://www.scons.org/][scons]]).
+
+There were a couple of tricky bits, though.
+
+** Arranging content in subdirectories
+
+First, I wanted to be able to create subdirectories containing data or
+images for specific posts (as opposed to lumping them all together in
+a single directory). Pelican doesn't seem to support this. So the
+SConstruct file manages the creation of subdirectories in Pelican's
+output directory and also copes page data and images there.
+
+Then, when writing posts, you just need to remain aware of the
+location of the data directory for a post relative to the org-mode
+source; this relationship is preserved in the final output. Note that
+the output of plotting operations should also be saved to the post's
+subdirectory (eg, =plot1.png=).
+
+Let's look at the organization of content and intermediate files for
+this post. Here's the working directory when the org-mode source is
+evaluated:
+
+#+BEGIN_SRC sh :results output
+pwd
+#+END_SRC
+
+The org-mode source is here:
+
+#+BEGIN_SRC sh :results output :exports results
+ls ../org-content/getting-started* | grep -Ev 'temp|^$'
+#+END_SRC
+
+Here is the intermediate html body for the post (note that these paths
+are relative to the org-mode source):
+
+: ../content/getting-started.html
+
+And the final output:
+
+#+BEGIN_SRC sh :results output :exports results
+ls ../output/getting-started* | grep -Ev 'temp|^$'
+#+END_SRC
+
+** Syntax highlighting
+
+Unfortunately, org-mode appears to rely on syntax highlighting in the
+console to colorize the output (I have a vague understanding that this
+has something to do with font-lock-mode), so non-interactive html
+export doesn't produce the same output as exported pages produced
+interactively from an open buffer. My solution was to use [[http://pygments.org/][pygments]] to
+generate the html markup and [[http://lxml.de/][lxml]] to extract text from code blocks and
+replace them with html markup (this is done in [[https://github.com/nhoffman/borborygmi/blob/master/colorize.py][colorize.py]]).
+
+Also unfortunately, the variable =org-src-fontify-natively= that is
+advertised (I think) to suppress html markup in exported code blocks
+so that I could use pygments to produce syntax highlighting,
+doesn't. My ugly hack to get around this was to replace the org-mode
+function responsible for marking up the code blocks with a neutered
+version:
+
+#+BEGIN_SRC emacs-lisp :eval no
+(defun org-html-fontify-code (code lang)
+  "Replaces the original function to suppress syntax
+highlighting"
+  (when code
+    (org-html-encode-plain-text code)))
+#+END_SRC
 
 * Choosing a theme
 
@@ -55,33 +156,44 @@ Thanks to the magical [[https://github.com/davisp/ghp-import][ghp-import]], host
 
 : ghp-import -p output
 
-* Experiments
+* Examples
 
-** Second-level headline
-
-So let's try out some org-mode markup:
-
+#+CAPTION: An org-mode table
 | here's | a    | table  |
 |--------+------+--------|
 | with   |      | values |
 | in     | some | cells  |
 
-Hey, a [[http://en.wikipedia.org/wiki/File:Perameles_gunni.jpg][bandicoot]]!
-
+#+CAPTION: Hey, a [[http://en.wikipedia.org/wiki/File:Perameles_gunni.jpg][bandicoot]]!
 [[file:getting-started/Perameles_gunni.jpg]]
 
+#+CAPTION: Example of an R plot, output file specified in the code block.
 #+BEGIN_SRC R :exports both :results output
-png('getting-started/qnorm.png')
+png('getting-started/plot1.png')
 plot(qnorm)
 invisible(dev.off())
 #+END_SRC
 
 #+RESULTS:
 
-[[file:getting-started/qnorm.png]]
+[[file:getting-started/plot1.png]]
 
-#+BEGIN_SRC sh :results output
-pwd
-ls
+#+CAPTION: Example of an R plot, output file specified in the header.
+#+BEGIN_SRC R :results output graphics :exports both :file getting-started/plot2.png
+plot(1:10)
 #+END_SRC
 
+#+CAPTION: A python code block with output
+#+BEGIN_SRC python
+for i in range(3):
+    print 'hello' + '!' * i
+#+END_SRC
+
+#+CAPTION: An sqlite3 code block producing an html-formatted table
+#+BEGIN_SRC sqlite :db ":memory:" :results value
+.header on
+create table foo (bar, baz);
+insert into foo values('a', 1);
+insert into foo values('b', 2);
+select * from foo;
+#+END_SRC
