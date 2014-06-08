@@ -1,0 +1,183 @@
+#+TITLE: A practical introduction to databases and data management
+#+DATE: 2014-05-30
+#+CATEGORY: lectures
+#+PROPERTY: TAGS laboratory medicine
+#+PROPERTY: header-args:sqlite :db database-intro/results.db :header on :results value
+
+This post contains the content of a lecture prepared for Laboratory Medicine residents as part of a series on medical informatics.
+
+#+NAME: setup
+#+BEGIN_SRC sh
+mkdir -p database-intro
+rm -f database-intro/*.csv
+rm -f database-intro/results.db
+#+END_SRC
+
+#+ATTR_HTML: :style display: none;
+#+NAME: patients
+| pkey | mrn     | name             |        dob | sex |
+| 1    | U123456 | Roger Rabbit     | 1939-04-01 | M   |
+| 2    | U654321 | Jessica Krupnick | 1924-10-27 | F   |
+
+#+ATTR_HTML: :style display: none;
+#+NAME: physicians
+| doc_id | doc_name        |
+| P01    | Dr. Spock       |
+| P02    | Dr. Horrible    |
+| P03    | Dr. Strangelove |
+
+#+ATTR_HTML: :style display: none;
+#+NAME: physician_patient
+| doc_id | mrn     |
+| P01    | U123456 |
+| P01    | U654321 |
+| P02    | U654321 |
+| P03    | U123456 |
+
+#+ATTR_HTML: :style display: none;
+#+NAME: results
+| mrn     | accession |       date | battery_code | test_code | value | flag |
+| U123456 | M00001    | 2014-06-02 | BMP          | GLU       | 135.0 | H    |
+| U123456 | M00001    | 2014-06-02 | BMP          | K         |   4.0 |      |
+| U123456 | T00001    | 2014-06-03 | CMP          | GLU       |  90.0 |      |
+| U123456 | T00001    | 2014-06-03 | CMP          | K         |   2.7 | L    |
+| U654321 | M00002    | 2014-06-02 | CMP          | GLU       |  85.0 |      |
+| U654321 | M00002    | 2014-06-02 | CMP          | K         |   4.1 |      |
+| U654321 | T00002    | 2014-06-03 | BMP          | GLU       |  75.0 |      |
+| U654321 | T00002    | 2014-06-03 | BMP          | K         |   4.2 |      |
+
+#+ATTR_HTML: :style display: none;
+#+NAME: tests
+| test_code | test_name | ref_range | range_low | range_hi |
+| Glucose   | GLU       |    62-125 |        62 |      125 |
+| Potassium | K         |   3.7-5.2 |       3.7 |      5.2 |
+
+#+ATTR_HTML: :style display: none;
+#+NAME: batteries
+| battery_code | battery_name                  |
+| CMP          | Comprehensive Metabolic Panel |
+| BMP          | Basic Metabolic Panel         |
+
+#+ATTR_HTML: :style display: none;
+#+NAME: battery_tests
+| battery_code | test_code |
+| CMP          | GLU       |
+| CMP          | K         |
+| BMP          | GLU       |
+| BMP          | K         |
+
+#+NAME: write_csv
+#+BEGIN_SRC python :exports results :var tbl_patients=patients tbl_results=results tbl_tests=tests tbl_batteries=batteries tbl_battery_tests=battery_tests tbl_patients=patients tbl_physicians=physicians tbl_physician_patient=physician_patient
+import csv
+tables = [(k, v) for k, v in locals().items() if k.startswith('tbl_')]
+for name, rows in tables:
+    with open('database-intro/%s.csv' % name.replace('tbl_', ''), 'w') as f:
+        csv.writer(f).writerows(rows)
+#+END_SRC
+
+#+NAME: create_database
+#+BEGIN_SRC sh :exports results
+rm -f database-intro/results.db
+for tbl in database-intro/*.csv; do
+csvsql --no-inference --db sqlite:///database-intro/results.db --insert $tbl
+done
+#+END_SRC
+
+* Database types
+
+* Relational database terminology
+
+- row :: contains a *tuple* or *record* representing a single item.
+- column :: represents an *attribute* or *field* and corresponds to a labeled element of a record; all elements within a column are of the same data type.
+- table :: a set of rows and columns.
+
+#+CAPTION: Components of a table from a relational database. Source: [[http://en.wikipedia.org/wiki/Relational_database][wikipedia]]
+[[file:database-intro/984px-Relational_database_terms.svg.png]]
+
+- primary key :: a field (or multiple fields in combination) that uniquely identify a row. Can either be *natural* (i.e., consisting of attributes that already exist in the table), or *surrogate* (i.e., a new attribute with no "real world" meaning created for the purpose).
+- index ::
+
+* Relations
+
+#+CAPTION: Types of relation. Source: [[http://fms-itskills.ncl.ac.uk/dbp/ERlarge.png][fms-itskills.ncl.ac.uk]]
+[[file:database-intro/ERlarge.png]]
+
+** one to one
+- describes the relationship between two or more elements in which each element uniquely identifies the other (likely to be true only in a specific context).
+- represented by elements in the same row
+- eg, name <--> mrn (but is this really true?)
+
+#+BEGIN_SRC sqlite
+select mrn, name from patients;
+#+END_SRC
+
+#+RESULTS:
+| mrn     | name             |        dob | sex |
+| U123456 | Roger Rabbit     | 1939-04-01 | M   |
+| U654321 | Jessica Krupnick | 1924-10-27 | F   |
+
+** one to many
+- in the context of a database, is represented by a pair of tables, in which an element or row can be related to multiple rows in another table
+
+#+BEGIN_SRC sqlite
+select name, mrn, accession
+from patients
+join results using(mrn)
+group by accession
+order by mrn;
+#+END_SRC
+
+#+RESULTS:
+| name             | mrn     | accession |
+| Roger Rabbit     | U123456 | M00001    |
+| Roger Rabbit     | U123456 | T00001    |
+| Jessica Krupnick | U654321 | M00002    |
+| Jessica Krupnick | U654321 | T00002    |
+
+** many to many
+
+- an entity in table A maps to more than one entity in table B, and vice-versa.
+- a many-to-many relation between two tables is represented via a third *junction table* or *cross-reference table*.
+- for example, each patient may see more than one physician, and each physician sees many patients.
+
+#+NAME: show_patients
+#+BEGIN_SRC sqlite
+select * from patients;
+#+END_SRC
+
+#+NAME: show_physicians
+#+BEGIN_SRC sqlite
+select * from physicians;
+#+END_SRC
+
+#+NAME: show_physician_patient
+#+BEGIN_SRC sqlite
+select * from physician_patient;
+#+END_SRC
+
+Now we can view all physician-patient relationships using a three-way join
+
+#+BEGIN_SRC sqlite
+select name, doc_name from patients
+join physician_patient using(mrn)
+join physicians using(doc_id);
+#+END_SRC
+
+#+RESULTS:
+| name             | doc_name        |
+| Roger Rabbit     | Dr. Spock       |
+| Roger Rabbit     | Dr. Strangelove |
+| Jessica Krupnick | Dr. Spock       |
+| Jessica Krupnick | Dr. Horrible    |
+
+* Relational database operations
+** select
+** order
+** join
+** group and aggregate
+
+* Organizing experimental data
+
+* Sources
+- http://en.wikipedia.org/wiki/Relational_database
+- http://en.wikipedia.org/wiki/Cardinality_(data_modeling)

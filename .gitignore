@@ -3,3 +3,5 @@ content
 .sconsign.dblite
 *.pyc
 *-env
+.DS_Store
+*.temp.*
