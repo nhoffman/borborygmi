@@ -6,8 +6,15 @@
 
 This post contains the content of a lecture prepared for Laboratory Medicine residents as part of a series on medical informatics.
 
+* Objectives
+
+- be aware that relational databases are a thing and can be described using some terms.
+- get to know the different types of relations.
+- see some examples.
+- make a connection between the above and some useful habits (and harmful anti-patterns) for organizing laboratory and experimental data.
+
 #+NAME: setup
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh :exports results
 mkdir -p database-intro
 rm -f database-intro/*.csv
 rm -f database-intro/results.db
@@ -83,10 +90,9 @@ csvsql --no-inference --db sqlite:///database-intro/results.db --insert $tbl
 done
 #+END_SRC
 
-* Database types
-
 * Relational database terminology
 
+- relational database :: a tabular database with defined "relations" among elements within and between tables.
 - row :: contains a *tuple* or *record* representing a single item.
 - column :: represents an *attribute* or *field* and corresponds to a labeled element of a record; all elements within a column are of the same data type.
 - table :: a set of rows and columns.
@@ -170,14 +176,43 @@ join physicians using(doc_id);
 | Jessica Krupnick | Dr. Spock       |
 | Jessica Krupnick | Dr. Horrible    |
 
-* Relational database operations
+* More examples of relational database operations using SQL
 ** select
-** order
 ** join
 ** group and aggregate
 
+* Other (non-relational) database types
+** hierarchical
+
+Hierarchical databases organize data in a tree-like structure. Data is represented as a graph of one-to-many (patent -> child) relations.
+
+#+BEGIN_SRC dot :results output :exports results :file database-intro/hierarchical.png
+digraph G {
+"Hospital";
+"Hospital" -> "Patient 1";
+"Hospital" -> "Patient 2";
+"Patient 1" -> "Accession 1";
+"Patient 1" -> "Accession 2";
+"Accession 1" -> "Order 1";
+"Accession 1" -> "Order 2";
+"Order 1" -> "Result 1";
+"Order 1" -> "Result 2";
+"Order 1" -> "Result 3";
+"Accession 2" -> "Order 3";
+"Order 3" -> "Result 4";
+}
+#+END_SRC
+
+- hierarchical databases are arguably extremely well-suited for modeling healthcare data.
+- can be used to efficiently represent data that would otherwise require many tables in a well-normalized relational database.
+- depending on the structure of the hierarchy, certain queries can be extremely efficient: eg, all orders for Patient 1 can be found by traversing only the subtree containing data for that patient, which might represent only a tiny fraction of the entire database.
+- other sorts of queries can be extremely inefficient: eg, finding all results of a certain type might require traversal of the entire tree!
+- guess what: major healthcare applications such as the VA system (VistA), Sunquest FlexiLab, and many Epic products use a hierarchical database implemented using the [[http://en.wikipedia.org/wiki/MUMPS][MUMPS]] language.
+
+** key/value store
 * Organizing experimental data
 
 * Sources
 - http://en.wikipedia.org/wiki/Relational_database
 - http://en.wikipedia.org/wiki/Cardinality_(data_modeling)
+- http://healthcaresecurity.wordpress.com/2010/10/12/why-are-hierarchical-databases-like-mumps-still-popular-in-healthcare/
