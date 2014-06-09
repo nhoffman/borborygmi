@@ -3,7 +3,7 @@ import re
 import glob
 from os import path, environ
 
-from SCons.Script import (Variables, Depends, Environment, ARGUMENTS, Copy)
+from SCons.Script import (Variables, Depends, Environment, ARGUMENTS, Flatten)
 
 
 def check_filename(filename):
@@ -12,7 +12,6 @@ def check_filename(filename):
         print ('The name "{}" contains illegal characters '
                '(should be alphanumeric or "-")').format(filename)
         sys.exit(1)
-
 
 # variables defining destination for output files; can be redefined
 # from the command line, eg "scons site=path/to/output"
@@ -53,16 +52,15 @@ for post_name in posts:
 
     content.append(html)
 
+    # copy any static or derived files associated with the post
     post_dir = e.subst('$org_content/$post')
     if path.isdir(post_dir):
-        post_files = glob.glob(path.join(post_dir, '*'))
-        for fn in post_files:
-            copy, = e.Command(
-                target='$output/$post/{}'.format(path.basename(fn)),
-                source=fn,
-                action=Copy('$TARGET', '$SOURCE')
-            )
-            Depends(copy, html)
+        outdir = e.Command(
+            target=e.Dir('$output/$post'),
+            source=post_dir,
+            action='rsync -a --delete $SOURCE/ $TARGET'
+        )
+        Depends(outdir, html)
 
 index, = env.Command(
     target='$output/index.html',
@@ -70,9 +68,3 @@ index, = env.Command(
     action=('pelican content -t pelican-themes/$theme')
 )
 Depends(index, Flatten([content, 'pelicanconf.py']))
-
-
-
-
-
-
