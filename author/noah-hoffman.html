@@ -56,8 +56,8 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="../getting-started.html"><h1>Creating a site with Pelican and org-mode</h1></a>
-Mon 26 May 2014
+            <a href="../database-intro.html"><h1>A practical introduction to databases and data management</h1></a>
+Wed 11 June 2014
 
 by <a class="url fn" href="../author/noah-hoffman.html">Noah Hoffman</a>
  
@@ -70,196 +70,1310 @@ by <a class="url fn" href="../author/noah-hoffman.html">Noah Hoffman</a>
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">org-mode integration</a></li>
-<li><a href="#sec-2">Choosing a theme</a></li>
-<li><a href="#sec-3">Hosting on github pages</a></li>
-<li><a href="#sec-4">Experiments</a>
+<li><a href="#sec-1">Setup</a></li>
+<li><a href="#sec-2">Objectives</a></li>
+<li><a href="#sec-3">Relational database terminology</a></li>
+<li><a href="#sec-4">Relations</a>
 <ul>
-<li><a href="#sec-4-1">Second-level headline</a></li>
+<li><a href="#sec-4-1">one to one</a></li>
+<li><a href="#sec-4-2">one to many</a></li>
+<li><a href="#sec-4-3">many to many</a></li>
 </ul>
 </li>
+<li><a href="#sec-5">Data types</a></li>
+<li><a href="#sec-6">SQL</a></li>
+<li><a href="#sec-7">Some examples of relational database operations using SQL</a>
+<ul>
+<li><a href="#sec-7-1">select</a></li>
+<li><a href="#sec-7-2">join</a></li>
+<li><a href="#sec-7-3">group and aggregate</a></li>
+</ul>
+</li>
+<li><a href="#sec-8">Hierarchical databases</a></li>
+<li><a href="#sec-9">Data management patterns and antipatterns</a></li>
+<li><a href="#sec-10">Sources</a></li>
 </ul>
 </div>
 </div>
 <p>
-Never one to pass up the opportunity for yak-shaving, I thought I'd
-finally try to settle on a publishing platform for various notes and
-other content that I have scattered about on the web.
-</p>
-
-<p>
-I much prefer to generate content in org-mode, but I just couldn't
-manage to get org-publish to work as I wanted. When I learned that the
-<a href="http://docs.getpelican.com/en/latest/index.html">Pelican</a> static site generator could import html and saw <a href="http://msnyder.info/posts/2013/12/introducing-pelicorg/">another effort</a>
-to use the two together, I thought I'd give it a shot.
-</p>
-
-<p>
-Pelican is pretty easy to get started with:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-python">virtualenv borborygmi-env
-source borborygmi-env/<span style="font-weight: bold;">bin</span>/activate
-pip install pelican ghp-<span style="font-weight: bold;">import</span>
-pelican-quickstart
-</pre>
-</div>
-
-<p>
-Which was enough to determine that it would be pretty smooth sailing.
+This post contains the content of a lecture prepared for Laboratory Medicine residents as part of a series on medical informatics.
 </p>
 
 <div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">org-mode integration</h2>
+<h2 id="sec-1">Setup</h2>
 <div class="outline-text-2" id="text-1">
-<p>
-Since I already have some tools for exporting org-mode from the
-command line, it was pretty easy to write an exporter for this
-purpose. Pelican can import html content with page metadata provided
-in the header.
-</p>
+<table id="patients" class="table table-striped table-bordered table-condensed" style="display: none;">
+
+
+<colgroup>
+<col class="right">
+
+<col class="left">
+
+<col class="left">
+
+<col class="right">
+
+<col class="left">
+</colgroup>
+<tbody>
+<tr>
+<td class="right">pkey</td>
+<td class="left">mrn</td>
+<td class="left">name</td>
+<td class="right">dob</td>
+<td class="left">sex</td>
+</tr>
+
+<tr>
+<td class="right">1</td>
+<td class="left">U123456</td>
+<td class="left">Roger Rabbit</td>
+<td class="right">1939-04-01</td>
+<td class="left">M</td>
+</tr>
+
+<tr>
+<td class="right">2</td>
+<td class="left">U654321</td>
+<td class="left">Jessica Krupnick</td>
+<td class="right">1924-10-27</td>
+<td class="left">F</td>
+</tr>
+</tbody>
+</table>
+
+<table id="physicians" class="table table-striped table-bordered table-condensed" style="display: none;">
+
+
+<colgroup>
+<col class="left">
+
+<col class="left">
+</colgroup>
+<tbody>
+<tr>
+<td class="left">doc_id</td>
+<td class="left">doc_name</td>
+</tr>
+
+<tr>
+<td class="left">P01</td>
+<td class="left">Dr. Spock</td>
+</tr>
+
+<tr>
+<td class="left">P02</td>
+<td class="left">Dr. Horrible</td>
+</tr>
+
+<tr>
+<td class="left">P03</td>
+<td class="left">Dr. Strangelove</td>
+</tr>
+</tbody>
+</table>
+
+<table id="physician_patient" class="table table-striped table-bordered table-condensed" style="display: none;">
+
+
+<colgroup>
+<col class="left">
+
+<col class="left">
+</colgroup>
+<tbody>
+<tr>
+<td class="left">doc_id</td>
+<td class="left">mrn</td>
+</tr>
+
+<tr>
+<td class="left">P01</td>
+<td class="left">U123456</td>
+</tr>
+
+<tr>
+<td class="left">P01</td>
+<td class="left">U654321</td>
+</tr>
+
+<tr>
+<td class="left">P02</td>
+<td class="left">U654321</td>
+</tr>
+
+<tr>
+<td class="left">P03</td>
+<td class="left">U123456</td>
+</tr>
+</tbody>
+</table>
+
+<table id="results" class="table table-striped table-bordered table-condensed" style="display: none;">
+
+
+<colgroup>
+<col class="left">
+
+<col class="left">
+
+<col class="right">
+
+<col class="left">
+
+<col class="left">
+
+<col class="right">
+
+<col class="left">
+</colgroup>
+<tbody>
+<tr>
+<td class="left">mrn</td>
+<td class="left">accession</td>
+<td class="right">date</td>
+<td class="left">battery_code</td>
+<td class="left">test_code</td>
+<td class="right">value</td>
+<td class="left">flag</td>
+</tr>
+
+<tr>
+<td class="left">U123456</td>
+<td class="left">M00001</td>
+<td class="right">2014-06-02</td>
+<td class="left">BMP</td>
+<td class="left">GLU</td>
+<td class="right">135.0</td>
+<td class="left">H</td>
+</tr>
+
+<tr>
+<td class="left">U123456</td>
+<td class="left">M00001</td>
+<td class="right">2014-06-02</td>
+<td class="left">BMP</td>
+<td class="left">K</td>
+<td class="right">4.0</td>
+<td class="left">&#160;</td>
+</tr>
+
+<tr>
+<td class="left">U123456</td>
+<td class="left">T00001</td>
+<td class="right">2014-06-03</td>
+<td class="left">CMP</td>
+<td class="left">GLU</td>
+<td class="right">90.0</td>
+<td class="left">&#160;</td>
+</tr>
+
+<tr>
+<td class="left">U123456</td>
+<td class="left">T00001</td>
+<td class="right">2014-06-03</td>
+<td class="left">CMP</td>
+<td class="left">K</td>
+<td class="right">2.7</td>
+<td class="left">L</td>
+</tr>
+
+<tr>
+<td class="left">U654321</td>
+<td class="left">M00002</td>
+<td class="right">2014-06-02</td>
+<td class="left">CMP</td>
+<td class="left">GLU</td>
+<td class="right">85.0</td>
+<td class="left">&#160;</td>
+</tr>
+
+<tr>
+<td class="left">U654321</td>
+<td class="left">M00002</td>
+<td class="right">2014-06-02</td>
+<td class="left">CMP</td>
+<td class="left">K</td>
+<td class="right">4.1</td>
+<td class="left">&#160;</td>
+</tr>
+
+<tr>
+<td class="left">U654321</td>
+<td class="left">T00002</td>
+<td class="right">2014-06-03</td>
+<td class="left">BMP</td>
+<td class="left">GLU</td>
+<td class="right">75.0</td>
+<td class="left">&#160;</td>
+</tr>
+
+<tr>
+<td class="left">U654321</td>
+<td class="left">T00002</td>
+<td class="right">2014-06-03</td>
+<td class="left">BMP</td>
+<td class="left">K</td>
+<td class="right">4.2</td>
+<td class="left">&#160;</td>
+</tr>
+</tbody>
+</table>
+
+<table id="tests" class="table table-striped table-bordered table-condensed" style="display: none;">
+
+
+<colgroup>
+<col class="left">
+
+<col class="left">
+
+<col class="left">
+
+<col class="right">
+
+<col class="right">
+</colgroup>
+<tbody>
+<tr>
+<td class="left">test_name</td>
+<td class="left">test_code</td>
+<td class="left">ref_range</td>
+<td class="right">range_low</td>
+<td class="right">range_hi</td>
+</tr>
+
+<tr>
+<td class="left">Glucose</td>
+<td class="left">GLU</td>
+<td class="left">62 - 125</td>
+<td class="right">62</td>
+<td class="right">125</td>
+</tr>
+
+<tr>
+<td class="left">Potassium</td>
+<td class="left">K</td>
+<td class="left">3.7 - 5.2</td>
+<td class="right">3.7</td>
+<td class="right">5.2</td>
+</tr>
+</tbody>
+</table>
+
+<table id="batteries" class="table table-striped table-bordered table-condensed" style="display: none;">
+
+
+<colgroup>
+<col class="left">
+
+<col class="left">
+</colgroup>
+<tbody>
+<tr>
+<td class="left">battery_code</td>
+<td class="left">battery_name</td>
+</tr>
+
+<tr>
+<td class="left">CMP</td>
+<td class="left">Comprehensive Metabolic Panel</td>
+</tr>
+
+<tr>
+<td class="left">BMP</td>
+<td class="left">Basic Metabolic Panel</td>
+</tr>
+</tbody>
+</table>
+
+<table id="battery_tests" class="table table-striped table-bordered table-condensed" style="display: none;">
+
+
+<colgroup>
+<col class="left">
+
+<col class="left">
+</colgroup>
+<tbody>
+<tr>
+<td class="left">battery_code</td>
+<td class="left">test_code</td>
+</tr>
+
+<tr>
+<td class="left">CMP</td>
+<td class="left">GLU</td>
+</tr>
+
+<tr>
+<td class="left">CMP</td>
+<td class="left">K</td>
+</tr>
+
+<tr>
+<td class="left">BMP</td>
+<td class="left">GLU</td>
+</tr>
+
+<tr>
+<td class="left">BMP</td>
+<td class="left">K</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 
 <div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2">Choosing a theme</h2>
+<h2 id="sec-2">Objectives</h2>
 <div class="outline-text-2" id="text-2">
-<p>
-There are plenty of choices over at <a href="https://github.com/getpelican/pelican-themes">the pelican-themes repository</a>, and
-there were a number that seemed to work well (for the time being)
-without any modification at all.
-</p>
-
-<p>
-For convenience, I just added the themes repository as a git submodule.
-</p>
-
-<p>
-Here are some I liked:
-</p>
-
 <ul class="org-ul">
-<li>bootstrap
+<li>be aware that relational databases are a thing and can be described using some terms.
 </li>
-<li>bootlex
+<li>get to know the different types of relations.
 </li>
-<li>dev-random2 (though I'd have to do some translation)
+<li>see some examples of SQL in action.
 </li>
-<li>tuxlite_tbs
-</li>
-<li>tuxlite_zf (although I prefer more contrast between text and code)
-</li>
-<li>zurb-F5-basic
+<li>make a connection between the above and some useful habits (and harmful anti-patterns) for organizing laboratory and experimental data.
 </li>
 </ul>
-
-<p>
-Settled on tuxlite_tbs (thanks, <a href="https://github.com/chanux">chanux</a>).
-</p>
 </div>
 </div>
 
 <div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3">Hosting on github pages</h2>
+<h2 id="sec-3">Relational database terminology</h2>
 <div class="outline-text-2" id="text-3">
-<p>
-Thanks to the magical <a href="https://github.com/davisp/ghp-import">ghp-import</a>, hosting on GitHub pages is as easy as
-</p>
+<dl class="org-dl">
+<dt> relational database </dt><dd>a tabular database with defined "relations" (which can be described in terms of <a href="http://en.wikipedia.org/wiki/Relational_algebra">relational algebra</a>) among elements within and between tables.
+</dd>
+<dt> row </dt><dd>contains a <b>tuple</b> or <b>record</b> representing a single item.
+</dd>
+<dt> column </dt><dd>represents an <b>attribute</b> or <b>field</b> and corresponds to a labeled element of a record; all elements within a column are of the same data type.
+</dd>
+<dt> table </dt><dd>a set of rows and columns.
+</dd>
+</dl>
 
-<pre class="example">
-ghp-import -p output
-</pre>
+
+<div class="figure">
+<p><img src="database-intro/984px-Relational_database_terms.svg.png" alt="984px-Relational_database_terms.svg.png">
+</p>
+<p><span class="figure-number">Figure 1:</span> Components of a table from a relational database. Source: <a href="http://en.wikipedia.org/wiki/Relational_database">wikipedia</a></p>
+</div>
+
+<dl class="org-dl">
+<dt> primary key </dt><dd>a field (or multiple fields in combination) that uniquely identify a row. Can either be <b>natural</b> (i.e., consisting of attributes that already exist in the table), or <b>surrogate</b> (i.e., a new attribute with no "real world" meaning created for the purpose).
+</dd>
+</dl>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="right">
+
+<col class="left">
+
+<col class="left">
+
+<col class="right">
+
+<col class="left">
+</colgroup>
+<tbody>
+<tr>
+<td class="right">pkey</td>
+<td class="left">mrn</td>
+<td class="left">name</td>
+<td class="right">dob</td>
+<td class="left">sex</td>
+</tr>
+
+<tr>
+<td class="right">1</td>
+<td class="left">U123456</td>
+<td class="left">Roger Rabbit</td>
+<td class="right">1939-04-01</td>
+<td class="left">M</td>
+</tr>
+
+<tr>
+<td class="right">2</td>
+<td class="left">U654321</td>
+<td class="left">Jessica Krupnick</td>
+<td class="right">1924-10-27</td>
+<td class="left">F</td>
+</tr>
+</tbody>
+</table>
+
+<dl class="org-dl">
+<dt> index </dt><dd>a data structure that improves the efficiency of data manipulation by reorganizing or clustering elements, typically as a tree.
+</dd>
+</dl>
 </div>
 </div>
 
 <div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4">Experiments</h2>
+<h2 id="sec-4">Relations</h2>
 <div class="outline-text-2" id="text-4">
 </div><div id="outline-container-sec-4-1" class="outline-3">
-<h3 id="sec-4-1">Second-level headline</h3>
+<h3 id="sec-4-1">one to one</h3>
 <div class="outline-text-3" id="text-4-1">
+<ul class="org-ul">
+<li>describes the relationship between two or more elements in which each element uniquely identifies the other (likely to be true only in a specific context).
+</li>
+<li>represented by elements in the same row
+</li>
+<li>eg, name &lt;&#8211;&gt; mrn (but is this really true?)
+</li>
+</ul>
+
 <p>
-So let's try out some org-mode markup:
+Graphically:
+</p>
+
+
+<div class="figure">
+<p><img src="database-intro/one_to_one.png" alt="one_to_one.png">
+</p>
+</div>
+
+<p>
+And in our database:
+</p>
+
+<div class="org-src-container">
+
+<div class="highlight"><pre><span class="k">select</span> <span class="n">mrn</span><span class="p">,</span> <span class="n">name</span>
+<span class="k">from</span> <span class="n">patients</span><span class="p">;</span>
+</pre></div></div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="left">
+
+<col class="left">
+</colgroup>
+<tbody>
+<tr>
+<td class="left">mrn</td>
+<td class="left">name</td>
+</tr>
+
+<tr>
+<td class="left">U123456</td>
+<td class="left">Roger Rabbit</td>
+</tr>
+
+<tr>
+<td class="left">U654321</td>
+<td class="left">Jessica Krupnick</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2">one to many</h3>
+<div class="outline-text-3" id="text-4-2">
+<ul class="org-ul">
+<li>in the context of a database, is represented by a pair of tables, in which an element or row can be related to multiple rows in another table
+</li>
+</ul>
+
+
+<div class="figure">
+<p><img src="database-intro/one_to_many.png" alt="one_to_many.png">
+</p>
+</div>
+
+<p>
+In our database:
+</p>
+
+<div class="org-src-container">
+
+<div class="highlight"><pre><span class="k">select</span> <span class="n">name</span><span class="p">,</span> <span class="n">mrn</span><span class="p">,</span> <span class="n">accession</span>
+<span class="k">from</span> <span class="n">patients</span> <span class="k">join</span> <span class="n">results</span> <span class="k">using</span><span class="p">(</span>
+    <span class="n">mrn</span>
+<span class="p">)</span>
+<span class="k">group</span> <span class="k">by</span> <span class="n">accession</span> <span class="k">order</span> <span class="k">by</span> <span class="n">mrn</span><span class="p">;</span>
+</pre></div></div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="left">
+
+<col class="left">
+
+<col class="left">
+</colgroup>
+<tbody>
+<tr>
+<td class="left">name</td>
+<td class="left">mrn</td>
+<td class="left">accession</td>
+</tr>
+
+<tr>
+<td class="left">Roger Rabbit</td>
+<td class="left">U123456</td>
+<td class="left">M00001</td>
+</tr>
+
+<tr>
+<td class="left">Roger Rabbit</td>
+<td class="left">U123456</td>
+<td class="left">T00001</td>
+</tr>
+
+<tr>
+<td class="left">Jessica Krupnick</td>
+<td class="left">U654321</td>
+<td class="left">M00002</td>
+</tr>
+
+<tr>
+<td class="left">Jessica Krupnick</td>
+<td class="left">U654321</td>
+<td class="left">T00002</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3">many to many</h3>
+<div class="outline-text-3" id="text-4-3">
+<ul class="org-ul">
+<li>an entity in table A maps to more than one entity in table B, and vice-versa.
+</li>
+<li>a many-to-many relation between two tables is represented via a third <b>junction table</b> or <b>cross-reference table</b>.
+</li>
+<li>for example, each patient may see more than one physician, and each physician sees many patients.
+</li>
+</ul>
+
+
+<div class="figure">
+<p><img src="database-intro/many_to_many.png" alt="many_to_many.png">
+</p>
+</div>
+
+<p>
+In our relational database, this relation requires three tables, one for each of patients and physicians:
 </p>
 
 <table class="table table-striped table-bordered table-condensed" style="width: auto;">
 
 
 <colgroup>
-<col class="left" />
+<col class="right">
 
-<col class="left" />
+<col class="left">
 
-<col class="left" />
+<col class="left">
+
+<col class="right">
+
+<col class="left">
 </colgroup>
-<thead>
-<tr>
-<th scope="col" class="left">here's</th>
-<th scope="col" class="left">a</th>
-<th scope="col" class="left">table</th>
-</tr>
-</thead>
 <tbody>
 <tr>
-<td class="left">with</td>
-<td class="left">&#xa0;</td>
-<td class="left">values</td>
+<td class="right">pkey</td>
+<td class="left">mrn</td>
+<td class="left">name</td>
+<td class="right">dob</td>
+<td class="left">sex</td>
 </tr>
 
 <tr>
-<td class="left">in</td>
-<td class="left">some</td>
-<td class="left">cells</td>
+<td class="right">1</td>
+<td class="left">U123456</td>
+<td class="left">Roger Rabbit</td>
+<td class="right">1939-04-01</td>
+<td class="left">M</td>
+</tr>
+
+<tr>
+<td class="right">2</td>
+<td class="left">U654321</td>
+<td class="left">Jessica Krupnick</td>
+<td class="right">1924-10-27</td>
+<td class="left">F</td>
+</tr>
+</tbody>
+</table>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="left">
+
+<col class="left">
+</colgroup>
+<tbody>
+<tr>
+<td class="left">doc_id</td>
+<td class="left">doc_name</td>
+</tr>
+
+<tr>
+<td class="left">P01</td>
+<td class="left">Dr. Spock</td>
+</tr>
+
+<tr>
+<td class="left">P02</td>
+<td class="left">Dr. Horrible</td>
+</tr>
+
+<tr>
+<td class="left">P03</td>
+<td class="left">Dr. Strangelove</td>
 </tr>
 </tbody>
 </table>
 
 <p>
-Hey, a <a href="http://en.wikipedia.org/wiki/File:Perameles_gunni.jpg">bandicoot</a>!
+And a junction table defining the many-to-many relationships:
 </p>
-
-
-<div class="figure">
-<p><img src="getting-started/Perameles_gunni.jpg" alt="Perameles_gunni.jpg" />
-</p>
-</div>
 
 <div class="org-src-container">
 
-<pre class="src src-R">png('getting-started/qnorm.png')
-plot(qnorm)
-invisible(dev.off())
-</pre>
-</div>
+<div class="highlight"><pre><span class="k">select</span> <span class="o">*</span>
+<span class="k">from</span> <span class="n">physician_patient</span><span class="p">;</span>
+</pre></div></div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
 
 
-<div class="figure">
-<p><img src="getting-started/qnorm.png" alt="qnorm.png" />
+<colgroup>
+<col class="left">
+
+<col class="left">
+</colgroup>
+<tbody>
+<tr>
+<td class="left">doc_id</td>
+<td class="left">mrn</td>
+</tr>
+
+<tr>
+<td class="left">P01</td>
+<td class="left">U123456</td>
+</tr>
+
+<tr>
+<td class="left">P01</td>
+<td class="left">U654321</td>
+</tr>
+
+<tr>
+<td class="left">P02</td>
+<td class="left">U654321</td>
+</tr>
+
+<tr>
+<td class="left">P03</td>
+<td class="left">U123456</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Now we can view all physician-patient relationships using a three-way join
 </p>
-</div>
 
 <div class="org-src-container">
 
-<pre class="src src-sh"><span style="font-weight: bold;">pwd</span>
-ls
-</pre>
+<div class="highlight"><pre><span class="k">select</span> <span class="o">*</span>
+<span class="k">from</span> <span class="n">patients</span> <span class="k">join</span> <span class="n">physician_patient</span> <span class="k">using</span><span class="p">(</span>
+    <span class="n">mrn</span>
+<span class="p">)</span> <span class="k">join</span> <span class="n">physicians</span> <span class="k">using</span><span class="p">(</span>
+    <span class="n">doc_id</span>
+<span class="p">);</span>
+</pre></div></div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="right">
+
+<col class="left">
+
+<col class="left">
+
+<col class="right">
+
+<col class="left">
+
+<col class="left">
+
+<col class="left">
+</colgroup>
+<tbody>
+<tr>
+<td class="right">pkey</td>
+<td class="left">mrn</td>
+<td class="left">name</td>
+<td class="right">dob</td>
+<td class="left">sex</td>
+<td class="left">doc_id</td>
+<td class="left">doc_name</td>
+</tr>
+
+<tr>
+<td class="right">1</td>
+<td class="left">U123456</td>
+<td class="left">Roger Rabbit</td>
+<td class="right">1939-04-01</td>
+<td class="left">M</td>
+<td class="left">P01</td>
+<td class="left">Dr. Spock</td>
+</tr>
+
+<tr>
+<td class="right">1</td>
+<td class="left">U123456</td>
+<td class="left">Roger Rabbit</td>
+<td class="right">1939-04-01</td>
+<td class="left">M</td>
+<td class="left">P03</td>
+<td class="left">Dr. Strangelove</td>
+</tr>
+
+<tr>
+<td class="right">2</td>
+<td class="left">U654321</td>
+<td class="left">Jessica Krupnick</td>
+<td class="right">1924-10-27</td>
+<td class="left">F</td>
+<td class="left">P01</td>
+<td class="left">Dr. Spock</td>
+</tr>
+
+<tr>
+<td class="right">2</td>
+<td class="left">U654321</td>
+<td class="left">Jessica Krupnick</td>
+<td class="right">1924-10-27</td>
+<td class="left">F</td>
+<td class="left">P02</td>
+<td class="left">Dr. Horrible</td>
+</tr>
+</tbody>
+</table>
 </div>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">Data types</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Most databases and programming languages make a distinction between various <b>data types</b> (integers, real numbers, text, binary data, etc). Why is this important?
+</p>
+
+<ul class="org-ul">
+<li>Operations may be defined for some data types but not others (eg, division makes sense for real numbers but not text).
+</li>
+<li>Different data types require different amounts of space for storage. For example, in MySQL, a column containing an integer representation of true/false (eg, a <b>boolean</b>) requires only 1 byte per element, whereas the string "True" will typically occupy at least 4 bytes. This can become important when anticipating database requirements or managing large amounts of data.
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">SQL</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+SQL (originally SEQUEL for <i>Structured English Query Language</i>) is a programming language for managing relational databases. Although versions of SQL are defined in internationally-recognized standards, various dialects are used depending on the implementation. Many relational database programs are out there. Some examples of relational database products using SQL that you are likely to come across include:
+</p>
+
+<ul class="org-ul">
+<li><a href="http://www.postgresql.org/">PostgreSQL</a> (free/open source)
+</li>
+<li><a href="http://www.sqlite.org/">SQLite</a> (free/open source)
+</li>
+<li><a href="http://www.mysql.com/">MySQL</a> (free/open source)
+</li>
+<li><a href="http://www.microsoft.com/en-us/server-cloud/products/sql-server/default.aspx">SQL Server</a> (Microsoft, one of its flagship products)
+</li>
+<li>Various <a href="http://www.oracle.com">Oracle</a> products (expensive and enterprise-y)
+</li>
+</ul>
+
+<p>
+SQL was designed to be accessible to non-technical users!
+</p>
+
+<p>
+Of these database engines, SQLite is probably the easiest to try out - unlike the others, the database consists of a single, portable file that can be accessed using either a command line interface or various GUI's available for your favorite platform (SQLite is also found <a href="http://www.sqlite.org/mostdeployed.html">pretty much everywhere</a>). For example, <a href="database-intro/results.db">here</a> is the SQLite database used for the examples in this post. If you're on a Mac, try this after downloading to your Downloads folder:
+</p>
+
+<ul class="org-ul">
+<li>open Terminal.app (press CMD+SPACE and type Term&#8230;)
+</li>
+<li>type this:
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<div class="highlight"><pre><span class="nb">cd</span> ~/Downloads
+sqlite3 results.db
+</pre></div></div>
+
+<p>
+You should see something like this:
+</p>
 
 <pre class="example">
-/Users/nhoffman/src/borborygmi/org-content
-getting-started
-getting-started.org
-getting-started.org89510TnC
+SQLite version 3.7.13 2012-07-17 17:46:21
+Enter ".help" for instructions
+Enter SQL statements terminated with a ";"
+sqlite&gt;
 </pre>
+
+<p>
+Go ahead and try out some of the examples above. You can also download a GUI database browser (<a href="http://en.wikipedia.org/wiki/SQLite">Wikipedia</a> has a list) and try out your queries there.
+</p>
 </div>
+</div>
+
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7">Some examples of relational database operations using SQL</h2>
+<div class="outline-text-2" id="text-7">
+</div><div id="outline-container-sec-7-1" class="outline-3">
+<h3 id="sec-7-1">select</h3>
+<div class="outline-text-3" id="text-7-1">
+<div class="org-src-container">
+
+<div class="highlight"><pre><span class="k">select</span> <span class="o">*</span>
+<span class="k">from</span> <span class="n">results</span><span class="p">;</span>
+</pre></div></div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="left">
+
+<col class="left">
+
+<col class="right">
+
+<col class="left">
+
+<col class="left">
+
+<col class="right">
+
+<col class="left">
+</colgroup>
+<tbody>
+<tr>
+<td class="left">mrn</td>
+<td class="left">accession</td>
+<td class="right">date</td>
+<td class="left">battery_code</td>
+<td class="left">test_code</td>
+<td class="right">value</td>
+<td class="left">flag</td>
+</tr>
+
+<tr>
+<td class="left">U123456</td>
+<td class="left">M00001</td>
+<td class="right">2014-06-02</td>
+<td class="left">BMP</td>
+<td class="left">GLU</td>
+<td class="right">135.0</td>
+<td class="left">H</td>
+</tr>
+
+<tr>
+<td class="left">U123456</td>
+<td class="left">M00001</td>
+<td class="right">2014-06-02</td>
+<td class="left">BMP</td>
+<td class="left">K</td>
+<td class="right">4.0</td>
+<td class="left">&#160;</td>
+</tr>
+
+<tr>
+<td class="left">U123456</td>
+<td class="left">T00001</td>
+<td class="right">2014-06-03</td>
+<td class="left">CMP</td>
+<td class="left">GLU</td>
+<td class="right">90.0</td>
+<td class="left">&#160;</td>
+</tr>
+
+<tr>
+<td class="left">U123456</td>
+<td class="left">T00001</td>
+<td class="right">2014-06-03</td>
+<td class="left">CMP</td>
+<td class="left">K</td>
+<td class="right">2.7</td>
+<td class="left">L</td>
+</tr>
+
+<tr>
+<td class="left">U654321</td>
+<td class="left">M00002</td>
+<td class="right">2014-06-02</td>
+<td class="left">CMP</td>
+<td class="left">GLU</td>
+<td class="right">85.0</td>
+<td class="left">&#160;</td>
+</tr>
+
+<tr>
+<td class="left">U654321</td>
+<td class="left">M00002</td>
+<td class="right">2014-06-02</td>
+<td class="left">CMP</td>
+<td class="left">K</td>
+<td class="right">4.1</td>
+<td class="left">&#160;</td>
+</tr>
+
+<tr>
+<td class="left">U654321</td>
+<td class="left">T00002</td>
+<td class="right">2014-06-03</td>
+<td class="left">BMP</td>
+<td class="left">GLU</td>
+<td class="right">75.0</td>
+<td class="left">&#160;</td>
+</tr>
+
+<tr>
+<td class="left">U654321</td>
+<td class="left">T00002</td>
+<td class="right">2014-06-03</td>
+<td class="left">BMP</td>
+<td class="left">K</td>
+<td class="right">4.2</td>
+<td class="left">&#160;</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+
+<div class="highlight"><pre><span class="k">select</span> <span class="o">*</span>
+<span class="k">from</span> <span class="n">results</span>
+<span class="k">where</span> <span class="n">test_code</span> <span class="o">=</span> <span class="s1">'GLU'</span> <span class="k">order</span> <span class="k">by</span> <span class="nb">date</span><span class="p">;</span>
+</pre></div></div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="left">
+
+<col class="left">
+
+<col class="right">
+
+<col class="left">
+
+<col class="left">
+
+<col class="right">
+
+<col class="left">
+</colgroup>
+<tbody>
+<tr>
+<td class="left">mrn</td>
+<td class="left">accession</td>
+<td class="right">date</td>
+<td class="left">battery_code</td>
+<td class="left">test_code</td>
+<td class="right">value</td>
+<td class="left">flag</td>
+</tr>
+
+<tr>
+<td class="left">U123456</td>
+<td class="left">M00001</td>
+<td class="right">2014-06-02</td>
+<td class="left">BMP</td>
+<td class="left">GLU</td>
+<td class="right">135.0</td>
+<td class="left">H</td>
+</tr>
+
+<tr>
+<td class="left">U654321</td>
+<td class="left">M00002</td>
+<td class="right">2014-06-02</td>
+<td class="left">CMP</td>
+<td class="left">GLU</td>
+<td class="right">85.0</td>
+<td class="left">&#160;</td>
+</tr>
+
+<tr>
+<td class="left">U123456</td>
+<td class="left">T00001</td>
+<td class="right">2014-06-03</td>
+<td class="left">CMP</td>
+<td class="left">GLU</td>
+<td class="right">90.0</td>
+<td class="left">&#160;</td>
+</tr>
+
+<tr>
+<td class="left">U654321</td>
+<td class="left">T00002</td>
+<td class="right">2014-06-03</td>
+<td class="left">BMP</td>
+<td class="left">GLU</td>
+<td class="right">75.0</td>
+<td class="left">&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-7-2" class="outline-3">
+<h3 id="sec-7-2">join</h3>
+<div class="outline-text-3" id="text-7-2">
+<div class="org-src-container">
+
+<div class="highlight"><pre><span class="k">select</span> <span class="n">patients</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">results</span><span class="p">.</span><span class="nb">date</span><span class="p">,</span> <span class="n">tests</span><span class="p">.</span><span class="n">test_name</span><span class="p">,</span> <span class="n">results</span><span class="p">.</span><span class="n">value</span><span class="p">,</span> <span class="n">results</span><span class="p">.</span><span class="n">flag</span>
+<span class="k">from</span> <span class="n">results</span> <span class="k">join</span> <span class="n">tests</span> <span class="k">using</span><span class="p">(</span>
+    <span class="n">test_code</span>
+<span class="p">)</span> <span class="k">join</span> <span class="n">patients</span> <span class="k">using</span><span class="p">(</span>
+    <span class="n">mrn</span>
+<span class="p">)</span>
+<span class="k">where</span> <span class="n">test_code</span> <span class="o">=</span> <span class="s1">'K'</span><span class="p">;</span>
+</pre></div></div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="left">
+
+<col class="right">
+
+<col class="left">
+
+<col class="right">
+
+<col class="left">
+</colgroup>
+<tbody>
+<tr>
+<td class="left">name</td>
+<td class="right">date</td>
+<td class="left">test_name</td>
+<td class="right">value</td>
+<td class="left">flag</td>
+</tr>
+
+<tr>
+<td class="left">Roger Rabbit</td>
+<td class="right">2014-06-02</td>
+<td class="left">Potassium</td>
+<td class="right">4.0</td>
+<td class="left">&#160;</td>
+</tr>
+
+<tr>
+<td class="left">Roger Rabbit</td>
+<td class="right">2014-06-03</td>
+<td class="left">Potassium</td>
+<td class="right">2.7</td>
+<td class="left">L</td>
+</tr>
+
+<tr>
+<td class="left">Jessica Krupnick</td>
+<td class="right">2014-06-02</td>
+<td class="left">Potassium</td>
+<td class="right">4.1</td>
+<td class="left">&#160;</td>
+</tr>
+
+<tr>
+<td class="left">Jessica Krupnick</td>
+<td class="right">2014-06-03</td>
+<td class="left">Potassium</td>
+<td class="right">4.2</td>
+<td class="left">&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-7-3" class="outline-3">
+<h3 id="sec-7-3">group and aggregate</h3>
+<div class="outline-text-3" id="text-7-3">
+<div class="org-src-container">
+
+<div class="highlight"><pre><span class="k">select</span> <span class="n">name</span><span class="p">,</span> <span class="n">test_code</span><span class="p">,</span> <span class="k">min</span><span class="p">(</span>
+    <span class="n">value</span>
+<span class="p">)</span>
+<span class="k">from</span> <span class="n">patients</span> <span class="k">join</span> <span class="n">results</span> <span class="k">using</span><span class="p">(</span>
+    <span class="n">mrn</span>
+<span class="p">)</span>
+<span class="k">group</span> <span class="k">by</span> <span class="n">mrn</span><span class="p">,</span> <span class="n">test_code</span><span class="p">;</span>
+</pre></div></div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="left">
+
+<col class="left">
+
+<col class="right">
+</colgroup>
+<tbody>
+<tr>
+<td class="left">name</td>
+<td class="left">test_code</td>
+<td class="right">min(value)</td>
+</tr>
+
+<tr>
+<td class="left">Roger Rabbit</td>
+<td class="left">GLU</td>
+<td class="right">135.0</td>
+</tr>
+
+<tr>
+<td class="left">Roger Rabbit</td>
+<td class="left">K</td>
+<td class="right">2.7</td>
+</tr>
+
+<tr>
+<td class="left">Jessica Krupnick</td>
+<td class="left">GLU</td>
+<td class="right">75.0</td>
+</tr>
+
+<tr>
+<td class="left">Jessica Krupnick</td>
+<td class="left">K</td>
+<td class="right">4.1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8">Hierarchical databases</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+Hierarchical databases organize data in a tree-like structure. Data is represented as a graph of one-to-many (patent -&gt; child) relations.
+</p>
+
+
+<div class="figure">
+<p><img src="database-intro/hierarchical.png" alt="hierarchical.png">
+</p>
+</div>
+
+<ul class="org-ul">
+<li>hierarchical databases are arguably extremely well-suited for modeling healthcare data.
+</li>
+<li>can be used to efficiently represent data that would otherwise require many tables in a well-normalized relational database.
+</li>
+<li>depending on the structure of the hierarchy, certain queries can be extremely efficient: eg, all orders for Patient 1 can be found by traversing only the subtree containing data for that patient, which might represent only a tiny fraction of the entire database.
+</li>
+<li>other sorts of queries can be extremely inefficient: eg, finding all results of a certain type might require traversal of the entire tree!
+</li>
+<li>guess what: major healthcare applications such as the VA system (VistA), Sunquest FlexiLab, and many Epic products use a hierarchical database implemented using the <a href="http://en.wikipedia.org/wiki/MUMPS">MUMPS</a> language.
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9">Data management patterns and antipatterns</h2>
+</div>
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10">Sources</h2>
+<div class="outline-text-2" id="text-10">
+<ul class="org-ul">
+<li><a href="http://en.wikipedia.org/wiki/Relational_database">http://en.wikipedia.org/wiki/Relational_database</a>
+</li>
+<li><a href="http://en.wikipedia.org/wiki/Cardinality_(data_modeling)">http://en.wikipedia.org/wiki/Cardinality_(data_modeling)</a>
+</li>
+<li><a href="http://healthcaresecurity.wordpress.com/2010/10/12/why-are-hierarchical-databases-like-mumps-still-popular-in-healthcare/">http://healthcaresecurity.wordpress.com/2010/10/12/why-are-hierarchical-databases-like-mumps-still-popular-in-healthcare/</a>
+</li>
+</ul>
 </div>
 </div>
 </div>
         <hr />
     </div>
 		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="../getting-started.html"><h2>Creating a site with Pelican and org-mode</h2></a>
+        <div class= "well small"> Mon 26 May 2014
+
+by <a class="url fn" href="../author/noah-hoffman.html">Noah Hoffman</a>
+ 
+
+
+ </div>
+        <div class="summary"><div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">org-mode integration</a>
+<ul>
+<li><a href="#sec-1-1">Arranging content in subdirectories</a></li>
+<li><a href="#sec-1-2">Syntax highlighting</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">Choosing a theme</a></li>
+<li><a href="#sec-3">Hosting on github pages</a></li>
+<li><a href="#sec-4">Examples</a></li>
+</ul>
+</div>
+</div>
+<p>
+Never one to pass up the opportunity for yak-shaving, I thought I'd
+finally try to settle on a publishing platform for various notes and
+other content that I have scattered ...</p> <a class="btn btn-info xsmall" href="../getting-started.html">read more</a></div>
+    </div>	
+				
 <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
@@ -295,6 +1409,7 @@ getting-started.org89510TnC
                 Categories
                 </li>
                 
+                <li><a href="../category/lectures.html">lectures</a></li>
                 <li><a href="../category/org-mode.html">org-mode</a></li>
                    
             </ul>
