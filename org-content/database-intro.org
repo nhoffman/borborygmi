@@ -81,7 +81,7 @@ for name, rows in tables:
 #+BEGIN_SRC sh :exports results
 rm -f database-intro/results.db
 for tbl in database-intro/*.csv; do
-csvsql --no-inference --db sqlite:///database-intro/results.db --insert $tbl
+../borborygmi-env/bin/csvsql --no-inference --db sqlite:///database-intro/results.db --insert $tbl
 done
 #+END_SRC
 
@@ -347,3 +347,4 @@ digraph G {
 - http://en.wikipedia.org/wiki/Relational_database
 - http://en.wikipedia.org/wiki/Cardinality_(data_modeling)
 - http://healthcaresecurity.wordpress.com/2010/10/12/why-are-hierarchical-databases-like-mumps-still-popular-in-healthcare/
+
