@@ -1,5 +1,6 @@
-pelican
-ghp-import
-pygments
-pygments-pprint-sql
-lxml
+ghp-import==0.4.1
+lxml==3.3.5
+pelican==3.3
+Pygments==1.6
+pygments-pprint-sql==0.1.0
+csvkit==0.7.3
