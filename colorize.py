@@ -73,8 +73,8 @@ def main(arguments):
             parent = block.getparent()
             parent.replace(block, colorized)
 
-            with open(args.outfile or args.infile, 'w') as f:
-                f.write(html.tostring(tree))
+    with open(args.outfile or args.infile, 'w') as f:
+        f.write(html.tostring(tree))
 
 
 if __name__ == '__main__':
