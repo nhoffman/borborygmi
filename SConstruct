@@ -2,6 +2,7 @@ import sys
 import re
 import glob
 from os import path, environ
+from itertools import chain
 
 from SCons.Script import (Variables, Depends, Environment, ARGUMENTS, Flatten)
 
@@ -49,7 +50,7 @@ for post_name in posts:
         action=('org-export pelican --infile $SOURCE --outfile $TARGET && '
                 './colorize.py $TARGET')
     )
-
+    Depends(html, 'colorize.py')
     content.append(html)
 
     # copy any static or derived files associated with the post
@@ -65,6 +66,7 @@ for post_name in posts:
 index, = env.Command(
     target='$output/index.html',
     source=content,
-    action=('pelican content -t pelican-themes/$theme')
+    action=('pelican content -t pelican-themes/$theme && '
+            './fix_urls.py $output')
 )
-Depends(index, Flatten([content, 'pelicanconf.py']))
+Depends(index, Flatten([content, 'fix_urls.py', 'pelicanconf.py']))
