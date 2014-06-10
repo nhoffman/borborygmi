@@ -1,17 +1,12 @@
 #+TITLE: A practical introduction to databases and data management
-#+DATE: 2014-05-30
+#+DATE: 2014-06-11
 #+CATEGORY: lectures
 #+PROPERTY: TAGS laboratory medicine
 #+PROPERTY: header-args:sqlite :db database-intro/results.db :header on :results value
 
 This post contains the content of a lecture prepared for Laboratory Medicine residents as part of a series on medical informatics.
 
-* Objectives
-
-- be aware that relational databases are a thing and can be described using some terms.
-- get to know the different types of relations.
-- see some examples.
-- make a connection between the above and some useful habits (and harmful anti-patterns) for organizing laboratory and experimental data.
+* Setup
 
 #+NAME: setup
 #+BEGIN_SRC sh :exports results
@@ -55,9 +50,9 @@ rm -f database-intro/results.db
 
 #+ATTR_HTML: :style display: none;
 #+NAME: tests
-| test_code | test_name | ref_range | range_low | range_hi |
-| Glucose   | GLU       |    62-125 |        62 |      125 |
-| Potassium | K         |   3.7-5.2 |       3.7 |      5.2 |
+| test_name | test_code | ref_range | range_low | range_hi |
+| Glucose   | GLU       | 62 - 125  |        62 |      125 |
+| Potassium | K         | 3.7 - 5.2 |       3.7 |      5.2 |
 
 #+ATTR_HTML: :style display: none;
 #+NAME: batteries
@@ -90,9 +85,16 @@ csvsql --no-inference --db sqlite:///database-intro/results.db --insert $tbl
 done
 #+END_SRC
 
+* Objectives
+
+- be aware that relational databases are a thing and can be described using some terms.
+- get to know the different types of relations.
+- see some examples of SQL in action.
+- make a connection between the above and some useful habits (and harmful anti-patterns) for organizing laboratory and experimental data.
+
 * Relational database terminology
 
-- relational database :: a tabular database with defined "relations" among elements within and between tables.
+- relational database :: a tabular database with defined "relations" (which can be described in terms of [[http://en.wikipedia.org/wiki/Relational_algebra][relational algebra]]) among elements within and between tables.
 - row :: contains a *tuple* or *record* representing a single item.
 - column :: represents an *attribute* or *field* and corresponds to a labeled element of a record; all elements within a column are of the same data type.
 - table :: a set of rows and columns.
@@ -101,17 +103,29 @@ done
 [[file:database-intro/984px-Relational_database_terms.svg.png]]
 
 - primary key :: a field (or multiple fields in combination) that uniquely identify a row. Can either be *natural* (i.e., consisting of attributes that already exist in the table), or *surrogate* (i.e., a new attribute with no "real world" meaning created for the purpose).
-- index ::
+
+#+BEGIN_SRC sqlite :exports results
+select * from patients;
+#+END_SRC
+
+- index :: a data structure that improves the efficiency of data manipulation by reorganizing or clustering elements, typically as a tree.
 
 * Relations
-
-#+CAPTION: Types of relation. Source: [[http://fms-itskills.ncl.ac.uk/dbp/ERlarge.png][fms-itskills.ncl.ac.uk]]
-[[file:database-intro/ERlarge.png]]
-
 ** one to one
+
 - describes the relationship between two or more elements in which each element uniquely identifies the other (likely to be true only in a specific context).
 - represented by elements in the same row
 - eg, name <--> mrn (but is this really true?)
+
+Graphically:
+
+#+BEGIN_SRC dot :results output :exports results :file database-intro/one_to_one.png
+digraph G {
+"Roger Rabbit" -> "MRN U123456" [dir="both"];
+}
+#+END_SRC
+
+And in our database:
 
 #+BEGIN_SRC sqlite
 select mrn, name from patients;
@@ -124,6 +138,15 @@ select mrn, name from patients;
 
 ** one to many
 - in the context of a database, is represented by a pair of tables, in which an element or row can be related to multiple rows in another table
+
+#+BEGIN_SRC dot :results output :exports results :file database-intro/one_to_many.png
+digraph G {
+"Roger Rabbit" -> "Accession M00001" [dir="both"];
+"Roger Rabbit" -> "Accession T00001" [dir="both"];
+}
+#+END_SRC
+
+In our database:
 
 #+BEGIN_SRC sqlite
 select name, mrn, accession
@@ -146,17 +169,30 @@ order by mrn;
 - a many-to-many relation between two tables is represented via a third *junction table* or *cross-reference table*.
 - for example, each patient may see more than one physician, and each physician sees many patients.
 
+#+BEGIN_SRC dot :results output :exports results :file database-intro/many_to_many.png
+digraph G {
+"Roger Rabbit" -> "Dr. Spock" [dir="both"];
+"Roger Rabbit" -> "Dr. Strangelove" [dir="both"];
+"Jessica Krupnick" -> "Dr. Spock" [dir="both"];
+"Jessica Krupnick" -> "Dr. Horrible" [dir="both"];
+}
+#+END_SRC
+
+In our relational database, this relation requires three tables, one for each of patients and physicians:
+
 #+NAME: show_patients
-#+BEGIN_SRC sqlite
+#+BEGIN_SRC sqlite :exports results
 select * from patients;
 #+END_SRC
 
 #+NAME: show_physicians
-#+BEGIN_SRC sqlite
+#+BEGIN_SRC sqlite :exports results
 select * from physicians;
 #+END_SRC
 
-#+NAME: show_physician_patient
+And a junction table defining the many-to-many relationships:
+
+#+NAME: show_physician_patient :exports results
 #+BEGIN_SRC sqlite
 select * from physician_patient;
 #+END_SRC
@@ -164,7 +200,8 @@ select * from physician_patient;
 Now we can view all physician-patient relationships using a three-way join
 
 #+BEGIN_SRC sqlite
-select name, doc_name from patients
+select *
+from patients
 join physician_patient using(mrn)
 join physicians using(doc_id);
 #+END_SRC
@@ -176,16 +213,112 @@ join physicians using(doc_id);
 | Jessica Krupnick | Dr. Spock       |
 | Jessica Krupnick | Dr. Horrible    |
 
-* More examples of relational database operations using SQL
+* Data types
+
+Most databases and programming languages make a distinction between various *data types* (integers, real numbers, text, binary data, etc). Why is this important?
+
+- Operations may be defined for some data types but not others (eg, division makes sense for real numbers but not text).
+- Different data types require different amounts of space for storage. For example, in MySQL, a column containing an integer representation of true/false (eg, a *boolean*) requires only 1 byte per element, whereas the string "True" will typically occupy at least 4 bytes. This can become important when anticipating database requirements or managing large amounts of data.
+
+* SQL
+
+SQL (originally SEQUEL for /Structured English Query Language/) is a programming language for managing relational databases. Although versions of SQL are defined in internationally-recognized standards, various dialects are used depending on the implementation. Many relational database programs are out there. Some examples of relational database products using SQL that you are likely to come across include:
+
+- [[http://www.postgresql.org/][PostgreSQL]] (free/open source)
+- [[http://www.sqlite.org/][SQLite]] (free/open source)
+- [[http://www.mysql.com/][MySQL]] (free/open source)
+- [[http://www.microsoft.com/en-us/server-cloud/products/sql-server/default.aspx][SQL Server]] (Microsoft, one of its flagship products)
+- Various [[http://www.oracle.com][Oracle]] products (expensive and enterprise-y)
+
+SQL was designed to be accessible to non-technical users!
+
+Of these database engines, SQLite is probably the easiest to try out - unlike the others, the database consists of a single, portable file that can be accessed using either a command line interface or various GUI's available for your favorite platform (SQLite is also found [[http://www.sqlite.org/mostdeployed.html][pretty much everywhere]]). For example, [[file:database-intro/results.db][here]] is the SQLite database used for the examples in this post. If you're on a Mac, try this after downloading to your Downloads folder:
+
+- open Terminal.app (press CMD+SPACE and type Term...)
+- type this:
+
+#+BEGIN_SRC sh :eval no
+cd ~/Downloads
+sqlite3 results.db
+#+END_SRC
+
+You should see something like this:
+
+#+BEGIN_EXAMPLE
+SQLite version 3.7.13 2012-07-17 17:46:21
+Enter ".help" for instructions
+Enter SQL statements terminated with a ";"
+sqlite>
+#+END_EXAMPLE
+
+Go ahead and try out some of the examples above. You can also download a GUI database browser ([[http://en.wikipedia.org/wiki/SQLite][Wikipedia]] has a list) and try out your queries there.
+
+* Some examples of relational database operations using SQL
 ** select
+
+#+BEGIN_SRC sqlite
+select * from results;
+#+END_SRC
+
+#+RESULTS:
+| mrn     | accession |       date | battery_code | test_code | value | flag |
+| U123456 | M00001    | 2014-06-02 | BMP          | GLU       | 135.0 | H    |
+| U123456 | M00001    | 2014-06-02 | BMP          | K         |   4.0 |      |
+| U123456 | T00001    | 2014-06-03 | CMP          | GLU       |  90.0 |      |
+| U123456 | T00001    | 2014-06-03 | CMP          | K         |   2.7 | L    |
+| U654321 | M00002    | 2014-06-02 | CMP          | GLU       |  85.0 |      |
+| U654321 | M00002    | 2014-06-02 | CMP          | K         |   4.1 |      |
+| U654321 | T00002    | 2014-06-03 | BMP          | GLU       |  75.0 |      |
+| U654321 | T00002    | 2014-06-03 | BMP          | K         |   4.2 |      |
+
+#+BEGIN_SRC sqlite
+select * from results where test_code = 'GLU' order by date;
+#+END_SRC
+
+#+RESULTS:
+| mrn     | accession |       date | battery_code | test_code | value | flag |
+| U123456 | M00001    | 2014-06-02 | BMP          | GLU       | 135.0 | H    |
+| U654321 | M00002    | 2014-06-02 | CMP          | GLU       |  85.0 |      |
+| U123456 | T00001    | 2014-06-03 | CMP          | GLU       |  90.0 |      |
+| U654321 | T00002    | 2014-06-03 | BMP          | GLU       |  75.0 |      |
+
 ** join
+
+#+BEGIN_SRC sqlite
+select patients.name, results.date, tests.test_name, results.value, results.flag
+from results
+join tests using(test_code)
+join patients using(mrn)
+where test_code = 'K';
+#+END_SRC
+
+#+RESULTS:
+| name             |       date | test_name | value | flag |
+| Roger Rabbit     | 2014-06-02 | Potassium |   4.0 |      |
+| Roger Rabbit     | 2014-06-03 | Potassium |   2.7 | L    |
+| Jessica Krupnick | 2014-06-02 | Potassium |   4.1 |      |
+| Jessica Krupnick | 2014-06-03 | Potassium |   4.2 |      |
+
 ** group and aggregate
 
-* Other (non-relational) database types
-** hierarchical
+#+BEGIN_SRC sqlite
+select name, test_code, min(value)
+from patients join results using(mrn)
+group by mrn, test_code;
+#+END_SRC
+
+#+RESULTS:
+| name             | test_code | min(value) |
+| Roger Rabbit     | GLU       |      135.0 |
+| Roger Rabbit     | K         |        2.7 |
+| Jessica Krupnick | GLU       |       75.0 |
+| Jessica Krupnick | K         |        4.1 |
+
+* Hierarchical databases
 
 Hierarchical databases organize data in a tree-like structure. Data is represented as a graph of one-to-many (patent -> child) relations.
 
+#+CAPTION: An example of hierarchically-organized healthcare data
 #+BEGIN_SRC dot :results output :exports results :file database-intro/hierarchical.png
 digraph G {
 "Hospital";
@@ -209,9 +342,7 @@ digraph G {
 - other sorts of queries can be extremely inefficient: eg, finding all results of a certain type might require traversal of the entire tree!
 - guess what: major healthcare applications such as the VA system (VistA), Sunquest FlexiLab, and many Epic products use a hierarchical database implemented using the [[http://en.wikipedia.org/wiki/MUMPS][MUMPS]] language.
 
-** key/value store
-* Organizing experimental data
-
+* Data management patterns and antipatterns
 * Sources
 - http://en.wikipedia.org/wiki/Relational_database
 - http://en.wikipedia.org/wiki/Cardinality_(data_modeling)
