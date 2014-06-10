@@ -58,7 +58,7 @@ for post_name in posts:
         outdir = e.Command(
             target=e.Dir('$output/$post'),
             source=post_dir,
-            action='rsync -a --delete $SOURCE/ $TARGET'
+            action='mkdir -p $TARGET && rsync -a --delete $SOURCE/ $TARGET'
         )
         Depends(outdir, html)
 
