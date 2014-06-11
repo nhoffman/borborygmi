@@ -111,6 +111,9 @@ select * from patients;
 - index :: a data structure that improves the efficiency of data manipulation by reorganizing or clustering elements, typically as a tree.
 
 * Relations
+
+For more details, see http://en.wikipedia.org/wiki/Cardinality_(data_modeling)
+
 ** one to one
 
 - describes the relationship between two or more elements in which each element uniquely identifies the other (likely to be true only in a specific context).
@@ -256,6 +259,8 @@ Go ahead and try out some of the examples above. You can also download a GUI dat
 * Some examples of relational database operations using SQL
 ** select
 
+This query returns the entire table named =results=.
+
 #+BEGIN_SRC sqlite
 select * from results;
 #+END_SRC
@@ -271,6 +276,8 @@ select * from results;
 | U654321 | T00002    | 2014-06-03 | BMP          | GLU       |  75.0 |      |
 | U654321 | T00002    | 2014-06-03 | BMP          | K         |   4.2 |      |
 
+Use a =where= clause to specify a subset of rows.
+
 #+BEGIN_SRC sqlite
 select * from results where test_code = 'GLU' order by date;
 #+END_SRC
@@ -282,7 +289,37 @@ select * from results where test_code = 'GLU' order by date;
 | U123456 | T00001    | 2014-06-03 | CMP          | GLU       |  90.0 |      |
 | U654321 | T00002    | 2014-06-03 | BMP          | GLU       |  75.0 |      |
 
+You can also specify a subset of columns.
+
+#+BEGIN_SRC sqlite
+select mrn, date, value from results where test_code = 'GLU' order by date;
+#+END_SRC
+
+#+RESULTS:
+| mrn     |       date | value |
+| U123456 | 2014-06-02 | 135.0 |
+| U654321 | 2014-06-02 |  85.0 |
+| U123456 | 2014-06-03 |  90.0 |
+| U654321 | 2014-06-03 |  75.0 |
+
 ** join
+
+Relations between tables are specified using a =join= clause. Here's a two-way join between two tables, =patients= and =results=.
+
+#+BEGIN_SRC sqlite
+select * from patients join results using(mrn);
+#+END_SRC
+
+#+RESULTS:
+| pkey | mrn     | name             |        dob | sex | accession |       date | battery_code | test_code | value | flag |
+|    1 | U123456 | Roger Rabbit     | 1939-04-01 | M   | M00001    | 2014-06-02 | BMP          | GLU       | 135.0 | H    |
+|    1 | U123456 | Roger Rabbit     | 1939-04-01 | M   | M00001    | 2014-06-02 | BMP          | K         |   4.0 |      |
+|    1 | U123456 | Roger Rabbit     | 1939-04-01 | M   | T00001    | 2014-06-03 | CMP          | GLU       |  90.0 |      |
+|    1 | U123456 | Roger Rabbit     | 1939-04-01 | M   | T00001    | 2014-06-03 | CMP          | K         |   2.7 | L    |
+|    2 | U654321 | Jessica Krupnick | 1924-10-27 | F   | M00002    | 2014-06-02 | CMP          | GLU       |  85.0 |      |
+|    2 | U654321 | Jessica Krupnick | 1924-10-27 | F   | M00002    | 2014-06-02 | CMP          | K         |   4.1 |      |
+|    2 | U654321 | Jessica Krupnick | 1924-10-27 | F   | T00002    | 2014-06-03 | BMP          | GLU       |  75.0 |      |
+|    2 | U654321 | Jessica Krupnick | 1924-10-27 | F   | T00002    | 2014-06-03 | BMP          | K         |   4.2 |      |
 
 #+BEGIN_SRC sqlite
 select patients.name, results.date, tests.test_name, results.value, results.flag
@@ -336,15 +373,101 @@ digraph G {
 }
 #+END_SRC
 
-- hierarchical databases are arguably extremely well-suited for modeling healthcare data.
+- hierarchical databases are arguably [[http://healthcaresecurity.wordpress.com/2010/10/12/why-are-hierarchical-databases-like-mumps-still-popular-in-healthcare/][extremely well-suited for modeling healthcare data]] extremely well-suited for modeling healthcare data.
 - can be used to efficiently represent data that would otherwise require many tables in a well-normalized relational database.
 - depending on the structure of the hierarchy, certain queries can be extremely efficient: eg, all orders for Patient 1 can be found by traversing only the subtree containing data for that patient, which might represent only a tiny fraction of the entire database.
 - other sorts of queries can be extremely inefficient: eg, finding all results of a certain type might require traversal of the entire tree!
 - guess what: major healthcare applications such as the VA system (VistA), Sunquest FlexiLab, and many Epic products use a hierarchical database implemented using the [[http://en.wikipedia.org/wiki/MUMPS][MUMPS]] language.
 
 * Data management patterns and antipatterns
-* Sources
-- http://en.wikipedia.org/wiki/Relational_database
-- http://en.wikipedia.org/wiki/Cardinality_(data_modeling)
-- http://healthcaresecurity.wordpress.com/2010/10/12/why-are-hierarchical-databases-like-mumps-still-popular-in-healthcare/
+
+A basic understanding of database applications, relations, and data
+types can help guide good practices for managing data. It makes
+perfect sense to organize and collect (limited amounts of) data in a
+spreadsheet, but it helps a lot to anticipate that you may want to
+transfer that data into a database or use software for statistical
+analysis or producing graphical output (such as R). This is a lot
+easier if you keep a few rules in mind. Here are some tips.
+
+** name fields sensibly
+
+- When naming column headers, stick to lowercase letters and
+  underscores only (numbers are ok after the first character).
+
+| bad        | good        |
+|------------+-------------|
+| Patient #  | patient_id  |
+| infection? | is_infected |
+
+- If you have multiple tables, be careful to name fields consistently
+  (don't use "DOB" in one place and "birth_date" in another).
+- If possible, don't use [[http://en.wikipedia.org/wiki/Category:SQL_keywords][SQL keywords]] for column names.
+
+** don't mix data types
+
+Values in a column are expected to be the same data type. Some
+databases will produce an error if you try to mix data types (eq,
+putting a string in a column identified as an integer type). Others
+may attempt to *coerce* data to the same type, producing unexpected
+results. Even without an error, mixing data types greatly complicates
+writing queries. For example, how can we find values greater than 10 in this table?
+
+| run_id |     value |
+|--------+-----------|
+|      1 |         5 |
+|      2 | cancelled |
+|      3 |        11 |
+|      4 |       < 2 |
+|      5 |         4 |
+
+In this case, it's better to create another column to contain the
+non-numeric values.
+
+| run_id | value | comment   |
+|--------+-------+-----------|
+|      1 |     5 |           |
+|      2 |       | cancelled |
+|      3 |    11 |           |
+|      4 |       | < 2       |
+|      5 |     4 |           |
+
+** tall, not wide
+
+Excel and EMR applications have made us accustomed to viewing data as
+a square matrix.
+
+| test_name | 2014-01-01 | 2014-01-02 | 2014-01-03 | 2014-01-04 |
+|-----------+------------+------------+------------+------------|
+| Sodium    |      135.0 |      137.0 |            |      150.0 |
+| Potassium |            |        3.5 |        4.0 |        3.7 |
+
+This is great for some purposes: is allows us to follow values of
+these two tests for this one patient over time. However, this is a
+lousy format for storing or manipulating data:
+
+- this representation is likely to be *sparse*, where not all cells
+  contain data, and requiring as many columns as there are dates in
+  the entire data set.
+- Adding data for an addition test is cumbersome.
+- It is not possible to associate additional attributes with each value.
+
+Here's an improved representation of the above data:
+
+| test_name |       date | value | method | comment                |
+|-----------+------------+-------+--------+------------------------|
+| Sodium    | 2014-01-01 | 135.0 | serum  |                        |
+| Sodium    | 2014-01-02 | 137.0 | ABG    |                        |
+| Sodium    | 2014-01-04 | 150.0 | serum  | confirmed in duplicate |
+| Potassium | 2014-01-02 |   3.5 | ABG    |                        |
+| Potassium | 2014-01-03 |   4.0 | serum  |                        |
+| Potassium | 2014-01-04 |   3.7 | serum  |                        |
+
+This table has a fixed number of columns. Adding new data is as simple
+as adding rows to the bottom. We can annotate values with arbitrary
+attributes, like methods or comments. It's even easy to aggregate data
+from multiple patients by adding another column.
+
+
+
+
 
