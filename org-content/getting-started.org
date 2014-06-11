@@ -5,7 +5,8 @@
 
 Never one to pass up the opportunity for yak-shaving, I thought I'd
 finally try to settle on a publishing platform for various notes and
-other content that I have scattered about on the web.
+other content that I have scattered about on the web. The repository
+is [[https://github.com/nhoffman/borborygmi][on GitHub.]]
 
 I much prefer to generate content in org-mode, but I just couldn't
 manage to get org-publish to work as I wanted. When I learned that the
@@ -105,6 +106,13 @@ And the final output:
 #+BEGIN_SRC sh :results output :exports results
 ls ../output/getting-started* | grep -Ev 'temp|^$'
 #+END_SRC
+
+An additional complication is that the files for the index and
+individual posts are at the top level of the output directory, but
+other pages (in categories, tags, etc) are in subdirectories. Rather
+than muck around with modifying linking behavior in Pelican, I just
+fixed things up in the latter files with lxml in the script
+=fix_urls.py=.
 
 ** Syntax highlighting
 

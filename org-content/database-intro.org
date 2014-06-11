@@ -39,14 +39,14 @@ rm -f database-intro/results.db
 #+ATTR_HTML: :style display: none;
 #+NAME: results
 | mrn     | accession |       date | battery_code | test_code | value | flag |
-| U123456 | M00001    | 2014-06-02 | BMP          | GLU       | 135.0 | H    |
-| U123456 | M00001    | 2014-06-02 | BMP          | K         |   4.0 |      |
-| U123456 | T00001    | 2014-06-03 | CMP          | GLU       |  90.0 |      |
-| U123456 | T00001    | 2014-06-03 | CMP          | K         |   2.7 | L    |
-| U654321 | M00002    | 2014-06-02 | CMP          | GLU       |  85.0 |      |
-| U654321 | M00002    | 2014-06-02 | CMP          | K         |   4.1 |      |
-| U654321 | T00002    | 2014-06-03 | BMP          | GLU       |  75.0 |      |
-| U654321 | T00002    | 2014-06-03 | BMP          | K         |   4.2 |      |
+| U123456 | Acc1      | 2014-06-02 | BMP          | GLU       | 135.0 | H    |
+| U123456 | Acc1      | 2014-06-02 | BMP          | K         |   4.0 |      |
+| U123456 | Acc2      | 2014-06-03 | CMP          | GLU       |  90.0 |      |
+| U123456 | Acc2      | 2014-06-03 | CMP          | K         |   2.7 | L    |
+| U654321 | Acc3      | 2014-06-02 | CMP          | GLU       |  85.0 |      |
+| U654321 | Acc3      | 2014-06-02 | CMP          | K         |   4.1 |      |
+| U654321 | Acc4      | 2014-06-03 | BMP          | GLU       |  75.0 |      |
+| U654321 | Acc4      | 2014-06-03 | BMP          | K         |   4.2 |      |
 
 #+ATTR_HTML: :style display: none;
 #+NAME: tests
@@ -81,7 +81,7 @@ for name, rows in tables:
 #+BEGIN_SRC sh :exports results
 rm -f database-intro/results.db
 for tbl in database-intro/*.csv; do
-../borborygmi-env/bin/csvsql --no-inference --db sqlite:///database-intro/results.db --insert $tbl
+../borborygmi-env/bin/csvsql --db sqlite:///database-intro/results.db --insert $tbl
 done
 #+END_SRC
 
@@ -102,13 +102,14 @@ done
 #+CAPTION: Components of a table from a relational database. Source: [[http://en.wikipedia.org/wiki/Relational_database][wikipedia]]
 [[file:database-intro/984px-Relational_database_terms.svg.png]]
 
-- primary key :: a field (or multiple fields in combination) that uniquely identify a row. Can either be *natural* (i.e., consisting of attributes that already exist in the table), or *surrogate* (i.e., a new attribute with no "real world" meaning created for the purpose).
+- primary key :: a field (or multiple fields in combination) that uniquely identify a row. Can either be *natural* (i.e., consisting of attributes that already exist in the table), or *surrogate* (i.e., a new attribute with no "real world" meaning created for the purpose). An example of a combination of attributes serving as a primary key: name + DOB
 
 #+BEGIN_SRC sqlite :exports results
 select * from patients;
 #+END_SRC
 
 - index :: a data structure that improves the efficiency of data manipulation by reorganizing or clustering elements, typically as a tree.
+- normalization :: when data is arranged to eliminate redundancy by dividing fields into separate tables, a database is said to be *[[http://en.wikipedia.org/wiki/Database_normalization][normalized]]*. There is a tradeoff between normalization and complexity: a database may not be fully normalized to make queries simpler or more efficient (eg, by requiring fewer joins).
 
 * Relations
 
@@ -118,7 +119,7 @@ For more details, see http://en.wikipedia.org/wiki/Cardinality_(data_modeling)
 
 - describes the relationship between two or more elements in which each element uniquely identifies the other (likely to be true only in a specific context).
 - represented by elements in the same row
-- eg, name <--> mrn (but is this really true?)
+- eg, name <--> mrn (but think about whether this is always true!)
 
 Graphically:
 
@@ -223,6 +224,23 @@ Most databases and programming languages make a distinction between various *dat
 - Operations may be defined for some data types but not others (eg, division makes sense for real numbers but not text).
 - Different data types require different amounts of space for storage. For example, in MySQL, a column containing an integer representation of true/false (eg, a *boolean*) requires only 1 byte per element, whereas the string "True" will typically occupy at least 4 bytes. This can become important when anticipating database requirements or managing large amounts of data.
 
+In an SQL database, data types are defined along with the table schema:
+
+#+BEGIN_SRC sqlite :results output
+.schema results
+#+END_SRC
+
+#+RESULTS:
+: CREATE TABLE results (
+: 	mrn VARCHAR(7) NOT NULL,
+: 	accession VARCHAR(4) NOT NULL,
+: 	date DATE NOT NULL,
+: 	battery_code VARCHAR(3) NOT NULL,
+: 	test_code VARCHAR(3) NOT NULL,
+: 	value FLOAT NOT NULL,
+: 	flag VARCHAR(4)
+: );
+
 * SQL
 
 SQL (originally SEQUEL for /Structured English Query Language/) is a programming language for managing relational databases. Although versions of SQL are defined in internationally-recognized standards, various dialects are used depending on the implementation. Many relational database programs are out there. Some examples of relational database products using SQL that you are likely to come across include:
@@ -235,7 +253,13 @@ SQL (originally SEQUEL for /Structured English Query Language/) is a programming
 
 SQL was designed to be accessible to non-technical users!
 
-Of these database engines, SQLite is probably the easiest to try out - unlike the others, the database consists of a single, portable file that can be accessed using either a command line interface or various GUI's available for your favorite platform (SQLite is also found [[http://www.sqlite.org/mostdeployed.html][pretty much everywhere]]). For example, [[file:database-intro/results.db][here]] is the SQLite database used for the examples in this post. If you're on a Mac, try this after downloading to your Downloads folder:
+Of these database engines, SQLite is probably the easiest to try out -
+unlike the others, the database consists of a single, portable file
+that can be accessed using either a command line interface or various
+GUI's available for your favorite platform (SQLite is found [[http://www.sqlite.org/mostdeployed.html][pretty
+much everywhere]]). For example, [[file:database-intro/results.db][here]] is the SQLite database used for
+the examples in this post. If you're on a Mac, try this after
+downloading to your Downloads folder:
 
 - open Terminal.app (press CMD+SPACE and type Term...)
 - type this:
@@ -254,7 +278,9 @@ Enter SQL statements terminated with a ";"
 sqlite>
 #+END_EXAMPLE
 
-Go ahead and try out some of the examples above. You can also download a GUI database browser ([[http://en.wikipedia.org/wiki/SQLite][Wikipedia]] has a list) and try out your queries there.
+Go ahead and try out some of the examples above. You can also download
+a GUI database browser ([[http://en.wikipedia.org/wiki/SQLite][Wikipedia]] has a list) and try out your queries
+there.
 
 * Some examples of relational database operations using SQL
 ** select
@@ -410,7 +436,8 @@ databases will produce an error if you try to mix data types (eq,
 putting a string in a column identified as an integer type). Others
 may attempt to *coerce* data to the same type, producing unexpected
 results. Even without an error, mixing data types greatly complicates
-writing queries. For example, how can we find values greater than 10 in this table?
+writing queries. For example, how can we find values greater than 10
+in this table?
 
 | run_id |     value |
 |--------+-----------|
@@ -441,15 +468,25 @@ a square matrix.
 | Sodium    |      135.0 |      137.0 |            |      150.0 |
 | Potassium |            |        3.5 |        4.0 |        3.7 |
 
-This is great for some purposes: is allows us to follow values of
-these two tests for this one patient over time. However, this is a
-lousy format for storing or manipulating data:
+This is great for some purposes: it allows us to easily compare the
+values of these two tests for this one patient over time. Or perhaps
+the square is transposed:
 
-- this representation is likely to be *sparse*, where not all cells
-  contain data, and requiring as many columns as there are dates in
-  the entire data set.
-- Adding data for an addition test is cumbersome.
-- It is not possible to associate additional attributes with each value.
+|       date | Sodium | Potassium |
+|------------+--------+-----------|
+| 2014-01-01 |  135.0 |           |
+| 2014-01-02 |  137.0 |       3.5 |
+| 2014-01-03 |        |       4.0 |
+| 2014-01-04 |  150.0 |       3.7 |
+
+However, both of these are lousy formats for storing or manipulating
+data:
+
+- they are likely to be *sparse*, where many cells are missing data,
+  and requiring as many columns as there are dates (first table) or
+  tests (second table) in the entire data set.
+- adding data for an addition test or patient is cumbersome.
+- it is not possible to associate additional attributes with each value.
 
 Here's an improved representation of the above data:
 
@@ -463,11 +500,49 @@ Here's an improved representation of the above data:
 | Potassium | 2014-01-04 |   3.7 | serum  |                        |
 
 This table has a fixed number of columns. Adding new data is as simple
-as adding rows to the bottom. We can annotate values with arbitrary
-attributes, like methods or comments. It's even easy to aggregate data
-from multiple patients by adding another column.
+as tacking rows onto the bottom. We can annotate values with arbitrary
+attributes, such as methods or comments. It's even easy to aggregate
+data from multiple patients by adding another column.
 
+** be consistent
 
+Composing queries will be easier if you are consistent in your representations of the data. I've frequently come across data like this:
 
+| subject | antibiotics | growth | antibiotic   |
+|---------+-------------+--------+--------------|
+|       1 | Y           | +      | azith.       |
+|       2 | N           | -      | azithromycin |
+|       3 | yes         | +      | penicillin   |
+|       4 | n           | +      | Penicillin   |
+
+- within a column, pick a value and stick with it - it's awfully hard to write a query that accommodates multiple variants of the same term or concept.
+- be consistent from column to column, as well. In the example above, we see both yes/no and +/- used as boolean values. How about this instead:
+
+| subject | antibiotics | growth | antibiotic   |
+|---------+-------------+--------+--------------|
+|       1 | yes         | yes    | azithromycin |
+|       2 | no          | no     | azithromycin |
+|       3 | yes         | yes    | penicillin   |
+|       4 | no          | yes    | penicillin   |
+
+** use multiple tables (normalize the data)
+
+Here's where understanding relations is useful. When I ask for data from the laboratory system, I typically get results back that look something like this:
+
+#+BEGIN_SRC sqlite :exports results
+select results.*, b.battery_name, t.test_name, t.ref_range from results
+join tests t using(test_code)
+join batteries b using(battery_code);
+#+END_SRC
+
+(The data isn't actually stored like this in the database, but when
+the request for data includes all of the above fields, it winds up
+denormalized in the process of fitting it into a single output table).
+
+In this table, test_code uniquely identifies test_name and ref_range,
+and battery_code uniquely identifies battery_name, so there's no need
+to include the last three columns in our table of results (imagine
+having millions of rows like this) - we can store these test and
+battery attributes in separate tables and perform joins as necessary.
 
 

@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = u'Noah Hoffman'
 SITENAME = u'borborygmi'
-SITEURL = ''
+SITEURL = 'http://nhoffman.github.io/borborygmi'
 
 TIMEZONE = 'America/Los_Angeles'
 
@@ -16,14 +16,12 @@ CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 
 # Blogroll
-LINKS =  (('Pelican', 'http://getpelican.com/'),
-          ('Python.org', 'http://python.org/'),
-          ('Jinja2', 'http://jinja.pocoo.org/'),)
+LINKS = (('Faculty Site', 'http://web.labmed.washington.edu/nhoffman'),
+         ('UW Lab Medicine', 'http://depts.washington.edu/labweb/'),
+         ('my GitHub', 'https://github.com/nhoffman'),
+         ('site source', 'https://github.com/nhoffman/borborygmi'),)
 
 # Social widget
-SOCIAL = (('You can add links in your config file', '#'),
-          ('Another social link', '#'),)
-
 SOCIAL = ()
 
 DEFAULT_PAGINATION = 10

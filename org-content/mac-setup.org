@@ -1,0 +1,249 @@
+#+TITLE: Setting up a new mac
+#+DATE: 2013-10-20
+#+CATEGORY: notes
+#+PROPERTY: TAGS mac
+#+PROPERTY: eval never
+#+OPTIONS: ^:nil
+
+These are my notes that I took while setting up a macbook Air near the
+end of 2013. There isn't a whole lot more that I need or use on my
+local machine.
+
+* First applications
+
+** Developer tools
+
+Pretty much the first thing any mac needs is the command line tools. These can be installed from within the Xcode application, available as a download from the Apple app store (https://developer.apple.com/xcode/downloads/). Note that this requires an apple id, even though the download is free. Once Xcode is installed, install the command line tools via the Xcode preferences: http://slashusr.wordpress.com/2012/07/27/os-x-mountain-lion-need-to-reinstall-xcode-command-line-tools/
+
+Edit: there appears to be another way to install the developer tools that does not require an apple ID - just run the following command:
+
+#+BEGIN_SRC sh
+xcode-select --install
+#+END_SRC
+
+Looks like you can even agree to the license from the command line using
+
+#+BEGIN_SRC sh
+sudo xcodebuild -license
+#+END_SRC
+
+See http://apple.stackexchange.com/questions/88535/how-to-download-the-command-line-tools-for-xcode-without-the-downloads-for-devel
+
+** X11
+
+Download and install Xquartz http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.4.dmg
+
+X11 key bindings so that the option key is used for Meta..
+
+#+BEGIN_SRC sh
+cat > ~/.Xmodmap <<EOF
+clear Mod1
+clear Mod2
+keycode 63 = Mode_switch
+keycode 66 = Meta_L
+add Mod1 = Meta_L
+add Mod2 = Mode_switch
+EOF
+#+END_SRC
+
+** Others
+
+- Chrome
+- iTerm2 (see settings below)
+- Dropbox
+- SizeUp - http://www.irradiatedsoftware.com/ (license in Dropbox/software_licenses)
+- MacTex - download from http://tug.org/mactex/
+  http://mirror.ctan.org/systems/mac/mactex/MacTeX.pkg
+
+* system-level configuration
+** turn off spelling autocorrect
+System Preferences --> Language & Text --> Text tab --> unselect "Correct spelling automatically"
+** fix scroll direction
+System Preferences --> Trackpad --> Scroll & Zoom --> unselect "scroll direction: natural"
+** turn off spaces key shortcuts
+System Preferences --> Keyboard --> Keyboard Shortcuts --> unselect C+{<-,->}
+
+* ssh
+
+Copy my default private key.
+
+* homebrew
+
+Be bloody, bold, and resolute:
+
+#+BEGIN_SRC sh
+ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)"
+brew doctor
+#+END_SRC
+
+Had to fix permissions:
+
+#+BEGIN_SRC sh
+sudo chown -R $(whoami) /usr/local
+#+END_SRC
+
+** stuff installed using homebrew
+
+#+BEGIN_SRC sh
+brew install aspell && \
+brew install autojump && \
+brew install gcc && \
+brew install git && \
+brew install gpg && \
+brew install graphviz && \
+brew install htop-osx && \
+brew install latex2rtf && \
+brew install readline && \
+brew install tmux && \
+brew install tree && \
+brew install wget && \
+brew install zsh
+#+END_SRC
+
+** zsh
+
+Install zsh with Homebrew above
+
+Note that zsh files are in Dropbox/zsh
+
+Change shell to zsh
+
+#+BEGIN_SRC sh
+sudo -s
+echo /usr/local/bin/zsh >> /etc/shells
+mv /etc/zshenv /etc/zprofile
+exit
+chsh -s /usr/local/bin/zsh $USER
+
+cat > .zshrc <<EOF
+export USR_ZSH_INITDIR=~/Dropbox/zsh
+. ~/Dropbox/zsh/zshrc
+EOF
+#+END_SRC
+
+* git
+
+ : git config --global user.name "Noah Hoffman"
+ : git config --global user.email noah.hoffman@gmail.com
+
+* iTerm2 settings
+
+Preferences --> Profiles --> Keys and do these things:
+- select "Left/right option key acts as": +Esc
+- + --> Keyboard shortcut "OPT+<left arrow>": Send Escape sequence "b"
+- + --> Keyboard shortcut "OPT+<right arrow>": Send Escape sequence "f"
+
+Preferences --> Profiles --> Colors --> Load Presets --> Light Background
+
+* emacs
+
+Install emacs24 binary from http://emacsformacosx.com/
+
+http://emacsformacosx.com/emacs-builds/Emacs-24.3-universal-10.6.8.dmg
+
+Check out my .emacs.d
+
+#+BEGIN_SRC sh
+cd ~
+git clone git@github.com:nhoffman/.emacs.d.git
+#+END_SRC
+
+* python
+
+Doesn't work out so well using homebrew, so let's install from source. Note that we did install readline with homebrew above.
+
+Here's a nice reference: http://arvinderkang.com/2012/07/06/a-virtualized-python-setup-on-os-x-lion/
+
+#+BEGIN_SRC sh
+mkdir -p ~/src
+cd ~/src && \
+wget http://www.python.org/ftp/python/2.7.6/Python-2.7.6.tgz && \
+tar -xf Python-2.7.6.tgz && \
+cd Python-2.7.6 && \
+export LDFLAGS=-L/usr/local/opt/readline/lib && \
+export CPPFLAGS=-I/usr/local/opt/readline/include && \
+./configure && make && make install
+#+END_SRC
+
+Note that installation does not require sudo because now I own /usr/local according to homebrew's preferences.
+
+Distribute and pip (see http://www.pip-installer.org/en/latest/installing.html)
+
+#+BEGIN_SRC sh
+curl http://python-distribute.org/distribute_setup.py | python
+curl https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python
+#+END_SRC
+
+And install some python packages.
+
+#+BEGIN_SRC sh
+pip install virtualenv
+pip install pygraphviz
+pip install git+ssh://git@github.com/nhoffman/csvkit.git
+# for flymake-mode
+pip install pep8 pyflakes flake8 autopep8
+pip install pandas   # installs numpy
+#+END_SRC
+
+scons doesn't work with pip
+
+#+BEGIN_SRC sh
+cd ~/src
+wget http://prdownloads.sourceforge.net/scons/scons-2.3.0.tar.gz && \
+tar -xf scons-2.3.0.tar.gz && \
+cd scons-2.3.0 && \
+python setup.py install
+#+END_SRC
+
+ansible
+
+#+BEGIN_SRC sh
+sudo mkdir /usr/share/ansible
+sudo chown -R $(whoami) /usr/share/ansible
+pip install ansible
+#+END_SRC
+
+* R
+
+#+BEGIN_SRC sh
+cd ~/src
+wget http://cran.us.r-project.org/bin/macosx/R-3.1.0-mavericks.pkg && \
+sudo installer -pkg R-3.1.0-mavericks.pkg -target /
+#+END_SRC
+
+# wget http://cran.fhcrc.org/bin/macosx/tools/gfortran-4.2.3.dmg
+# wget http://cran.fhcrc.org/bin/macosx/tools/tcltk-8.5.5-x11.dmg
+
+#+BEGIN_SRC sh
+sudo R --slave << EOF
+packages <- c("ape", "sqldf", "ROCR", "lattice", "RSQLite", "latticeExtra")
+install.packages(packages, repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE)
+EOF
+#+END_SRC
+
+* mail
+
+http://www.washington.edu/itconnect/connect/email/uw-email/configuring/os-x-mail6/
+* sshfs
+Now provided by the project http://osxfuse.github.io/
+
+#+BEGIN_SRC sh
+cd ~/Downloads
+wget http://sourceforge.net/projects/osxfuse/files/osxfuse-2.6.0/osxfuse-2.6.0.dmg
+wget https://github.com/downloads/osxfuse/sshfs/SSHFS-2.4.1.pkg
+#+END_SRC
+
+* wkhtmltopdf
+
+#+BEGIN_SRC sh
+cd ~/src
+wget 'http://wkhtmltopdf.googlecode.com/files/wkhtmltopdf.dmg'
+open wkhtmltopdf.dmg
+cp -r /Volumes/wkhtmltopdf/wkhtmltopdf.app /Applications
+#+END_SRC
+
+Now create an alias:
+
+#+BEGIN_SRC sh
+alias wkhtmltopdf='/Applications/wkhtmltopdf.app/Contents/MacOS/wkhtmltopdf'
+#+END_SRC

@@ -1,0 +1,68 @@
+#+TITLE: Installing R packages
+#+DATE: 2010-03-22
+#+CATEGORY: notes
+#+PROPERTY: TAGS R-language
+#+PROPERTY: eval never
+
+Notes to myself about installing R packages.
+
+* Installing from CRAN
+
+#+BEGIN_SRC R
+install.packages(c("ape","sqldf","ROCR"), repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE)
+#+END_SRC
+
+* Bioconductor
+
+#+BEGIN_SRC R
+source("http://bioconductor.org/biocLite.R")
+biocLite(c("Biostrings","BSgenome")) # for example
+#+END_SRC
+
+Update all of bioconductor
+
+#+BEGIN_SRC R
+source("http://bioconductor.org/biocLite.R")
+update.packages(rep=biocinstallRepos(), ask=FALSE)
+#+END_SRC
+
+Check out and install a package (eg, Biostrings) from the Subversion repository. See http://wiki.fhcrc.org/bioc/SvnHowTo
+
+#+BEGIN_SRC R
+svn checkout --username=readonly --password=readonly https://hedgehog.fhcrc.org/bioconductor/trunk/madman/Rpacks/Biostrings
+R CMD INSTALL Biostrings
+#+END_SRC
+
+* R-forge
+
+#+BEGIN_SRC R
+install.packages("packagename",repos="http://R-Forge.R-project.org")
+#+END_SRC
+
+Read-only subversion repository may be checked out using
+
+#+BEGIN_SRC R
+svn checkout svn://svn.r-forge.r-project.org/svnroot/packagename
+#+END_SRC
+
+* Installing packages locally
+
+If you can't (or don't want to) install packages to the system R location, you can create a local library. For example:
+
+#+BEGIN_SRC R
+echo 'R_LIBS_USER="~/R/library"' >  $HOME/.Renviron
+mkdir -p ~/R/library
+R CMD INSTALL --library=~/R/library somepackage.gz
+#+END_SRC
+
+* Reloading a package
+
+Calling =library()= after a package has already been loaded does not update the namespace with updates if the library has changed (eg, during package development). Instead, do something like this:
+
+#+BEGIN_SRC R
+relibrary <- function(pkg){
+    unloadNamespace(pkg)
+    library(pkg, character.only=TRUE)
+}
+#+END_SRC
+
