@@ -21,7 +21,7 @@ vars.Add('org_content', 'org-mode source files',
          ARGUMENTS.get('org_content', 'org-content'))
 vars.Add('content', 'compiled org-mode output', ARGUMENTS.get('content', 'content'))
 vars.Add('output', 'site contents', ARGUMENTS.get('output', 'output'))
-vars.Add('theme', 'theme name', ARGUMENTS.get('theme', 'tuxlite_tbs'))
+vars.Add('theme', 'theme name', ARGUMENTS.get('theme', 'pelican-themes/tuxlite_tbs'))
 
 paths = ['~/src/org-export'] + environ['PATH'].split(':')
 if not 'VIRTUAL_ENV' in environ:
@@ -66,7 +66,7 @@ for post_name in posts:
 index, = env.Command(
     target='$output/index.html',
     source=content,
-    action=('pelican content -t pelican-themes/$theme && '
+    action=('pelican content -t $theme && '
             './fix_urls.py $output')
 )
 Depends(index, Flatten([content, 'fix_urls.py', 'pelicanconf.py']))
