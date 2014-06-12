@@ -81,7 +81,7 @@ for name, rows in tables:
 #+BEGIN_SRC sh :exports results
 rm -f database-intro/results.db
 for tbl in database-intro/*.csv; do
-../borborygmi-env/bin/csvsql --db sqlite:///database-intro/results.db --insert $tbl
+csvsql --db sqlite:///database-intro/results.db --insert $tbl
 done
 #+END_SRC
 
