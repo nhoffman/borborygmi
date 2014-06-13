@@ -21,7 +21,7 @@ vars.Add('org_content', 'org-mode source files',
          ARGUMENTS.get('org_content', 'org-content'))
 vars.Add('content', 'compiled org-mode output', ARGUMENTS.get('content', 'content'))
 vars.Add('output', 'site contents', ARGUMENTS.get('output', 'output'))
-vars.Add('theme', 'theme name', ARGUMENTS.get('theme', 'pelican-themes/tuxlite_tbs'))
+vars.Add('theme', 'theme name', ARGUMENTS.get('theme', 'theme'))
 
 paths = ['~/src/org-export'] + environ['PATH'].split(':')
 if not 'VIRTUAL_ENV' in environ:

@@ -66,7 +66,7 @@ symbol instead of the value:
 
 #+BEGIN_SRC elisp :results output
 (let ((path "someplace"))
-  (print '((:prologue . pathdef))))
+  (print '((:prologue . path))))
 #+END_SRC
 
 #+RESULTS:
@@ -77,11 +77,11 @@ Nope.
 
 #+BEGIN_SRC elisp :results output
 (let ((path "someplace"))
-  (print (list `(:prologue . ,pathdef))))
+  (print (list `(:prologue . ,path))))
 #+END_SRC
 
 #+RESULTS:
 :
-: ((:prologue . "/path/to/someplace"))
+: ((:prologue . "someplace"))
 
 Much better.

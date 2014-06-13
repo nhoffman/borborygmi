@@ -3,10 +3,11 @@
 #+CATEGORY: lectures
 #+PROPERTY: TAGS laboratory medicine
 #+PROPERTY: header-args:sqlite :db database-intro/results.db :header on :results value
+#+OPTIONS: toc:nil
 
 This post contains the content of a lecture prepared for Laboratory Medicine residents as part of a series on medical informatics.
 
-* Setup
+#+TOC: headlines 2
 
 #+NAME: setup
 #+BEGIN_SRC sh :exports results
