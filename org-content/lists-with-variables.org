@@ -1,0 +1,87 @@
+#+TITLE: Creating lists containing variables
+#+DATE: 2014-06-12
+#+CATEGORY: notes
+#+PROPERTY: TAGS elisp
+
+I learned a bit about list creation in elisp today. Here's how you join a list of strings in elisp:
+
+#+BEGIN_SRC elisp :results output
+(mapconcat #'identity '("" "path" "to" "someplace") "/")
+#+END_SRC
+
+#+RESULTS:
+: /path/to/someplace
+
+But I learned (thanks to [[http://stackoverflow.com/users/113848/legoscia][legoscia]] on [[http://stackoverflow.com/questions/24188100][stackoverflow]]) that simply
+replacing an element in the list with a variable results in an error:
+
+#+BEGIN_SRC elisp :eval no
+(let ((path "someplace"))
+  (mapconcat #'identity '("" "path" "to" path) "/"))
+#+END_SRC
+
+: Wrong type argument: sequencep, path
+
+It turns out that a list constructed using a single quote includes
+symbols (and not the corresponding values) in the list.
+
+#+BEGIN_SRC elisp :results output
+(let ((path "someplace"))
+  (print '("" "path" "to" path)))
+#+END_SRC
+
+#+RESULTS:
+:
+: ("" "path" "to" path)
+
+Instead, create the list either using the =list= function, or with a
+backquote and a comma:
+
+#+BEGIN_SRC elisp :results output
+(let ((path "someplace"))
+  (print (list "" "path" "to" path))
+  (print `("" "path" "to" ,path)))
+#+END_SRC
+
+#+RESULTS:
+:
+: ("" "path" "to" "someplace")
+:
+: ("" "path" "to" "someplace")
+
+Yikes, that second syntax is... not intuitive. It turns out that the [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Backquote.html][backquote]] syntax exists just for this purpose:
+
+#+BEGIN_QUOTE
+Backquote constructs allow you to quote a list, but selectively
+evaluate elements of that list... The special marker ',' inside of the
+argument to backquote indicates a value that isn't constant. The Emacs
+Lisp evaluator evaluates the argument of ',', and puts the value in
+the list structure.
+#+END_QUOTE
+
+Well, that's good to know. I needed to take it a step further, because
+I was actually trying to store the value of a variable in an
+=alist=. Again, the familiar syntax for defining an alist stored the
+symbol instead of the value:
+
+#+BEGIN_SRC elisp :results output
+(let ((path "someplace"))
+  (print '((:prologue . pathdef))))
+#+END_SRC
+
+#+RESULTS:
+:
+: ((:prologue . pathdef))
+
+Nope.
+
+#+BEGIN_SRC elisp :results output
+(let ((path "someplace"))
+  (print (list `(:prologue . ,pathdef))))
+#+END_SRC
+
+#+RESULTS:
+:
+: ((:prologue . "/path/to/someplace"))
+
+Much better.
