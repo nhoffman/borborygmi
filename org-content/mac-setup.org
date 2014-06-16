@@ -155,12 +155,18 @@ Doesn't work out so well using homebrew, so let's install from source. Note that
 
 Here's a nice reference: http://arvinderkang.com/2012/07/06/a-virtualized-python-setup-on-os-x-lion/
 
+To remove all user-installed packages:
+
+#+BEGIN_SRC sh
+rm -r /usr/local/lib/python2.7/site-packages
+#+END_SRC
+
 #+BEGIN_SRC sh
 mkdir -p ~/src
 cd ~/src && \
-wget http://www.python.org/ftp/python/2.7.6/Python-2.7.6.tgz && \
-tar -xf Python-2.7.6.tgz && \
-cd Python-2.7.6 && \
+wget http://www.python.org/ftp/python/2.7.7/Python-2.7.7.tgz && \
+tar -xf Python-2.7.7.tgz && \
+cd Python-2.7.7 && \
 export LDFLAGS=-L/usr/local/opt/readline/lib && \
 export CPPFLAGS=-I/usr/local/opt/readline/include && \
 ./configure && make && make install
@@ -168,31 +174,58 @@ export CPPFLAGS=-I/usr/local/opt/readline/include && \
 
 Note that installation does not require sudo because now I own /usr/local according to homebrew's preferences.
 
-Distribute and pip (see http://www.pip-installer.org/en/latest/installing.html)
+Install pip (see http://www.pip-installer.org/en/latest/installing.html)
+
+(Beginning with pip v1.5.1, get-pip.py stopped requiring setuptools to be installed first.)
 
 #+BEGIN_SRC sh
-curl http://python-distribute.org/distribute_setup.py | python
-curl https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python
+cd ~/src
+wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py
+chmod +x get-pip.py
+./get-pip.py --force-reinstall
 #+END_SRC
 
-And install some python packages.
+And install some python packages. Some of these packages take a while
+to compile, and it's nice to save compiled versions of wheels so that
+they can be included in a virtualenv - the =bioy= package includes a
+script that help set this up. First, we'll need some requirements.
 
 #+BEGIN_SRC sh
-pip install virtualenv
-pip install pygraphviz
-pip install git+ssh://git@github.com/nhoffman/csvkit.git
-# for flymake-mode
-pip install pep8 pyflakes flake8 autopep8
-pip install pandas   # installs numpy
+cd ~/src
+wget -N https://raw.githubusercontent.com/jorgenschaefer/elpy/master/requirements.txt
+cat >> requirements.txt <<EOF
+numpy
+pandas
+csvkit
+pep8
+autopep8
+pygraphviz
+reportlab
+jinja2
+EOF
+#+END_SRC
+
+Now create the wheels for these packages and save them in a system-level directory.
+
+#+BEGIN_SRC sh
+cd ~/src
+git clone git@github.com:nhoffman/bioy.git
+bioy/dev/build_wheels.sh --wheelstreet /usr/local/share/python/wheels --requirements requirements.txt
+#+END_SRC
+
+Now these packages can be quickly be installed to the system or a virtualenv using these wheels:
+
+#+BEGIN_SRC sh
+pip install --use-wheel --find-links=/usr/local/share/python/wheels/2.7.7 -r requirements.txt
 #+END_SRC
 
 scons doesn't work with pip
 
 #+BEGIN_SRC sh
 cd ~/src
-wget http://prdownloads.sourceforge.net/scons/scons-2.3.0.tar.gz && \
-tar -xf scons-2.3.0.tar.gz && \
-cd scons-2.3.0 && \
+wget -N http://prdownloads.sourceforge.net/scons/scons-2.3.1.tar.gz && \
+tar -xf scons-2.3.1.tar.gz && \
+cd scons-2.3.1 && \
 python setup.py install
 #+END_SRC
 
