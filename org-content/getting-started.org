@@ -2,6 +2,7 @@
 #+DATE: 2014-05-26
 #+CATEGORY: org-mode
 #+PROPERTY: TAGS org-mode, pelican, elisp
+#+PROPERTY: eval yes
 
 Never one to pass up the opportunity for yak-shaving, I thought I'd
 finally try to settle on a publishing platform for various notes and
@@ -38,11 +39,10 @@ The utility renders the just body of the page (leaving all of the
 styling, etc to Pelican) and provides page metadata in the header, for
 example:
 
-#+BEGIN_SRC sh :results output
+#+BEGIN_SRC sh :results output eval: no
 head ../content/getting-started.html
 #+END_SRC
 
-#+RESULTS:
 #+begin_example
 <html>
     <head>
@@ -106,6 +106,13 @@ And the final output:
 #+BEGIN_SRC sh :results output :exports results
 ls ../output/getting-started* | grep -Ev 'temp|^$'
 #+END_SRC
+
+#+RESULTS:
+: ../output/getting-started.html
+: ../output/getting-started:
+: Perameles_gunni.jpg
+: plot1.png
+: plot2.png
 
 An additional complication is that the files for the index and
 individual posts are at the top level of the output directory, but
