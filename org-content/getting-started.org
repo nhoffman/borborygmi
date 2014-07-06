@@ -9,19 +9,11 @@ finally try to settle on a publishing platform for various notes and
 other content that I have scattered about on the web. The repository
 is [[https://github.com/nhoffman/borborygmi][on GitHub.]]
 
-I much prefer to generate content in org-mode, but I just couldn't
-manage to get org-publish to work as I wanted. When I learned that the
-[[http://docs.getpelican.com/en/latest/index.html][Pelican]] static site generator could import html and saw [[http://msnyder.info/posts/2013/12/introducing-pelicorg/][another effort]]
-to use the two together, I thought I'd give it a shot.
-
-Pelican is pretty easy to get started with:
-
-#+BEGIN_SRC sh :eval no
-virtualenv borborygmi-env
-source borborygmi-env/bin/activate
-pip install pelican
-pelican-quickstart
-#+END_SRC
+I much prefer to generate content in org-mode, but I couldn't manage
+to get org-publish to organize content in the way I wanted, or to be
+easily compiled in batch mode. When I learned that the [[http://docs.getpelican.com/en/latest/index.html][Pelican]] static
+site generator could import html and saw [[http://msnyder.info/posts/2013/12/introducing-pelicorg/][another effort]] to use the two
+together, I thought I'd give it a shot.
 
 * org-mode integration
 
@@ -123,28 +115,25 @@ fixed things up in the latter files with lxml in the script
 
 ** Syntax highlighting
 
-Unfortunately, org-mode appears to rely on syntax highlighting in the
-console to colorize the output (I have a vague understanding that this
-has something to do with font-lock-mode), so non-interactive html
-export doesn't produce the same output as exported pages produced
-interactively from an open buffer. My solution was to use [[http://pygments.org/][pygments]] to
-generate the html markup and [[http://lxml.de/][lxml]] to extract text from code blocks and
-replace them with html markup (this is done in [[https://github.com/nhoffman/borborygmi/blob/master/colorize.py][colorize.py]]).
+A lot of trial and error was required to export code blocks with
+colorized syntax highlighting, and I still can't say I fully
+understand why the final configuration seems to work when others I
+tried didn't. But here are a few of the bits of magic that were required.
 
-Also unfortunately, the variable =org-src-fontify-natively= that is
-advertised (I think) to suppress html markup in exported code blocks
-so that I could use pygments to produce syntax highlighting,
-doesn't. My ugly hack to get around this was to replace the org-mode
-function responsible for marking up the code blocks with a neutered
-version:
+Requiring the =htmlize= package alone seems to be sufficient to
+produce colorized syntax highlighting when exporting interactively
+from within emacs. But an identical configuration did not result in
+colorized output when exporting in batch mode using =org-export
+pelican=. I finally came across advice someplace to use the
+=color-theme= package along with some custom themes. Turns out that
+after installing =color-theme= along with =color-theme-github=, simply
+adding
 
 #+BEGIN_SRC emacs-lisp :eval no
-(defun org-html-fontify-code (code lang)
-  "Replaces the original function to suppress syntax
-highlighting"
-  (when code
-    (org-html-encode-plain-text code)))
+(require 'color-theme-github)
 #+END_SRC
+
+was enough to produce colorized output. Go figure.
 
 * Choosing a theme
 
@@ -154,7 +143,7 @@ without any modification at all.
 
 For convenience, I just added the themes repository as a git submodule.
 
-Here are some I liked:
+Here are some I liked at first glance:
 
 - bootstrap
 - bootlex
@@ -163,7 +152,7 @@ Here are some I liked:
 - tuxlite_zf (although I prefer more contrast between text and code)
 - zurb-F5-basic
 
-Settled on tuxlite_tbs (thanks, [[https://github.com/chanux][chanux]]).
+I finally settled on tuxlite_tbs (thanks, [[https://github.com/chanux][chanux]]), and made a local version, which I've modified minimally thus far.
 
 * Hosting on github pages
 

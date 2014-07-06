@@ -19,7 +19,8 @@ def check_filename(filename):
 vars = Variables()
 vars.Add('org_content', 'org-mode source files',
          ARGUMENTS.get('org_content', 'org-content'))
-vars.Add('content', 'compiled org-mode output', ARGUMENTS.get('content', 'content'))
+vars.Add('content', 'compiled org-mode output',
+         ARGUMENTS.get('content', 'content'))
 vars.Add('output', 'site contents', ARGUMENTS.get('output', 'output'))
 vars.Add('theme', 'theme name', ARGUMENTS.get('theme', 'theme'))
 
@@ -44,13 +45,20 @@ for post_name in posts:
     e['post'] = post_name
     check_filename(post_name)
 
+    # html, = e.Command(
+    #     target='$content/${post}.html',
+    #     source='$org_content/${post}.org',
+    #     action=('org-export pelican --infile $SOURCE --outfile $TARGET && '
+    #             'bin/colorize.py $TARGET')
+    # )
+    # Depends(html, 'colorize.py')
+    # content.append(html)
+
     html, = e.Command(
         target='$content/${post}.html',
         source='$org_content/${post}.org',
-        action=('org-export pelican --infile $SOURCE --outfile $TARGET && '
-                './colorize.py $TARGET')
+        action=('org-export pelican --infile $SOURCE --outfile $TARGET')
     )
-    Depends(html, 'colorize.py')
     content.append(html)
 
     # copy any static or derived files associated with the post
@@ -67,6 +75,6 @@ index, = env.Command(
     target='$output/index.html',
     source=content,
     action=('pelican content -t $theme && '
-            './fix_urls.py $output')
+            'bin/fix_urls.py $output')
 )
-Depends(index, Flatten([content, 'fix_urls.py', 'pelicanconf.py']))
+Depends(index, Flatten([content, 'bin/fix_urls.py', 'pelicanconf.py']))
