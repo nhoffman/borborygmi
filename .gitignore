@@ -5,3 +5,4 @@ content
 *-env
 .DS_Store
 *.temp.*
+cache
