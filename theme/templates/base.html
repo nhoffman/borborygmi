@@ -39,7 +39,7 @@
         {% for title, link in MENUITEMS %}
             <li><a href="{{ link }}">{{ title }}</a></li>
         {% endfor %}
-            
+
         {% if DISPLAY_PAGES_ON_MENU %}
         {% for page in PAGES %}
             <li><a href="{{ SITEURL }}/{{ page.url }}">{{ page.title }}</a></li>
@@ -47,7 +47,7 @@
         {% endif %}
         </ul>
         </div>
-        
+
     </div>
     </div>
 </div>
@@ -59,15 +59,15 @@
         <div class="span9">
         {% block content %}{% endblock %}
         </div>
-        
+
         <div class="span3">
 
             <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
             <ul class="nav nav-list">
-                <li class="nav-header"> 
+                <li class="nav-header">
                 Site
                 </li>
-            
+
                 <li><a href="{{ SITEURL }}/{{ ARCHIVES_URL }}">Archives</a>
                 <li><a href="{{ SITEURL }}/tags.html">Tags</a>
                 <li><a href="{{ FEED_DOMAIN }}/{{ FEED_ATOM }}" rel="alternate">Atom feed</a></li>
@@ -81,13 +81,13 @@
             {% if categories %}
             <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
             <ul class="nav nav-list">
-                <li class="nav-header"> 
+                <li class="nav-header">
                 Categories
                 </li>
-                
+
                 {% for cat, null in categories %}
                 <li><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
-                {% endfor %}                   
+                {% endfor %}
             </ul>
             </div>
             {% endif %}
@@ -96,10 +96,10 @@
             {% if LINKS %}
             <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
             <ul class="nav nav-list">
-                <li class="nav-header"> 
+                <li class="nav-header">
                 Links
                 </li>
-            
+
             {% for name, link in LINKS %}
                 <li><a href="{{ link }}">{{ name }}</a></li>
             {% endfor %}
@@ -112,10 +112,10 @@
             <div class="social">
             <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
             <ul class="nav nav-list">
-                <li class="nav-header"> 
+                <li class="nav-header">
                 Social
                 </li>
-           
+
                 {% for name, link in SOCIAL %}
                 <li><a href="{{ link }}">{{ name }}</a></li>
                 {% endfor %}
@@ -124,19 +124,19 @@
             </div>
             {% endif %}
 
-        </div> {# End span3 #} 
+        </div> {# End span3 #}
     </div> {# End row #}
     </div> {# End content #}
 
 <footer>
 <br />
-<p><a href="{{ SITEURL }}">{{ SITENAME }}</a> &copy; {{ AUTHOR }} 2012</p>
+<p><a href="{{ SITEURL }}">{{ SITENAME }}</a> &copy; {{ AUTHOR }} 2014</p>
 </footer>
 
 </div> <!-- /container -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-collapse.js"></script>
 {% include "analytics.html" %}
-{% include "github.html" %} 
+{% include "github.html" %}
 </body>
 </html>

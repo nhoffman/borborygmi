@@ -1,19 +1,17 @@
-{{ article.locale_date }}
+{{ article.locale_date }} &#8212;
 
 {% if article.author %}
-by <a class="url fn" href="{{ SITEURL }}/{{ article.author.url }}">{{ article.author }}</a>
-    {% if article.translations %}
-        <a href="{{ SITEURL }}/{{ article.url }}" class="btn btn-info xsmall">{{ article.lang or DEFAULT_LANG }}</a>
-        {% for translation in article.translations %}
-            <a href="{{ SITEURL }}/{{ translation.url }}" class="btn btn-info xsmall">{{ translation.lang }}</a>&nbsp;
-        {% endfor %}
-    {% endif %}
-{% endif %} 
-
-{# Filed under <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a> #}
-
-{# 
-{% if article.tags %} 
-    Tags {% for tag in article.tags %}<a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a> {% endfor %}
+  {# by <a class="url fn" href="{{ SITEURL }}/{{ article.author.url }}">{{ article.author }}</a> #}
+  {% if article.translations %}
+    <a href="{{ SITEURL }}/{{ article.url }}" class="btn btn-info xsmall">{{ article.lang or DEFAULT_LANG }}</a>
+    {% for translation in article.translations %}
+      <a href="{{ SITEURL }}/{{ translation.url }}" class="btn btn-info xsmall">{{ translation.lang }}</a>&nbsp;
+    {% endfor %}
+  {% endif %}
 {% endif %}
-#}
+
+<em>Filed under <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a>
+  {%- if article.tags %};
+    tags: {% for tag in article.tags %}<a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}{% if loop.index < loop.length %},&nbsp;{% endif %}</a>{% endfor %}
+  {% endif %}
+</em>
