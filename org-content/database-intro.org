@@ -400,7 +400,7 @@ digraph G {
 }
 #+END_SRC
 
-- hierarchical databases are arguably [[http://healthcaresecurity.wordpress.com/2010/10/12/why-are-hierarchical-databases-like-mumps-still-popular-in-healthcare/][extremely well-suited for modeling healthcare data]] extremely well-suited for modeling healthcare data.
+- hierarchical databases are arguably [[http://healthcaresecurity.wordpress.com/2010/10/12/why-are-hierarchical-databases-like-mumps-still-popular-in-healthcare/][extremely well-suited for modeling healthcare data]].
 - can be used to efficiently represent data that would otherwise require many tables in a well-normalized relational database.
 - depending on the structure of the hierarchy, certain queries can be extremely efficient: eg, all orders for Patient 1 can be found by traversing only the subtree containing data for that patient, which might represent only a tiny fraction of the entire database.
 - other sorts of queries can be extremely inefficient: eg, finding all results of a certain type might require traversal of the entire tree!
