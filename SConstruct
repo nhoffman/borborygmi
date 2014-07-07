@@ -78,3 +78,11 @@ index, = env.Command(
             'bin/fix_urls.py $output')
 )
 Depends(index, Flatten([content, 'bin/fix_urls.py', 'pelicanconf.py']))
+Default(index)
+
+publish_log, = env.Command(
+    target='publish_log.txt',
+    source='$output',
+    action='ghp-import -p $SOURCE > $TARGET'
+)
+Alias('publish', publish_log)

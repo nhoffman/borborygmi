@@ -6,3 +6,4 @@ content
 .DS_Store
 *.temp.*
 cache
+publish_log.txt
