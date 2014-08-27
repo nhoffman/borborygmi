@@ -1,0 +1,112 @@
+#+TITLE: Compiling bcl2fastq v2.15 on Ubuntu 12.04 and 14.04
+#+DATE: 2014-08-27
+#+CATEGORY: notes
+#+PROPERTY: TAGS linux
+#+PROPERTY: eval no
+
+Illumina provides a program for demultiplexing sequencing output
+called =bcl2fastq=. They get a gold star for releasing the source -
+the downside is that they release binaries only for RHEL/CentOS, and
+no build instructions for Ubuntu. So how hard could it be?
+
+* Ubuntu 14.04 (Trusty Tahr)
+
+I thought I'd start here since the packages are more up to date (turns
+out it's a good thing I did, see the morass below). There's some
+documentation from Illumina for compiling from source [[http://supportres.illumina.com/documents/documentation/software_documentation/bcl2fastq/bcl2fastq-v2-0-user-guide-15051736-a.pdf][here]]. There's
+not a lot to go on, other than a list of dependencies, which boils
+down to:
+
+- zlib
+- librt
+- libpthread
+- gcc 4.1.2 (with c++)
+- boost 1.54 (with its dependencies)
+- cmake 2.8.9
+
+Really the only tricky part was figuring out the required packages,
+which didn't correspond particularly well to the list of dependencies
+above. I didn't bother trying to install specific version of any of
+the dependencies other than boost 1.54.
+
+On an Amazon AWS EC2 instance (m3.medium, ubuntu-trusty-14.04-amd64-server-20140607.1 ami-e7b8c0d7):
+
+#+BEGIN_SRC sh
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install zlibc
+sudo apt-get install libc6 # provides librt and libpthread
+sudo apt-get install gcc
+sudo apt-get install g++
+sudo apt-get install libboost1.54-all-dev
+sudo apt-get install cmake
+#+END_SRC
+
+From there, compilation more or less works as advertised:
+
+#+BEGIN_SRC sh
+wget ftp://webdata2:webdata2@ussd-ftp.illumina.com/downloads/Software/bcl2fastq/bcl2fastq2-v2.15.0.4.tar.gz
+tar -xf bcl2fastq2-v2.15.0.4.tar.gz
+cd bcl2fastq
+mkdir build
+cd build
+PREFIX=/usr/local
+sudo mkdir -p ${PREFIX:?}
+../src/configure --prefix=${PREFIX:?}
+make
+sudo make install
+#+END_SRC
+
+We wanted this version to coexist with an older one, so I renamed
+the executable:
+
+#+BEGIN_SRC sh
+sudo mv $PREFIX/bin/bcl2fastq $PREFIX/bin/bcl2fastq2
+#+END_SRC
+
+* Ubuntu 12.04 (Precise Pangolin)
+
+Emboldened, I went on to 12.04. This was a lot more painful. Lots of
+trail and error. Here's what I came up with. More or less the same as
+above at first (m3.medium, ubuntu-precise-12.04-amd64-server-20140717
+ami-23f78e13):
+
+#+BEGIN_SRC sh
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install zlibc
+sudo apt-get install libc6 # librt and libpthread
+sudo apt-get install gcc
+sudo apt-get install g++
+sudo apt-get install cmake
+#+END_SRC
+
+We'll also need libboost version 1.54; to do this, we need to add a
+third-party ppa (https://launchpad.net/~boost-latest/+archive/ubuntu/ppa).
+
+#+BEGIN_SRC sh
+sudo apt-get install python-software-properties
+sudo add-apt-repository ppa:boost-latest/ppa
+sudo apt-get update
+sudo apt-get install libboost1.54-all-dev
+#+END_SRC
+
+I tried to install cmake 2.8.9 from various ppa's but kept getting
+errors when I compiled =bcl2fastq=. So, source it is.
+
+#+BEGIN_SRC sh
+sudo apt-get build-dep cmake
+wget http://www.cmake.org/files/v2.8/cmake-2.8.9.tar.gz
+tar -xf cmake-2.8.9.tar.gz
+cd cmake-2.8.9
+./configure && make && sudo make install
+#+END_SRC
+
+Finally, an error complaining about the absence of =sys/stat.h=. I found good advice [[http://askubuntu.com/questions/414110/wheres-my-usr-include-sys-directory][here]]:
+
+#+BEGIN_SRC
+sudo mkdir -p /usr/include/sys
+sudo ln -s /usr/include/x86_64-linux-gnu/sys/stat.h /usr/include/sys/stat.h
+#+END_SRC
+
+After all of that, compiling bcl2fasta worked as described for 14.04.
