@@ -86,3 +86,10 @@ publish_log, = env.Command(
     action='ghp-import -p $SOURCE > $TARGET'
 )
 Alias('publish', publish_log)
+
+reset_log, = env.Command(
+    target='reset_log.txt',
+    source='$output',
+    action='git push origin :gh-pages'
+)
+Alias('reset', reset_log)
