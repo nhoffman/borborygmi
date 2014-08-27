@@ -75,10 +75,9 @@ ami-23f78e13):
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install zlibc
-sudo apt-get install libc6 # librt and libpthread
+sudo apt-get install libc6 # provides librt and libpthread
 sudo apt-get install gcc
 sudo apt-get install g++
-sudo apt-get install cmake
 #+END_SRC
 
 We'll also need libboost version 1.54; to do this, we need to add a
