@@ -36,10 +36,10 @@
 
         <div class="nav-collapse">
         <ul class="nav">
-            
+
         </ul>
         </div>
-        
+
     </div>
     </div>
 </div>
@@ -52,14 +52,12 @@
     <div class='article'>
         <div class="content-title">
             <h1>Creating a site with Pelican and org-mode</h1>
-Mon 26 May 2014
-
-by <a class="url fn" href="./author/noah-hoffman.html">Noah Hoffman</a>
- 
+Mon 26 May 2014 &#8212;
 
 
-        </div>
-	
+<em>Filed under <a href="./category/org-mode.html">org-mode</a>;
+    tags: <a href="./tag/org-mode.html">org-mode,&nbsp;</a><a href="./tag/pelican.html">pelican,&nbsp;</a><a href="./tag/elisp.html">elisp</a></em>        </div>
+
         <div><div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
@@ -79,27 +77,17 @@ by <a class="url fn" href="./author/noah-hoffman.html">Noah Hoffman</a>
 <p>
 Never one to pass up the opportunity for yak-shaving, I thought I'd
 finally try to settle on a publishing platform for various notes and
-other content that I have scattered about on the web.
+other content that I have scattered about on the web. The repository
+is <a href="https://github.com/nhoffman/borborygmi">on GitHub.</a>
 </p>
 
 <p>
-I much prefer to generate content in org-mode, but I just couldn't
-manage to get org-publish to work as I wanted. When I learned that the
-<a href="http://docs.getpelican.com/en/latest/index.html">Pelican</a> static site generator could import html and saw <a href="http://msnyder.info/posts/2013/12/introducing-pelicorg/">another effort</a>
-to use the two together, I thought I'd give it a shot.
+I much prefer to generate content in org-mode, but I couldn't manage
+to get org-publish to organize content in the way I wanted, or to be
+easily compiled in batch mode. When I learned that the <a href="http://docs.getpelican.com/en/latest/index.html">Pelican</a> static
+site generator could import html and saw <a href="http://msnyder.info/posts/2013/12/introducing-pelicorg/">another effort</a> to use the two
+together, I thought I'd give it a shot.
 </p>
-
-<p>
-Pelican is pretty easy to get started with:
-</p>
-
-<div class="org-src-container">
-
-<div class="highlight"><pre>virtualenv borborygmi-env
-<span class="nb">source </span>borborygmi-env/bin/activate
-pip install pelican
-pelican-quickstart
-</pre></div></div>
 
 <div id="outline-container-sec-1" class="outline-2">
 <h2 id="sec-1">org-mode integration</h2>
@@ -114,8 +102,9 @@ to write a utility for this purpose.
 
 <div class="org-src-container">
 
-<div class="highlight"><pre>org-export pelican -h
-</pre></div></div>
+<pre class="src src-sh">org-export pelican -h
+</pre>
+</div>
 
 <pre class="example">
 Using /Applications/Emacs.app/Contents/MacOS/Emacs, GNU Emacs 24.3.1
@@ -134,8 +123,22 @@ example:
 
 <div class="org-src-container">
 
-<div class="highlight"><pre>head ../content/getting-started.html
-</pre></div></div>
+<pre class="src src-sh">head ../content/getting-started.html
+</pre>
+</div>
+
+<pre class="example">
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Creating a site with Pelican and org-mode&lt;/title&gt;
+        &lt;meta name="authors" content="Noah Hoffman"&gt;
+        &lt;meta name="date" content="2014-05-26"&gt;
+        &lt;meta name="category" content="org-mode"&gt;
+        &lt;meta name="tags" content="org-mode, pelican, elisp"&gt;
+        &lt;meta name="save_as" content="getting-started.html"&gt;
+        &lt;meta name="url" content="getting-started.html"&gt;
+    &lt;/head&gt;
+</pre>
 
 <p>
 Specifying "save_as" and "url" was more convenient than trying to
@@ -183,8 +186,9 @@ evaluated:
 
 <div class="org-src-container">
 
-<div class="highlight"><pre><span class="nb">pwd</span>
-</pre></div></div>
+<pre class="src src-sh">pwd
+</pre>
+</div>
 
 <pre class="example">
 /Users/nhoffman/src/borborygmi/org-content
@@ -222,6 +226,15 @@ Perameles_gunni.jpg
 plot1.png
 plot2.png
 </pre>
+
+<p>
+An additional complication is that the files for the index and
+individual posts are at the top level of the output directory, but
+other pages (in categories, tags, etc) are in subdirectories. Rather
+than muck around with modifying linking behavior in Pelican, I just
+fixed things up in the latter files with lxml in the script
+<code>fix_urls.py</code>.
+</p>
 </div>
 </div>
 
@@ -229,33 +242,32 @@ plot2.png
 <h3 id="sec-1-2">Syntax highlighting</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
-Unfortunately, org-mode appears to rely on syntax highlighting in the
-console to colorize the output (I have a vague understanding that this
-has something to do with font-lock-mode), so non-interactive html
-export doesn't produce the same output as exported pages produced
-interactively from an open buffer. My solution was to use <a href="http://pygments.org/">pygments</a> to
-generate the html markup and <a href="http://lxml.de/">lxml</a> to extract text from code blocks and
-replace them with html markup (this is done in <a href="https://github.com/nhoffman/borborygmi/blob/master/colorize.py">colorize.py</a>).
+A lot of trial and error was required to export code blocks with
+colorized syntax highlighting, and I still can't say I fully
+understand why the final configuration seems to work when others I
+tried didn't. But here are a few of the bits of magic that were required.
 </p>
 
 <p>
-Also unfortunately, the variable <code>org-src-fontify-natively</code> that is
-advertised (I think) to suppress html markup in exported code blocks
-so that I could use pygments to produce syntax highlighting,
-doesn't. My ugly hack to get around this was to replace the org-mode
-function responsible for marking up the code blocks with a neutered
-version:
+Requiring the <code>htmlize</code> package alone seems to be sufficient to
+produce colorized syntax highlighting when exporting interactively
+from within emacs. But an identical configuration did not result in
+colorized output when exporting in batch mode using <code>org-export
+pelican</code>. I finally came across advice someplace to use the
+<code>color-theme</code> package along with some custom themes. Turns out that
+after installing <code>color-theme</code> along with <code>color-theme-github</code>, simply
+adding
 </p>
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defun org-html-fontify-code (code lang)
-  "Replaces the original function to suppress syntax
-highlighting"
-  (when code
-    (org-html-encode-plain-text code)))
+<pre class="src src-emacs-lisp">(require 'color-theme-github)
 </pre>
 </div>
+
+<p>
+was enough to produce colorized output. Go figure.
+</p>
 </div>
 </div>
 </div>
@@ -274,7 +286,7 @@ For convenience, I just added the themes repository as a git submodule.
 </p>
 
 <p>
-Here are some I liked:
+Here are some I liked at first glance:
 </p>
 
 <ul class="org-ul">
@@ -293,7 +305,7 @@ Here are some I liked:
 </ul>
 
 <p>
-Settled on tuxlite_tbs (thanks, <a href="https://github.com/chanux">chanux</a>).
+I finally settled on tuxlite_tbs (thanks, <a href="https://github.com/chanux">chanux</a>), and made a local version, which I've modified minimally thus far.
 </p>
 </div>
 </div>
@@ -318,11 +330,11 @@ ghp-import -p output
 <caption class="t-above"><span class="table-number">Table 1:</span> An org-mode table</caption>
 
 <colgroup>
-<col class="left">
+<col class="left" />
 
-<col class="left">
+<col class="left" />
 
-<col class="left">
+<col class="left" />
 </colgroup>
 <thead>
 <tr>
@@ -334,7 +346,7 @@ ghp-import -p output
 <tbody>
 <tr>
 <td class="left">with</td>
-<td class="left">&#160;</td>
+<td class="left">&#xa0;</td>
 <td class="left">values</td>
 </tr>
 
@@ -348,7 +360,7 @@ ghp-import -p output
 
 
 <div class="figure">
-<p><img src="getting-started/Perameles_gunni.jpg" alt="Perameles_gunni.jpg">
+<p><img src="getting-started/Perameles_gunni.jpg" alt="Perameles_gunni.jpg" />
 </p>
 <p><span class="figure-number">Figure 1:</span> Hey, a <a href="http://en.wikipedia.org/wiki/File:Perameles_gunni.jpg">bandicoot</a>!</p>
 </div>
@@ -363,7 +375,7 @@ invisible(dev.off())
 
 
 <div class="figure">
-<p><img src="getting-started/plot1.png" alt="plot1.png">
+<p><img src="getting-started/plot1.png" alt="plot1.png" />
 </p>
 </div>
 
@@ -375,15 +387,16 @@ invisible(dev.off())
 
 
 <div class="figure">
-<p><img src="getting-started/plot2.png" alt="plot2.png">
+<p><img src="getting-started/plot2.png" alt="plot2.png" />
 </p>
 </div>
 
 <div class="org-src-container">
 <label class="org-src-name">A python code block with output</label>
-<div class="highlight"><pre><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="k">print</span> <span class="s">'hello'</span> <span class="o">+</span> <span class="s">'!'</span> <span class="o">*</span> <span class="n">i</span>
-</pre></div></div>
+<pre class="src src-python">for i in range(3):
+    print 'hello' + '!' * i
+</pre>
+</div>
 
 <pre class="example">
 hello
@@ -393,20 +406,21 @@ hello!!
 
 <div class="org-src-container">
 <label class="org-src-name">An sqlite3 code block producing an html-formatted table</label>
-<div class="highlight"><pre><span class="p">.</span><span class="n">header</span> <span class="k">on</span>
-<span class="k">create</span> <span class="k">table</span> <span class="n">foo</span> <span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">baz</span><span class="p">);</span>
-<span class="k">insert</span> <span class="k">into</span> <span class="n">foo</span> <span class="k">values</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-<span class="k">insert</span> <span class="k">into</span> <span class="n">foo</span> <span class="k">values</span><span class="p">(</span><span class="s1">'b'</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
-<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">foo</span><span class="p">;</span>
-</pre></div></div>
+<pre class="src src-sqlite">.header on
+create table foo (bar, baz);
+insert into foo values('a', 1);
+insert into foo values('b', 2);
+select * from foo;
+</pre>
+</div>
 
 <table class="table table-striped table-bordered table-condensed" style="width: auto;">
 
 
 <colgroup>
-<col class="left">
+<col class="left" />
 
-<col class="right">
+<col class="right" />
 </colgroup>
 <tbody>
 <tr>
@@ -428,64 +442,63 @@ hello!!
 </div>
 </div>
 </div>
-	
+
         <hr>
 
     </div>
         </div>
-        
+
         <div class="span3">
 
             <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
             <ul class="nav nav-list">
-                <li class="nav-header"> 
+                <li class="nav-header">
                 Site
                 </li>
-            
+
                 <li><a href="./">Archives</a>
                 <li><a href="./tags.html">Tags</a>
-                <li><a href="/" rel="alternate">Atom feed</a></li>
+                <li><a href="http://nhoffman.github.io/borborygmi/" rel="alternate">Atom feed</a></li>
             </ul>
             </div>
 
 
             <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
             <ul class="nav nav-list">
-                <li class="nav-header"> 
+                <li class="nav-header">
                 Categories
                 </li>
-                
+
                 <li><a href="./category/lectures.html">lectures</a></li>
+                <li><a href="./category/notes.html">notes</a></li>
                 <li><a href="./category/org-mode.html">org-mode</a></li>
-                   
             </ul>
             </div>
 
 
             <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
             <ul class="nav nav-list">
-                <li class="nav-header"> 
+                <li class="nav-header">
                 Links
                 </li>
-            
-                <li><a href="http://getpelican.com/">Pelican</a></li>
-                <li><a href="http://python.org/">Python.org</a></li>
-                <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+
+                <li><a href="http://web.labmed.washington.edu/nhoffman">Faculty Site</a></li>
+                <li><a href="http://depts.washington.edu/labweb/">UW Lab Medicine</a></li>
+                <li><a href="https://github.com/nhoffman">my GitHub</a></li>
+                <li><a href="https://github.com/nhoffman/borborygmi">site source</a></li>
             </ul>
             </div>
 
 
 
-        </div>  
-    </div>     </div> 
+        </div>     </div>     </div> 
 <footer>
 <br />
-<p><a href=".">borborygmi</a> &copy; Noah Hoffman 2012</p>
+<p><a href=".">borborygmi</a> &copy; Noah Hoffman 2014</p>
 </footer>
 
 </div> <!-- /container -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-collapse.js"></script>
- 
 </body>
 </html>

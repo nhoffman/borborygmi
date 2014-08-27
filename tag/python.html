@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -9,14 +8,14 @@
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
-    <script src="./theme/html5.js"></script>
+    <script src="../theme/html5.js"></script>
     <![endif]-->
 
     <!-- Le styles -->
-    <link href="./theme/bootstrap.min.css" rel="stylesheet">
-    <link href="./theme/bootstrap.min.responsive.css" rel="stylesheet">
-    <link href="./theme/local.css" rel="stylesheet">
-    <link href="./theme/pygments.css" rel="stylesheet">
+    <link href="../theme/bootstrap.min.css" rel="stylesheet">
+    <link href="../theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="../theme/local.css" rel="stylesheet">
+    <link href="../theme/pygments.css" rel="stylesheet">
 
 </head>
 
@@ -32,7 +31,7 @@
              <span class="icon-bar"></span>
          </a>
 
-        <a class="brand" href=".">borborygmi</a>
+        <a class="brand" href="..">borborygmi</a>
 
         <div class="nav-collapse">
         <ul class="nav">
@@ -49,7 +48,61 @@
     <div class="row">
 
         <div class="span9">
-    <h1>Authors on borborygmi</h1>        <li><a href="./author/noah-hoffman.html">Noah Hoffman</a> (7)</li>
+
+<!-- Don't include TOC on the index page -->
+<style>div#table-of-contents {display: none;}</style>
+
+
+
+    <div class="article">
+        <div class="content-title">
+            <a href="../dict-factory.html"><h1>sqlite dict factory</h1></a>
+Tue 10 June 2014 &#8212;
+
+
+<em>Filed under <a href="../category/notes.html">notes</a>;
+    tags: <a href="../tag/python.html">python,&#160;</a><a href="../tag/sqlite.html">sqlite</a></em>        </div>
+
+        <div><p>
+Probably not as efficient as using the sqlite3.Row class, but works
+when actual dict objects are required. Adapted from
+<a href="https://docs.python.org/2/library/sqlite3.html">https://docs.python.org/2/library/sqlite3.html</a>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python">import sqlite3
+
+def dict_factory(cursor, row):
+    return {col[0]: row[idx] for idx, col in enumerate(cursor.description)}
+
+con = sqlite3.connect(":memory:")
+con.row_factory = dict_factory
+cur = con.cursor()
+cur.execute("select 1 as a")
+print cur.fetchone()
+</pre>
+</div>
+
+<pre class="example">
+{'a': 1}
+</pre>
+</div>
+        <hr>
+    </div>
+
+<div class="pagination">
+<ul>
+    <li class="prev disabled"><a href="#">&#8592; Previous</a></li>
+
+    <li class="active"><a href="../tag/python.html">1</a></li>
+
+    <li class="next disabled"><a href="#">&#8594; Next</a></li>
+
+</ul>
+</div>
+ 
+  
         </div>
 
         <div class="span3">
@@ -60,9 +113,9 @@
                 Site
                 </li>
 
-                <li><a href="./">Archives</a>
-                <li><a href="./tags.html">Tags</a>
-                <li><a href="http://nhoffman.github.io/borborygmi/" rel="alternate">Atom feed</a></li>
+                <li><a href="../">Archives</a>
+                </li><li><a href="../tags.html">Tags</a>
+                </li><li><a href="http://nhoffman.github.io/borborygmi/" rel="alternate">Atom feed</a></li>
             </ul>
             </div>
 
@@ -73,9 +126,9 @@
                 Categories
                 </li>
 
-                <li><a href="./category/lectures.html">lectures</a></li>
-                <li><a href="./category/notes.html">notes</a></li>
-                <li><a href="./category/org-mode.html">org-mode</a></li>
+                <li><a href="../category/lectures.html">lectures</a></li>
+                <li><a href="../category/notes.html">notes</a></li>
+                <li><a href="../category/org-mode.html">org-mode</a></li>
             </ul>
             </div>
 
@@ -97,8 +150,8 @@
 
         </div>     </div>     </div> 
 <footer>
-<br />
-<p><a href=".">borborygmi</a> &copy; Noah Hoffman 2014</p>
+<br>
+<p><a href="..">borborygmi</a> &#169; Noah Hoffman 2014</p>
 </footer>
 
 </div> <!-- /container -->

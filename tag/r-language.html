@@ -56,170 +56,138 @@
 
     <div class="article">
         <div class="content-title">
-            <a href="../lists-with-variables.html"><h1>Creating lists containing variables</h1></a>
-Thu 12 June 2014 &#8212;
+            <a href="../installing-r-packages.html"><h1>Installing R packages</h1></a>
+Mon 22 March 2010 &#8212;
 
 
 <em>Filed under <a href="../category/notes.html">notes</a>;
-    tags: <a href="../tag/elisp.html">elisp</a></em>        </div>
+    tags: <a href="../tag/r-language.html">R-language</a></em>        </div>
 
-        <div><p>
-I learned a bit about list creation in elisp today. Here's how you join a list of strings in elisp:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">(mapconcat #'identity '("" "path" "to" "someplace") "/")
-</pre>
-</div>
-
-<pre class="example">
-/path/to/someplace
-</pre>
-
-<p>
-But I learned (thanks to <a href="http://stackoverflow.com/users/113848/legoscia">legoscia</a> on <a href="http://stackoverflow.com/questions/24188100">stackoverflow</a>) that simply
-replacing an element in the list with a variable results in an error:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">(let ((path "someplace"))
-  (mapconcat #'identity '("" "path" "to" path) "/"))
-</pre>
-</div>
-
-<pre class="example">
-Wrong type argument: sequencep, path
-</pre>
-
-<p>
-It turns out that a list constructed using a single quote includes
-symbols (and not the corresponding values) in the list.
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">(let ((path "someplace"))
-  (print '("" "path" "to" path)))
-</pre>
-</div>
-
-<pre class="example">
-("" "path" "to" path)
-</pre>
-
-<p>
-Instead, create the list either using the <code>list</code> function, or with a
-backquote and a comma:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">(let ((path "someplace"))
-  (print (list "" "path" "to" path))
-  (print `("" "path" "to" ,path)))
-</pre>
-</div>
-
-<pre class="example">
-("" "path" "to" "someplace")
-
-("" "path" "to" "someplace")
-</pre>
-
-<p>
-Yikes, that second syntax is&#8230; not intuitive. It turns out that the <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Backquote.html">backquote</a> syntax exists just for this purpose:
-</p>
-
-<blockquote>
-<p>
-Backquote constructs allow you to quote a list, but selectively
-evaluate elements of that list&#8230; The special marker ',' inside of the
-argument to backquote indicates a value that isn't constant. The Emacs
-Lisp evaluator evaluates the argument of ',', and puts the value in
-the list structure.
-</p>
-</blockquote>
-
-<p>
-Well, that's good to know. I needed to take it a step further, because
-I was actually trying to store the value of a variable in an
-<code>alist</code>. Again, the familiar syntax for defining an alist stored the
-symbol instead of the value:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">(let ((path "someplace"))
-  (print '((:prologue . path))))
-</pre>
-</div>
-
-<pre class="example">
-((:prologue . pathdef))
-</pre>
-
-<p>
-Nope.
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-elisp">(let ((path "someplace"))
-  (print (list `(:prologue . ,path))))
-</pre>
-</div>
-
-<pre class="example">
-((:prologue . "someplace"))
-</pre>
-
-<p>
-Much better.
-</p>
-</div>
-        <hr>
-    </div>
-
-
- 
-
-
-    <div class="article">
-        <a href="../getting-started.html"><h2>Creating a site with Pelican and org-mode</h2></a>
-        <div class="well small"> Mon 26 May 2014 &#8212;
-
-
-<em>Filed under <a href="../category/org-mode.html">org-mode</a>;
-    tags: <a href="../tag/org-mode.html">org-mode,&#160;</a><a href="../tag/pelican.html">pelican,&#160;</a><a href="../tag/elisp.html">elisp</a></em> <a class="btn btn-info xsmall" href="../getting-started.html">read more</a> </div>
-        <div class="summary"><div id="table-of-contents">
+        <div><div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">org-mode integration</a>
-<ul>
-<li><a href="#sec-1-1">Arranging content in subdirectories</a></li>
-<li><a href="#sec-1-2">Syntax highlighting</a></li>
-</ul>
-</li>
-<li><a href="#sec-2">Choosing a theme</a></li>
-<li><a href="#sec-3">Hosting on github pages</a></li>
-<li><a href="#sec-4">Examples</a></li>
+<li><a href="#sec-1">Installing from CRAN</a></li>
+<li><a href="#sec-2">Bioconductor</a></li>
+<li><a href="#sec-3">R-forge</a></li>
+<li><a href="#sec-4">Installing packages locally</a></li>
+<li><a href="#sec-5">Reloading a package</a></li>
 </ul>
 </div>
 </div>
 <p>
-Never one to pass up the opportunity for yak-shaving, I thought I'd
-finally try to settle on a publishing platform for various notes and
-other content that I have scattered ...</p> </div>
+Notes to myself about installing R packages.
+</p>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">Installing from CRAN</h2>
+<div class="outline-text-2" id="text-1">
+<div class="org-src-container">
+
+<pre class="src src-R">install.packages(c("ape","sqldf","ROCR"), repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Bioconductor</h2>
+<div class="outline-text-2" id="text-2">
+<div class="org-src-container">
+
+<pre class="src src-R">source("http://bioconductor.org/biocLite.R")
+biocLite(c("Biostrings","BSgenome")) # for example
+</pre>
+</div>
+
+<p>
+Update all of bioconductor
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-R">source("http://bioconductor.org/biocLite.R")
+update.packages(rep=biocinstallRepos(), ask=FALSE)
+</pre>
+</div>
+
+<p>
+Check out and install a package (eg, Biostrings) from the Subversion repository. See <a href="http://wiki.fhcrc.org/bioc/SvnHowTo">http://wiki.fhcrc.org/bioc/SvnHowTo</a>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-R">svn checkout --username=readonly --password=readonly https://hedgehog.fhcrc.org/bioconductor/trunk/madman/Rpacks/Biostrings
+R CMD INSTALL Biostrings
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">R-forge</h2>
+<div class="outline-text-2" id="text-3">
+<div class="org-src-container">
+
+<pre class="src src-R">install.packages("packagename",repos="http://R-Forge.R-project.org")
+</pre>
+</div>
+
+<p>
+Read-only subversion repository may be checked out using
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-R">svn checkout svn://svn.r-forge.r-project.org/svnroot/packagename
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">Installing packages locally</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+If you can't (or don't want to) install packages to the system R location, you can create a local library. For example:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-R">echo 'R_LIBS_USER="~/R/library"' &gt;  $HOME/.Renviron
+mkdir -p ~/R/library
+R CMD INSTALL --library=~/R/library somepackage.gz
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">Reloading a package</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Calling <code>library()</code> after a package has already been loaded does not update the namespace with updates if the library has changed (eg, during package development). Instead, do something like this:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-R">relibrary &lt;- function(pkg){
+    unloadNamespace(pkg)
+    library(pkg, character.only=TRUE)
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+        <hr>
     </div>
 
 <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&#8592; Previous</a></li>
 
-    <li class="active"><a href="../tag/elisp.html">1</a></li>
+    <li class="active"><a href="../tag/r-language.html">1</a></li>
 
     <li class="next disabled"><a href="#">&#8594; Next</a></li>
 
