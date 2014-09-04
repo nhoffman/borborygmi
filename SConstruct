@@ -85,6 +85,7 @@ publish_log, = env.Command(
     source='$output',
     action='ghp-import -p $SOURCE > $TARGET'
 )
+Depends(publish_log, [content, index])
 Alias('publish', publish_log)
 
 reset_log, = env.Command(
