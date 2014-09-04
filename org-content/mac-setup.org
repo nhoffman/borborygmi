@@ -241,8 +241,8 @@ pip install ansible
 
 #+BEGIN_SRC sh
 cd ~/src
-wget http://cran.us.r-project.org/bin/macosx/R-3.1.0-mavericks.pkg && \
-sudo installer -pkg R-3.1.0-mavericks.pkg -target /
+wget http://cran.fhcrc.org/bin/macosx/R-3.1.1-mavericks.pkg && \
+sudo installer -pkg R-3.1.1-mavericks.pkg -target /
 #+END_SRC
 
 # wget http://cran.fhcrc.org/bin/macosx/tools/gfortran-4.2.3.dmg
@@ -250,7 +250,7 @@ sudo installer -pkg R-3.1.0-mavericks.pkg -target /
 
 #+BEGIN_SRC sh
 sudo R --slave << EOF
-packages <- c("ape", "sqldf", "ROCR", "lattice", "RSQLite", "latticeExtra")
+packages <- c("ape", "sqldf", "ROCR", "lattice", "RSQLite", "latticeExtra", "argparse", "data.table")
 install.packages(packages, repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE)
 EOF
 #+END_SRC
