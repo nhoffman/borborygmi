@@ -528,7 +528,9 @@ Composing queries will be easier if you are consistent in your representations o
 
 ** use multiple tables (normalize the data)
 
-Here's where understanding relations is useful. When I ask for data from the laboratory system, I typically get results back that look something like this:
+Here's where understanding relations is useful. When I ask for data
+from the laboratory system, I typically get results back that look
+something like this:
 
 #+BEGIN_SRC sqlite :exports results
 select results.*, b.battery_name, t.test_name, t.ref_range from results
@@ -546,4 +548,4 @@ to include the last three columns in our table of results (imagine
 having millions of rows like this) - we can store these test and
 battery attributes in separate tables and perform joins as necessary.
 
-
+It's worth having a look at the classic short article [[http://www.bkent.net/Doc/simple5.htm][A Simple Guide to Five Normal Forms in Relational Database Theory]]
