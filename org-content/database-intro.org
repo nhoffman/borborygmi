@@ -70,21 +70,30 @@ rm -f database-intro/results.db
 | BMP          | K         |
 
 #+NAME: write_csv
-#+BEGIN_SRC python :exports results :var tbl_patients=patients tbl_results=results tbl_tests=tests tbl_batteries=batteries tbl_battery_tests=battery_tests tbl_patients=patients tbl_physicians=physicians tbl_physician_patient=physician_patient
+#+BEGIN_SRC python :eval yes :results output :exports results :var tbl_patients=patients tbl_results=results tbl_tests=tests tbl_batteries=batteries tbl_battery_tests=battery_tests tbl_patients=patients tbl_physicians=physicians tbl_physician_patient=physician_patient
 import csv
 tables = [(k, v) for k, v in locals().items() if k.startswith('tbl_')]
 for name, rows in tables:
     with open('database-intro/%s.csv' % name.replace('tbl_', ''), 'w') as f:
-        csv.writer(f).writerows(rows)
+        csv.writer(f, lineterminator='\n').writerows(rows)
 #+END_SRC
 
 #+NAME: create_database
-#+BEGIN_SRC sh :exports results
+#+BEGIN_SRC sh :eval yes :results output :exports results
+
+# apparently something very strange is going on in the execution
+# environment of this code block: when called normally, csvsql seems
+# to be receiving data via stdin. The only way to prevent an error is
+# to write explicitly to stdin.
+
 rm -f database-intro/results.db
-for tbl in database-intro/*.csv; do
-csvsql --db sqlite:///database-intro/results.db --insert $tbl
+for csv in database-intro/*.csv; do
+    # csvsql --db sqlite:///database-intro/results.db $csv --insert
+    cat $csv | csvsql --db sqlite:///database-intro/results.db --insert \
+        --tables $(basename ${csv%.csv})
 done
 #+END_SRC
+
 
 * Objectives
 
@@ -548,4 +557,5 @@ to include the last three columns in our table of results (imagine
 having millions of rows like this) - we can store these test and
 battery attributes in separate tables and perform joins as necessary.
 
-It's worth having a look at the classic short article [[http://www.bkent.net/Doc/simple5.htm][A Simple Guide to Five Normal Forms in Relational Database Theory]]
+It's worth having a look at the classic short article [[http://www.bkent.net/Doc/simple5.htm][A Simple Guide
+to Five Normal Forms in Relational Database Theory]]

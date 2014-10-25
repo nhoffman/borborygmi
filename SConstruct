@@ -4,8 +4,10 @@ import glob
 from os import path, environ
 from itertools import chain
 
-from SCons.Script import (Variables, Depends, Environment, ARGUMENTS, Flatten)
+if not 'VIRTUAL_ENV' in environ:
+    sys.exit('No virtualenv is actuve')
 
+from SCons.Script import (Variables, Depends, Environment, ARGUMENTS, Flatten)
 
 def check_filename(filename):
     fail = filename.startswith('.') or re.search(r'[_<>:"/\\|?*^% ]', filename)
@@ -24,13 +26,10 @@ vars.Add('content', 'compiled org-mode output',
 vars.Add('output', 'site contents', ARGUMENTS.get('output', 'output'))
 vars.Add('theme', 'theme name', ARGUMENTS.get('theme', 'theme'))
 
-paths = ['~/src/org-export'] + environ['PATH'].split(':')
-if not 'VIRTUAL_ENV' in environ:
-    try:
-        venv = glob.glob('*-env')[0]
-        paths.insert(0, path.join(venv, 'bin'))
-    except IndexError:
-        pass
+paths = ['org-export',
+         path.join(environ['VIRTUAL_ENV'], 'bin'),
+         '/usr/local/bin', '/usr/local/sbin', '/usr/bin', '/bin',
+         '/usr/sbin', '/sbin', '/opt/X11/bin', '/usr/texbin']
 
 env = Environment(ENV=dict(environ, PATH=':'.join(paths)),
                   variables=vars)
@@ -57,7 +56,8 @@ for post_name in posts:
     html, = e.Command(
         target='$content/${post}.html',
         source='$org_content/${post}.org',
-        action=('org-export pelican --infile $SOURCE --outfile $TARGET')
+        action=('org-export pelican --infile $SOURCE '
+                '--outfile $TARGET --package-dir emacs.d')
     )
     content.append(html)
 

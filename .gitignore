@@ -7,3 +7,4 @@ content
 *.temp.*
 cache
 publish_log.txt
+emacs.d
