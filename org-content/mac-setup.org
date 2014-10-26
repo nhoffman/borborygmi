@@ -31,7 +31,7 @@ See http://apple.stackexchange.com/questions/88535/how-to-download-the-command-l
 
 ** X11
 
-Download and install Xquartz http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.4.dmg
+Download and install Xquartz http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.7.dmg
 
 X11 key bindings so that the option key is used for Meta..
 
@@ -72,7 +72,7 @@ Copy my default private key.
 Be bloody, bold, and resolute:
 
 #+BEGIN_SRC sh
-ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)"
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew doctor
 #+END_SRC
 
@@ -164,9 +164,9 @@ rm -r /usr/local/lib/python2.7/site-packages
 #+BEGIN_SRC sh
 mkdir -p ~/src
 cd ~/src && \
-wget http://www.python.org/ftp/python/2.7.7/Python-2.7.7.tgz && \
-tar -xf Python-2.7.7.tgz && \
-cd Python-2.7.7 && \
+wget http://www.python.org/ftp/python/2.7.8/Python-2.7.8.tgz && \
+tar -xf Python-2.7.8.tgz && \
+cd Python-2.7.8 && \
 export LDFLAGS=-L/usr/local/opt/readline/lib && \
 export CPPFLAGS=-I/usr/local/opt/readline/include && \
 ./configure && make && make install
@@ -176,7 +176,7 @@ Note that installation does not require sudo because now I own /usr/local accord
 
 Install pip (see http://www.pip-installer.org/en/latest/installing.html)
 
-(Beginning with pip v1.5.1, get-pip.py stopped requiring setuptools to be installed first.)
+(Beginning with pip v1.5.1, get-pip.py provides setuptools and no longer requires setuptools to be installed first.)
 
 #+BEGIN_SRC sh
 cd ~/src
@@ -199,7 +199,7 @@ pandas
 csvkit
 pep8
 autopep8
-pygraphviz
+# pygraphviz
 reportlab
 jinja2
 EOF
@@ -216,16 +216,16 @@ bioy/dev/build_wheels.sh --wheelstreet /usr/local/share/python/wheels --requirem
 Now these packages can be quickly be installed to the system or a virtualenv using these wheels:
 
 #+BEGIN_SRC sh
-pip install --use-wheel --find-links=/usr/local/share/python/wheels/2.7.7 -r requirements.txt
+pip install --use-wheel --find-links=/usr/local/share/python/wheels/2.7.8 -r requirements.txt
 #+END_SRC
 
 scons doesn't work with pip
 
 #+BEGIN_SRC sh
 cd ~/src
-wget -N http://prdownloads.sourceforge.net/scons/scons-2.3.1.tar.gz && \
-tar -xf scons-2.3.1.tar.gz && \
-cd scons-2.3.1 && \
+wget -N http://prdownloads.sourceforge.net/scons/scons-2.3.4.tar.gz && \
+tar -xf scons-2.3.4.tar.gz && \
+cd scons-2.3.4 && \
 python setup.py install
 #+END_SRC
 
