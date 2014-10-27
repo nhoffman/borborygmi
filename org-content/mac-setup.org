@@ -9,6 +9,8 @@ These are my notes that I took while setting up a macbook Air near the
 end of 2013, with incremental updates when I remember to add
 them.
 
+- Oct 2014 :: increment versions of various applications, update for Yoesmite
+
 * First applications
 
 ** Developer tools
