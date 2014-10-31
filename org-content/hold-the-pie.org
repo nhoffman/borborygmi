@@ -1,0 +1,55 @@
+#+TITLE: Pie chart tragedy
+#+DATE: 2014-10-30
+#+CATEGORY: opinion
+#+PROPERTY: TAGS visualization
+
+I'm nether the first, nor the [[http://www.edwardtufte.com/tufte/][most famous]] person to abhor pie charts, but sometime I see an abuse so egregious that I can't help but... plug some numbers into R.
+
+Here it is:
+
+[[file:hold-the-pie/why_pie.png]]
+
+I just... don't understand why someone would choose a pie chart, particularly *this* pie chart, for these data. For starters, how about a nice table?
+
+|--------------+----------+-------------|
+| colony count | with UTI | without UTI |
+|--------------+----------+-------------|
+| [100K, Inf)  |     50.8 |        11.3 |
+| [50K, 100K)  |      1.6 |        13.0 |
+| [10K, 50K)   |      0.5 |        13.0 |
+| [0, 10K)     |      0.0 |         9.7 |
+|--------------+----------+-------------|
+
+Ah, much better! Now you can immediately see that most patients with
+UTI have high colony count, but there is a more or less uniform
+distribution of colony counts among patients without UTI.
+
+Let's play around with some visualizations that may do a better job highlighting this relationship.
+
+It's easier to generate the plots when the table is "long" rather than "wide."
+
+#+TBLNAME: counts
+|--------------+-----+------------|
+| [100K, Inf)  | yes |       50.8 |
+| [50K, 100K)  | yes |        1.6 |
+| [10K, 50K)   | yes |        0.5 |
+| [0, 10K)     | yes |        0.0 |
+| [100K, Inf)  | no  |       11.3 |
+| [50K, 100K)  | no  |       13.0 |
+| [10K, 50K)   | no  |       13.0 |
+| [0, 10K)     | no  |        9.7 |
+|--------------+-----+------------|
+
+#+BEGIN_SRC R :results output graphics :exports both :file hold-the-pie/plot1.png :var counts=counts
+colnames(counts) <- c('colonies', 'UTI', 'percentage')
+counts$colonies <- factor(counts$colonies, levels=c('[0, 10K)', '[10K, 50K)', '[50K, 100K)', '[100K, Inf)'))
+library(lattice)
+dotplot(percentage ~ colonies,
+       groups=UTI,
+       data=counts,
+       type='b')
+#+END_SRC
+
+#+RESULTS:
+[[file:hold-the-pie/plot1.png]]
+
