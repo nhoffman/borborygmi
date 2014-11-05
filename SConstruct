@@ -42,6 +42,9 @@ content = []
 for post_name in posts:
     e = env.Clone()
     e['post'] = post_name
+    post_dir = e['post_dir'] = e.subst('$org_content/$post')
+    this_output = e['output'] = e.subst('$output/$post')
+
     check_filename(post_name)
 
     # html, = e.Command(
@@ -62,14 +65,14 @@ for post_name in posts:
     content.append(html)
 
     # copy any static or derived files associated with the post
-    post_dir = e.subst('$org_content/$post')
     if path.isdir(post_dir):
-        outdir = e.Command(
-            target=e.Dir('$output/$post'),
-            source=post_dir,
-            action='mkdir -p $TARGET && rsync -a --delete $SOURCE/ $TARGET'
+        inputs = glob.glob(path.join(post_dir, '*'))
+        outputs = e.Command(
+            target=[fn.replace(post_dir, this_output) for fn in inputs],
+            source=inputs,
+            action='mkdir -p $output && rsync -a --delete $post_dir/ $output'
         )
-        Depends(outdir, html)
+        content.extend(outputs)
 
 index, = env.Command(
     target='$output/index.html',
