@@ -7,7 +7,8 @@ I came across this visualization of a very simple data set, and it took me a few
 
 [[file:hold-the-pie/why_pie.png]]
 
-It's not just the pie-ness ([[https://blogs.oracle.com/experience/entry/countdown_of_top_10_reasons_to_never_ever_use_a_pie_chart][many]] [[http://en.wikipedia.org/wiki/Pie_chart][commenters]] [[http://www.businessinsider.com/pie-charts-are-the-worst-2013-6][plead]] to avoid pie charts in general). There are a number of other problems here:
+It's not just the pie-ness ([[https://blogs.oracle.com/experience/entry/countdown_of_top_10_reasons_to_never_ever_use_a_pie_chart][many]] [[http://en.wikipedia.org/wiki/Pie_chart][commenters]] [[http://www.businessinsider.com/pie-charts-are-the-worst-2013-6][plead]] for everyone avoid
+pie charts in general). There are a number of other problems here:
 
 - Ok, first of all, it's a pie chart.
 - The labels are separated from the corresponding values.
@@ -16,14 +17,13 @@ It's not just the pie-ness ([[https://blogs.oracle.com/experience/entry/countdow
 
 Here's how I would tell the same story:
 
-|--------------+----------+-------------|
+#+TBLNAME: counts_wide
 | colony count | with UTI | without UTI |
 |--------------+----------+-------------|
 | [100K, Inf)  |     50.8 |        11.3 |
 | [50K, 100K)  |      1.6 |        13.0 |
 | [10K, 50K)   |      0.5 |        13.0 |
 | [0, 10K)     |      0.0 |         9.7 |
-|--------------+----------+-------------|
 
 Ah, much better! Now you can immediately see that most patients with
 UTI have high colony count, but there is a more or less uniform
@@ -34,27 +34,42 @@ Let's play around with some visualizations that may do a better job highlighting
 It's easier to generate the plots when the table is "long" rather than "wide."
 
 #+TBLNAME: counts
-|--------------+-----+------------|
-| [100K, Inf)  | yes |       50.8 |
-| [50K, 100K)  | yes |        1.6 |
-| [10K, 50K)   | yes |        0.5 |
-| [0, 10K)     | yes |        0.0 |
-| [100K, Inf)  | no  |       11.3 |
-| [50K, 100K)  | no  |       13.0 |
-| [10K, 50K)   | no  |       13.0 |
-| [0, 10K)     | no  |        9.7 |
-|--------------+-----+------------|
+| colony_count | UTI |  pct |
+|--------------+-----+------|
+| [100K, Inf)  | yes | 50.8 |
+| [50K, 100K)  | yes |  1.6 |
+| [10K, 50K)   | yes |  0.5 |
+| [0, 10K)     | yes |  0.0 |
+| [100K, Inf)  | no  | 11.3 |
+| [50K, 100K)  | no  | 13.0 |
+| [10K, 50K)   | no  | 13.0 |
+| [0, 10K)     | no  |  9.7 |
+
 
 #+BEGIN_SRC R :results output graphics :exports both :file hold-the-pie/plot1.png :var counts=counts
-colnames(counts) <- c('colonies', 'UTI', 'percentage')
-counts$colonies <- factor(counts$colonies, levels=c('[0, 10K)', '[10K, 50K)', '[50K, 100K)', '[100K, Inf)'))
 library(lattice)
-dotplot(percentage ~ colonies,
+counts$colony_count <- factor(counts$colony_count,
+                              levels=c('[0, 10K)', '[10K, 50K)', '[50K, 100K)', '[100K, Inf)'))
+xyplot(pct ~ colony_count,
        groups=UTI,
        data=counts,
-       type='b')
+       type='b', lwd=2,
+       xlab='Colony count',
+       ylab='Percent of patients',
+       auto.key=list(space="right", title="UTI"))
 #+END_SRC
 
-#+RESULTS:
-[[file:hold-the-pie/plot1.png]]
+
+#+BEGIN_SRC R :results output graphics :exports both :file hold-the-pie/plot2.png :var counts=counts
+library(lattice)
+counts$colony_count <- factor(counts$colony_count,
+                              levels=c('[0, 10K)', '[10K, 50K)', '[50K, 100K)', '[100K, Inf)'))
+xyplot(pct ~ factor(UTI),
+       groups=colony_count,
+       data=counts,
+       type='b', lwd=2,
+       xlab='Colony count',
+       ylab='Percent of patients',
+       auto.key=list(space="right", title="UTI"))
+#+END_SRC
 
