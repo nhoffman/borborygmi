@@ -2,74 +2,124 @@
 #+DATE: 2014-10-30
 #+CATEGORY: opinion
 #+PROPERTY: TAGS visualization
+#+PROPERTY: header-args:R :results output :exports both :session
 
 I came across this visualization of a very simple data set, and it took me a few minutes to figure out what makes it so... suboptimal.
 
 [[file:hold-the-pie/why_pie.png]]
 
-It's not just the pie-ness ([[https://blogs.oracle.com/experience/entry/countdown_of_top_10_reasons_to_never_ever_use_a_pie_chart][many]] [[http://en.wikipedia.org/wiki/Pie_chart][commenters]] [[http://www.businessinsider.com/pie-charts-are-the-worst-2013-6][plead]] for everyone avoid
-pie charts in general). There are a number of other problems here:
+It's not just the pie-ness ([[https://blogs.oracle.com/experience/entry/countdown_of_top_10_reasons_to_never_ever_use_a_pie_chart][we]] [[http://en.wikipedia.org/wiki/Pie_chart][all]] [[http://www.businessinsider.com/pie-charts-are-the-worst-2013-6][agree]] that it's best to avoid pie
+charts, right?). There are a number of other problems here:
 
 - Ok, first of all, it's a pie chart.
 - The labels are separated from the corresponding values.
 - The grey scale color map doesn't distinguish well between categories.
 - But here's the real problem: the covariates are combined into a flat list of categories!
 
-Here's how I would tell the same story:
-
-#+TBLNAME: counts_wide
-| colony count | with UTI | without UTI |
-|--------------+----------+-------------|
-| [100K, Inf)  |     50.8 |        11.3 |
-| [50K, 100K)  |      1.6 |        13.0 |
-| [10K, 50K)   |      0.5 |        13.0 |
-| [0, 10K)     |      0.0 |         9.7 |
-
-Ah, much better! Now you can immediately see that most patients with
-UTI have high colony count, but there is a more or less uniform
-distribution of colony counts among patients without UTI.
-
-Let's play around with some visualizations that may do a better job highlighting this relationship.
-
-It's easier to generate the plots when the table is "long" rather than "wide."
+Even a simple table tells the story much more clearly:
 
 #+TBLNAME: counts
-| colony_count | UTI |  pct |
-|--------------+-----+------|
-| [100K, Inf)  | yes | 50.8 |
-| [50K, 100K)  | yes |  1.6 |
-| [10K, 50K)   | yes |  0.5 |
-| [0, 10K)     | yes |  0.0 |
-| [100K, Inf)  | no  | 11.3 |
-| [50K, 100K)  | no  | 13.0 |
-| [10K, 50K)   | no  | 13.0 |
-| [0, 10K)     | no  |  9.7 |
+| colony count |  UTI | no UTI |
+|--------------+------+--------|
+| [0, 10K)     |  0.0 |    9.7 |
+| [10K, 50K)   |  0.5 |   13.0 |
+| [50K, 100K)  |  1.6 |   13.0 |
+| [100K, Inf)  | 50.8 |   11.3 |
 
+Now you can immediately see that most patients with UTI have a urine
+culture with a high colony count, but there is a more or less uniform
+distribution of colony counts among patients without UTI.
 
-#+BEGIN_SRC R :results output graphics :exports both :file hold-the-pie/plot1.png :var counts=counts
-library(lattice)
-counts$colony_count <- factor(counts$colony_count,
-                              levels=c('[0, 10K)', '[10K, 50K)', '[50K, 100K)', '[100K, Inf)'))
-xyplot(pct ~ colony_count,
-       groups=UTI,
-       data=counts,
-       type='b', lwd=2,
-       xlab='Colony count',
-       ylab='Percent of patients',
-       auto.key=list(space="right", title="UTI"))
+Let's play around with some visualizations that may do a better job
+illustrating the relationship between colony counts and UTI.
+
+#+BEGIN_SRC R :exports none :eval yes
+1
 #+END_SRC
 
-
-#+BEGIN_SRC R :results output graphics :exports both :file hold-the-pie/plot2.png :var counts=counts
-library(lattice)
-counts$colony_count <- factor(counts$colony_count,
-                              levels=c('[0, 10K)', '[10K, 50K)', '[50K, 100K)', '[100K, Inf)'))
-xyplot(pct ~ factor(UTI),
-       groups=colony_count,
-       data=counts,
-       type='b', lwd=2,
-       xlab='Colony count',
-       ylab='Percent of patients',
-       auto.key=list(space="right", title="UTI"))
+#+BEGIN_SRC R :var counts=counts :colnames foo,bar,baz
+colnames(counts) <- c("colonies", "pos", "neg")
+counts <- with(counts, {
+  data.frame(colonies=ordered(rep(colonies, 2), levels=colonies),
+             UTI=factor(rep(c('yes', 'no'), each=4)),
+             percent=c(pos, neg)
+             )})
+counts
 #+END_SRC
 
+#+RESULTS:
+:      colonies UTI percent
+: 1    [0, 10K) yes     0.0
+: 2  [10K, 50K) yes     0.5
+: 3 [50K, 100K) yes     1.6
+: 4 [100K, Inf) yes    50.8
+: 5    [0, 10K)  no     9.7
+: 6  [10K, 50K)  no    13.0
+: 7 [50K, 100K)  no    13.0
+: 8 [100K, Inf)  no    11.3
+
+#+BEGIN_SRC R :results output graphics :file hold-the-pie/plot1.png
+library(lattice)
+library(latticeExtra)
+
+barchart(percent ~ colonies,
+         groups=UTI,
+         data=counts,
+         xlab='Colony count',
+         ylab='Percent of patients',
+         auto.key=list(corner=c(0, 1), title="UTI", reverse.rows=TRUE),
+         origin=0,
+         par.settings=theEconomist.theme()
+         )
+#+END_SRC
+
+#+RESULTS:
+[[file:hold-the-pie/plot1.png]]
+
+So this isn't too bad - we can easily compare the relative proportion
+of cases with UTI in each of the bins of colony counts. But this plot
+emphasizes the absolute prevalence of each combination of categories
+(ie, UTI status + colony count), rather than the relative prevalence
+of, for example, UTI status within each bin of colony counts, which is
+what we really want to know when assessing the correlation between
+covariates. I think that a stacked bar chart is more effective for
+emphasizing the proportion of patients with and without UTI within
+each range of colony counts:
+
+#+BEGIN_SRC R :results output graphics :file hold-the-pie/plot2.png
+barchart(percent ~ colonies,
+         groups=UTI,
+         data=counts,
+         xlab='Colony count',
+         ylab='Percent of patients',
+         auto.key=list(corner=c(0, 1), title="UTI", reverse.rows=TRUE),
+         stack=TRUE,
+         origin=0,
+         par.settings=theEconomist.theme()
+         )
+#+END_SRC
+
+#+RESULTS:
+[[file:hold-the-pie/plot2.png]]
+
+Or we can turn things around and look at the relative proportion of
+each bin of colony counts among patients with or without UTI.
+
+#+BEGIN_SRC R :results output graphics :file hold-the-pie/plot3.png
+barchart(percent ~ UTI,
+         groups=colonies,
+         data=counts,
+         xlab='UTI',
+         ylab='Percent of patients',
+         auto.key=list(space='top',
+             title='Colony count', reverse.rows=TRUE),
+         stack=TRUE,
+         origin=0,
+         par.settings=theEconomist.theme()
+         )
+#+END_SRC
+
+#+RESULTS:
+[[file:hold-the-pie/plot3.png]]
+
+Both views are informative, but each addresses a different question.
