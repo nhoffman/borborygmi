@@ -1,17 +1,16 @@
 #+TITLE: Hold the pie
 #+DATE: 2014-10-30
-#+CATEGORY: opinion
-#+PROPERTY: TAGS visualization
-#+PROPERTY: header-args:R :results output :exports both :session
+#+CATEGORY: visualization
+#+PROPERTY: TAGS laboratory medicine
+#+PROPERTY: header-args:R :results output :exports results :session
 
-I came across this visualization of a very simple data set, and it took me a few minutes to figure out what makes it so... suboptimal.
+I came across this visualization[fn:1] of a very simple data set, and
+it took me a few minutes to fully understand what makes it
+so... suboptimal.
 
 [[file:hold-the-pie/why_pie.png]]
 
-It's not just the pie-ness ([[https://blogs.oracle.com/experience/entry/countdown_of_top_10_reasons_to_never_ever_use_a_pie_chart][we]] [[http://en.wikipedia.org/wiki/Pie_chart][all]] [[http://www.businessinsider.com/pie-charts-are-the-worst-2013-6][agree]] that it's best to avoid pie
-charts, right?). There are a number of other problems here:
-
-- Ok, first of all, it's a pie chart.
+- Ok, first of all, it's [[https://blogs.oracle.com/experience/entry/countdown_of_top_10_reasons_to_never_ever_use_a_pie_chart][a]] [[http://en.wikipedia.org/wiki/Pie_chart][pie]] [[http://www.businessinsider.com/pie-charts-are-the-worst-2013-6][chart]].
 - The labels are separated from the corresponding values.
 - The grey scale color map doesn't distinguish well between categories.
 - But here's the real problem: the covariates are combined into a flat list of categories!
@@ -37,7 +36,7 @@ illustrating the relationship between colony counts and UTI.
 1
 #+END_SRC
 
-#+BEGIN_SRC R :var counts=counts :colnames foo,bar,baz
+#+BEGIN_SRC R :var counts=counts :exports none :eval yes
 colnames(counts) <- c("colonies", "pos", "neg")
 counts <- with(counts, {
   data.frame(colonies=ordered(rep(colonies, 2), levels=colonies),
@@ -65,8 +64,7 @@ library(latticeExtra)
 barchart(percent ~ colonies,
          groups=UTI,
          data=counts,
-         xlab='Colony count',
-         ylab='Percent of patients',
+         xlab='Colony count', ylab='Percent of patients',
          auto.key=list(corner=c(0, 1), title="UTI", reverse.rows=TRUE),
          origin=0,
          par.settings=theEconomist.theme()
@@ -77,40 +75,20 @@ barchart(percent ~ colonies,
 [[file:hold-the-pie/plot1.png]]
 
 So this isn't too bad - we can easily compare the relative proportion
-of cases with UTI in each of the bins of colony counts. But this plot
-emphasizes the absolute prevalence of each combination of categories
-(ie, UTI status + colony count), rather than the relative prevalence
-of, for example, UTI status within each bin of colony counts, which is
-what we really want to know when assessing the correlation between
-covariates. I think that a stacked bar chart is more effective for
-emphasizing the proportion of patients with and without UTI within
-each range of colony counts:
+of cases with UTI in each of the bins. But this plot isn't so helpful
+for conditioning one covariate on another, which, to me, is
+fundamental to the purpose of the visualization.
+
+With this in mind, I think that a stacked bar chart is a better choice.
+
+This one shows the distribution of culture results among patients with
+or without UTI.
 
 #+BEGIN_SRC R :results output graphics :file hold-the-pie/plot2.png
-barchart(percent ~ colonies,
-         groups=UTI,
-         data=counts,
-         xlab='Colony count',
-         ylab='Percent of patients',
-         auto.key=list(corner=c(0, 1), title="UTI", reverse.rows=TRUE),
-         stack=TRUE,
-         origin=0,
-         par.settings=theEconomist.theme()
-         )
-#+END_SRC
-
-#+RESULTS:
-[[file:hold-the-pie/plot2.png]]
-
-Or we can turn things around and look at the relative proportion of
-each bin of colony counts among patients with or without UTI.
-
-#+BEGIN_SRC R :results output graphics :file hold-the-pie/plot3.png
 barchart(percent ~ UTI,
          groups=colonies,
          data=counts,
-         xlab='UTI',
-         ylab='Percent of patients',
+         xlab='UTI', ylab='Percent of patients',
          auto.key=list(space='top',
              title='Colony count', reverse.rows=TRUE),
          stack=TRUE,
@@ -119,7 +97,26 @@ barchart(percent ~ UTI,
          )
 #+END_SRC
 
-#+RESULTS:
-[[file:hold-the-pie/plot3.png]]
+Or we can turn things around and look at the proportion of patients
+with and without UTI within each range of colony counts.
 
-Both views are informative, but each addresses a different question.
+#+BEGIN_SRC R :results output graphics :file hold-the-pie/plot3.png
+barchart(percent ~ colonies,
+         groups=UTI,
+         data=counts,
+         xlab='Colony count', ylab='Percent of patients',
+         auto.key=list(corner=c(0, 1), title="UTI", reverse.rows=TRUE),
+         stack=TRUE,
+         origin=0,
+         par.settings=theEconomist.theme()
+         )
+#+END_SRC
+
+I like this last one the best - it best addresses to what extent urine
+culture is useful diagnostically, by showing that if the colony count
+is > 100K, there is about a 4:1 chance that the patient has a UTI, but
+for lower values the likelihood is much lower. This is the point that
+the authors of the study were trying to make - but with very little
+help from the visualization above.
+
+[fn:1] Kwon JH, Fausone MK, Du H, Robicsek A, and Peterson LR. Impact of laboratory-reported urine culture colony counts on the diagnosis and treatment of urinary tract infection for hospitalized patients. Am. J. Clin. Pathol. 2012, 137:778-84. PMID [[http://www.ncbi.nlm.nih.gov/pubmed/22523217][22523217]]
