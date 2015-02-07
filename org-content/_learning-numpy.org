@@ -1,0 +1,32 @@
+#+TITLE: Learning numpy
+#+DATE: 2015-01-26
+#+CATEGORY: notes
+#+PROPERTY: TAGS R,numpy,pandas,python
+
+As much as I'd like to do so, there's a lot of activation energy to
+learning numpy, since (at this point) I can typically accomplish what
+I want in R much more easily. Here are a few notes describing common
+operations.
+
+The very first place to look for a quick comparison with R should probably be http://hyperpolyglot.org/numerical-analysis
+
+* tabulation
+
+The closest thing to =table()= in R seems to be [[http://docs.scipy.org/doc/numpy/reference/generated/numpy.unique.html][=numpy.unique=]] (requires numpy >= 1.9)
+
+#+BEGIN_SRC python :results output :eval true
+import numpy as np
+groups, counts = np.unique(['a', 'a', 'b', 'c', 'c', 'c'], return_counts=True)
+print zip(groups, counts)
+#+END_SRC
+
+#+RESULTS:
+: [('a', 2), ('b', 1), ('c', 3)]
+
+* indexing
+
+Indexing a numpy array =X= using a boolean vector =ii= can be
+accomplished using the =ix_= function (in this case, I want a square
+submatrix):
+
+: X[np.ix_(ii, ii)]

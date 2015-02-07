@@ -1,0 +1,228 @@
+#+TITLE: Setup for VirtualBox VM running Ubuntu 14.04 on OS X Mavericks
+#+DATE: 2015-02-06
+#+CATEGORY: notes
+#+PROPERTY: TAGS linux,mac,virtualbox
+#+PROPERTY: eval never
+
+Here are my notes for setting up an Ubuntu VM to work on some web
+applications. This is intended to be a sandbox for development, so
+I'll err on the side of convenience (at the expense of security, since
+the VM should never be accessible from outside of the host
+machine). I'm doing this on a machine running OS X Mavericks. Much of
+the content was adapted from this really excellent post:
+
+https://leemendelowitz.github.io/blog/ubuntu-server-virtualbox.html
+
+I also went on to provide local network access via a static IP
+address. I chose not to include the guest additions or a shared
+directory - I wanted to interact with this VM as if it were a remote
+host.
+
+* VirtualBox preferences
+
+Install VirtualBox from the vendor's website.
+
+#+BEGIN_SRC sh
+vboxmanage --version
+#+END_SRC
+
+: 4.3.20r96996
+
+First, there are some application-level settings that should be
+modified right off the bat.
+
+Rename the default location for VirtualBox resources to something sensible.
+
+: VirtualBox -> Preferences -> Default Machine Folder -> ~/VirtualBox
+
+Create a host-only network. Go to
+
+: VirtualBox -> Preferences -> Network -> Host Only Networks
+
+and from here, click on the little green icon with a plus on the right -
+this creates the host-only network =vboxnet0=. We'll need this later.
+
+* Create an Ubuntu 14.04 VM
+
+Download ubuntu-14.04.1-server-amd64.iso [[http://www.ubuntu.com/download/server][here]] (we'll move it into
+$VBOXDIR below).
+
+#+BEGIN_SRC sh
+VBOXDIR="$HOME/VirtualBox"
+VM_NAME="Ubuntu14.04-1"
+UBUNTU_ISO_PATH="${VBOXDIR:?}/ubuntu-14.04.1-server-amd64.iso"
+VM_HD_PATH="${VBOXDIR:?}/${VM_NAME:?}.vdi"
+mkdir -p "${VBOXDIR:?}"
+mv ~/Downloads/ubuntu-14.04.1-server-amd64.iso "${VBOXDIR:?}"
+#+END_SRC
+
+Create the VM.
+
+#+BEGIN_SRC sh
+vboxmanage createvm --name ${VM_NAME:?} --ostype Ubuntu_64 --register
+#+END_SRC
+
+: Virtual machine 'Ubuntu14.04-1' is created and registered.
+: UUID: 58826a23-fceb-4a03-b7c3-cc22c975ccec
+: Settings file: '/Users/nhoffman/VirtualBox/Ubuntu14.04-1/Ubuntu14.04-1.vbox'
+
+I have to confess that I never could have figured these command out
+without the post above. The ones defining HD and memory allocations
+seemed pretty obvious. The last three lines will allow us to ssh into
+the VM once the OS is installed (see below). If I could wish for one
+thing from the VirtualBox application, it would be to generate the
+corresponding =vboxmanage= command from a menu action.
+
+#+BEGIN_SRC sh
+vboxmanage createhd --filename ${VM_HD_PATH:?} --size 12288 # size in MB (12GB)
+vboxmanage storagectl ${VM_NAME:?} --name "SATA Controller" --add sata --controller IntelAHCI
+vboxmanage storageattach ${VM_NAME:?} --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium ${VM_HD_PATH:?}
+vboxmanage storagectl ${VM_NAME:?} --name "IDE Controller" --add ide
+vboxmanage storageattach ${VM_NAME:?} --storagectl "IDE Controller" --port 0 --device 0 --type dvddrive --medium ${UBUNTU_ISO_PATH:?}
+vboxmanage modifyvm ${VM_NAME:?} --ioapic on
+vboxmanage modifyvm ${VM_NAME:?} --memory 1024 --vram 128
+vboxmanage modifyvm ${VM_NAME:?} --nic1 nat
+vboxmanage modifyvm ${VM_NAME:?} --natpf1 "guestssh,tcp,,2222,,22"
+vboxmanage modifyvm ${VM_NAME:?} --natdnshostresolver1 on
+#+END_SRC
+
+Ok! This should result in a bootable VM. Here goes the first boot.
+
+#+BEGIN_SRC sh
+vboxmanage startvm ${VM_NAME:?}
+#+END_SRC
+
+Now we let Ubuntu install itself. I chose the default for each option
+and provided some extremely boring and insecure host settings:
+
+- hostname: ubuntu
+- full name: ubuntu
+- username: ubuntu
+- password: ubuntu
+
+Obviously this would be a terrible idea for a real system (as are an
+ssh key without a passphrase, and allowing sudo without a password,
+both of which I will be guilty of below).
+
+Once the system is installed, perform an upgrade and install the bare
+essentials that will allow us to ssh in.
+
+#+BEGIN_SRC sh
+sudo apt-get update && sudo apt-get -y upgrade
+sudo apt-get install -y openssh-server
+sudo shutdown -h now
+#+END_SRC
+
+This is a good time to make a snapshot ("clean-image"). From now on,
+I'll run the VM "headless" and ssh in to avoid having to use the
+horrible VirtualBox terminal.
+
+: vboxmanage startvm Ubuntu14.04-1 --type headless
+
+For now, we can ssh in using port 2222 redirected to localhost, but in
+a minute, we'll give the VM an IP address.
+
+: ssh -p 2222 ubuntu@localhost
+
+Now I'll degrade the security of my little VM sandbox even further by
+allowing the ubuntu user to sudo without a password. Edit the sudoers
+file:
+
+: sudo visudo
+
+And add the following lines:
+
+: # ubuntu user can sudo without password
+: ubuntu ALL= NOPASSWD: ALL
+
+* Set up an IP address
+
+I pieced together the following with the help of the following posts:
+
+- http://www.websightdesigns.com/posts/view/how-to-set-up-a-local-web-server-with-virtualbox-on-mac-os-x
+- http://anupriti.blogspot.com/2014/10/invalid-settings-detected-virtualbox.html
+- https://www.virtualbox.org/manual/ch06.html
+
+First power off the VM.
+
+: vboxmanage controlvm Ubuntu14.04-1 poweroff
+
+Now we need to create host-only network. I would have loved to know how to do this using vboxmanage. Go to the Setting for this VM:
+
+: Settings -> Network -> Adapter2 -> Enable Network Adapter
+
+- Attached to: Host-only Adapter
+- Name: vboxnet0
+
+(remember, we created =vboxnet0= in the application-level
+configuration settings at the top).
+
+Power the VM back on and ssh in as above, then modify
+=/etc/network/interfaces= as shown.
+
+#+BEGIN_SRC sh
+sudo -s
+cat >> /etc/network/interfaces <<EOF
+
+auto eth1
+iface eth1 inet static
+address 192.168.56.101
+netmask 255.255.255.0
+EOF
+#+END_SRC
+
+After a restart, you should be able to ping the VM at =192.168.56.101=
+
+This should work, too:
+
+: ssh ubuntu@192.168.56.101
+
+And if you run this from the VM
+
+: python -m SimpleHTTPServer
+
+you should be able to point your browser to
+=http://192.168.56.101:8000= and see a directory listing of =$HOME=!
+Better yet, add an entry to =/etc/hosts= on the host machine:
+
+#+BEGIN_SRC sh
+sudo -s
+cp /etc/hosts /etc/hosts.bak
+cat >> /etc/hosts <<EOF
+
+# for VirtualBox VM Ubuntu14.04-1
+192.168.56.101 ubuntu1
+EOF
+#+END_SRC
+
+and browse to the following address:
+
+: http://ubuntu1:8000
+
+Now make a ssh key pair for this VM and install the public key.
+
+#+BEGIN_SRC sh
+cd ~/.ssh
+ssh-keygen -f vm-unsafe
+ssh ubuntu@192.168.56.101 'mkdir -p -m 700 ~/.ssh; cat - > ~/.ssh/authorized_keys; chmod 600 ~/.ssh/*' < ~/.ssh/vm-unsafe.pub
+#+END_SRC
+
+Finally, create an entry in =~/.ssh/config= (on the host machine, of
+course) to create an alias for the VM:
+
+#+BEGIN_SRC sh
+Host ubuntu1
+     HostName 192.168.56.101
+     User ubuntu
+     IdentityFile ~/.ssh/vm-unsafe
+#+END_SRC
+
+Now you can ssh in without a prompt for a password:
+
+: ssh ubuntu1
+
+Time for another snapshot! ("ssh-ok")
+
+That's enough for now. It kills me that there are so many manual steps
+in this process - more of them could probably be performed via the
+command line given more time and patience than I have at this point!

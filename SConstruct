@@ -35,8 +35,10 @@ env = Environment(ENV=dict(environ, PATH=':'.join(paths)),
                   variables=vars)
 
 # list of org-mode fies containing posts
+# ignore file names starting with '_'
 posts = [path.splitext(path.basename(p))[0]
-         for p in glob.glob(env.subst('$org_content/*.org'))]
+         for p in glob.glob(env.subst('$org_content/*.org'))
+         if not path.basename(p).startswith('_')]
 
 content = []
 for post_name in posts:
