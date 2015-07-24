@@ -5,6 +5,8 @@
 #+PROPERTY: header-args:sqlite :db database-intro/results.db :header on :results value
 #+OPTIONS: toc:nil
 
+/Edit 2015-07-26: added a section on date formatting./
+
 This post contains the content of a lecture prepared for Laboratory Medicine residents as part of a series on medical informatics.
 
 #+TOC: headlines 2
@@ -93,7 +95,6 @@ for csv in database-intro/*.csv; do
         --tables $(basename ${csv%.csv})
 done
 #+END_SRC
-
 
 * Objectives
 
@@ -559,3 +560,21 @@ battery attributes in separate tables and perform joins as necessary.
 
 It's worth having a look at the classic short article [[http://www.bkent.net/Doc/simple5.htm][A Simple Guide
 to Five Normal Forms in Relational Database Theory]]
+** Use a standard format for dates and times
+
+American humans might write today's date as 7/23/15, or perhaps
+07/23/2015 or July 23, 2015; European humans might write it as 23 July
+2015 or 23/7/15.
+
+None of these formats are... (trying to be polite here) exactly
+optimal. For one thing, neither format results in alphanumeric sorting
+in chronological order. But much worse, it's hard to guess exactly
+what format the date is actually in, so parsing is a chore.
+
+It turns out that there's a standard for representing dates and times
+that addresses these issues, and also allows the representation of
+time zone (which we won't get into right now): this standard is called
+[[https://en.wikipedia.org/wiki/ISO_8601][ISO 8601]]. Using this standard, today would be written
+2015-07-23. Please be nice and write dates like this. Follow the link
+to read more (you will learn that right now the ISO 8601 timestamp is
+something like 2015-07-23T16:55:02+17:00).
