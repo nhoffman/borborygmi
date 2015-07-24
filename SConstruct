@@ -7,6 +7,7 @@ from itertools import chain
 if not 'VIRTUAL_ENV' in environ:
     sys.exit('No virtualenv is actuve')
 
+import SCons
 from SCons.Script import (Variables, Depends, Environment, ARGUMENTS, Flatten)
 
 def check_filename(filename):
@@ -33,6 +34,8 @@ paths = ['org-export',
 
 env = Environment(ENV=dict(environ, PATH=':'.join(paths)),
                   variables=vars)
+
+Help(vars.GenerateHelpText(env))
 
 # list of org-mode fies containing posts
 # ignore file names starting with '_'
@@ -99,3 +102,9 @@ reset_log, = env.Command(
     action='git push origin :gh-pages'
 )
 Alias('reset', reset_log)
+
+if GetOption('help'):
+    print 'Available Build Aliases:'
+    print '-----'
+    for alias in sorted(SCons.Node.Alias.default_ans.keys()):
+        print alias
