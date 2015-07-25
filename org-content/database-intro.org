@@ -390,7 +390,7 @@ group by mrn, test_code;
 
 * Hierarchical databases
 
-Hierarchical databases organize data in a tree-like structure. Data is represented as a graph of one-to-many (patent -> child) relations.
+Hierarchical databases organize data in a tree-like structure. Data is represented as a graph of one-to-many (parent -> child) relations.
 
 #+CAPTION: An example of hierarchically-organized healthcare data
 #+BEGIN_SRC dot :results output :exports results :file database-intro/hierarchical.png
