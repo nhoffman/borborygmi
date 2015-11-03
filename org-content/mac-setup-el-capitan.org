@@ -1,0 +1,285 @@
+#+TITLE: Setup after clean install of El Capitan
+#+DATE: 2015-11-02
+#+CATEGORY: notes
+#+PROPERTY: TAGS mac
+#+PROPERTY: eval never
+#+OPTIONS: ^:nil
+
+I had enough issues after updating to El Capitan (the inability to save my
+wifi password in the system keychain was the tipping point) that I
+decided to perform a clean install. Here are some notes.
+
+* First applications
+
+** Developer tools
+
+Pretty much the first thing any mac needs is the command line tools. This can be done from the command line:
+
+#+BEGIN_SRC sh
+xcode-select --install
+#+END_SRC
+
+** X11
+
+Download and install Xquartz:
+
+#+BEGIN_SRC sh
+cd ~/Downloads
+wget http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.8.dmg
+open XQuartz-2.7.8.dmg
+sudo installer -pkg /Volumes/XQuartz-2.7.8/XQuartz.pkg -target /
+#+END_SRC
+
+Note for next time: might be worth trying to use homebrew.
+
+X11 key bindings so that the option key is used for Meta..
+
+#+BEGIN_SRC sh
+cat > ~/.Xmodmap <<EOF
+clear Mod1
+clear Mod2
+keycode 63 = Mode_switch
+keycode 66 = Meta_L
+add Mod1 = Meta_L
+add Mod2 = Mode_switch
+EOF
+#+END_SRC
+
+** iTerm2
+
+Update a few settings.
+
+Preferences --> Profiles --> Keys and do these things:
+- select "Left/right option key acts as": +Esc
+- + --> Keyboard shortcut "OPT+<left arrow>": Send Escape sequence "b"
+- + --> Keyboard shortcut "OPT+<right arrow>": Send Escape sequence "f"
+
+Default appearance:
+
+- Preferences --> Profiles --> Colors --> Load Presets --> Light Background
+- Preferences --> Profiles --> Text --> Change Font --> 14 point
+
+** Others
+
+- Dropbox
+- SizeUp - http://www.irradiatedsoftware.com/ (license in Dropbox/software_licenses)
+- MacTex - download from http://tug.org/mactex/
+  http://mirror.ctan.org/systems/mac/mactex/MacTeX.pkg
+- HipChat client
+- Chrome
+- Dash 2 (App store)
+
+* system-level configuration
+** turn off spelling autocorrect
+System Preferences --> Language & Text --> Text tab --> unselect "Correct spelling automatically"
+** turn off spaces key shortcuts
+System Preferences --> Keyboard --> Keyboard Shortcuts --> unselect C+{<-,->}
+
+* homebrew
+
+Note that El Capitan introduced [[https://en.wikipedia.org/wiki/System_Integrity_Protection][System Integrity Protection (SIP)]], which may need to be temporarily disabled during homebrew installation. See https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/El_Capitan_and_Homebrew.md
+
+#+BEGIN_SRC sh
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew doctor
+#+END_SRC
+
+If it becomes necessary to fix permissions:
+
+#+BEGIN_SRC sh
+sudo chown -R $(whoami) /usr/local
+#+END_SRC
+
+** packages installed using homebrew
+
+#+BEGIN_SRC sh
+brew install homebrew/dupes/tcl-tk && \
+brew install aspell && \
+brew install autojump && \
+brew install berkeley-db4 && \
+brew install gcc && \
+brew install git && \
+brew install gpg && \
+brew install graphviz && \
+brew install htop-osx && \
+brew install latex2rtf && \
+brew install openssh && \
+brew install pandoc && \
+brew install pkg-config && \
+brew install readline && \
+brew install sqlite && \
+brew install tmux && \
+brew install tree && \
+brew install wget && \
+brew install zsh
+#+END_SRC
+
+** homebrew API token
+
+Apparently lots of requests to GutHub via homebrew can hit a rate limit. There's a higher limit if you create an API token. See https://gist.github.com/christopheranderton/8644743
+
+Here's the url for the token creation dialog:
+
+https://github.com/settings/tokens/new?scopes=&description=Homebrew
+
+Make sure that all 'scopes' are unchecked. Once you generate the token, add to your shell profile:
+
+: export HOMEBREW_GITHUB_API_TOKEN=token_here
+
+** zsh
+
+Install zsh with Homebrew above
+
+Change shell to zsh
+
+#+BEGIN_SRC sh
+sudo -s
+echo /usr/local/bin/zsh >> /etc/shells
+exit
+chsh -s /usr/local/bin/zsh $USER
+#+END_SRC
+
+zsh init files are in Dropbox/zsh
+
+#+BEGIN_SRC sh
+cat > ~/.zshrc <<EOF
+. ~/Dropbox/zsh/zshrc
+EOF
+#+END_SRC
+
+* ssh
+
+After installing homebrew's openssh on El Capitan, ssh-agent no longer
+seemed to work (in the sense that after using ssh-add to cache a
+passphrase, I still got a system prompt when trying to ssh). This
+seemed to be fixed by the instructions here (my version below is only
+slightly modified):
+
+https://coderwall.com/p/qdwcpg/using-the-latest-ssh-from-homebrew-on-osx
+
+In short:
+
+- update /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist
+- create $ZSH_INITDIR/ssh-ask-keychain (called from start_ssh_agent.zsh)
+- create $ZSH_INITDIR/start_ssh_agent.zsh (sourced from zshrc)
+
+#+BEGIN_SRC sh :results output :export results :eval yes
+cat ~/Dropbox/zsh/ssh-ask-keychain
+#+END_SRC
+
+#+BEGIN_SRC sh :results output :export results :eval yes
+cat ~/Dropbox/zsh/ssh_environ.zsh
+#+END_SRC
+
+* git
+
+ : git config --global user.name "Noah Hoffman"
+ : git config --global user.email noah.hoffman@gmail.com
+
+* emacs
+
+Install emacs24 binary from http://emacsformacosx.com/
+
+http://emacsformacosx.com/emacs-builds/Emacs-24.5-1-universal.dmg
+
+Check out my .emacs.d
+
+#+BEGIN_SRC sh
+cd ~
+git clone git@github.com:nhoffman/.emacs.d.git
+git submodule init
+git submodule update
+#+END_SRC
+
+* python
+
+Use homebrew - see
+https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Homebrew-and-Python.md
+
+Run =brew info python= for required and optional dependencies
+(installed above).
+
+#+BEGIN_SRC sh
+brew install python --with-berkeley-db4 --with-tcl-tk
+brew linkapps python
+pip install -U pip
+pip install -U setuptools
+pip install -U virtualenv
+#+END_SRC
+
+Install some python packages using homebrew - these are time consuming to install otherwise.
+
+#+BEGIN_SRC sh
+brew install homebrew/python/numpy
+#+END_SRC
+
+Install some other packages to the system using pip.
+
+For elpy:
+
+#+BEGIN_SRC sh
+pip install -r <(curl https://raw.githubusercontent.com/jorgenschaefer/elpy/master/requirements.txt)
+#+END_SRC
+
+ansible
+
+#+BEGIN_SRC sh
+sudo mkdir /usr/share/ansible
+sudo chown -R $(whoami) /usr/share/ansible
+pip install ansible
+#+END_SRC
+
+Others
+
+#+BEGIN_SRC sh
+pip install csvkit
+pip install reportlab
+pip install scons
+pip install jinja2
+#+END_SRC
+
+* R
+
+Really doubling down on homebrew this time around:
+
+#+BEGIN_SRC sh
+brew tap homebrew/science
+brew install r
+#+END_SRC
+
+#+BEGIN_SRC sh
+R --slave << EOF
+packages <- c("ape", "sqldf", "ROCR", "lattice", "RSQLite", "latticeExtra", "argparse", "data.table")
+install.packages(packages, repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE)
+EOF
+#+END_SRC
+
+* mail
+
+http://www.washington.edu/itconnect/connect/email/uw-email/configuring/os-x-mail6/
+
+* sshfs
+
+Provided by the project http://osxfuse.github.io/ - the links below
+are for binaries provided as installers.
+
+#+BEGIN_SRC sh
+cd ~/Downloads
+wget http://sourceforge.net/projects/osxfuse/files/osxfuse-2.8.2/osxfuse-2.8.2.dmg
+wget https://github.com/osxfuse/sshfs/releases/download/osxfuse-sshfs-2.5.0/sshfs-2.5.0.pkg
+#+END_SRC
+
+* wkhtmltopdf
+
+#+BEGIN_SRC sh
+cd ~/Downloads
+wget 'http://wkhtmltopdf.googlecode.com/files/wkhtmltopdf.dmg'
+open wkhtmltopdf.dmg
+cp -r /Volumes/wkhtmltopdf/wkhtmltopdf.app /Applications
+#+END_SRC
+
+Now create an alias:
+
+#+BEGIN_SRC sh
+alias wkhtmltopdf='/Applications/wkhtmltopdf.app/Contents/MacOS/wkhtmltopdf'
+#+END_SRC
