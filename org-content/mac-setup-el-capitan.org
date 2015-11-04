@@ -142,8 +142,8 @@ chsh -s /usr/local/bin/zsh $USER
 zsh init files are in Dropbox/zsh
 
 #+BEGIN_SRC sh
-cat > ~/.zshrc <<EOF
-. ~/Dropbox/zsh/zshrc
+cat > ~/.zshenv <<EOF
+. ~/Dropbox/zsh/zstartup
 EOF
 #+END_SRC
 
@@ -152,20 +152,64 @@ EOF
 After installing homebrew's openssh on El Capitan, ssh-agent no longer
 seemed to work (in the sense that after using ssh-add to cache a
 passphrase, I still got a system prompt when trying to ssh). This
-seemed to be fixed by the instructions here (my version below is only
-slightly modified):
+seemed to be fixed by the instructions I found at the url below (my
+version is functionally the same but uses PlistBuddy to edit the
+plist):
 
 https://coderwall.com/p/qdwcpg/using-the-latest-ssh-from-homebrew-on-osx
 
-In short:
+** update /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist
 
-- update /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist
-- create $ZSH_INITDIR/ssh-ask-keychain (called from start_ssh_agent.zsh)
-- create $ZSH_INITDIR/start_ssh_agent.zsh (sourced from zshrc)
+#+BEGIN_SRC sh
+/usr/libexec/PlistBuddy /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist<<EOF
+Delete :ProgramArguments
+Add :ProgramArguments array
+Add :ProgramArguments: string /usr/bin/ssh-agent
+Add :ProgramArguments: string -D
+Add :ProgramArguments: string -t 1d
+Save
+Exit
+EOF
+#+END_SRC
+
+This should change the original value of =ProgramArguments=:
+
+#+BEGIN_EXAMPLE
+<key>ProgramArguments</key>
+<array>
+	<string>/usr/bin/ssh-agent</string>
+	<string>-l</string>
+</array>
+#+END_EXAMPLE
+
+to
+
+#+BEGIN_EXAMPLE
+<key>ProgramArguments</key>
+<array>
+	<string>/usr/bin/ssh-agent</string>
+	<string>-D</string>
+	<string>-t 1d</string>
+</array>
+#+END_EXAMPLE
+
+Now restart the service
+
+#+BEGIN_SRC sh
+launchctl unload /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist
+launchctl load -w /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist
+launchctl start org.openbsd.ssh-agent
+#+END_SRC
+
+** create $ZSH_INITDIR/ssh-ask-keychain (called from start_ssh_agent.zsh)
 
 #+BEGIN_SRC sh :results output :export results :eval yes
 cat ~/Dropbox/zsh/ssh-ask-keychain
 #+END_SRC
+
+** create $ZSH_INITDIR/start_ssh_agent.zsh
+
+(either as a file sourced from .zshrc, or as a code block in a login script)
 
 #+BEGIN_SRC sh :results output :export results :eval yes
 cat ~/Dropbox/zsh/ssh_environ.zsh
@@ -173,8 +217,8 @@ cat ~/Dropbox/zsh/ssh_environ.zsh
 
 * git
 
- : git config --global user.name "Noah Hoffman"
- : git config --global user.email noah.hoffman@gmail.com
+ : git config --global user.name "My Name"
+ : git config --global user.email me@email.com
 
 * emacs
 
@@ -283,3 +327,4 @@ Now create an alias:
 #+BEGIN_SRC sh
 alias wkhtmltopdf='/Applications/wkhtmltopdf.app/Contents/MacOS/wkhtmltopdf'
 #+END_SRC
+
