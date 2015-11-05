@@ -69,6 +69,11 @@ Default appearance:
 - Chrome
 - Dash 2 (App store)
 
+** UW only
+
+- Sophos antivirus: https://softy.cac.washington.edu/sophos/for-staff/
+- Junos Pulse (SSL VPN): https://networks.uwmedicine.org/content/sslvpn-frequently-asked-questions-14
+
 * system-level configuration
 ** turn off spelling autocorrect
 System Preferences --> Language & Text --> Text tab --> unselect "Correct spelling automatically"
