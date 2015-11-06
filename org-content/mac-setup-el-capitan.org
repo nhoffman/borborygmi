@@ -119,6 +119,18 @@ brew install wget && \
 brew install zsh
 #+END_SRC
 
+** homebrew cask
+
+#+BEGIN_SRC sh
+brew install caskroom/cask/brew-cask
+#+END_SRC
+
+Install some applications
+
+#+BEGIN_SRC sh
+brew cask install java
+#+END_SRC
+
 ** homebrew API token
 
 Apparently lots of requests to GutHub via homebrew can hit a rate limit. There's a higher limit if you create an API token. See https://gist.github.com/christopheranderton/8644743
