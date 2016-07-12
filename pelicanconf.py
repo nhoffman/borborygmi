@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
+import datetime
 
 AUTHOR = u'Noah Hoffman'
 SITENAME = u'borborygmi'
 SITEURL = 'http://nhoffman.github.io/borborygmi'
+COPYRIGHT_YEAR = datetime.date.today().year
 
 TIMEZONE = 'America/Los_Angeles'
 

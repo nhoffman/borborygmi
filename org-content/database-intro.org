@@ -5,7 +5,8 @@
 #+PROPERTY: header-args:sqlite :db database-intro/results.db :header on :results value
 #+OPTIONS: toc:nil
 
-/Edit 2015-07-26: added a section on date formatting./
+- /Edit 2015-07-26: added a section on date formatting/
+- /Edit 2016-07-11: add reference to Tidy Data/
 
 This post contains the content of a lecture prepared for Laboratory Medicine residents as part of a series on medical informatics.
 
@@ -424,7 +425,9 @@ perfect sense to organize and collect (limited amounts of) data in a
 spreadsheet, but it helps a lot to anticipate that you may want to
 transfer that data into a database or use software for statistical
 analysis or producing graphical output (such as R). This is a lot
-easier if you keep a few rules in mind. Here are some tips.
+easier if you keep a few rules in mind. Here are some tips. Note that
+[[http://vita.had.co.nz/papers/tidy-data.pdf][Tidy Data]] by Hadley Wickham provides an excellent discussion of the
+ways in which data can be "tidy" or "messy."
 
 ** name fields sensibly
 
@@ -561,6 +564,9 @@ battery attributes in separate tables and perform joins as necessary.
 It's worth having a look at the classic short article [[http://www.bkent.net/Doc/simple5.htm][A Simple Guide
 to Five Normal Forms in Relational Database Theory]]
 ** Use a standard format for dates and times
+
+#+CAPTION: Obligatory xkcd (https://xkcd.com/1179/)
+[[file:database-intro/iso_8601.png]]
 
 American humans might write today's date as 7/23/15, or perhaps
 07/23/2015 or July 23, 2015; European humans might write it as 23 July

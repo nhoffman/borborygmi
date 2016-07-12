@@ -8,3 +8,16 @@ content
 cache
 publish_log.txt
 emacs.d
+/org-content/database-intro/batteries.csv
+/org-content/database-intro/battery_tests.csv
+/org-content/database-intro/patients.csv
+/org-content/database-intro/physician_patient.csv
+/org-content/database-intro/physicians.csv
+/org-content/database-intro/results.csv
+/org-content/database-intro/results.db
+/org-content/database-intro/tests.csv
+/org-content/getting-started/plot1.png
+/org-content/getting-started/plot2.png
+/org-content/hold-the-pie/plot1.png
+/org-content/hold-the-pie/plot2.png
+/org-content/hold-the-pie/plot3.png
