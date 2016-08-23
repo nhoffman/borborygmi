@@ -121,8 +121,10 @@ brew install zsh
 
 ** homebrew cask
 
+Command line installer for desktop applications. See https://caskroom.github.io
+
 #+BEGIN_SRC sh
-brew install caskroom/cask/brew-cask
+brew tap caskroom/cask
 #+END_SRC
 
 Install some applications
