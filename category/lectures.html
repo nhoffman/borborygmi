@@ -63,7 +63,14 @@ Wed 11 June 2014 &#8212;
 <em>Filed under <a href="../category/lectures.html">lectures</a>;
     tags: <a href="../tag/laboratory-medicine.html">laboratory medicine</a></em>        </div>
 
-        <div><p>
+        <div><ul class="org-ul">
+<li><i>Edit 2015-07-26: added a section on date formatting</i>
+</li>
+<li><i>Edit 2016-07-11: add reference to Tidy Data</i>
+</li>
+</ul>
+
+<p>
 This post contains the content of a lecture prepared for Laboratory Medicine residents as part of a series on medical informatics.
 </p>
 
@@ -97,6 +104,7 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 <li><a href="#sec-8-3">tall, not wide</a></li>
 <li><a href="#sec-8-4">be consistent</a></li>
 <li><a href="#sec-8-5">use multiple tables (normalize the data)</a></li>
+<li><a href="#sec-8-6">Use a standard format for dates and times</a></li>
 </ul>
 </li>
 </ul>
@@ -424,7 +432,6 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 </tr>
 </tbody>
 </table>
-
 
 <div id="outline-container-sec-1" class="outline-2">
 <h2 id="sec-1">Objectives</h2>
@@ -1552,7 +1559,7 @@ group by mrn, test_code;
 <h2 id="sec-7">Hierarchical databases</h2>
 <div class="outline-text-2" id="text-7">
 <p>
-Hierarchical databases organize data in a tree-like structure. Data is represented as a graph of one-to-many (patent -&gt; child) relations.
+Hierarchical databases organize data in a tree-like structure. Data is represented as a graph of one-to-many (parent -&gt; child) relations.
 </p>
 
 
@@ -1586,7 +1593,9 @@ perfect sense to organize and collect (limited amounts of) data in a
 spreadsheet, but it helps a lot to anticipate that you may want to
 transfer that data into a database or use software for statistical
 analysis or producing graphical output (such as R). This is a lot
-easier if you keep a few rules in mind. Here are some tips.
+easier if you keep a few rules in mind. Here are some tips. Note that
+<a href="http://vita.had.co.nz/papers/tidy-data.pdf">Tidy Data</a> by Hadley Wickham provides an excellent discussion of the
+ways in which data can be "tidy" or "messy."
 </p>
 </div>
 
@@ -2242,6 +2251,40 @@ to Five Normal Forms in Relational Database Theory</a>
 </p>
 </div>
 </div>
+<div id="outline-container-sec-8-6" class="outline-3">
+<h3 id="sec-8-6">Use a standard format for dates and times</h3>
+<div class="outline-text-3" id="text-8-6">
+
+<div class="figure">
+<p><img src="../database-intro/iso_8601.png" alt="iso_8601.png">
+</p>
+<p><span class="figure-number">Figure 6:</span> Obligatory xkcd (<a href="https://xkcd.com/1179/">https://xkcd.com/1179/</a>)</p>
+</div>
+
+<p>
+American humans might write today's date as 7/23/15, or perhaps
+07/23/2015 or July 23, 2015; European humans might write it as 23 July
+2015 or 23/7/15.
+</p>
+
+<p>
+None of these formats are&#8230; (trying to be polite here) exactly
+optimal. For one thing, neither format results in alphanumeric sorting
+in chronological order. But much worse, it's hard to guess exactly
+what format the date is actually in, so parsing is a chore.
+</p>
+
+<p>
+It turns out that there's a standard for representing dates and times
+that addresses these issues, and also allows the representation of
+time zone (which we won't get into right now): this standard is called
+<a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>. Using this standard, today would be written
+2015-07-23. Please be nice and write dates like this. Follow the link
+to read more (you will learn that right now the ISO 8601 timestamp is
+something like 2015-07-23T16:55:02+17:00).
+</p>
+</div>
+</div>
 </div>
 </div>
         <hr>
@@ -2285,6 +2328,7 @@ to Five Normal Forms in Relational Database Theory</a>
                 <li><a href="../category/lectures.html">lectures</a></li>
                 <li><a href="../category/notes.html">notes</a></li>
                 <li><a href="../category/org-mode.html">org-mode</a></li>
+                <li><a href="../category/visualization.html">visualization</a></li>
             </ul>
             </div>
 
@@ -2307,7 +2351,7 @@ to Five Normal Forms in Relational Database Theory</a>
         </div>     </div>     </div> 
 <footer>
 <br>
-<p><a href="..">borborygmi</a> &#169; Noah Hoffman 2014</p>
+<p><a href="..">borborygmi</a> &#169; Noah Hoffman 2016</p>
 </footer>
 
 </div> <!-- /container -->

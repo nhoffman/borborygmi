@@ -387,9 +387,9 @@ To remove all user-installed packages:
 
 <pre class="src src-sh">mkdir -p ~/src
 cd ~/src &amp;&amp; \
-wget http://www.python.org/ftp/python/2.7.8/Python-2.7.8.tgz &amp;&amp; \
-tar -xf Python-2.7.8.tgz &amp;&amp; \
-cd Python-2.7.8 &amp;&amp; \
+wget http://www.python.org/ftp/python/2.7.9/Python-2.7.9.tgz &amp;&amp; \
+tar -xf Python-2.7.9.tgz &amp;&amp; \
+cd Python-2.7.9 &amp;&amp; \
 export LDFLAGS=-L/usr/local/opt/readline/lib &amp;&amp; \
 export CPPFLAGS=-I/usr/local/opt/readline/include &amp;&amp; \
 ./configure &amp;&amp; make &amp;&amp; make install
@@ -414,6 +414,17 @@ Install pip (see <a href="http://www.pip-installer.org/en/latest/installing.html
 wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py
 chmod +x get-pip.py
 ./get-pip.py --force-reinstall
+</pre>
+</div>
+
+<p>
+Even better: starting with python 2.7.9, you can bootstrap install pip
+directly from the standard library:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">python -m ensurepip --upgrade
 </pre>
 </div>
 
@@ -525,14 +536,18 @@ EOF
 <h2 id="sec-11">sshfs</h2>
 <div class="outline-text-2" id="text-11">
 <p>
-Now provided by the project <a href="http://osxfuse.github.io/">http://osxfuse.github.io/</a>
+Now provided by the project <a href="http://osxfuse.github.io/">http://osxfuse.github.io/</a> - the links below are for binaries provided as installers.
+</p>
+
+<p>
+Edit 11/2014: updated versions for yosemite
 </p>
 
 <div class="org-src-container">
 
 <pre class="src src-sh">cd ~/Downloads
-wget http://sourceforge.net/projects/osxfuse/files/osxfuse-2.6.0/osxfuse-2.6.0.dmg
-wget https://github.com/downloads/osxfuse/sshfs/SSHFS-2.4.1.pkg
+wget http://sourceforge.net/projects/osxfuse/files/osxfuse-2.7.2/osxfuse-2.7.2.dmg
+wget https://github.com/osxfuse/sshfs/releases/download/osxfuse-sshfs-2.5.0/sshfs-2.5.0.pkg
 </pre>
 </div>
 </div>
@@ -592,6 +607,7 @@ Now create an alias:
                 <li><a href="./category/lectures.html">lectures</a></li>
                 <li><a href="./category/notes.html">notes</a></li>
                 <li><a href="./category/org-mode.html">org-mode</a></li>
+                <li><a href="./category/visualization.html">visualization</a></li>
             </ul>
             </div>
 
@@ -614,7 +630,7 @@ Now create an alias:
         </div>     </div>     </div> 
 <footer>
 <br />
-<p><a href=".">borborygmi</a> &copy; Noah Hoffman 2014</p>
+<p><a href=".">borborygmi</a> &copy; Noah Hoffman 2016</p>
 </footer>
 
 </div> <!-- /container -->
