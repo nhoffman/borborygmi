@@ -64,8 +64,7 @@ for post_name in posts:
     html, = e.Command(
         target='$content/${post}.html',
         source='$org_content/${post}.org',
-        action=('org-export pelican --infile $SOURCE '
-                '--outfile $TARGET --package-dir emacs.d')
+        action=('org-export pelican --infile $SOURCE --outfile $TARGET')
     )
     content.append(html)
 
