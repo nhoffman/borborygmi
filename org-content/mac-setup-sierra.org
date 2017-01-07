@@ -5,11 +5,11 @@
 #+PROPERTY: header-args :eval no
 #+OPTIONS: ^:nil
 
-This post describes the process that I followed to set up a new
-mac running MacOS Sierra (10.12.2), in as close to the order in
-which I did things as I could reproduce. The primary purpose is to
-document these steps for myself (for when I perform a clean install of
-other machines); hopefully others will also find it useful.
+This post describes the steps that I followed to set up a new mac
+running MacOS Sierra (10.12.2), in as close to the order in which I
+did things as I could reproduce. The primary purpose is to document
+what I did for when I perform a clean install of other machines;
+hopefully others will also find it useful.
 
 This time around I really went all in on [[http://brew.sh/][homebrew]]: I used homebrew to
 install not only command line programs and languages (python, R), but
@@ -19,21 +19,24 @@ installer. When it wasn't entirely clear (to me) whether there might
 be some advantage of getting a program from another project (Emacs,
 Postgres.app), I did it the old fashioned way.
 
-Not documented here are manual steps used to transfer non-public
-dotfiles, credentials, etc. Here's a partial list of files and
-directories that I copied directly from my old laptop:
+Somewhat glossed over here are manual steps used to transfer
+non-public dotfiles, credentials, etc. Here's a partial list of files
+and directories that I copied directly from my old laptop:
+
+It's interesting that all none of these steps require an Apple ID -
+usually I sign in first thing, but this time I held off.
 
 : tar -cf dotfiles.tar .Xmodmap .gitconfig .gnupg .pypirc .ssh
 
 * system settings
 ** turn off spelling autocorrect
-System Preferences --> Keyboard --> Text tab --> unselect "Correct spelling automatically" and others
+: System Preferences --> Keyboard --> Text tab --> unselect "Correct spelling automatically" and others
 ** unmap Control + left,right
 
 I use Control plus the left and right arrow keys to move between
 windows in emacs and tmux.
 
-System Preferences --> Keyboard --> Shortcuts --> uncheck mission control: move left/right a space
+: System Preferences --> Keyboard --> Shortcuts --> uncheck mission control: move left/right a space
 
 * First applications
 
@@ -57,7 +60,7 @@ Install from website
 
 ** Developer tools
 
-Pretty much the first thing any mac needs is the command line tools. This can be done from the command line:
+This can be done from the command line:
 
 #+BEGIN_SRC sh
 xcode-select --install
@@ -76,8 +79,8 @@ Instructions for UW are here: https://networks.uwmedicine.org/content/sslvpn-fre
 ** Microsoft Office 2016
 
 The initial version of Excel (15.11) crashed on startup as widely
-reported - this was fixed by updating top a version (15.29) provided
-by Microsoft:
+reported - this was fixed by updating to a version (15.29) provided by
+Microsoft:
 
 https://support.microsoft.com/en-us/kb/3187505
 
@@ -105,7 +108,6 @@ brew install git
 brew install wget
 #+END_SRC
 
-
 A number of packages are installed in the context of other
 applications; here are additional packages that I know I'll use.
 
@@ -119,6 +121,8 @@ brew install pandoc && \
 brew install tmux && \
 brew install tree
 #+END_SRC
+
+Note other packages installed in other sections as well.
 
 ** X11
 
@@ -219,6 +223,8 @@ Install some python packages using homebrew - these are time consuming to instal
 brew install homebrew/python/numpy
 #+END_SRC
 
+And a few packages that I usually like to have around.
+
 #+BEGIN_SRC sh
 pip install ansible
 pip install csvkit
@@ -258,7 +264,7 @@ pip install -r requirements.txt
 
 * R
 
-Really doubling down on homebrew this time around:
+Again, using homebrew.
 
 #+BEGIN_SRC sh
 brew tap homebrew/science
