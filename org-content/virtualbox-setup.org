@@ -2,7 +2,7 @@
 #+DATE: 2015-02-06
 #+CATEGORY: notes
 #+PROPERTY: TAGS linux,mac,virtualbox
-#+PROPERTY: eval never
+#+PROPERTY: header-args :eval no
 
 Here are my notes for setting up an Ubuntu VM to work on some web
 applications. This is intended to be a sandbox for development, so

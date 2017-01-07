@@ -2,7 +2,7 @@
 #+DATE: 2014-08-27
 #+CATEGORY: notes
 #+PROPERTY: TAGS linux
-#+PROPERTY: eval no
+#+PROPERTY: header-args :eval no
 
 Illumina provides a program for demultiplexing sequencing output
 called =bcl2fastq=. They get a gold star for releasing the source -
@@ -103,7 +103,7 @@ cd cmake-2.8.9
 
 Finally, an error complaining about the absence of =sys/stat.h=. I found good advice [[http://askubuntu.com/questions/414110/wheres-my-usr-include-sys-directory][here]]:
 
-#+BEGIN_SRC
+#+BEGIN_SRC sh
 sudo mkdir -p /usr/include/sys
 sudo ln -s /usr/include/x86_64-linux-gnu/sys/stat.h /usr/include/sys/stat.h
 #+END_SRC

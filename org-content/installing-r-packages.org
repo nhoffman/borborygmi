@@ -2,7 +2,7 @@
 #+DATE: 2010-03-22
 #+CATEGORY: notes
 #+PROPERTY: TAGS R-language
-#+PROPERTY: eval never
+#+PROPERTY: header-args :eval no
 
 Notes to myself about installing R packages.
 

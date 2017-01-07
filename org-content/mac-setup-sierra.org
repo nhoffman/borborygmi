@@ -1,13 +1,39 @@
-#+TITLE: Setup new Mac (Sierra)
+#+TITLE: Setting up a new Mac (Sierra)
 #+DATE: 2017-01-5
 #+CATEGORY: notes
 #+PROPERTY: TAGS mac
-#+PROPERTY: eval never
+#+PROPERTY: header-args :eval no
 #+OPTIONS: ^:nil
+
+This post describes the process that I followed to set up a new
+mac running MacOS Sierra (10.12.2), in as close to the order in
+which I did things as I could reproduce. The primary purpose is to
+document these steps for myself (for when I perform a clean install of
+other machines); hopefully others will also find it useful.
+
+This time around I really went all in on [[http://brew.sh/][homebrew]]: I used homebrew to
+install not only command line programs and languages (python, R), but
+also as many desktop apps as I could (Chrome, x11) that would
+otherwise have been installed manually by hunting down an
+installer. When it wasn't entirely clear (to me) whether there might
+be some advantage of getting a program from another project (Emacs,
+Postgres.app), I did it the old fashioned way.
+
+Not documented here are manual steps used to transfer non-public
+dotfiles, credentials, etc. Here's a partial list of files and
+directories that I copied directly from my old laptop:
+
+: tar -cf dotfiles.tar .Xmodmap .gitconfig .gnupg .pypirc .ssh
 
 * system settings
 ** turn off spelling autocorrect
 System Preferences --> Keyboard --> Text tab --> unselect "Correct spelling automatically" and others
+** unmap Control + left,right
+
+I use Control plus the left and right arrow keys to move between
+windows in emacs and tmux.
+
+System Preferences --> Keyboard --> Shortcuts --> uncheck mission control: move left/right a space
 
 * First applications
 
@@ -37,45 +63,31 @@ Pretty much the first thing any mac needs is the command line tools. This can be
 xcode-select --install
 #+END_SRC
 
-** X11
+** Junos pulse VPN client
 
-Download and install Xquartz:
+Version 5.1 appears to be broken in Sierra:
+https://forums.developer.apple.com/thread/51184 - this thread leads to
+a link to version 5.0, which does work:
+https://www.net.usf.edu/vpn/MacOS/JunosPulse.dmg (we're trusting the
+University of South Florida, here).
 
-#+BEGIN_SRC sh
-cd ~/Downloads
-wget http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.8.dmg
-open XQuartz-2.7.8.dmg
-sudo installer -pkg /Volumes/XQuartz-2.7.8/XQuartz.pkg -target /
-#+END_SRC
+Instructions for UW are here: https://networks.uwmedicine.org/content/sslvpn-frequently-asked-questions-14
 
-Note for next time: might be worth trying to use homebrew.
+** Microsoft Office 2016
 
-X11 key bindings so that the option key is used for Meta..
+The initial version of Excel (15.11) crashed on startup as widely
+reported - this was fixed by updating top a version (15.29) provided
+by Microsoft:
 
-#+BEGIN_SRC sh
-cat > ~/.Xmodmap <<EOF
-clear Mod1
-clear Mod2
-keycode 63 = Mode_switch
-keycode 66 = Meta_L
-add Mod1 = Meta_L
-add Mod2 = Mode_switch
-EOF
-#+END_SRC
+https://support.microsoft.com/en-us/kb/3187505
 
 ** Others
 
 - [X] SizeUp - http://www.irradiatedsoftware.com/ (license in Dropbox/software_licenses)
-- [ ] MacTex - download from http://tug.org/mactex/ http://mirror.ctan.org/systems/mac/mactex/MacTeX.pkg
-- [ ] HipChat client
-- [ ] Chrome
-- [ ] Dash 2
-
-** UW only
-
-- Sophos antivirus: https://softy.cac.washington.edu/sophos/for-staff/
-- Junos Pulse (SSL VPN): https://networks.uwmedicine.org/content/sslvpn-frequently-asked-questions-14
-
+- [X] HipChat client
+- [X] Dash 2
+- [X] Postgres.app https://postgresapp.com
+- [X] PgAdmin https://www.pgadmin.org
 
 * homebrew
 
@@ -98,33 +110,46 @@ A number of packages are installed in the context of other
 applications; here are additional packages that I know I'll use.
 
 #+BEGIN_SRC sh
-brew install homebrew/dupes/tcl-tk && \
 brew install autojump && \
-brew install berkeley-db4 && \
 brew install gcc && \
 brew install graphviz && \
 brew install htop-osx && \
 brew install latex2rtf && \
 brew install pandoc && \
-brew install pkg-config && \
-brew install readline && \
-brew install sqlite && \
 brew install tmux && \
-brew install tree && \
+brew install tree
 #+END_SRC
 
-** homebrew cask
+** X11
 
-Command line installer for desktop applications. See https://caskroom.github.io
+install Xquartz
 
 #+BEGIN_SRC sh
-brew tap caskroom/cask
+brew install Caskroom/cask/xquartz
 #+END_SRC
 
-Install some applications
+X11 key bindings so that the option key is used for Meta..
 
 #+BEGIN_SRC sh
+cat > ~/.Xmodmap <<EOF
+clear Mod1
+clear Mod2
+keycode 63 = Mode_switch
+keycode 66 = Meta_L
+add Mod1 = Meta_L
+add Mod2 = Mode_switch
+EOF
+#+END_SRC
+
+** Desktop apps using Cask
+
+Homebrew installs desktop apps too!
+
+#+BEGIN_SRC sh
+brew cask install google-chrome
 brew cask install java
+brew cask install mactex
+brew cask install texmaker
 #+END_SRC
 
 ** homebrew API token
@@ -141,7 +166,7 @@ Make sure that all 'scopes' are unchecked. Once you generate the token, add to y
 
 ** zsh
 
-Install zsh with Homebrew above
+Install zsh with Homebrew
 
 #+BEGIN_SRC sh
 brew install zsh
@@ -156,108 +181,21 @@ exit
 chsh -s /usr/local/bin/zsh $USER
 #+END_SRC
 
-zsh init files are in Dropbox/zsh
+zsh init files are in Dropbox/zsh. =~/.zshenv= contains the following:
 
 #+BEGIN_SRC sh
-cat > ~/.zshenv <<EOF
-. ~/Dropbox/zsh/zstartup
-EOF
-#+END_SRC
-
-* ssh
-
-After installing homebrew's openssh on El Capitan, ssh-agent no longer
-seemed to work (in the sense that after using ssh-add to cache a
-passphrase, I still got a system prompt when trying to ssh). This
-seemed to be fixed by the instructions I found at the url below (my
-version is functionally the same but uses PlistBuddy to edit the
-plist):
-
-https://coderwall.com/p/qdwcpg/using-the-latest-ssh-from-homebrew-on-osx
-
-** update /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist
-
-#+BEGIN_SRC sh
-sudo /usr/libexec/PlistBuddy /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist<<EOF
-Delete :ProgramArguments
-Add :ProgramArguments array
-Add :ProgramArguments: string /usr/local/bin/ssh-agent
-Add :ProgramArguments: string -D
-Add :ProgramArguments: string -t 1d
-Save
-Exit
-EOF
-#+END_SRC
-
-This should change the original value of =ProgramArguments=:
-
-#+BEGIN_EXAMPLE
-<key>ProgramArguments</key>
-<array>
-	<string>/usr/bin/ssh-agent</string>
-	<string>-l</string>
-</array>
-#+END_EXAMPLE
-
-to
-
-#+BEGIN_EXAMPLE
-<key>ProgramArguments</key>
-<array>
-	<string>/usr/local/bin/ssh-agent</string>
-	<string>-D</string>
-	<string>-t 1d</string>
-</array>
-#+END_EXAMPLE
-
-Now restart the service
-
-#+BEGIN_SRC sh
-launchctl unload /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist
-launchctl load -w /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist
-launchctl start org.openbsd.ssh-agent
-#+END_SRC
-
-** create $ZSH_INITDIR/ssh-ask-keychain (called from start_ssh_agent.zsh)
-
-#+BEGIN_SRC sh :results output :export results :eval yes
-cat ~/Dropbox/zsh/ssh-ask-keychain
-#+END_SRC
-
-** create $ZSH_INITDIR/start_ssh_agent.zsh
-
-(either as a file sourced from .zshrc, or as a code block in a login script)
-
-#+BEGIN_SRC sh :results output :export results :eval yes
-cat ~/Dropbox/zsh/ssh_environ.zsh
+for pth in $HOME/Dropbox $HOME/src $HOME; do
+    if [[ -f $pth/zsh/zstartup ]]; then
+        . $pth/zsh/zstartup
+        break
+    fi
+done
 #+END_SRC
 
 * git
 
  : git config --global user.name "My Name"
  : git config --global user.email me@email.com
-
-* emacs
-
-Install latest emacs binary (25.1) from http://emacsformacosx.com/
-
-Emacs needs a few homebrew packages
-
-#+BEGIN_SRC sh
-brew install libressl
-brew install aspell
-brew install gpg
-#+END_SRC
-
-Check out my .emacs.d and run setup scripts.
-
-#+BEGIN_SRC sh
-cd ~
-git clone git@github.com:nhoffman/.emacs.d.git
-cd .emacs.d
-git submodule init
-git submodule update
-#+END_SRC
 
 * python
 
@@ -281,29 +219,41 @@ Install some python packages using homebrew - these are time consuming to instal
 brew install homebrew/python/numpy
 #+END_SRC
 
-Install some other packages to the system using pip.
-
-For elpy:
-
 #+BEGIN_SRC sh
-pip install -r <(curl https://raw.githubusercontent.com/jorgenschaefer/elpy/master/requirements.txt)
-#+END_SRC
-
-ansible
-
-#+BEGIN_SRC sh
-sudo mkdir /usr/share/ansible
-sudo chown -R $(whoami) /usr/share/ansible
 pip install ansible
-#+END_SRC
-
-Others
-
-#+BEGIN_SRC sh
 pip install csvkit
 pip install reportlab
 pip install scons
 pip install jinja2
+#+END_SRC
+
+* emacs
+
+Install latest emacs binary (25.1) from http://emacsformacosx.com/
+
+Emacs needs a few homebrew packages
+
+#+BEGIN_SRC sh
+brew install libressl
+brew install aspell
+brew install gpg
+#+END_SRC
+
+Check out my .emacs.d and run setup scripts.
+
+#+BEGIN_SRC sh
+cd ~
+git clone git@github.com:nhoffman/.emacs.d.git
+cd .emacs.d
+git submodule init
+git submodule update
+bin/venv.sh
+#+END_SRC
+
+For elpy:
+
+#+BEGIN_SRC sh
+pip install -r requirements.txt
 #+END_SRC
 
 * R
@@ -322,33 +272,15 @@ install.packages(packages, repos="http://cran.fhcrc.org/", dependencies=TRUE, cl
 EOF
 #+END_SRC
 
-* mail
-
-http://www.washington.edu/itconnect/connect/email/uw-email/configuring/os-x-mail6/
-
-* sshfs
-
-Provided by the project http://osxfuse.github.io/ - the links below
-are for binaries provided as installers.
-
-#+BEGIN_SRC sh
-cd ~/Downloads
-wget http://sourceforge.net/projects/osxfuse/files/osxfuse-2.8.2/osxfuse-2.8.2.dmg
-wget https://github.com/osxfuse/sshfs/releases/download/osxfuse-sshfs-2.5.0/sshfs-2.5.0.pkg
-#+END_SRC
-
 * wkhtmltopdf
 
 #+BEGIN_SRC sh
 cd ~/Downloads
-wget 'http://wkhtmltopdf.googlecode.com/files/wkhtmltopdf.dmg'
-open wkhtmltopdf.dmg
-cp -r /Volumes/wkhtmltopdf/wkhtmltopdf.app /Applications
+wget 'http://download.gna.org/wkhtmltopdf/0.12/0.12.4/wkhtmltox-0.12.4_osx-cocoa-x86-64.pkg'
 #+END_SRC
 
-Now create an alias:
+Use installer - binary is =/usr/local/bin/wkhtmltopdf=
 
-#+BEGIN_SRC sh
-alias wkhtmltopdf='/Applications/wkhtmltopdf.app/Contents/MacOS/wkhtmltopdf'
-#+END_SRC
+* mail
 
+http://www.washington.edu/itconnect/connect/email/uw-email/configuring/os-x-mail6/

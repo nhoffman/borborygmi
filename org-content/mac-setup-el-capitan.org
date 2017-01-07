@@ -2,7 +2,7 @@
 #+DATE: 2015-11-02
 #+CATEGORY: notes
 #+PROPERTY: TAGS mac
-#+PROPERTY: eval never
+#+PROPERTY: header-args :eval no
 #+OPTIONS: ^:nil
 
 I had enough issues after updating to El Capitan (the inability to save my

@@ -2,7 +2,7 @@
 #+DATE: 2013-10-20
 #+CATEGORY: notes
 #+PROPERTY: TAGS mac
-#+PROPERTY: eval never
+#+PROPERTY: header-args :eval no
 #+OPTIONS: ^:nil
 
 These are my notes that I took while setting up a macbook Air near the
