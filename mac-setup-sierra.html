@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -8,14 +9,14 @@
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
-    <script src="../theme/html5.js"></script>
+    <script src="./theme/html5.js"></script>
     <![endif]-->
 
     <!-- Le styles -->
-    <link href="../theme/bootstrap.min.css" rel="stylesheet">
-    <link href="../theme/bootstrap.min.responsive.css" rel="stylesheet">
-    <link href="../theme/local.css" rel="stylesheet">
-    <link href="../theme/pygments.css" rel="stylesheet">
+    <link href="./theme/bootstrap.min.css" rel="stylesheet">
+    <link href="./theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="./theme/local.css" rel="stylesheet">
+    <link href="./theme/pygments.css" rel="stylesheet">
 
 </head>
 
@@ -31,7 +32,7 @@
              <span class="icon-bar"></span>
          </a>
 
-        <a class="brand" href="..">borborygmi</a>
+        <a class="brand" href=".">borborygmi</a>
 
         <div class="nav-collapse">
         <ul class="nav">
@@ -48,20 +49,14 @@
     <div class="row">
 
         <div class="span9">
-
-<!-- Don't include TOC on the index page -->
-<style>div#table-of-contents {display: none;}</style>
-
-
-
-    <div class="article">
+    <div class='article'>
         <div class="content-title">
-            <a href="../mac-setup-sierra.html"><h1>Setting up a new Mac (Sierra)</h1></a>
+            <h1>Setting up a new Mac (Sierra)</h1>
 Thu 05 January 2017 &#8212;
 
 
-<em>Filed under <a href="../category/notes.html">notes</a>;
-    tags: <a href="../tag/mac.html">mac</a></em>        </div>
+<em>Filed under <a href="./category/notes.html">notes</a>;
+    tags: <a href="./tag/mac.html">mac</a></em>        </div>
 
         <div><div id="table-of-contents">
 <h2>Table of Contents</h2>
@@ -170,12 +165,12 @@ Update a few settings.
 </p>
 
 <p>
-Preferences &#8211;&gt; Profiles &#8211;&gt; Keys and do these things:
+Preferences &#x2013;&gt; Profiles &#x2013;&gt; Keys and do these things:
 </p>
 <ul class="org-ul">
 <li>select "Left/right option key acts as": +Esc</li>
-<li>+ &#8211;&gt; Keyboard shortcut "OPT+&lt;left arrow&gt;": Send Escape sequence "b"</li>
-<li>+ &#8211;&gt; Keyboard shortcut "OPT+&lt;right arrow&gt;": Send Escape sequence "f"</li>
+<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;left arrow&gt;": Send Escape sequence "b"</li>
+<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;right arrow&gt;": Send Escape sequence "f"</li>
 </ul>
 
 <p>
@@ -183,8 +178,8 @@ Default appearance:
 </p>
 
 <ul class="org-ul">
-<li>Preferences &#8211;&gt; Profiles &#8211;&gt; Colors &#8211;&gt; Load Presets &#8211;&gt; Light Background</li>
-<li>Preferences &#8211;&gt; Profiles &#8211;&gt; Text &#8211;&gt; Change Font &#8211;&gt; 14 point</li>
+<li>Preferences &#x2013;&gt; Profiles &#x2013;&gt; Colors &#x2013;&gt; Load Presets &#x2013;&gt; Light Background</li>
+<li>Preferences &#x2013;&gt; Profiles &#x2013;&gt; Text &#x2013;&gt; Change Font &#x2013;&gt; 14 point</li>
 </ul>
 </div>
 </div>
@@ -562,143 +557,10 @@ Use installer - binary is <code>/usr/local/bin/wkhtmltopdf</code>
 </div>
 </div>
 </div>
+
         <hr>
+
     </div>
-
-
- 
-
-
-    <div class="article">
-        <a href="../mac-setup-el-capitan.html"><h2>Setup after clean install of El Capitan</h2></a>
-        <div class="well small"> Mon 02 November 2015 &#8212;
-
-
-<em>Filed under <a href="../category/notes.html">notes</a>;
-    tags: <a href="../tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="../mac-setup-el-capitan.html">read more</a> </div>
-        <div class="summary"><div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#org2c1e823">First applications</a>
-<ul>
-<li><a href="#org1a18810">Developer tools</a></li>
-<li><a href="#orgd9e0b89">X11</a></li>
-<li><a href="#org8b54df8">iTerm2</a></li>
-<li><a href="#orgf30e7d9">Others</a></li>
-<li><a href="#org16af2e4">UW only</a></li>
-</ul>
-</li>
-<li><a href="#org608d67f">system-level configuration</a>
-<ul>
-<li><a href="#orgb78443e">turn off spelling autocorrect</a></li>
-<li><a href="#orgd973fab">turn off spaces key shortcuts</a></li>
-</ul>
-</li>
-<li><a href="#org4a2c6dc">homebrew</a>
-<ul>
-<li><a href="#orgb603a5b">packages installed using homebrew</a></li>
-<li><a href="#org6db31e4">homebrew cask</a></li>
-<li><a href="#org714038d">homebrew API token</a></li>
-<li><a href="#org450908e">zsh</a></li>
-</ul>
-</li>
-<li><a href="#orgf241ce7">ssh</a>
-<ul>
-<li><a href="#org3d9e002">update /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist</a></li>
-<li><a href="#org91d81f3">create $ZSH_INITDIR/ssh-ask-keychain (called from start_ssh_agent.zsh ...</a></li></ul></li></ul></div></div> </div>
-    </div>
-
-
- 
-
-
-    <div class="article">
-        <a href="../virtualbox-setup.html"><h2>Setup for VirtualBox VM running Ubuntu 14.04 on OS X Mavericks</h2></a>
-        <div class="well small"> Fri 06 February 2015 &#8212;
-
-
-<em>Filed under <a href="../category/notes.html">notes</a>;
-    tags: <a href="../tag/linux.html">linux,&#160;</a><a href="../tag/mac.html">mac,&#160;</a><a href="../tag/virtualbox.html">virtualbox</a></em> <a class="btn btn-info xsmall" href="../virtualbox-setup.html">read more</a> </div>
-        <div class="summary"><div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#orgba4c0e5">VirtualBox preferences</a></li>
-<li><a href="#org1003ef3">Create an Ubuntu 14.04 VM</a></li>
-<li><a href="#org29de9d5">Set up an IP address</a></li>
-</ul>
-</div>
-</div>
-<p>
-Here are my notes for setting up an Ubuntu VM to work on some web
-applications. This is intended to be a sandbox for development, so
-I'll err on the side of convenience ...</p> </div>
-    </div>
-
-
- 
-
-
-    <div class="article">
-        <a href="../mac-setup.html"><h2>Setting up a new mac</h2></a>
-        <div class="well small"> Sun 20 October 2013 &#8212;
-
-
-<em>Filed under <a href="../category/notes.html">notes</a>;
-    tags: <a href="../tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="../mac-setup.html">read more</a> </div>
-        <div class="summary"><div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#org2213851">First applications</a>
-<ul>
-<li><a href="#orga746407">Developer tools</a></li>
-<li><a href="#org574d72b">X11</a></li>
-<li><a href="#org2534276">Others</a></li>
-</ul>
-</li>
-<li><a href="#orgfe48cb1">system-level configuration</a>
-<ul>
-<li><a href="#org44fd4d7">turn off spelling autocorrect</a></li>
-<li><a href="#orgb064b23">fix scroll direction</a></li>
-<li><a href="#org642bad5">turn off spaces key shortcuts</a></li>
-</ul>
-</li>
-<li><a href="#org65830c5">ssh</a></li>
-<li><a href="#org5d3a81b">homebrew</a>
-<ul>
-<li><a href="#org1683660">stuff installed using homebrew</a></li>
-<li><a href="#orga778c7a">zsh</a></li>
-</ul>
-</li>
-<li><a href="#orgdb771bf">git</a></li>
-<li><a href="#orga72624d">iTerm2 settings</a></li>
-<li><a href="#org97efc1d">emacs</a></li>
-<li><a href="#orgb1860ef">python</a></li>
-<li><a href="#orge69e16c">R</a></li>
-<li><a href="#org0975c4f">mail</a></li>
-<li><a href="#org6311d98">sshfs</a></li>
-<li><a href="#orge9b1650">wkhtmltopdf</a></li>
-</ul>
-</div>
-</div>
-<p>
-These are my notes that I took while setting up a ...</p> </div>
-    </div>
-
-<div class="pagination">
-<ul>
-    <li class="prev disabled"><a href="#">&#8592; Previous</a></li>
-
-    <li class="active"><a href="../tag/mac.html">1</a></li>
-
-    <li class="next disabled"><a href="#">&#8594; Next</a></li>
-
-</ul>
-</div>
- 
-  
         </div>
 
         <div class="span3">
@@ -709,9 +571,9 @@ These are my notes that I took while setting up a ...</p> </div>
                 Site
                 </li>
 
-                <li><a href="../">Archives</a>
-                </li><li><a href="../tags.html">Tags</a>
-                </li><li><a href="http://nhoffman.github.io/borborygmi/" rel="alternate">Atom feed</a></li>
+                <li><a href="./">Archives</a>
+                <li><a href="./tags.html">Tags</a>
+                <li><a href="http://nhoffman.github.io/borborygmi/" rel="alternate">Atom feed</a></li>
             </ul>
             </div>
 
@@ -722,10 +584,10 @@ These are my notes that I took while setting up a ...</p> </div>
                 Categories
                 </li>
 
-                <li><a href="../category/lectures.html">lectures</a></li>
-                <li><a href="../category/notes.html">notes</a></li>
-                <li><a href="../category/org-mode.html">org-mode</a></li>
-                <li><a href="../category/visualization.html">visualization</a></li>
+                <li><a href="./category/lectures.html">lectures</a></li>
+                <li><a href="./category/notes.html">notes</a></li>
+                <li><a href="./category/org-mode.html">org-mode</a></li>
+                <li><a href="./category/visualization.html">visualization</a></li>
             </ul>
             </div>
 
@@ -747,8 +609,8 @@ These are my notes that I took while setting up a ...</p> </div>
 
         </div>     </div>     </div> 
 <footer>
-<br>
-<p><a href="..">borborygmi</a> &#169; Noah Hoffman 2017</p>
+<br />
+<p><a href=".">borborygmi</a> &copy; Noah Hoffman 2017</p>
 </footer>
 
 </div> <!-- /container -->

@@ -68,14 +68,9 @@ I learned a bit about list creation in elisp today. Here's how you join a list o
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-elisp">(mapconcat #'identity '("" "path" "to" "someplace") "/")
 </pre>
 </div>
-
-<pre class="example">
-/path/to/someplace
-</pre>
 
 <p>
 But I learned (thanks to <a href="http://stackoverflow.com/users/113848/legoscia">legoscia</a> on <a href="http://stackoverflow.com/questions/24188100">stackoverflow</a>) that simply
@@ -83,7 +78,6 @@ replacing an element in the list with a variable results in an error:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-elisp">(let ((path "someplace"))
   (mapconcat #'identity '("" "path" "to" path) "/"))
 </pre>
@@ -99,7 +93,6 @@ symbols (and not the corresponding values) in the list.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-elisp">(let ((path "someplace"))
   (print '("" "path" "to" path)))
 </pre>
@@ -115,7 +108,6 @@ backquote and a comma:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-elisp">(let ((path "someplace"))
   (print (list "" "path" "to" path))
   (print `("" "path" "to" ,path)))
@@ -150,14 +142,13 @@ symbol instead of the value:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-elisp">(let ((path "someplace"))
   (print '((:prologue . path))))
 </pre>
 </div>
 
 <pre class="example">
-((:prologue . pathdef))
+((:prologue . path))
 </pre>
 
 <p>
@@ -165,7 +156,6 @@ Nope.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-elisp">(let ((path "someplace"))
   (print (list `(:prologue . ,path))))
 </pre>
@@ -197,15 +187,15 @@ Much better.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">org-mode integration</a>
+<li><a href="#org39ee611">org-mode integration</a>
 <ul>
-<li><a href="#sec-1-1">Arranging content in subdirectories</a></li>
-<li><a href="#sec-1-2">Syntax highlighting</a></li>
+<li><a href="#org02108f5">Arranging content in subdirectories</a></li>
+<li><a href="#orgf44722f">Syntax highlighting</a></li>
 </ul>
 </li>
-<li><a href="#sec-2">Choosing a theme</a></li>
-<li><a href="#sec-3">Hosting on github pages</a></li>
-<li><a href="#sec-4">Examples</a></li>
+<li><a href="#org9aedfed">Choosing a theme</a></li>
+<li><a href="#org1236f1e">Hosting on github pages</a></li>
+<li><a href="#org2316dc5">Examples</a></li>
 </ul>
 </div>
 </div>
@@ -276,7 +266,7 @@ other content that I have scattered ...</p> </div>
         </div>     </div>     </div> 
 <footer>
 <br>
-<p><a href="..">borborygmi</a> &#169; Noah Hoffman 2016</p>
+<p><a href="..">borborygmi</a> &#169; Noah Hoffman 2017</p>
 </footer>
 
 </div> <!-- /container -->

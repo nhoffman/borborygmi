@@ -62,35 +62,35 @@ Sun 20 October 2013 &#8212;
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">First applications</a>
+<li><a href="#org2213851">First applications</a>
 <ul>
-<li><a href="#sec-1-1">Developer tools</a></li>
-<li><a href="#sec-1-2">X11</a></li>
-<li><a href="#sec-1-3">Others</a></li>
+<li><a href="#orga746407">Developer tools</a></li>
+<li><a href="#org574d72b">X11</a></li>
+<li><a href="#org2534276">Others</a></li>
 </ul>
 </li>
-<li><a href="#sec-2">system-level configuration</a>
+<li><a href="#orgfe48cb1">system-level configuration</a>
 <ul>
-<li><a href="#sec-2-1">turn off spelling autocorrect</a></li>
-<li><a href="#sec-2-2">fix scroll direction</a></li>
-<li><a href="#sec-2-3">turn off spaces key shortcuts</a></li>
+<li><a href="#org44fd4d7">turn off spelling autocorrect</a></li>
+<li><a href="#orgb064b23">fix scroll direction</a></li>
+<li><a href="#org642bad5">turn off spaces key shortcuts</a></li>
 </ul>
 </li>
-<li><a href="#sec-3">ssh</a></li>
-<li><a href="#sec-4">homebrew</a>
+<li><a href="#org65830c5">ssh</a></li>
+<li><a href="#org5d3a81b">homebrew</a>
 <ul>
-<li><a href="#sec-4-1">stuff installed using homebrew</a></li>
-<li><a href="#sec-4-2">zsh</a></li>
+<li><a href="#org1683660">stuff installed using homebrew</a></li>
+<li><a href="#orga778c7a">zsh</a></li>
 </ul>
 </li>
-<li><a href="#sec-5">git</a></li>
-<li><a href="#sec-6">iTerm2 settings</a></li>
-<li><a href="#sec-7">emacs</a></li>
-<li><a href="#sec-8">python</a></li>
-<li><a href="#sec-9">R</a></li>
-<li><a href="#sec-10">mail</a></li>
-<li><a href="#sec-11">sshfs</a></li>
-<li><a href="#sec-12">wkhtmltopdf</a></li>
+<li><a href="#orgdb771bf">git</a></li>
+<li><a href="#orga72624d">iTerm2 settings</a></li>
+<li><a href="#org97efc1d">emacs</a></li>
+<li><a href="#orgb1860ef">python</a></li>
+<li><a href="#orge69e16c">R</a></li>
+<li><a href="#org0975c4f">mail</a></li>
+<li><a href="#org6311d98">sshfs</a></li>
+<li><a href="#orge9b1650">wkhtmltopdf</a></li>
 </ul>
 </div>
 </div>
@@ -101,16 +101,15 @@ them.
 </p>
 
 <dl class="org-dl">
-<dt> Oct 2014 </dt><dd>increment versions of various applications, update for Yoesmite
-</dd>
+<dt>Oct 2014</dt><dd>increment versions of various applications, update for Yoesmite</dd>
 </dl>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">First applications</h2>
-<div class="outline-text-2" id="text-1">
-</div><div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1">Developer tools</h3>
-<div class="outline-text-3" id="text-1-1">
+<div id="outline-container-org2213851" class="outline-2">
+<h2 id="org2213851">First applications</h2>
+<div class="outline-text-2" id="text-org2213851">
+</div><div id="outline-container-orga746407" class="outline-3">
+<h3 id="orga746407">Developer tools</h3>
+<div class="outline-text-3" id="text-orga746407">
 <p>
 Pretty much the first thing any mac needs is the command line tools. These can be installed from within the Xcode application, available as a download from the Apple app store (<a href="https://developer.apple.com/xcode/downloads/">https://developer.apple.com/xcode/downloads/</a>). Note that this requires an apple id, even though the download is free. Once Xcode is installed, install the command line tools via the Xcode preferences: <a href="http://slashusr.wordpress.com/2012/07/27/os-x-mountain-lion-need-to-reinstall-xcode-command-line-tools/">http://slashusr.wordpress.com/2012/07/27/os-x-mountain-lion-need-to-reinstall-xcode-command-line-tools/</a>
 </p>
@@ -120,7 +119,6 @@ Edit: there appears to be another way to install the developer tools that does n
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">xcode-select --install
 </pre>
 </div>
@@ -130,7 +128,6 @@ Looks like you can even agree to the license from the command line using
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">sudo xcodebuild -license
 </pre>
 </div>
@@ -141,9 +138,9 @@ See <a href="http://apple.stackexchange.com/questions/88535/how-to-download-the-
 </div>
 </div>
 
-<div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2">X11</h3>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-org574d72b" class="outline-3">
+<h3 id="org574d72b">X11</h3>
+<div class="outline-text-3" id="text-org574d72b">
 <p>
 Download and install Xquartz <a href="http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.7.dmg">http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.7.dmg</a>
 </p>
@@ -153,7 +150,6 @@ X11 key bindings so that the option key is used for Meta..
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">cat &gt; ~/.Xmodmap &lt;&lt;EOF
 clear Mod1
 clear Mod2
@@ -167,48 +163,43 @@ EOF
 </div>
 </div>
 
-<div id="outline-container-sec-1-3" class="outline-3">
-<h3 id="sec-1-3">Others</h3>
-<div class="outline-text-3" id="text-1-3">
+<div id="outline-container-org2534276" class="outline-3">
+<h3 id="org2534276">Others</h3>
+<div class="outline-text-3" id="text-org2534276">
 <ul class="org-ul">
-<li>Chrome
-</li>
-<li>iTerm2 (see settings below)
-</li>
-<li>Dropbox
-</li>
-<li>SizeUp - <a href="http://www.irradiatedsoftware.com/">http://www.irradiatedsoftware.com/</a> (license in Dropbox/software_licenses)
-</li>
+<li>Chrome</li>
+<li>iTerm2 (see settings below)</li>
+<li>Dropbox</li>
+<li>SizeUp - <a href="http://www.irradiatedsoftware.com/">http://www.irradiatedsoftware.com/</a> (license in Dropbox/software_licenses)</li>
 <li>MacTex - download from <a href="http://tug.org/mactex/">http://tug.org/mactex/</a>
-  <a href="http://mirror.ctan.org/systems/mac/mactex/MacTeX.pkg">http://mirror.ctan.org/systems/mac/mactex/MacTeX.pkg</a>
-</li>
+<a href="http://mirror.ctan.org/systems/mac/mactex/MacTeX.pkg">http://mirror.ctan.org/systems/mac/mactex/MacTeX.pkg</a></li>
 </ul>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2">system-level configuration</h2>
-<div class="outline-text-2" id="text-2">
-</div><div id="outline-container-sec-2-1" class="outline-3">
-<h3 id="sec-2-1">turn off spelling autocorrect</h3>
-<div class="outline-text-3" id="text-2-1">
+<div id="outline-container-orgfe48cb1" class="outline-2">
+<h2 id="orgfe48cb1">system-level configuration</h2>
+<div class="outline-text-2" id="text-orgfe48cb1">
+</div><div id="outline-container-org44fd4d7" class="outline-3">
+<h3 id="org44fd4d7">turn off spelling autocorrect</h3>
+<div class="outline-text-3" id="text-org44fd4d7">
 <p>
 System Preferences &#x2013;&gt; Language &amp; Text &#x2013;&gt; Text tab &#x2013;&gt; unselect "Correct spelling automatically"
 </p>
 </div>
 </div>
-<div id="outline-container-sec-2-2" class="outline-3">
-<h3 id="sec-2-2">fix scroll direction</h3>
-<div class="outline-text-3" id="text-2-2">
+<div id="outline-container-orgb064b23" class="outline-3">
+<h3 id="orgb064b23">fix scroll direction</h3>
+<div class="outline-text-3" id="text-orgb064b23">
 <p>
 System Preferences &#x2013;&gt; Trackpad &#x2013;&gt; Scroll &amp; Zoom &#x2013;&gt; unselect "scroll direction: natural"
 </p>
 </div>
 </div>
-<div id="outline-container-sec-2-3" class="outline-3">
-<h3 id="sec-2-3">turn off spaces key shortcuts</h3>
-<div class="outline-text-3" id="text-2-3">
+<div id="outline-container-org642bad5" class="outline-3">
+<h3 id="org642bad5">turn off spaces key shortcuts</h3>
+<div class="outline-text-3" id="text-org642bad5">
 <p>
 System Preferences &#x2013;&gt; Keyboard &#x2013;&gt; Keyboard Shortcuts &#x2013;&gt; unselect C+{&lt;-,-&gt;}
 </p>
@@ -216,24 +207,23 @@ System Preferences &#x2013;&gt; Keyboard &#x2013;&gt; Keyboard Shortcuts &#x2013
 </div>
 </div>
 
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3">ssh</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-org65830c5" class="outline-2">
+<h2 id="org65830c5">ssh</h2>
+<div class="outline-text-2" id="text-org65830c5">
 <p>
 Copy my default private key.
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4">homebrew</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org5d3a81b" class="outline-2">
+<h2 id="org5d3a81b">homebrew</h2>
+<div class="outline-text-2" id="text-org5d3a81b">
 <p>
 Be bloody, bold, and resolute:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew doctor
 </pre>
@@ -244,17 +234,15 @@ Had to fix permissions:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">sudo chown -R $(whoami) /usr/local
 </pre>
 </div>
 </div>
 
-<div id="outline-container-sec-4-1" class="outline-3">
-<h3 id="sec-4-1">stuff installed using homebrew</h3>
-<div class="outline-text-3" id="text-4-1">
+<div id="outline-container-org1683660" class="outline-3">
+<h3 id="org1683660">stuff installed using homebrew</h3>
+<div class="outline-text-3" id="text-org1683660">
 <div class="org-src-container">
-
 <pre class="src src-sh">brew install aspell &amp;&amp; \
 brew install autojump &amp;&amp; \
 brew install gcc &amp;&amp; \
@@ -274,9 +262,9 @@ brew install zsh
 </div>
 </div>
 
-<div id="outline-container-sec-4-2" class="outline-3">
-<h3 id="sec-4-2">zsh</h3>
-<div class="outline-text-3" id="text-4-2">
+<div id="outline-container-orga778c7a" class="outline-3">
+<h3 id="orga778c7a">zsh</h3>
+<div class="outline-text-3" id="text-orga778c7a">
 <p>
 Install zsh with Homebrew above
 </p>
@@ -290,7 +278,6 @@ Change shell to zsh
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">sudo -s
 echo /usr/local/bin/zsh &gt;&gt; /etc/shells
 mv /etc/zshenv /etc/zprofile
@@ -307,9 +294,9 @@ EOF
 </div>
 </div>
 
-<div id="outline-container-sec-5" class="outline-2">
-<h2 id="sec-5">git</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-orgdb771bf" class="outline-2">
+<h2 id="orgdb771bf">git</h2>
+<div class="outline-text-2" id="text-orgdb771bf">
 <pre class="example">
 git config --global user.name "Noah Hoffman"
 git config --global user.email noah.hoffman@gmail.com
@@ -317,19 +304,16 @@ git config --global user.email noah.hoffman@gmail.com
 </div>
 </div>
 
-<div id="outline-container-sec-6" class="outline-2">
-<h2 id="sec-6">iTerm2 settings</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-orga72624d" class="outline-2">
+<h2 id="orga72624d">iTerm2 settings</h2>
+<div class="outline-text-2" id="text-orga72624d">
 <p>
 Preferences &#x2013;&gt; Profiles &#x2013;&gt; Keys and do these things:
 </p>
 <ul class="org-ul">
-<li>select "Left/right option key acts as": +Esc
-</li>
-<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;left arrow&gt;": Send Escape sequence "b"
-</li>
-<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;right arrow&gt;": Send Escape sequence "f"
-</li>
+<li>select "Left/right option key acts as": +Esc</li>
+<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;left arrow&gt;": Send Escape sequence "b"</li>
+<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;right arrow&gt;": Send Escape sequence "f"</li>
 </ul>
 
 <p>
@@ -338,9 +322,9 @@ Preferences &#x2013;&gt; Profiles &#x2013;&gt; Colors &#x2013;&gt; Load Presets 
 </div>
 </div>
 
-<div id="outline-container-sec-7" class="outline-2">
-<h2 id="sec-7">emacs</h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-org97efc1d" class="outline-2">
+<h2 id="org97efc1d">emacs</h2>
+<div class="outline-text-2" id="text-org97efc1d">
 <p>
 Install emacs24 binary from <a href="http://emacsformacosx.com/">http://emacsformacosx.com/</a>
 </p>
@@ -354,7 +338,6 @@ Check out my .emacs.d
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">cd ~
 git clone git@github.com:nhoffman/.emacs.d.git
 </pre>
@@ -362,9 +345,9 @@ git clone git@github.com:nhoffman/.emacs.d.git
 </div>
 </div>
 
-<div id="outline-container-sec-8" class="outline-2">
-<h2 id="sec-8">python</h2>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-orgb1860ef" class="outline-2">
+<h2 id="orgb1860ef">python</h2>
+<div class="outline-text-2" id="text-orgb1860ef">
 <p>
 Doesn't work out so well using homebrew, so let's install from source. Note that we did install readline with homebrew above.
 </p>
@@ -378,13 +361,11 @@ To remove all user-installed packages:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">rm -r /usr/local/lib/python2.7/site-packages
 </pre>
 </div>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">mkdir -p ~/src
 cd ~/src &amp;&amp; \
 wget http://www.python.org/ftp/python/2.7.9/Python-2.7.9.tgz &amp;&amp; \
@@ -409,7 +390,6 @@ Install pip (see <a href="http://www.pip-installer.org/en/latest/installing.html
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">cd ~/src
 wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py
 chmod +x get-pip.py
@@ -423,7 +403,6 @@ directly from the standard library:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">python -m ensurepip --upgrade
 </pre>
 </div>
@@ -436,7 +415,6 @@ script that help set this up. First, we'll need some requirements.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">cd ~/src
 wget -N https://raw.githubusercontent.com/jorgenschaefer/elpy/master/requirements.txt
 cat &gt;&gt; requirements.txt &lt;&lt;EOF
@@ -457,7 +435,6 @@ Now create the wheels for these packages and save them in a system-level directo
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">cd ~/src
 git clone git@github.com:nhoffman/bioy.git
 bioy/dev/build_wheels.sh --wheelstreet /usr/local/share/python/wheels --requirements requirements.txt
@@ -469,7 +446,6 @@ Now these packages can be quickly be installed to the system or a virtualenv usi
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">pip install --use-wheel --find-links=/usr/local/share/python/wheels/2.7.8 -r requirements.txt
 </pre>
 </div>
@@ -479,7 +455,6 @@ scons doesn't work with pip
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">cd ~/src
 wget -N http://prdownloads.sourceforge.net/scons/scons-2.3.4.tar.gz &amp;&amp; \
 tar -xf scons-2.3.4.tar.gz &amp;&amp; \
@@ -493,7 +468,6 @@ ansible
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">sudo mkdir /usr/share/ansible
 sudo chown -R $(whoami) /usr/share/ansible
 pip install ansible
@@ -502,11 +476,10 @@ pip install ansible
 </div>
 </div>
 
-<div id="outline-container-sec-9" class="outline-2">
-<h2 id="sec-9">R</h2>
-<div class="outline-text-2" id="text-9">
+<div id="outline-container-orge69e16c" class="outline-2">
+<h2 id="orge69e16c">R</h2>
+<div class="outline-text-2" id="text-orge69e16c">
 <div class="org-src-container">
-
 <pre class="src src-sh">cd ~/src
 wget http://cran.fhcrc.org/bin/macosx/R-3.1.1-mavericks.pkg &amp;&amp; \
 sudo installer -pkg R-3.1.1-mavericks.pkg -target /
@@ -514,7 +487,6 @@ sudo installer -pkg R-3.1.1-mavericks.pkg -target /
 </div>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">sudo R --slave &lt;&lt; EOF
 packages &lt;- c("ape", "sqldf", "ROCR", "lattice", "RSQLite", "latticeExtra", "argparse", "data.table")
 install.packages(packages, repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE)
@@ -524,17 +496,17 @@ EOF
 </div>
 </div>
 
-<div id="outline-container-sec-10" class="outline-2">
-<h2 id="sec-10">mail</h2>
-<div class="outline-text-2" id="text-10">
+<div id="outline-container-org0975c4f" class="outline-2">
+<h2 id="org0975c4f">mail</h2>
+<div class="outline-text-2" id="text-org0975c4f">
 <p>
 <a href="http://www.washington.edu/itconnect/connect/email/uw-email/configuring/os-x-mail6/">http://www.washington.edu/itconnect/connect/email/uw-email/configuring/os-x-mail6/</a>
 </p>
 </div>
 </div>
-<div id="outline-container-sec-11" class="outline-2">
-<h2 id="sec-11">sshfs</h2>
-<div class="outline-text-2" id="text-11">
+<div id="outline-container-org6311d98" class="outline-2">
+<h2 id="org6311d98">sshfs</h2>
+<div class="outline-text-2" id="text-org6311d98">
 <p>
 Now provided by the project <a href="http://osxfuse.github.io/">http://osxfuse.github.io/</a> - the links below are for binaries provided as installers.
 </p>
@@ -544,7 +516,6 @@ Edit 11/2014: updated versions for yosemite
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">cd ~/Downloads
 wget http://sourceforge.net/projects/osxfuse/files/osxfuse-2.7.2/osxfuse-2.7.2.dmg
 wget https://github.com/osxfuse/sshfs/releases/download/osxfuse-sshfs-2.5.0/sshfs-2.5.0.pkg
@@ -553,11 +524,10 @@ wget https://github.com/osxfuse/sshfs/releases/download/osxfuse-sshfs-2.5.0/sshf
 </div>
 </div>
 
-<div id="outline-container-sec-12" class="outline-2">
-<h2 id="sec-12">wkhtmltopdf</h2>
-<div class="outline-text-2" id="text-12">
+<div id="outline-container-orge9b1650" class="outline-2">
+<h2 id="orge9b1650">wkhtmltopdf</h2>
+<div class="outline-text-2" id="text-orge9b1650">
 <div class="org-src-container">
-
 <pre class="src src-sh">cd ~/src
 wget 'http://wkhtmltopdf.googlecode.com/files/wkhtmltopdf.dmg'
 open wkhtmltopdf.dmg
@@ -570,7 +540,6 @@ Now create an alias:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">alias wkhtmltopdf='/Applications/wkhtmltopdf.app/Contents/MacOS/wkhtmltopdf'
 </pre>
 </div>
@@ -630,7 +599,7 @@ Now create an alias:
         </div>     </div>     </div> 
 <footer>
 <br />
-<p><a href=".">borborygmi</a> &copy; Noah Hoffman 2016</p>
+<p><a href=".">borborygmi</a> &copy; Noah Hoffman 2017</p>
 </footer>
 
 </div> <!-- /container -->

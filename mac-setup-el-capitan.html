@@ -62,43 +62,43 @@ Mon 02 November 2015 &#8212;
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">First applications</a>
+<li><a href="#org2c1e823">First applications</a>
 <ul>
-<li><a href="#sec-1-1">Developer tools</a></li>
-<li><a href="#sec-1-2">X11</a></li>
-<li><a href="#sec-1-3">iTerm2</a></li>
-<li><a href="#sec-1-4">Others</a></li>
-<li><a href="#sec-1-5">UW only</a></li>
+<li><a href="#org1a18810">Developer tools</a></li>
+<li><a href="#orgd9e0b89">X11</a></li>
+<li><a href="#org8b54df8">iTerm2</a></li>
+<li><a href="#orgf30e7d9">Others</a></li>
+<li><a href="#org16af2e4">UW only</a></li>
 </ul>
 </li>
-<li><a href="#sec-2">system-level configuration</a>
+<li><a href="#org608d67f">system-level configuration</a>
 <ul>
-<li><a href="#sec-2-1">turn off spelling autocorrect</a></li>
-<li><a href="#sec-2-2">turn off spaces key shortcuts</a></li>
+<li><a href="#orgb78443e">turn off spelling autocorrect</a></li>
+<li><a href="#orgd973fab">turn off spaces key shortcuts</a></li>
 </ul>
 </li>
-<li><a href="#sec-3">homebrew</a>
+<li><a href="#org4a2c6dc">homebrew</a>
 <ul>
-<li><a href="#sec-3-1">packages installed using homebrew</a></li>
-<li><a href="#sec-3-2">homebrew cask</a></li>
-<li><a href="#sec-3-3">homebrew API token</a></li>
-<li><a href="#sec-3-4">zsh</a></li>
+<li><a href="#orgb603a5b">packages installed using homebrew</a></li>
+<li><a href="#org6db31e4">homebrew cask</a></li>
+<li><a href="#org714038d">homebrew API token</a></li>
+<li><a href="#org450908e">zsh</a></li>
 </ul>
 </li>
-<li><a href="#sec-4">ssh</a>
+<li><a href="#orgf241ce7">ssh</a>
 <ul>
-<li><a href="#sec-4-1">update /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist</a></li>
-<li><a href="#sec-4-2">create $ZSH_INITDIR/ssh-ask-keychain (called from start_ssh_agent.zsh)</a></li>
-<li><a href="#sec-4-3">create $ZSH_INITDIR/start_ssh_agent.zsh</a></li>
+<li><a href="#org3d9e002">update /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist</a></li>
+<li><a href="#org91d81f3">create $ZSH_INITDIR/ssh-ask-keychain (called from start_ssh_agent.zsh)</a></li>
+<li><a href="#orgc58b8ae">create $ZSH_INITDIR/start_ssh_agent.zsh</a></li>
 </ul>
 </li>
-<li><a href="#sec-5">git</a></li>
-<li><a href="#sec-6">emacs</a></li>
-<li><a href="#sec-7">python</a></li>
-<li><a href="#sec-8">R</a></li>
-<li><a href="#sec-9">mail</a></li>
-<li><a href="#sec-10">sshfs</a></li>
-<li><a href="#sec-11">wkhtmltopdf</a></li>
+<li><a href="#org502e28e">git</a></li>
+<li><a href="#org09543e7">emacs</a></li>
+<li><a href="#org7381a82">python</a></li>
+<li><a href="#org1908a93">R</a></li>
+<li><a href="#org37b4f3d">mail</a></li>
+<li><a href="#orgb80af31">sshfs</a></li>
+<li><a href="#org21c76f6">wkhtmltopdf</a></li>
 </ul>
 </div>
 </div>
@@ -108,33 +108,31 @@ wifi password in the system keychain was the tipping point) that I
 decided to perform a clean install. Here are some notes.
 </p>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">First applications</h2>
-<div class="outline-text-2" id="text-1">
-</div><div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1">Developer tools</h3>
-<div class="outline-text-3" id="text-1-1">
+<div id="outline-container-org2c1e823" class="outline-2">
+<h2 id="org2c1e823">First applications</h2>
+<div class="outline-text-2" id="text-org2c1e823">
+</div><div id="outline-container-org1a18810" class="outline-3">
+<h3 id="org1a18810">Developer tools</h3>
+<div class="outline-text-3" id="text-org1a18810">
 <p>
 Pretty much the first thing any mac needs is the command line tools. This can be done from the command line:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">xcode-select --install
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2">X11</h3>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-orgd9e0b89" class="outline-3">
+<h3 id="orgd9e0b89">X11</h3>
+<div class="outline-text-3" id="text-orgd9e0b89">
 <p>
 Download and install Xquartz:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">cd ~/Downloads
 wget http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.8.dmg
 open XQuartz-2.7.8.dmg
@@ -151,7 +149,6 @@ X11 key bindings so that the option key is used for Meta..
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">cat &gt; ~/.Xmodmap &lt;&lt;EOF
 clear Mod1
 clear Mod2
@@ -165,9 +162,9 @@ EOF
 </div>
 </div>
 
-<div id="outline-container-sec-1-3" class="outline-3">
-<h3 id="sec-1-3">iTerm2</h3>
-<div class="outline-text-3" id="text-1-3">
+<div id="outline-container-org8b54df8" class="outline-3">
+<h3 id="org8b54df8">iTerm2</h3>
+<div class="outline-text-3" id="text-org8b54df8">
 <p>
 Update a few settings.
 </p>
@@ -176,12 +173,9 @@ Update a few settings.
 Preferences &#x2013;&gt; Profiles &#x2013;&gt; Keys and do these things:
 </p>
 <ul class="org-ul">
-<li>select "Left/right option key acts as": +Esc
-</li>
-<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;left arrow&gt;": Send Escape sequence "b"
-</li>
-<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;right arrow&gt;": Send Escape sequence "f"
-</li>
+<li>select "Left/right option key acts as": +Esc</li>
+<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;left arrow&gt;": Send Escape sequence "b"</li>
+<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;right arrow&gt;": Send Escape sequence "f"</li>
 </ul>
 
 <p>
@@ -189,62 +183,52 @@ Default appearance:
 </p>
 
 <ul class="org-ul">
-<li>Preferences &#x2013;&gt; Profiles &#x2013;&gt; Colors &#x2013;&gt; Load Presets &#x2013;&gt; Light Background
-</li>
-<li>Preferences &#x2013;&gt; Profiles &#x2013;&gt; Text &#x2013;&gt; Change Font &#x2013;&gt; 14 point
-</li>
+<li>Preferences &#x2013;&gt; Profiles &#x2013;&gt; Colors &#x2013;&gt; Load Presets &#x2013;&gt; Light Background</li>
+<li>Preferences &#x2013;&gt; Profiles &#x2013;&gt; Text &#x2013;&gt; Change Font &#x2013;&gt; 14 point</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-sec-1-4" class="outline-3">
-<h3 id="sec-1-4">Others</h3>
-<div class="outline-text-3" id="text-1-4">
+<div id="outline-container-orgf30e7d9" class="outline-3">
+<h3 id="orgf30e7d9">Others</h3>
+<div class="outline-text-3" id="text-orgf30e7d9">
 <ul class="org-ul">
-<li>Dropbox
-</li>
-<li>SizeUp - <a href="http://www.irradiatedsoftware.com/">http://www.irradiatedsoftware.com/</a> (license in Dropbox/software_licenses)
-</li>
+<li>Dropbox</li>
+<li>SizeUp - <a href="http://www.irradiatedsoftware.com/">http://www.irradiatedsoftware.com/</a> (license in Dropbox/software_licenses)</li>
 <li>MacTex - download from <a href="http://tug.org/mactex/">http://tug.org/mactex/</a>
-  <a href="http://mirror.ctan.org/systems/mac/mactex/MacTeX.pkg">http://mirror.ctan.org/systems/mac/mactex/MacTeX.pkg</a>
-</li>
-<li>HipChat client
-</li>
-<li>Chrome
-</li>
-<li>Dash 2 (App store)
-</li>
+<a href="http://mirror.ctan.org/systems/mac/mactex/MacTeX.pkg">http://mirror.ctan.org/systems/mac/mactex/MacTeX.pkg</a></li>
+<li>HipChat client</li>
+<li>Chrome</li>
+<li>Dash 2 (App store)</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-sec-1-5" class="outline-3">
-<h3 id="sec-1-5">UW only</h3>
-<div class="outline-text-3" id="text-1-5">
+<div id="outline-container-org16af2e4" class="outline-3">
+<h3 id="org16af2e4">UW only</h3>
+<div class="outline-text-3" id="text-org16af2e4">
 <ul class="org-ul">
-<li>Sophos antivirus: <a href="https://softy.cac.washington.edu/sophos/for-staff/">https://softy.cac.washington.edu/sophos/for-staff/</a>
-</li>
-<li>Junos Pulse (SSL VPN): <a href="https://networks.uwmedicine.org/content/sslvpn-frequently-asked-questions-14">https://networks.uwmedicine.org/content/sslvpn-frequently-asked-questions-14</a>
-</li>
+<li>Sophos antivirus: <a href="https://softy.cac.washington.edu/sophos/for-staff/">https://softy.cac.washington.edu/sophos/for-staff/</a></li>
+<li>Junos Pulse (SSL VPN): <a href="https://networks.uwmedicine.org/content/sslvpn-frequently-asked-questions-14">https://networks.uwmedicine.org/content/sslvpn-frequently-asked-questions-14</a></li>
 </ul>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2">system-level configuration</h2>
-<div class="outline-text-2" id="text-2">
-</div><div id="outline-container-sec-2-1" class="outline-3">
-<h3 id="sec-2-1">turn off spelling autocorrect</h3>
-<div class="outline-text-3" id="text-2-1">
+<div id="outline-container-org608d67f" class="outline-2">
+<h2 id="org608d67f">system-level configuration</h2>
+<div class="outline-text-2" id="text-org608d67f">
+</div><div id="outline-container-orgb78443e" class="outline-3">
+<h3 id="orgb78443e">turn off spelling autocorrect</h3>
+<div class="outline-text-3" id="text-orgb78443e">
 <p>
 System Preferences &#x2013;&gt; Language &amp; Text &#x2013;&gt; Text tab &#x2013;&gt; unselect "Correct spelling automatically"
 </p>
 </div>
 </div>
-<div id="outline-container-sec-2-2" class="outline-3">
-<h3 id="sec-2-2">turn off spaces key shortcuts</h3>
-<div class="outline-text-3" id="text-2-2">
+<div id="outline-container-orgd973fab" class="outline-3">
+<h3 id="orgd973fab">turn off spaces key shortcuts</h3>
+<div class="outline-text-3" id="text-orgd973fab">
 <p>
 System Preferences &#x2013;&gt; Keyboard &#x2013;&gt; Keyboard Shortcuts &#x2013;&gt; unselect C+{&lt;-,-&gt;}
 </p>
@@ -252,15 +236,14 @@ System Preferences &#x2013;&gt; Keyboard &#x2013;&gt; Keyboard Shortcuts &#x2013
 </div>
 </div>
 
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3">homebrew</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-org4a2c6dc" class="outline-2">
+<h2 id="org4a2c6dc">homebrew</h2>
+<div class="outline-text-2" id="text-org4a2c6dc">
 <p>
 Note that El Capitan introduced <a href="https://en.wikipedia.org/wiki/System_Integrity_Protection">System Integrity Protection (SIP)</a>, which may need to be temporarily disabled during homebrew installation. See <a href="https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/El_Capitan_and_Homebrew.md">https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/El_Capitan_and_Homebrew.md</a>
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew doctor
 </pre>
@@ -271,17 +254,15 @@ If it becomes necessary to fix permissions:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">sudo chown -R $(whoami) /usr/local
 </pre>
 </div>
 </div>
 
-<div id="outline-container-sec-3-1" class="outline-3">
-<h3 id="sec-3-1">packages installed using homebrew</h3>
-<div class="outline-text-3" id="text-3-1">
+<div id="outline-container-orgb603a5b" class="outline-3">
+<h3 id="orgb603a5b">packages installed using homebrew</h3>
+<div class="outline-text-3" id="text-orgb603a5b">
 <div class="org-src-container">
-
 <pre class="src src-sh">brew install homebrew/dupes/tcl-tk &amp;&amp; \
 brew install aspell &amp;&amp; \
 brew install autojump &amp;&amp; \
@@ -306,15 +287,14 @@ brew install zsh
 </div>
 </div>
 
-<div id="outline-container-sec-3-2" class="outline-3">
-<h3 id="sec-3-2">homebrew cask</h3>
-<div class="outline-text-3" id="text-3-2">
+<div id="outline-container-org6db31e4" class="outline-3">
+<h3 id="org6db31e4">homebrew cask</h3>
+<div class="outline-text-3" id="text-org6db31e4">
 <p>
 Command line installer for desktop applications. See <a href="https://caskroom.github.io">https://caskroom.github.io</a>
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">brew tap caskroom/cask
 </pre>
 </div>
@@ -324,16 +304,15 @@ Install some applications
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">brew cask install java
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-3-3" class="outline-3">
-<h3 id="sec-3-3">homebrew API token</h3>
-<div class="outline-text-3" id="text-3-3">
+<div id="outline-container-org714038d" class="outline-3">
+<h3 id="org714038d">homebrew API token</h3>
+<div class="outline-text-3" id="text-org714038d">
 <p>
 Apparently lots of requests to GutHub via homebrew can hit a rate limit. There's a higher limit if you create an API token. See <a href="https://gist.github.com/christopheranderton/8644743">https://gist.github.com/christopheranderton/8644743</a>
 </p>
@@ -343,7 +322,7 @@ Here's the url for the token creation dialog:
 </p>
 
 <p>
-<a href="https://github.com/settings/tokens/new?scopes=&amp;description=Homebrew">https://github.com/settings/tokens/new?scopes=&description;=Homebrew</a>
+<a href="https://github.com/settings/tokens/new?scopes=&amp;description=Homebrew">https://github.com/settings/tokens/new?scopes=&amp;description=Homebrew</a>
 </p>
 
 <p>
@@ -356,9 +335,9 @@ export HOMEBREW_GITHUB_API_TOKEN=token_here
 </div>
 </div>
 
-<div id="outline-container-sec-3-4" class="outline-3">
-<h3 id="sec-3-4">zsh</h3>
-<div class="outline-text-3" id="text-3-4">
+<div id="outline-container-org450908e" class="outline-3">
+<h3 id="org450908e">zsh</h3>
+<div class="outline-text-3" id="text-org450908e">
 <p>
 Install zsh with Homebrew above
 </p>
@@ -368,7 +347,6 @@ Change shell to zsh
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">sudo -s
 echo /usr/local/bin/zsh &gt;&gt; /etc/shells
 exit
@@ -381,7 +359,6 @@ zsh init files are in Dropbox/zsh
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">cat &gt; ~/.zshenv &lt;&lt;EOF
 . ~/Dropbox/zsh/zstartup
 EOF
@@ -391,9 +368,9 @@ EOF
 </div>
 </div>
 
-<div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4">ssh</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-orgf241ce7" class="outline-2">
+<h2 id="orgf241ce7">ssh</h2>
+<div class="outline-text-2" id="text-orgf241ce7">
 <p>
 After installing homebrew's openssh on El Capitan, ssh-agent no longer
 seemed to work (in the sense that after using ssh-add to cache a
@@ -408,11 +385,10 @@ plist):
 </p>
 </div>
 
-<div id="outline-container-sec-4-1" class="outline-3">
-<h3 id="sec-4-1">update /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist</h3>
-<div class="outline-text-3" id="text-4-1">
+<div id="outline-container-org3d9e002" class="outline-3">
+<h3 id="org3d9e002">update /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist</h3>
+<div class="outline-text-3" id="text-org3d9e002">
 <div class="org-src-container">
-
 <pre class="src src-sh">sudo /usr/libexec/PlistBuddy /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist&lt;&lt;EOF
 Delete :ProgramArguments
 Add :ProgramArguments array
@@ -455,7 +431,6 @@ Now restart the service
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">launchctl unload /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist
 launchctl load -w /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist
 launchctl start org.openbsd.ssh-agent
@@ -464,11 +439,10 @@ launchctl start org.openbsd.ssh-agent
 </div>
 </div>
 
-<div id="outline-container-sec-4-2" class="outline-3">
-<h3 id="sec-4-2">create $ZSH_INITDIR/ssh-ask-keychain (called from start_ssh_agent.zsh)</h3>
-<div class="outline-text-3" id="text-4-2">
+<div id="outline-container-org91d81f3" class="outline-3">
+<h3 id="org91d81f3">create $ZSH_INITDIR/ssh-ask-keychain (called from start_ssh_agent.zsh)</h3>
+<div class="outline-text-3" id="text-org91d81f3">
 <div class="org-src-container">
-
 <pre class="src src-sh">cat ~/Dropbox/zsh/ssh-ask-keychain
 </pre>
 </div>
@@ -481,15 +455,14 @@ security find-generic-password -l "SSH: ${HOME}/.ssh/id_rsa" -gw
 </div>
 </div>
 
-<div id="outline-container-sec-4-3" class="outline-3">
-<h3 id="sec-4-3">create $ZSH_INITDIR/start_ssh_agent.zsh</h3>
-<div class="outline-text-3" id="text-4-3">
+<div id="outline-container-orgc58b8ae" class="outline-3">
+<h3 id="orgc58b8ae">create $ZSH_INITDIR/start_ssh_agent.zsh</h3>
+<div class="outline-text-3" id="text-orgc58b8ae">
 <p>
 (either as a file sourced from .zshrc, or as a code block in a login script)
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">cat ~/Dropbox/zsh/ssh_environ.zsh
 </pre>
 </div>
@@ -541,9 +514,9 @@ ssh-reset(){
 </div>
 </div>
 
-<div id="outline-container-sec-5" class="outline-2">
-<h2 id="sec-5">git</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-org502e28e" class="outline-2">
+<h2 id="org502e28e">git</h2>
+<div class="outline-text-2" id="text-org502e28e">
 <pre class="example">
 git config --global user.name "My Name"
 git config --global user.email me@email.com
@@ -551,9 +524,9 @@ git config --global user.email me@email.com
 </div>
 </div>
 
-<div id="outline-container-sec-6" class="outline-2">
-<h2 id="sec-6">emacs</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-org09543e7" class="outline-2">
+<h2 id="org09543e7">emacs</h2>
+<div class="outline-text-2" id="text-org09543e7">
 <p>
 Install emacs24 binary from <a href="http://emacsformacosx.com/">http://emacsformacosx.com/</a>
 </p>
@@ -567,7 +540,6 @@ Check out my .emacs.d
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">cd ~
 git clone git@github.com:nhoffman/.emacs.d.git
 git submodule init
@@ -577,9 +549,9 @@ git submodule update
 </div>
 </div>
 
-<div id="outline-container-sec-7" class="outline-2">
-<h2 id="sec-7">python</h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-org7381a82" class="outline-2">
+<h2 id="org7381a82">python</h2>
+<div class="outline-text-2" id="text-org7381a82">
 <p>
 Use homebrew - see
 <a href="https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Homebrew-and-Python.md">https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Homebrew-and-Python.md</a>
@@ -591,7 +563,6 @@ Run <code>brew info python</code> for required and optional dependencies
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">brew install python --with-berkeley-db4 --with-tcl-tk
 brew linkapps python
 pip install -U pip
@@ -605,7 +576,6 @@ Install some python packages using homebrew - these are time consuming to instal
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">brew install homebrew/python/numpy
 </pre>
 </div>
@@ -619,7 +589,6 @@ For elpy:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">pip install -r &lt;(curl https://raw.githubusercontent.com/jorgenschaefer/elpy/master/requirements.txt)
 </pre>
 </div>
@@ -629,7 +598,6 @@ ansible
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">sudo mkdir /usr/share/ansible
 sudo chown -R $(whoami) /usr/share/ansible
 pip install ansible
@@ -641,7 +609,6 @@ Others
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">pip install csvkit
 pip install reportlab
 pip install scons
@@ -651,22 +618,20 @@ pip install jinja2
 </div>
 </div>
 
-<div id="outline-container-sec-8" class="outline-2">
-<h2 id="sec-8">R</h2>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-org1908a93" class="outline-2">
+<h2 id="org1908a93">R</h2>
+<div class="outline-text-2" id="text-org1908a93">
 <p>
 Really doubling down on homebrew this time around:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">brew tap homebrew/science
 brew install r
 </pre>
 </div>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">R --slave &lt;&lt; EOF
 packages &lt;- c("ape", "sqldf", "ROCR", "lattice", "RSQLite", "latticeExtra", "argparse", "data.table")
 install.packages(packages, repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE)
@@ -676,25 +641,24 @@ EOF
 </div>
 </div>
 
-<div id="outline-container-sec-9" class="outline-2">
-<h2 id="sec-9">mail</h2>
-<div class="outline-text-2" id="text-9">
+<div id="outline-container-org37b4f3d" class="outline-2">
+<h2 id="org37b4f3d">mail</h2>
+<div class="outline-text-2" id="text-org37b4f3d">
 <p>
 <a href="http://www.washington.edu/itconnect/connect/email/uw-email/configuring/os-x-mail6/">http://www.washington.edu/itconnect/connect/email/uw-email/configuring/os-x-mail6/</a>
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-10" class="outline-2">
-<h2 id="sec-10">sshfs</h2>
-<div class="outline-text-2" id="text-10">
+<div id="outline-container-orgb80af31" class="outline-2">
+<h2 id="orgb80af31">sshfs</h2>
+<div class="outline-text-2" id="text-orgb80af31">
 <p>
 Provided by the project <a href="http://osxfuse.github.io/">http://osxfuse.github.io/</a> - the links below
 are for binaries provided as installers.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">cd ~/Downloads
 wget http://sourceforge.net/projects/osxfuse/files/osxfuse-2.8.2/osxfuse-2.8.2.dmg
 wget https://github.com/osxfuse/sshfs/releases/download/osxfuse-sshfs-2.5.0/sshfs-2.5.0.pkg
@@ -703,11 +667,10 @@ wget https://github.com/osxfuse/sshfs/releases/download/osxfuse-sshfs-2.5.0/sshf
 </div>
 </div>
 
-<div id="outline-container-sec-11" class="outline-2">
-<h2 id="sec-11">wkhtmltopdf</h2>
-<div class="outline-text-2" id="text-11">
+<div id="outline-container-org21c76f6" class="outline-2">
+<h2 id="org21c76f6">wkhtmltopdf</h2>
+<div class="outline-text-2" id="text-org21c76f6">
 <div class="org-src-container">
-
 <pre class="src src-sh">cd ~/Downloads
 wget 'http://wkhtmltopdf.googlecode.com/files/wkhtmltopdf.dmg'
 open wkhtmltopdf.dmg
@@ -720,7 +683,6 @@ Now create an alias:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">alias wkhtmltopdf='/Applications/wkhtmltopdf.app/Contents/MacOS/wkhtmltopdf'
 </pre>
 </div>
@@ -780,7 +742,7 @@ Now create an alias:
         </div>     </div>     </div> 
 <footer>
 <br />
-<p><a href=".">borborygmi</a> &copy; Noah Hoffman 2016</p>
+<p><a href=".">borborygmi</a> &copy; Noah Hoffman 2017</p>
 </footer>
 
 </div> <!-- /container -->
