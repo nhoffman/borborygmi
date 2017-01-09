@@ -3,39 +3,43 @@
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org353539a"&gt;system settings&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org2213a29"&gt;system settings&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgb011310"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgf7c3200"&gt;unmap Control + left,right&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org1e956f8"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgd19eb4f"&gt;unmap Control + left,right&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgcd0aeaf"&gt;First applications&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org8241ad6"&gt;First applications&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org9fff0df"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgdfd59d7"&gt;Dropbox&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgede50b7"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org60a9f4e"&gt;Junos pulse VPN client&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgd4de0fe"&gt;Microsoft Office 2016&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org257f360"&gt;Others&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org32cbf80"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org46cda0d"&gt;Dropbox&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orga73de04"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org12a5c74"&gt;Junos pulse VPN client&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org34f384e"&gt;Microsoft Office 2016&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orged2929b"&gt;Others&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#org6091ec7"&gt;homebrew&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org849a053"&gt;homebrew&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgbdf6bb2"&gt;X11&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgeab8c1b"&gt;Desktop apps using Cask&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgeedd4fd"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orge7ecdb6"&gt;zsh&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org345b6e4"&gt;X11&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgffd757c"&gt;Desktop apps using Cask&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgdd66ca7"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org1492522"&gt;zsh&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#org90302f8"&gt;git&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org3e670d1"&gt;python&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgacd34f1"&gt;emacs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgc2ffd4e"&gt;R&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org4ce557e"&gt;wkhtmltopdf&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgba4257b"&gt;mail&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org7f6012d"&gt;git&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgc75564a"&gt;python&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org3078505"&gt;emacs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org04a8544"&gt;R&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orga22e6c7"&gt;wkhtmltopdf&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgff8f2c8"&gt;mail&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;&lt;i&gt;Edit 2017-01-09: provide upgrade path to Pulse Secure client v5.1&lt;/i&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;p&gt;
 This post describes the steps that I followed to set up a new mac
 running MacOS Sierra (10.12.2), in as close to the order in which I
@@ -69,20 +73,20 @@ usually I sign in first thing, but this time I held off.
 tar -cf dotfiles.tar .Xmodmap .gitconfig .gnupg .pypirc .ssh
 &lt;/pre&gt;
 
-&lt;div id="outline-container-org353539a" class="outline-2"&gt;
-&lt;h2 id="org353539a"&gt;system settings&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org353539a"&gt;
-&lt;/div&gt;&lt;div id="outline-container-orgb011310" class="outline-3"&gt;
-&lt;h3 id="orgb011310"&gt;turn off spelling autocorrect&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgb011310"&gt;
+&lt;div id="outline-container-org2213a29" class="outline-2"&gt;
+&lt;h2 id="org2213a29"&gt;system settings&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org2213a29"&gt;
+&lt;/div&gt;&lt;div id="outline-container-org1e956f8" class="outline-3"&gt;
+&lt;h3 id="org1e956f8"&gt;turn off spelling autocorrect&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org1e956f8"&gt;
 &lt;pre class="example"&gt;
 System Preferences --&amp;gt; Keyboard --&amp;gt; Text tab --&amp;gt; unselect "Correct spelling automatically" and others
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgf7c3200" class="outline-3"&gt;
-&lt;h3 id="orgf7c3200"&gt;unmap Control + left,right&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgf7c3200"&gt;
+&lt;div id="outline-container-orgd19eb4f" class="outline-3"&gt;
+&lt;h3 id="orgd19eb4f"&gt;unmap Control + left,right&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgd19eb4f"&gt;
 &lt;p&gt;
 I use Control plus the left and right arrow keys to move between
 windows in emacs and tmux.
@@ -95,12 +99,12 @@ System Preferences --&amp;gt; Keyboard --&amp;gt; Shortcuts --&amp;gt; uncheck m
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgcd0aeaf" class="outline-2"&gt;
-&lt;h2 id="orgcd0aeaf"&gt;First applications&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgcd0aeaf"&gt;
-&lt;/div&gt;&lt;div id="outline-container-org9fff0df" class="outline-3"&gt;
-&lt;h3 id="org9fff0df"&gt;iTerm2&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org9fff0df"&gt;
+&lt;div id="outline-container-org8241ad6" class="outline-2"&gt;
+&lt;h2 id="org8241ad6"&gt;First applications&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org8241ad6"&gt;
+&lt;/div&gt;&lt;div id="outline-container-org32cbf80" class="outline-3"&gt;
+&lt;h3 id="org32cbf80"&gt;iTerm2&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org32cbf80"&gt;
 &lt;p&gt;
 Update a few settings.
 &lt;/p&gt;
@@ -125,18 +129,18 @@ Default appearance:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgdfd59d7" class="outline-3"&gt;
-&lt;h3 id="orgdfd59d7"&gt;Dropbox&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgdfd59d7"&gt;
+&lt;div id="outline-container-org46cda0d" class="outline-3"&gt;
+&lt;h3 id="org46cda0d"&gt;Dropbox&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org46cda0d"&gt;
 &lt;p&gt;
 Install from website
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgede50b7" class="outline-3"&gt;
-&lt;h3 id="orgede50b7"&gt;Developer tools&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgede50b7"&gt;
+&lt;div id="outline-container-orga73de04" class="outline-3"&gt;
+&lt;h3 id="orga73de04"&gt;Developer tools&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orga73de04"&gt;
 &lt;p&gt;
 This can be done from the command line:
 &lt;/p&gt;
@@ -148,15 +152,20 @@ This can be done from the command line:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org60a9f4e" class="outline-3"&gt;
-&lt;h3 id="org60a9f4e"&gt;Junos pulse VPN client&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org60a9f4e"&gt;
+&lt;div id="outline-container-org12a5c74" class="outline-3"&gt;
+&lt;h3 id="org12a5c74"&gt;Junos pulse VPN client&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org12a5c74"&gt;
 &lt;p&gt;
-Version 5.1 appears to be broken in Sierra:
-&lt;a href="https://forums.developer.apple.com/thread/51184"&gt;https://forums.developer.apple.com/thread/51184&lt;/a&gt; - this thread leads to
-a link to version 5.0, which does work:
-&lt;a href="https://www.net.usf.edu/vpn/MacOS/JunosPulse.dmg"&gt;https://www.net.usf.edu/vpn/MacOS/JunosPulse.dmg&lt;/a&gt; (we're trusting the
-University of South Florida, here).
+There are some &lt;a href="https://forums.developer.apple.com/thread/51184"&gt;reports&lt;/a&gt; of version 5.1 being broken in Sierra. At the
+time I'm writing this, my institution provides 5.1.9 (61653), which is
+indeed broken. The internet helpfully provides a link to an older
+version (we're trusting the University of South Florida, here):
+&lt;a href="https://www.net.usf.edu/vpn/MacOS/JunosPulse.dmg"&gt;https://www.net.usf.edu/vpn/MacOS/JunosPulse.dmg&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+Installing this, and then running the updater provides 5.1.10 (61733),
+which seems to work.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -165,9 +174,9 @@ Instructions for UW are here: &lt;a href="https://networks.uwmedicine.org/conten
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgd4de0fe" class="outline-3"&gt;
-&lt;h3 id="orgd4de0fe"&gt;Microsoft Office 2016&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgd4de0fe"&gt;
+&lt;div id="outline-container-org34f384e" class="outline-3"&gt;
+&lt;h3 id="org34f384e"&gt;Microsoft Office 2016&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org34f384e"&gt;
 &lt;p&gt;
 The initial version of Excel (15.11) crashed on startup as widely
 reported - this was fixed by updating to a version (15.29) provided by
@@ -180,9 +189,9 @@ Microsoft:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org257f360" class="outline-3"&gt;
-&lt;h3 id="org257f360"&gt;Others&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org257f360"&gt;
+&lt;div id="outline-container-orged2929b" class="outline-3"&gt;
+&lt;h3 id="orged2929b"&gt;Others&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orged2929b"&gt;
 &lt;ul class="org-ul"&gt;
 &lt;li class="on"&gt;&lt;code&gt;[X]&lt;/code&gt; SizeUp - &lt;a href="http://www.irradiatedsoftware.com/"&gt;http://www.irradiatedsoftware.com/&lt;/a&gt; (license in Dropbox/software_licenses)&lt;/li&gt;
 &lt;li class="on"&gt;&lt;code&gt;[X]&lt;/code&gt; HipChat client&lt;/li&gt;
@@ -194,9 +203,9 @@ Microsoft:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org6091ec7" class="outline-2"&gt;
-&lt;h2 id="org6091ec7"&gt;homebrew&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org6091ec7"&gt;
+&lt;div id="outline-container-org849a053" class="outline-2"&gt;
+&lt;h2 id="org849a053"&gt;homebrew&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org849a053"&gt;
 &lt;p&gt;
 Homebrew no longer requires user-ownership of /usr/local, so things are pretty easy now:
 &lt;/p&gt;
@@ -239,9 +248,9 @@ Note other packages installed in other sections as well.
 &lt;/p&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgbdf6bb2" class="outline-3"&gt;
-&lt;h3 id="orgbdf6bb2"&gt;X11&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgbdf6bb2"&gt;
+&lt;div id="outline-container-org345b6e4" class="outline-3"&gt;
+&lt;h3 id="org345b6e4"&gt;X11&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org345b6e4"&gt;
 &lt;p&gt;
 install Xquartz
 &lt;/p&gt;
@@ -269,9 +278,9 @@ EOF
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgeab8c1b" class="outline-3"&gt;
-&lt;h3 id="orgeab8c1b"&gt;Desktop apps using Cask&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgeab8c1b"&gt;
+&lt;div id="outline-container-orgffd757c" class="outline-3"&gt;
+&lt;h3 id="orgffd757c"&gt;Desktop apps using Cask&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgffd757c"&gt;
 &lt;p&gt;
 Homebrew installs desktop apps too!
 &lt;/p&gt;
@@ -286,9 +295,9 @@ brew cask install texmaker
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgeedd4fd" class="outline-3"&gt;
-&lt;h3 id="orgeedd4fd"&gt;homebrew API token&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgeedd4fd"&gt;
+&lt;div id="outline-container-orgdd66ca7" class="outline-3"&gt;
+&lt;h3 id="orgdd66ca7"&gt;homebrew API token&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgdd66ca7"&gt;
 &lt;p&gt;
 Apparently lots of requests to GutHub via homebrew can hit a rate limit. There's a higher limit if you create an API token. See &lt;a href="https://gist.github.com/christopheranderton/8644743"&gt;https://gist.github.com/christopheranderton/8644743&lt;/a&gt;
 &lt;/p&gt;
@@ -311,9 +320,9 @@ export HOMEBREW_GITHUB_API_TOKEN=token_here
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orge7ecdb6" class="outline-3"&gt;
-&lt;h3 id="orge7ecdb6"&gt;zsh&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orge7ecdb6"&gt;
+&lt;div id="outline-container-org1492522" class="outline-3"&gt;
+&lt;h3 id="org1492522"&gt;zsh&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org1492522"&gt;
 &lt;p&gt;
 Install zsh with Homebrew
 &lt;/p&gt;
@@ -352,9 +361,9 @@ done
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org90302f8" class="outline-2"&gt;
-&lt;h2 id="org90302f8"&gt;git&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org90302f8"&gt;
+&lt;div id="outline-container-org7f6012d" class="outline-2"&gt;
+&lt;h2 id="org7f6012d"&gt;git&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org7f6012d"&gt;
 &lt;pre class="example"&gt;
 git config --global user.name "My Name"
 git config --global user.email me@email.com
@@ -362,9 +371,9 @@ git config --global user.email me@email.com
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org3e670d1" class="outline-2"&gt;
-&lt;h2 id="org3e670d1"&gt;python&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org3e670d1"&gt;
+&lt;div id="outline-container-orgc75564a" class="outline-2"&gt;
+&lt;h2 id="orgc75564a"&gt;python&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgc75564a"&gt;
 &lt;p&gt;
 Use homebrew - see
 &lt;a href="https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Homebrew-and-Python.md"&gt;https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Homebrew-and-Python.md&lt;/a&gt;
@@ -408,9 +417,9 @@ pip install jinja2
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgacd34f1" class="outline-2"&gt;
-&lt;h2 id="orgacd34f1"&gt;emacs&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgacd34f1"&gt;
+&lt;div id="outline-container-org3078505" class="outline-2"&gt;
+&lt;h2 id="org3078505"&gt;emacs&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org3078505"&gt;
 &lt;p&gt;
 Install latest emacs binary (25.1) from &lt;a href="http://emacsformacosx.com/"&gt;http://emacsformacosx.com/&lt;/a&gt;
 &lt;/p&gt;
@@ -451,9 +460,9 @@ For elpy:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgc2ffd4e" class="outline-2"&gt;
-&lt;h2 id="orgc2ffd4e"&gt;R&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgc2ffd4e"&gt;
+&lt;div id="outline-container-org04a8544" class="outline-2"&gt;
+&lt;h2 id="org04a8544"&gt;R&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org04a8544"&gt;
 &lt;p&gt;
 Again, using homebrew.
 &lt;/p&gt;
@@ -474,9 +483,9 @@ EOF
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org4ce557e" class="outline-2"&gt;
-&lt;h2 id="org4ce557e"&gt;wkhtmltopdf&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org4ce557e"&gt;
+&lt;div id="outline-container-orga22e6c7" class="outline-2"&gt;
+&lt;h2 id="orga22e6c7"&gt;wkhtmltopdf&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orga22e6c7"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-sh"&gt;cd ~/Downloads
 wget 'http://download.gna.org/wkhtmltopdf/0.12/0.12.4/wkhtmltox-0.12.4_osx-cocoa-x86-64.pkg'
@@ -489,9 +498,9 @@ Use installer - binary is &lt;code&gt;/usr/local/bin/wkhtmltopdf&lt;/code&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgba4257b" class="outline-2"&gt;
-&lt;h2 id="orgba4257b"&gt;mail&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgba4257b"&gt;
+&lt;div id="outline-container-orgff8f2c8" class="outline-2"&gt;
+&lt;h2 id="orgff8f2c8"&gt;mail&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgff8f2c8"&gt;
 &lt;p&gt;
 &lt;a href="http://www.washington.edu/itconnect/connect/email/uw-email/configuring/os-x-mail6/"&gt;http://www.washington.edu/itconnect/connect/email/uw-email/configuring/os-x-mail6/&lt;/a&gt;
 &lt;/p&gt;

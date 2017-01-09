@@ -68,39 +68,43 @@ Thu 05 January 2017 &#8212;
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org353539a">system settings</a>
+<li><a href="#org2213a29">system settings</a>
 <ul>
-<li><a href="#orgb011310">turn off spelling autocorrect</a></li>
-<li><a href="#orgf7c3200">unmap Control + left,right</a></li>
+<li><a href="#org1e956f8">turn off spelling autocorrect</a></li>
+<li><a href="#orgd19eb4f">unmap Control + left,right</a></li>
 </ul>
 </li>
-<li><a href="#orgcd0aeaf">First applications</a>
+<li><a href="#org8241ad6">First applications</a>
 <ul>
-<li><a href="#org9fff0df">iTerm2</a></li>
-<li><a href="#orgdfd59d7">Dropbox</a></li>
-<li><a href="#orgede50b7">Developer tools</a></li>
-<li><a href="#org60a9f4e">Junos pulse VPN client</a></li>
-<li><a href="#orgd4de0fe">Microsoft Office 2016</a></li>
-<li><a href="#org257f360">Others</a></li>
+<li><a href="#org32cbf80">iTerm2</a></li>
+<li><a href="#org46cda0d">Dropbox</a></li>
+<li><a href="#orga73de04">Developer tools</a></li>
+<li><a href="#org12a5c74">Junos pulse VPN client</a></li>
+<li><a href="#org34f384e">Microsoft Office 2016</a></li>
+<li><a href="#orged2929b">Others</a></li>
 </ul>
 </li>
-<li><a href="#org6091ec7">homebrew</a>
+<li><a href="#org849a053">homebrew</a>
 <ul>
-<li><a href="#orgbdf6bb2">X11</a></li>
-<li><a href="#orgeab8c1b">Desktop apps using Cask</a></li>
-<li><a href="#orgeedd4fd">homebrew API token</a></li>
-<li><a href="#orge7ecdb6">zsh</a></li>
+<li><a href="#org345b6e4">X11</a></li>
+<li><a href="#orgffd757c">Desktop apps using Cask</a></li>
+<li><a href="#orgdd66ca7">homebrew API token</a></li>
+<li><a href="#org1492522">zsh</a></li>
 </ul>
 </li>
-<li><a href="#org90302f8">git</a></li>
-<li><a href="#org3e670d1">python</a></li>
-<li><a href="#orgacd34f1">emacs</a></li>
-<li><a href="#orgc2ffd4e">R</a></li>
-<li><a href="#org4ce557e">wkhtmltopdf</a></li>
-<li><a href="#orgba4257b">mail</a></li>
+<li><a href="#org7f6012d">git</a></li>
+<li><a href="#orgc75564a">python</a></li>
+<li><a href="#org3078505">emacs</a></li>
+<li><a href="#org04a8544">R</a></li>
+<li><a href="#orga22e6c7">wkhtmltopdf</a></li>
+<li><a href="#orgff8f2c8">mail</a></li>
 </ul>
 </div>
 </div>
+<ul class="org-ul">
+<li><i>Edit 2017-01-09: provide upgrade path to Pulse Secure client v5.1</i></li>
+</ul>
+
 <p>
 This post describes the steps that I followed to set up a new mac
 running MacOS Sierra (10.12.2), in as close to the order in which I
@@ -134,20 +138,20 @@ usually I sign in first thing, but this time I held off.
 tar -cf dotfiles.tar .Xmodmap .gitconfig .gnupg .pypirc .ssh
 </pre>
 
-<div id="outline-container-org353539a" class="outline-2">
-<h2 id="org353539a">system settings</h2>
-<div class="outline-text-2" id="text-org353539a">
-</div><div id="outline-container-orgb011310" class="outline-3">
-<h3 id="orgb011310">turn off spelling autocorrect</h3>
-<div class="outline-text-3" id="text-orgb011310">
+<div id="outline-container-org2213a29" class="outline-2">
+<h2 id="org2213a29">system settings</h2>
+<div class="outline-text-2" id="text-org2213a29">
+</div><div id="outline-container-org1e956f8" class="outline-3">
+<h3 id="org1e956f8">turn off spelling autocorrect</h3>
+<div class="outline-text-3" id="text-org1e956f8">
 <pre class="example">
 System Preferences --&gt; Keyboard --&gt; Text tab --&gt; unselect "Correct spelling automatically" and others
 </pre>
 </div>
 </div>
-<div id="outline-container-orgf7c3200" class="outline-3">
-<h3 id="orgf7c3200">unmap Control + left,right</h3>
-<div class="outline-text-3" id="text-orgf7c3200">
+<div id="outline-container-orgd19eb4f" class="outline-3">
+<h3 id="orgd19eb4f">unmap Control + left,right</h3>
+<div class="outline-text-3" id="text-orgd19eb4f">
 <p>
 I use Control plus the left and right arrow keys to move between
 windows in emacs and tmux.
@@ -160,12 +164,12 @@ System Preferences --&gt; Keyboard --&gt; Shortcuts --&gt; uncheck mission contr
 </div>
 </div>
 
-<div id="outline-container-orgcd0aeaf" class="outline-2">
-<h2 id="orgcd0aeaf">First applications</h2>
-<div class="outline-text-2" id="text-orgcd0aeaf">
-</div><div id="outline-container-org9fff0df" class="outline-3">
-<h3 id="org9fff0df">iTerm2</h3>
-<div class="outline-text-3" id="text-org9fff0df">
+<div id="outline-container-org8241ad6" class="outline-2">
+<h2 id="org8241ad6">First applications</h2>
+<div class="outline-text-2" id="text-org8241ad6">
+</div><div id="outline-container-org32cbf80" class="outline-3">
+<h3 id="org32cbf80">iTerm2</h3>
+<div class="outline-text-3" id="text-org32cbf80">
 <p>
 Update a few settings.
 </p>
@@ -190,18 +194,18 @@ Default appearance:
 </div>
 </div>
 
-<div id="outline-container-orgdfd59d7" class="outline-3">
-<h3 id="orgdfd59d7">Dropbox</h3>
-<div class="outline-text-3" id="text-orgdfd59d7">
+<div id="outline-container-org46cda0d" class="outline-3">
+<h3 id="org46cda0d">Dropbox</h3>
+<div class="outline-text-3" id="text-org46cda0d">
 <p>
 Install from website
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgede50b7" class="outline-3">
-<h3 id="orgede50b7">Developer tools</h3>
-<div class="outline-text-3" id="text-orgede50b7">
+<div id="outline-container-orga73de04" class="outline-3">
+<h3 id="orga73de04">Developer tools</h3>
+<div class="outline-text-3" id="text-orga73de04">
 <p>
 This can be done from the command line:
 </p>
@@ -213,15 +217,20 @@ This can be done from the command line:
 </div>
 </div>
 
-<div id="outline-container-org60a9f4e" class="outline-3">
-<h3 id="org60a9f4e">Junos pulse VPN client</h3>
-<div class="outline-text-3" id="text-org60a9f4e">
+<div id="outline-container-org12a5c74" class="outline-3">
+<h3 id="org12a5c74">Junos pulse VPN client</h3>
+<div class="outline-text-3" id="text-org12a5c74">
 <p>
-Version 5.1 appears to be broken in Sierra:
-<a href="https://forums.developer.apple.com/thread/51184">https://forums.developer.apple.com/thread/51184</a> - this thread leads to
-a link to version 5.0, which does work:
-<a href="https://www.net.usf.edu/vpn/MacOS/JunosPulse.dmg">https://www.net.usf.edu/vpn/MacOS/JunosPulse.dmg</a> (we're trusting the
-University of South Florida, here).
+There are some <a href="https://forums.developer.apple.com/thread/51184">reports</a> of version 5.1 being broken in Sierra. At the
+time I'm writing this, my institution provides 5.1.9 (61653), which is
+indeed broken. The internet helpfully provides a link to an older
+version (we're trusting the University of South Florida, here):
+<a href="https://www.net.usf.edu/vpn/MacOS/JunosPulse.dmg">https://www.net.usf.edu/vpn/MacOS/JunosPulse.dmg</a>
+</p>
+
+<p>
+Installing this, and then running the updater provides 5.1.10 (61733),
+which seems to work.
 </p>
 
 <p>
@@ -230,9 +239,9 @@ Instructions for UW are here: <a href="https://networks.uwmedicine.org/content/s
 </div>
 </div>
 
-<div id="outline-container-orgd4de0fe" class="outline-3">
-<h3 id="orgd4de0fe">Microsoft Office 2016</h3>
-<div class="outline-text-3" id="text-orgd4de0fe">
+<div id="outline-container-org34f384e" class="outline-3">
+<h3 id="org34f384e">Microsoft Office 2016</h3>
+<div class="outline-text-3" id="text-org34f384e">
 <p>
 The initial version of Excel (15.11) crashed on startup as widely
 reported - this was fixed by updating to a version (15.29) provided by
@@ -245,9 +254,9 @@ Microsoft:
 </div>
 </div>
 
-<div id="outline-container-org257f360" class="outline-3">
-<h3 id="org257f360">Others</h3>
-<div class="outline-text-3" id="text-org257f360">
+<div id="outline-container-orged2929b" class="outline-3">
+<h3 id="orged2929b">Others</h3>
+<div class="outline-text-3" id="text-orged2929b">
 <ul class="org-ul">
 <li class="on"><code>[X]</code> SizeUp - <a href="http://www.irradiatedsoftware.com/">http://www.irradiatedsoftware.com/</a> (license in Dropbox/software_licenses)</li>
 <li class="on"><code>[X]</code> HipChat client</li>
@@ -259,9 +268,9 @@ Microsoft:
 </div>
 </div>
 
-<div id="outline-container-org6091ec7" class="outline-2">
-<h2 id="org6091ec7">homebrew</h2>
-<div class="outline-text-2" id="text-org6091ec7">
+<div id="outline-container-org849a053" class="outline-2">
+<h2 id="org849a053">homebrew</h2>
+<div class="outline-text-2" id="text-org849a053">
 <p>
 Homebrew no longer requires user-ownership of /usr/local, so things are pretty easy now:
 </p>
@@ -304,9 +313,9 @@ Note other packages installed in other sections as well.
 </p>
 </div>
 
-<div id="outline-container-orgbdf6bb2" class="outline-3">
-<h3 id="orgbdf6bb2">X11</h3>
-<div class="outline-text-3" id="text-orgbdf6bb2">
+<div id="outline-container-org345b6e4" class="outline-3">
+<h3 id="org345b6e4">X11</h3>
+<div class="outline-text-3" id="text-org345b6e4">
 <p>
 install Xquartz
 </p>
@@ -334,9 +343,9 @@ EOF
 </div>
 </div>
 
-<div id="outline-container-orgeab8c1b" class="outline-3">
-<h3 id="orgeab8c1b">Desktop apps using Cask</h3>
-<div class="outline-text-3" id="text-orgeab8c1b">
+<div id="outline-container-orgffd757c" class="outline-3">
+<h3 id="orgffd757c">Desktop apps using Cask</h3>
+<div class="outline-text-3" id="text-orgffd757c">
 <p>
 Homebrew installs desktop apps too!
 </p>
@@ -351,9 +360,9 @@ brew cask install texmaker
 </div>
 </div>
 
-<div id="outline-container-orgeedd4fd" class="outline-3">
-<h3 id="orgeedd4fd">homebrew API token</h3>
-<div class="outline-text-3" id="text-orgeedd4fd">
+<div id="outline-container-orgdd66ca7" class="outline-3">
+<h3 id="orgdd66ca7">homebrew API token</h3>
+<div class="outline-text-3" id="text-orgdd66ca7">
 <p>
 Apparently lots of requests to GutHub via homebrew can hit a rate limit. There's a higher limit if you create an API token. See <a href="https://gist.github.com/christopheranderton/8644743">https://gist.github.com/christopheranderton/8644743</a>
 </p>
@@ -376,9 +385,9 @@ export HOMEBREW_GITHUB_API_TOKEN=token_here
 </div>
 </div>
 
-<div id="outline-container-orge7ecdb6" class="outline-3">
-<h3 id="orge7ecdb6">zsh</h3>
-<div class="outline-text-3" id="text-orge7ecdb6">
+<div id="outline-container-org1492522" class="outline-3">
+<h3 id="org1492522">zsh</h3>
+<div class="outline-text-3" id="text-org1492522">
 <p>
 Install zsh with Homebrew
 </p>
@@ -417,9 +426,9 @@ done
 </div>
 </div>
 
-<div id="outline-container-org90302f8" class="outline-2">
-<h2 id="org90302f8">git</h2>
-<div class="outline-text-2" id="text-org90302f8">
+<div id="outline-container-org7f6012d" class="outline-2">
+<h2 id="org7f6012d">git</h2>
+<div class="outline-text-2" id="text-org7f6012d">
 <pre class="example">
 git config --global user.name "My Name"
 git config --global user.email me@email.com
@@ -427,9 +436,9 @@ git config --global user.email me@email.com
 </div>
 </div>
 
-<div id="outline-container-org3e670d1" class="outline-2">
-<h2 id="org3e670d1">python</h2>
-<div class="outline-text-2" id="text-org3e670d1">
+<div id="outline-container-orgc75564a" class="outline-2">
+<h2 id="orgc75564a">python</h2>
+<div class="outline-text-2" id="text-orgc75564a">
 <p>
 Use homebrew - see
 <a href="https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Homebrew-and-Python.md">https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Homebrew-and-Python.md</a>
@@ -473,9 +482,9 @@ pip install jinja2
 </div>
 </div>
 
-<div id="outline-container-orgacd34f1" class="outline-2">
-<h2 id="orgacd34f1">emacs</h2>
-<div class="outline-text-2" id="text-orgacd34f1">
+<div id="outline-container-org3078505" class="outline-2">
+<h2 id="org3078505">emacs</h2>
+<div class="outline-text-2" id="text-org3078505">
 <p>
 Install latest emacs binary (25.1) from <a href="http://emacsformacosx.com/">http://emacsformacosx.com/</a>
 </p>
@@ -516,9 +525,9 @@ For elpy:
 </div>
 </div>
 
-<div id="outline-container-orgc2ffd4e" class="outline-2">
-<h2 id="orgc2ffd4e">R</h2>
-<div class="outline-text-2" id="text-orgc2ffd4e">
+<div id="outline-container-org04a8544" class="outline-2">
+<h2 id="org04a8544">R</h2>
+<div class="outline-text-2" id="text-org04a8544">
 <p>
 Again, using homebrew.
 </p>
@@ -539,9 +548,9 @@ EOF
 </div>
 </div>
 
-<div id="outline-container-org4ce557e" class="outline-2">
-<h2 id="org4ce557e">wkhtmltopdf</h2>
-<div class="outline-text-2" id="text-org4ce557e">
+<div id="outline-container-orga22e6c7" class="outline-2">
+<h2 id="orga22e6c7">wkhtmltopdf</h2>
+<div class="outline-text-2" id="text-orga22e6c7">
 <div class="org-src-container">
 <pre class="src src-sh">cd ~/Downloads
 wget 'http://download.gna.org/wkhtmltopdf/0.12/0.12.4/wkhtmltox-0.12.4_osx-cocoa-x86-64.pkg'
@@ -554,9 +563,9 @@ Use installer - binary is <code>/usr/local/bin/wkhtmltopdf</code>
 </div>
 </div>
 
-<div id="outline-container-orgba4257b" class="outline-2">
-<h2 id="orgba4257b">mail</h2>
-<div class="outline-text-2" id="text-orgba4257b">
+<div id="outline-container-orgff8f2c8" class="outline-2">
+<h2 id="orgff8f2c8">mail</h2>
+<div class="outline-text-2" id="text-orgff8f2c8">
 <p>
 <a href="http://www.washington.edu/itconnect/connect/email/uw-email/configuring/os-x-mail6/">http://www.washington.edu/itconnect/connect/email/uw-email/configuring/os-x-mail6/</a>
 </p>
