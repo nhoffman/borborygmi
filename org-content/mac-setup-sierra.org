@@ -5,6 +5,8 @@
 #+PROPERTY: header-args :eval no
 #+OPTIONS: ^:nil
 
+- /Edit 2017-01-09: provide upgrade path to Pulse Secure client v5.1/
+
 This post describes the steps that I followed to set up a new mac
 running MacOS Sierra (10.12.2), in as close to the order in which I
 did things as I could reproduce. The primary purpose is to document
@@ -68,11 +70,14 @@ xcode-select --install
 
 ** Junos pulse VPN client
 
-Version 5.1 appears to be broken in Sierra:
-https://forums.developer.apple.com/thread/51184 - this thread leads to
-a link to version 5.0, which does work:
-https://www.net.usf.edu/vpn/MacOS/JunosPulse.dmg (we're trusting the
-University of South Florida, here).
+There are some [[https://forums.developer.apple.com/thread/51184][reports]] of version 5.1 being broken in Sierra. At the
+time I'm writing this, my institution provides 5.1.9 (61653), which is
+indeed broken. The internet helpfully provides a link to an older
+version (we're trusting the University of South Florida, here):
+https://www.net.usf.edu/vpn/MacOS/JunosPulse.dmg
+
+Installing this, and then running the updater provides 5.1.10 (61733),
+which seems to work.
 
 Instructions for UW are here: https://networks.uwmedicine.org/content/sslvpn-frequently-asked-questions-14
 
