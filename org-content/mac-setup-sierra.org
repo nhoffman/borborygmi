@@ -225,7 +225,7 @@ pip install -U virtualenv
 Install some python packages using homebrew - these are time consuming to install otherwise.
 
 #+BEGIN_SRC sh
-brew install homebrew/python/numpy
+brew install numpy
 #+END_SRC
 
 And a few packages that I usually like to have around.
@@ -236,6 +236,12 @@ pip install csvkit
 pip install reportlab
 pip install scons
 pip install jinja2
+#+END_SRC
+
+Also install python3
+
+#+BEGIN_SRC sh
+brew install python3 --with-tcl-tk
 #+END_SRC
 
 * emacs
