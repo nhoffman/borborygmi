@@ -230,6 +230,15 @@ brew install numpy
 
 And a few packages that I usually like to have around.
 
+Note that =scons= wants to install man pages to =/usr/local/man=, which is owned by root. You'll need to do this first:
+
+#+BEGIN_SRC sh
+sudo mkdir -p /usr/local/man
+sudo sudo chown $(whoami) /usr/local/man
+#+END_SRC
+
+Now install the actual packages:
+
 #+BEGIN_SRC sh
 pip install ansible
 pip install csvkit
