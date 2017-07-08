@@ -1,0 +1,303 @@
+#+TITLE: Using recursive CTEs for calculating taxonomic lineages
+#+DATE: 2017-07-07
+#+CATEGORY: sql
+#+PROPERTY: TAGS postgresql,taxonomy
+#+PROPERTY: header-args:sql :engine postgresql :database ncbi_taxonomy :header on :results value :eval no
+
+This topic falls into the category of "things that I didn't know that
+I didn't know." Many of my projects involve the manipulation of
+taxonomies, particularly the [[https://www.ncbi.nlm.nih.gov/taxonomy][NCBI taxonomy]], but I didn't understand
+the efficiency with which it was possible to calculate a lineage in
+SQL. I recently revisited the issue, and here's what I learned.
+
+The NCBI taxonomy is provided as a collection of tables that can be
+downloaded in its entirety [[ftp://ftp.ncbi.nih.gov/pub/taxonomy][by FTP]]. There are two tables in the
+taxonomy database that we care about for the purposes of this
+post. The first is =nodes=. The table from the NCBI taxonomy contains
+some additional fields that aren't important in this context, but at
+it's core, it looks something like this:
+
+#+BEGIN_SRC sql :eval no
+create table nodes (
+       tax_id integer,
+       parent integer,
+       rank text
+);
+#+END_SRC
+
+The second table that we will use later is called =names=, with a
+schema that (in its simplified form) looks like this:
+
+#+BEGIN_SRC sql :eval no
+create table names (
+       tax_id integer,
+       tax_name text,
+       is_primary boolean
+);
+#+END_SRC
+
+Multiple synonyms are allowed for each =tax_id=; the column
+=names.is_primary= indicates which is the definitive name for the
+organism (this isn't present in the table downloaded from NCBI but is
+derived from other attributes).
+
+The taxonomic hierarchy is defined in =nodes= using an [[https://en.wikipedia.org/wiki/Adjacency_list][adjacency list]]
+model. It turns out that relational databases supporting recursive
+queries can easily traverse the graph defined by the model for a given
+node. This is well-described [[http://gbif.blogspot.com/2012/06/taxonomic-trees-in-postgresql.html][elsewhere]] (the linked post compares the
+adjacency model with other representations of trees in sql).
+
+The query that we will use is called a [[https://www.postgresql.org/docs/current/static/queries-with.html][recursive CTE]] (common table
+expression):
+
+#+BEGIN_SRC sql
+WITH RECURSIVE a AS (
+ SELECT tax_id, parent_id, rank
+  FROM nodes
+  WHERE tax_id = '1280'
+UNION ALL
+ SELECT p.tax_id, p.parent_id, p.rank
+  FROM a JOIN nodes p ON a.parent_id = p.tax_id
+)
+SELECT a.tax_id, a.rank
+  FROM a;
+#+END_SRC
+
+#+RESULTS:
+|  tax_id | rank               |
+|---------+--------------------|
+|    1280 | species            |
+|    1279 | genus              |
+|   90964 | family             |
+|    1385 | order              |
+|   91061 | class              |
+|    1239 | phylum             |
+| 1783272 | below_superkingdom |
+|       2 | superkingdom       |
+|  131567 | below_root         |
+|       1 | root               |
+
+And voila: we have traversed the tree from leaf to root, and in doing
+so, the lineage is defined. I'm using postgresql for this example, but
+sqlite supports recursive CTEs as well, and an identical query can be
+used with both databases.
+
+At this point, we can easily add taxonomic names as well:
+
+#+BEGIN_SRC sql
+WITH RECURSIVE a AS (
+ SELECT tax_id, parent_id, rank
+  FROM nodes
+  WHERE tax_id = '1280'
+UNION ALL
+ SELECT p.tax_id, p.parent_id, p.rank
+  FROM a JOIN nodes p ON a.parent_id = p.tax_id
+)
+SELECT a.tax_id, a.rank, names.tax_name
+  FROM a JOIN names USING(tax_id)
+  WHERE is_primary;
+#+END_SRC
+
+#+RESULTS:
+|  tax_id | rank               | tax_name              |
+|---------+--------------------+-----------------------|
+|    1280 | species            | Staphylococcus aureus |
+|    1279 | genus              | Staphylococcus        |
+|   90964 | family             | Staphylococcaceae     |
+|    1385 | order              | Bacillales            |
+|   91061 | class              | Bacilli               |
+|    1239 | phylum             | Firmicutes            |
+| 1783272 | below_superkingdom | Terrabacteria group   |
+|       2 | superkingdom       | Bacteria              |
+|  131567 | below_root         | cellular organisms    |
+|       1 | root               | root                  |
+
+It's worth pausing to point out an important feature of the
+representation of the adjacency list model of the =nodes= table
+downloaded from NCBI: the root is identified as the node for which
+=tax_id = 1=, but the value of =parent_id= for the root node is also
+1! The recursive CTE as written expects a value of NULL in the
+=parent_id= field of the root node; with a value of 1, it will never
+terminate, and your laptop will get quite hot! So do yourself a favor
+and execute the following before trying this as home:
+
+#+BEGIN_SRC sql :eval no
+UPDATE nodes set parent_id = NULL where tax_id = 1;
+#+END_SRC
+
+As I mentioned, all of this is pretty well documented (as I learned
+once I bothered to look). But what about a query for multiple tax_ids
+at once? Is it as easy as including more than one in the query?
+
+#+BEGIN_SRC sql
+WITH RECURSIVE a AS (
+ SELECT tax_id, parent_id, rank
+  FROM nodes
+  WHERE tax_id in ('562', '1280')
+UNION ALL
+ SELECT p.tax_id, p.parent_id, p.rank
+  FROM a JOIN nodes p ON a.parent_id = p.tax_id
+)
+SELECT a.tax_id, a.rank, names.tax_name
+  FROM a JOIN names USING(tax_id)
+  WHERE is_primary;
+#+END_SRC
+
+#+RESULTS:
+|  tax_id | rank               | tax_name              |
+|---------+--------------------+-----------------------|
+|    1280 | species            | Staphylococcus aureus |
+|     562 | species            | Escherichia coli      |
+|    1279 | genus              | Staphylococcus        |
+|     561 | genus              | Escherichia           |
+|   90964 | family             | Staphylococcaceae     |
+|     543 | family             | Enterobacteriaceae    |
+|    1385 | order              | Bacillales            |
+|   91347 | order              | Enterobacterales      |
+|   91061 | class              | Bacilli               |
+|    1236 | class              | Gammaproteobacteria   |
+|    1239 | phylum             | Firmicutes            |
+|    1224 | phylum             | Proteobacteria        |
+| 1783272 | below_superkingdom | Terrabacteria group   |
+|       2 | superkingdom       | Bacteria              |
+|       2 | superkingdom       | Bacteria              |
+|  131567 | below_root         | cellular organisms    |
+|  131567 | below_root         | cellular organisms    |
+|       1 | root               | root                  |
+|       1 | root               | root                  |
+
+Hmm, no, that doesn't work so well. Even if the ordering was right, we
+would find it difficult to keep track of the individual lineages. But
+one approach that does work is to accumulate values in an array in the
+recursive expression, and then use the first value in the array to
+identify the first tax_id in each lineage.
+
+#+BEGIN_SRC sql
+WITH RECURSIVE a AS (
+ SELECT tax_id as tid,
+        parent_id as pid,
+	rank,
+	tax_id,
+	ARRAY[tax_id] as lineage
+  FROM nodes
+  WHERE tax_id = '1280'
+UNION ALL
+  SELECT p.tax_id,
+         p.parent_id,
+	 p.rank,
+	 lineage[1],
+	 lineage || ARRAY[p.tax_id]
+  FROM a JOIN nodes p ON a.pid = p.tax_id
+)
+SELECT * FROM a;
+#+END_SRC
+
+#+RESULTS:
+|     tid |     pid | rank               | tax_id | lineage                                              |
+|---------+---------+--------------------+--------+------------------------------------------------------|
+|    1280 |    1279 | species            |   1280 | {1280}                                               |
+|    1279 |   90964 | genus              |   1280 | {1280,1279}                                          |
+|   90964 |    1385 | family             |   1280 | {1280,1279,90964}                                    |
+|    1385 |   91061 | order              |   1280 | {1280,1279,90964,1385}                               |
+|   91061 |    1239 | class              |   1280 | {1280,1279,90964,1385,91061}                         |
+|    1239 | 1783272 | phylum             |   1280 | {1280,1279,90964,1385,91061,1239}                    |
+| 1783272 |       2 | below_superkingdom |   1280 | {1280,1279,90964,1385,91061,1239,1783272}            |
+|       2 |  131567 | superkingdom       |   1280 | {1280,1279,90964,1385,91061,1239,1783272,2}          |
+|  131567 |       1 | below_root         |   1280 | {1280,1279,90964,1385,91061,1239,1783272,2,131567}   |
+|       1 |         | root               |   1280 | {1280,1279,90964,1385,91061,1239,1783272,2,131567,1} |
+
+Nice! But we only actually care about the final lineage when it
+terminates at the root node.
+
+#+BEGIN_SRC sql
+WITH RECURSIVE a AS (
+ SELECT tax_id as tid,
+        parent_id as pid,
+	rank,
+	tax_id,
+	ARRAY[tax_id] as lineage
+  FROM nodes
+  WHERE tax_id = '1280'
+UNION ALL
+  SELECT p.tax_id,
+         p.parent_id,
+	 p.rank,
+	 lineage[1],
+	 lineage || ARRAY[p.tax_id]
+  FROM a JOIN nodes p ON a.pid = p.tax_id
+)
+SELECT tax_id, lineage FROM a
+WHERE a.rank = 'root';
+#+END_SRC
+
+#+RESULTS:
+| tax_id | lineage                                              |
+|--------+------------------------------------------------------|
+|   1280 | {1280,1279,90964,1385,91061,1239,1783272,2,131567,1} |
+
+
+With some embellishment, we can see how this strategy can be used to
+retrieve lineages plus additional annotation for multiple tax_ids (at
+arbitrary ranks) as once.
+
+(The results are shown using the equivalent of =psql -x=; the first
+line just provides a header row.)
+
+#+BEGIN_SRC sql :cmdline -x :header off
+SELECT 'value' as key;
+WITH RECURSIVE a AS (
+ SELECT tax_id as tid,
+        parent_id as pid,
+	rank,
+	tax_id,
+	ARRAY[tax_id] as lineage,
+	ARRAY[rank] as ranks
+  FROM nodes
+  WHERE tax_id in ('1279', '1280', '562')
+UNION ALL
+  SELECT p.tax_id,
+         p.parent_id,
+	 p.rank,
+	 lineage[1],
+	 lineage || ARRAY[p.tax_id],
+	 ranks || ARRAY[p.rank]
+  FROM a JOIN nodes p ON a.pid = p.tax_id
+)
+SELECT tax_id, tax_name, nodes.rank, lineage, ranks
+FROM a
+JOIN nodes USING(tax_id)
+JOIN names USING(tax_id)
+WHERE a.rank = 'root'
+AND names.is_primary;
+#+END_SRC
+
+#+RESULTS:
+| key      | value                                                                                     |
+|----------+-------------------------------------------------------------------------------------------|
+| tax_id   | 1279                                                                                      |
+| tax_name | Staphylococcus                                                                            |
+| rank     | genus                                                                                     |
+| lineage  | {1279,90964,1385,91061,1239,1783272,2,131567,1}                                           |
+| ranks    | {genus,family,order,class,phylum,below_superkingdom,superkingdom,below_root,root}         |
+|          |                                                                                           |
+| tax_id   | 562                                                                                       |
+| tax_name | Escherichia coli                                                                          |
+| rank     | species                                                                                   |
+| lineage  | {562,561,543,91347,1236,1224,2,131567,1}                                                  |
+| ranks    | {species,genus,family,order,class,phylum,superkingdom,below_root,root}                    |
+|          |                                                                                           |
+| tax_id   | 1280                                                                                      |
+| tax_name | Staphylococcus aureus                                                                     |
+| rank     | species                                                                                   |
+| lineage  | {1280,1279,90964,1385,91061,1239,1783272,2,131567,1}                                      |
+| ranks    | {species,genus,family,order,class,phylum,below_superkingdom,superkingdom,below_root,root} |
+
+How well does this scale? A query similar to the final one above
+executed in about 0.5 seconds for 1000 tax_id's, but took more like
+40s for 2000, so not fantastically well. But I expect the some
+optimization is possible.
+
+Unfortunately, in the absence of an ARRAY data type, this approach
+does not work for sqlite, but you could do something similar by
+concatenating strings (though I doubt that this would be very
+efficient).
