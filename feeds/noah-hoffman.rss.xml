@@ -1,38 +1,796 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>borborygmi</title><link>http://nhoffman.github.io/borborygmi/</link><description></description><lastBuildDate>Thu, 05 Jan 2017 00:00:00 -0800</lastBuildDate><item><title>Setting up a new Mac (Sierra)</title><link>http://nhoffman.github.io/borborygmi/mac-setup-sierra.html</link><description>&lt;div id="table-of-contents"&gt;
+<rss version="2.0"><channel><title>borborygmi</title><link>http://nhoffman.github.io/borborygmi/</link><description></description><lastBuildDate>Fri, 07 Jul 2017 00:00:00 -0700</lastBuildDate><item><title>Using recursive CTEs for calculating taxonomic lineages</title><link>http://nhoffman.github.io/borborygmi/recursive-cte-for-taxonomy.html</link><description>&lt;p&gt;
+This topic falls into the category of "things that I didn't know that
+I didn't know." Many of my projects involve the manipulation of
+taxonomies, particularly the &lt;a href="https://www.ncbi.nlm.nih.gov/taxonomy"&gt;NCBI taxonomy&lt;/a&gt;, but I didn't understand
+the efficiency with which it was possible to calculate a lineage in
+SQL. I recently revisited the issue, and here's what I learned.
+&lt;/p&gt;
+
+&lt;p&gt;
+The NCBI taxonomy is provided as a collection of tables that can be
+downloaded in its entirety &lt;a href="ftp://ftp.ncbi.nih.gov/pub/taxonomy"&gt;by FTP&lt;/a&gt;. There are two tables in the
+taxonomy database that we care about for the purposes of this
+post. The first is &lt;code&gt;nodes&lt;/code&gt;. The table from the NCBI taxonomy contains
+some additional fields that aren't important in this context, but at
+it's core, it looks something like this:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+&lt;pre class="src src-sql"&gt;create table nodes (
+       tax_id integer,
+       parent integer,
+       rank text
+);
+&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;
+The second table that we will use later is called &lt;code&gt;names&lt;/code&gt;, with a
+schema that (in its simplified form) looks like this:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+&lt;pre class="src src-sql"&gt;create table names (
+       tax_id integer,
+       tax_name text,
+       is_primary boolean
+);
+&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;
+Multiple synonyms are allowed for each &lt;code&gt;tax_id&lt;/code&gt;; the column
+&lt;code&gt;names.is_primary&lt;/code&gt; indicates which is the definitive name for the
+organism (this isn't present in the table downloaded from NCBI but is
+derived from other attributes).
+&lt;/p&gt;
+
+&lt;p&gt;
+The taxonomic hierarchy is defined in &lt;code&gt;nodes&lt;/code&gt; using an &lt;a href="https://en.wikipedia.org/wiki/Adjacency_list"&gt;adjacency list&lt;/a&gt;
+model. It turns out that relational databases supporting recursive
+queries can easily traverse the graph defined by the model for a given
+node. This is well-described &lt;a href="http://gbif.blogspot.com/2012/06/taxonomic-trees-in-postgresql.html"&gt;elsewhere&lt;/a&gt; (the linked post compares the
+adjacency model with other representations of trees in sql).
+&lt;/p&gt;
+
+&lt;p&gt;
+The query that we will use is called a &lt;a href="https://www.postgresql.org/docs/current/static/queries-with.html"&gt;recursive CTE&lt;/a&gt; (common table
+expression):
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+&lt;pre class="src src-sql"&gt;WITH RECURSIVE a AS (
+ SELECT tax_id, parent_id, rank
+  FROM nodes
+  WHERE tax_id = '1280'
+UNION ALL
+ SELECT p.tax_id, p.parent_id, p.rank
+  FROM a JOIN nodes p ON a.parent_id = p.tax_id
+)
+SELECT a.tax_id, a.rank
+  FROM a;
+&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;table class="table table-striped table-bordered table-condensed" style="width: auto;"&gt;
+
+
+&lt;colgroup&gt;
+&lt;col class="org-right" /&gt;
+
+&lt;col class="org-left" /&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th scope="col" class="org-right"&gt;tax_id&lt;/th&gt;
+&lt;th scope="col" class="org-left"&gt;rank&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class="org-right"&gt;1280&lt;/td&gt;
+&lt;td class="org-left"&gt;species&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;1279&lt;/td&gt;
+&lt;td class="org-left"&gt;genus&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;90964&lt;/td&gt;
+&lt;td class="org-left"&gt;family&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;1385&lt;/td&gt;
+&lt;td class="org-left"&gt;order&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;91061&lt;/td&gt;
+&lt;td class="org-left"&gt;class&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;1239&lt;/td&gt;
+&lt;td class="org-left"&gt;phylum&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;1783272&lt;/td&gt;
+&lt;td class="org-left"&gt;below_superkingdom&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;2&lt;/td&gt;
+&lt;td class="org-left"&gt;superkingdom&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;131567&lt;/td&gt;
+&lt;td class="org-left"&gt;below_root&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;1&lt;/td&gt;
+&lt;td class="org-left"&gt;root&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;
+And voila: we have traversed the tree from leaf to root, and in doing
+so, the lineage is defined. I'm using postgresql for this example, but
+sqlite supports recursive CTEs as well, and an identical query can be
+used with both databases.
+&lt;/p&gt;
+
+&lt;p&gt;
+At this point, we can easily add taxonomic names as well:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+&lt;pre class="src src-sql"&gt;WITH RECURSIVE a AS (
+ SELECT tax_id, parent_id, rank
+  FROM nodes
+  WHERE tax_id = '1280'
+UNION ALL
+ SELECT p.tax_id, p.parent_id, p.rank
+  FROM a JOIN nodes p ON a.parent_id = p.tax_id
+)
+SELECT a.tax_id, a.rank, names.tax_name
+  FROM a JOIN names USING(tax_id)
+  WHERE is_primary;
+&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;table class="table table-striped table-bordered table-condensed" style="width: auto;"&gt;
+
+
+&lt;colgroup&gt;
+&lt;col class="org-right" /&gt;
+
+&lt;col class="org-left" /&gt;
+
+&lt;col class="org-left" /&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th scope="col" class="org-right"&gt;tax_id&lt;/th&gt;
+&lt;th scope="col" class="org-left"&gt;rank&lt;/th&gt;
+&lt;th scope="col" class="org-left"&gt;tax_name&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class="org-right"&gt;1280&lt;/td&gt;
+&lt;td class="org-left"&gt;species&lt;/td&gt;
+&lt;td class="org-left"&gt;Staphylococcus aureus&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;1279&lt;/td&gt;
+&lt;td class="org-left"&gt;genus&lt;/td&gt;
+&lt;td class="org-left"&gt;Staphylococcus&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;90964&lt;/td&gt;
+&lt;td class="org-left"&gt;family&lt;/td&gt;
+&lt;td class="org-left"&gt;Staphylococcaceae&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;1385&lt;/td&gt;
+&lt;td class="org-left"&gt;order&lt;/td&gt;
+&lt;td class="org-left"&gt;Bacillales&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;91061&lt;/td&gt;
+&lt;td class="org-left"&gt;class&lt;/td&gt;
+&lt;td class="org-left"&gt;Bacilli&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;1239&lt;/td&gt;
+&lt;td class="org-left"&gt;phylum&lt;/td&gt;
+&lt;td class="org-left"&gt;Firmicutes&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;1783272&lt;/td&gt;
+&lt;td class="org-left"&gt;below_superkingdom&lt;/td&gt;
+&lt;td class="org-left"&gt;Terrabacteria group&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;2&lt;/td&gt;
+&lt;td class="org-left"&gt;superkingdom&lt;/td&gt;
+&lt;td class="org-left"&gt;Bacteria&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;131567&lt;/td&gt;
+&lt;td class="org-left"&gt;below_root&lt;/td&gt;
+&lt;td class="org-left"&gt;cellular organisms&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;1&lt;/td&gt;
+&lt;td class="org-left"&gt;root&lt;/td&gt;
+&lt;td class="org-left"&gt;root&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;
+It's worth pausing to point out an important feature of the
+representation of the adjacency list model of the &lt;code&gt;nodes&lt;/code&gt; table
+downloaded from NCBI: the root is identified as the node for which
+&lt;code&gt;tax_id = 1&lt;/code&gt;, but the value of &lt;code&gt;parent_id&lt;/code&gt; for the root node is also
+1! The recursive CTE as written expects a value of NULL in the
+&lt;code&gt;parent_id&lt;/code&gt; field of the root node; with a value of 1, it will never
+terminate, and your laptop will get quite hot! So do yourself a favor
+and execute the following before trying this as home:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+&lt;pre class="src src-sql"&gt;UPDATE nodes set parent_id = NULL where tax_id = 1;
+&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;
+As I mentioned, all of this is pretty well documented (as I learned
+once I bothered to look). But what about a query for multiple tax_ids
+at once? Is it as easy as including more than one in the query?
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+&lt;pre class="src src-sql"&gt;WITH RECURSIVE a AS (
+ SELECT tax_id, parent_id, rank
+  FROM nodes
+  WHERE tax_id in ('562', '1280')
+UNION ALL
+ SELECT p.tax_id, p.parent_id, p.rank
+  FROM a JOIN nodes p ON a.parent_id = p.tax_id
+)
+SELECT a.tax_id, a.rank, names.tax_name
+  FROM a JOIN names USING(tax_id)
+  WHERE is_primary;
+&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;table class="table table-striped table-bordered table-condensed" style="width: auto;"&gt;
+
+
+&lt;colgroup&gt;
+&lt;col class="org-right" /&gt;
+
+&lt;col class="org-left" /&gt;
+
+&lt;col class="org-left" /&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th scope="col" class="org-right"&gt;tax_id&lt;/th&gt;
+&lt;th scope="col" class="org-left"&gt;rank&lt;/th&gt;
+&lt;th scope="col" class="org-left"&gt;tax_name&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class="org-right"&gt;1280&lt;/td&gt;
+&lt;td class="org-left"&gt;species&lt;/td&gt;
+&lt;td class="org-left"&gt;Staphylococcus aureus&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;562&lt;/td&gt;
+&lt;td class="org-left"&gt;species&lt;/td&gt;
+&lt;td class="org-left"&gt;Escherichia coli&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;1279&lt;/td&gt;
+&lt;td class="org-left"&gt;genus&lt;/td&gt;
+&lt;td class="org-left"&gt;Staphylococcus&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;561&lt;/td&gt;
+&lt;td class="org-left"&gt;genus&lt;/td&gt;
+&lt;td class="org-left"&gt;Escherichia&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;90964&lt;/td&gt;
+&lt;td class="org-left"&gt;family&lt;/td&gt;
+&lt;td class="org-left"&gt;Staphylococcaceae&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;543&lt;/td&gt;
+&lt;td class="org-left"&gt;family&lt;/td&gt;
+&lt;td class="org-left"&gt;Enterobacteriaceae&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;1385&lt;/td&gt;
+&lt;td class="org-left"&gt;order&lt;/td&gt;
+&lt;td class="org-left"&gt;Bacillales&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;91347&lt;/td&gt;
+&lt;td class="org-left"&gt;order&lt;/td&gt;
+&lt;td class="org-left"&gt;Enterobacterales&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;91061&lt;/td&gt;
+&lt;td class="org-left"&gt;class&lt;/td&gt;
+&lt;td class="org-left"&gt;Bacilli&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;1236&lt;/td&gt;
+&lt;td class="org-left"&gt;class&lt;/td&gt;
+&lt;td class="org-left"&gt;Gammaproteobacteria&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;1239&lt;/td&gt;
+&lt;td class="org-left"&gt;phylum&lt;/td&gt;
+&lt;td class="org-left"&gt;Firmicutes&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;1224&lt;/td&gt;
+&lt;td class="org-left"&gt;phylum&lt;/td&gt;
+&lt;td class="org-left"&gt;Proteobacteria&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;1783272&lt;/td&gt;
+&lt;td class="org-left"&gt;below_superkingdom&lt;/td&gt;
+&lt;td class="org-left"&gt;Terrabacteria group&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;2&lt;/td&gt;
+&lt;td class="org-left"&gt;superkingdom&lt;/td&gt;
+&lt;td class="org-left"&gt;Bacteria&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;2&lt;/td&gt;
+&lt;td class="org-left"&gt;superkingdom&lt;/td&gt;
+&lt;td class="org-left"&gt;Bacteria&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;131567&lt;/td&gt;
+&lt;td class="org-left"&gt;below_root&lt;/td&gt;
+&lt;td class="org-left"&gt;cellular organisms&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;131567&lt;/td&gt;
+&lt;td class="org-left"&gt;below_root&lt;/td&gt;
+&lt;td class="org-left"&gt;cellular organisms&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;1&lt;/td&gt;
+&lt;td class="org-left"&gt;root&lt;/td&gt;
+&lt;td class="org-left"&gt;root&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;1&lt;/td&gt;
+&lt;td class="org-left"&gt;root&lt;/td&gt;
+&lt;td class="org-left"&gt;root&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;
+Hmm, no, that doesn't work so well. Even if the ordering was right, we
+would find it difficult to keep track of the individual lineages. But
+one approach that does work is to accumulate values in an array in the
+recursive expression, and then use the first value in the array to
+identify the first tax_id in each lineage.
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+&lt;pre class="src src-sql"&gt;WITH RECURSIVE a AS (
+ SELECT tax_id as tid,
+	parent_id as pid,
+	rank,
+	tax_id,
+	ARRAY[tax_id] as lineage
+  FROM nodes
+  WHERE tax_id = '1280'
+UNION ALL
+  SELECT p.tax_id,
+	 p.parent_id,
+	 p.rank,
+	 lineage[1],
+	 lineage || ARRAY[p.tax_id]
+  FROM a JOIN nodes p ON a.pid = p.tax_id
+)
+SELECT * FROM a;
+&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;table class="table table-striped table-bordered table-condensed" style="width: auto;"&gt;
+
+
+&lt;colgroup&gt;
+&lt;col class="org-right" /&gt;
+
+&lt;col class="org-right" /&gt;
+
+&lt;col class="org-left" /&gt;
+
+&lt;col class="org-right" /&gt;
+
+&lt;col class="org-left" /&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th scope="col" class="org-right"&gt;tid&lt;/th&gt;
+&lt;th scope="col" class="org-right"&gt;pid&lt;/th&gt;
+&lt;th scope="col" class="org-left"&gt;rank&lt;/th&gt;
+&lt;th scope="col" class="org-right"&gt;tax_id&lt;/th&gt;
+&lt;th scope="col" class="org-left"&gt;lineage&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class="org-right"&gt;1280&lt;/td&gt;
+&lt;td class="org-right"&gt;1279&lt;/td&gt;
+&lt;td class="org-left"&gt;species&lt;/td&gt;
+&lt;td class="org-right"&gt;1280&lt;/td&gt;
+&lt;td class="org-left"&gt;{1280}&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;1279&lt;/td&gt;
+&lt;td class="org-right"&gt;90964&lt;/td&gt;
+&lt;td class="org-left"&gt;genus&lt;/td&gt;
+&lt;td class="org-right"&gt;1280&lt;/td&gt;
+&lt;td class="org-left"&gt;{1280,1279}&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;90964&lt;/td&gt;
+&lt;td class="org-right"&gt;1385&lt;/td&gt;
+&lt;td class="org-left"&gt;family&lt;/td&gt;
+&lt;td class="org-right"&gt;1280&lt;/td&gt;
+&lt;td class="org-left"&gt;{1280,1279,90964}&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;1385&lt;/td&gt;
+&lt;td class="org-right"&gt;91061&lt;/td&gt;
+&lt;td class="org-left"&gt;order&lt;/td&gt;
+&lt;td class="org-right"&gt;1280&lt;/td&gt;
+&lt;td class="org-left"&gt;{1280,1279,90964,1385}&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;91061&lt;/td&gt;
+&lt;td class="org-right"&gt;1239&lt;/td&gt;
+&lt;td class="org-left"&gt;class&lt;/td&gt;
+&lt;td class="org-right"&gt;1280&lt;/td&gt;
+&lt;td class="org-left"&gt;{1280,1279,90964,1385,91061}&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;1239&lt;/td&gt;
+&lt;td class="org-right"&gt;1783272&lt;/td&gt;
+&lt;td class="org-left"&gt;phylum&lt;/td&gt;
+&lt;td class="org-right"&gt;1280&lt;/td&gt;
+&lt;td class="org-left"&gt;{1280,1279,90964,1385,91061,1239}&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;1783272&lt;/td&gt;
+&lt;td class="org-right"&gt;2&lt;/td&gt;
+&lt;td class="org-left"&gt;below_superkingdom&lt;/td&gt;
+&lt;td class="org-right"&gt;1280&lt;/td&gt;
+&lt;td class="org-left"&gt;{1280,1279,90964,1385,91061,1239,1783272}&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;2&lt;/td&gt;
+&lt;td class="org-right"&gt;131567&lt;/td&gt;
+&lt;td class="org-left"&gt;superkingdom&lt;/td&gt;
+&lt;td class="org-right"&gt;1280&lt;/td&gt;
+&lt;td class="org-left"&gt;{1280,1279,90964,1385,91061,1239,1783272,2}&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;131567&lt;/td&gt;
+&lt;td class="org-right"&gt;1&lt;/td&gt;
+&lt;td class="org-left"&gt;below_root&lt;/td&gt;
+&lt;td class="org-right"&gt;1280&lt;/td&gt;
+&lt;td class="org-left"&gt;{1280,1279,90964,1385,91061,1239,1783272,2,131567}&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-right"&gt;1&lt;/td&gt;
+&lt;td class="org-right"&gt;&amp;#xa0;&lt;/td&gt;
+&lt;td class="org-left"&gt;root&lt;/td&gt;
+&lt;td class="org-right"&gt;1280&lt;/td&gt;
+&lt;td class="org-left"&gt;{1280,1279,90964,1385,91061,1239,1783272,2,131567,1}&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;
+Nice! But we only actually care about the final lineage when it
+terminates at the root node.
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+&lt;pre class="src src-sql"&gt;WITH RECURSIVE a AS (
+ SELECT tax_id as tid,
+	parent_id as pid,
+	rank,
+	tax_id,
+	ARRAY[tax_id] as lineage
+  FROM nodes
+  WHERE tax_id = '1280'
+UNION ALL
+  SELECT p.tax_id,
+	 p.parent_id,
+	 p.rank,
+	 lineage[1],
+	 lineage || ARRAY[p.tax_id]
+  FROM a JOIN nodes p ON a.pid = p.tax_id
+)
+SELECT tax_id, lineage FROM a
+WHERE a.rank = 'root';
+&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;table class="table table-striped table-bordered table-condensed" style="width: auto;"&gt;
+
+
+&lt;colgroup&gt;
+&lt;col class="org-right" /&gt;
+
+&lt;col class="org-left" /&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th scope="col" class="org-right"&gt;tax_id&lt;/th&gt;
+&lt;th scope="col" class="org-left"&gt;lineage&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class="org-right"&gt;1280&lt;/td&gt;
+&lt;td class="org-left"&gt;{1280,1279,90964,1385,91061,1239,1783272,2,131567,1}&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+&lt;p&gt;
+With some embellishment, we can see how this strategy can be used to
+retrieve lineages plus additional annotation for multiple tax_ids (at
+arbitrary ranks) as once.
+&lt;/p&gt;
+
+&lt;p&gt;
+(The results are shown using the equivalent of &lt;code&gt;psql -x&lt;/code&gt;; the first
+line just provides a header row.)
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+&lt;pre class="src src-sql"&gt;SELECT 'value' as key;
+WITH RECURSIVE a AS (
+ SELECT tax_id as tid,
+	parent_id as pid,
+	rank,
+	tax_id,
+	ARRAY[tax_id] as lineage,
+	ARRAY[rank] as ranks
+  FROM nodes
+  WHERE tax_id in ('1279', '1280', '562')
+UNION ALL
+  SELECT p.tax_id,
+	 p.parent_id,
+	 p.rank,
+	 lineage[1],
+	 lineage || ARRAY[p.tax_id],
+	 ranks || ARRAY[p.rank]
+  FROM a JOIN nodes p ON a.pid = p.tax_id
+)
+SELECT tax_id, tax_name, nodes.rank, lineage, ranks
+FROM a
+JOIN nodes USING(tax_id)
+JOIN names USING(tax_id)
+WHERE a.rank = 'root'
+AND names.is_primary;
+&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;table class="table table-striped table-bordered table-condensed" style="width: auto;"&gt;
+
+
+&lt;colgroup&gt;
+&lt;col class="org-left" /&gt;
+
+&lt;col class="org-left" /&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th scope="col" class="org-left"&gt;key&lt;/th&gt;
+&lt;th scope="col" class="org-left"&gt;value&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class="org-left"&gt;tax_id&lt;/td&gt;
+&lt;td class="org-left"&gt;1279&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-left"&gt;tax_name&lt;/td&gt;
+&lt;td class="org-left"&gt;Staphylococcus&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-left"&gt;rank&lt;/td&gt;
+&lt;td class="org-left"&gt;genus&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-left"&gt;lineage&lt;/td&gt;
+&lt;td class="org-left"&gt;{1279,90964,1385,91061,1239,1783272,2,131567,1}&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-left"&gt;ranks&lt;/td&gt;
+&lt;td class="org-left"&gt;{genus,family,order,class,phylum,below_superkingdom,superkingdom,below_root,root}&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-left"&gt;&amp;#xa0;&lt;/td&gt;
+&lt;td class="org-left"&gt;&amp;#xa0;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-left"&gt;tax_id&lt;/td&gt;
+&lt;td class="org-left"&gt;562&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-left"&gt;tax_name&lt;/td&gt;
+&lt;td class="org-left"&gt;Escherichia coli&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-left"&gt;rank&lt;/td&gt;
+&lt;td class="org-left"&gt;species&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-left"&gt;lineage&lt;/td&gt;
+&lt;td class="org-left"&gt;{562,561,543,91347,1236,1224,2,131567,1}&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-left"&gt;ranks&lt;/td&gt;
+&lt;td class="org-left"&gt;{species,genus,family,order,class,phylum,superkingdom,below_root,root}&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-left"&gt;&amp;#xa0;&lt;/td&gt;
+&lt;td class="org-left"&gt;&amp;#xa0;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-left"&gt;tax_id&lt;/td&gt;
+&lt;td class="org-left"&gt;1280&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-left"&gt;tax_name&lt;/td&gt;
+&lt;td class="org-left"&gt;Staphylococcus aureus&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-left"&gt;rank&lt;/td&gt;
+&lt;td class="org-left"&gt;species&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-left"&gt;lineage&lt;/td&gt;
+&lt;td class="org-left"&gt;{1280,1279,90964,1385,91061,1239,1783272,2,131567,1}&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="org-left"&gt;ranks&lt;/td&gt;
+&lt;td class="org-left"&gt;{species,genus,family,order,class,phylum,below_superkingdom,superkingdom,below_root,root}&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;
+How well does this scale? A query similar to the final one above
+executed in about 0.5 seconds for 1000 tax_id's, but took more like
+40s for 2000, so not fantastically well. But I expect the some
+optimization is possible.
+&lt;/p&gt;
+
+&lt;p&gt;
+Unfortunately, in the absence of an ARRAY data type, this approach
+does not work for sqlite, but you could do something similar by
+concatenating strings (though I doubt that this would be very
+efficient).
+&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Noah Hoffman</dc:creator><pubDate>Fri, 07 Jul 2017 00:00:00 -0700</pubDate><guid isPermaLink="false">tag:nhoffman.github.io,2017-07-07:borborygmi/recursive-cte-for-taxonomy.html</guid><category>postgresql</category><category>taxonomy</category></item><item><title>Setting up a new Mac (Sierra)</title><link>http://nhoffman.github.io/borborygmi/mac-setup-sierra.html</link><description>&lt;div id="table-of-contents"&gt;
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org2213a29"&gt;system settings&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org51c7f02"&gt;system settings&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org1e956f8"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgd19eb4f"&gt;unmap Control + left,right&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org323f827"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgfb2b798"&gt;unmap Control + left,right&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#org8241ad6"&gt;First applications&lt;/a&gt;
+&lt;li&gt;&lt;a href="#orgb247d0b"&gt;First applications&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org32cbf80"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org46cda0d"&gt;Dropbox&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orga73de04"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org12a5c74"&gt;Junos pulse VPN client&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org34f384e"&gt;Microsoft Office 2016&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orged2929b"&gt;Others&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org215914f"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgb6d0312"&gt;Dropbox&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgda378d2"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgb5a9573"&gt;Junos pulse VPN client&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org075b5e4"&gt;Microsoft Office 2016&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org667ac89"&gt;Others&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#org849a053"&gt;homebrew&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org165835a"&gt;homebrew&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org345b6e4"&gt;X11&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgffd757c"&gt;Desktop apps using Cask&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgdd66ca7"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org1492522"&gt;zsh&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgc0eb6ce"&gt;X11&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org66ea1ca"&gt;Desktop apps using Cask&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgedc55bf"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgc970e05"&gt;zsh&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#org7f6012d"&gt;git&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgc75564a"&gt;python&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org3078505"&gt;emacs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org04a8544"&gt;R&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orga22e6c7"&gt;wkhtmltopdf&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgff8f2c8"&gt;mail&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgfa91dc5"&gt;git&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org7934c1b"&gt;python&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgc4fa74b"&gt;emacs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgea2bcea"&gt;R&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org278d9f1"&gt;wkhtmltopdf&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org0be92f3"&gt;mail&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -73,20 +831,20 @@ usually I sign in first thing, but this time I held off.
 tar -cf dotfiles.tar .Xmodmap .gitconfig .gnupg .pypirc .ssh
 &lt;/pre&gt;
 
-&lt;div id="outline-container-org2213a29" class="outline-2"&gt;
-&lt;h2 id="org2213a29"&gt;system settings&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org2213a29"&gt;
-&lt;/div&gt;&lt;div id="outline-container-org1e956f8" class="outline-3"&gt;
-&lt;h3 id="org1e956f8"&gt;turn off spelling autocorrect&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org1e956f8"&gt;
+&lt;div id="outline-container-org51c7f02" class="outline-2"&gt;
+&lt;h2 id="org51c7f02"&gt;system settings&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org51c7f02"&gt;
+&lt;/div&gt;&lt;div id="outline-container-org323f827" class="outline-3"&gt;
+&lt;h3 id="org323f827"&gt;turn off spelling autocorrect&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org323f827"&gt;
 &lt;pre class="example"&gt;
 System Preferences --&amp;gt; Keyboard --&amp;gt; Text tab --&amp;gt; unselect "Correct spelling automatically" and others
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgd19eb4f" class="outline-3"&gt;
-&lt;h3 id="orgd19eb4f"&gt;unmap Control + left,right&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgd19eb4f"&gt;
+&lt;div id="outline-container-orgfb2b798" class="outline-3"&gt;
+&lt;h3 id="orgfb2b798"&gt;unmap Control + left,right&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgfb2b798"&gt;
 &lt;p&gt;
 I use Control plus the left and right arrow keys to move between
 windows in emacs and tmux.
@@ -99,12 +857,12 @@ System Preferences --&amp;gt; Keyboard --&amp;gt; Shortcuts --&amp;gt; uncheck m
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org8241ad6" class="outline-2"&gt;
-&lt;h2 id="org8241ad6"&gt;First applications&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org8241ad6"&gt;
-&lt;/div&gt;&lt;div id="outline-container-org32cbf80" class="outline-3"&gt;
-&lt;h3 id="org32cbf80"&gt;iTerm2&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org32cbf80"&gt;
+&lt;div id="outline-container-orgb247d0b" class="outline-2"&gt;
+&lt;h2 id="orgb247d0b"&gt;First applications&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgb247d0b"&gt;
+&lt;/div&gt;&lt;div id="outline-container-org215914f" class="outline-3"&gt;
+&lt;h3 id="org215914f"&gt;iTerm2&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org215914f"&gt;
 &lt;p&gt;
 Update a few settings.
 &lt;/p&gt;
@@ -129,18 +887,18 @@ Default appearance:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org46cda0d" class="outline-3"&gt;
-&lt;h3 id="org46cda0d"&gt;Dropbox&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org46cda0d"&gt;
+&lt;div id="outline-container-orgb6d0312" class="outline-3"&gt;
+&lt;h3 id="orgb6d0312"&gt;Dropbox&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgb6d0312"&gt;
 &lt;p&gt;
 Install from website
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orga73de04" class="outline-3"&gt;
-&lt;h3 id="orga73de04"&gt;Developer tools&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orga73de04"&gt;
+&lt;div id="outline-container-orgda378d2" class="outline-3"&gt;
+&lt;h3 id="orgda378d2"&gt;Developer tools&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgda378d2"&gt;
 &lt;p&gt;
 This can be done from the command line:
 &lt;/p&gt;
@@ -152,9 +910,9 @@ This can be done from the command line:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org12a5c74" class="outline-3"&gt;
-&lt;h3 id="org12a5c74"&gt;Junos pulse VPN client&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org12a5c74"&gt;
+&lt;div id="outline-container-orgb5a9573" class="outline-3"&gt;
+&lt;h3 id="orgb5a9573"&gt;Junos pulse VPN client&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgb5a9573"&gt;
 &lt;p&gt;
 There are some &lt;a href="https://forums.developer.apple.com/thread/51184"&gt;reports&lt;/a&gt; of version 5.1 being broken in Sierra. At the
 time I'm writing this, my institution provides 5.1.9 (61653), which is
@@ -174,9 +932,9 @@ Instructions for UW are here: &lt;a href="https://networks.uwmedicine.org/conten
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org34f384e" class="outline-3"&gt;
-&lt;h3 id="org34f384e"&gt;Microsoft Office 2016&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org34f384e"&gt;
+&lt;div id="outline-container-org075b5e4" class="outline-3"&gt;
+&lt;h3 id="org075b5e4"&gt;Microsoft Office 2016&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org075b5e4"&gt;
 &lt;p&gt;
 The initial version of Excel (15.11) crashed on startup as widely
 reported - this was fixed by updating to a version (15.29) provided by
@@ -189,9 +947,9 @@ Microsoft:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orged2929b" class="outline-3"&gt;
-&lt;h3 id="orged2929b"&gt;Others&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orged2929b"&gt;
+&lt;div id="outline-container-org667ac89" class="outline-3"&gt;
+&lt;h3 id="org667ac89"&gt;Others&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org667ac89"&gt;
 &lt;ul class="org-ul"&gt;
 &lt;li class="on"&gt;&lt;code&gt;[X]&lt;/code&gt; SizeUp - &lt;a href="http://www.irradiatedsoftware.com/"&gt;http://www.irradiatedsoftware.com/&lt;/a&gt; (license in Dropbox/software_licenses)&lt;/li&gt;
 &lt;li class="on"&gt;&lt;code&gt;[X]&lt;/code&gt; HipChat client&lt;/li&gt;
@@ -203,9 +961,9 @@ Microsoft:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org849a053" class="outline-2"&gt;
-&lt;h2 id="org849a053"&gt;homebrew&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org849a053"&gt;
+&lt;div id="outline-container-org165835a" class="outline-2"&gt;
+&lt;h2 id="org165835a"&gt;homebrew&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org165835a"&gt;
 &lt;p&gt;
 Homebrew no longer requires user-ownership of /usr/local, so things are pretty easy now:
 &lt;/p&gt;
@@ -248,9 +1006,9 @@ Note other packages installed in other sections as well.
 &lt;/p&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org345b6e4" class="outline-3"&gt;
-&lt;h3 id="org345b6e4"&gt;X11&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org345b6e4"&gt;
+&lt;div id="outline-container-orgc0eb6ce" class="outline-3"&gt;
+&lt;h3 id="orgc0eb6ce"&gt;X11&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgc0eb6ce"&gt;
 &lt;p&gt;
 install Xquartz
 &lt;/p&gt;
@@ -278,9 +1036,9 @@ EOF
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgffd757c" class="outline-3"&gt;
-&lt;h3 id="orgffd757c"&gt;Desktop apps using Cask&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgffd757c"&gt;
+&lt;div id="outline-container-org66ea1ca" class="outline-3"&gt;
+&lt;h3 id="org66ea1ca"&gt;Desktop apps using Cask&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org66ea1ca"&gt;
 &lt;p&gt;
 Homebrew installs desktop apps too!
 &lt;/p&gt;
@@ -295,9 +1053,9 @@ brew cask install texmaker
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgdd66ca7" class="outline-3"&gt;
-&lt;h3 id="orgdd66ca7"&gt;homebrew API token&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgdd66ca7"&gt;
+&lt;div id="outline-container-orgedc55bf" class="outline-3"&gt;
+&lt;h3 id="orgedc55bf"&gt;homebrew API token&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgedc55bf"&gt;
 &lt;p&gt;
 Apparently lots of requests to GutHub via homebrew can hit a rate limit. There's a higher limit if you create an API token. See &lt;a href="https://gist.github.com/christopheranderton/8644743"&gt;https://gist.github.com/christopheranderton/8644743&lt;/a&gt;
 &lt;/p&gt;
@@ -320,9 +1078,9 @@ export HOMEBREW_GITHUB_API_TOKEN=token_here
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org1492522" class="outline-3"&gt;
-&lt;h3 id="org1492522"&gt;zsh&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org1492522"&gt;
+&lt;div id="outline-container-orgc970e05" class="outline-3"&gt;
+&lt;h3 id="orgc970e05"&gt;zsh&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgc970e05"&gt;
 &lt;p&gt;
 Install zsh with Homebrew
 &lt;/p&gt;
@@ -361,9 +1119,9 @@ done
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org7f6012d" class="outline-2"&gt;
-&lt;h2 id="org7f6012d"&gt;git&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org7f6012d"&gt;
+&lt;div id="outline-container-orgfa91dc5" class="outline-2"&gt;
+&lt;h2 id="orgfa91dc5"&gt;git&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgfa91dc5"&gt;
 &lt;pre class="example"&gt;
 git config --global user.name "My Name"
 git config --global user.email me@email.com
@@ -371,9 +1129,9 @@ git config --global user.email me@email.com
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgc75564a" class="outline-2"&gt;
-&lt;h2 id="orgc75564a"&gt;python&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgc75564a"&gt;
+&lt;div id="outline-container-org7934c1b" class="outline-2"&gt;
+&lt;h2 id="org7934c1b"&gt;python&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org7934c1b"&gt;
 &lt;p&gt;
 Use homebrew - see
 &lt;a href="https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Homebrew-and-Python.md"&gt;https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Homebrew-and-Python.md&lt;/a&gt;
@@ -398,12 +1156,26 @@ Install some python packages using homebrew - these are time consuming to instal
 &lt;/p&gt;
 
 &lt;div class="org-src-container"&gt;
-&lt;pre class="src src-sh"&gt;brew install homebrew/python/numpy
+&lt;pre class="src src-sh"&gt;brew install numpy
 &lt;/pre&gt;
 &lt;/div&gt;
 
 &lt;p&gt;
 And a few packages that I usually like to have around.
+&lt;/p&gt;
+
+&lt;p&gt;
+Note that &lt;code&gt;scons&lt;/code&gt; wants to install man pages to &lt;code&gt;/usr/local/man&lt;/code&gt;, which is owned by root. You'll need to do this first:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+&lt;pre class="src src-sh"&gt;sudo mkdir -p /usr/local/man
+sudo sudo chown $(whoami) /usr/local/man
+&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;
+Now install the actual packages:
 &lt;/p&gt;
 
 &lt;div class="org-src-container"&gt;
@@ -414,12 +1186,21 @@ pip install scons
 pip install jinja2
 &lt;/pre&gt;
 &lt;/div&gt;
+
+&lt;p&gt;
+Also install python3
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+&lt;pre class="src src-sh"&gt;brew install python3 --with-tcl-tk
+&lt;/pre&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org3078505" class="outline-2"&gt;
-&lt;h2 id="org3078505"&gt;emacs&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org3078505"&gt;
+&lt;div id="outline-container-orgc4fa74b" class="outline-2"&gt;
+&lt;h2 id="orgc4fa74b"&gt;emacs&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgc4fa74b"&gt;
 &lt;p&gt;
 Install latest emacs binary (25.1) from &lt;a href="http://emacsformacosx.com/"&gt;http://emacsformacosx.com/&lt;/a&gt;
 &lt;/p&gt;
@@ -460,9 +1241,9 @@ For elpy:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org04a8544" class="outline-2"&gt;
-&lt;h2 id="org04a8544"&gt;R&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org04a8544"&gt;
+&lt;div id="outline-container-orgea2bcea" class="outline-2"&gt;
+&lt;h2 id="orgea2bcea"&gt;R&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgea2bcea"&gt;
 &lt;p&gt;
 Again, using homebrew.
 &lt;/p&gt;
@@ -483,9 +1264,9 @@ EOF
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orga22e6c7" class="outline-2"&gt;
-&lt;h2 id="orga22e6c7"&gt;wkhtmltopdf&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orga22e6c7"&gt;
+&lt;div id="outline-container-org278d9f1" class="outline-2"&gt;
+&lt;h2 id="org278d9f1"&gt;wkhtmltopdf&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org278d9f1"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-sh"&gt;cd ~/Downloads
 wget 'http://download.gna.org/wkhtmltopdf/0.12/0.12.4/wkhtmltox-0.12.4_osx-cocoa-x86-64.pkg'
@@ -498,9 +1279,9 @@ Use installer - binary is &lt;code&gt;/usr/local/bin/wkhtmltopdf&lt;/code&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgff8f2c8" class="outline-2"&gt;
-&lt;h2 id="orgff8f2c8"&gt;mail&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgff8f2c8"&gt;
+&lt;div id="outline-container-org0be92f3" class="outline-2"&gt;
+&lt;h2 id="org0be92f3"&gt;mail&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org0be92f3"&gt;
 &lt;p&gt;
 &lt;a href="http://www.washington.edu/itconnect/connect/email/uw-email/configuring/os-x-mail6/"&gt;http://www.washington.edu/itconnect/connect/email/uw-email/configuring/os-x-mail6/&lt;/a&gt;
 &lt;/p&gt;

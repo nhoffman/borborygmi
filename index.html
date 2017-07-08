@@ -57,522 +57,825 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="./mac-setup-sierra.html"><h1>Setting up a new Mac (Sierra)</h1></a>
-Thu 05 January 2017 &#8212;
+            <a href="./recursive-cte-for-taxonomy.html"><h1>Using recursive CTEs for calculating taxonomic lineages</h1></a>
+Fri 07 July 2017 &#8212;
+
+
+<em>Filed under <a href="./category/sql.html">sql</a>;
+    tags: <a href="./tag/postgresql.html">postgresql,&nbsp;</a><a href="./tag/taxonomy.html">taxonomy</a></em>        </div>
+
+        <div><p>
+This topic falls into the category of "things that I didn't know that
+I didn't know." Many of my projects involve the manipulation of
+taxonomies, particularly the <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI taxonomy</a>, but I didn't understand
+the efficiency with which it was possible to calculate a lineage in
+SQL. I recently revisited the issue, and here's what I learned.
+</p>
+
+<p>
+The NCBI taxonomy is provided as a collection of tables that can be
+downloaded in its entirety <a href="ftp://ftp.ncbi.nih.gov/pub/taxonomy">by FTP</a>. There are two tables in the
+taxonomy database that we care about for the purposes of this
+post. The first is <code>nodes</code>. The table from the NCBI taxonomy contains
+some additional fields that aren't important in this context, but at
+it's core, it looks something like this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql">create table nodes (
+       tax_id integer,
+       parent integer,
+       rank text
+);
+</pre>
+</div>
+
+<p>
+The second table that we will use later is called <code>names</code>, with a
+schema that (in its simplified form) looks like this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql">create table names (
+       tax_id integer,
+       tax_name text,
+       is_primary boolean
+);
+</pre>
+</div>
+
+<p>
+Multiple synonyms are allowed for each <code>tax_id</code>; the column
+<code>names.is_primary</code> indicates which is the definitive name for the
+organism (this isn't present in the table downloaded from NCBI but is
+derived from other attributes).
+</p>
+
+<p>
+The taxonomic hierarchy is defined in <code>nodes</code> using an <a href="https://en.wikipedia.org/wiki/Adjacency_list">adjacency list</a>
+model. It turns out that relational databases supporting recursive
+queries can easily traverse the graph defined by the model for a given
+node. This is well-described <a href="http://gbif.blogspot.com/2012/06/taxonomic-trees-in-postgresql.html">elsewhere</a> (the linked post compares the
+adjacency model with other representations of trees in sql).
+</p>
+
+<p>
+The query that we will use is called a <a href="https://www.postgresql.org/docs/current/static/queries-with.html">recursive CTE</a> (common table
+expression):
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql">WITH RECURSIVE a AS (
+ SELECT tax_id, parent_id, rank
+  FROM nodes
+  WHERE tax_id = '1280'
+UNION ALL
+ SELECT p.tax_id, p.parent_id, p.rank
+  FROM a JOIN nodes p ON a.parent_id = p.tax_id
+)
+SELECT a.tax_id, a.rank
+  FROM a;
+</pre>
+</div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-right" />
+
+<col class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">tax_id</th>
+<th scope="col" class="org-left">rank</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1280</td>
+<td class="org-left">species</td>
+</tr>
+
+<tr>
+<td class="org-right">1279</td>
+<td class="org-left">genus</td>
+</tr>
+
+<tr>
+<td class="org-right">90964</td>
+<td class="org-left">family</td>
+</tr>
+
+<tr>
+<td class="org-right">1385</td>
+<td class="org-left">order</td>
+</tr>
+
+<tr>
+<td class="org-right">91061</td>
+<td class="org-left">class</td>
+</tr>
+
+<tr>
+<td class="org-right">1239</td>
+<td class="org-left">phylum</td>
+</tr>
+
+<tr>
+<td class="org-right">1783272</td>
+<td class="org-left">below_superkingdom</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">superkingdom</td>
+</tr>
+
+<tr>
+<td class="org-right">131567</td>
+<td class="org-left">below_root</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">root</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+And voila: we have traversed the tree from leaf to root, and in doing
+so, the lineage is defined. I'm using postgresql for this example, but
+sqlite supports recursive CTEs as well, and an identical query can be
+used with both databases.
+</p>
+
+<p>
+At this point, we can easily add taxonomic names as well:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql">WITH RECURSIVE a AS (
+ SELECT tax_id, parent_id, rank
+  FROM nodes
+  WHERE tax_id = '1280'
+UNION ALL
+ SELECT p.tax_id, p.parent_id, p.rank
+  FROM a JOIN nodes p ON a.parent_id = p.tax_id
+)
+SELECT a.tax_id, a.rank, names.tax_name
+  FROM a JOIN names USING(tax_id)
+  WHERE is_primary;
+</pre>
+</div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-right" />
+
+<col class="org-left" />
+
+<col class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">tax_id</th>
+<th scope="col" class="org-left">rank</th>
+<th scope="col" class="org-left">tax_name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1280</td>
+<td class="org-left">species</td>
+<td class="org-left">Staphylococcus aureus</td>
+</tr>
+
+<tr>
+<td class="org-right">1279</td>
+<td class="org-left">genus</td>
+<td class="org-left">Staphylococcus</td>
+</tr>
+
+<tr>
+<td class="org-right">90964</td>
+<td class="org-left">family</td>
+<td class="org-left">Staphylococcaceae</td>
+</tr>
+
+<tr>
+<td class="org-right">1385</td>
+<td class="org-left">order</td>
+<td class="org-left">Bacillales</td>
+</tr>
+
+<tr>
+<td class="org-right">91061</td>
+<td class="org-left">class</td>
+<td class="org-left">Bacilli</td>
+</tr>
+
+<tr>
+<td class="org-right">1239</td>
+<td class="org-left">phylum</td>
+<td class="org-left">Firmicutes</td>
+</tr>
+
+<tr>
+<td class="org-right">1783272</td>
+<td class="org-left">below_superkingdom</td>
+<td class="org-left">Terrabacteria group</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">superkingdom</td>
+<td class="org-left">Bacteria</td>
+</tr>
+
+<tr>
+<td class="org-right">131567</td>
+<td class="org-left">below_root</td>
+<td class="org-left">cellular organisms</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">root</td>
+<td class="org-left">root</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+It's worth pausing to point out an important feature of the
+representation of the adjacency list model of the <code>nodes</code> table
+downloaded from NCBI: the root is identified as the node for which
+<code>tax_id = 1</code>, but the value of <code>parent_id</code> for the root node is also
+1! The recursive CTE as written expects a value of NULL in the
+<code>parent_id</code> field of the root node; with a value of 1, it will never
+terminate, and your laptop will get quite hot! So do yourself a favor
+and execute the following before trying this as home:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql">UPDATE nodes set parent_id = NULL where tax_id = 1;
+</pre>
+</div>
+
+<p>
+As I mentioned, all of this is pretty well documented (as I learned
+once I bothered to look). But what about a query for multiple tax_ids
+at once? Is it as easy as including more than one in the query?
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql">WITH RECURSIVE a AS (
+ SELECT tax_id, parent_id, rank
+  FROM nodes
+  WHERE tax_id in ('562', '1280')
+UNION ALL
+ SELECT p.tax_id, p.parent_id, p.rank
+  FROM a JOIN nodes p ON a.parent_id = p.tax_id
+)
+SELECT a.tax_id, a.rank, names.tax_name
+  FROM a JOIN names USING(tax_id)
+  WHERE is_primary;
+</pre>
+</div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-right" />
+
+<col class="org-left" />
+
+<col class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">tax_id</th>
+<th scope="col" class="org-left">rank</th>
+<th scope="col" class="org-left">tax_name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1280</td>
+<td class="org-left">species</td>
+<td class="org-left">Staphylococcus aureus</td>
+</tr>
+
+<tr>
+<td class="org-right">562</td>
+<td class="org-left">species</td>
+<td class="org-left">Escherichia coli</td>
+</tr>
+
+<tr>
+<td class="org-right">1279</td>
+<td class="org-left">genus</td>
+<td class="org-left">Staphylococcus</td>
+</tr>
+
+<tr>
+<td class="org-right">561</td>
+<td class="org-left">genus</td>
+<td class="org-left">Escherichia</td>
+</tr>
+
+<tr>
+<td class="org-right">90964</td>
+<td class="org-left">family</td>
+<td class="org-left">Staphylococcaceae</td>
+</tr>
+
+<tr>
+<td class="org-right">543</td>
+<td class="org-left">family</td>
+<td class="org-left">Enterobacteriaceae</td>
+</tr>
+
+<tr>
+<td class="org-right">1385</td>
+<td class="org-left">order</td>
+<td class="org-left">Bacillales</td>
+</tr>
+
+<tr>
+<td class="org-right">91347</td>
+<td class="org-left">order</td>
+<td class="org-left">Enterobacterales</td>
+</tr>
+
+<tr>
+<td class="org-right">91061</td>
+<td class="org-left">class</td>
+<td class="org-left">Bacilli</td>
+</tr>
+
+<tr>
+<td class="org-right">1236</td>
+<td class="org-left">class</td>
+<td class="org-left">Gammaproteobacteria</td>
+</tr>
+
+<tr>
+<td class="org-right">1239</td>
+<td class="org-left">phylum</td>
+<td class="org-left">Firmicutes</td>
+</tr>
+
+<tr>
+<td class="org-right">1224</td>
+<td class="org-left">phylum</td>
+<td class="org-left">Proteobacteria</td>
+</tr>
+
+<tr>
+<td class="org-right">1783272</td>
+<td class="org-left">below_superkingdom</td>
+<td class="org-left">Terrabacteria group</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">superkingdom</td>
+<td class="org-left">Bacteria</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">superkingdom</td>
+<td class="org-left">Bacteria</td>
+</tr>
+
+<tr>
+<td class="org-right">131567</td>
+<td class="org-left">below_root</td>
+<td class="org-left">cellular organisms</td>
+</tr>
+
+<tr>
+<td class="org-right">131567</td>
+<td class="org-left">below_root</td>
+<td class="org-left">cellular organisms</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">root</td>
+<td class="org-left">root</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">root</td>
+<td class="org-left">root</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Hmm, no, that doesn't work so well. Even if the ordering was right, we
+would find it difficult to keep track of the individual lineages. But
+one approach that does work is to accumulate values in an array in the
+recursive expression, and then use the first value in the array to
+identify the first tax_id in each lineage.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql">WITH RECURSIVE a AS (
+ SELECT tax_id as tid,
+	parent_id as pid,
+	rank,
+	tax_id,
+	ARRAY[tax_id] as lineage
+  FROM nodes
+  WHERE tax_id = '1280'
+UNION ALL
+  SELECT p.tax_id,
+	 p.parent_id,
+	 p.rank,
+	 lineage[1],
+	 lineage || ARRAY[p.tax_id]
+  FROM a JOIN nodes p ON a.pid = p.tax_id
+)
+SELECT * FROM a;
+</pre>
+</div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-right" />
+
+<col class="org-right" />
+
+<col class="org-left" />
+
+<col class="org-right" />
+
+<col class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">tid</th>
+<th scope="col" class="org-right">pid</th>
+<th scope="col" class="org-left">rank</th>
+<th scope="col" class="org-right">tax_id</th>
+<th scope="col" class="org-left">lineage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1280</td>
+<td class="org-right">1279</td>
+<td class="org-left">species</td>
+<td class="org-right">1280</td>
+<td class="org-left">{1280}</td>
+</tr>
+
+<tr>
+<td class="org-right">1279</td>
+<td class="org-right">90964</td>
+<td class="org-left">genus</td>
+<td class="org-right">1280</td>
+<td class="org-left">{1280,1279}</td>
+</tr>
+
+<tr>
+<td class="org-right">90964</td>
+<td class="org-right">1385</td>
+<td class="org-left">family</td>
+<td class="org-right">1280</td>
+<td class="org-left">{1280,1279,90964}</td>
+</tr>
+
+<tr>
+<td class="org-right">1385</td>
+<td class="org-right">91061</td>
+<td class="org-left">order</td>
+<td class="org-right">1280</td>
+<td class="org-left">{1280,1279,90964,1385}</td>
+</tr>
+
+<tr>
+<td class="org-right">91061</td>
+<td class="org-right">1239</td>
+<td class="org-left">class</td>
+<td class="org-right">1280</td>
+<td class="org-left">{1280,1279,90964,1385,91061}</td>
+</tr>
+
+<tr>
+<td class="org-right">1239</td>
+<td class="org-right">1783272</td>
+<td class="org-left">phylum</td>
+<td class="org-right">1280</td>
+<td class="org-left">{1280,1279,90964,1385,91061,1239}</td>
+</tr>
+
+<tr>
+<td class="org-right">1783272</td>
+<td class="org-right">2</td>
+<td class="org-left">below_superkingdom</td>
+<td class="org-right">1280</td>
+<td class="org-left">{1280,1279,90964,1385,91061,1239,1783272}</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-right">131567</td>
+<td class="org-left">superkingdom</td>
+<td class="org-right">1280</td>
+<td class="org-left">{1280,1279,90964,1385,91061,1239,1783272,2}</td>
+</tr>
+
+<tr>
+<td class="org-right">131567</td>
+<td class="org-right">1</td>
+<td class="org-left">below_root</td>
+<td class="org-right">1280</td>
+<td class="org-left">{1280,1279,90964,1385,91061,1239,1783272,2,131567}</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">root</td>
+<td class="org-right">1280</td>
+<td class="org-left">{1280,1279,90964,1385,91061,1239,1783272,2,131567,1}</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Nice! But we only actually care about the final lineage when it
+terminates at the root node.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql">WITH RECURSIVE a AS (
+ SELECT tax_id as tid,
+	parent_id as pid,
+	rank,
+	tax_id,
+	ARRAY[tax_id] as lineage
+  FROM nodes
+  WHERE tax_id = '1280'
+UNION ALL
+  SELECT p.tax_id,
+	 p.parent_id,
+	 p.rank,
+	 lineage[1],
+	 lineage || ARRAY[p.tax_id]
+  FROM a JOIN nodes p ON a.pid = p.tax_id
+)
+SELECT tax_id, lineage FROM a
+WHERE a.rank = 'root';
+</pre>
+</div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-right" />
+
+<col class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">tax_id</th>
+<th scope="col" class="org-left">lineage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1280</td>
+<td class="org-left">{1280,1279,90964,1385,91061,1239,1783272,2,131567,1}</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+With some embellishment, we can see how this strategy can be used to
+retrieve lineages plus additional annotation for multiple tax_ids (at
+arbitrary ranks) as once.
+</p>
+
+<p>
+(The results are shown using the equivalent of <code>psql -x</code>; the first
+line just provides a header row.)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql">SELECT 'value' as key;
+WITH RECURSIVE a AS (
+ SELECT tax_id as tid,
+	parent_id as pid,
+	rank,
+	tax_id,
+	ARRAY[tax_id] as lineage,
+	ARRAY[rank] as ranks
+  FROM nodes
+  WHERE tax_id in ('1279', '1280', '562')
+UNION ALL
+  SELECT p.tax_id,
+	 p.parent_id,
+	 p.rank,
+	 lineage[1],
+	 lineage || ARRAY[p.tax_id],
+	 ranks || ARRAY[p.rank]
+  FROM a JOIN nodes p ON a.pid = p.tax_id
+)
+SELECT tax_id, tax_name, nodes.rank, lineage, ranks
+FROM a
+JOIN nodes USING(tax_id)
+JOIN names USING(tax_id)
+WHERE a.rank = 'root'
+AND names.is_primary;
+</pre>
+</div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-left" />
+
+<col class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">key</th>
+<th scope="col" class="org-left">value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">tax_id</td>
+<td class="org-left">1279</td>
+</tr>
+
+<tr>
+<td class="org-left">tax_name</td>
+<td class="org-left">Staphylococcus</td>
+</tr>
+
+<tr>
+<td class="org-left">rank</td>
+<td class="org-left">genus</td>
+</tr>
+
+<tr>
+<td class="org-left">lineage</td>
+<td class="org-left">{1279,90964,1385,91061,1239,1783272,2,131567,1}</td>
+</tr>
+
+<tr>
+<td class="org-left">ranks</td>
+<td class="org-left">{genus,family,order,class,phylum,below_superkingdom,superkingdom,below_root,root}</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">tax_id</td>
+<td class="org-left">562</td>
+</tr>
+
+<tr>
+<td class="org-left">tax_name</td>
+<td class="org-left">Escherichia coli</td>
+</tr>
+
+<tr>
+<td class="org-left">rank</td>
+<td class="org-left">species</td>
+</tr>
+
+<tr>
+<td class="org-left">lineage</td>
+<td class="org-left">{562,561,543,91347,1236,1224,2,131567,1}</td>
+</tr>
+
+<tr>
+<td class="org-left">ranks</td>
+<td class="org-left">{species,genus,family,order,class,phylum,superkingdom,below_root,root}</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">tax_id</td>
+<td class="org-left">1280</td>
+</tr>
+
+<tr>
+<td class="org-left">tax_name</td>
+<td class="org-left">Staphylococcus aureus</td>
+</tr>
+
+<tr>
+<td class="org-left">rank</td>
+<td class="org-left">species</td>
+</tr>
+
+<tr>
+<td class="org-left">lineage</td>
+<td class="org-left">{1280,1279,90964,1385,91061,1239,1783272,2,131567,1}</td>
+</tr>
+
+<tr>
+<td class="org-left">ranks</td>
+<td class="org-left">{species,genus,family,order,class,phylum,below_superkingdom,superkingdom,below_root,root}</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+How well does this scale? A query similar to the final one above
+executed in about 0.5 seconds for 1000 tax_id's, but took more like
+40s for 2000, so not fantastically well. But I expect the some
+optimization is possible.
+</p>
+
+<p>
+Unfortunately, in the absence of an ARRAY data type, this approach
+does not work for sqlite, but you could do something similar by
+concatenating strings (though I doubt that this would be very
+efficient).
+</p>
+</div>
+        <hr />
+    </div>
+
+
+ 
+
+
+    <div class='article'>
+        <a href="./mac-setup-sierra.html"><h2>Setting up a new Mac (Sierra)</h2></a>
+        <div class= "well small"> Thu 05 January 2017 &#8212;
 
 
 <em>Filed under <a href="./category/notes.html">notes</a>;
-    tags: <a href="./tag/mac.html">mac</a></em>        </div>
-
-        <div><div id="table-of-contents">
+    tags: <a href="./tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="./mac-setup-sierra.html">read more</a> </div>
+        <div class="summary"><div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org2213a29">system settings</a>
+<li><a href="#org51c7f02">system settings</a>
 <ul>
-<li><a href="#org1e956f8">turn off spelling autocorrect</a></li>
-<li><a href="#orgd19eb4f">unmap Control + left,right</a></li>
+<li><a href="#org323f827">turn off spelling autocorrect</a></li>
+<li><a href="#orgfb2b798">unmap Control + left,right</a></li>
 </ul>
 </li>
-<li><a href="#org8241ad6">First applications</a>
+<li><a href="#orgb247d0b">First applications</a>
 <ul>
-<li><a href="#org32cbf80">iTerm2</a></li>
-<li><a href="#org46cda0d">Dropbox</a></li>
-<li><a href="#orga73de04">Developer tools</a></li>
-<li><a href="#org12a5c74">Junos pulse VPN client</a></li>
-<li><a href="#org34f384e">Microsoft Office 2016</a></li>
-<li><a href="#orged2929b">Others</a></li>
+<li><a href="#org215914f">iTerm2</a></li>
+<li><a href="#orgb6d0312">Dropbox</a></li>
+<li><a href="#orgda378d2">Developer tools</a></li>
+<li><a href="#orgb5a9573">Junos pulse VPN client</a></li>
+<li><a href="#org075b5e4">Microsoft Office 2016</a></li>
+<li><a href="#org667ac89">Others</a></li>
 </ul>
 </li>
-<li><a href="#org849a053">homebrew</a>
+<li><a href="#org165835a">homebrew</a>
 <ul>
-<li><a href="#org345b6e4">X11</a></li>
-<li><a href="#orgffd757c">Desktop apps using Cask</a></li>
-<li><a href="#orgdd66ca7">homebrew API token</a></li>
-<li><a href="#org1492522">zsh</a></li>
+<li><a href="#orgc0eb6ce">X11</a></li>
+<li><a href="#org66ea1ca">Desktop apps using Cask</a></li>
+<li><a href="#orgedc55bf">homebrew API token</a></li>
+<li><a href="#orgc970e05">zsh</a></li>
 </ul>
 </li>
-<li><a href="#org7f6012d">git</a></li>
-<li><a href="#orgc75564a">python</a></li>
-<li><a href="#org3078505">emacs</a></li>
-<li><a href="#org04a8544">R</a></li>
-<li><a href="#orga22e6c7">wkhtmltopdf</a></li>
-<li><a href="#orgff8f2c8">mail</a></li>
+<li><a href="#orgfa91dc5">git</a></li>
+<li><a href="#org7934c1b">python</a></li>
+<li><a href="#orgc4fa74b">emacs</a></li>
+<li><a href="#orgea2bcea">R</a></li>
+<li><a href="#org278d9f1">wkhtmltopdf</a></li>
+<li><a href="#org0be92f3">mail</a></li>
 </ul>
 </div>
 </div>
 <ul class="org-ul">
-<li><i>Edit 2017-01-09: provide upgrade path to Pulse Secure client v5.1</i></li>
-</ul>
-
-<p>
-This post describes the steps that I followed to set up a new mac
-running MacOS Sierra (10.12.2), in as close to the order in which I
-did things as I could reproduce. The primary purpose is to document
-what I did for when I perform a clean install of other machines;
-hopefully others will also find it useful.
-</p>
-
-<p>
-This time around I really went all in on <a href="http://brew.sh/">homebrew</a>: I used homebrew to
-install not only command line programs and languages (python, R), but
-also as many desktop apps as I could (Chrome, x11) that would
-otherwise have been installed manually by hunting down an
-installer. When it wasn't entirely clear (to me) whether there might
-be some advantage of getting a program from another project (Emacs,
-Postgres.app), I did it the old fashioned way.
-</p>
-
-<p>
-Somewhat glossed over here are manual steps used to transfer
-non-public dotfiles, credentials, etc. Here's a partial list of files
-and directories that I copied directly from my old laptop:
-</p>
-
-<p>
-It's interesting that all none of these steps require an Apple ID -
-usually I sign in first thing, but this time I held off.
-</p>
-
-<pre class="example">
-tar -cf dotfiles.tar .Xmodmap .gitconfig .gnupg .pypirc .ssh
-</pre>
-
-<div id="outline-container-org2213a29" class="outline-2">
-<h2 id="org2213a29">system settings</h2>
-<div class="outline-text-2" id="text-org2213a29">
-</div><div id="outline-container-org1e956f8" class="outline-3">
-<h3 id="org1e956f8">turn off spelling autocorrect</h3>
-<div class="outline-text-3" id="text-org1e956f8">
-<pre class="example">
-System Preferences --&gt; Keyboard --&gt; Text tab --&gt; unselect "Correct spelling automatically" and others
-</pre>
-</div>
-</div>
-<div id="outline-container-orgd19eb4f" class="outline-3">
-<h3 id="orgd19eb4f">unmap Control + left,right</h3>
-<div class="outline-text-3" id="text-orgd19eb4f">
-<p>
-I use Control plus the left and right arrow keys to move between
-windows in emacs and tmux.
-</p>
-
-<pre class="example">
-System Preferences --&gt; Keyboard --&gt; Shortcuts --&gt; uncheck mission control: move left/right a space
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org8241ad6" class="outline-2">
-<h2 id="org8241ad6">First applications</h2>
-<div class="outline-text-2" id="text-org8241ad6">
-</div><div id="outline-container-org32cbf80" class="outline-3">
-<h3 id="org32cbf80">iTerm2</h3>
-<div class="outline-text-3" id="text-org32cbf80">
-<p>
-Update a few settings.
-</p>
-
-<p>
-Preferences &#x2013;&gt; Profiles &#x2013;&gt; Keys and do these things:
-</p>
-<ul class="org-ul">
-<li>select "Left/right option key acts as": +Esc</li>
-<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;left arrow&gt;": Send Escape sequence "b"</li>
-<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;right arrow&gt;": Send Escape sequence "f"</li>
-</ul>
-
-<p>
-Default appearance:
-</p>
-
-<ul class="org-ul">
-<li>Preferences &#x2013;&gt; Profiles &#x2013;&gt; Colors &#x2013;&gt; Load Presets &#x2013;&gt; Light Background</li>
-<li>Preferences &#x2013;&gt; Profiles &#x2013;&gt; Text &#x2013;&gt; Change Font &#x2013;&gt; 14 point</li>
-</ul>
-</div>
-</div>
-
-<div id="outline-container-org46cda0d" class="outline-3">
-<h3 id="org46cda0d">Dropbox</h3>
-<div class="outline-text-3" id="text-org46cda0d">
-<p>
-Install from website
-</p>
-</div>
-</div>
-
-<div id="outline-container-orga73de04" class="outline-3">
-<h3 id="orga73de04">Developer tools</h3>
-<div class="outline-text-3" id="text-orga73de04">
-<p>
-This can be done from the command line:
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh">xcode-select --install
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org12a5c74" class="outline-3">
-<h3 id="org12a5c74">Junos pulse VPN client</h3>
-<div class="outline-text-3" id="text-org12a5c74">
-<p>
-There are some <a href="https://forums.developer.apple.com/thread/51184">reports</a> of version 5.1 being broken in Sierra. At the
-time I'm writing this, my institution provides 5.1.9 (61653), which is
-indeed broken. The internet helpfully provides a link to an older
-version (we're trusting the University of South Florida, here):
-<a href="https://www.net.usf.edu/vpn/MacOS/JunosPulse.dmg">https://www.net.usf.edu/vpn/MacOS/JunosPulse.dmg</a>
-</p>
-
-<p>
-Installing this, and then running the updater provides 5.1.10 (61733),
-which seems to work.
-</p>
-
-<p>
-Instructions for UW are here: <a href="https://networks.uwmedicine.org/content/sslvpn-frequently-asked-questions-14">https://networks.uwmedicine.org/content/sslvpn-frequently-asked-questions-14</a>
-</p>
-</div>
-</div>
-
-<div id="outline-container-org34f384e" class="outline-3">
-<h3 id="org34f384e">Microsoft Office 2016</h3>
-<div class="outline-text-3" id="text-org34f384e">
-<p>
-The initial version of Excel (15.11) crashed on startup as widely
-reported - this was fixed by updating to a version (15.29) provided by
-Microsoft:
-</p>
-
-<p>
-<a href="https://support.microsoft.com/en-us/kb/3187505">https://support.microsoft.com/en-us/kb/3187505</a>
-</p>
-</div>
-</div>
-
-<div id="outline-container-orged2929b" class="outline-3">
-<h3 id="orged2929b">Others</h3>
-<div class="outline-text-3" id="text-orged2929b">
-<ul class="org-ul">
-<li class="on"><code>[X]</code> SizeUp - <a href="http://www.irradiatedsoftware.com/">http://www.irradiatedsoftware.com/</a> (license in Dropbox/software_licenses)</li>
-<li class="on"><code>[X]</code> HipChat client</li>
-<li class="on"><code>[X]</code> Dash 2</li>
-<li class="on"><code>[X]</code> Postgres.app <a href="https://postgresapp.com">https://postgresapp.com</a></li>
-<li class="on"><code>[X]</code> PgAdmin <a href="https://www.pgadmin.org">https://www.pgadmin.org</a></li>
-</ul>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org849a053" class="outline-2">
-<h2 id="org849a053">homebrew</h2>
-<div class="outline-text-2" id="text-org849a053">
-<p>
-Homebrew no longer requires user-ownership of /usr/local, so things are pretty easy now:
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh">/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew doctor
-</pre>
-</div>
-
-<p>
-Some packages I'll need off the bat to do just about anything
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh">brew install git
-brew install wget
-</pre>
-</div>
-
-<p>
-A number of packages are installed in the context of other
-applications; here are additional packages that I know I'll use.
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh">brew install autojump &amp;&amp; \
-brew install gcc &amp;&amp; \
-brew install graphviz &amp;&amp; \
-brew install htop-osx &amp;&amp; \
-brew install latex2rtf &amp;&amp; \
-brew install pandoc &amp;&amp; \
-brew install tmux &amp;&amp; \
-brew install tree
-</pre>
-</div>
-
-<p>
-Note other packages installed in other sections as well.
-</p>
-</div>
-
-<div id="outline-container-org345b6e4" class="outline-3">
-<h3 id="org345b6e4">X11</h3>
-<div class="outline-text-3" id="text-org345b6e4">
-<p>
-install Xquartz
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh">brew install Caskroom/cask/xquartz
-</pre>
-</div>
-
-<p>
-X11 key bindings so that the option key is used for Meta..
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh">cat &gt; ~/.Xmodmap &lt;&lt;EOF
-clear Mod1
-clear Mod2
-keycode 63 = Mode_switch
-keycode 66 = Meta_L
-add Mod1 = Meta_L
-add Mod2 = Mode_switch
-EOF
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-orgffd757c" class="outline-3">
-<h3 id="orgffd757c">Desktop apps using Cask</h3>
-<div class="outline-text-3" id="text-orgffd757c">
-<p>
-Homebrew installs desktop apps too!
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh">brew cask install google-chrome
-brew cask install java
-brew cask install mactex
-brew cask install texmaker
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-orgdd66ca7" class="outline-3">
-<h3 id="orgdd66ca7">homebrew API token</h3>
-<div class="outline-text-3" id="text-orgdd66ca7">
-<p>
-Apparently lots of requests to GutHub via homebrew can hit a rate limit. There's a higher limit if you create an API token. See <a href="https://gist.github.com/christopheranderton/8644743">https://gist.github.com/christopheranderton/8644743</a>
-</p>
-
-<p>
-Here's the url for the token creation dialog:
-</p>
-
-<p>
-<a href="https://github.com/settings/tokens/new?scopes=&amp;description=Homebrew">https://github.com/settings/tokens/new?scopes=&amp;description=Homebrew</a>
-</p>
-
-<p>
-Make sure that all 'scopes' are unchecked. Once you generate the token, add to your shell profile:
-</p>
-
-<pre class="example">
-export HOMEBREW_GITHUB_API_TOKEN=token_here
-</pre>
-</div>
-</div>
-
-<div id="outline-container-org1492522" class="outline-3">
-<h3 id="org1492522">zsh</h3>
-<div class="outline-text-3" id="text-org1492522">
-<p>
-Install zsh with Homebrew
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh">brew install zsh
-</pre>
-</div>
-
-<p>
-Change shell to zsh
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh">sudo -s
-echo /usr/local/bin/zsh &gt;&gt; /etc/shells
-exit
-chsh -s /usr/local/bin/zsh $USER
-</pre>
-</div>
-
-<p>
-zsh init files are in Dropbox/zsh. <code>~/.zshenv</code> contains the following:
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh">for pth in $HOME/Dropbox $HOME/src $HOME; do
-    if [[ -f $pth/zsh/zstartup ]]; then
-	. $pth/zsh/zstartup
-	break
-    fi
-done
-</pre>
-</div>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org7f6012d" class="outline-2">
-<h2 id="org7f6012d">git</h2>
-<div class="outline-text-2" id="text-org7f6012d">
-<pre class="example">
-git config --global user.name "My Name"
-git config --global user.email me@email.com
-</pre>
-</div>
-</div>
-
-<div id="outline-container-orgc75564a" class="outline-2">
-<h2 id="orgc75564a">python</h2>
-<div class="outline-text-2" id="text-orgc75564a">
-<p>
-Use homebrew - see
-<a href="https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Homebrew-and-Python.md">https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Homebrew-and-Python.md</a>
-</p>
-
-<p>
-Run <code>brew info python</code> for required and optional dependencies
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh">for pkg in sphinx-doc pkg-config readline sqlite homebrew/dupes/tcl-tk berkeley-db4; do brew install $pkg; done
-brew install python --with-berkeley-db4 --with-tcl-tk
-brew linkapps python
-pip install -U pip
-pip install -U setuptools
-pip install -U virtualenv
-</pre>
-</div>
-
-<p>
-Install some python packages using homebrew - these are time consuming to install otherwise.
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh">brew install homebrew/python/numpy
-</pre>
-</div>
-
-<p>
-And a few packages that I usually like to have around.
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh">pip install ansible
-pip install csvkit
-pip install reportlab
-pip install scons
-pip install jinja2
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org3078505" class="outline-2">
-<h2 id="org3078505">emacs</h2>
-<div class="outline-text-2" id="text-org3078505">
-<p>
-Install latest emacs binary (25.1) from <a href="http://emacsformacosx.com/">http://emacsformacosx.com/</a>
-</p>
-
-<p>
-Emacs needs a few homebrew packages
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh">brew install libressl
-brew install aspell
-brew install gpg
-</pre>
-</div>
-
-<p>
-Check out my .emacs.d and run setup scripts.
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh">cd ~
-git clone git@github.com:nhoffman/.emacs.d.git
-cd .emacs.d
-git submodule init
-git submodule update
-bin/venv.sh
-</pre>
-</div>
-
-<p>
-For elpy:
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh">pip install -r requirements.txt
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org04a8544" class="outline-2">
-<h2 id="org04a8544">R</h2>
-<div class="outline-text-2" id="text-org04a8544">
-<p>
-Again, using homebrew.
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh">brew tap homebrew/science
-brew install r
-</pre>
-</div>
-
-<div class="org-src-container">
-<pre class="src src-sh">R --slave &lt;&lt; EOF
-packages &lt;- c("ape", "sqldf", "ROCR", "lattice", "RSQLite", "latticeExtra", "argparse", "data.table")
-install.packages(packages, repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE)
-EOF
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-orga22e6c7" class="outline-2">
-<h2 id="orga22e6c7">wkhtmltopdf</h2>
-<div class="outline-text-2" id="text-orga22e6c7">
-<div class="org-src-container">
-<pre class="src src-sh">cd ~/Downloads
-wget 'http://download.gna.org/wkhtmltopdf/0.12/0.12.4/wkhtmltox-0.12.4_osx-cocoa-x86-64.pkg'
-</pre>
-</div>
-
-<p>
-Use installer - binary is <code>/usr/local/bin/wkhtmltopdf</code>
-</p>
-</div>
-</div>
-
-<div id="outline-container-orgff8f2c8" class="outline-2">
-<h2 id="orgff8f2c8">mail</h2>
-<div class="outline-text-2" id="text-orgff8f2c8">
-<p>
-<a href="http://www.washington.edu/itconnect/connect/email/uw-email/configuring/os-x-mail6/">http://www.washington.edu/itconnect/connect/email/uw-email/configuring/os-x-mail6/</a>
-</p>
-</div>
-</div>
-</div>
-        <hr />
+<li><i>Edit 2017-01-09: provide upgrade path to Pulse ...</i></li></ul> </div>
     </div>
 
 
@@ -822,57 +1125,6 @@ finally try to settle on a publishing platform for various notes and
 other content that I have scattered ...</p> </div>
     </div>
 
-
- 
-
-
-    <div class='article'>
-        <a href="./mac-setup.html"><h2>Setting up a new mac</h2></a>
-        <div class= "well small"> Sun 20 October 2013 &#8212;
-
-
-<em>Filed under <a href="./category/notes.html">notes</a>;
-    tags: <a href="./tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="./mac-setup.html">read more</a> </div>
-        <div class="summary"><div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#org2213851">First applications</a>
-<ul>
-<li><a href="#orga746407">Developer tools</a></li>
-<li><a href="#org574d72b">X11</a></li>
-<li><a href="#org2534276">Others</a></li>
-</ul>
-</li>
-<li><a href="#orgfe48cb1">system-level configuration</a>
-<ul>
-<li><a href="#org44fd4d7">turn off spelling autocorrect</a></li>
-<li><a href="#orgb064b23">fix scroll direction</a></li>
-<li><a href="#org642bad5">turn off spaces key shortcuts</a></li>
-</ul>
-</li>
-<li><a href="#org65830c5">ssh</a></li>
-<li><a href="#org5d3a81b">homebrew</a>
-<ul>
-<li><a href="#org1683660">stuff installed using homebrew</a></li>
-<li><a href="#orga778c7a">zsh</a></li>
-</ul>
-</li>
-<li><a href="#orgdb771bf">git</a></li>
-<li><a href="#orga72624d">iTerm2 settings</a></li>
-<li><a href="#org97efc1d">emacs</a></li>
-<li><a href="#orgb1860ef">python</a></li>
-<li><a href="#orge69e16c">R</a></li>
-<li><a href="#org0975c4f">mail</a></li>
-<li><a href="#org6311d98">sshfs</a></li>
-<li><a href="#orge9b1650">wkhtmltopdf</a></li>
-</ul>
-</div>
-</div>
-<p>
-These are my notes that I took while setting up a ...</p> </div>
-    </div>
-
 <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
@@ -912,6 +1164,7 @@ These are my notes that I took while setting up a ...</p> </div>
                 <li><a href="./category/lectures.html">lectures</a></li>
                 <li><a href="./category/notes.html">notes</a></li>
                 <li><a href="./category/org-mode.html">org-mode</a></li>
+                <li><a href="./category/sql.html">sql</a></li>
                 <li><a href="./category/visualization.html">visualization</a></li>
             </ul>
             </div>
