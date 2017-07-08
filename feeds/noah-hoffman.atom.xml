@@ -659,6 +659,11 @@ SELECT a.tid, a.ord, a.tax_id, a.rank, names.tax_name
 Ok, that's better! If we like, we can group and aggregate the lineages:
 &lt;/p&gt;
 
+&lt;p&gt;
+(The results are shown using the equivalent of &lt;code&gt;psql -x&lt;/code&gt;; the first
+line just provides a header row.)
+&lt;/p&gt;
+
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-sql"&gt;SELECT 'value' as key;
 WITH RECURSIVE a AS (
@@ -925,11 +930,6 @@ WHERE a.rank = 'root';
 With some embellishment, we can see how this strategy can be used to
 retrieve lineages plus additional annotation for multiple tax_ids (at
 arbitrary ranks) as once.
-&lt;/p&gt;
-
-&lt;p&gt;
-(The results are shown using the equivalent of &lt;code&gt;psql -x&lt;/code&gt;; the first
-line just provides a header row.)
 &lt;/p&gt;
 
 &lt;div class="org-src-container"&gt;
