@@ -2,7 +2,7 @@
 #+DATE: 2017-07-07
 #+CATEGORY: sql
 #+PROPERTY: TAGS postgresql,taxonomy
-#+PROPERTY: header-args:sql :engine postgresql :database ncbi_taxonomy :header on :results value :eval no
+#+PROPERTY: header-args:sql :engine postgresql :database ncbi_taxonomy :header on :results value :eval
 
 This topic falls into the category of "things that I didn't know that
 I didn't know." Many of my projects involve the manipulation of
@@ -209,6 +209,9 @@ SELECT a.tid, a.ord, a.tax_id, a.rank, names.tax_name
 
 Ok, that's better! If we like, we can group and aggregate the lineages:
 
+(The results are shown using the equivalent of =psql -x=; the first
+line just provides a header row.)
+
 #+BEGIN_SRC sql :cmdline -x
 SELECT 'value' as key;
 WITH RECURSIVE a AS (
@@ -309,9 +312,6 @@ WHERE a.rank = 'root';
 With some embellishment, we can see how this strategy can be used to
 retrieve lineages plus additional annotation for multiple tax_ids (at
 arbitrary ranks) as once.
-
-(The results are shown using the equivalent of =psql -x=; the first
-line just provides a header row.)
 
 #+BEGIN_SRC sql :cmdline -x :header off
 SELECT 'value' as key;
