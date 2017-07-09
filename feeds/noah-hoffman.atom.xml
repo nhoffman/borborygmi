@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>borborygmi</title><link href="http://nhoffman.github.io/borborygmi/" rel="alternate"></link><link href="http://nhoffman.github.io/borborygmi/feeds/noah-hoffman.atom.xml" rel="self"></link><id>http://nhoffman.github.io/borborygmi/</id><updated>2017-07-07T00:00:00-07:00</updated><entry><title>Using recursive CTEs for calculating taxonomic lineages</title><link href="http://nhoffman.github.io/borborygmi/recursive-cte-for-taxonomy.html" rel="alternate"></link><published>2017-07-07T00:00:00-07:00</published><updated>2017-07-07T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2017-07-07:borborygmi/recursive-cte-for-taxonomy.html</id><summary type="html">&lt;p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>borborygmi - Noah Hoffman</title><link href="https://nhoffman.github.io/borborygmi/" rel="alternate"></link><link href="https://nhoffman.github.io/borborygmi/feeds/noah-hoffman.atom.xml" rel="self"></link><id>https://nhoffman.github.io/borborygmi/</id><updated>2017-07-07T00:00:00-07:00</updated><entry><title>Using recursive CTEs for calculating taxonomic lineages</title><link href="https://nhoffman.github.io/borborygmi/recursive-cte-for-taxonomy.html" rel="alternate"></link><published>2017-07-07T00:00:00-07:00</published><updated>2017-07-07T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2017-07-07:/borborygmi/recursive-cte-for-taxonomy.html</id><summary type="html">&lt;p&gt;
+This topic falls into the category of "things that I didn't know that
+I didn't know." Many of my projects involve the manipulation of
+taxonomies, particularly the &lt;a href="https://www.ncbi.nlm.nih.gov/taxonomy"&gt;NCBI taxonomy&lt;/a&gt;, but I didn't understand
+the efficiency with which it was possible to calculate a lineage in
+SQL. I recently revisited the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;
 This topic falls into the category of "things that I didn't know that
 I didn't know." Many of my projects involve the manipulation of
 taxonomies, particularly the &lt;a href="https://www.ncbi.nlm.nih.gov/taxonomy"&gt;NCBI taxonomy&lt;/a&gt;, but I didn't understand
@@ -1075,7 +1080,45 @@ does not work for sqlite, but you could do something similar by
 concatenating strings (though I doubt that this would be very
 efficient).
 &lt;/p&gt;
-</summary><category term="postgresql"></category><category term="taxonomy"></category></entry><entry><title>Setting up a new Mac (Sierra)</title><link href="http://nhoffman.github.io/borborygmi/mac-setup-sierra.html" rel="alternate"></link><published>2017-01-05T00:00:00-08:00</published><updated>2017-01-05T00:00:00-08:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2017-01-05:borborygmi/mac-setup-sierra.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
+</content><category term="postgresql"></category><category term="taxonomy"></category></entry><entry><title>Setting up a new Mac (Sierra)</title><link href="https://nhoffman.github.io/borborygmi/mac-setup-sierra.html" rel="alternate"></link><published>2017-01-05T00:00:00-08:00</published><updated>2017-01-05T00:00:00-08:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2017-01-05:/borborygmi/mac-setup-sierra.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
+&lt;h2&gt;Table of Contents&lt;/h2&gt;
+&lt;div id="text-table-of-contents"&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#org51c7f02"&gt;system settings&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#org323f827"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgfb2b798"&gt;unmap Control + left,right&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgb247d0b"&gt;First applications&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#org215914f"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgb6d0312"&gt;Dropbox&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgda378d2"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgb5a9573"&gt;Junos pulse VPN client&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org075b5e4"&gt;Microsoft Office 2016&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org667ac89"&gt;Others&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org165835a"&gt;homebrew&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#orgc0eb6ce"&gt;X11&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org66ea1ca"&gt;Desktop apps using Cask&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgedc55bf"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgc970e05"&gt;zsh&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgfa91dc5"&gt;git&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org7934c1b"&gt;python&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgc4fa74b"&gt;emacs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgea2bcea"&gt;R&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org278d9f1"&gt;wkhtmltopdf&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org0be92f3"&gt;mail&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;&lt;i&gt;Edit 2017-01-09: provide upgrade path to Pulse …&lt;/i&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;div id="table-of-contents"&gt;
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
@@ -1605,7 +1648,37 @@ Use installer - binary is &lt;code&gt;/usr/local/bin/wkhtmltopdf&lt;/code&gt;
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="mac"></category></entry><entry><title>Setup after clean install of El Capitan</title><link href="http://nhoffman.github.io/borborygmi/mac-setup-el-capitan.html" rel="alternate"></link><published>2015-11-02T00:00:00-08:00</published><updated>2015-11-02T00:00:00-08:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2015-11-02:borborygmi/mac-setup-el-capitan.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
+</content><category term="mac"></category></entry><entry><title>Setup after clean install of El Capitan</title><link href="https://nhoffman.github.io/borborygmi/mac-setup-el-capitan.html" rel="alternate"></link><published>2015-11-02T00:00:00-08:00</published><updated>2015-11-02T00:00:00-08:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2015-11-02:/borborygmi/mac-setup-el-capitan.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
+&lt;h2&gt;Table of Contents&lt;/h2&gt;
+&lt;div id="text-table-of-contents"&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#org2c1e823"&gt;First applications&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#org1a18810"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgd9e0b89"&gt;X11&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org8b54df8"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgf30e7d9"&gt;Others&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org16af2e4"&gt;UW only&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org608d67f"&gt;system-level configuration&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#orgb78443e"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgd973fab"&gt;turn off spaces key shortcuts&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org4a2c6dc"&gt;homebrew&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#orgb603a5b"&gt;packages installed using homebrew&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org6db31e4"&gt;homebrew cask&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org714038d"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org450908e"&gt;zsh&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgf241ce7"&gt;ssh&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#org3d9e002"&gt;update /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org91d81f3"&gt;create $ZSH_INITDIR/ssh-ask-keychain (called from start_ssh_agent.zsh …&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;</summary><content type="html">&lt;div id="table-of-contents"&gt;
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
@@ -2235,7 +2308,20 @@ Now create an alias:
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="mac"></category></entry><entry><title>Setup for VirtualBox VM running Ubuntu 14.04 on OS X Mavericks</title><link href="http://nhoffman.github.io/borborygmi/virtualbox-setup.html" rel="alternate"></link><published>2015-02-06T00:00:00-08:00</published><updated>2015-02-06T00:00:00-08:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2015-02-06:borborygmi/virtualbox-setup.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
+</content><category term="mac"></category></entry><entry><title>Setup for VirtualBox VM running Ubuntu 14.04 on OS X Mavericks</title><link href="https://nhoffman.github.io/borborygmi/virtualbox-setup.html" rel="alternate"></link><published>2015-02-06T00:00:00-08:00</published><updated>2015-02-06T00:00:00-08:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2015-02-06:/borborygmi/virtualbox-setup.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
+&lt;h2&gt;Table of Contents&lt;/h2&gt;
+&lt;div id="text-table-of-contents"&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#orgba4c0e5"&gt;VirtualBox preferences&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org1003ef3"&gt;Create an Ubuntu 14.04 VM&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org29de9d5"&gt;Set up an IP address&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;
+Here are my notes for setting up an Ubuntu VM to work on some web
+applications. This is intended to be a sandbox for development, so
+I'll err on the side of convenience (at …&lt;/p&gt;</summary><content type="html">&lt;div id="table-of-contents"&gt;
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
@@ -2588,7 +2674,22 @@ command line given more time and patience than I have at this point!
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="linux"></category><category term="mac"></category><category term="virtualbox"></category></entry><entry><title>Hold the pie</title><link href="http://nhoffman.github.io/borborygmi/hold-the-pie.html" rel="alternate"></link><published>2014-10-30T00:00:00-07:00</published><updated>2014-10-30T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2014-10-30:borborygmi/hold-the-pie.html</id><summary type="html">&lt;p&gt;
+</content><category term="linux"></category><category term="mac"></category><category term="virtualbox"></category></entry><entry><title>Hold the pie</title><link href="https://nhoffman.github.io/borborygmi/hold-the-pie.html" rel="alternate"></link><published>2014-10-30T00:00:00-07:00</published><updated>2014-10-30T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2014-10-30:/borborygmi/hold-the-pie.html</id><summary type="html">&lt;p&gt;
+I came across this visualization&lt;sup&gt;&lt;a id="fnr.1" class="footref" href="#fn.1"&gt;1&lt;/a&gt;&lt;/sup&gt; of a very simple data set, and
+it took me a few minutes to fully understand what makes it
+so&amp;#x2026; suboptimal.
+&lt;/p&gt;
+
+
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="hold-the-pie/why_pie.png" alt="why_pie.png" /&gt;
+&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;Ok, first of all, it's &lt;a href="https://blogs.oracle.com/experience/entry/countdown_of_top_10_reasons_to_never_ever_use_a_pie_chart"&gt;a&lt;/a&gt; &lt;a href="http://en.wikipedia.org/wiki/Pie_chart"&gt;pie&lt;/a&gt; &lt;a href="http://www.businessinsider.com/pie-charts-are-the-worst-2013-6"&gt;chart&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;The labels are separated from the corresponding values.&lt;/li&gt;
+&lt;li&gt;The grey scale color map doesn't distinguish …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;
 I came across this visualization&lt;sup&gt;&lt;a id="fnr.1" class="footref" href="#fn.1"&gt;1&lt;/a&gt;&lt;/sup&gt; of a very simple data set, and
 it took me a few minutes to fully understand what makes it
 so&amp;#x2026; suboptimal.
@@ -2723,7 +2824,20 @@ Kwon JH, Fausone MK, Du H, Robicsek A, and Peterson LR. Impact of laboratory-rep
 
 
 &lt;/div&gt;
-&lt;/div&gt;</summary><category term="laboratory medicine"></category></entry><entry><title>Compiling bcl2fastq v2.15 on Ubuntu 12.04 and 14.04</title><link href="http://nhoffman.github.io/borborygmi/compiling-bcl2fastq-on-ubuntu.html" rel="alternate"></link><published>2014-08-27T00:00:00-07:00</published><updated>2014-08-27T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2014-08-27:borborygmi/compiling-bcl2fastq-on-ubuntu.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
+&lt;/div&gt;</content><category term="laboratory medicine"></category></entry><entry><title>Compiling bcl2fastq v2.15 on Ubuntu 12.04 and 14.04</title><link href="https://nhoffman.github.io/borborygmi/compiling-bcl2fastq-on-ubuntu.html" rel="alternate"></link><published>2014-08-27T00:00:00-07:00</published><updated>2014-08-27T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2014-08-27:/borborygmi/compiling-bcl2fastq-on-ubuntu.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
+&lt;h2&gt;Table of Contents&lt;/h2&gt;
+&lt;div id="text-table-of-contents"&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#org4866048"&gt;Ubuntu 14.04 (Trusty Tahr)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgc00f271"&gt;Ubuntu 12.04 (Precise Pangolin)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;
+Illumina provides a program for demultiplexing sequencing output
+called &lt;code&gt;bcl2fastq&lt;/code&gt;. They get a gold star for releasing the source -
+the downside is that they release binaries only for RHEL/CentOS, and
+no build instructions for Ubuntu. So …&lt;/p&gt;</summary><content type="html">&lt;div id="table-of-contents"&gt;
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
@@ -2874,7 +2988,22 @@ After all of that, compiling bcl2fasta worked as described for 14.04.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="linux"></category></entry><entry><title>Creating lists containing variables</title><link href="http://nhoffman.github.io/borborygmi/lists-with-variables.html" rel="alternate"></link><published>2014-06-12T00:00:00-07:00</published><updated>2014-06-12T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2014-06-12:borborygmi/lists-with-variables.html</id><summary type="html">&lt;p&gt;
+</content><category term="linux"></category></entry><entry><title>Creating lists containing variables</title><link href="https://nhoffman.github.io/borborygmi/lists-with-variables.html" rel="alternate"></link><published>2014-06-12T00:00:00-07:00</published><updated>2014-06-12T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2014-06-12:/borborygmi/lists-with-variables.html</id><summary type="html">&lt;p&gt;
+I learned a bit about list creation in elisp today. Here's how you join a list of strings in elisp:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+&lt;pre class="src src-elisp"&gt;(mapconcat #'identity '("" "path" "to" "someplace") "/")
+&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;
+But I learned (thanks to &lt;a href="http://stackoverflow.com/users/113848/legoscia"&gt;legoscia&lt;/a&gt; on &lt;a href="http://stackoverflow.com/questions/24188100"&gt;stackoverflow&lt;/a&gt;) that simply
+replacing an element in the list with a variable results in an error:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+&lt;pre class="src src-elisp"&gt;(let ((path …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;
 I learned a bit about list creation in elisp today. Here's how you join a list of strings in elisp:
 &lt;/p&gt;
 
@@ -2979,7 +3108,25 @@ Nope.
 &lt;p&gt;
 Much better.
 &lt;/p&gt;
-</summary><category term="elisp"></category></entry><entry><title>A practical introduction to databases and data management</title><link href="http://nhoffman.github.io/borborygmi/database-intro.html" rel="alternate"></link><published>2014-06-11T00:00:00-07:00</published><updated>2014-06-11T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2014-06-11:borborygmi/database-intro.html</id><summary type="html">&lt;ul class="org-ul"&gt;
+</content><category term="elisp"></category></entry><entry><title>A practical introduction to databases and data management</title><link href="https://nhoffman.github.io/borborygmi/database-intro.html" rel="alternate"></link><published>2014-06-11T00:00:00-07:00</published><updated>2014-06-11T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2014-06-11:/borborygmi/database-intro.html</id><summary type="html">&lt;ul class="org-ul"&gt;
+&lt;li&gt;&lt;i&gt;Edit 2015-07-26: added a section on date formatting&lt;/i&gt;&lt;/li&gt;
+&lt;li&gt;&lt;i&gt;Edit 2016-07-11: add reference to Tidy Data&lt;/i&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+This post contains the content of a lecture prepared for Laboratory Medicine residents as part of a series on medical informatics.
+&lt;/p&gt;
+
+&lt;div id="table-of-contents"&gt;
+&lt;h2&gt;Table of Contents&lt;/h2&gt;
+&lt;div id="text-table-of-contents"&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#org1b83c2b"&gt;Objectives&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org1caf079"&gt;Relational database terminology&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org7ca5b02"&gt;Relations&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#org25595e1"&gt;one to one&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org6506864"&gt;one to many …&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;</summary><content type="html">&lt;ul class="org-ul"&gt;
 &lt;li&gt;&lt;i&gt;Edit 2015-07-26: added a section on date formatting&lt;/i&gt;&lt;/li&gt;
 &lt;li&gt;&lt;i&gt;Edit 2016-07-11: add reference to Tidy Data&lt;/i&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -5148,7 +5295,19 @@ something like 2015-07-23T16:55:02+17:00).
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="laboratory medicine"></category></entry><entry><title>sqlite dict factory</title><link href="http://nhoffman.github.io/borborygmi/dict-factory.html" rel="alternate"></link><published>2014-06-10T00:00:00-07:00</published><updated>2014-06-10T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2014-06-10:borborygmi/dict-factory.html</id><summary type="html">&lt;p&gt;
+</content><category term="laboratory medicine"></category></entry><entry><title>sqlite dict factory</title><link href="https://nhoffman.github.io/borborygmi/dict-factory.html" rel="alternate"></link><published>2014-06-10T00:00:00-07:00</published><updated>2014-06-10T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2014-06-10:/borborygmi/dict-factory.html</id><summary type="html">&lt;p&gt;
+Probably not as efficient as using the sqlite3.Row class, but works
+when actual dict objects are required. Adapted from
+&lt;a href="https://docs.python.org/2/library/sqlite3.html"&gt;https://docs.python.org/2/library/sqlite3.html&lt;/a&gt;.
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+&lt;pre class="src src-python"&gt;import sqlite3
+
+def dict_factory(cursor, row):
+    return {col[0]: row[idx] for idx, col in enumerate(cursor.description)}
+
+con = sqlite3.connect(":memory …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;
 Probably not as efficient as using the sqlite3.Row class, but works
 when actual dict objects are required. Adapted from
 &lt;a href="https://docs.python.org/2/library/sqlite3.html"&gt;https://docs.python.org/2/library/sqlite3.html&lt;/a&gt;.
@@ -5171,7 +5330,26 @@ print cur.fetchone()
 &lt;pre class="example"&gt;
 {'a': 1}
 &lt;/pre&gt;
-</summary><category term="python"></category><category term="sqlite"></category></entry><entry><title>Creating a site with Pelican and org-mode</title><link href="http://nhoffman.github.io/borborygmi/getting-started.html" rel="alternate"></link><published>2014-05-26T00:00:00-07:00</published><updated>2014-05-26T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2014-05-26:borborygmi/getting-started.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
+</content><category term="python"></category><category term="sqlite"></category></entry><entry><title>Creating a site with Pelican and org-mode</title><link href="https://nhoffman.github.io/borborygmi/getting-started.html" rel="alternate"></link><published>2014-05-26T00:00:00-07:00</published><updated>2014-05-26T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2014-05-26:/borborygmi/getting-started.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
+&lt;h2&gt;Table of Contents&lt;/h2&gt;
+&lt;div id="text-table-of-contents"&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#org39ee611"&gt;org-mode integration&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#org02108f5"&gt;Arranging content in subdirectories&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgf44722f"&gt;Syntax highlighting&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org9aedfed"&gt;Choosing a theme&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org1236f1e"&gt;Hosting on github pages&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org2316dc5"&gt;Examples&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;
+Never one to pass up the opportunity for yak-shaving, I thought I'd
+finally try to settle on a publishing platform for various notes and
+other content that I have scattered about …&lt;/p&gt;</summary><content type="html">&lt;div id="table-of-contents"&gt;
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
@@ -5529,7 +5707,44 @@ select * from foo;
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="org-mode"></category><category term="pelican"></category><category term="elisp"></category></entry><entry><title>Setting up a new mac</title><link href="http://nhoffman.github.io/borborygmi/mac-setup.html" rel="alternate"></link><published>2013-10-20T00:00:00-07:00</published><updated>2013-10-20T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2013-10-20:borborygmi/mac-setup.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
+</content><category term="org-mode"></category><category term="pelican"></category><category term="elisp"></category></entry><entry><title>Setting up a new mac</title><link href="https://nhoffman.github.io/borborygmi/mac-setup.html" rel="alternate"></link><published>2013-10-20T00:00:00-07:00</published><updated>2013-10-20T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2013-10-20:/borborygmi/mac-setup.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
+&lt;h2&gt;Table of Contents&lt;/h2&gt;
+&lt;div id="text-table-of-contents"&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#org2213851"&gt;First applications&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#orga746407"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org574d72b"&gt;X11&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org2534276"&gt;Others&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgfe48cb1"&gt;system-level configuration&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#org44fd4d7"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgb064b23"&gt;fix scroll direction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org642bad5"&gt;turn off spaces key shortcuts&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org65830c5"&gt;ssh&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org5d3a81b"&gt;homebrew&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#org1683660"&gt;stuff installed using homebrew&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orga778c7a"&gt;zsh&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgdb771bf"&gt;git&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orga72624d"&gt;iTerm2 settings&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org97efc1d"&gt;emacs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgb1860ef"&gt;python&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orge69e16c"&gt;R&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org0975c4f"&gt;mail&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org6311d98"&gt;sshfs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orge9b1650"&gt;wkhtmltopdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;
+These are my notes that I took while setting up a …&lt;/p&gt;</summary><content type="html">&lt;div id="table-of-contents"&gt;
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
@@ -6016,7 +6231,38 @@ Now create an alias:
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="mac"></category></entry><entry><title>Installing R packages</title><link href="http://nhoffman.github.io/borborygmi/installing-r-packages.html" rel="alternate"></link><published>2010-03-22T00:00:00-07:00</published><updated>2010-03-22T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2010-03-22:borborygmi/installing-r-packages.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
+</content><category term="mac"></category></entry><entry><title>Installing R packages</title><link href="https://nhoffman.github.io/borborygmi/installing-r-packages.html" rel="alternate"></link><published>2010-03-22T00:00:00-07:00</published><updated>2010-03-22T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2010-03-22:/borborygmi/installing-r-packages.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
+&lt;h2&gt;Table of Contents&lt;/h2&gt;
+&lt;div id="text-table-of-contents"&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#org2aad2fd"&gt;Installing from CRAN&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org2cc5a0c"&gt;Bioconductor&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgc092385"&gt;R-forge&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org04ff07c"&gt;Installing packages locally&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org6578780"&gt;Reloading a package&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;
+Notes to myself about installing R packages.
+&lt;/p&gt;
+
+&lt;div id="outline-container-org2aad2fd" class="outline-2"&gt;
+&lt;h2 id="org2aad2fd"&gt;Installing from CRAN&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org2aad2fd"&gt;
+&lt;div class="org-src-container"&gt;
+&lt;pre class="src src-R"&gt;install.packages(c("ape","sqldf","ROCR"), repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE)
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org2cc5a0c" class="outline-2"&gt;
+&lt;h2 id="org2cc5a0c"&gt;Bioconductor&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org2cc5a0c"&gt;
+&lt;div class="org-src-container"&gt;
+&lt;pre class="src src-R"&gt;source("http://bioconductor.org/biocLite.R")
+biocLite(c("Biostrings","BSgenome …&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</summary><content type="html">&lt;div id="table-of-contents"&gt;
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
@@ -6124,4 +6370,4 @@ Calling &lt;code&gt;library()&lt;/code&gt; after a package has already been load
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</summary><category term="R-language"></category></entry></feed>
+</content><category term="R-language"></category></entry></feed>
