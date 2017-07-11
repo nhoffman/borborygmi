@@ -66,11 +66,11 @@ expression):
 
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-sql"&gt;WITH RECURSIVE a AS (
- SELECT tax_id as tid, 1 as ord, tax_id, parent_id, rank
+ SELECT tax_id, parent_id, rank
   FROM nodes
   WHERE tax_id = '1280'
 UNION ALL
- SELECT a.tid, a.ord + 1, p.tax_id, p.parent_id, p.rank
+ SELECT p.tax_id, p.parent_id, p.rank
   FROM a JOIN nodes p ON a.parent_id = p.tax_id
 )
 SELECT * FROM a;
@@ -85,16 +85,10 @@ SELECT * FROM a;
 
 &lt;col class="org-right" /&gt;
 
-&lt;col class="org-right" /&gt;
-
-&lt;col class="org-right" /&gt;
-
 &lt;col class="org-left" /&gt;
 &lt;/colgroup&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th scope="col" class="org-right"&gt;tid&lt;/th&gt;
-&lt;th scope="col" class="org-right"&gt;ord&lt;/th&gt;
 &lt;th scope="col" class="org-right"&gt;tax_id&lt;/th&gt;
 &lt;th scope="col" class="org-right"&gt;parent_id&lt;/th&gt;
 &lt;th scope="col" class="org-left"&gt;rank&lt;/th&gt;
@@ -103,79 +97,59 @@ SELECT * FROM a;
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td class="org-right"&gt;1280&lt;/td&gt;
-&lt;td class="org-right"&gt;1&lt;/td&gt;
-&lt;td class="org-right"&gt;1280&lt;/td&gt;
 &lt;td class="org-right"&gt;1279&lt;/td&gt;
 &lt;td class="org-left"&gt;species&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="org-right"&gt;1280&lt;/td&gt;
-&lt;td class="org-right"&gt;2&lt;/td&gt;
 &lt;td class="org-right"&gt;1279&lt;/td&gt;
 &lt;td class="org-right"&gt;90964&lt;/td&gt;
 &lt;td class="org-left"&gt;genus&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="org-right"&gt;1280&lt;/td&gt;
-&lt;td class="org-right"&gt;3&lt;/td&gt;
 &lt;td class="org-right"&gt;90964&lt;/td&gt;
 &lt;td class="org-right"&gt;1385&lt;/td&gt;
 &lt;td class="org-left"&gt;family&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="org-right"&gt;1280&lt;/td&gt;
-&lt;td class="org-right"&gt;4&lt;/td&gt;
 &lt;td class="org-right"&gt;1385&lt;/td&gt;
 &lt;td class="org-right"&gt;91061&lt;/td&gt;
 &lt;td class="org-left"&gt;order&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="org-right"&gt;1280&lt;/td&gt;
-&lt;td class="org-right"&gt;5&lt;/td&gt;
 &lt;td class="org-right"&gt;91061&lt;/td&gt;
 &lt;td class="org-right"&gt;1239&lt;/td&gt;
 &lt;td class="org-left"&gt;class&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="org-right"&gt;1280&lt;/td&gt;
-&lt;td class="org-right"&gt;6&lt;/td&gt;
 &lt;td class="org-right"&gt;1239&lt;/td&gt;
 &lt;td class="org-right"&gt;1783272&lt;/td&gt;
 &lt;td class="org-left"&gt;phylum&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="org-right"&gt;1280&lt;/td&gt;
-&lt;td class="org-right"&gt;7&lt;/td&gt;
 &lt;td class="org-right"&gt;1783272&lt;/td&gt;
 &lt;td class="org-right"&gt;2&lt;/td&gt;
 &lt;td class="org-left"&gt;below_superkingdom&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="org-right"&gt;1280&lt;/td&gt;
-&lt;td class="org-right"&gt;8&lt;/td&gt;
 &lt;td class="org-right"&gt;2&lt;/td&gt;
 &lt;td class="org-right"&gt;131567&lt;/td&gt;
 &lt;td class="org-left"&gt;superkingdom&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="org-right"&gt;1280&lt;/td&gt;
-&lt;td class="org-right"&gt;9&lt;/td&gt;
 &lt;td class="org-right"&gt;131567&lt;/td&gt;
 &lt;td class="org-right"&gt;1&lt;/td&gt;
 &lt;td class="org-left"&gt;below_root&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="org-right"&gt;1280&lt;/td&gt;
-&lt;td class="org-right"&gt;10&lt;/td&gt;
 &lt;td class="org-right"&gt;1&lt;/td&gt;
 &lt;td class="org-right"&gt;&amp;#xa0;&lt;/td&gt;
 &lt;td class="org-left"&gt;root&lt;/td&gt;

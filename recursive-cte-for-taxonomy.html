@@ -120,11 +120,11 @@ expression):
 
 <div class="org-src-container">
 <pre class="src src-sql">WITH RECURSIVE a AS (
- SELECT tax_id as tid, 1 as ord, tax_id, parent_id, rank
+ SELECT tax_id, parent_id, rank
   FROM nodes
   WHERE tax_id = '1280'
 UNION ALL
- SELECT a.tid, a.ord + 1, p.tax_id, p.parent_id, p.rank
+ SELECT p.tax_id, p.parent_id, p.rank
   FROM a JOIN nodes p ON a.parent_id = p.tax_id
 )
 SELECT * FROM a;
@@ -139,16 +139,10 @@ SELECT * FROM a;
 
 <col class="org-right" />
 
-<col class="org-right" />
-
-<col class="org-right" />
-
 <col class="org-left" />
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-right">tid</th>
-<th scope="col" class="org-right">ord</th>
 <th scope="col" class="org-right">tax_id</th>
 <th scope="col" class="org-right">parent_id</th>
 <th scope="col" class="org-left">rank</th>
@@ -157,79 +151,59 @@ SELECT * FROM a;
 <tbody>
 <tr>
 <td class="org-right">1280</td>
-<td class="org-right">1</td>
-<td class="org-right">1280</td>
 <td class="org-right">1279</td>
 <td class="org-left">species</td>
 </tr>
 
 <tr>
-<td class="org-right">1280</td>
-<td class="org-right">2</td>
 <td class="org-right">1279</td>
 <td class="org-right">90964</td>
 <td class="org-left">genus</td>
 </tr>
 
 <tr>
-<td class="org-right">1280</td>
-<td class="org-right">3</td>
 <td class="org-right">90964</td>
 <td class="org-right">1385</td>
 <td class="org-left">family</td>
 </tr>
 
 <tr>
-<td class="org-right">1280</td>
-<td class="org-right">4</td>
 <td class="org-right">1385</td>
 <td class="org-right">91061</td>
 <td class="org-left">order</td>
 </tr>
 
 <tr>
-<td class="org-right">1280</td>
-<td class="org-right">5</td>
 <td class="org-right">91061</td>
 <td class="org-right">1239</td>
 <td class="org-left">class</td>
 </tr>
 
 <tr>
-<td class="org-right">1280</td>
-<td class="org-right">6</td>
 <td class="org-right">1239</td>
 <td class="org-right">1783272</td>
 <td class="org-left">phylum</td>
 </tr>
 
 <tr>
-<td class="org-right">1280</td>
-<td class="org-right">7</td>
 <td class="org-right">1783272</td>
 <td class="org-right">2</td>
 <td class="org-left">below_superkingdom</td>
 </tr>
 
 <tr>
-<td class="org-right">1280</td>
-<td class="org-right">8</td>
 <td class="org-right">2</td>
 <td class="org-right">131567</td>
 <td class="org-left">superkingdom</td>
 </tr>
 
 <tr>
-<td class="org-right">1280</td>
-<td class="org-right">9</td>
 <td class="org-right">131567</td>
 <td class="org-right">1</td>
 <td class="org-left">below_root</td>
 </tr>
 
 <tr>
-<td class="org-right">1280</td>
-<td class="org-right">10</td>
 <td class="org-right">1</td>
 <td class="org-right">&#xa0;</td>
 <td class="org-left">root</td>
