@@ -52,29 +52,29 @@ expression):
 
 #+BEGIN_SRC sql
 WITH RECURSIVE a AS (
- SELECT tax_id as tid, 1 as ord, tax_id, parent_id, rank
+ SELECT tax_id, parent_id, rank
   FROM nodes
   WHERE tax_id = '1280'
 UNION ALL
- SELECT a.tid, a.ord + 1, p.tax_id, p.parent_id, p.rank
+ SELECT p.tax_id, p.parent_id, p.rank
   FROM a JOIN nodes p ON a.parent_id = p.tax_id
 )
 SELECT * FROM a;
 #+END_SRC
 
 #+RESULTS:
-|  tid | ord |  tax_id | parent_id | rank               |
-|------+-----+---------+-----------+--------------------|
-| 1280 |   1 |    1280 |      1279 | species            |
-| 1280 |   2 |    1279 |     90964 | genus              |
-| 1280 |   3 |   90964 |      1385 | family             |
-| 1280 |   4 |    1385 |     91061 | order              |
-| 1280 |   5 |   91061 |      1239 | class              |
-| 1280 |   6 |    1239 |   1783272 | phylum             |
-| 1280 |   7 | 1783272 |         2 | below_superkingdom |
-| 1280 |   8 |       2 |    131567 | superkingdom       |
-| 1280 |   9 |  131567 |         1 | below_root         |
-| 1280 |  10 |       1 |           | root               |
+|  tax_id | parent_id | rank               |
+|---------+-----------+--------------------|
+|    1280 |      1279 | species            |
+|    1279 |     90964 | genus              |
+|   90964 |      1385 | family             |
+|    1385 |     91061 | order              |
+|   91061 |      1239 | class              |
+|    1239 |   1783272 | phylum             |
+| 1783272 |         2 | below_superkingdom |
+|       2 |    131567 | superkingdom       |
+|  131567 |         1 | below_root         |
+|       1 |           | root               |
 
 And voila: we have traversed the tree from leaf to root, and in doing
 so, the lineage is defined. I'm using postgresql for this example, but
