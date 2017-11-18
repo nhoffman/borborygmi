@@ -5,19 +5,23 @@
 #+PROPERTY: header-args :eval no
 #+OPTIONS: ^:nil
 
-Seems like just about the only thing I post here is documentation of
-periodic clean installs of new versions of MacOS... oh well. I make it
-a practice now to blow away previous versions of the OS and start with
-a clean install each time there's a major update. So, with only minor
-modifications from my last post...
+I make it a practice to blow away previous versions of the OS and
+start with a clean install each time there's a major update. Why do
+this?
+
+- In my experience, clean installs result in a more stable system.
+- I try to maintain a system that is easily bootstrapped, and this is
+  pretty much the only way to reliably test that process.
+- I want to make sure that everything that I really care about on my
+  computer is replicated someplace, either using a cloud service
+  (mostly Dropbox), or in git repositories. This forces the issue.
 
 Once again, homebrew is the foundation of my setup. I used homebrew to
 install not only command line programs and languages (python, R), but
 also as many desktop apps as I could (Chrome, x11) that would
 otherwise have been installed manually by hunting down an
-installer. When it wasn't entirely clear (to me) whether there might
-be some advantage of getting a program from another project (Emacs,
-Postgres.app), I did it the old fashioned way.
+installer. Each time I go through this, homebrew takes care of more
+and more apps.
 
 Somewhat glossed over here are manual steps used to transfer
 non-public dotfiles, credentials, etc. Here's a partial list of files
@@ -28,7 +32,264 @@ and directories that I copied directly from my old laptop:
 Note that none of these steps require an Apple ID - I held off on
 signing in until the very end just to see if it was possible.
 
-* install virtualbox and vagrant
+* system settings
+** turn off spelling autocorrect
+: System Preferences --> Keyboard --> Text tab --> unselect "Correct spelling automatically" and others
+** unmap Control + left,right
+
+I use Control plus the left and right arrow keys to move between
+windows in emacs and tmux.
+
+: System Preferences --> Keyboard --> Shortcuts --> uncheck mission control: move left/right a space
+
+* Developer tools
+
+Pretty much the first thing that needs to happen. This can be done
+from the command line:
+
+#+BEGIN_SRC sh
+xcode-select --install
+#+END_SRC
+
+* homebrew
+
+Homebrew no longer requires user-ownership of /usr/local, so things
+are pretty easy now:
+
+#+BEGIN_SRC sh
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew doctor
+#+END_SRC
+
+Many packages are installed later with additional elaboration or in as
+dependencies for other applications; here are some more or less
+standalone packages that I routinely install.
+
+#+BEGIN_SRC sh
+brew install git && \
+brew install wget && \
+brew install autojump && \
+brew install gcc && \
+brew install graphviz && \
+brew install htop-osx && \
+brew install latex2rtf && \
+brew install pandoc && \
+brew install tmux && \
+brew install tree && \
+brew install fd && \
+brew install xsv
+#+END_SRC
+
+** homebrew API token
+
+Apparently lots of requests to GutHub via homebrew can hit a rate limit. There's a higher limit if you create an API token. See https://gist.github.com/christopheranderton/8644743
+
+Here's the url for the token creation dialog:
+
+https://github.com/settings/tokens/new?scopes=&description=Homebrew
+
+Make sure that all 'scopes' are unchecked. Once you generate the token, add to your shell profile:
+
+: export HOMEBREW_GITHUB_API_TOKEN=token_here
+
+* zsh
+
+Install zsh with Homebrew
+
+#+BEGIN_SRC sh
+brew install zsh
+#+END_SRC
+
+Change shell to zsh
+
+#+BEGIN_SRC sh
+sudo -s
+echo /usr/local/bin/zsh >> /etc/shells
+exit
+chsh -s /usr/local/bin/zsh $USER
+#+END_SRC
+
+Install my dotfiles
+
+#+BEGIN_SRC sh
+cd ~
+git clone git@bitbucket.org:nhoffman/dotfiles.git
+~/dotfiles/mac/install.py
+#+END_SRC
+
+* desktop apps
+
+Homebrew installs desktop apps too!
+
+#+BEGIN_SRC sh
+brew cask install sizeup
+# brew cask install dash # installs dash 4 - have I bought this?
+brew cask install hipchat
+brew cask install google-chrome
+brew cask install java
+brew cask install mactex
+brew cask install texmaker
+brew cask install wkhtmltopdf
+#+END_SRC
+
+- Some of the above (eg, sizeup, dropbox, dash) require licenses and credentials
+that I install interactively.
+
+** iTerm2
+
+#+BEGIN_SRC
+brew cask install iterm2
+#+END_SRC
+
+Update a few settings.
+
+Preferences --> Profiles --> Keys and do these things:
+- select "Left/right option key acts as": +Esc
+- + --> Keyboard shortcut "OPT+<left arrow>": Send Escape sequence "b"
+- + --> Keyboard shortcut "OPT+<right arrow>": Send Escape sequence "f"
+
+Default appearance:
+
+- Preferences --> Profiles --> Colors --> Load Presets --> Light Background
+- Preferences --> Profiles --> Text --> Change Font --> 14 point
+
+** postgresql
+
+#+BEGIN_SRC sh
+brew cask install postgres
+#+END_SRC
+
+This installs multiple versions of postgres. You'll need to add the
+path to the CLI for the version you want to use to your PATH, eg:
+
+#+BEGIN_SRC sh
+export PATH=/Applications/Postgres.app/Contents/Versions/9.6/bin:$PATH
+#+END_SRC
+
+* emacs
+
+Install latest emacs binary from http://emacsformacosx.com/
+
+Emacs needs a few homebrew packages
+
+#+BEGIN_SRC sh
+brew install libressl
+brew install aspell
+brew install gpg
+#+END_SRC
+
+Check out my .emacs.d and run setup scripts.
+
+#+BEGIN_SRC sh
+cd ~
+git clone git@github.com:nhoffman/.emacs.d.git
+cd .emacs.d
+git submodule init
+git submodule update
+#+END_SRC
+
+For elpy:
+
+#+BEGIN_SRC sh
+cd ~/.emacs.d
+bin/venv.sh
+pip install -r requirements.txt
+#+END_SRC
+
+* python
+
+I'm in the midst of the transition from python2 to python3, so as I
+wrote this it wasn't clear which packages (if any) I would need to
+install to the system. I decided to go with mostly python3, and really
+tried to limit these to utilities that are used outside of the context
+of a virtualenv.
+
+Use homebrew - see
+https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Homebrew-and-Python.md
+
+** dependencies
+
+Run =brew info python= for required and optional dependencies
+
+#+BEGIN_SRC sh
+for pkg in sphinx-doc pkg-config readline sqlite homebrew/dupes/tcl-tk; do brew install $pkg; done
+#+END_SRC
+
+** python2
+
+#+BEGIN_SRC sh
+brew install python --with-tcl-tk
+pip2 install -U pip setuptools virtualenv
+#+END_SRC
+
+** python3
+
+#+BEGIN_SRC sh
+brew install python3 --with-tcl-tk
+#+END_SRC
+
+A limited selection of packages - better to use virtualenvs!
+
+#+BEGIN_SRC sh
+pip3 install ansible
+pip3 install csvkit
+pip3 install pgcli
+#+END_SRC
+
+*** scons
+
+Note that =scons= wants to install man pages to =/usr/local/man=, which is owned by root. You'll need to do this first:
+
+#+BEGIN_SRC sh
+sudo mkdir -p /usr/local/man
+sudo chown $(whoami) /usr/local/man
+pip3 install scons
+#+END_SRC
+
+* R
+
+Again, using homebrew.
+
+#+BEGIN_SRC sh
+brew tap homebrew/science
+brew install R
+#+END_SRC
+
+Some packages that I know I'll need:
+
+#+BEGIN_SRC sh
+R --slave << EOF
+packages <- c("lattice", "RSQLite", "latticeExtra", "argparse", "data.table", "dplyr", "tidyr")
+install.packages(packages, repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE)
+EOF
+#+END_SRC
+
+Wow, this takes a long time!
+
+* X11
+
+install Xquartz
+
+#+BEGIN_SRC sh
+brew install Caskroom/cask/xquartz
+#+END_SRC
+
+X11 key bindings so that the option key is used for Meta. Not so
+relevant any more now that I rarely use emacs via X11 for remote
+sessions.
+
+#+BEGIN_SRC sh
+cat > ~/.Xmodmap <<EOF
+clear Mod1
+clear Mod2
+keycode 63 = Mode_switch
+keycode 66 = Meta_L
+add Mod1 = Meta_L
+add Mod2 = Mode_switch
+EOF
+#+END_SRC
+
+* virtualbox and vagrant
 
 brew cask install virtualbox
 brew cask install vagrant
@@ -40,8 +301,7 @@ after virtualbox is installed, go to preferences, and change default machine fol
 
 https://app.vagrantup.com/boxes/search
 
-
-* ubuntu16.04
+** install an ubuntu16.04 VM
 
 see https://app.vagrantup.com/ubuntu/boxes/xenial64
 
