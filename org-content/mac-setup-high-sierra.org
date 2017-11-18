@@ -1,0 +1,51 @@
+#+TITLE: Clean install of MacOS High Sierra
+#+DATE: 2017-11-17
+#+CATEGORY: notes
+#+PROPERTY: TAGS mac
+#+PROPERTY: header-args :eval no
+#+OPTIONS: ^:nil
+
+Seems like just about the only thing I post here is documentation of
+periodic clean installs of new versions of MacOS... oh well. I make it
+a practice now to blow away previous versions of the OS and start with
+a clean install each time there's a major update. So, with only minor
+modifications from my last post...
+
+Once again, homebrew is the foundation of my setup. I used homebrew to
+install not only command line programs and languages (python, R), but
+also as many desktop apps as I could (Chrome, x11) that would
+otherwise have been installed manually by hunting down an
+installer. When it wasn't entirely clear (to me) whether there might
+be some advantage of getting a program from another project (Emacs,
+Postgres.app), I did it the old fashioned way.
+
+Somewhat glossed over here are manual steps used to transfer
+non-public dotfiles, credentials, etc. Here's a partial list of files
+and directories that I copied directly from my old laptop:
+
+: tar -cf dotfiles.tar .Xmodmap .gitconfig .gnupg .pypirc .ssh
+
+Note that none of these steps require an Apple ID - I held off on
+signing in until the very end just to see if it was possible.
+
+* install virtualbox and vagrant
+
+brew cask install virtualbox
+brew cask install vagrant
+brew cask install vagrant-manager
+
+after virtualbox is installed, go to preferences, and change default machine folder to ~/VirtualBox
+
+- available vagrant images:
+
+https://app.vagrantup.com/boxes/search
+
+
+* ubuntu16.04
+
+see https://app.vagrantup.com/ubuntu/boxes/xenial64
+
+mkdir -p ~/vagrant/xenial64
+cd ~/vagrant/xenial64
+vagrant init ubuntu/xenial64
+vagrant up
