@@ -70,8 +70,8 @@ brew install git && \
 brew install wget && \
 brew install autojump && \
 brew install gcc && \
-brew install graphviz && \
-brew install htop-osx && \
+# brew install graphviz && \
+# brew install htop-osx && \
 brew install latex2rtf && \
 brew install pandoc && \
 brew install tmux && \
@@ -79,6 +79,8 @@ brew install tree && \
 brew install fd && \
 brew install xsv
 #+END_SRC
+
+Note that brews for graphviz and htop-osx were broken as of 2018-02-25
 
 ** homebrew API token
 
@@ -91,6 +93,82 @@ https://github.com/settings/tokens/new?scopes=&description=Homebrew
 Make sure that all 'scopes' are unchecked. Once you generate the token, add to your shell profile:
 
 : export HOMEBREW_GITHUB_API_TOKEN=token_here
+
+* python
+
+I'm in the midst of the transition from python2 to python3, so as I
+wrote this it wasn't clear which packages (if any) I would need to
+install to the system. I decided to go with mostly python3, and really
+tried to limit these to utilities that are used outside of the context
+of a virtualenv.
+
+Use homebrew - see
+https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Homebrew-and-Python.md
+
+** dependencies
+
+Run =brew info python= for required and optional dependencies
+
+#+BEGIN_SRC sh
+for pkg in sphinx-doc pkg-config readline sqlite gdbm berkeley-db@4 tcl-tk; do brew install $pkg; done
+#+END_SRC
+
+** python2
+
+#+BEGIN_SRC sh
+brew install python --with-tcl-tk --with-berkeley-db@4
+pip2 install -U pip setuptools virtualenv
+#+END_SRC
+
+** python3
+
+#+BEGIN_SRC sh
+brew install python3 --with-tcl-tk
+#+END_SRC
+
+A limited selection of packages - better to use virtualenvs!
+
+#+BEGIN_SRC sh
+pip3 install ansible
+pip3 install csvkit
+pip3 install pgcli
+#+END_SRC
+
+*** scons
+
+Note that =scons= wants to install man pages to =/usr/local/man=, which is owned by root. You'll need to do this first:
+
+#+BEGIN_SRC sh
+sudo mkdir -p /usr/local/man
+sudo chown $(whoami) /usr/local/man
+pip3 install scons
+#+END_SRC
+
+* emacs
+
+Install latest emacs binary from http://emacsformacosx.com/
+
+Emacs needs a few homebrew packages
+
+#+BEGIN_SRC sh
+brew install libressl
+brew install aspell
+brew install gpg
+#+END_SRC
+
+Check out my .emacs.d and run setup scripts.
+
+#+BEGIN_SRC sh
+cd ~
+git clone --recurse-submodules git@github.com:nhoffman/.emacs.d.git
+#+END_SRC
+
+For elpy:
+
+#+BEGIN_SRC sh
+cd ~/.emacs.d
+bin/venv.sh
+#+END_SRC
 
 * zsh
 
@@ -109,7 +187,7 @@ exit
 chsh -s /usr/local/bin/zsh $USER
 #+END_SRC
 
-Install my dotfiles
+Install my dotfiles (relevant only to me)
 
 #+BEGIN_SRC sh
 cd ~
@@ -122,14 +200,16 @@ git clone git@bitbucket.org:nhoffman/dotfiles.git
 Homebrew installs desktop apps too!
 
 #+BEGIN_SRC sh
+brew cask install dropbox
 brew cask install sizeup
-# brew cask install dash # installs dash 4 - have I bought this?
+brew cask install dash
 brew cask install hipchat
 brew cask install google-chrome
 brew cask install java
 brew cask install mactex
 brew cask install texmaker
 brew cask install wkhtmltopdf
+brew cask install firefox
 #+END_SRC
 
 - Some of the above (eg, sizeup, dropbox, dash) require licenses and credentials
@@ -166,92 +246,13 @@ path to the CLI for the version you want to use to your PATH, eg:
 export PATH=/Applications/Postgres.app/Contents/Versions/9.6/bin:$PATH
 #+END_SRC
 
-* emacs
-
-Install latest emacs binary from http://emacsformacosx.com/
-
-Emacs needs a few homebrew packages
-
-#+BEGIN_SRC sh
-brew install libressl
-brew install aspell
-brew install gpg
-#+END_SRC
-
-Check out my .emacs.d and run setup scripts.
-
-#+BEGIN_SRC sh
-cd ~
-git clone git@github.com:nhoffman/.emacs.d.git
-cd .emacs.d
-git submodule init
-git submodule update
-#+END_SRC
-
-For elpy:
-
-#+BEGIN_SRC sh
-cd ~/.emacs.d
-bin/venv.sh
-pip install -r requirements.txt
-#+END_SRC
-
-* python
-
-I'm in the midst of the transition from python2 to python3, so as I
-wrote this it wasn't clear which packages (if any) I would need to
-install to the system. I decided to go with mostly python3, and really
-tried to limit these to utilities that are used outside of the context
-of a virtualenv.
-
-Use homebrew - see
-https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Homebrew-and-Python.md
-
-** dependencies
-
-Run =brew info python= for required and optional dependencies
-
-#+BEGIN_SRC sh
-for pkg in sphinx-doc pkg-config readline sqlite homebrew/dupes/tcl-tk; do brew install $pkg; done
-#+END_SRC
-
-** python2
-
-#+BEGIN_SRC sh
-brew install python --with-tcl-tk
-pip2 install -U pip setuptools virtualenv
-#+END_SRC
-
-** python3
-
-#+BEGIN_SRC sh
-brew install python3 --with-tcl-tk
-#+END_SRC
-
-A limited selection of packages - better to use virtualenvs!
-
-#+BEGIN_SRC sh
-pip3 install ansible
-pip3 install csvkit
-pip3 install pgcli
-#+END_SRC
-
-*** scons
-
-Note that =scons= wants to install man pages to =/usr/local/man=, which is owned by root. You'll need to do this first:
-
-#+BEGIN_SRC sh
-sudo mkdir -p /usr/local/man
-sudo chown $(whoami) /usr/local/man
-pip3 install scons
-#+END_SRC
-
 * R
 
 Again, using homebrew.
 
 #+BEGIN_SRC sh
-brew tap homebrew/science
+brew install openblas
+brew install pcre
 brew install R
 #+END_SRC
 
@@ -259,7 +260,7 @@ Some packages that I know I'll need:
 
 #+BEGIN_SRC sh
 R --slave << EOF
-packages <- c("lattice", "RSQLite", "latticeExtra", "argparse", "data.table", "dplyr", "tidyr")
+packages <- c("lattice", "RSQLite", "latticeExtra", "argparse", "data.table", "tidyverse")
 install.packages(packages, repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE)
 EOF
 #+END_SRC
@@ -271,7 +272,7 @@ Wow, this takes a long time!
 install Xquartz
 
 #+BEGIN_SRC sh
-brew install Caskroom/cask/xquartz
+brew install caskroom/cask/xquartz
 #+END_SRC
 
 X11 key bindings so that the option key is used for Meta. Not so
@@ -291,9 +292,11 @@ EOF
 
 * virtualbox and vagrant
 
+#+BEGIN_SRC sh
 brew cask install virtualbox
 brew cask install vagrant
 brew cask install vagrant-manager
+#+END_SRC
 
 after virtualbox is installed, go to preferences, and change default machine folder to ~/VirtualBox
 
@@ -305,7 +308,10 @@ https://app.vagrantup.com/boxes/search
 
 see https://app.vagrantup.com/ubuntu/boxes/xenial64
 
+#+BEGIN_SRC sh
 mkdir -p ~/vagrant/xenial64
 cd ~/vagrant/xenial64
 vagrant init ubuntu/xenial64
 vagrant up
+#+END_SRC
+
