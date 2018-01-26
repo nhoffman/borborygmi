@@ -67,9 +67,9 @@ Fri 06 February 2015 &#8212;
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgba4c0e5">VirtualBox preferences</a></li>
-<li><a href="#org1003ef3">Create an Ubuntu 14.04 VM</a></li>
-<li><a href="#org29de9d5">Set up an IP address</a></li>
+<li><a href="#sec-1">VirtualBox preferences</a></li>
+<li><a href="#sec-2">Create an Ubuntu 14.04 VM</a></li>
+<li><a href="#sec-3">Set up an IP address</a></li>
 </ul>
 </div>
 </div>
@@ -93,14 +93,15 @@ directory - I wanted to interact with this VM as if it were a remote
 host.
 </p>
 
-<div id="outline-container-orgba4c0e5" class="outline-2">
-<h2 id="orgba4c0e5">VirtualBox preferences</h2>
-<div class="outline-text-2" id="text-orgba4c0e5">
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">VirtualBox preferences</h2>
+<div class="outline-text-2" id="text-1">
 <p>
 Install VirtualBox from the vendor's website.
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sh">vboxmanage --version
 </pre>
 </div>
@@ -137,15 +138,16 @@ this creates the host-only network <code>vboxnet0</code>. We'll need this later.
 </div>
 </div>
 
-<div id="outline-container-org1003ef3" class="outline-2">
-<h2 id="org1003ef3">Create an Ubuntu 14.04 VM</h2>
-<div class="outline-text-2" id="text-org1003ef3">
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Create an Ubuntu 14.04 VM</h2>
+<div class="outline-text-2" id="text-2">
 <p>
 Download ubuntu-14.04.1-server-amd64.iso <a href="http://www.ubuntu.com/download/server">here</a> (we'll move it into
 $VBOXDIR below).
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sh">VBOXDIR="$HOME/VirtualBox"
 VM_NAME="Ubuntu14.04-1"
 UBUNTU_ISO_PATH="${VBOXDIR:?}/ubuntu-14.04.1-server-amd64.iso"
@@ -160,6 +162,7 @@ Create the VM.
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sh">vboxmanage createvm --name ${VM_NAME:?} --ostype Ubuntu_64 --register
 </pre>
 </div>
@@ -180,6 +183,7 @@ corresponding <code>vboxmanage</code> command from a menu action.
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sh">vboxmanage createhd --filename ${VM_HD_PATH:?} --size 12288 # size in MB (12GB)
 vboxmanage storagectl ${VM_NAME:?} --name "SATA Controller" --add sata --controller IntelAHCI
 vboxmanage storageattach ${VM_NAME:?} --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium ${VM_HD_PATH:?}
@@ -198,6 +202,7 @@ Ok! This should result in a bootable VM. Here goes the first boot.
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sh">vboxmanage startvm ${VM_NAME:?}
 </pre>
 </div>
@@ -208,10 +213,14 @@ and provided some extremely boring and insecure host settings:
 </p>
 
 <ul class="org-ul">
-<li>hostname: ubuntu</li>
-<li>full name: ubuntu</li>
-<li>username: ubuntu</li>
-<li>password: ubuntu</li>
+<li>hostname: ubuntu
+</li>
+<li>full name: ubuntu
+</li>
+<li>username: ubuntu
+</li>
+<li>password: ubuntu
+</li>
 </ul>
 
 <p>
@@ -226,6 +235,7 @@ essentials that will allow us to ssh in.
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sh">sudo apt-get update &amp;&amp; sudo apt-get -y upgrade
 sudo apt-get install -y openssh-server
 sudo shutdown -h now
@@ -272,17 +282,20 @@ ubuntu ALL= NOPASSWD: ALL
 </div>
 </div>
 
-<div id="outline-container-org29de9d5" class="outline-2">
-<h2 id="org29de9d5">Set up an IP address</h2>
-<div class="outline-text-2" id="text-org29de9d5">
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">Set up an IP address</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 I pieced together the following with the help of the following posts:
 </p>
 
 <ul class="org-ul">
-<li><a href="http://www.websightdesigns.com/posts/view/how-to-set-up-a-local-web-server-with-virtualbox-on-mac-os-x">http://www.websightdesigns.com/posts/view/how-to-set-up-a-local-web-server-with-virtualbox-on-mac-os-x</a></li>
-<li><a href="http://anupriti.blogspot.com/2014/10/invalid-settings-detected-virtualbox.html">http://anupriti.blogspot.com/2014/10/invalid-settings-detected-virtualbox.html</a></li>
-<li><a href="https://www.virtualbox.org/manual/ch06.html">https://www.virtualbox.org/manual/ch06.html</a></li>
+<li><a href="http://www.websightdesigns.com/posts/view/how-to-set-up-a-local-web-server-with-virtualbox-on-mac-os-x">http://www.websightdesigns.com/posts/view/how-to-set-up-a-local-web-server-with-virtualbox-on-mac-os-x</a>
+</li>
+<li><a href="http://anupriti.blogspot.com/2014/10/invalid-settings-detected-virtualbox.html">http://anupriti.blogspot.com/2014/10/invalid-settings-detected-virtualbox.html</a>
+</li>
+<li><a href="https://www.virtualbox.org/manual/ch06.html">https://www.virtualbox.org/manual/ch06.html</a>
+</li>
 </ul>
 
 <p>
@@ -302,8 +315,10 @@ Settings -&gt; Network -&gt; Adapter2 -&gt; Enable Network Adapter
 </pre>
 
 <ul class="org-ul">
-<li>Attached to: Host-only Adapter</li>
-<li>Name: vboxnet0</li>
+<li>Attached to: Host-only Adapter
+</li>
+<li>Name: vboxnet0
+</li>
 </ul>
 
 <p>
@@ -317,6 +332,7 @@ Power the VM back on and ssh in as above, then modify
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sh">sudo -s
 cat &gt;&gt; /etc/network/interfaces &lt;&lt;EOF
 
@@ -355,6 +371,7 @@ Better yet, add an entry to <code>/etc/hosts</code> on the host machine:
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sh">sudo -s
 cp /etc/hosts /etc/hosts.bak
 cat &gt;&gt; /etc/hosts &lt;&lt;EOF
@@ -378,6 +395,7 @@ Now make a ssh key pair for this VM and install the public key.
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sh">cd ~/.ssh
 ssh-keygen -f vm-unsafe
 ssh ubuntu@192.168.56.101 'mkdir -p -m 700 ~/.ssh; cat - &gt; ~/.ssh/authorized_keys; chmod 600 ~/.ssh/*' &lt; ~/.ssh/vm-unsafe.pub
@@ -390,6 +408,7 @@ course) to create an alias for the VM:
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sh">Host ubuntu1
      HostName 192.168.56.101
      User ubuntu
@@ -456,8 +475,8 @@ command line given more time and patience than I have at this point!
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org4866048">Ubuntu 14.04 (Trusty Tahr)</a></li>
-<li><a href="#orgc00f271">Ubuntu 12.04 (Precise Pangolin)</a></li>
+<li><a href="#sec-1">Ubuntu 14.04 (Trusty Tahr)</a></li>
+<li><a href="#sec-2">Ubuntu 12.04 (Precise Pangolin)</a></li>
 </ul>
 </div>
 </div>
@@ -465,7 +484,7 @@ command line given more time and patience than I have at this point!
 Illumina provides a program for demultiplexing sequencing output
 called <code>bcl2fastq</code>. They get a gold star for releasing the source -
 the downside is that they release binaries only for RHEL/CentOS, and
-no build instructions for Ubuntu. So &#8230;</p> </div>
+no build instructions for Ubuntu. So ...</p> </div>
 	</div>
 
 <div class="pagination">
@@ -528,7 +547,7 @@ no build instructions for Ubuntu. So &#8230;</p> </div>
         </div>     </div>     </div> 
 <footer>
 <br>
-<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &#169; Noah Hoffman 2017</p>
+<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &#169; Noah Hoffman 2018</p>
 </footer>
 
 </div> <!-- /container -->

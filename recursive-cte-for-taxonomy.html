@@ -76,6 +76,7 @@ its core, it looks something like this:
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sql">create table nodes (
        tax_id integer,
        parent integer,
@@ -90,6 +91,7 @@ schema that (in its simplified form) looks like this:
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sql">create table names (
        tax_id integer,
        tax_name text,
@@ -119,6 +121,7 @@ expression):
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sql">WITH RECURSIVE a AS (
  SELECT tax_id, parent_id, rank
   FROM nodes
@@ -135,78 +138,78 @@ SELECT * FROM a;
 
 
 <colgroup>
-<col class="org-right" />
+<col class="right" />
 
-<col class="org-right" />
+<col class="right" />
 
-<col class="org-left" />
+<col class="left" />
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-right">tax_id</th>
-<th scope="col" class="org-right">parent_id</th>
-<th scope="col" class="org-left">rank</th>
+<th scope="col" class="right">tax_id</th>
+<th scope="col" class="right">parent_id</th>
+<th scope="col" class="left">rank</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="org-right">1280</td>
-<td class="org-right">1279</td>
-<td class="org-left">species</td>
+<td class="right">1280</td>
+<td class="right">1279</td>
+<td class="left">species</td>
 </tr>
 
 <tr>
-<td class="org-right">1279</td>
-<td class="org-right">90964</td>
-<td class="org-left">genus</td>
+<td class="right">1279</td>
+<td class="right">90964</td>
+<td class="left">genus</td>
 </tr>
 
 <tr>
-<td class="org-right">90964</td>
-<td class="org-right">1385</td>
-<td class="org-left">family</td>
+<td class="right">90964</td>
+<td class="right">1385</td>
+<td class="left">family</td>
 </tr>
 
 <tr>
-<td class="org-right">1385</td>
-<td class="org-right">91061</td>
-<td class="org-left">order</td>
+<td class="right">1385</td>
+<td class="right">91061</td>
+<td class="left">order</td>
 </tr>
 
 <tr>
-<td class="org-right">91061</td>
-<td class="org-right">1239</td>
-<td class="org-left">class</td>
+<td class="right">91061</td>
+<td class="right">1239</td>
+<td class="left">class</td>
 </tr>
 
 <tr>
-<td class="org-right">1239</td>
-<td class="org-right">1783272</td>
-<td class="org-left">phylum</td>
+<td class="right">1239</td>
+<td class="right">1783272</td>
+<td class="left">phylum</td>
 </tr>
 
 <tr>
-<td class="org-right">1783272</td>
-<td class="org-right">2</td>
-<td class="org-left">below_superkingdom</td>
+<td class="right">1783272</td>
+<td class="right">2</td>
+<td class="left">below_superkingdom</td>
 </tr>
 
 <tr>
-<td class="org-right">2</td>
-<td class="org-right">131567</td>
-<td class="org-left">superkingdom</td>
+<td class="right">2</td>
+<td class="right">131567</td>
+<td class="left">superkingdom</td>
 </tr>
 
 <tr>
-<td class="org-right">131567</td>
-<td class="org-right">1</td>
-<td class="org-left">below_root</td>
+<td class="right">131567</td>
+<td class="right">1</td>
+<td class="left">below_root</td>
 </tr>
 
 <tr>
-<td class="org-right">1</td>
-<td class="org-right">&#xa0;</td>
-<td class="org-left">root</td>
+<td class="right">1</td>
+<td class="right">&#xa0;</td>
+<td class="left">root</td>
 </tr>
 </tbody>
 </table>
@@ -223,6 +226,7 @@ At this point, we can easily add taxonomic names as well:
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sql">WITH RECURSIVE a AS (
  SELECT tax_id, parent_id, rank
   FROM nodes
@@ -241,78 +245,78 @@ SELECT a.tax_id, a.rank, names.tax_name
 
 
 <colgroup>
-<col class="org-right" />
+<col class="right" />
 
-<col class="org-left" />
+<col class="left" />
 
-<col class="org-left" />
+<col class="left" />
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-right">tax_id</th>
-<th scope="col" class="org-left">rank</th>
-<th scope="col" class="org-left">tax_name</th>
+<th scope="col" class="right">tax_id</th>
+<th scope="col" class="left">rank</th>
+<th scope="col" class="left">tax_name</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="org-right">1280</td>
-<td class="org-left">species</td>
-<td class="org-left">Staphylococcus aureus</td>
+<td class="right">1280</td>
+<td class="left">species</td>
+<td class="left">Staphylococcus aureus</td>
 </tr>
 
 <tr>
-<td class="org-right">1279</td>
-<td class="org-left">genus</td>
-<td class="org-left">Staphylococcus</td>
+<td class="right">1279</td>
+<td class="left">genus</td>
+<td class="left">Staphylococcus</td>
 </tr>
 
 <tr>
-<td class="org-right">90964</td>
-<td class="org-left">family</td>
-<td class="org-left">Staphylococcaceae</td>
+<td class="right">90964</td>
+<td class="left">family</td>
+<td class="left">Staphylococcaceae</td>
 </tr>
 
 <tr>
-<td class="org-right">1385</td>
-<td class="org-left">order</td>
-<td class="org-left">Bacillales</td>
+<td class="right">1385</td>
+<td class="left">order</td>
+<td class="left">Bacillales</td>
 </tr>
 
 <tr>
-<td class="org-right">91061</td>
-<td class="org-left">class</td>
-<td class="org-left">Bacilli</td>
+<td class="right">91061</td>
+<td class="left">class</td>
+<td class="left">Bacilli</td>
 </tr>
 
 <tr>
-<td class="org-right">1239</td>
-<td class="org-left">phylum</td>
-<td class="org-left">Firmicutes</td>
+<td class="right">1239</td>
+<td class="left">phylum</td>
+<td class="left">Firmicutes</td>
 </tr>
 
 <tr>
-<td class="org-right">1783272</td>
-<td class="org-left">below_superkingdom</td>
-<td class="org-left">Terrabacteria group</td>
+<td class="right">1783272</td>
+<td class="left">below_superkingdom</td>
+<td class="left">Terrabacteria group</td>
 </tr>
 
 <tr>
-<td class="org-right">2</td>
-<td class="org-left">superkingdom</td>
-<td class="org-left">Bacteria</td>
+<td class="right">2</td>
+<td class="left">superkingdom</td>
+<td class="left">Bacteria</td>
 </tr>
 
 <tr>
-<td class="org-right">131567</td>
-<td class="org-left">below_root</td>
-<td class="org-left">cellular organisms</td>
+<td class="right">131567</td>
+<td class="left">below_root</td>
+<td class="left">cellular organisms</td>
 </tr>
 
 <tr>
-<td class="org-right">1</td>
-<td class="org-left">root</td>
-<td class="org-left">root</td>
+<td class="right">1</td>
+<td class="left">root</td>
+<td class="left">root</td>
 </tr>
 </tbody>
 </table>
@@ -329,6 +333,7 @@ and execute the following before trying this as home:
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sql">UPDATE nodes set parent_id = NULL where tax_id = 1;
 </pre>
 </div>
@@ -340,6 +345,7 @@ at once? Is it as easy as including more than one in the query?
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sql">WITH RECURSIVE a AS (
  SELECT tax_id, parent_id, rank
   FROM nodes
@@ -358,132 +364,132 @@ SELECT a.tax_id, a.rank, names.tax_name
 
 
 <colgroup>
-<col class="org-right" />
+<col class="right" />
 
-<col class="org-left" />
+<col class="left" />
 
-<col class="org-left" />
+<col class="left" />
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-right">tax_id</th>
-<th scope="col" class="org-left">rank</th>
-<th scope="col" class="org-left">tax_name</th>
+<th scope="col" class="right">tax_id</th>
+<th scope="col" class="left">rank</th>
+<th scope="col" class="left">tax_name</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="org-right">1280</td>
-<td class="org-left">species</td>
-<td class="org-left">Staphylococcus aureus</td>
+<td class="right">1280</td>
+<td class="left">species</td>
+<td class="left">Staphylococcus aureus</td>
 </tr>
 
 <tr>
-<td class="org-right">562</td>
-<td class="org-left">species</td>
-<td class="org-left">Escherichia coli</td>
+<td class="right">562</td>
+<td class="left">species</td>
+<td class="left">Escherichia coli</td>
 </tr>
 
 <tr>
-<td class="org-right">1279</td>
-<td class="org-left">genus</td>
-<td class="org-left">Staphylococcus</td>
+<td class="right">1279</td>
+<td class="left">genus</td>
+<td class="left">Staphylococcus</td>
 </tr>
 
 <tr>
-<td class="org-right">561</td>
-<td class="org-left">genus</td>
-<td class="org-left">Escherichia</td>
+<td class="right">561</td>
+<td class="left">genus</td>
+<td class="left">Escherichia</td>
 </tr>
 
 <tr>
-<td class="org-right">90964</td>
-<td class="org-left">family</td>
-<td class="org-left">Staphylococcaceae</td>
+<td class="right">90964</td>
+<td class="left">family</td>
+<td class="left">Staphylococcaceae</td>
 </tr>
 
 <tr>
-<td class="org-right">543</td>
-<td class="org-left">family</td>
-<td class="org-left">Enterobacteriaceae</td>
+<td class="right">543</td>
+<td class="left">family</td>
+<td class="left">Enterobacteriaceae</td>
 </tr>
 
 <tr>
-<td class="org-right">1385</td>
-<td class="org-left">order</td>
-<td class="org-left">Bacillales</td>
+<td class="right">1385</td>
+<td class="left">order</td>
+<td class="left">Bacillales</td>
 </tr>
 
 <tr>
-<td class="org-right">91347</td>
-<td class="org-left">order</td>
-<td class="org-left">Enterobacterales</td>
+<td class="right">91347</td>
+<td class="left">order</td>
+<td class="left">Enterobacterales</td>
 </tr>
 
 <tr>
-<td class="org-right">91061</td>
-<td class="org-left">class</td>
-<td class="org-left">Bacilli</td>
+<td class="right">91061</td>
+<td class="left">class</td>
+<td class="left">Bacilli</td>
 </tr>
 
 <tr>
-<td class="org-right">1236</td>
-<td class="org-left">class</td>
-<td class="org-left">Gammaproteobacteria</td>
+<td class="right">1236</td>
+<td class="left">class</td>
+<td class="left">Gammaproteobacteria</td>
 </tr>
 
 <tr>
-<td class="org-right">1239</td>
-<td class="org-left">phylum</td>
-<td class="org-left">Firmicutes</td>
+<td class="right">1239</td>
+<td class="left">phylum</td>
+<td class="left">Firmicutes</td>
 </tr>
 
 <tr>
-<td class="org-right">1224</td>
-<td class="org-left">phylum</td>
-<td class="org-left">Proteobacteria</td>
+<td class="right">1224</td>
+<td class="left">phylum</td>
+<td class="left">Proteobacteria</td>
 </tr>
 
 <tr>
-<td class="org-right">1783272</td>
-<td class="org-left">below_superkingdom</td>
-<td class="org-left">Terrabacteria group</td>
+<td class="right">1783272</td>
+<td class="left">below_superkingdom</td>
+<td class="left">Terrabacteria group</td>
 </tr>
 
 <tr>
-<td class="org-right">2</td>
-<td class="org-left">superkingdom</td>
-<td class="org-left">Bacteria</td>
+<td class="right">2</td>
+<td class="left">superkingdom</td>
+<td class="left">Bacteria</td>
 </tr>
 
 <tr>
-<td class="org-right">2</td>
-<td class="org-left">superkingdom</td>
-<td class="org-left">Bacteria</td>
+<td class="right">2</td>
+<td class="left">superkingdom</td>
+<td class="left">Bacteria</td>
 </tr>
 
 <tr>
-<td class="org-right">131567</td>
-<td class="org-left">below_root</td>
-<td class="org-left">cellular organisms</td>
+<td class="right">131567</td>
+<td class="left">below_root</td>
+<td class="left">cellular organisms</td>
 </tr>
 
 <tr>
-<td class="org-right">131567</td>
-<td class="org-left">below_root</td>
-<td class="org-left">cellular organisms</td>
+<td class="right">131567</td>
+<td class="left">below_root</td>
+<td class="left">cellular organisms</td>
 </tr>
 
 <tr>
-<td class="org-right">1</td>
-<td class="org-left">root</td>
-<td class="org-left">root</td>
+<td class="right">1</td>
+<td class="left">root</td>
+<td class="left">root</td>
 </tr>
 
 <tr>
-<td class="org-right">1</td>
-<td class="org-left">root</td>
-<td class="org-left">root</td>
+<td class="right">1</td>
+<td class="left">root</td>
+<td class="left">root</td>
 </tr>
 </tbody>
 </table>
@@ -495,6 +501,7 @@ maybe we can keep track?
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sql">WITH RECURSIVE a AS (
  SELECT tax_id as tid, 1 as ord, tax_id, parent_id, rank
   FROM nodes
@@ -514,176 +521,176 @@ SELECT a.tid, a.ord, a.tax_id, a.rank, names.tax_name
 
 
 <colgroup>
-<col class="org-right" />
+<col class="right" />
 
-<col class="org-right" />
+<col class="right" />
 
-<col class="org-right" />
+<col class="right" />
 
-<col class="org-left" />
+<col class="left" />
 
-<col class="org-left" />
+<col class="left" />
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-right">tid</th>
-<th scope="col" class="org-right">ord</th>
-<th scope="col" class="org-right">tax_id</th>
-<th scope="col" class="org-left">rank</th>
-<th scope="col" class="org-left">tax_name</th>
+<th scope="col" class="right">tid</th>
+<th scope="col" class="right">ord</th>
+<th scope="col" class="right">tax_id</th>
+<th scope="col" class="left">rank</th>
+<th scope="col" class="left">tax_name</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="org-right">1280</td>
-<td class="org-right">1</td>
-<td class="org-right">1280</td>
-<td class="org-left">species</td>
-<td class="org-left">Staphylococcus aureus</td>
+<td class="right">1280</td>
+<td class="right">1</td>
+<td class="right">1280</td>
+<td class="left">species</td>
+<td class="left">Staphylococcus aureus</td>
 </tr>
 
 <tr>
-<td class="org-right">1280</td>
-<td class="org-right">2</td>
-<td class="org-right">1279</td>
-<td class="org-left">genus</td>
-<td class="org-left">Staphylococcus</td>
+<td class="right">1280</td>
+<td class="right">2</td>
+<td class="right">1279</td>
+<td class="left">genus</td>
+<td class="left">Staphylococcus</td>
 </tr>
 
 <tr>
-<td class="org-right">1280</td>
-<td class="org-right">3</td>
-<td class="org-right">90964</td>
-<td class="org-left">family</td>
-<td class="org-left">Staphylococcaceae</td>
+<td class="right">1280</td>
+<td class="right">3</td>
+<td class="right">90964</td>
+<td class="left">family</td>
+<td class="left">Staphylococcaceae</td>
 </tr>
 
 <tr>
-<td class="org-right">1280</td>
-<td class="org-right">4</td>
-<td class="org-right">1385</td>
-<td class="org-left">order</td>
-<td class="org-left">Bacillales</td>
+<td class="right">1280</td>
+<td class="right">4</td>
+<td class="right">1385</td>
+<td class="left">order</td>
+<td class="left">Bacillales</td>
 </tr>
 
 <tr>
-<td class="org-right">1280</td>
-<td class="org-right">5</td>
-<td class="org-right">91061</td>
-<td class="org-left">class</td>
-<td class="org-left">Bacilli</td>
+<td class="right">1280</td>
+<td class="right">5</td>
+<td class="right">91061</td>
+<td class="left">class</td>
+<td class="left">Bacilli</td>
 </tr>
 
 <tr>
-<td class="org-right">1280</td>
-<td class="org-right">6</td>
-<td class="org-right">1239</td>
-<td class="org-left">phylum</td>
-<td class="org-left">Firmicutes</td>
+<td class="right">1280</td>
+<td class="right">6</td>
+<td class="right">1239</td>
+<td class="left">phylum</td>
+<td class="left">Firmicutes</td>
 </tr>
 
 <tr>
-<td class="org-right">1280</td>
-<td class="org-right">7</td>
-<td class="org-right">1783272</td>
-<td class="org-left">below_superkingdom</td>
-<td class="org-left">Terrabacteria group</td>
+<td class="right">1280</td>
+<td class="right">7</td>
+<td class="right">1783272</td>
+<td class="left">below_superkingdom</td>
+<td class="left">Terrabacteria group</td>
 </tr>
 
 <tr>
-<td class="org-right">1280</td>
-<td class="org-right">8</td>
-<td class="org-right">2</td>
-<td class="org-left">superkingdom</td>
-<td class="org-left">Bacteria</td>
+<td class="right">1280</td>
+<td class="right">8</td>
+<td class="right">2</td>
+<td class="left">superkingdom</td>
+<td class="left">Bacteria</td>
 </tr>
 
 <tr>
-<td class="org-right">1280</td>
-<td class="org-right">9</td>
-<td class="org-right">131567</td>
-<td class="org-left">below_root</td>
-<td class="org-left">cellular organisms</td>
+<td class="right">1280</td>
+<td class="right">9</td>
+<td class="right">131567</td>
+<td class="left">below_root</td>
+<td class="left">cellular organisms</td>
 </tr>
 
 <tr>
-<td class="org-right">1280</td>
-<td class="org-right">10</td>
-<td class="org-right">1</td>
-<td class="org-left">root</td>
-<td class="org-left">root</td>
+<td class="right">1280</td>
+<td class="right">10</td>
+<td class="right">1</td>
+<td class="left">root</td>
+<td class="left">root</td>
 </tr>
 
 <tr>
-<td class="org-right">562</td>
-<td class="org-right">1</td>
-<td class="org-right">562</td>
-<td class="org-left">species</td>
-<td class="org-left">Escherichia coli</td>
+<td class="right">562</td>
+<td class="right">1</td>
+<td class="right">562</td>
+<td class="left">species</td>
+<td class="left">Escherichia coli</td>
 </tr>
 
 <tr>
-<td class="org-right">562</td>
-<td class="org-right">2</td>
-<td class="org-right">561</td>
-<td class="org-left">genus</td>
-<td class="org-left">Escherichia</td>
+<td class="right">562</td>
+<td class="right">2</td>
+<td class="right">561</td>
+<td class="left">genus</td>
+<td class="left">Escherichia</td>
 </tr>
 
 <tr>
-<td class="org-right">562</td>
-<td class="org-right">3</td>
-<td class="org-right">543</td>
-<td class="org-left">family</td>
-<td class="org-left">Enterobacteriaceae</td>
+<td class="right">562</td>
+<td class="right">3</td>
+<td class="right">543</td>
+<td class="left">family</td>
+<td class="left">Enterobacteriaceae</td>
 </tr>
 
 <tr>
-<td class="org-right">562</td>
-<td class="org-right">4</td>
-<td class="org-right">91347</td>
-<td class="org-left">order</td>
-<td class="org-left">Enterobacterales</td>
+<td class="right">562</td>
+<td class="right">4</td>
+<td class="right">91347</td>
+<td class="left">order</td>
+<td class="left">Enterobacterales</td>
 </tr>
 
 <tr>
-<td class="org-right">562</td>
-<td class="org-right">5</td>
-<td class="org-right">1236</td>
-<td class="org-left">class</td>
-<td class="org-left">Gammaproteobacteria</td>
+<td class="right">562</td>
+<td class="right">5</td>
+<td class="right">1236</td>
+<td class="left">class</td>
+<td class="left">Gammaproteobacteria</td>
 </tr>
 
 <tr>
-<td class="org-right">562</td>
-<td class="org-right">6</td>
-<td class="org-right">1224</td>
-<td class="org-left">phylum</td>
-<td class="org-left">Proteobacteria</td>
+<td class="right">562</td>
+<td class="right">6</td>
+<td class="right">1224</td>
+<td class="left">phylum</td>
+<td class="left">Proteobacteria</td>
 </tr>
 
 <tr>
-<td class="org-right">562</td>
-<td class="org-right">7</td>
-<td class="org-right">2</td>
-<td class="org-left">superkingdom</td>
-<td class="org-left">Bacteria</td>
+<td class="right">562</td>
+<td class="right">7</td>
+<td class="right">2</td>
+<td class="left">superkingdom</td>
+<td class="left">Bacteria</td>
 </tr>
 
 <tr>
-<td class="org-right">562</td>
-<td class="org-right">8</td>
-<td class="org-right">131567</td>
-<td class="org-left">below_root</td>
-<td class="org-left">cellular organisms</td>
+<td class="right">562</td>
+<td class="right">8</td>
+<td class="right">131567</td>
+<td class="left">below_root</td>
+<td class="left">cellular organisms</td>
 </tr>
 
 <tr>
-<td class="org-right">562</td>
-<td class="org-right">9</td>
-<td class="org-right">1</td>
-<td class="org-left">root</td>
-<td class="org-left">root</td>
+<td class="right">562</td>
+<td class="right">9</td>
+<td class="right">1</td>
+<td class="left">root</td>
+<td class="left">root</td>
 </tr>
 </tbody>
 </table>
@@ -698,6 +705,7 @@ line just provides a header row.)
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sql">SELECT 'value' as key;
 WITH RECURSIVE a AS (
  SELECT tax_id as tid, 1 as ord, tax_id, parent_id, rank
@@ -718,60 +726,60 @@ SELECT a.tid, array_agg(a.tax_id), array_agg(a.rank), array_agg(names.tax_name)
 
 
 <colgroup>
-<col class="org-left" />
+<col class="left" />
 
-<col class="org-left" />
+<col class="left" />
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-left">key</th>
-<th scope="col" class="org-left">value</th>
+<th scope="col" class="left">key</th>
+<th scope="col" class="left">value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="org-left">tid</td>
-<td class="org-left">1280</td>
+<td class="left">tid</td>
+<td class="left">1280</td>
 </tr>
 
 <tr>
-<td class="org-left">array_agg</td>
-<td class="org-left">{1280,1279,90964,1385,91061,1239,1783272,2,131567,1}</td>
+<td class="left">array_agg</td>
+<td class="left">{1280,1279,90964,1385,91061,1239,1783272,2,131567,1}</td>
 </tr>
 
 <tr>
-<td class="org-left">array_agg</td>
-<td class="org-left">{species,genus,family,order,class,phylum,below_superkingdom,superkingdom,below_root,root}</td>
+<td class="left">array_agg</td>
+<td class="left">{species,genus,family,order,class,phylum,below_superkingdom,superkingdom,below_root,root}</td>
 </tr>
 
 <tr>
-<td class="org-left">array_agg</td>
-<td class="org-left">{"Staphylococcus aureus",Staphylococcus,Staphylococcaceae,Bacillales,Bacilli,Firmicutes,"Terrabacteria group",Bacteria,"cellular organisms",root}</td>
+<td class="left">array_agg</td>
+<td class="left">{"Staphylococcus aureus",Staphylococcus,Staphylococcaceae,Bacillales,Bacilli,Firmicutes,"Terrabacteria group",Bacteria,"cellular organisms",root}</td>
 </tr>
 
 <tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
 </tr>
 
 <tr>
-<td class="org-left">tid</td>
-<td class="org-left">562</td>
+<td class="left">tid</td>
+<td class="left">562</td>
 </tr>
 
 <tr>
-<td class="org-left">array_agg</td>
-<td class="org-left">{562,1,561,1224,543,131567,91347,2,1236}</td>
+<td class="left">array_agg</td>
+<td class="left">{562,1,561,1224,543,131567,91347,2,1236}</td>
 </tr>
 
 <tr>
-<td class="org-left">array_agg</td>
-<td class="org-left">{species,root,genus,phylum,family,below_root,order,superkingdom,class}</td>
+<td class="left">array_agg</td>
+<td class="left">{species,root,genus,phylum,family,below_root,order,superkingdom,class}</td>
 </tr>
 
 <tr>
-<td class="org-left">array_agg</td>
-<td class="org-left">{"Escherichia coli",root,Escherichia,Proteobacteria,Enterobacteriaceae,"cellular organisms",Enterobacterales,Bacteria,Gammaproteobacteria}</td>
+<td class="left">array_agg</td>
+<td class="left">{"Escherichia coli",root,Escherichia,Proteobacteria,Enterobacteriaceae,"cellular organisms",Enterobacterales,Bacteria,Gammaproteobacteria}</td>
 </tr>
 </tbody>
 </table>
@@ -783,6 +791,7 @@ identify the first tax_id in each lineage.
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sql">WITH RECURSIVE a AS (
  SELECT tax_id as tid,
 	parent_id as pid,
@@ -807,104 +816,104 @@ SELECT * FROM a;
 
 
 <colgroup>
-<col class="org-right" />
+<col class="right" />
 
-<col class="org-right" />
+<col class="right" />
 
-<col class="org-left" />
+<col class="left" />
 
-<col class="org-right" />
+<col class="right" />
 
-<col class="org-left" />
+<col class="left" />
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-right">tid</th>
-<th scope="col" class="org-right">pid</th>
-<th scope="col" class="org-left">rank</th>
-<th scope="col" class="org-right">tax_id</th>
-<th scope="col" class="org-left">lineage</th>
+<th scope="col" class="right">tid</th>
+<th scope="col" class="right">pid</th>
+<th scope="col" class="left">rank</th>
+<th scope="col" class="right">tax_id</th>
+<th scope="col" class="left">lineage</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="org-right">1280</td>
-<td class="org-right">1279</td>
-<td class="org-left">species</td>
-<td class="org-right">1280</td>
-<td class="org-left">{1280}</td>
+<td class="right">1280</td>
+<td class="right">1279</td>
+<td class="left">species</td>
+<td class="right">1280</td>
+<td class="left">{1280}</td>
 </tr>
 
 <tr>
-<td class="org-right">1279</td>
-<td class="org-right">90964</td>
-<td class="org-left">genus</td>
-<td class="org-right">1280</td>
-<td class="org-left">{1280,1279}</td>
+<td class="right">1279</td>
+<td class="right">90964</td>
+<td class="left">genus</td>
+<td class="right">1280</td>
+<td class="left">{1280,1279}</td>
 </tr>
 
 <tr>
-<td class="org-right">90964</td>
-<td class="org-right">1385</td>
-<td class="org-left">family</td>
-<td class="org-right">1280</td>
-<td class="org-left">{1280,1279,90964}</td>
+<td class="right">90964</td>
+<td class="right">1385</td>
+<td class="left">family</td>
+<td class="right">1280</td>
+<td class="left">{1280,1279,90964}</td>
 </tr>
 
 <tr>
-<td class="org-right">1385</td>
-<td class="org-right">91061</td>
-<td class="org-left">order</td>
-<td class="org-right">1280</td>
-<td class="org-left">{1280,1279,90964,1385}</td>
+<td class="right">1385</td>
+<td class="right">91061</td>
+<td class="left">order</td>
+<td class="right">1280</td>
+<td class="left">{1280,1279,90964,1385}</td>
 </tr>
 
 <tr>
-<td class="org-right">91061</td>
-<td class="org-right">1239</td>
-<td class="org-left">class</td>
-<td class="org-right">1280</td>
-<td class="org-left">{1280,1279,90964,1385,91061}</td>
+<td class="right">91061</td>
+<td class="right">1239</td>
+<td class="left">class</td>
+<td class="right">1280</td>
+<td class="left">{1280,1279,90964,1385,91061}</td>
 </tr>
 
 <tr>
-<td class="org-right">1239</td>
-<td class="org-right">1783272</td>
-<td class="org-left">phylum</td>
-<td class="org-right">1280</td>
-<td class="org-left">{1280,1279,90964,1385,91061,1239}</td>
+<td class="right">1239</td>
+<td class="right">1783272</td>
+<td class="left">phylum</td>
+<td class="right">1280</td>
+<td class="left">{1280,1279,90964,1385,91061,1239}</td>
 </tr>
 
 <tr>
-<td class="org-right">1783272</td>
-<td class="org-right">2</td>
-<td class="org-left">below_superkingdom</td>
-<td class="org-right">1280</td>
-<td class="org-left">{1280,1279,90964,1385,91061,1239,1783272}</td>
+<td class="right">1783272</td>
+<td class="right">2</td>
+<td class="left">below_superkingdom</td>
+<td class="right">1280</td>
+<td class="left">{1280,1279,90964,1385,91061,1239,1783272}</td>
 </tr>
 
 <tr>
-<td class="org-right">2</td>
-<td class="org-right">131567</td>
-<td class="org-left">superkingdom</td>
-<td class="org-right">1280</td>
-<td class="org-left">{1280,1279,90964,1385,91061,1239,1783272,2}</td>
+<td class="right">2</td>
+<td class="right">131567</td>
+<td class="left">superkingdom</td>
+<td class="right">1280</td>
+<td class="left">{1280,1279,90964,1385,91061,1239,1783272,2}</td>
 </tr>
 
 <tr>
-<td class="org-right">131567</td>
-<td class="org-right">1</td>
-<td class="org-left">below_root</td>
-<td class="org-right">1280</td>
-<td class="org-left">{1280,1279,90964,1385,91061,1239,1783272,2,131567}</td>
+<td class="right">131567</td>
+<td class="right">1</td>
+<td class="left">below_root</td>
+<td class="right">1280</td>
+<td class="left">{1280,1279,90964,1385,91061,1239,1783272,2,131567}</td>
 </tr>
 
 <tr>
-<td class="org-right">1</td>
-<td class="org-right">&#xa0;</td>
-<td class="org-left">root</td>
-<td class="org-right">1280</td>
-<td class="org-left">{1280,1279,90964,1385,91061,1239,1783272,2,131567,1}</td>
+<td class="right">1</td>
+<td class="right">&#xa0;</td>
+<td class="left">root</td>
+<td class="right">1280</td>
+<td class="left">{1280,1279,90964,1385,91061,1239,1783272,2,131567,1}</td>
 </tr>
 </tbody>
 </table>
@@ -915,6 +924,7 @@ the root node.
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sql">WITH RECURSIVE a AS (
  SELECT tax_id as tid,
 	parent_id as pid,
@@ -940,20 +950,20 @@ WHERE a.rank = 'root';
 
 
 <colgroup>
-<col class="org-right" />
+<col class="right" />
 
-<col class="org-left" />
+<col class="left" />
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-right">tax_id</th>
-<th scope="col" class="org-left">lineage</th>
+<th scope="col" class="right">tax_id</th>
+<th scope="col" class="left">lineage</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="org-right">1280</td>
-<td class="org-left">{1280,1279,90964,1385,91061,1239,1783272,2,131567,1}</td>
+<td class="right">1280</td>
+<td class="left">{1280,1279,90964,1385,91061,1239,1783272,2,131567,1}</td>
 </tr>
 </tbody>
 </table>
@@ -966,6 +976,7 @@ arbitrary ranks) as once.
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sql">SELECT 'value' as key;
 WITH RECURSIVE a AS (
  SELECT tax_id as tid,
@@ -998,100 +1009,100 @@ AND names.is_primary;
 
 
 <colgroup>
-<col class="org-left" />
+<col class="left" />
 
-<col class="org-left" />
+<col class="left" />
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-left">key</th>
-<th scope="col" class="org-left">value</th>
+<th scope="col" class="left">key</th>
+<th scope="col" class="left">value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="org-left">tax_id</td>
-<td class="org-left">1279</td>
+<td class="left">tax_id</td>
+<td class="left">1279</td>
 </tr>
 
 <tr>
-<td class="org-left">tax_name</td>
-<td class="org-left">Staphylococcus</td>
+<td class="left">tax_name</td>
+<td class="left">Staphylococcus</td>
 </tr>
 
 <tr>
-<td class="org-left">rank</td>
-<td class="org-left">genus</td>
+<td class="left">rank</td>
+<td class="left">genus</td>
 </tr>
 
 <tr>
-<td class="org-left">lineage</td>
-<td class="org-left">{1279,90964,1385,91061,1239,1783272,2,131567,1}</td>
+<td class="left">lineage</td>
+<td class="left">{1279,90964,1385,91061,1239,1783272,2,131567,1}</td>
 </tr>
 
 <tr>
-<td class="org-left">ranks</td>
-<td class="org-left">{genus,family,order,class,phylum,below_superkingdom,superkingdom,below_root,root}</td>
+<td class="left">ranks</td>
+<td class="left">{genus,family,order,class,phylum,below_superkingdom,superkingdom,below_root,root}</td>
 </tr>
 
 <tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
 </tr>
 
 <tr>
-<td class="org-left">tax_id</td>
-<td class="org-left">562</td>
+<td class="left">tax_id</td>
+<td class="left">562</td>
 </tr>
 
 <tr>
-<td class="org-left">tax_name</td>
-<td class="org-left">Escherichia coli</td>
+<td class="left">tax_name</td>
+<td class="left">Escherichia coli</td>
 </tr>
 
 <tr>
-<td class="org-left">rank</td>
-<td class="org-left">species</td>
+<td class="left">rank</td>
+<td class="left">species</td>
 </tr>
 
 <tr>
-<td class="org-left">lineage</td>
-<td class="org-left">{562,561,543,91347,1236,1224,2,131567,1}</td>
+<td class="left">lineage</td>
+<td class="left">{562,561,543,91347,1236,1224,2,131567,1}</td>
 </tr>
 
 <tr>
-<td class="org-left">ranks</td>
-<td class="org-left">{species,genus,family,order,class,phylum,superkingdom,below_root,root}</td>
+<td class="left">ranks</td>
+<td class="left">{species,genus,family,order,class,phylum,superkingdom,below_root,root}</td>
 </tr>
 
 <tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
 </tr>
 
 <tr>
-<td class="org-left">tax_id</td>
-<td class="org-left">1280</td>
+<td class="left">tax_id</td>
+<td class="left">1280</td>
 </tr>
 
 <tr>
-<td class="org-left">tax_name</td>
-<td class="org-left">Staphylococcus aureus</td>
+<td class="left">tax_name</td>
+<td class="left">Staphylococcus aureus</td>
 </tr>
 
 <tr>
-<td class="org-left">rank</td>
-<td class="org-left">species</td>
+<td class="left">rank</td>
+<td class="left">species</td>
 </tr>
 
 <tr>
-<td class="org-left">lineage</td>
-<td class="org-left">{1280,1279,90964,1385,91061,1239,1783272,2,131567,1}</td>
+<td class="left">lineage</td>
+<td class="left">{1280,1279,90964,1385,91061,1239,1783272,2,131567,1}</td>
 </tr>
 
 <tr>
-<td class="org-left">ranks</td>
-<td class="org-left">{species,genus,family,order,class,phylum,below_superkingdom,superkingdom,below_root,root}</td>
+<td class="left">ranks</td>
+<td class="left">{species,genus,family,order,class,phylum,below_superkingdom,superkingdom,below_root,root}</td>
 </tr>
 </tbody>
 </table>
@@ -1180,7 +1191,7 @@ efficient).
         </div>     </div>     </div> 
 <footer>
 <br />
-<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &copy; Noah Hoffman 2017</p>
+<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &copy; Noah Hoffman 2018</p>
 </footer>
 
 </div> <!-- /container -->

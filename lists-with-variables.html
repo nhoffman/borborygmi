@@ -63,9 +63,14 @@ I learned a bit about list creation in elisp today. Here's how you join a list o
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-elisp">(mapconcat #'identity '("" "path" "to" "someplace") "/")
 </pre>
 </div>
+
+<pre class="example">
+/path/to/someplace
+</pre>
 
 <p>
 But I learned (thanks to <a href="http://stackoverflow.com/users/113848/legoscia">legoscia</a> on <a href="http://stackoverflow.com/questions/24188100">stackoverflow</a>) that simply
@@ -73,6 +78,7 @@ replacing an element in the list with a variable results in an error:
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-elisp">(let ((path "someplace"))
   (mapconcat #'identity '("" "path" "to" path) "/"))
 </pre>
@@ -88,6 +94,7 @@ symbols (and not the corresponding values) in the list.
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-elisp">(let ((path "someplace"))
   (print '("" "path" "to" path)))
 </pre>
@@ -103,6 +110,7 @@ backquote and a comma:
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-elisp">(let ((path "someplace"))
   (print (list "" "path" "to" path))
   (print `("" "path" "to" ,path)))
@@ -137,13 +145,14 @@ symbol instead of the value:
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-elisp">(let ((path "someplace"))
   (print '((:prologue . path))))
 </pre>
 </div>
 
 <pre class="example">
-((:prologue . path))
+((:prologue . pathdef))
 </pre>
 
 <p>
@@ -151,6 +160,7 @@ Nope.
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-elisp">(let ((path "someplace"))
   (print (list `(:prologue . ,path))))
 </pre>
@@ -235,7 +245,7 @@ Much better.
         </div>     </div>     </div> 
 <footer>
 <br />
-<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &copy; Noah Hoffman 2017</p>
+<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &copy; Noah Hoffman 2018</p>
 </footer>
 
 </div> <!-- /container -->

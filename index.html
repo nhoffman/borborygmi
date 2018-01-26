@@ -57,1063 +57,587 @@
 
 	<div class='article'>
           <div class="content-title">
-            <a href="https://nhoffman.github.io/borborygmi/recursive-cte-for-taxonomy.html"><h1>Using recursive CTEs for calculating taxonomic lineages</h1></a>
-Fri 07 July 2017 &#8212;
+            <a href="https://nhoffman.github.io/borborygmi/mac-setup-high-sierra.html"><h1>Clean install of MacOS High Sierra</h1></a>
+Fri 17 November 2017 &#8212;
 
 
-<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/sql.html">sql</a>;
-    tags: <a href="https://nhoffman.github.io/borborygmi/tag/postgresql.html">postgresql,&nbsp;</a><a href="https://nhoffman.github.io/borborygmi/tag/taxonomy.html">taxonomy</a></em>          </div>
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em>          </div>
 
-          <div><p>
-This topic falls into the category of "things that I didn't know that
-I didn't know." Many of my projects involve the manipulation of
-taxonomies, particularly the <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI taxonomy</a>, but I didn't understand
-the efficiency with which it was possible to calculate a lineage in
-SQL. I recently revisited the issue, and here's what I learned.
+          <div><div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">system settings</a>
+<ul>
+<li><a href="#sec-1-1">turn off spelling autocorrect</a></li>
+<li><a href="#sec-1-2">unmap Control + left,right</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">Developer tools</a></li>
+<li><a href="#sec-3">homebrew</a>
+<ul>
+<li><a href="#sec-3-1">homebrew API token</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">python</a>
+<ul>
+<li><a href="#sec-4-1">dependencies</a></li>
+<li><a href="#sec-4-2">python2</a></li>
+<li><a href="#sec-4-3">python3</a>
+<ul>
+<li><a href="#sec-4-3-1">scons</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-5">emacs</a></li>
+<li><a href="#sec-6">zsh</a></li>
+<li><a href="#sec-7">desktop apps</a>
+<ul>
+<li><a href="#sec-7-1">iTerm2</a></li>
+<li><a href="#sec-7-2">postgresql</a></li>
+</ul>
+</li>
+<li><a href="#sec-8">R</a></li>
+<li><a href="#sec-9">X11</a></li>
+<li><a href="#sec-10">virtualbox and vagrant</a>
+<ul>
+<li><a href="#sec-10-1">install an ubuntu16.04 VM</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+I make it a practice to blow away previous versions of the OS and
+start with a clean install each time there's a major update. Why do
+this?
+</p>
+
+<ul class="org-ul">
+<li>In my experience, clean installs result in a more stable system.
+</li>
+<li>I try to maintain a system that is easily bootstrapped, and this is
+pretty much the only way to reliably test that process.
+</li>
+<li>I want to make sure that everything that I really care about on my
+computer is replicated someplace, either using a cloud service
+(mostly Dropbox), or in git repositories. This forces the issue.
+</li>
+</ul>
+
+<p>
+Once again, homebrew is the foundation of my setup. I used homebrew to
+install not only command line programs and languages (python, R), but
+also as many desktop apps as I could (Chrome, x11) that would
+otherwise have been installed manually by hunting down an
+installer. Each time I go through this, homebrew takes care of more
+and more apps.
 </p>
 
 <p>
-The NCBI taxonomy is provided as a collection of tables that can be
-downloaded in its entirety <a href="ftp://ftp.ncbi.nih.gov/pub/taxonomy">by FTP</a>. There are two tables in the
-taxonomy database that we care about for the purposes of this
-post. The first is <code>nodes</code>. The table from the NCBI taxonomy contains
-some additional fields that aren't important in this context, but at
-its core, it looks something like this:
+Somewhat glossed over here are manual steps used to transfer
+non-public dotfiles, credentials, etc. Here's a partial list of files
+and directories that I copied directly from my old laptop:
+</p>
+
+<pre class="example">
+tar -cf dotfiles.tar .Xmodmap .gitconfig .gnupg .pypirc .ssh
+</pre>
+
+<p>
+Note that none of these steps require an Apple ID - I held off on
+signing in until the very end just to see if it was possible.
+</p>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">system settings</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1">turn off spelling autocorrect</h3>
+<div class="outline-text-3" id="text-1-1">
+<pre class="example">
+System Preferences --&gt; Keyboard --&gt; Text tab --&gt; unselect "Correct spelling automatically" and others
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2">unmap Control + left,right</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+I use Control plus the left and right arrow keys to move between
+windows in emacs and tmux.
+</p>
+
+<pre class="example">
+System Preferences --&gt; Keyboard --&gt; Shortcuts --&gt; uncheck mission control: move left/right a space
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Developer tools</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Pretty much the first thing that needs to happen. This can be done
+from the command line:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sql">create table nodes (
-       tax_id integer,
-       parent integer,
-       rank text
-);
+
+<pre class="src src-sh">xcode-select --install
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">homebrew</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Homebrew no longer requires user-ownership of /usr/local, so things
+are pretty easy now:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew doctor
 </pre>
 </div>
 
 <p>
-The second table that we will use later is called <code>names</code>, with a
-schema that (in its simplified form) looks like this:
+Many packages are installed later with additional elaboration or in as
+dependencies for other applications; here are some more or less
+standalone packages that I routinely install.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sql">create table names (
-       tax_id integer,
-       tax_name text,
-       is_primary boolean
-);
+
+<pre class="src src-sh">brew install git &amp;&amp; \
+brew install wget &amp;&amp; \
+brew install autojump &amp;&amp; \
+brew install gcc &amp;&amp; \
+brew install graphviz &amp;&amp; \
+brew install latex2rtf &amp;&amp; \
+brew install pandoc &amp;&amp; \
+brew install tmux &amp;&amp; \
+brew install tree &amp;&amp; \
+brew install fd &amp;&amp; \
+brew install xsv
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1">homebrew API token</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Apparently lots of requests to GutHub via homebrew can hit a rate limit. There's a higher limit if you create an API token. See <a href="https://gist.github.com/christopheranderton/8644743">https://gist.github.com/christopheranderton/8644743</a>
+</p>
+
+<p>
+Here's the url for the token creation dialog:
+</p>
+
+<p>
+<a href="https://github.com/settings/tokens/new?scopes=&amp;description=Homebrew">https://github.com/settings/tokens/new?scopes=&description;=Homebrew</a>
+</p>
+
+<p>
+Make sure that all 'scopes' are unchecked. Once you generate the token, add to your shell profile:
+</p>
+
+<pre class="example">
+export HOMEBREW_GITHUB_API_TOKEN=token_here
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">python</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+I'm in the midst of the transition from python2 to python3, so as I
+wrote this it wasn't clear which packages (if any) I would need to
+install to the system. I decided to go with mostly python3, and really
+tried to limit these to utilities that are used outside of the context
+of a virtualenv.
+</p>
+
+<p>
+Use homebrew - see
+<a href="https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Homebrew-and-Python.md">https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Homebrew-and-Python.md</a>
+</p>
+</div>
+
+<div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1">dependencies</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+Run <code>brew info python</code> for required and optional dependencies
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">for pkg in sphinx-doc pkg-config readline sqlite gdbm berkeley-db@4 tcl-tk; do brew install $pkg; done
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2">python2</h3>
+<div class="outline-text-3" id="text-4-2">
+<div class="org-src-container">
+
+<pre class="src src-sh">brew install python --with-tcl-tk --with-berkeley-db@4
+pip2 install -U pip setuptools virtualenv
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3">python3</h3>
+<div class="outline-text-3" id="text-4-3">
+<div class="org-src-container">
+
+<pre class="src src-sh">brew install python3 --with-tcl-tk
 </pre>
 </div>
 
 <p>
-Multiple synonyms are allowed for each <code>tax_id</code>; the column
-<code>names.is_primary</code> indicates which is the definitive name for the
-organism (this isn't present in the table downloaded from NCBI but is
-derived from other attributes).
-</p>
-
-<p>
-The taxonomic hierarchy is defined in <code>nodes</code> using an <a href="https://en.wikipedia.org/wiki/Adjacency_list">adjacency list</a>
-model. It turns out that relational databases supporting recursive
-queries can easily traverse the graph defined by the model for a given
-node. This is well-described <a href="http://gbif.blogspot.com/2012/06/taxonomic-trees-in-postgresql.html">elsewhere</a> (the linked post compares the
-adjacency model with other representations of trees in sql).
-</p>
-
-<p>
-The query that we will use is called a <a href="https://www.postgresql.org/docs/current/static/queries-with.html">recursive CTE</a> (common table
-expression):
+A limited selection of packages - better to use virtualenvs!
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sql">WITH RECURSIVE a AS (
- SELECT tax_id, parent_id, rank
-  FROM nodes
-  WHERE tax_id = '1280'
-UNION ALL
- SELECT p.tax_id, p.parent_id, p.rank
-  FROM a JOIN nodes p ON a.parent_id = p.tax_id
-)
-SELECT * FROM a;
+
+<pre class="src src-sh">pip3 install ansible
+pip3 install csvkit
+pip3 install pgcli
 </pre>
 </div>
-
-<table class="table table-striped table-bordered table-condensed" style="width: auto;">
-
-
-<colgroup>
-<col class="org-right" />
-
-<col class="org-right" />
-
-<col class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-right">tax_id</th>
-<th scope="col" class="org-right">parent_id</th>
-<th scope="col" class="org-left">rank</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-right">1280</td>
-<td class="org-right">1279</td>
-<td class="org-left">species</td>
-</tr>
-
-<tr>
-<td class="org-right">1279</td>
-<td class="org-right">90964</td>
-<td class="org-left">genus</td>
-</tr>
-
-<tr>
-<td class="org-right">90964</td>
-<td class="org-right">1385</td>
-<td class="org-left">family</td>
-</tr>
-
-<tr>
-<td class="org-right">1385</td>
-<td class="org-right">91061</td>
-<td class="org-left">order</td>
-</tr>
-
-<tr>
-<td class="org-right">91061</td>
-<td class="org-right">1239</td>
-<td class="org-left">class</td>
-</tr>
-
-<tr>
-<td class="org-right">1239</td>
-<td class="org-right">1783272</td>
-<td class="org-left">phylum</td>
-</tr>
-
-<tr>
-<td class="org-right">1783272</td>
-<td class="org-right">2</td>
-<td class="org-left">below_superkingdom</td>
-</tr>
-
-<tr>
-<td class="org-right">2</td>
-<td class="org-right">131567</td>
-<td class="org-left">superkingdom</td>
-</tr>
-
-<tr>
-<td class="org-right">131567</td>
-<td class="org-right">1</td>
-<td class="org-left">below_root</td>
-</tr>
-
-<tr>
-<td class="org-right">1</td>
-<td class="org-right">&#xa0;</td>
-<td class="org-left">root</td>
-</tr>
-</tbody>
-</table>
-
-<p>
-And voila: we have traversed the tree from leaf to root, and in doing
-so, the lineage is defined. I'm using postgresql for this example, but
-sqlite supports recursive CTEs as well, and an identical query can be
-used with both databases.
-</p>
-
-<p>
-At this point, we can easily add taxonomic names as well:
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sql">WITH RECURSIVE a AS (
- SELECT tax_id, parent_id, rank
-  FROM nodes
-  WHERE tax_id = '1280'
-UNION ALL
- SELECT p.tax_id, p.parent_id, p.rank
-  FROM a JOIN nodes p ON a.parent_id = p.tax_id
-)
-SELECT a.tax_id, a.rank, names.tax_name
-  FROM a JOIN names USING(tax_id)
-  WHERE is_primary;
-</pre>
 </div>
 
-<table class="table table-striped table-bordered table-condensed" style="width: auto;">
-
-
-<colgroup>
-<col class="org-right" />
-
-<col class="org-left" />
-
-<col class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-right">tax_id</th>
-<th scope="col" class="org-left">rank</th>
-<th scope="col" class="org-left">tax_name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-right">1280</td>
-<td class="org-left">species</td>
-<td class="org-left">Staphylococcus aureus</td>
-</tr>
-
-<tr>
-<td class="org-right">1279</td>
-<td class="org-left">genus</td>
-<td class="org-left">Staphylococcus</td>
-</tr>
-
-<tr>
-<td class="org-right">90964</td>
-<td class="org-left">family</td>
-<td class="org-left">Staphylococcaceae</td>
-</tr>
-
-<tr>
-<td class="org-right">1385</td>
-<td class="org-left">order</td>
-<td class="org-left">Bacillales</td>
-</tr>
-
-<tr>
-<td class="org-right">91061</td>
-<td class="org-left">class</td>
-<td class="org-left">Bacilli</td>
-</tr>
-
-<tr>
-<td class="org-right">1239</td>
-<td class="org-left">phylum</td>
-<td class="org-left">Firmicutes</td>
-</tr>
-
-<tr>
-<td class="org-right">1783272</td>
-<td class="org-left">below_superkingdom</td>
-<td class="org-left">Terrabacteria group</td>
-</tr>
-
-<tr>
-<td class="org-right">2</td>
-<td class="org-left">superkingdom</td>
-<td class="org-left">Bacteria</td>
-</tr>
-
-<tr>
-<td class="org-right">131567</td>
-<td class="org-left">below_root</td>
-<td class="org-left">cellular organisms</td>
-</tr>
-
-<tr>
-<td class="org-right">1</td>
-<td class="org-left">root</td>
-<td class="org-left">root</td>
-</tr>
-</tbody>
-</table>
-
+<div id="outline-container-sec-4-3-1" class="outline-4">
+<h4 id="sec-4-3-1">scons</h4>
+<div class="outline-text-4" id="text-4-3-1">
 <p>
-It's worth pausing to point out an important feature of the
-representation of the adjacency list model of the <code>nodes</code> table
-downloaded from NCBI: the root is identified as the node for which
-<code>tax_id = 1</code>, but the value of <code>parent_id</code> for the root node is also
-1! The recursive CTE as written expects a value of NULL in the
-<code>parent_id</code> field of the root node; with a value of 1, it will never
-terminate, and your laptop will get quite hot! So do yourself a favor
-and execute the following before trying this as home:
+Note that <code>scons</code> wants to install man pages to <code>/usr/local/man</code>, which is owned by root. You'll need to do this first:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sql">UPDATE nodes set parent_id = NULL where tax_id = 1;
+
+<pre class="src src-sh">sudo mkdir -p /usr/local/man
+sudo chown $(whoami) /usr/local/man
+pip3 install scons
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">emacs</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Install latest emacs binary from <a href="http://emacsformacosx.com/">http://emacsformacosx.com/</a>
+</p>
+
+<p>
+Emacs needs a few homebrew packages
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">brew install libressl
+brew install aspell
+brew install gpg
 </pre>
 </div>
 
 <p>
-As I mentioned, all of this is pretty well documented (as I learned
-once I bothered to look). But what about a query for multiple tax_ids
-at once? Is it as easy as including more than one in the query?
+Check out my .emacs.d and run setup scripts.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sql">WITH RECURSIVE a AS (
- SELECT tax_id, parent_id, rank
-  FROM nodes
-  WHERE tax_id in ('562', '1280')
-UNION ALL
- SELECT p.tax_id, p.parent_id, p.rank
-  FROM a JOIN nodes p ON a.parent_id = p.tax_id
-)
-SELECT a.tax_id, a.rank, names.tax_name
-  FROM a JOIN names USING(tax_id)
-  WHERE is_primary;
+
+<pre class="src src-sh">cd ~
+git clone --recurse-submodules git@github.com:nhoffman/.emacs.d.git
 </pre>
 </div>
 
-<table class="table table-striped table-bordered table-condensed" style="width: auto;">
-
-
-<colgroup>
-<col class="org-right" />
-
-<col class="org-left" />
-
-<col class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-right">tax_id</th>
-<th scope="col" class="org-left">rank</th>
-<th scope="col" class="org-left">tax_name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-right">1280</td>
-<td class="org-left">species</td>
-<td class="org-left">Staphylococcus aureus</td>
-</tr>
-
-<tr>
-<td class="org-right">562</td>
-<td class="org-left">species</td>
-<td class="org-left">Escherichia coli</td>
-</tr>
-
-<tr>
-<td class="org-right">1279</td>
-<td class="org-left">genus</td>
-<td class="org-left">Staphylococcus</td>
-</tr>
-
-<tr>
-<td class="org-right">561</td>
-<td class="org-left">genus</td>
-<td class="org-left">Escherichia</td>
-</tr>
-
-<tr>
-<td class="org-right">90964</td>
-<td class="org-left">family</td>
-<td class="org-left">Staphylococcaceae</td>
-</tr>
-
-<tr>
-<td class="org-right">543</td>
-<td class="org-left">family</td>
-<td class="org-left">Enterobacteriaceae</td>
-</tr>
-
-<tr>
-<td class="org-right">1385</td>
-<td class="org-left">order</td>
-<td class="org-left">Bacillales</td>
-</tr>
-
-<tr>
-<td class="org-right">91347</td>
-<td class="org-left">order</td>
-<td class="org-left">Enterobacterales</td>
-</tr>
-
-<tr>
-<td class="org-right">91061</td>
-<td class="org-left">class</td>
-<td class="org-left">Bacilli</td>
-</tr>
-
-<tr>
-<td class="org-right">1236</td>
-<td class="org-left">class</td>
-<td class="org-left">Gammaproteobacteria</td>
-</tr>
-
-<tr>
-<td class="org-right">1239</td>
-<td class="org-left">phylum</td>
-<td class="org-left">Firmicutes</td>
-</tr>
-
-<tr>
-<td class="org-right">1224</td>
-<td class="org-left">phylum</td>
-<td class="org-left">Proteobacteria</td>
-</tr>
-
-<tr>
-<td class="org-right">1783272</td>
-<td class="org-left">below_superkingdom</td>
-<td class="org-left">Terrabacteria group</td>
-</tr>
-
-<tr>
-<td class="org-right">2</td>
-<td class="org-left">superkingdom</td>
-<td class="org-left">Bacteria</td>
-</tr>
-
-<tr>
-<td class="org-right">2</td>
-<td class="org-left">superkingdom</td>
-<td class="org-left">Bacteria</td>
-</tr>
-
-<tr>
-<td class="org-right">131567</td>
-<td class="org-left">below_root</td>
-<td class="org-left">cellular organisms</td>
-</tr>
-
-<tr>
-<td class="org-right">131567</td>
-<td class="org-left">below_root</td>
-<td class="org-left">cellular organisms</td>
-</tr>
-
-<tr>
-<td class="org-right">1</td>
-<td class="org-left">root</td>
-<td class="org-left">root</td>
-</tr>
-
-<tr>
-<td class="org-right">1</td>
-<td class="org-left">root</td>
-<td class="org-left">root</td>
-</tr>
-</tbody>
-</table>
-
 <p>
-Hmm, no, that doesn't work so well. Even if the ordering was right, we
-would find it difficult to keep track of the individual lineages. So
-maybe we can keep track?
+For elpy:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sql">WITH RECURSIVE a AS (
- SELECT tax_id as tid, 1 as ord, tax_id, parent_id, rank
-  FROM nodes
-  WHERE tax_id in ('562', '1280')
-UNION ALL
- SELECT a.tid, a.ord + 1, p.tax_id, p.parent_id, p.rank
-  FROM a JOIN nodes p ON a.parent_id = p.tax_id
-)
-SELECT a.tid, a.ord, a.tax_id, a.rank, names.tax_name
-  FROM a JOIN names USING(tax_id)
-  WHERE is_primary
-  ORDER BY tid, ord;
+
+<pre class="src src-sh">cd ~/.emacs.d
+bin/venv.sh
 </pre>
 </div>
+</div>
+</div>
 
-<table class="table table-striped table-bordered table-condensed" style="width: auto;">
-
-
-<colgroup>
-<col class="org-right" />
-
-<col class="org-right" />
-
-<col class="org-right" />
-
-<col class="org-left" />
-
-<col class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-right">tid</th>
-<th scope="col" class="org-right">ord</th>
-<th scope="col" class="org-right">tax_id</th>
-<th scope="col" class="org-left">rank</th>
-<th scope="col" class="org-left">tax_name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-right">1280</td>
-<td class="org-right">1</td>
-<td class="org-right">1280</td>
-<td class="org-left">species</td>
-<td class="org-left">Staphylococcus aureus</td>
-</tr>
-
-<tr>
-<td class="org-right">1280</td>
-<td class="org-right">2</td>
-<td class="org-right">1279</td>
-<td class="org-left">genus</td>
-<td class="org-left">Staphylococcus</td>
-</tr>
-
-<tr>
-<td class="org-right">1280</td>
-<td class="org-right">3</td>
-<td class="org-right">90964</td>
-<td class="org-left">family</td>
-<td class="org-left">Staphylococcaceae</td>
-</tr>
-
-<tr>
-<td class="org-right">1280</td>
-<td class="org-right">4</td>
-<td class="org-right">1385</td>
-<td class="org-left">order</td>
-<td class="org-left">Bacillales</td>
-</tr>
-
-<tr>
-<td class="org-right">1280</td>
-<td class="org-right">5</td>
-<td class="org-right">91061</td>
-<td class="org-left">class</td>
-<td class="org-left">Bacilli</td>
-</tr>
-
-<tr>
-<td class="org-right">1280</td>
-<td class="org-right">6</td>
-<td class="org-right">1239</td>
-<td class="org-left">phylum</td>
-<td class="org-left">Firmicutes</td>
-</tr>
-
-<tr>
-<td class="org-right">1280</td>
-<td class="org-right">7</td>
-<td class="org-right">1783272</td>
-<td class="org-left">below_superkingdom</td>
-<td class="org-left">Terrabacteria group</td>
-</tr>
-
-<tr>
-<td class="org-right">1280</td>
-<td class="org-right">8</td>
-<td class="org-right">2</td>
-<td class="org-left">superkingdom</td>
-<td class="org-left">Bacteria</td>
-</tr>
-
-<tr>
-<td class="org-right">1280</td>
-<td class="org-right">9</td>
-<td class="org-right">131567</td>
-<td class="org-left">below_root</td>
-<td class="org-left">cellular organisms</td>
-</tr>
-
-<tr>
-<td class="org-right">1280</td>
-<td class="org-right">10</td>
-<td class="org-right">1</td>
-<td class="org-left">root</td>
-<td class="org-left">root</td>
-</tr>
-
-<tr>
-<td class="org-right">562</td>
-<td class="org-right">1</td>
-<td class="org-right">562</td>
-<td class="org-left">species</td>
-<td class="org-left">Escherichia coli</td>
-</tr>
-
-<tr>
-<td class="org-right">562</td>
-<td class="org-right">2</td>
-<td class="org-right">561</td>
-<td class="org-left">genus</td>
-<td class="org-left">Escherichia</td>
-</tr>
-
-<tr>
-<td class="org-right">562</td>
-<td class="org-right">3</td>
-<td class="org-right">543</td>
-<td class="org-left">family</td>
-<td class="org-left">Enterobacteriaceae</td>
-</tr>
-
-<tr>
-<td class="org-right">562</td>
-<td class="org-right">4</td>
-<td class="org-right">91347</td>
-<td class="org-left">order</td>
-<td class="org-left">Enterobacterales</td>
-</tr>
-
-<tr>
-<td class="org-right">562</td>
-<td class="org-right">5</td>
-<td class="org-right">1236</td>
-<td class="org-left">class</td>
-<td class="org-left">Gammaproteobacteria</td>
-</tr>
-
-<tr>
-<td class="org-right">562</td>
-<td class="org-right">6</td>
-<td class="org-right">1224</td>
-<td class="org-left">phylum</td>
-<td class="org-left">Proteobacteria</td>
-</tr>
-
-<tr>
-<td class="org-right">562</td>
-<td class="org-right">7</td>
-<td class="org-right">2</td>
-<td class="org-left">superkingdom</td>
-<td class="org-left">Bacteria</td>
-</tr>
-
-<tr>
-<td class="org-right">562</td>
-<td class="org-right">8</td>
-<td class="org-right">131567</td>
-<td class="org-left">below_root</td>
-<td class="org-left">cellular organisms</td>
-</tr>
-
-<tr>
-<td class="org-right">562</td>
-<td class="org-right">9</td>
-<td class="org-right">1</td>
-<td class="org-left">root</td>
-<td class="org-left">root</td>
-</tr>
-</tbody>
-</table>
-
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">zsh</h2>
+<div class="outline-text-2" id="text-6">
 <p>
-Ok, that's better! If we like, we can group and aggregate the lineages:
-</p>
-
-<p>
-(The results are shown using the equivalent of <code>psql -x</code>; the first
-line just provides a header row.)
+Install zsh with Homebrew
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sql">SELECT 'value' as key;
-WITH RECURSIVE a AS (
- SELECT tax_id as tid, 1 as ord, tax_id, parent_id, rank
-  FROM nodes
-  WHERE tax_id in ('562', '1280')
-UNION ALL
- SELECT a.tid, a.ord + 1, p.tax_id, p.parent_id, p.rank
-  FROM a JOIN nodes p ON a.parent_id = p.tax_id
-)
-SELECT a.tid, array_agg(a.tax_id), array_agg(a.rank), array_agg(names.tax_name)
-  FROM a JOIN names USING(tax_id)
-  WHERE is_primary
-  GROUP BY tid;
+
+<pre class="src src-sh">brew install zsh
 </pre>
 </div>
 
-<table class="table table-striped table-bordered table-condensed" style="width: auto;">
-
-
-<colgroup>
-<col class="org-left" />
-
-<col class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">key</th>
-<th scope="col" class="org-left">value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-left">tid</td>
-<td class="org-left">1280</td>
-</tr>
-
-<tr>
-<td class="org-left">array_agg</td>
-<td class="org-left">{1280,1279,90964,1385,91061,1239,1783272,2,131567,1}</td>
-</tr>
-
-<tr>
-<td class="org-left">array_agg</td>
-<td class="org-left">{species,genus,family,order,class,phylum,below_superkingdom,superkingdom,below_root,root}</td>
-</tr>
-
-<tr>
-<td class="org-left">array_agg</td>
-<td class="org-left">{"Staphylococcus aureus",Staphylococcus,Staphylococcaceae,Bacillales,Bacilli,Firmicutes,"Terrabacteria group",Bacteria,"cellular organisms",root}</td>
-</tr>
-
-<tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">tid</td>
-<td class="org-left">562</td>
-</tr>
-
-<tr>
-<td class="org-left">array_agg</td>
-<td class="org-left">{562,1,561,1224,543,131567,91347,2,1236}</td>
-</tr>
-
-<tr>
-<td class="org-left">array_agg</td>
-<td class="org-left">{species,root,genus,phylum,family,below_root,order,superkingdom,class}</td>
-</tr>
-
-<tr>
-<td class="org-left">array_agg</td>
-<td class="org-left">{"Escherichia coli",root,Escherichia,Proteobacteria,Enterobacteriaceae,"cellular organisms",Enterobacterales,Bacteria,Gammaproteobacteria}</td>
-</tr>
-</tbody>
-</table>
-
 <p>
-Here's another approach: accumulate values in an array in the
-recursive expression, and then use the first value in the array to
-identify the first tax_id in each lineage.
+Change shell to zsh
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sql">WITH RECURSIVE a AS (
- SELECT tax_id as tid,
-	parent_id as pid,
-	rank,
-	tax_id,
-	ARRAY[tax_id] as lineage
-  FROM nodes
-  WHERE tax_id = '1280'
-UNION ALL
-  SELECT p.tax_id,
-	 p.parent_id,
-	 p.rank,
-	 lineage[1],
-	 lineage || ARRAY[p.tax_id]
-  FROM a JOIN nodes p ON a.pid = p.tax_id
-)
-SELECT * FROM a;
+
+<pre class="src src-sh">sudo -s
+echo /usr/local/bin/zsh &gt;&gt; /etc/shells
+exit
+chsh -s /usr/local/bin/zsh $USER
 </pre>
 </div>
 
-<table class="table table-striped table-bordered table-condensed" style="width: auto;">
-
-
-<colgroup>
-<col class="org-right" />
-
-<col class="org-right" />
-
-<col class="org-left" />
-
-<col class="org-right" />
-
-<col class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-right">tid</th>
-<th scope="col" class="org-right">pid</th>
-<th scope="col" class="org-left">rank</th>
-<th scope="col" class="org-right">tax_id</th>
-<th scope="col" class="org-left">lineage</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-right">1280</td>
-<td class="org-right">1279</td>
-<td class="org-left">species</td>
-<td class="org-right">1280</td>
-<td class="org-left">{1280}</td>
-</tr>
-
-<tr>
-<td class="org-right">1279</td>
-<td class="org-right">90964</td>
-<td class="org-left">genus</td>
-<td class="org-right">1280</td>
-<td class="org-left">{1280,1279}</td>
-</tr>
-
-<tr>
-<td class="org-right">90964</td>
-<td class="org-right">1385</td>
-<td class="org-left">family</td>
-<td class="org-right">1280</td>
-<td class="org-left">{1280,1279,90964}</td>
-</tr>
-
-<tr>
-<td class="org-right">1385</td>
-<td class="org-right">91061</td>
-<td class="org-left">order</td>
-<td class="org-right">1280</td>
-<td class="org-left">{1280,1279,90964,1385}</td>
-</tr>
-
-<tr>
-<td class="org-right">91061</td>
-<td class="org-right">1239</td>
-<td class="org-left">class</td>
-<td class="org-right">1280</td>
-<td class="org-left">{1280,1279,90964,1385,91061}</td>
-</tr>
-
-<tr>
-<td class="org-right">1239</td>
-<td class="org-right">1783272</td>
-<td class="org-left">phylum</td>
-<td class="org-right">1280</td>
-<td class="org-left">{1280,1279,90964,1385,91061,1239}</td>
-</tr>
-
-<tr>
-<td class="org-right">1783272</td>
-<td class="org-right">2</td>
-<td class="org-left">below_superkingdom</td>
-<td class="org-right">1280</td>
-<td class="org-left">{1280,1279,90964,1385,91061,1239,1783272}</td>
-</tr>
-
-<tr>
-<td class="org-right">2</td>
-<td class="org-right">131567</td>
-<td class="org-left">superkingdom</td>
-<td class="org-right">1280</td>
-<td class="org-left">{1280,1279,90964,1385,91061,1239,1783272,2}</td>
-</tr>
-
-<tr>
-<td class="org-right">131567</td>
-<td class="org-right">1</td>
-<td class="org-left">below_root</td>
-<td class="org-right">1280</td>
-<td class="org-left">{1280,1279,90964,1385,91061,1239,1783272,2,131567}</td>
-</tr>
-
-<tr>
-<td class="org-right">1</td>
-<td class="org-right">&#xa0;</td>
-<td class="org-left">root</td>
-<td class="org-right">1280</td>
-<td class="org-left">{1280,1279,90964,1385,91061,1239,1783272,2,131567,1}</td>
-</tr>
-</tbody>
-</table>
-
 <p>
-We only actually care about the final lineage when it terminates at
-the root node.
+Install my dotfiles (relevant only to me)
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sql">WITH RECURSIVE a AS (
- SELECT tax_id as tid,
-	parent_id as pid,
-	rank,
-	tax_id,
-	ARRAY[tax_id] as lineage
-  FROM nodes
-  WHERE tax_id = '1280'
-UNION ALL
-  SELECT p.tax_id,
-	 p.parent_id,
-	 p.rank,
-	 lineage[1],
-	 lineage || ARRAY[p.tax_id]
-  FROM a JOIN nodes p ON a.pid = p.tax_id
-)
-SELECT tax_id, lineage FROM a
-WHERE a.rank = 'root';
+
+<pre class="src src-sh">cd ~
+git clone git@bitbucket.org:nhoffman/dotfiles.git
+~/dotfiles/mac/install.py
 </pre>
 </div>
+</div>
+</div>
 
-<table class="table table-striped table-bordered table-condensed" style="width: auto;">
-
-
-<colgroup>
-<col class="org-right" />
-
-<col class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-right">tax_id</th>
-<th scope="col" class="org-left">lineage</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-right">1280</td>
-<td class="org-left">{1280,1279,90964,1385,91061,1239,1783272,2,131567,1}</td>
-</tr>
-</tbody>
-</table>
-
-
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7">desktop apps</h2>
+<div class="outline-text-2" id="text-7">
 <p>
-With some embellishment, we can see how this strategy can be used to
-retrieve lineages plus additional annotation for multiple tax_ids (at
-arbitrary ranks) as once.
+Homebrew installs desktop apps too!
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sql">SELECT 'value' as key;
-WITH RECURSIVE a AS (
- SELECT tax_id as tid,
-	parent_id as pid,
-	rank,
-	tax_id,
-	ARRAY[tax_id] as lineage,
-	ARRAY[rank] as ranks
-  FROM nodes
-  WHERE tax_id in ('1279', '1280', '562')
-UNION ALL
-  SELECT p.tax_id,
-	 p.parent_id,
-	 p.rank,
-	 lineage[1],
-	 lineage || ARRAY[p.tax_id],
-	 ranks || ARRAY[p.rank]
-  FROM a JOIN nodes p ON a.pid = p.tax_id
-)
-SELECT tax_id, tax_name, nodes.rank, lineage, ranks
-FROM a
-JOIN nodes USING(tax_id)
-JOIN names USING(tax_id)
-WHERE a.rank = 'root'
-AND names.is_primary;
+
+<pre class="src src-sh">brew cask install dropbox
+brew cask install sizeup
+brew cask install dash
+brew cask install hipchat
+brew cask install google-chrome
+brew cask install java
+brew cask install mactex
+brew cask install texmaker
+brew cask install wkhtmltopdf
+brew cask install firefox
+brew cask install docker
 </pre>
 </div>
 
-<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+<p>
+Some of the above (eg, sizeup, dropbox, dash) require licenses and
+credentials that must be installed interactively.
+</p>
+</div>
 
-
-<colgroup>
-<col class="org-left" />
-
-<col class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">key</th>
-<th scope="col" class="org-left">value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-left">tax_id</td>
-<td class="org-left">1279</td>
-</tr>
-
-<tr>
-<td class="org-left">tax_name</td>
-<td class="org-left">Staphylococcus</td>
-</tr>
-
-<tr>
-<td class="org-left">rank</td>
-<td class="org-left">genus</td>
-</tr>
-
-<tr>
-<td class="org-left">lineage</td>
-<td class="org-left">{1279,90964,1385,91061,1239,1783272,2,131567,1}</td>
-</tr>
-
-<tr>
-<td class="org-left">ranks</td>
-<td class="org-left">{genus,family,order,class,phylum,below_superkingdom,superkingdom,below_root,root}</td>
-</tr>
-
-<tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">tax_id</td>
-<td class="org-left">562</td>
-</tr>
-
-<tr>
-<td class="org-left">tax_name</td>
-<td class="org-left">Escherichia coli</td>
-</tr>
-
-<tr>
-<td class="org-left">rank</td>
-<td class="org-left">species</td>
-</tr>
-
-<tr>
-<td class="org-left">lineage</td>
-<td class="org-left">{562,561,543,91347,1236,1224,2,131567,1}</td>
-</tr>
-
-<tr>
-<td class="org-left">ranks</td>
-<td class="org-left">{species,genus,family,order,class,phylum,superkingdom,below_root,root}</td>
-</tr>
-
-<tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">tax_id</td>
-<td class="org-left">1280</td>
-</tr>
-
-<tr>
-<td class="org-left">tax_name</td>
-<td class="org-left">Staphylococcus aureus</td>
-</tr>
-
-<tr>
-<td class="org-left">rank</td>
-<td class="org-left">species</td>
-</tr>
-
-<tr>
-<td class="org-left">lineage</td>
-<td class="org-left">{1280,1279,90964,1385,91061,1239,1783272,2,131567,1}</td>
-</tr>
-
-<tr>
-<td class="org-left">ranks</td>
-<td class="org-left">{species,genus,family,order,class,phylum,below_superkingdom,superkingdom,below_root,root}</td>
-</tr>
-</tbody>
-</table>
+<div id="outline-container-sec-7-1" class="outline-3">
+<h3 id="sec-7-1">iTerm2</h3>
+<div class="outline-text-3" id="text-7-1">
+<pre class="example">
+brew cask install iterm2
+</pre>
 
 <p>
-How well does this scale? Both of the approaches executed in less than
-one second for 1000 tax_id's, but took more like 40s for 2000, so not
-fantastically well. But I expect the some optimization is possible.
+Update a few settings.
 </p>
 
 <p>
-Unfortunately, in the absence of an ARRAY data type, this approach
-does not work for sqlite, but you could do something similar by
-concatenating strings (though I doubt that this would be very
-efficient).
+Preferences &#x2013;&gt; Profiles &#x2013;&gt; Keys and do these things:
 </p>
+<ul class="org-ul">
+<li>select "Left/right option key acts as": +Esc
+</li>
+<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;left arrow&gt;": Send Escape sequence "b"
+</li>
+<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;right arrow&gt;": Send Escape sequence "f"
+</li>
+</ul>
+
+<p>
+Default appearance:
+</p>
+
+<ul class="org-ul">
+<li>Preferences &#x2013;&gt; Profiles &#x2013;&gt; Colors &#x2013;&gt; Load Presets &#x2013;&gt; Light Background
+</li>
+<li>Preferences &#x2013;&gt; Profiles &#x2013;&gt; Text &#x2013;&gt; Change Font &#x2013;&gt; 14 point
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-7-2" class="outline-3">
+<h3 id="sec-7-2">postgresql</h3>
+<div class="outline-text-3" id="text-7-2">
+<div class="org-src-container">
+
+<pre class="src src-sh">brew cask install postgres
+</pre>
+</div>
+
+<p>
+This installs multiple versions of postgres. You'll need to add the
+path to the CLI for the version you want to use to your PATH, eg:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">export PATH=/Applications/Postgres.app/Contents/Versions/9.6/bin:$PATH
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8">R</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+Again, using homebrew.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">brew install openblas
+brew install pcre
+brew install R
+</pre>
+</div>
+
+<p>
+Some packages that I know I'll need:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">R --slave &lt;&lt; EOF
+packages &lt;- c("lattice", "RSQLite", "latticeExtra", "argparse", "data.table", "tidyverse")
+install.packages(packages, repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE)
+EOF
+</pre>
+</div>
+
+<p>
+Wow, this takes a long time!
+</p>
+
+<p>
+And while I'm at it:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">brew cask install rstudio
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9">X11</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+install Xquartz
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">brew install caskroom/cask/xquartz
+</pre>
+</div>
+
+<p>
+X11 key bindings so that the option key is used for Meta. Not so
+relevant any more now that I rarely use emacs via X11 for remote
+sessions.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">cat &gt; ~/.Xmodmap &lt;&lt;EOF
+clear Mod1
+clear Mod2
+keycode 63 = Mode_switch
+keycode 66 = Meta_L
+add Mod1 = Meta_L
+add Mod2 = Mode_switch
+EOF
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10">virtualbox and vagrant</h2>
+<div class="outline-text-2" id="text-10">
+<div class="org-src-container">
+
+<pre class="src src-sh">brew cask install virtualbox
+brew cask install vagrant
+brew cask install vagrant-manager
+</pre>
+</div>
+
+<p>
+On High Sierra, a kernel extension signing issue caused an error: instructions for a workaround are here: <a href="https://github.com/caskroom/homebrew-cask/issues/39369">https://github.com/caskroom/homebrew-cask/issues/39369</a>
+</p>
+
+<p>
+After virtualbox is installed, go to preferences, and change default machine folder to ~/VirtualBox
+</p>
+
+<ul class="org-ul">
+<li>available vagrant images:
+</li>
+</ul>
+
+<p>
+<a href="https://app.vagrantup.com/boxes/search">https://app.vagrantup.com/boxes/search</a>
+</p>
+</div>
+
+<div id="outline-container-sec-10-1" class="outline-3">
+<h3 id="sec-10-1">install an ubuntu16.04 VM</h3>
+<div class="outline-text-3" id="text-10-1">
+<p>
+see <a href="https://app.vagrantup.com/ubuntu/boxes/xenial64">https://app.vagrantup.com/ubuntu/boxes/xenial64</a>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">mkdir -p ~/vagrant/xenial64
+cd ~/vagrant/xenial64
+vagrant init ubuntu/xenial64
+vagrant up
+</pre>
+</div>
+</div>
+</div>
+</div>
 </div>
           <hr />
 
@@ -1123,7 +647,7 @@ efficient).
 <script>
   var disqus_config = function () {
   this.page.url = 'https://nhoffman.github.io/borborygmi';
-  this.page.identifier = 'using-recursive-ctes-for-calculating-taxonomic-lineages';
+  this.page.identifier = 'clean-install-of-macos-high-sierra';
   };
   (function() { // DON'T EDIT BELOW THIS LINE
   var d = document, s = d.createElement('script');
@@ -1144,6 +668,25 @@ efficient).
 
 
 	<div class='article'>
+          <a href="https://nhoffman.github.io/borborygmi/recursive-cte-for-taxonomy.html"><h2>Using recursive CTEs for calculating taxonomic lineages</h2></a>
+          <div class= "well small"> Fri 07 July 2017 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/sql.html">sql</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/postgresql.html">postgresql,&nbsp;</a><a href="https://nhoffman.github.io/borborygmi/tag/taxonomy.html">taxonomy</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/recursive-cte-for-taxonomy.html">read more</a> </div>
+          <div class="summary"><p>
+This topic falls into the category of "things that I didn't know that
+I didn't know." Many of my projects involve the manipulation of
+taxonomies, particularly the <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI taxonomy</a>, but I didn't understand
+the efficiency with which it was possible to calculate a lineage in
+SQL. I ...</p> </div>
+	</div>
+
+
+ 
+
+
+	<div class='article'>
           <a href="https://nhoffman.github.io/borborygmi/mac-setup-sierra.html"><h2>Setting up a new Mac (Sierra)</h2></a>
           <div class= "well small"> Thu 05 January 2017 &#8212;
 
@@ -1154,41 +697,41 @@ efficient).
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org51c7f02">system settings</a>
+<li><a href="#sec-1">system settings</a>
 <ul>
-<li><a href="#org323f827">turn off spelling autocorrect</a></li>
-<li><a href="#orgfb2b798">unmap Control + left,right</a></li>
+<li><a href="#sec-1-1">turn off spelling autocorrect</a></li>
+<li><a href="#sec-1-2">unmap Control + left,right</a></li>
 </ul>
 </li>
-<li><a href="#orgb247d0b">First applications</a>
+<li><a href="#sec-2">First applications</a>
 <ul>
-<li><a href="#org215914f">iTerm2</a></li>
-<li><a href="#orgb6d0312">Dropbox</a></li>
-<li><a href="#orgda378d2">Developer tools</a></li>
-<li><a href="#orgb5a9573">Junos pulse VPN client</a></li>
-<li><a href="#org075b5e4">Microsoft Office 2016</a></li>
-<li><a href="#org667ac89">Others</a></li>
+<li><a href="#sec-2-1">iTerm2</a></li>
+<li><a href="#sec-2-2">Dropbox</a></li>
+<li><a href="#sec-2-3">Developer tools</a></li>
+<li><a href="#sec-2-4">Junos pulse VPN client</a></li>
+<li><a href="#sec-2-5">Microsoft Office 2016</a></li>
+<li><a href="#sec-2-6">Others</a></li>
 </ul>
 </li>
-<li><a href="#org165835a">homebrew</a>
+<li><a href="#sec-3">homebrew</a>
 <ul>
-<li><a href="#orgc0eb6ce">X11</a></li>
-<li><a href="#org66ea1ca">Desktop apps using Cask</a></li>
-<li><a href="#orgedc55bf">homebrew API token</a></li>
-<li><a href="#orgc970e05">zsh</a></li>
+<li><a href="#sec-3-1">X11</a></li>
+<li><a href="#sec-3-2">Desktop apps using Cask</a></li>
+<li><a href="#sec-3-3">homebrew API token</a></li>
+<li><a href="#sec-3-4">zsh</a></li>
 </ul>
 </li>
-<li><a href="#orgfa91dc5">git</a></li>
-<li><a href="#org7934c1b">python</a></li>
-<li><a href="#orgc4fa74b">emacs</a></li>
-<li><a href="#orgea2bcea">R</a></li>
-<li><a href="#org278d9f1">wkhtmltopdf</a></li>
-<li><a href="#org0be92f3">mail</a></li>
+<li><a href="#sec-4">git</a></li>
+<li><a href="#sec-5">python</a></li>
+<li><a href="#sec-6">emacs</a></li>
+<li><a href="#sec-7">R</a></li>
+<li><a href="#sec-8">wkhtmltopdf</a></li>
+<li><a href="#sec-9">mail</a></li>
 </ul>
 </div>
 </div>
 <ul class="org-ul">
-<li><i>Edit 2017-01-09: provide upgrade path to Pulse …</i></li></ul> </div>
+<li><i>Edit 2017-01-09: provide upgrade path to Pulse ...</i></li></ul> </div>
 	</div>
 
 
@@ -1206,33 +749,33 @@ efficient).
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org2c1e823">First applications</a>
+<li><a href="#sec-1">First applications</a>
 <ul>
-<li><a href="#org1a18810">Developer tools</a></li>
-<li><a href="#orgd9e0b89">X11</a></li>
-<li><a href="#org8b54df8">iTerm2</a></li>
-<li><a href="#orgf30e7d9">Others</a></li>
-<li><a href="#org16af2e4">UW only</a></li>
+<li><a href="#sec-1-1">Developer tools</a></li>
+<li><a href="#sec-1-2">X11</a></li>
+<li><a href="#sec-1-3">iTerm2</a></li>
+<li><a href="#sec-1-4">Others</a></li>
+<li><a href="#sec-1-5">UW only</a></li>
 </ul>
 </li>
-<li><a href="#org608d67f">system-level configuration</a>
+<li><a href="#sec-2">system-level configuration</a>
 <ul>
-<li><a href="#orgb78443e">turn off spelling autocorrect</a></li>
-<li><a href="#orgd973fab">turn off spaces key shortcuts</a></li>
+<li><a href="#sec-2-1">turn off spelling autocorrect</a></li>
+<li><a href="#sec-2-2">turn off spaces key shortcuts</a></li>
 </ul>
 </li>
-<li><a href="#org4a2c6dc">homebrew</a>
+<li><a href="#sec-3">homebrew</a>
 <ul>
-<li><a href="#orgb603a5b">packages installed using homebrew</a></li>
-<li><a href="#org6db31e4">homebrew cask</a></li>
-<li><a href="#org714038d">homebrew API token</a></li>
-<li><a href="#org450908e">zsh</a></li>
+<li><a href="#sec-3-1">packages installed using homebrew</a></li>
+<li><a href="#sec-3-2">homebrew cask</a></li>
+<li><a href="#sec-3-3">homebrew API token</a></li>
+<li><a href="#sec-3-4">zsh</a></li>
 </ul>
 </li>
-<li><a href="#orgf241ce7">ssh</a>
+<li><a href="#sec-4">ssh</a>
 <ul>
-<li><a href="#org3d9e002">update /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist</a></li>
-<li><a href="#org91d81f3">create $ZSH_INITDIR/ssh-ask-keychain (called from start_ssh_agent.zsh …</a></li></ul></li></ul></div></div> </div>
+<li><a href="#sec-4-1">update /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist</a></li>
+<li><a href="#sec-4-2">create $ZSH_INITDIR/ssh-ask-keychain (called from start_ssh_agent.zsh ...</a></li></ul></li></ul></div></div> </div>
 	</div>
 
 
@@ -1250,16 +793,16 @@ efficient).
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgba4c0e5">VirtualBox preferences</a></li>
-<li><a href="#org1003ef3">Create an Ubuntu 14.04 VM</a></li>
-<li><a href="#org29de9d5">Set up an IP address</a></li>
+<li><a href="#sec-1">VirtualBox preferences</a></li>
+<li><a href="#sec-2">Create an Ubuntu 14.04 VM</a></li>
+<li><a href="#sec-3">Set up an IP address</a></li>
 </ul>
 </div>
 </div>
 <p>
 Here are my notes for setting up an Ubuntu VM to work on some web
 applications. This is intended to be a sandbox for development, so
-I'll err on the side of convenience (at …</p> </div>
+I'll err on the side of convenience ...</p> </div>
 	</div>
 
 
@@ -1274,7 +817,7 @@ I'll err on the side of convenience (at …</p> </div>
 <em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/visualization.html">visualization</a>;
     tags: <a href="https://nhoffman.github.io/borborygmi/tag/laboratory-medicine.html">laboratory medicine</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/hold-the-pie.html">read more</a> </div>
           <div class="summary"><p>
-I came across this visualization<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> of a very simple data set, and
+I came across this visualization<sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup> of a very simple data set, and
 it took me a few minutes to fully understand what makes it
 so&#x2026; suboptimal.
 </p>
@@ -1286,9 +829,11 @@ so&#x2026; suboptimal.
 </div>
 
 <ul class="org-ul">
-<li>Ok, first of all, it's <a href="https://blogs.oracle.com/experience/entry/countdown_of_top_10_reasons_to_never_ever_use_a_pie_chart">a</a> <a href="http://en.wikipedia.org/wiki/Pie_chart">pie</a> <a href="http://www.businessinsider.com/pie-charts-are-the-worst-2013-6">chart</a>.</li>
-<li>The labels are separated from the corresponding values.</li>
-<li>The grey scale color map doesn't distinguish …</li></ul> </div>
+<li>Ok, first of all, it's <a href="https://blogs.oracle.com/experience/entry/countdown_of_top_10_reasons_to_never_ever_use_a_pie_chart">a</a> <a href="http://en.wikipedia.org/wiki/Pie_chart">pie</a> <a href="http://www.businessinsider.com/pie-charts-are-the-worst-2013-6">chart</a>.
+</li>
+<li>The labels are separated from the corresponding values.
+</li>
+<li>The grey scale color map doesn ...</li></ul> </div>
 	</div>
 
 
@@ -1306,8 +851,8 @@ so&#x2026; suboptimal.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org4866048">Ubuntu 14.04 (Trusty Tahr)</a></li>
-<li><a href="#orgc00f271">Ubuntu 12.04 (Precise Pangolin)</a></li>
+<li><a href="#sec-1">Ubuntu 14.04 (Trusty Tahr)</a></li>
+<li><a href="#sec-2">Ubuntu 12.04 (Precise Pangolin)</a></li>
 </ul>
 </div>
 </div>
@@ -1315,7 +860,7 @@ so&#x2026; suboptimal.
 Illumina provides a program for demultiplexing sequencing output
 called <code>bcl2fastq</code>. They get a gold star for releasing the source -
 the downside is that they release binaries only for RHEL/CentOS, and
-no build instructions for Ubuntu. So …</p> </div>
+no build instructions for Ubuntu. So ...</p> </div>
 	</div>
 
 
@@ -1334,17 +879,18 @@ I learned a bit about list creation in elisp today. Here's how you join a list o
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-elisp">(mapconcat #'identity '("" "path" "to" "someplace") "/")
 </pre>
 </div>
 
+<pre class="example">
+/path/to/someplace
+</pre>
+
 <p>
 But I learned (thanks to <a href="http://stackoverflow.com/users/113848/legoscia">legoscia</a> on <a href="http://stackoverflow.com/questions/24188100">stackoverflow</a>) that simply
-replacing an element in the list with a variable results in an error:
-</p>
-
-<div class="org-src-container">
-<pre class="src src-elisp">(let ((path …</pre></div> </div>
+replacing an element in the list with a variable results in ...</p> </div>
 	</div>
 
 
@@ -1359,8 +905,10 @@ replacing an element in the list with a variable results in an error:
 <em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/lectures.html">lectures</a>;
     tags: <a href="https://nhoffman.github.io/borborygmi/tag/laboratory-medicine.html">laboratory medicine</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/database-intro.html">read more</a> </div>
           <div class="summary"><ul class="org-ul">
-<li><i>Edit 2015-07-26: added a section on date formatting</i></li>
-<li><i>Edit 2016-07-11: add reference to Tidy Data</i></li>
+<li><i>Edit 2015-07-26: added a section on date formatting</i>
+</li>
+<li><i>Edit 2016-07-11: add reference to Tidy Data</i>
+</li>
 </ul>
 
 <p>
@@ -1371,12 +919,12 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org1b83c2b">Objectives</a></li>
-<li><a href="#org1caf079">Relational database terminology</a></li>
-<li><a href="#org7ca5b02">Relations</a>
+<li><a href="#sec-1">Objectives</a></li>
+<li><a href="#sec-2">Relational database terminology</a></li>
+<li><a href="#sec-3">Relations</a>
 <ul>
-<li><a href="#org25595e1">one to one</a></li>
-<li><a href="#org6506864">one to many …</a></li></ul></li></ul></div></div> </div>
+<li><a href="#sec-3-1">one to one</a></li>
+<li><a href="#sec-3-2">one to many ...</a></li></ul></li></ul></div></div> </div>
 	</div>
 
 
@@ -1397,45 +945,13 @@ when actual dict objects are required. Adapted from
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-python">import sqlite3
 
 def dict_factory(cursor, row):
     return {col[0]: row[idx] for idx, col in enumerate(cursor.description)}
 
-con = sqlite3.connect(":memory …</pre></div> </div>
-	</div>
-
-
- 
-
-
-	<div class='article'>
-          <a href="https://nhoffman.github.io/borborygmi/getting-started.html"><h2>Creating a site with Pelican and org-mode</h2></a>
-          <div class= "well small"> Mon 26 May 2014 &#8212;
-
-
-<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/org-mode.html">org-mode</a>;
-    tags: <a href="https://nhoffman.github.io/borborygmi/tag/org-mode.html">org-mode,&nbsp;</a><a href="https://nhoffman.github.io/borborygmi/tag/pelican.html">pelican,&nbsp;</a><a href="https://nhoffman.github.io/borborygmi/tag/elisp.html">elisp</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/getting-started.html">read more</a> </div>
-          <div class="summary"><div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#org39ee611">org-mode integration</a>
-<ul>
-<li><a href="#org02108f5">Arranging content in subdirectories</a></li>
-<li><a href="#orgf44722f">Syntax highlighting</a></li>
-</ul>
-</li>
-<li><a href="#org9aedfed">Choosing a theme</a></li>
-<li><a href="#org1236f1e">Hosting on github pages</a></li>
-<li><a href="#org2316dc5">Examples</a></li>
-</ul>
-</div>
-</div>
-<p>
-Never one to pass up the opportunity for yak-shaving, I thought I'd
-finally try to settle on a publishing platform for various notes and
-other content that I have scattered about …</p> </div>
+con = sqlite3.connect(":memory ...</pre></div> </div>
 	</div>
 
 <div class="pagination">
@@ -1499,7 +1015,7 @@ other content that I have scattered about …</p> </div>
         </div>     </div>     </div> 
 <footer>
 <br />
-<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &copy; Noah Hoffman 2017</p>
+<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &copy; Noah Hoffman 2018</p>
 </footer>
 
 </div> <!-- /container -->
