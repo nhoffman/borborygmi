@@ -210,10 +210,11 @@ brew cask install mactex
 brew cask install texmaker
 brew cask install wkhtmltopdf
 brew cask install firefox
+brew cask install docker
 #+END_SRC
 
-- Some of the above (eg, sizeup, dropbox, dash) require licenses and credentials
-that I install interactively.
+Some of the above (eg, sizeup, dropbox, dash) require licenses and
+credentials that must be installed interactively.
 
 ** iTerm2
 
@@ -267,6 +268,12 @@ EOF
 
 Wow, this takes a long time!
 
+And while I'm at it:
+
+#+BEGIN_SRC sh
+brew cask install rstudio
+#+END_SRC
+
 * X11
 
 install Xquartz
@@ -298,7 +305,9 @@ brew cask install vagrant
 brew cask install vagrant-manager
 #+END_SRC
 
-after virtualbox is installed, go to preferences, and change default machine folder to ~/VirtualBox
+On High Sierra, a kernel extension signing issue caused an error: instructions for a workaround are here: https://github.com/caskroom/homebrew-cask/issues/39369
+
+After virtualbox is installed, go to preferences, and change default machine folder to ~/VirtualBox
 
 - available vagrant images:
 
