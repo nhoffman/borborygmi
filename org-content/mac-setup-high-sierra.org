@@ -70,8 +70,7 @@ brew install git && \
 brew install wget && \
 brew install autojump && \
 brew install gcc && \
-# brew install graphviz && \
-# brew install htop-osx && \
+brew install graphviz && \
 brew install latex2rtf && \
 brew install pandoc && \
 brew install tmux && \
@@ -79,8 +78,6 @@ brew install tree && \
 brew install fd && \
 brew install xsv
 #+END_SRC
-
-Note that brews for graphviz and htop-osx were broken as of 2018-02-25
 
 ** homebrew API token
 
