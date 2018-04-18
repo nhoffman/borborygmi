@@ -42,6 +42,12 @@ windows in emacs and tmux.
 
 : System Preferences --> Keyboard --> Shortcuts --> uncheck mission control: move left/right a space
 
+** Turn on FileVault
+
+: System Preferences --> Security & privacy --> FileVault
+
+I used a recovery key option rather than iCloud for my work machine, iCloud for personal
+
 * Developer tools
 
 Pretty much the first thing that needs to happen. This can be done
@@ -113,14 +119,17 @@ for pkg in sphinx-doc pkg-config readline sqlite gdbm berkeley-db@4 tcl-tk; do b
 ** python2
 
 #+BEGIN_SRC sh
-brew install python --with-tcl-tk --with-berkeley-db@4
-pip2 install -U pip setuptools virtualenv
+brew install python@2 --with-tcl-tk
+/usr/local/bin/pip2 install -U pip setuptools virtualenv wheel
 #+END_SRC
 
 ** python3
 
+Note that "python" corresponds to the python3 homebrew recipe.
+
 #+BEGIN_SRC sh
-brew install python3 --with-tcl-tk
+brew install python --with-tcl-tk
+/usr/local/bin/pip3 install -U pip wheel
 #+END_SRC
 
 A limited selection of packages - better to use virtualenvs!
@@ -259,7 +268,7 @@ Some packages that I know I'll need:
 #+BEGIN_SRC sh
 R --slave << EOF
 packages <- c("lattice", "RSQLite", "latticeExtra", "argparse", "data.table", "tidyverse")
-install.packages(packages, repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE)
+install.packages(packages, repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE, Ncpus=4)
 EOF
 #+END_SRC
 
