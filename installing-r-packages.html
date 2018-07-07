@@ -62,11 +62,11 @@ Mon 22 March 2010 &#8212;
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">Installing from CRAN</a></li>
-<li><a href="#sec-2">Bioconductor</a></li>
-<li><a href="#sec-3">R-forge</a></li>
-<li><a href="#sec-4">Installing packages locally</a></li>
-<li><a href="#sec-5">Reloading a package</a></li>
+<li><a href="#orgf5eaa98">Installing from CRAN</a></li>
+<li><a href="#org4915bb9">Bioconductor</a></li>
+<li><a href="#org9d4739f">R-forge</a></li>
+<li><a href="#org4454db2">Installing packages locally</a></li>
+<li><a href="#orga48229d">Reloading a package</a></li>
 </ul>
 </div>
 </div>
@@ -74,22 +74,20 @@ Mon 22 March 2010 &#8212;
 Notes to myself about installing R packages.
 </p>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">Installing from CRAN</h2>
-<div class="outline-text-2" id="text-1">
+<div id="outline-container-orgf5eaa98" class="outline-2">
+<h2 id="orgf5eaa98">Installing from CRAN</h2>
+<div class="outline-text-2" id="text-orgf5eaa98">
 <div class="org-src-container">
-
 <pre class="src src-R">install.packages(c("ape","sqldf","ROCR"), repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2">Bioconductor</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-org4915bb9" class="outline-2">
+<h2 id="org4915bb9">Bioconductor</h2>
+<div class="outline-text-2" id="text-org4915bb9">
 <div class="org-src-container">
-
 <pre class="src src-R">source("http://bioconductor.org/biocLite.R")
 biocLite(c("Biostrings","BSgenome")) # for example
 </pre>
@@ -100,7 +98,6 @@ Update all of bioconductor
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-R">source("http://bioconductor.org/biocLite.R")
 update.packages(rep=biocinstallRepos(), ask=FALSE)
 </pre>
@@ -111,7 +108,6 @@ Check out and install a package (eg, Biostrings) from the Subversion repository.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-R">svn checkout --username=readonly --password=readonly https://hedgehog.fhcrc.org/bioconductor/trunk/madman/Rpacks/Biostrings
 R CMD INSTALL Biostrings
 </pre>
@@ -119,11 +115,10 @@ R CMD INSTALL Biostrings
 </div>
 </div>
 
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3">R-forge</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-org9d4739f" class="outline-2">
+<h2 id="org9d4739f">R-forge</h2>
+<div class="outline-text-2" id="text-org9d4739f">
 <div class="org-src-container">
-
 <pre class="src src-R">install.packages("packagename",repos="http://R-Forge.R-project.org")
 </pre>
 </div>
@@ -133,22 +128,20 @@ Read-only subversion repository may be checked out using
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-R">svn checkout svn://svn.r-forge.r-project.org/svnroot/packagename
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4">Installing packages locally</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org4454db2" class="outline-2">
+<h2 id="org4454db2">Installing packages locally</h2>
+<div class="outline-text-2" id="text-org4454db2">
 <p>
 If you can't (or don't want to) install packages to the system R location, you can create a local library. For example:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-R">echo 'R_LIBS_USER="~/R/library"' &gt;  $HOME/.Renviron
 mkdir -p ~/R/library
 R CMD INSTALL --library=~/R/library somepackage.gz
@@ -157,15 +150,14 @@ R CMD INSTALL --library=~/R/library somepackage.gz
 </div>
 </div>
 
-<div id="outline-container-sec-5" class="outline-2">
-<h2 id="sec-5">Reloading a package</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-orga48229d" class="outline-2">
+<h2 id="orga48229d">Reloading a package</h2>
+<div class="outline-text-2" id="text-orga48229d">
 <p>
 Calling <code>library()</code> after a package has already been loaded does not update the namespace with updates if the library has changed (eg, during package development). Instead, do something like this:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-R">relibrary &lt;- function(pkg){
     unloadNamespace(pkg)
     library(pkg, character.only=TRUE)

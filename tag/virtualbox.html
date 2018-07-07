@@ -67,9 +67,9 @@ Fri 06 February 2015 &#8212;
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">VirtualBox preferences</a></li>
-<li><a href="#sec-2">Create an Ubuntu 14.04 VM</a></li>
-<li><a href="#sec-3">Set up an IP address</a></li>
+<li><a href="#orgcd216cb">VirtualBox preferences</a></li>
+<li><a href="#orgf547536">Create an Ubuntu 14.04 VM</a></li>
+<li><a href="#orgbf9af1e">Set up an IP address</a></li>
 </ul>
 </div>
 </div>
@@ -93,21 +93,21 @@ directory - I wanted to interact with this VM as if it were a remote
 host.
 </p>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">VirtualBox preferences</h2>
-<div class="outline-text-2" id="text-1">
+<div id="outline-container-orgcd216cb" class="outline-2">
+<h2 id="orgcd216cb">VirtualBox preferences</h2>
+<div class="outline-text-2" id="text-orgcd216cb">
 <p>
 Install VirtualBox from the vendor's website.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">vboxmanage --version
 </pre>
 </div>
 
 <pre class="example">
 4.3.20r96996
+
 </pre>
 
 <p>
@@ -121,6 +121,7 @@ Rename the default location for VirtualBox resources to something sensible.
 
 <pre class="example">
 VirtualBox -&gt; Preferences -&gt; Default Machine Folder -&gt; ~/VirtualBox
+
 </pre>
 
 <p>
@@ -129,6 +130,7 @@ Create a host-only network. Go to
 
 <pre class="example">
 VirtualBox -&gt; Preferences -&gt; Network -&gt; Host Only Networks
+
 </pre>
 
 <p>
@@ -138,16 +140,15 @@ this creates the host-only network <code>vboxnet0</code>. We'll need this later.
 </div>
 </div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2">Create an Ubuntu 14.04 VM</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-orgf547536" class="outline-2">
+<h2 id="orgf547536">Create an Ubuntu 14.04 VM</h2>
+<div class="outline-text-2" id="text-orgf547536">
 <p>
 Download ubuntu-14.04.1-server-amd64.iso <a href="http://www.ubuntu.com/download/server">here</a> (we'll move it into
 $VBOXDIR below).
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">VBOXDIR="$HOME/VirtualBox"
 VM_NAME="Ubuntu14.04-1"
 UBUNTU_ISO_PATH="${VBOXDIR:?}/ubuntu-14.04.1-server-amd64.iso"
@@ -162,7 +163,6 @@ Create the VM.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">vboxmanage createvm --name ${VM_NAME:?} --ostype Ubuntu_64 --register
 </pre>
 </div>
@@ -171,6 +171,7 @@ Create the VM.
 Virtual machine 'Ubuntu14.04-1' is created and registered.
 UUID: 58826a23-fceb-4a03-b7c3-cc22c975ccec
 Settings file: '/Users/nhoffman/VirtualBox/Ubuntu14.04-1/Ubuntu14.04-1.vbox'
+
 </pre>
 
 <p>
@@ -183,7 +184,6 @@ corresponding <code>vboxmanage</code> command from a menu action.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">vboxmanage createhd --filename ${VM_HD_PATH:?} --size 12288 # size in MB (12GB)
 vboxmanage storagectl ${VM_NAME:?} --name "SATA Controller" --add sata --controller IntelAHCI
 vboxmanage storageattach ${VM_NAME:?} --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium ${VM_HD_PATH:?}
@@ -202,7 +202,6 @@ Ok! This should result in a bootable VM. Here goes the first boot.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">vboxmanage startvm ${VM_NAME:?}
 </pre>
 </div>
@@ -213,14 +212,10 @@ and provided some extremely boring and insecure host settings:
 </p>
 
 <ul class="org-ul">
-<li>hostname: ubuntu
-</li>
-<li>full name: ubuntu
-</li>
-<li>username: ubuntu
-</li>
-<li>password: ubuntu
-</li>
+<li>hostname: ubuntu</li>
+<li>full name: ubuntu</li>
+<li>username: ubuntu</li>
+<li>password: ubuntu</li>
 </ul>
 
 <p>
@@ -235,7 +230,6 @@ essentials that will allow us to ssh in.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">sudo apt-get update &amp;&amp; sudo apt-get -y upgrade
 sudo apt-get install -y openssh-server
 sudo shutdown -h now
@@ -250,6 +244,7 @@ horrible VirtualBox terminal.
 
 <pre class="example">
 vboxmanage startvm Ubuntu14.04-1 --type headless
+
 </pre>
 
 <p>
@@ -259,6 +254,7 @@ a minute, we'll give the VM an IP address.
 
 <pre class="example">
 ssh -p 2222 ubuntu@localhost
+
 </pre>
 
 <p>
@@ -269,6 +265,7 @@ file:
 
 <pre class="example">
 sudo visudo
+
 </pre>
 
 <p>
@@ -278,24 +275,22 @@ And add the following lines:
 <pre class="example">
 # ubuntu user can sudo without password
 ubuntu ALL= NOPASSWD: ALL
+
 </pre>
 </div>
 </div>
 
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3">Set up an IP address</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-orgbf9af1e" class="outline-2">
+<h2 id="orgbf9af1e">Set up an IP address</h2>
+<div class="outline-text-2" id="text-orgbf9af1e">
 <p>
 I pieced together the following with the help of the following posts:
 </p>
 
 <ul class="org-ul">
-<li><a href="http://www.websightdesigns.com/posts/view/how-to-set-up-a-local-web-server-with-virtualbox-on-mac-os-x">http://www.websightdesigns.com/posts/view/how-to-set-up-a-local-web-server-with-virtualbox-on-mac-os-x</a>
-</li>
-<li><a href="http://anupriti.blogspot.com/2014/10/invalid-settings-detected-virtualbox.html">http://anupriti.blogspot.com/2014/10/invalid-settings-detected-virtualbox.html</a>
-</li>
-<li><a href="https://www.virtualbox.org/manual/ch06.html">https://www.virtualbox.org/manual/ch06.html</a>
-</li>
+<li><a href="http://www.websightdesigns.com/posts/view/how-to-set-up-a-local-web-server-with-virtualbox-on-mac-os-x">http://www.websightdesigns.com/posts/view/how-to-set-up-a-local-web-server-with-virtualbox-on-mac-os-x</a></li>
+<li><a href="http://anupriti.blogspot.com/2014/10/invalid-settings-detected-virtualbox.html">http://anupriti.blogspot.com/2014/10/invalid-settings-detected-virtualbox.html</a></li>
+<li><a href="https://www.virtualbox.org/manual/ch06.html">https://www.virtualbox.org/manual/ch06.html</a></li>
 </ul>
 
 <p>
@@ -304,6 +299,7 @@ First power off the VM.
 
 <pre class="example">
 vboxmanage controlvm Ubuntu14.04-1 poweroff
+
 </pre>
 
 <p>
@@ -312,13 +308,12 @@ Now we need to create host-only network. I would have loved to know how to do th
 
 <pre class="example">
 Settings -&gt; Network -&gt; Adapter2 -&gt; Enable Network Adapter
+
 </pre>
 
 <ul class="org-ul">
-<li>Attached to: Host-only Adapter
-</li>
-<li>Name: vboxnet0
-</li>
+<li>Attached to: Host-only Adapter</li>
+<li>Name: vboxnet0</li>
 </ul>
 
 <p>
@@ -332,7 +327,6 @@ Power the VM back on and ssh in as above, then modify
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">sudo -s
 cat &gt;&gt; /etc/network/interfaces &lt;&lt;EOF
 
@@ -354,6 +348,7 @@ This should work, too:
 
 <pre class="example">
 ssh ubuntu@192.168.56.101
+
 </pre>
 
 <p>
@@ -362,6 +357,7 @@ And if you run this from the VM
 
 <pre class="example">
 python -m SimpleHTTPServer
+
 </pre>
 
 <p>
@@ -371,7 +367,6 @@ Better yet, add an entry to <code>/etc/hosts</code> on the host machine:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">sudo -s
 cp /etc/hosts /etc/hosts.bak
 cat &gt;&gt; /etc/hosts &lt;&lt;EOF
@@ -388,6 +383,7 @@ and browse to the following address:
 
 <pre class="example">
 http://ubuntu1:8000
+
 </pre>
 
 <p>
@@ -395,7 +391,6 @@ Now make a ssh key pair for this VM and install the public key.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">cd ~/.ssh
 ssh-keygen -f vm-unsafe
 ssh ubuntu@192.168.56.101 'mkdir -p -m 700 ~/.ssh; cat - &gt; ~/.ssh/authorized_keys; chmod 600 ~/.ssh/*' &lt; ~/.ssh/vm-unsafe.pub
@@ -408,7 +403,6 @@ course) to create an alias for the VM:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">Host ubuntu1
      HostName 192.168.56.101
      User ubuntu
@@ -422,6 +416,7 @@ Now you can ssh in without a prompt for a password:
 
 <pre class="example">
 ssh ubuntu1
+
 </pre>
 
 <p>

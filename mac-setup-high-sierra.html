@@ -62,42 +62,43 @@ Fri 17 November 2017 &#8212;
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">system settings</a>
+<li><a href="#org22c1b5f">system settings</a>
 <ul>
-<li><a href="#sec-1-1">turn off spelling autocorrect</a></li>
-<li><a href="#sec-1-2">unmap Control + left,right</a></li>
+<li><a href="#org3437974">turn off spelling autocorrect</a></li>
+<li><a href="#org9708550">unmap Control + left,right</a></li>
+<li><a href="#org2e32e7e">Turn on FileVault</a></li>
 </ul>
 </li>
-<li><a href="#sec-2">Developer tools</a></li>
-<li><a href="#sec-3">homebrew</a>
+<li><a href="#org7017d59">Developer tools</a></li>
+<li><a href="#orgaba459c">homebrew</a>
 <ul>
-<li><a href="#sec-3-1">homebrew API token</a></li>
+<li><a href="#org9467a6a">homebrew API token</a></li>
 </ul>
 </li>
-<li><a href="#sec-4">python</a>
+<li><a href="#org4e0fd07">python</a>
 <ul>
-<li><a href="#sec-4-1">dependencies</a></li>
-<li><a href="#sec-4-2">python2</a></li>
-<li><a href="#sec-4-3">python3</a>
+<li><a href="#org444f139">dependencies</a></li>
+<li><a href="#org5bd94be">python2</a></li>
+<li><a href="#org8f8ba37">python3</a>
 <ul>
-<li><a href="#sec-4-3-1">scons</a></li>
+<li><a href="#org0c3a1a2">scons</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#sec-5">emacs</a></li>
-<li><a href="#sec-6">zsh</a></li>
-<li><a href="#sec-7">desktop apps</a>
+<li><a href="#org0a7c032">emacs</a></li>
+<li><a href="#org78ca2c8">zsh</a></li>
+<li><a href="#orga955834">desktop apps</a>
 <ul>
-<li><a href="#sec-7-1">iTerm2</a></li>
-<li><a href="#sec-7-2">postgresql</a></li>
+<li><a href="#org5210ad2">iTerm2</a></li>
+<li><a href="#org40adaf8">postgresql</a></li>
 </ul>
 </li>
-<li><a href="#sec-8">R</a></li>
-<li><a href="#sec-9">X11</a></li>
-<li><a href="#sec-10">virtualbox and vagrant</a>
+<li><a href="#org83f81a3">R</a></li>
+<li><a href="#orge268b0f">X11</a></li>
+<li><a href="#org2cbb177">virtualbox and vagrant</a>
 <ul>
-<li><a href="#sec-10-1">install an ubuntu16.04 VM</a></li>
+<li><a href="#orgd26f124">install an ubuntu16.04 VM</a></li>
 </ul>
 </li>
 </ul>
@@ -110,15 +111,12 @@ this?
 </p>
 
 <ul class="org-ul">
-<li>In my experience, clean installs result in a more stable system.
-</li>
+<li>In my experience, clean installs result in a more stable system.</li>
 <li>I try to maintain a system that is easily bootstrapped, and this is
-pretty much the only way to reliably test that process.
-</li>
+pretty much the only way to reliably test that process.</li>
 <li>I want to make sure that everything that I really care about on my
 computer is replicated someplace, either using a cloud service
-(mostly Dropbox), or in git repositories. This forces the issue.
-</li>
+(mostly Dropbox), or in git repositories. This forces the issue.</li>
 </ul>
 
 <p>
@@ -138,6 +136,7 @@ and directories that I copied directly from my old laptop:
 
 <pre class="example">
 tar -cf dotfiles.tar .Xmodmap .gitconfig .gnupg .pypirc .ssh
+
 </pre>
 
 <p>
@@ -145,20 +144,22 @@ Note that none of these steps require an Apple ID - I held off on
 signing in until the very end just to see if it was possible.
 </p>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">system settings</h2>
-<div class="outline-text-2" id="text-1">
-</div><div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1">turn off spelling autocorrect</h3>
-<div class="outline-text-3" id="text-1-1">
+<div id="outline-container-org22c1b5f" class="outline-2">
+<h2 id="org22c1b5f">system settings</h2>
+<div class="outline-text-2" id="text-org22c1b5f">
+</div>
+<div id="outline-container-org3437974" class="outline-3">
+<h3 id="org3437974">turn off spelling autocorrect</h3>
+<div class="outline-text-3" id="text-org3437974">
 <pre class="example">
 System Preferences --&gt; Keyboard --&gt; Text tab --&gt; unselect "Correct spelling automatically" and others
+
 </pre>
 </div>
 </div>
-<div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2">unmap Control + left,right</h3>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-org9708550" class="outline-3">
+<h3 id="org9708550">unmap Control + left,right</h3>
+<div class="outline-text-3" id="text-org9708550">
 <p>
 I use Control plus the left and right arrow keys to move between
 windows in emacs and tmux.
@@ -166,37 +167,50 @@ windows in emacs and tmux.
 
 <pre class="example">
 System Preferences --&gt; Keyboard --&gt; Shortcuts --&gt; uncheck mission control: move left/right a space
+
 </pre>
+</div>
+</div>
+
+<div id="outline-container-org2e32e7e" class="outline-3">
+<h3 id="org2e32e7e">Turn on FileVault</h3>
+<div class="outline-text-3" id="text-org2e32e7e">
+<pre class="example">
+System Preferences --&gt; Security &amp; privacy --&gt; FileVault
+
+</pre>
+
+<p>
+I used a recovery key option rather than iCloud for my work machine, iCloud for personal
+</p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2">Developer tools</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-org7017d59" class="outline-2">
+<h2 id="org7017d59">Developer tools</h2>
+<div class="outline-text-2" id="text-org7017d59">
 <p>
 Pretty much the first thing that needs to happen. This can be done
 from the command line:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">xcode-select --install
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3">homebrew</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-orgaba459c" class="outline-2">
+<h2 id="orgaba459c">homebrew</h2>
+<div class="outline-text-2" id="text-orgaba459c">
 <p>
 Homebrew no longer requires user-ownership of /usr/local, so things
 are pretty easy now:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew doctor
 </pre>
@@ -209,7 +223,6 @@ standalone packages that I routinely install.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">brew install git &amp;&amp; \
 brew install wget &amp;&amp; \
 brew install autojump &amp;&amp; \
@@ -225,9 +238,9 @@ brew install xsv
 </div>
 </div>
 
-<div id="outline-container-sec-3-1" class="outline-3">
-<h3 id="sec-3-1">homebrew API token</h3>
-<div class="outline-text-3" id="text-3-1">
+<div id="outline-container-org9467a6a" class="outline-3">
+<h3 id="org9467a6a">homebrew API token</h3>
+<div class="outline-text-3" id="text-org9467a6a">
 <p>
 Apparently lots of requests to GutHub via homebrew can hit a rate limit. There's a higher limit if you create an API token. See <a href="https://gist.github.com/christopheranderton/8644743">https://gist.github.com/christopheranderton/8644743</a>
 </p>
@@ -237,7 +250,7 @@ Here's the url for the token creation dialog:
 </p>
 
 <p>
-<a href="https://github.com/settings/tokens/new?scopes=&amp;description=Homebrew">https://github.com/settings/tokens/new?scopes=&description;=Homebrew</a>
+<a href="https://github.com/settings/tokens/new?scopes=&amp;description=Homebrew">https://github.com/settings/tokens/new?scopes=&amp;description=Homebrew</a>
 </p>
 
 <p>
@@ -246,14 +259,15 @@ Make sure that all 'scopes' are unchecked. Once you generate the token, add to y
 
 <pre class="example">
 export HOMEBREW_GITHUB_API_TOKEN=token_here
+
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4">python</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org4e0fd07" class="outline-2">
+<h2 id="org4e0fd07">python</h2>
+<div class="outline-text-2" id="text-org4e0fd07">
 <p>
 I'm in the midst of the transition from python2 to python3, so as I
 wrote this it wasn't clear which packages (if any) I would need to
@@ -268,39 +282,41 @@ Use homebrew - see
 </p>
 </div>
 
-<div id="outline-container-sec-4-1" class="outline-3">
-<h3 id="sec-4-1">dependencies</h3>
-<div class="outline-text-3" id="text-4-1">
+<div id="outline-container-org444f139" class="outline-3">
+<h3 id="org444f139">dependencies</h3>
+<div class="outline-text-3" id="text-org444f139">
 <p>
 Run <code>brew info python</code> for required and optional dependencies
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">for pkg in sphinx-doc pkg-config readline sqlite gdbm berkeley-db@4 tcl-tk; do brew install $pkg; done
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-4-2" class="outline-3">
-<h3 id="sec-4-2">python2</h3>
-<div class="outline-text-3" id="text-4-2">
+<div id="outline-container-org5bd94be" class="outline-3">
+<h3 id="org5bd94be">python2</h3>
+<div class="outline-text-3" id="text-org5bd94be">
 <div class="org-src-container">
-
-<pre class="src src-sh">brew install python --with-tcl-tk --with-berkeley-db@4
-pip2 install -U pip setuptools virtualenv
+<pre class="src src-sh">brew install python@2 --with-tcl-tk
+/usr/local/bin/pip2 install -U pip setuptools virtualenv wheel
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-4-3" class="outline-3">
-<h3 id="sec-4-3">python3</h3>
-<div class="outline-text-3" id="text-4-3">
-<div class="org-src-container">
+<div id="outline-container-org8f8ba37" class="outline-3">
+<h3 id="org8f8ba37">python3</h3>
+<div class="outline-text-3" id="text-org8f8ba37">
+<p>
+Note that "python" corresponds to the python3 homebrew recipe.
+</p>
 
-<pre class="src src-sh">brew install python3 --with-tcl-tk
+<div class="org-src-container">
+<pre class="src src-sh">brew install python --with-tcl-tk
+/usr/local/bin/pip3 install -U pip wheel
 </pre>
 </div>
 
@@ -309,7 +325,6 @@ A limited selection of packages - better to use virtualenvs!
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">pip3 install ansible
 pip3 install csvkit
 pip3 install pgcli
@@ -317,15 +332,14 @@ pip3 install pgcli
 </div>
 </div>
 
-<div id="outline-container-sec-4-3-1" class="outline-4">
-<h4 id="sec-4-3-1">scons</h4>
-<div class="outline-text-4" id="text-4-3-1">
+<div id="outline-container-org0c3a1a2" class="outline-4">
+<h4 id="org0c3a1a2">scons</h4>
+<div class="outline-text-4" id="text-org0c3a1a2">
 <p>
 Note that <code>scons</code> wants to install man pages to <code>/usr/local/man</code>, which is owned by root. You'll need to do this first:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">sudo mkdir -p /usr/local/man
 sudo chown $(whoami) /usr/local/man
 pip3 install scons
@@ -336,9 +350,9 @@ pip3 install scons
 </div>
 </div>
 
-<div id="outline-container-sec-5" class="outline-2">
-<h2 id="sec-5">emacs</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-org0a7c032" class="outline-2">
+<h2 id="org0a7c032">emacs</h2>
+<div class="outline-text-2" id="text-org0a7c032">
 <p>
 Install latest emacs binary from <a href="http://emacsformacosx.com/">http://emacsformacosx.com/</a>
 </p>
@@ -348,7 +362,6 @@ Emacs needs a few homebrew packages
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">brew install libressl
 brew install aspell
 brew install gpg
@@ -360,7 +373,6 @@ Check out my .emacs.d and run setup scripts.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">cd ~
 git clone --recurse-submodules git@github.com:nhoffman/.emacs.d.git
 </pre>
@@ -371,7 +383,6 @@ For elpy:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">cd ~/.emacs.d
 bin/venv.sh
 </pre>
@@ -379,15 +390,14 @@ bin/venv.sh
 </div>
 </div>
 
-<div id="outline-container-sec-6" class="outline-2">
-<h2 id="sec-6">zsh</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-org78ca2c8" class="outline-2">
+<h2 id="org78ca2c8">zsh</h2>
+<div class="outline-text-2" id="text-org78ca2c8">
 <p>
 Install zsh with Homebrew
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">brew install zsh
 </pre>
 </div>
@@ -397,7 +407,6 @@ Change shell to zsh
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">sudo -s
 echo /usr/local/bin/zsh &gt;&gt; /etc/shells
 exit
@@ -410,7 +419,6 @@ Install my dotfiles (relevant only to me)
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">cd ~
 git clone git@bitbucket.org:nhoffman/dotfiles.git
 ~/dotfiles/mac/install.py
@@ -419,15 +427,14 @@ git clone git@bitbucket.org:nhoffman/dotfiles.git
 </div>
 </div>
 
-<div id="outline-container-sec-7" class="outline-2">
-<h2 id="sec-7">desktop apps</h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-orga955834" class="outline-2">
+<h2 id="orga955834">desktop apps</h2>
+<div class="outline-text-2" id="text-orga955834">
 <p>
 Homebrew installs desktop apps too!
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">brew cask install dropbox
 brew cask install sizeup
 brew cask install dash
@@ -448,9 +455,9 @@ credentials that must be installed interactively.
 </p>
 </div>
 
-<div id="outline-container-sec-7-1" class="outline-3">
-<h3 id="sec-7-1">iTerm2</h3>
-<div class="outline-text-3" id="text-7-1">
+<div id="outline-container-org5210ad2" class="outline-3">
+<h3 id="org5210ad2">iTerm2</h3>
+<div class="outline-text-3" id="text-org5210ad2">
 <pre class="example">
 brew cask install iterm2
 </pre>
@@ -463,12 +470,9 @@ Update a few settings.
 Preferences &#x2013;&gt; Profiles &#x2013;&gt; Keys and do these things:
 </p>
 <ul class="org-ul">
-<li>select "Left/right option key acts as": +Esc
-</li>
-<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;left arrow&gt;": Send Escape sequence "b"
-</li>
-<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;right arrow&gt;": Send Escape sequence "f"
-</li>
+<li>select "Left/right option key acts as": +Esc</li>
+<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;left arrow&gt;": Send Escape sequence "b"</li>
+<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;right arrow&gt;": Send Escape sequence "f"</li>
 </ul>
 
 <p>
@@ -476,19 +480,16 @@ Default appearance:
 </p>
 
 <ul class="org-ul">
-<li>Preferences &#x2013;&gt; Profiles &#x2013;&gt; Colors &#x2013;&gt; Load Presets &#x2013;&gt; Light Background
-</li>
-<li>Preferences &#x2013;&gt; Profiles &#x2013;&gt; Text &#x2013;&gt; Change Font &#x2013;&gt; 14 point
-</li>
+<li>Preferences &#x2013;&gt; Profiles &#x2013;&gt; Colors &#x2013;&gt; Load Presets &#x2013;&gt; Light Background</li>
+<li>Preferences &#x2013;&gt; Profiles &#x2013;&gt; Text &#x2013;&gt; Change Font &#x2013;&gt; 14 point</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-sec-7-2" class="outline-3">
-<h3 id="sec-7-2">postgresql</h3>
-<div class="outline-text-3" id="text-7-2">
+<div id="outline-container-org40adaf8" class="outline-3">
+<h3 id="org40adaf8">postgresql</h3>
+<div class="outline-text-3" id="text-org40adaf8">
 <div class="org-src-container">
-
 <pre class="src src-sh">brew cask install postgres
 </pre>
 </div>
@@ -499,7 +500,6 @@ path to the CLI for the version you want to use to your PATH, eg:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">export PATH=/Applications/Postgres.app/Contents/Versions/9.6/bin:$PATH
 </pre>
 </div>
@@ -507,15 +507,14 @@ path to the CLI for the version you want to use to your PATH, eg:
 </div>
 </div>
 
-<div id="outline-container-sec-8" class="outline-2">
-<h2 id="sec-8">R</h2>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-org83f81a3" class="outline-2">
+<h2 id="org83f81a3">R</h2>
+<div class="outline-text-2" id="text-org83f81a3">
 <p>
 Again, using homebrew.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">brew install openblas
 brew install pcre
 brew install R
@@ -527,10 +526,9 @@ Some packages that I know I'll need:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">R --slave &lt;&lt; EOF
 packages &lt;- c("lattice", "RSQLite", "latticeExtra", "argparse", "data.table", "tidyverse")
-install.packages(packages, repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE)
+install.packages(packages, repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE, Ncpus=4)
 EOF
 </pre>
 </div>
@@ -544,22 +542,20 @@ And while I'm at it:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">brew cask install rstudio
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-9" class="outline-2">
-<h2 id="sec-9">X11</h2>
-<div class="outline-text-2" id="text-9">
+<div id="outline-container-orge268b0f" class="outline-2">
+<h2 id="orge268b0f">X11</h2>
+<div class="outline-text-2" id="text-orge268b0f">
 <p>
 install Xquartz
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">brew install caskroom/cask/xquartz
 </pre>
 </div>
@@ -571,7 +567,6 @@ sessions.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">cat &gt; ~/.Xmodmap &lt;&lt;EOF
 clear Mod1
 clear Mod2
@@ -585,11 +580,10 @@ EOF
 </div>
 </div>
 
-<div id="outline-container-sec-10" class="outline-2">
-<h2 id="sec-10">virtualbox and vagrant</h2>
-<div class="outline-text-2" id="text-10">
+<div id="outline-container-org2cbb177" class="outline-2">
+<h2 id="org2cbb177">virtualbox and vagrant</h2>
+<div class="outline-text-2" id="text-org2cbb177">
 <div class="org-src-container">
-
 <pre class="src src-sh">brew cask install virtualbox
 brew cask install vagrant
 brew cask install vagrant-manager
@@ -605,8 +599,7 @@ After virtualbox is installed, go to preferences, and change default machine fol
 </p>
 
 <ul class="org-ul">
-<li>available vagrant images:
-</li>
+<li>available vagrant images:</li>
 </ul>
 
 <p>
@@ -614,15 +607,14 @@ After virtualbox is installed, go to preferences, and change default machine fol
 </p>
 </div>
 
-<div id="outline-container-sec-10-1" class="outline-3">
-<h3 id="sec-10-1">install an ubuntu16.04 VM</h3>
-<div class="outline-text-3" id="text-10-1">
+<div id="outline-container-orgd26f124" class="outline-3">
+<h3 id="orgd26f124">install an ubuntu16.04 VM</h3>
+<div class="outline-text-3" id="text-orgd26f124">
 <p>
 see <a href="https://app.vagrantup.com/ubuntu/boxes/xenial64">https://app.vagrantup.com/ubuntu/boxes/xenial64</a>
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">mkdir -p ~/vagrant/xenial64
 cd ~/vagrant/xenial64
 vagrant init ubuntu/xenial64

@@ -62,42 +62,41 @@ Thu 05 January 2017 &#8212;
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">system settings</a>
+<li><a href="#org60682b9">system settings</a>
 <ul>
-<li><a href="#sec-1-1">turn off spelling autocorrect</a></li>
-<li><a href="#sec-1-2">unmap Control + left,right</a></li>
+<li><a href="#org4cd4252">turn off spelling autocorrect</a></li>
+<li><a href="#org27d1866">unmap Control + left,right</a></li>
 </ul>
 </li>
-<li><a href="#sec-2">First applications</a>
+<li><a href="#org6fffb25">First applications</a>
 <ul>
-<li><a href="#sec-2-1">iTerm2</a></li>
-<li><a href="#sec-2-2">Dropbox</a></li>
-<li><a href="#sec-2-3">Developer tools</a></li>
-<li><a href="#sec-2-4">Junos pulse VPN client</a></li>
-<li><a href="#sec-2-5">Microsoft Office 2016</a></li>
-<li><a href="#sec-2-6">Others</a></li>
+<li><a href="#org199cfa0">iTerm2</a></li>
+<li><a href="#orgdaf85ba">Dropbox</a></li>
+<li><a href="#org16d3fa8">Developer tools</a></li>
+<li><a href="#org6f6adbf">Junos pulse VPN client</a></li>
+<li><a href="#org5bcb457">Microsoft Office 2016</a></li>
+<li><a href="#org7905f9e">Others</a></li>
 </ul>
 </li>
-<li><a href="#sec-3">homebrew</a>
+<li><a href="#org4007c1b">homebrew</a>
 <ul>
-<li><a href="#sec-3-1">X11</a></li>
-<li><a href="#sec-3-2">Desktop apps using Cask</a></li>
-<li><a href="#sec-3-3">homebrew API token</a></li>
-<li><a href="#sec-3-4">zsh</a></li>
+<li><a href="#org8ddd86c">X11</a></li>
+<li><a href="#org0bae9c8">Desktop apps using Cask</a></li>
+<li><a href="#org2f0989b">homebrew API token</a></li>
+<li><a href="#org403468b">zsh</a></li>
 </ul>
 </li>
-<li><a href="#sec-4">git</a></li>
-<li><a href="#sec-5">python</a></li>
-<li><a href="#sec-6">emacs</a></li>
-<li><a href="#sec-7">R</a></li>
-<li><a href="#sec-8">wkhtmltopdf</a></li>
-<li><a href="#sec-9">mail</a></li>
+<li><a href="#orgd2d5df5">git</a></li>
+<li><a href="#org7217a3a">python</a></li>
+<li><a href="#org27208ad">emacs</a></li>
+<li><a href="#orga13b113">R</a></li>
+<li><a href="#orgee56a2d">wkhtmltopdf</a></li>
+<li><a href="#orgb937928">mail</a></li>
 </ul>
 </div>
 </div>
 <ul class="org-ul">
-<li><i>Edit 2017-01-09: provide upgrade path to Pulse Secure client v5.1</i>
-</li>
+<li><i>Edit 2017-01-09: provide upgrade path to Pulse Secure client v5.1</i></li>
 </ul>
 
 <p>
@@ -131,22 +130,25 @@ usually I sign in first thing, but this time I held off.
 
 <pre class="example">
 tar -cf dotfiles.tar .Xmodmap .gitconfig .gnupg .pypirc .ssh
+
 </pre>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">system settings</h2>
-<div class="outline-text-2" id="text-1">
-</div><div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1">turn off spelling autocorrect</h3>
-<div class="outline-text-3" id="text-1-1">
+<div id="outline-container-org60682b9" class="outline-2">
+<h2 id="org60682b9">system settings</h2>
+<div class="outline-text-2" id="text-org60682b9">
+</div>
+<div id="outline-container-org4cd4252" class="outline-3">
+<h3 id="org4cd4252">turn off spelling autocorrect</h3>
+<div class="outline-text-3" id="text-org4cd4252">
 <pre class="example">
 System Preferences --&gt; Keyboard --&gt; Text tab --&gt; unselect "Correct spelling automatically" and others
+
 </pre>
 </div>
 </div>
-<div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2">unmap Control + left,right</h3>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-org27d1866" class="outline-3">
+<h3 id="org27d1866">unmap Control + left,right</h3>
+<div class="outline-text-3" id="text-org27d1866">
 <p>
 I use Control plus the left and right arrow keys to move between
 windows in emacs and tmux.
@@ -154,17 +156,19 @@ windows in emacs and tmux.
 
 <pre class="example">
 System Preferences --&gt; Keyboard --&gt; Shortcuts --&gt; uncheck mission control: move left/right a space
+
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2">First applications</h2>
-<div class="outline-text-2" id="text-2">
-</div><div id="outline-container-sec-2-1" class="outline-3">
-<h3 id="sec-2-1">iTerm2</h3>
-<div class="outline-text-3" id="text-2-1">
+<div id="outline-container-org6fffb25" class="outline-2">
+<h2 id="org6fffb25">First applications</h2>
+<div class="outline-text-2" id="text-org6fffb25">
+</div>
+<div id="outline-container-org199cfa0" class="outline-3">
+<h3 id="org199cfa0">iTerm2</h3>
+<div class="outline-text-3" id="text-org199cfa0">
 <p>
 Update a few settings.
 </p>
@@ -173,12 +177,9 @@ Update a few settings.
 Preferences &#x2013;&gt; Profiles &#x2013;&gt; Keys and do these things:
 </p>
 <ul class="org-ul">
-<li>select "Left/right option key acts as": +Esc
-</li>
-<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;left arrow&gt;": Send Escape sequence "b"
-</li>
-<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;right arrow&gt;": Send Escape sequence "f"
-</li>
+<li>select "Left/right option key acts as": +Esc</li>
+<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;left arrow&gt;": Send Escape sequence "b"</li>
+<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;right arrow&gt;": Send Escape sequence "f"</li>
 </ul>
 
 <p>
@@ -186,41 +187,38 @@ Default appearance:
 </p>
 
 <ul class="org-ul">
-<li>Preferences &#x2013;&gt; Profiles &#x2013;&gt; Colors &#x2013;&gt; Load Presets &#x2013;&gt; Light Background
-</li>
-<li>Preferences &#x2013;&gt; Profiles &#x2013;&gt; Text &#x2013;&gt; Change Font &#x2013;&gt; 14 point
-</li>
+<li>Preferences &#x2013;&gt; Profiles &#x2013;&gt; Colors &#x2013;&gt; Load Presets &#x2013;&gt; Light Background</li>
+<li>Preferences &#x2013;&gt; Profiles &#x2013;&gt; Text &#x2013;&gt; Change Font &#x2013;&gt; 14 point</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-sec-2-2" class="outline-3">
-<h3 id="sec-2-2">Dropbox</h3>
-<div class="outline-text-3" id="text-2-2">
+<div id="outline-container-orgdaf85ba" class="outline-3">
+<h3 id="orgdaf85ba">Dropbox</h3>
+<div class="outline-text-3" id="text-orgdaf85ba">
 <p>
 Install from website
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-2-3" class="outline-3">
-<h3 id="sec-2-3">Developer tools</h3>
-<div class="outline-text-3" id="text-2-3">
+<div id="outline-container-org16d3fa8" class="outline-3">
+<h3 id="org16d3fa8">Developer tools</h3>
+<div class="outline-text-3" id="text-org16d3fa8">
 <p>
 This can be done from the command line:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">xcode-select --install
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-2-4" class="outline-3">
-<h3 id="sec-2-4">Junos pulse VPN client</h3>
-<div class="outline-text-3" id="text-2-4">
+<div id="outline-container-org6f6adbf" class="outline-3">
+<h3 id="org6f6adbf">Junos pulse VPN client</h3>
+<div class="outline-text-3" id="text-org6f6adbf">
 <p>
 There are some <a href="https://forums.developer.apple.com/thread/51184">reports</a> of version 5.1 being broken in Sierra. At the
 time I'm writing this, my institution provides 5.1.9 (61653), which is
@@ -240,9 +238,9 @@ Instructions for UW are here: <a href="https://networks.uwmedicine.org/content/s
 </div>
 </div>
 
-<div id="outline-container-sec-2-5" class="outline-3">
-<h3 id="sec-2-5">Microsoft Office 2016</h3>
-<div class="outline-text-3" id="text-2-5">
+<div id="outline-container-org5bcb457" class="outline-3">
+<h3 id="org5bcb457">Microsoft Office 2016</h3>
+<div class="outline-text-3" id="text-org5bcb457">
 <p>
 The initial version of Excel (15.11) crashed on startup as widely
 reported - this was fixed by updating to a version (15.29) provided by
@@ -255,34 +253,28 @@ Microsoft:
 </div>
 </div>
 
-<div id="outline-container-sec-2-6" class="outline-3">
-<h3 id="sec-2-6">Others</h3>
-<div class="outline-text-3" id="text-2-6">
+<div id="outline-container-org7905f9e" class="outline-3">
+<h3 id="org7905f9e">Others</h3>
+<div class="outline-text-3" id="text-org7905f9e">
 <ul class="org-ul">
-<li><code>[X]</code> SizeUp - <a href="http://www.irradiatedsoftware.com/">http://www.irradiatedsoftware.com/</a> (license in Dropbox/software_licenses)
-</li>
-<li><code>[X]</code> HipChat client
-</li>
-<li><code>[X]</code> Dash 2
-</li>
-<li><code>[X]</code> Postgres.app <a href="https://postgresapp.com">https://postgresapp.com</a>
-</li>
-<li><code>[X]</code> PgAdmin <a href="https://www.pgadmin.org">https://www.pgadmin.org</a>
-</li>
+<li class="on"><code>[X]</code> SizeUp - <a href="http://www.irradiatedsoftware.com/">http://www.irradiatedsoftware.com/</a> (license in Dropbox/software_licenses)</li>
+<li class="on"><code>[X]</code> HipChat client</li>
+<li class="on"><code>[X]</code> Dash 2</li>
+<li class="on"><code>[X]</code> Postgres.app <a href="https://postgresapp.com">https://postgresapp.com</a></li>
+<li class="on"><code>[X]</code> PgAdmin <a href="https://www.pgadmin.org">https://www.pgadmin.org</a></li>
 </ul>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3">homebrew</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-org4007c1b" class="outline-2">
+<h2 id="org4007c1b">homebrew</h2>
+<div class="outline-text-2" id="text-org4007c1b">
 <p>
 Homebrew no longer requires user-ownership of /usr/local, so things are pretty easy now:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew doctor
 </pre>
@@ -293,7 +285,6 @@ Some packages I'll need off the bat to do just about anything
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">brew install git
 brew install wget
 </pre>
@@ -305,7 +296,6 @@ applications; here are additional packages that I know I'll use.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">brew install autojump &amp;&amp; \
 brew install gcc &amp;&amp; \
 brew install graphviz &amp;&amp; \
@@ -322,15 +312,14 @@ Note other packages installed in other sections as well.
 </p>
 </div>
 
-<div id="outline-container-sec-3-1" class="outline-3">
-<h3 id="sec-3-1">X11</h3>
-<div class="outline-text-3" id="text-3-1">
+<div id="outline-container-org8ddd86c" class="outline-3">
+<h3 id="org8ddd86c">X11</h3>
+<div class="outline-text-3" id="text-org8ddd86c">
 <p>
 install Xquartz
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">brew install Caskroom/cask/xquartz
 </pre>
 </div>
@@ -340,7 +329,6 @@ X11 key bindings so that the option key is used for Meta..
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">cat &gt; ~/.Xmodmap &lt;&lt;EOF
 clear Mod1
 clear Mod2
@@ -354,15 +342,14 @@ EOF
 </div>
 </div>
 
-<div id="outline-container-sec-3-2" class="outline-3">
-<h3 id="sec-3-2">Desktop apps using Cask</h3>
-<div class="outline-text-3" id="text-3-2">
+<div id="outline-container-org0bae9c8" class="outline-3">
+<h3 id="org0bae9c8">Desktop apps using Cask</h3>
+<div class="outline-text-3" id="text-org0bae9c8">
 <p>
 Homebrew installs desktop apps too!
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">brew cask install google-chrome
 brew cask install java
 brew cask install mactex
@@ -372,9 +359,9 @@ brew cask install texmaker
 </div>
 </div>
 
-<div id="outline-container-sec-3-3" class="outline-3">
-<h3 id="sec-3-3">homebrew API token</h3>
-<div class="outline-text-3" id="text-3-3">
+<div id="outline-container-org2f0989b" class="outline-3">
+<h3 id="org2f0989b">homebrew API token</h3>
+<div class="outline-text-3" id="text-org2f0989b">
 <p>
 Apparently lots of requests to GutHub via homebrew can hit a rate limit. There's a higher limit if you create an API token. See <a href="https://gist.github.com/christopheranderton/8644743">https://gist.github.com/christopheranderton/8644743</a>
 </p>
@@ -384,7 +371,7 @@ Here's the url for the token creation dialog:
 </p>
 
 <p>
-<a href="https://github.com/settings/tokens/new?scopes=&amp;description=Homebrew">https://github.com/settings/tokens/new?scopes=&description;=Homebrew</a>
+<a href="https://github.com/settings/tokens/new?scopes=&amp;description=Homebrew">https://github.com/settings/tokens/new?scopes=&amp;description=Homebrew</a>
 </p>
 
 <p>
@@ -393,19 +380,19 @@ Make sure that all 'scopes' are unchecked. Once you generate the token, add to y
 
 <pre class="example">
 export HOMEBREW_GITHUB_API_TOKEN=token_here
+
 </pre>
 </div>
 </div>
 
-<div id="outline-container-sec-3-4" class="outline-3">
-<h3 id="sec-3-4">zsh</h3>
-<div class="outline-text-3" id="text-3-4">
+<div id="outline-container-org403468b" class="outline-3">
+<h3 id="org403468b">zsh</h3>
+<div class="outline-text-3" id="text-org403468b">
 <p>
 Install zsh with Homebrew
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">brew install zsh
 </pre>
 </div>
@@ -415,7 +402,6 @@ Change shell to zsh
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">sudo -s
 echo /usr/local/bin/zsh &gt;&gt; /etc/shells
 exit
@@ -428,7 +414,6 @@ zsh init files are in Dropbox/zsh. <code>~/.zshenv</code> contains the following
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">for pth in $HOME/Dropbox $HOME/src $HOME; do
     if [[ -f $pth/zsh/zstartup ]]; then
 	. $pth/zsh/zstartup
@@ -441,19 +426,20 @@ done
 </div>
 </div>
 
-<div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4">git</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-orgd2d5df5" class="outline-2">
+<h2 id="orgd2d5df5">git</h2>
+<div class="outline-text-2" id="text-orgd2d5df5">
 <pre class="example">
 git config --global user.name "My Name"
 git config --global user.email me@email.com
+
 </pre>
 </div>
 </div>
 
-<div id="outline-container-sec-5" class="outline-2">
-<h2 id="sec-5">python</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-org7217a3a" class="outline-2">
+<h2 id="org7217a3a">python</h2>
+<div class="outline-text-2" id="text-org7217a3a">
 <p>
 Use homebrew - see
 <a href="https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Homebrew-and-Python.md">https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Homebrew-and-Python.md</a>
@@ -464,7 +450,6 @@ Run <code>brew info python</code> for required and optional dependencies
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">for pkg in sphinx-doc pkg-config readline sqlite homebrew/dupes/tcl-tk berkeley-db4; do brew install $pkg; done
 brew install python --with-berkeley-db4 --with-tcl-tk
 brew linkapps python
@@ -479,7 +464,6 @@ Install some python packages using homebrew - these are time consuming to instal
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">brew install numpy
 </pre>
 </div>
@@ -493,7 +477,6 @@ Note that <code>scons</code> wants to install man pages to <code>/usr/local/man<
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">sudo mkdir -p /usr/local/man
 sudo sudo chown $(whoami) /usr/local/man
 </pre>
@@ -504,7 +487,6 @@ Now install the actual packages:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">pip install ansible
 pip install csvkit
 pip install reportlab
@@ -518,16 +500,15 @@ Also install python3
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">brew install python3 --with-tcl-tk
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-6" class="outline-2">
-<h2 id="sec-6">emacs</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-org27208ad" class="outline-2">
+<h2 id="org27208ad">emacs</h2>
+<div class="outline-text-2" id="text-org27208ad">
 <p>
 Install latest emacs binary (25.1) from <a href="http://emacsformacosx.com/">http://emacsformacosx.com/</a>
 </p>
@@ -537,7 +518,6 @@ Emacs needs a few homebrew packages
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">brew install libressl
 brew install aspell
 brew install gpg
@@ -549,7 +529,6 @@ Check out my .emacs.d and run setup scripts.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">cd ~
 git clone git@github.com:nhoffman/.emacs.d.git
 cd .emacs.d
@@ -564,29 +543,26 @@ For elpy:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">pip install -r requirements.txt
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-7" class="outline-2">
-<h2 id="sec-7">R</h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-orga13b113" class="outline-2">
+<h2 id="orga13b113">R</h2>
+<div class="outline-text-2" id="text-orga13b113">
 <p>
 Again, using homebrew.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">brew tap homebrew/science
 brew install r
 </pre>
 </div>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">R --slave &lt;&lt; EOF
 packages &lt;- c("ape", "sqldf", "ROCR", "lattice", "RSQLite", "latticeExtra", "argparse", "data.table")
 install.packages(packages, repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE)
@@ -596,11 +572,10 @@ EOF
 </div>
 </div>
 
-<div id="outline-container-sec-8" class="outline-2">
-<h2 id="sec-8">wkhtmltopdf</h2>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-orgee56a2d" class="outline-2">
+<h2 id="orgee56a2d">wkhtmltopdf</h2>
+<div class="outline-text-2" id="text-orgee56a2d">
 <div class="org-src-container">
-
 <pre class="src src-sh">cd ~/Downloads
 wget 'http://download.gna.org/wkhtmltopdf/0.12/0.12.4/wkhtmltox-0.12.4_osx-cocoa-x86-64.pkg'
 </pre>
@@ -612,9 +587,9 @@ Use installer - binary is <code>/usr/local/bin/wkhtmltopdf</code>
 </div>
 </div>
 
-<div id="outline-container-sec-9" class="outline-2">
-<h2 id="sec-9">mail</h2>
-<div class="outline-text-2" id="text-9">
+<div id="outline-container-orgb937928" class="outline-2">
+<h2 id="orgb937928">mail</h2>
+<div class="outline-text-2" id="text-orgb937928">
 <p>
 <a href="http://www.washington.edu/itconnect/connect/email/uw-email/configuring/os-x-mail6/">http://www.washington.edu/itconnect/connect/email/uw-email/configuring/os-x-mail6/</a>
 </p>

@@ -64,7 +64,7 @@ Thu 30 October 2014 &#8212;
     tags: <a href="https://nhoffman.github.io/borborygmi/tag/laboratory-medicine.html">laboratory medicine</a></em>          </div>
 
           <div><p>
-I came across this visualization<sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup> of a very simple data set, and
+I came across this visualization<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> of a very simple data set, and
 it took me a few minutes to fully understand what makes it
 so&#8230; suboptimal.
 </p>
@@ -76,60 +76,56 @@ so&#8230; suboptimal.
 </div>
 
 <ul class="org-ul">
-<li>Ok, first of all, it's <a href="https://blogs.oracle.com/experience/entry/countdown_of_top_10_reasons_to_never_ever_use_a_pie_chart">a</a> <a href="http://en.wikipedia.org/wiki/Pie_chart">pie</a> <a href="http://www.businessinsider.com/pie-charts-are-the-worst-2013-6">chart</a>.
-</li>
-<li>The labels are separated from the corresponding values.
-</li>
-<li>The grey scale color map doesn't distinguish well between categories.
-</li>
-<li>But here's the real problem: the covariates are combined into a flat list of categories!
-</li>
+<li>Ok, first of all, it's <a href="https://blogs.oracle.com/experience/entry/countdown_of_top_10_reasons_to_never_ever_use_a_pie_chart">a</a> <a href="http://en.wikipedia.org/wiki/Pie_chart">pie</a> <a href="http://www.businessinsider.com/pie-charts-are-the-worst-2013-6">chart</a>.</li>
+<li>The labels are separated from the corresponding values.</li>
+<li>The grey scale color map doesn't distinguish well between categories.</li>
+<li>But here's the real problem: the covariates are combined into a flat list of categories!</li>
 </ul>
 
 <p>
 Even a simple table tells the story much more clearly:
 </p>
 
-<table id="counts" class="table table-striped table-bordered table-condensed" style="width: auto;">
+<table id="orgb7d17ca" class="table table-striped table-bordered table-condensed" style="width: auto;">
 
 
 <colgroup>
-<col class="left">
+<col class="org-left">
 
-<col class="right">
+<col class="org-right">
 
-<col class="right">
+<col class="org-right">
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="left">colony count</th>
-<th scope="col" class="right">UTI</th>
-<th scope="col" class="right">no UTI</th>
+<th scope="col" class="org-left">colony count</th>
+<th scope="col" class="org-right">UTI</th>
+<th scope="col" class="org-right">no UTI</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="left">[0, 10K)</td>
-<td class="right">0.0</td>
-<td class="right">9.7</td>
+<td class="org-left">[0, 10K)</td>
+<td class="org-right">0.0</td>
+<td class="org-right">9.7</td>
 </tr>
 
 <tr>
-<td class="left">[10K, 50K)</td>
-<td class="right">0.5</td>
-<td class="right">13.0</td>
+<td class="org-left">[10K, 50K)</td>
+<td class="org-right">0.5</td>
+<td class="org-right">13.0</td>
 </tr>
 
 <tr>
-<td class="left">[50K, 100K)</td>
-<td class="right">1.6</td>
-<td class="right">13.0</td>
+<td class="org-left">[50K, 100K)</td>
+<td class="org-right">1.6</td>
+<td class="org-right">13.0</td>
 </tr>
 
 <tr>
-<td class="left">[100K, Inf)</td>
-<td class="right">50.8</td>
-<td class="right">11.3</td>
+<td class="org-left">[100K, Inf)</td>
+<td class="org-right">50.8</td>
+<td class="org-right">11.3</td>
 </tr>
 </tbody>
 </table>
@@ -196,9 +192,9 @@ help from the visualization above.
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
 
-<div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
 Kwon JH, Fausone MK, Du H, Robicsek A, and Peterson LR. Impact of laboratory-reported urine culture colony counts on the diagnosis and treatment of urinary tract infection for hospitalized patients. Am. J. Clin. Pathol. 2012, 137:778-84. PMID <a href="http://www.ncbi.nlm.nih.gov/pubmed/22523217">22523217</a>
-</p></div>
+</p></div></div>
 
 
 </div>
@@ -239,10 +235,8 @@ Kwon JH, Fausone MK, Du H, Robicsek A, and Peterson LR. Impact of laboratory-rep
 <em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/lectures.html">lectures</a>;
     tags: <a href="https://nhoffman.github.io/borborygmi/tag/laboratory-medicine.html">laboratory medicine</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/database-intro.html">read more</a> </div>
           <div class="summary"><ul class="org-ul">
-<li><i>Edit 2015-07-26: added a section on date formatting</i>
-</li>
-<li><i>Edit 2016-07-11: add reference to Tidy Data</i>
-</li>
+<li><i>Edit 2015-07-26: added a section on date formatting</i></li>
+<li><i>Edit 2016-07-11: add reference to Tidy Data</i></li>
 </ul>
 
 <p>
@@ -253,12 +247,12 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">Objectives</a></li>
-<li><a href="#sec-2">Relational database terminology</a></li>
-<li><a href="#sec-3">Relations</a>
+<li><a href="#org2bfb815">Objectives</a></li>
+<li><a href="#org0413646">Relational database terminology</a></li>
+<li><a href="#org464a6c5">Relations</a>
 <ul>
-<li><a href="#sec-3-1">one to one</a></li>
-<li><a href="#sec-3-2">one to many ...</a></li></ul></li></ul></div></div> </div>
+<li><a href="#org1862815">one to one</a></li>
+<li><a href="#org913c97a">one to many ...</a></li></ul></li></ul></div></div> </div>
 	</div>
 
 <div class="pagination">

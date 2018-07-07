@@ -62,15 +62,15 @@ Mon 26 May 2014 &#8212;
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">org-mode integration</a>
+<li><a href="#org33dac0d">org-mode integration</a>
 <ul>
-<li><a href="#sec-1-1">Arranging content in subdirectories</a></li>
-<li><a href="#sec-1-2">Syntax highlighting</a></li>
+<li><a href="#org43d3861">Arranging content in subdirectories</a></li>
+<li><a href="#org6fd377e">Syntax highlighting</a></li>
 </ul>
 </li>
-<li><a href="#sec-2">Choosing a theme</a></li>
-<li><a href="#sec-3">Hosting on github pages</a></li>
-<li><a href="#sec-4">Examples</a></li>
+<li><a href="#orgd3274ce">Choosing a theme</a></li>
+<li><a href="#orge53899c">Hosting on github pages</a></li>
+<li><a href="#org55c0d2d">Examples</a></li>
 </ul>
 </div>
 </div>
@@ -89,9 +89,9 @@ site generator could import html and saw <a href="http://msnyder.info/posts/2013
 together, I thought I'd give it a shot.
 </p>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">org-mode integration</h2>
-<div class="outline-text-2" id="text-1">
+<div id="outline-container-org33dac0d" class="outline-2">
+<h2 id="org33dac0d">org-mode integration</h2>
+<div class="outline-text-2" id="text-org33dac0d">
 <p>
 At a basic level, integration with org-mode is pretty simple: Pelican
 can import html content with page metadata provided in the
@@ -101,7 +101,6 @@ to write a utility for this purpose.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">org-export pelican -h
 </pre>
 </div>
@@ -113,7 +112,6 @@ example:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">head ../content/getting-started.html
 </pre>
 </div>
@@ -150,9 +148,9 @@ There were a couple of tricky bits, though.
 </p>
 </div>
 
-<div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1">Arranging content in subdirectories</h3>
-<div class="outline-text-3" id="text-1-1">
+<div id="outline-container-org43d3861" class="outline-3">
+<h3 id="org43d3861">Arranging content in subdirectories</h3>
+<div class="outline-text-3" id="text-org43d3861">
 <p>
 First, I wanted to be able to create subdirectories containing data or
 images for specific posts (as opposed to lumping them all together in
@@ -176,14 +174,13 @@ evaluated:
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-sh">pwd
 </pre>
 </div>
 
 <pre class="example">
-loading /Users/nhoffman/dotfiles/mac/zsh/zstartup
 /Users/nhoffman/src/borborygmi/org-content
+
 </pre>
 
 <p>
@@ -191,10 +188,12 @@ The org-mode source is here:
 </p>
 
 <pre class="example">
-loading /Users/nhoffman/dotfiles/mac/zsh/zstartup
 ../org-content/getting-started.org
 ../org-content/getting-started:
 Perameles_gunni.jpg
+plot1.png
+plot2.png
+
 </pre>
 
 <p>
@@ -204,11 +203,21 @@ are relative to the org-mode source):
 
 <pre class="example">
 ../content/getting-started.html
+
 </pre>
 
 <p>
 And the final output:
 </p>
+
+<pre class="example">
+../output/getting-started.html
+../output/getting-started:
+Perameles_gunni.jpg
+plot1.png
+plot2.png
+
+</pre>
 
 <p>
 An additional complication is that the files for the index and
@@ -221,9 +230,9 @@ fixed things up in the latter files with lxml in the script
 </div>
 </div>
 
-<div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2">Syntax highlighting</h3>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-org6fd377e" class="outline-3">
+<h3 id="org6fd377e">Syntax highlighting</h3>
+<div class="outline-text-3" id="text-org6fd377e">
 <p>
 A lot of trial and error was required to export code blocks with
 colorized syntax highlighting, and I still can't say I fully
@@ -243,7 +252,6 @@ adding
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-emacs-lisp">(require 'color-theme-github)
 </pre>
 </div>
@@ -255,9 +263,9 @@ was enough to produce colorized output. Go figure.
 </div>
 </div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2">Choosing a theme</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-orgd3274ce" class="outline-2">
+<h2 id="orgd3274ce">Choosing a theme</h2>
+<div class="outline-text-2" id="text-orgd3274ce">
 <p>
 There are plenty of choices over at <a href="https://github.com/getpelican/pelican-themes">the pelican-themes repository</a>, and
 there were a number that seemed to work well (for the time being)
@@ -273,18 +281,12 @@ Here are some I liked at first glance:
 </p>
 
 <ul class="org-ul">
-<li>bootstrap
-</li>
-<li>bootlex
-</li>
-<li>dev-random2 (though I'd have to do some translation)
-</li>
-<li>tuxlite_tbs
-</li>
-<li>tuxlite_zf (although I prefer more contrast between text and code)
-</li>
-<li>zurb-F5-basic
-</li>
+<li>bootstrap</li>
+<li>bootlex</li>
+<li>dev-random2 (though I'd have to do some translation)</li>
+<li>tuxlite_tbs</li>
+<li>tuxlite_zf (although I prefer more contrast between text and code)</li>
+<li>zurb-F5-basic</li>
 </ul>
 
 <p>
@@ -293,50 +295,51 @@ I finally settled on tuxlite_tbs (thanks, <a href="https://github.com/chanux">ch
 </div>
 </div>
 
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3">Hosting on github pages</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-orge53899c" class="outline-2">
+<h2 id="orge53899c">Hosting on github pages</h2>
+<div class="outline-text-2" id="text-orge53899c">
 <p>
 Thanks to the magical <a href="https://github.com/davisp/ghp-import">ghp-import</a>, hosting on GitHub pages is as easy as
 </p>
 
 <pre class="example">
 ghp-import -p output
+
 </pre>
 </div>
 </div>
 
-<div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4">Examples</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org55c0d2d" class="outline-2">
+<h2 id="org55c0d2d">Examples</h2>
+<div class="outline-text-2" id="text-org55c0d2d">
 <table class="table table-striped table-bordered table-condensed" style="width: auto;">
 <caption class="t-above"><span class="table-number">Table 1:</span> An org-mode table</caption>
 
 <colgroup>
-<col class="left" />
+<col class="org-left" />
 
-<col class="left" />
+<col class="org-left" />
 
-<col class="left" />
+<col class="org-left" />
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="left">here's</th>
-<th scope="col" class="left">a</th>
-<th scope="col" class="left">table</th>
+<th scope="col" class="org-left">here's</th>
+<th scope="col" class="org-left">a</th>
+<th scope="col" class="org-left">table</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="left">with</td>
-<td class="left">&#xa0;</td>
-<td class="left">values</td>
+<td class="org-left">with</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">values</td>
 </tr>
 
 <tr>
-<td class="left">in</td>
-<td class="left">some</td>
-<td class="left">cells</td>
+<td class="org-left">in</td>
+<td class="org-left">some</td>
+<td class="org-left">cells</td>
 </tr>
 </tbody>
 </table>
@@ -345,20 +348,15 @@ ghp-import -p output
 <div class="figure">
 <p><img src="getting-started/Perameles_gunni.jpg" alt="Perameles_gunni.jpg" />
 </p>
-<p><span class="figure-number">Figure 1:</span> Hey, a <a href="http://en.wikipedia.org/wiki/File:Perameles_gunni.jpg">bandicoot</a>!</p>
+<p><span class="figure-number">Figure 1: </span>Hey, a <a href="http://en.wikipedia.org/wiki/File:Perameles_gunni.jpg">bandicoot</a>!</p>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name">Example of an R plot, output file specified in the code block.</label>
-<pre class="src src-R">png('getting-started/plot1.png')
+<label class="org-src-name"><span class="listing-number">Listing 1: </span>Example of an R plot, output file specified in the code block.</label><pre class="src src-R">png('getting-started/plot1.png')
 plot(qnorm)
 invisible(dev.off())
 </pre>
 </div>
-
-<pre class="example">
-loading /Users/nhoffman/dotfiles/mac/zsh/zstartup
-</pre>
 
 
 <div class="figure">
@@ -367,8 +365,7 @@ loading /Users/nhoffman/dotfiles/mac/zsh/zstartup
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name">Example of an R plot, output file specified in the header.</label>
-<pre class="src src-R">plot(1:10)
+<label class="org-src-name"><span class="listing-number">Listing 2: </span>Example of an R plot, output file specified in the header.</label><pre class="src src-R">plot(1:10)
 </pre>
 </div>
 
@@ -379,22 +376,20 @@ loading /Users/nhoffman/dotfiles/mac/zsh/zstartup
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name">A python code block with output</label>
-<pre class="src src-python">for i in range(3):
+<label class="org-src-name"><span class="listing-number">Listing 3: </span>A python code block with output</label><pre class="src src-python">for i in range(3):
     print 'hello' + '!' * i
 </pre>
 </div>
 
 <pre class="example">
-loading /Users/nhoffman/dotfiles/mac/zsh/zstartup
 hello
 hello!
 hello!!
+
 </pre>
 
 <div class="org-src-container">
-<label class="org-src-name">An sqlite3 code block producing an html-formatted table</label>
-<pre class="src src-sqlite">.header on
+<label class="org-src-name"><span class="listing-number">Listing 4: </span>An sqlite3 code block producing an html-formatted table</label><pre class="src src-sqlite">.header on
 create table foo (bar, baz);
 insert into foo values('a', 1);
 insert into foo values('b', 2);
@@ -406,29 +401,24 @@ select * from foo;
 
 
 <colgroup>
-<col class="left" />
+<col class="org-left" />
 
-<col class="right" />
+<col class="org-right" />
 </colgroup>
 <tbody>
 <tr>
-<td class="left">loading /Users/nhoffman/dotfiles/mac/zsh/zstartup</td>
-<td class="right">&#xa0;</td>
+<td class="org-left">bar</td>
+<td class="org-right">baz</td>
 </tr>
 
 <tr>
-<td class="left">bar</td>
-<td class="right">baz</td>
+<td class="org-left">a</td>
+<td class="org-right">1</td>
 </tr>
 
 <tr>
-<td class="left">a</td>
-<td class="right">1</td>
-</tr>
-
-<tr>
-<td class="left">b</td>
-<td class="right">2</td>
+<td class="org-left">b</td>
+<td class="org-right">2</td>
 </tr>
 </tbody>
 </table>
