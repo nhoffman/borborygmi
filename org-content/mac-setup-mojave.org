@@ -1,0 +1,318 @@
+#+TITLE: Clean install of MacOS Mojave
+#+DATE: 2019-02-15
+#+CATEGORY: notes
+#+PROPERTY: TAGS mac
+#+PROPERTY: header-args :eval no
+#+OPTIONS: ^:nil
+
+Another installation of my personal notes for setting up a new (or
+cleanly installed) MacOS computer. The process changes just a bit with
+each new OS version. I have made an attempt to record the steps in
+order (for example, even entering commands is somewhat painful until I
+have iTerm with familiar keyboard settings).
+
+Somewhat glossed over here are manual steps used to transfer
+non-public dotfiles, credentials, etc. Here's a partial list of files
+and directories that I copied directly from my old laptop:
+
+: tar -cf dotfiles.tar .Xmodmap .gitconfig .gnupg .pypirc .ssh
+
+Note that none of these steps require an Apple ID - I held off on
+signing in until the very end just to see if it was possible.
+
+* system settings
+** turn off spelling autocorrect
+: System Preferences --> Keyboard --> Text tab --> unselect "Correct spelling automatically" and others
+** unmap Control + left,right
+
+I use Control plus the left and right arrow keys to move between
+windows in emacs and tmux.
+
+: System Preferences --> Keyboard --> Shortcuts --> uncheck mission control: move left/right a space
+
+** Turn on FileVault
+
+: System Preferences --> Security & privacy --> FileVault
+
+I used a recovery key option rather than iCloud for my work machine, iCloud for personal
+
+* Developer tools
+
+Pretty much the first thing that needs to happen. This can be done
+from the command line:
+
+#+BEGIN_SRC sh
+xcode-select --install
+#+END_SRC
+
+* iTerm2
+
+#+BEGIN_SRC
+brew cask install iterm2
+#+END_SRC
+
+Update a few settings.
+
+Preferences --> Profiles --> Keys and do these things:
+- select "Left/right option key acts as": +Esc
+- + --> Keyboard shortcut "OPT+<left arrow>": Send Escape sequence "b"
+- + --> Keyboard shortcut "OPT+<right arrow>": Send Escape sequence "f"
+
+Default appearance:
+
+- Preferences --> Profiles --> Colors --> Load Presets --> Light Background
+- Preferences --> Profiles --> Text --> Change Font --> 14 point
+
+* homebrew
+
+Homebrew no longer requires user-ownership of /usr/local, so things
+are pretty easy now:
+
+#+BEGIN_SRC sh
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew doctor
+#+END_SRC
+
+** homebrew API token
+
+Apparently lots of requests to GutHub via homebrew can hit a rate limit. There's a higher limit if you create an API token. See https://gist.github.com/christopheranderton/8644743
+
+Here's the url for the token creation dialog:
+
+https://github.com/settings/tokens/new?scopes=&description=Homebrew
+
+Make sure that all 'scopes' are unchecked. Once you generate the token, add to your shell profile:
+
+: export HOMEBREW_GITHUB_API_TOKEN=token_here
+
+** Terminal applications
+
+Many packages are installed later with additional elaboration or in as
+dependencies for other applications; here are some more or less
+standalone packages that I routinely install.
+
+#+BEGIN_SRC sh
+brew install git && \
+brew install wget && \
+brew install autojump && \
+brew install gcc && \
+brew install graphviz && \
+brew install latex2rtf && \
+brew install pandoc && \
+brew install tmux && \
+brew install tree && \
+brew install fd && \
+brew install xsv
+#+END_SRC
+
+** desktop applications
+
+Homebrew installs desktop apps too!
+
+#+BEGIN_SRC sh
+brew cask install dropbox
+brew cask install sizeup
+brew cask install dash
+brew cask install google-chrome
+brew cask install java
+brew cask install mactex
+brew cask install texmaker
+brew cask install firefox
+brew cask install docker
+#+END_SRC
+
+Some of the above (eg, sizeup, dropbox, dash) require licenses and
+credentials that must be installed interactively.
+
+* python
+
+Mojave seems to ship with Python 2.7.10 and no python3, so let's use
+homebrew to get recent versions of both.
+
+I try to limit packages installed to the system to utilities that are
+very frequently used outside of the context of a virtualenv.
+
+See
+https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Homebrew-and-Python.md
+
+** dependencies
+
+Run =brew info python= for required and optional dependencies
+
+#+BEGIN_SRC sh
+for pkg in sphinx-doc pkg-config readline sqlite gdbm berkeley-db@4 tcl-tk xz; do brew install $pkg; done
+#+END_SRC
+
+** python2
+
+#+BEGIN_SRC sh
+brew install python@2
+/usr/local/bin/pip2 install -U pip setuptools virtualenv wheel
+#+END_SRC
+
+** python3
+
+Note that "python" corresponds to the python3 homebrew recipe.
+
+#+BEGIN_SRC sh
+brew install python
+/usr/local/bin/pip3 install -U pip wheel
+#+END_SRC
+
+A limited selection of packages - better to use virtualenvs!
+
+#+BEGIN_SRC sh
+pip3 install ansible
+pip3 install csvkit
+pip3 install pgcli
+#+END_SRC
+
+*** scons
+
+Note that =scons= wants to install man pages to =/usr/local/man=, which is owned by root. You'll need to do this first:
+
+#+BEGIN_SRC sh
+sudo mkdir -p /usr/local/man
+sudo chown $(whoami) /usr/local/man
+pip3 install scons
+#+END_SRC
+
+* emacs
+
+Install latest emacs binary from http://emacsformacosx.com/
+
+Emacs needs a few homebrew packages
+
+#+BEGIN_SRC sh
+brew install libressl
+brew install aspell
+brew install gpg
+#+END_SRC
+
+Check out my .emacs.d and run setup scripts.
+
+#+BEGIN_SRC sh
+cd ~
+git clone --recurse-submodules git@github.com:nhoffman/.emacs.d.git
+#+END_SRC
+
+For elpy:
+
+#+BEGIN_SRC sh
+cd ~/.emacs.d
+bin/venv.sh
+#+END_SRC
+
+* zsh
+
+Install zsh with Homebrew
+
+#+BEGIN_SRC sh
+brew install zsh
+#+END_SRC
+
+Change shell to zsh
+
+#+BEGIN_SRC sh
+sudo -s
+echo /usr/local/bin/zsh >> /etc/shells
+exit
+chsh -s /usr/local/bin/zsh $USER
+#+END_SRC
+
+Install my dotfiles (relevant only to me)
+
+#+BEGIN_SRC sh
+cd ~
+git clone git@bitbucket.org:nhoffman/dotfiles.git
+~/dotfiles/mac/install.py
+#+END_SRC
+
+* R
+
+I had to give up on installing R with homebrew because it seemed to
+result in an interpreter that always wanted to install packages from
+source. So I used the binary from https://cran.r-project.org/bin/macosx/
+
+Some packages that I know I'll need:
+
+#+BEGIN_SRC sh
+R --slave << EOF
+packages <- c("lattice", "RSQLite", "latticeExtra", "argparse", "data.table", "tidyverse")
+install.packages(packages, repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE, Ncpus=4)
+EOF
+#+END_SRC
+
+Wow, this takes a long time!
+
+Also:
+
+#+BEGIN_SRC sh
+brew cask install rstudio
+#+END_SRC
+
+* postgresql
+
+#+BEGIN_SRC sh
+brew cask install postgres
+#+END_SRC
+
+This installs multiple versions of postgres. You'll need to add the
+path to the CLI for the version you want to use to your PATH, eg:
+
+#+BEGIN_SRC sh
+export PATH=/Applications/Postgres.app/Contents/Versions/9.6/bin:$PATH
+#+END_SRC
+
+* X11
+
+install Xquartz
+
+#+BEGIN_SRC sh
+brew install caskroom/cask/xquartz
+#+END_SRC
+
+X11 key bindings so that the option key is used for Meta. Not so
+relevant any more now that I rarely use emacs via X11 for remote
+sessions.
+
+#+BEGIN_SRC sh
+cat > ~/.Xmodmap <<EOF
+clear Mod1
+clear Mod2
+keycode 63 = Mode_switch
+keycode 66 = Meta_L
+add Mod1 = Meta_L
+add Mod2 = Mode_switch
+EOF
+#+END_SRC
+
+* virtualbox and vagrant
+
+#+BEGIN_SRC sh
+brew cask install virtualbox
+brew cask install vagrant
+brew cask install vagrant-manager
+#+END_SRC
+
+The command to install virtualbox will prompt you to allow a kernel
+extension in system preferences.
+
+After virtualbox is installed, launch the application, go to
+preferences, and change default machine folder to ~/VirtualBox
+
+- available vagrant images:
+
+https://app.vagrantup.com/boxes/search
+
+** install an ubuntu16.04 VM
+
+see https://app.vagrantup.com/ubuntu/boxes/xenial64
+
+#+BEGIN_SRC sh
+mkdir -p ~/vagrant/xenial64
+cd ~/vagrant/xenial64
+vagrant init ubuntu/xenial64
+vagrant up
+#+END_SRC
+
