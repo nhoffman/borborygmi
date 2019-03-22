@@ -80,8 +80,8 @@ replacing an element in the list with a variable results in an error:
 
 <pre class="example">
 Wrong type argument: sequencep, path
-
 </pre>
+
 
 <p>
 It turns out that a list constructed using a single quote includes
@@ -97,8 +97,8 @@ symbols (and not the corresponding values) in the list.
 <pre class="example">
 
 ("" "path" "to" path)
-
 </pre>
+
 
 <p>
 Instead, create the list either using the <code>list</code> function, or with a
@@ -117,8 +117,8 @@ backquote and a comma:
 ("" "path" "to" "someplace")
 
 ("" "path" "to" "someplace")
-
 </pre>
+
 
 <p>
 Yikes, that second syntax is&#x2026; not intuitive. It turns out that the <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Backquote.html">backquote</a> syntax exists just for this purpose:
@@ -150,8 +150,8 @@ symbol instead of the value:
 <pre class="example">
 
 ((:prologue . path))
-
 </pre>
+
 
 <p>
 Nope.
@@ -166,8 +166,8 @@ Nope.
 <pre class="example">
 
 ((:prologue . "someplace"))
-
 </pre>
+
 
 <p>
 Much better.
@@ -244,7 +244,7 @@ Much better.
         </div>     </div>     </div> 
 <footer>
 <br />
-<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &copy; Noah Hoffman 2018</p>
+<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &copy; Noah Hoffman 2019</p>
 </footer>
 
 </div> <!-- /container -->

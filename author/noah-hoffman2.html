@@ -55,6 +55,32 @@
 
 
 	<div class="article">
+          <a href="https://nhoffman.github.io/borborygmi/dict-factory.html"><h2>sqlite dict factory</h2></a>
+          <div class="well small"> Tue 10 June 2014 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/python.html">python,&#160;</a><a href="https://nhoffman.github.io/borborygmi/tag/sqlite.html">sqlite</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/dict-factory.html">read more</a> </div>
+          <div class="summary"><p>
+Probably not as efficient as using the sqlite3.Row class, but works
+when actual dict objects are required. Adapted from
+<a href="https://docs.python.org/2/library/sqlite3.html">https://docs.python.org/2/library/sqlite3.html</a>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">import sqlite3
+
+def dict_factory(cursor, row):
+    return {col[0]: row[idx] for idx, col in enumerate(cursor.description)}
+
+con = sqlite3.connect(":memory ...</pre></div> </div>
+	</div>
+
+
+ 
+
+
+	<div class="article">
           <a href="https://nhoffman.github.io/borborygmi/getting-started.html"><h2>Creating a site with Pelican and org-mode</h2></a>
           <div class="well small"> Mon 26 May 2014 &#8212;
 
@@ -65,15 +91,15 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org33dac0d">org-mode integration</a>
+<li><a href="#org7e1f983">org-mode integration</a>
 <ul>
-<li><a href="#org43d3861">Arranging content in subdirectories</a></li>
-<li><a href="#org6fd377e">Syntax highlighting</a></li>
+<li><a href="#org2612c62">Arranging content in subdirectories</a></li>
+<li><a href="#orgef5edbf">Syntax highlighting</a></li>
 </ul>
 </li>
-<li><a href="#orgd3274ce">Choosing a theme</a></li>
-<li><a href="#orge53899c">Hosting on github pages</a></li>
-<li><a href="#org55c0d2d">Examples</a></li>
+<li><a href="#org7c4aea6">Choosing a theme</a></li>
+<li><a href="#orga9ffd40">Hosting on github pages</a></li>
+<li><a href="#org84ce0d9">Examples</a></li>
 </ul>
 </div>
 </div>
@@ -98,35 +124,35 @@ other content that I have scattered ...</p> </div>
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org874bf1b">First applications</a>
+<li><a href="#org184cd58">First applications</a>
 <ul>
-<li><a href="#orgae7319f">Developer tools</a></li>
-<li><a href="#org78854d8">X11</a></li>
-<li><a href="#org4a74d95">Others</a></li>
+<li><a href="#org52895d2">Developer tools</a></li>
+<li><a href="#org53be261">X11</a></li>
+<li><a href="#org1e0e76e">Others</a></li>
 </ul>
 </li>
-<li><a href="#orge631671">system-level configuration</a>
+<li><a href="#org8666416">system-level configuration</a>
 <ul>
-<li><a href="#org12b73cb">turn off spelling autocorrect</a></li>
-<li><a href="#orgf1c1dda">fix scroll direction</a></li>
-<li><a href="#org721d7b3">turn off spaces key shortcuts</a></li>
+<li><a href="#org97376cb">turn off spelling autocorrect</a></li>
+<li><a href="#org65c73ef">fix scroll direction</a></li>
+<li><a href="#org9a90515">turn off spaces key shortcuts</a></li>
 </ul>
 </li>
-<li><a href="#org132bd96">ssh</a></li>
-<li><a href="#orgff2b64f">homebrew</a>
+<li><a href="#org6a312c0">ssh</a></li>
+<li><a href="#orge5e03ee">homebrew</a>
 <ul>
-<li><a href="#org5816820">stuff installed using homebrew</a></li>
-<li><a href="#org3d01d70">zsh</a></li>
+<li><a href="#org121acc9">stuff installed using homebrew</a></li>
+<li><a href="#orge67283a">zsh</a></li>
 </ul>
 </li>
-<li><a href="#org7aac224">git</a></li>
-<li><a href="#orgbc5cf0f">iTerm2 settings</a></li>
-<li><a href="#org0bc30ce">emacs</a></li>
-<li><a href="#orgd0be4d7">python</a></li>
-<li><a href="#orgcffbc93">R</a></li>
-<li><a href="#orge0c0557">mail</a></li>
-<li><a href="#org2b65e89">sshfs</a></li>
-<li><a href="#orgae24a88">wkhtmltopdf</a></li>
+<li><a href="#orgd96d425">git</a></li>
+<li><a href="#orgfd74248">iTerm2 settings</a></li>
+<li><a href="#orgee3f2bc">emacs</a></li>
+<li><a href="#org6662223">python</a></li>
+<li><a href="#orga277997">R</a></li>
+<li><a href="#org601011f">mail</a></li>
+<li><a href="#org27c01af">sshfs</a></li>
+<li><a href="#orgfa74a27">wkhtmltopdf</a></li>
 </ul>
 </div>
 </div>
@@ -149,11 +175,11 @@ These are my notes that I took while setting up a ...</p> </div>
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgf5eaa98">Installing from CRAN</a></li>
-<li><a href="#org4915bb9">Bioconductor</a></li>
-<li><a href="#org9d4739f">R-forge</a></li>
-<li><a href="#org4454db2">Installing packages locally</a></li>
-<li><a href="#orga48229d">Reloading a package</a></li>
+<li><a href="#org43732a5">Installing from CRAN</a></li>
+<li><a href="#org9bbbb4a">Bioconductor</a></li>
+<li><a href="#org6897968">R-forge</a></li>
+<li><a href="#orgc5aba89">Installing packages locally</a></li>
+<li><a href="#orgb9c60cf">Reloading a package</a></li>
 </ul>
 </div>
 </div>
@@ -161,9 +187,9 @@ These are my notes that I took while setting up a ...</p> </div>
 Notes to myself about installing R packages.
 </p>
 
-<div id="outline-container-orgf5eaa98" class="outline-2">
-<h2 id="orgf5eaa98">Installing from CRAN</h2>
-<div class="outline-text-2" id="text-orgf5eaa98">
+<div id="outline-container-org43732a5" class="outline-2">
+<h2 id="org43732a5">Installing from CRAN</h2>
+<div class="outline-text-2" id="text-org43732a5">
 <div class="org-src-container">
 <pre class="src src-R">install.packages(c("ape","sqldf","ROCR"), repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE)
 </pre>
@@ -171,9 +197,9 @@ Notes to myself about installing R packages.
 </div>
 </div>
 
-<div id="outline-container-org4915bb9" class="outline-2">
-<h2 id="org4915bb9">Bioconductor</h2>
-<div class="outline-text-2" id="text-org4915bb9">
+<div id="outline-container-org9bbbb4a" class="outline-2">
+<h2 id="org9bbbb4a">Bioconductor</h2>
+<div class="outline-text-2" id="text-org9bbbb4a">
 <div class="org-src-container">
 <pre class="src src-R">source("http://bioconductor.org/biocLite.R")
 biocLite(c("Biostrings","BSgenome ...</pre></div></div></div> </div>
@@ -240,7 +266,7 @@ biocLite(c("Biostrings","BSgenome ...</pre></div></div></div> </div>
         </div>     </div>     </div> 
 <footer>
 <br>
-<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &#169; Noah Hoffman 2018</p>
+<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &#169; Noah Hoffman 2019</p>
 </footer>
 
 </div> <!-- /container -->
