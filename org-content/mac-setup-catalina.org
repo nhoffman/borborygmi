@@ -109,6 +109,14 @@ brew cask install docker
 Some of the above (eg, sizeup, dropbox, dash) require licenses and
 credentials that must be installed interactively.
 
+** packages in 3rd party taps
+*** saml2aws
+
+#+BEGIN_SRC sh
+brew tap versent/homebrew-taps
+brew install saml2aws
+#+END_SRC
+
 * iTerm2
 
 The homebrew version gave an error on launch with a message about not
