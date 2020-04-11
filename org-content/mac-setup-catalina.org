@@ -15,6 +15,11 @@ pretty minimal. Here's the command to gather up what I need to transfer.
 
 : tar -cf dotfiles.tar .Xmodmap .gitconfig .gnupg .pypirc .ssh .aws .saml2aws
 
+It's also handy to know all of the projects I'm working on:
+
+: cd ~/src
+: for dname in */.git; do git -C $(dirname $dname) remote -v; done > remotes.txt
+
 Note that none of these steps require an Apple ID - I held off on
 signing in until the very end just to see if it was possible.
 
