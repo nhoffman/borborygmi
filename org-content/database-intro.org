@@ -359,7 +359,7 @@ select * from patients join results using(mrn);
 |    2 | U654321 | Jessica Krupnick | 1924-10-27 | F   | T00002    | 2014-06-03 | BMP          | GLU       |  75.0 |      |
 |    2 | U654321 | Jessica Krupnick | 1924-10-27 | F   | T00002    | 2014-06-03 | BMP          | K         |   4.2 |      |
 
-#+BEGIN_SRC sqlite
+#+BEGIN_SRC
 select patients.name, results.date, tests.test_name, results.value, results.flag
 from results
 join tests using(test_code)
@@ -376,7 +376,7 @@ where test_code = 'K';
 
 ** group and aggregate
 
-#+BEGIN_SRC sqlite
+#+BEGIN_SRC
 select name, test_code, min(value)
 from patients join results using(mrn)
 group by mrn, test_code;
@@ -545,7 +545,7 @@ Here's where understanding relations is useful. When I ask for data
 from the laboratory system, I typically get results back that look
 something like this:
 
-#+BEGIN_SRC sqlite :exports results
+#+BEGIN_SRC
 select results.*, b.battery_name, t.test_name, t.ref_range from results
 join tests t using(test_code)
 join batteries b using(battery_code);
