@@ -100,7 +100,8 @@ brew install tree && \
 brew install fd && \
 brew install xsv && \
 brew install fzf && \
-brew install saml2aws
+brew install saml2aws && \
+brew install jq
 #+END_SRC
 
 ** desktop applications
