@@ -11,20 +11,15 @@ each new OS version. I will try really hard to reproduce the steps in
 an order that make then easiest to execute.
 
 This time I need to document some details of the actual clean install
-process: it turned out to be unusually difficult to boot from a
-startup disk containing the Big Sur installer. I kept getting an error
-that security settings would not allow startup from an external
-drive. The error message included a suggestion to restart into
-recovery mode (hold down Command+r) and use the Startup Security
-Utility (under the Utilities menu) to allow booting from external
-media. Once I did this and restarted while holding down the option
-key, a second warning: "a wireless network is required to verify the
-startup disk". The wireless network was apparently not good enough
-(there is an option to join a network when selecting the startup
-disk), but with an ethernet connection via a USB-C dongle, I was
-finally given the option to install Bug Sur. This was on a 2018 13"
-MBP. After running that gauntlet, on to the actual installation
-process.
+process: it seems to have become more complicated to boot from a
+startup disk containing the Big Sur installer. It was necessary to
+restart into recovery mode (hold down Command+r) and use the Startup
+Security Utility (under the Utilities menu) to allow booting from
+external media and not to require an internet connection to verify the
+boot media. After this, I was able to select a startup disk by
+restarting while holding down Option. After running that gauntlet, on
+to the actual installation process (after which I restarted again in
+recovery mode and restored the default security settings).
 
 I do copy some things over from my old computer, but it's pretty
 minimal. Here's the command to gather up what I need to transfer.
