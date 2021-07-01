@@ -50,7 +50,7 @@ def main(arguments):
         fix_urls(tree, rexp, '//img', 'src')
         fix_urls(tree, rexp, '//a', 'href')
 
-        with open(infile, 'w') as f:
+        with open(infile, 'wb') as f:
             f.write(html.tostring(tree))
 
 
