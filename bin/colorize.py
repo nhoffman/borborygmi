@@ -51,7 +51,7 @@ def main(arguments):
 
     if args.list_lexers:
         for x in get_all_lexers():
-            print x
+            print(x)
         sys.exit()
 
     formatter = get_formatter_by_name('html')

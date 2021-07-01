@@ -1,16 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
-from __future__ import unicode_literals
+
 import datetime
 
-AUTHOR = u'Noah Hoffman'
-SITENAME = u'borborygmi'
+AUTHOR = 'Noah Hoffman'
+SITENAME = 'borborygmi'
 SITEURL = 'https://nhoffman.github.io/borborygmi'
 COPYRIGHT_YEAR = datetime.date.today().year
 
 TIMEZONE = 'America/Los_Angeles'
 
-DEFAULT_LANG = u'en'
+DEFAULT_LANG = 'en'
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None

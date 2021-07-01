@@ -13,7 +13,7 @@ import datetime
 from os import path
 
 def ask(field):
-    return raw_input('{}: '.format(field)).strip()
+    return input('{}: '.format(field)).strip()
 
 
 def main(arguments):
@@ -57,7 +57,7 @@ def main(arguments):
         assert not path.exists(outfile)
         if args.create_dir:
             os.makedirs(outfile.replace('.org', ''))
-        print outfile
+        print(outfile)
 
     with open(outfile, 'w') as f:
         f.write(fstr.format(**vals))

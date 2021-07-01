@@ -13,8 +13,8 @@ from SCons.Script import (Variables, Depends, Environment, ARGUMENTS, Flatten)
 def check_filename(filename):
     fail = filename.startswith('.') or re.search(r'[_<>:"/\\|?*^% ]', filename)
     if fail:
-        print ('The name "{}" contains illegal characters '
-               '(should be alphanumeric or "-")').format(filename)
+        print(('The name "{}" contains illegal characters '
+               '(should be alphanumeric or "-")').format(filename))
         sys.exit(1)
 
 # variables defining destination for output files; can be redefined
@@ -103,7 +103,7 @@ reset_log, = env.Command(
 Alias('reset', reset_log)
 
 if GetOption('help'):
-    print 'Available Build Aliases:'
-    print '-----'
+    print('Available Build Aliases:')
+    print('-----')
     for alias in sorted(SCons.Node.Alias.default_ans.keys()):
-        print alias
+        print(alias)
