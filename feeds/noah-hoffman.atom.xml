@@ -3,27 +3,27 @@
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orge430839"&gt;system settings&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org4f52105"&gt;system settings&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org95c9859"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org853a6ce"&gt;unmap Control + left,right&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orga1fc9ee"&gt;Turn on FileVault&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org67a33b3"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgec1217e"&gt;unmap Control + left,right&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org5e591d9"&gt;Turn on FileVault&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgb9650f1"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orga754461"&gt;homebrew&lt;/a&gt;
+&lt;li&gt;&lt;a href="#orgd16dd08"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org65fc8f9"&gt;homebrew&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org4f4a973"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orga8e478c"&gt;CLI applications&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org9ad1c13"&gt;desktop applications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org8a736db"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgae57dd6"&gt;CLI applications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org87eb953"&gt;desktop applications&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#org4806d84"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org843d9c8"&gt;zsh&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org23a5717"&gt;python&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org8b18c05"&gt;emacs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org2e05bf8"&gt;R&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgea373c0"&gt;postgresql&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org5ddff9f"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org9cf7c1a"&gt;zsh&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org784234d"&gt;python&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgbd129b9"&gt;emacs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgcf63de0"&gt;R&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orga1cf366"&gt;postgresql&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -33,27 +33,27 @@ cleanly installed) MacOS computer. The …&lt;/p&gt;</summary><content type="htm
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orge430839"&gt;system settings&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org4f52105"&gt;system settings&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org95c9859"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org853a6ce"&gt;unmap Control + left,right&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orga1fc9ee"&gt;Turn on FileVault&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org67a33b3"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgec1217e"&gt;unmap Control + left,right&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org5e591d9"&gt;Turn on FileVault&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgb9650f1"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orga754461"&gt;homebrew&lt;/a&gt;
+&lt;li&gt;&lt;a href="#orgd16dd08"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org65fc8f9"&gt;homebrew&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org4f4a973"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orga8e478c"&gt;CLI applications&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org9ad1c13"&gt;desktop applications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org8a736db"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgae57dd6"&gt;CLI applications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org87eb953"&gt;desktop applications&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#org4806d84"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org843d9c8"&gt;zsh&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org23a5717"&gt;python&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org8b18c05"&gt;emacs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org2e05bf8"&gt;R&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgea373c0"&gt;postgresql&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org5ddff9f"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org9cf7c1a"&gt;zsh&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org784234d"&gt;python&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgbd129b9"&gt;emacs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgcf63de0"&gt;R&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orga1cf366"&gt;postgresql&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -102,21 +102,21 @@ Note that none of the steps below require an Apple ID - I held off on
 signing in until the very end just to see if it was possible.
 &lt;/p&gt;
 
-&lt;div id="outline-container-orge430839" class="outline-2"&gt;
-&lt;h2 id="orge430839"&gt;system settings&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orge430839"&gt;
+&lt;div id="outline-container-org4f52105" class="outline-2"&gt;
+&lt;h2 id="org4f52105"&gt;system settings&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org4f52105"&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org95c9859" class="outline-3"&gt;
-&lt;h3 id="org95c9859"&gt;turn off spelling autocorrect&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org95c9859"&gt;
+&lt;div id="outline-container-org67a33b3" class="outline-3"&gt;
+&lt;h3 id="org67a33b3"&gt;turn off spelling autocorrect&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org67a33b3"&gt;
 &lt;pre class="example"&gt;
 System Preferences --&amp;gt; Keyboard --&amp;gt; Text tab --&amp;gt; unselect "Correct spelling automatically" and others
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org853a6ce" class="outline-3"&gt;
-&lt;h3 id="org853a6ce"&gt;unmap Control + left,right&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org853a6ce"&gt;
+&lt;div id="outline-container-orgec1217e" class="outline-3"&gt;
+&lt;h3 id="orgec1217e"&gt;unmap Control + left,right&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgec1217e"&gt;
 &lt;p&gt;
 I use Control plus the left and right arrow keys to move between
 windows in emacs and tmux, so I disable the defaults.
@@ -128,9 +128,9 @@ System Preferences --&amp;gt; Keyboard --&amp;gt; Shortcuts --&amp;gt; uncheck m
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orga1fc9ee" class="outline-3"&gt;
-&lt;h3 id="orga1fc9ee"&gt;Turn on FileVault&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orga1fc9ee"&gt;
+&lt;div id="outline-container-org5e591d9" class="outline-3"&gt;
+&lt;h3 id="org5e591d9"&gt;Turn on FileVault&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org5e591d9"&gt;
 &lt;pre class="example"&gt;
 System Preferences --&amp;gt; Security &amp;amp; privacy --&amp;gt; FileVault
 &lt;/pre&gt;
@@ -143,9 +143,9 @@ I used a recovery key option rather than iCloud for my work machine, iCloud for 
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgb9650f1" class="outline-2"&gt;
-&lt;h2 id="orgb9650f1"&gt;Developer tools&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgb9650f1"&gt;
+&lt;div id="outline-container-orgd16dd08" class="outline-2"&gt;
+&lt;h2 id="orgd16dd08"&gt;Developer tools&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgd16dd08"&gt;
 &lt;p&gt;
 Pretty much the first thing that needs to happen. This can be done
 from the command line:
@@ -158,9 +158,9 @@ from the command line:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orga754461" class="outline-2"&gt;
-&lt;h2 id="orga754461"&gt;homebrew&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orga754461"&gt;
+&lt;div id="outline-container-org65fc8f9" class="outline-2"&gt;
+&lt;h2 id="org65fc8f9"&gt;homebrew&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org65fc8f9"&gt;
 &lt;p&gt;
 Homebrew no longer requires user-ownership of /usr/local, so things
 are pretty easy now:
@@ -173,9 +173,9 @@ brew doctor
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org4f4a973" class="outline-3"&gt;
-&lt;h3 id="org4f4a973"&gt;homebrew API token&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org4f4a973"&gt;
+&lt;div id="outline-container-org8a736db" class="outline-3"&gt;
+&lt;h3 id="org8a736db"&gt;homebrew API token&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org8a736db"&gt;
 &lt;p&gt;
 Apparently lots of requests to GitHub via homebrew can hit a rate limit. There's a higher limit if you create an API token. See &lt;a href="https://gist.github.com/christopheranderton/8644743"&gt;https://gist.github.com/christopheranderton/8644743&lt;/a&gt;
 &lt;/p&gt;
@@ -198,9 +198,9 @@ export HOMEBREW_GITHUB_API_TOKEN=token_here
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orga8e478c" class="outline-3"&gt;
-&lt;h3 id="orga8e478c"&gt;CLI applications&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orga8e478c"&gt;
+&lt;div id="outline-container-orgae57dd6" class="outline-3"&gt;
+&lt;h3 id="orgae57dd6"&gt;CLI applications&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgae57dd6"&gt;
 &lt;p&gt;
 Many packages are installed later with additional elaboration or in as
 dependencies for other applications; here are some more or less
@@ -227,9 +227,9 @@ brew install jq
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org9ad1c13" class="outline-3"&gt;
-&lt;h3 id="org9ad1c13"&gt;desktop applications&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org9ad1c13"&gt;
+&lt;div id="outline-container-org87eb953" class="outline-3"&gt;
+&lt;h3 id="org87eb953"&gt;desktop applications&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org87eb953"&gt;
 &lt;p&gt;
 Homebrew installs desktop apps too! (the syntax has changed a bit)
 &lt;/p&gt;
@@ -247,9 +247,9 @@ credentials that must be installed interactively.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org4806d84" class="outline-2"&gt;
-&lt;h2 id="org4806d84"&gt;iTerm2&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org4806d84"&gt;
+&lt;div id="outline-container-org5ddff9f" class="outline-2"&gt;
+&lt;h2 id="org5ddff9f"&gt;iTerm2&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org5ddff9f"&gt;
 &lt;p&gt;
 Install using homebrew above. Update a few settings.
 &lt;/p&gt;
@@ -292,9 +292,9 @@ curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | bash
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org843d9c8" class="outline-2"&gt;
-&lt;h2 id="org843d9c8"&gt;zsh&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org843d9c8"&gt;
+&lt;div id="outline-container-org9cf7c1a" class="outline-2"&gt;
+&lt;h2 id="org9cf7c1a"&gt;zsh&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org9cf7c1a"&gt;
 &lt;p&gt;
 Change shell to zsh. I'll just use the zsh shipped with the OS.
 &lt;/p&gt;
@@ -317,9 +317,9 @@ git clone git@bitbucket.org:nhoffman/dotfiles.git
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org23a5717" class="outline-2"&gt;
-&lt;h2 id="org23a5717"&gt;python&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org23a5717"&gt;
+&lt;div id="outline-container-org784234d" class="outline-2"&gt;
+&lt;h2 id="org784234d"&gt;python&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org784234d"&gt;
 &lt;p&gt;
 My version of Big Sur provided Python 2.7.16 and 3.9.5. My most recent evolution of managing python interpreters is to use pyenv. See &lt;a href="https://realpython.com/intro-to-pyenv/"&gt;https://realpython.com/intro-to-pyenv/&lt;/a&gt;
 &lt;/p&gt;
@@ -377,9 +377,9 @@ pyenv install -v 3.8.8
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org8b18c05" class="outline-2"&gt;
-&lt;h2 id="org8b18c05"&gt;emacs&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org8b18c05"&gt;
+&lt;div id="outline-container-orgbd129b9" class="outline-2"&gt;
+&lt;h2 id="orgbd129b9"&gt;emacs&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgbd129b9"&gt;
 &lt;p&gt;
 Install latest emacs binary from &lt;a href="http://emacsformacosx.com/"&gt;http://emacsformacosx.com/&lt;/a&gt;
 &lt;/p&gt;
@@ -417,9 +417,9 @@ bin/python-setup.sh
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org2e05bf8" class="outline-2"&gt;
-&lt;h2 id="org2e05bf8"&gt;R&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org2e05bf8"&gt;
+&lt;div id="outline-container-orgcf63de0" class="outline-2"&gt;
+&lt;h2 id="orgcf63de0"&gt;R&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgcf63de0"&gt;
 &lt;p&gt;
 I had to give up on installing R with homebrew because it seemed to
 result in an interpreter that always wanted to install packages from
@@ -453,9 +453,9 @@ Also:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgea373c0" class="outline-2"&gt;
-&lt;h2 id="orgea373c0"&gt;postgresql&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgea373c0"&gt;
+&lt;div id="outline-container-orga1cf366" class="outline-2"&gt;
+&lt;h2 id="orga1cf366"&gt;postgresql&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orga1cf366"&gt;
 &lt;p&gt;
 Install from &lt;a href="https://postgresapp.com/downloads.html"&gt;https://postgresapp.com/downloads.html&lt;/a&gt;
 &lt;/p&gt;
@@ -471,41 +471,41 @@ path to the CLI for the version you want to use to your PATH, eg:
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="mac"></category></entry><entry><title>Clean install of MacOS Catalina</title><link href="https://nhoffman.github.io/borborygmi/mac-setup-catalina.html" rel="alternate"></link><published>2020-04-11T00:00:00-07:00</published><updated>2020-04-11T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2020-04-11:/borborygmi/mac-setup-catalina.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
+</content><category term="notes"></category><category term="mac"></category></entry><entry><title>Clean install of MacOS Catalina</title><link href="https://nhoffman.github.io/borborygmi/mac-setup-catalina.html" rel="alternate"></link><published>2020-04-11T00:00:00-07:00</published><updated>2020-04-11T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2020-04-11:/borborygmi/mac-setup-catalina.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org9270b6f"&gt;system settings&lt;/a&gt;
+&lt;li&gt;&lt;a href="#orgbc4bd4c"&gt;system settings&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgabf0cbb"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org5af910a"&gt;unmap Control + left,right&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org84c17b8"&gt;Turn on FileVault&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgc302056"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org02c61a5"&gt;unmap Control + left,right&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgd1a5911"&gt;Turn on FileVault&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgc3a5abf"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgef1478f"&gt;homebrew&lt;/a&gt;
+&lt;li&gt;&lt;a href="#orgb5cd155"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgc58f58d"&gt;homebrew&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org14e3bf0"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgce8ac28"&gt;CLI applications&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org3c40feb"&gt;desktop applications&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org3fd0c83"&gt;packages in 3rd party taps&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org099729d"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org9cc7fad"&gt;CLI applications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgf3ab1d3"&gt;desktop applications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org27d2ff3"&gt;packages in 3rd party taps&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org2f12351"&gt;saml2aws&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org82412ea"&gt;saml2aws&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#orga7bdc08"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org53e96f9"&gt;python&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org8763dea"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org12e513a"&gt;python&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org1e95918"&gt;dependencies&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org5cdad8f"&gt;dependencies&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgfd8ca84"&gt;emacs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org8761260"&gt;zsh&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgf22e3ff"&gt;R&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org0292527"&gt;postgresql&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org9c414e4"&gt;X11&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgf6bd661"&gt;emacs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgaa4318f"&gt;zsh&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org988ff10"&gt;R&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org84b4b07"&gt;postgresql&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgd0f4102"&gt;X11&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -514,37 +514,37 @@ Another installation of my personal notes for setting up a …&lt;/p&gt;</summar
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org9270b6f"&gt;system settings&lt;/a&gt;
+&lt;li&gt;&lt;a href="#orgbc4bd4c"&gt;system settings&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgabf0cbb"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org5af910a"&gt;unmap Control + left,right&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org84c17b8"&gt;Turn on FileVault&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgc302056"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org02c61a5"&gt;unmap Control + left,right&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgd1a5911"&gt;Turn on FileVault&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgc3a5abf"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgef1478f"&gt;homebrew&lt;/a&gt;
+&lt;li&gt;&lt;a href="#orgb5cd155"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgc58f58d"&gt;homebrew&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org14e3bf0"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgce8ac28"&gt;CLI applications&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org3c40feb"&gt;desktop applications&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org3fd0c83"&gt;packages in 3rd party taps&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org099729d"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org9cc7fad"&gt;CLI applications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgf3ab1d3"&gt;desktop applications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org27d2ff3"&gt;packages in 3rd party taps&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org2f12351"&gt;saml2aws&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org82412ea"&gt;saml2aws&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#orga7bdc08"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org53e96f9"&gt;python&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org8763dea"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org12e513a"&gt;python&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org1e95918"&gt;dependencies&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org5cdad8f"&gt;dependencies&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgfd8ca84"&gt;emacs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org8761260"&gt;zsh&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgf22e3ff"&gt;R&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org0292527"&gt;postgresql&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org9c414e4"&gt;X11&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgf6bd661"&gt;emacs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgaa4318f"&gt;zsh&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org988ff10"&gt;R&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org84b4b07"&gt;postgresql&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgd0f4102"&gt;X11&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -580,21 +580,21 @@ Note that none of these steps require an Apple ID - I held off on
 signing in until the very end just to see if it was possible.
 &lt;/p&gt;
 
-&lt;div id="outline-container-org9270b6f" class="outline-2"&gt;
-&lt;h2 id="org9270b6f"&gt;system settings&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org9270b6f"&gt;
+&lt;div id="outline-container-orgbc4bd4c" class="outline-2"&gt;
+&lt;h2 id="orgbc4bd4c"&gt;system settings&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgbc4bd4c"&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgabf0cbb" class="outline-3"&gt;
-&lt;h3 id="orgabf0cbb"&gt;turn off spelling autocorrect&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgabf0cbb"&gt;
+&lt;div id="outline-container-orgc302056" class="outline-3"&gt;
+&lt;h3 id="orgc302056"&gt;turn off spelling autocorrect&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgc302056"&gt;
 &lt;pre class="example"&gt;
 System Preferences --&amp;gt; Keyboard --&amp;gt; Text tab --&amp;gt; unselect "Correct spelling automatically" and others
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org5af910a" class="outline-3"&gt;
-&lt;h3 id="org5af910a"&gt;unmap Control + left,right&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org5af910a"&gt;
+&lt;div id="outline-container-org02c61a5" class="outline-3"&gt;
+&lt;h3 id="org02c61a5"&gt;unmap Control + left,right&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org02c61a5"&gt;
 &lt;p&gt;
 I use Control plus the left and right arrow keys to move between
 windows in emacs and tmux.
@@ -606,9 +606,9 @@ System Preferences --&amp;gt; Keyboard --&amp;gt; Shortcuts --&amp;gt; uncheck m
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org84c17b8" class="outline-3"&gt;
-&lt;h3 id="org84c17b8"&gt;Turn on FileVault&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org84c17b8"&gt;
+&lt;div id="outline-container-orgd1a5911" class="outline-3"&gt;
+&lt;h3 id="orgd1a5911"&gt;Turn on FileVault&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgd1a5911"&gt;
 &lt;pre class="example"&gt;
 System Preferences --&amp;gt; Security &amp;amp; privacy --&amp;gt; FileVault
 &lt;/pre&gt;
@@ -621,9 +621,9 @@ I used a recovery key option rather than iCloud for my work machine, iCloud for 
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgc3a5abf" class="outline-2"&gt;
-&lt;h2 id="orgc3a5abf"&gt;Developer tools&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgc3a5abf"&gt;
+&lt;div id="outline-container-orgb5cd155" class="outline-2"&gt;
+&lt;h2 id="orgb5cd155"&gt;Developer tools&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgb5cd155"&gt;
 &lt;p&gt;
 Pretty much the first thing that needs to happen. This can be done
 from the command line:
@@ -636,9 +636,9 @@ from the command line:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgef1478f" class="outline-2"&gt;
-&lt;h2 id="orgef1478f"&gt;homebrew&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgef1478f"&gt;
+&lt;div id="outline-container-orgc58f58d" class="outline-2"&gt;
+&lt;h2 id="orgc58f58d"&gt;homebrew&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgc58f58d"&gt;
 &lt;p&gt;
 Homebrew no longer requires user-ownership of /usr/local, so things
 are pretty easy now:
@@ -651,9 +651,9 @@ brew doctor
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org14e3bf0" class="outline-3"&gt;
-&lt;h3 id="org14e3bf0"&gt;homebrew API token&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org14e3bf0"&gt;
+&lt;div id="outline-container-org099729d" class="outline-3"&gt;
+&lt;h3 id="org099729d"&gt;homebrew API token&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org099729d"&gt;
 &lt;p&gt;
 Apparently lots of requests to GutHub via homebrew can hit a rate limit. There's a higher limit if you create an API token. See &lt;a href="https://gist.github.com/christopheranderton/8644743"&gt;https://gist.github.com/christopheranderton/8644743&lt;/a&gt;
 &lt;/p&gt;
@@ -676,9 +676,9 @@ export HOMEBREW_GITHUB_API_TOKEN=token_here
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgce8ac28" class="outline-3"&gt;
-&lt;h3 id="orgce8ac28"&gt;CLI applications&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgce8ac28"&gt;
+&lt;div id="outline-container-org9cc7fad" class="outline-3"&gt;
+&lt;h3 id="org9cc7fad"&gt;CLI applications&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org9cc7fad"&gt;
 &lt;p&gt;
 Many packages are installed later with additional elaboration or in as
 dependencies for other applications; here are some more or less
@@ -702,9 +702,9 @@ brew install xsv
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org3c40feb" class="outline-3"&gt;
-&lt;h3 id="org3c40feb"&gt;desktop applications&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org3c40feb"&gt;
+&lt;div id="outline-container-orgf3ab1d3" class="outline-3"&gt;
+&lt;h3 id="orgf3ab1d3"&gt;desktop applications&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgf3ab1d3"&gt;
 &lt;p&gt;
 Homebrew installs desktop apps too!
 &lt;/p&gt;
@@ -729,13 +729,13 @@ credentials that must be installed interactively.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org3fd0c83" class="outline-3"&gt;
-&lt;h3 id="org3fd0c83"&gt;packages in 3rd party taps&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org3fd0c83"&gt;
+&lt;div id="outline-container-org27d2ff3" class="outline-3"&gt;
+&lt;h3 id="org27d2ff3"&gt;packages in 3rd party taps&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org27d2ff3"&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org2f12351" class="outline-4"&gt;
-&lt;h4 id="org2f12351"&gt;saml2aws&lt;/h4&gt;
-&lt;div class="outline-text-4" id="text-org2f12351"&gt;
+&lt;div id="outline-container-org82412ea" class="outline-4"&gt;
+&lt;h4 id="org82412ea"&gt;saml2aws&lt;/h4&gt;
+&lt;div class="outline-text-4" id="text-org82412ea"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-sh"&gt;brew tap versent/homebrew-taps
 brew install saml2aws
@@ -746,9 +746,9 @@ brew install saml2aws
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orga7bdc08" class="outline-2"&gt;
-&lt;h2 id="orga7bdc08"&gt;iTerm2&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orga7bdc08"&gt;
+&lt;div id="outline-container-org8763dea" class="outline-2"&gt;
+&lt;h2 id="org8763dea"&gt;iTerm2&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org8763dea"&gt;
 &lt;p&gt;
 The homebrew version gave an error on launch with a message about not
 being supported on Catalina, and rather than fight with it, I just
@@ -779,9 +779,9 @@ Default appearance:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org53e96f9" class="outline-2"&gt;
-&lt;h2 id="org53e96f9"&gt;python&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org53e96f9"&gt;
+&lt;div id="outline-container-org12e513a" class="outline-2"&gt;
+&lt;h2 id="org12e513a"&gt;python&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org12e513a"&gt;
 &lt;p&gt;
 My version of Catalina provided Python 2.7.16 and 3.7.3, so let's use
 homebrew to get recent version of python3.
@@ -798,9 +798,9 @@ See
 &lt;/p&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org1e95918" class="outline-3"&gt;
-&lt;h3 id="org1e95918"&gt;dependencies&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org1e95918"&gt;
+&lt;div id="outline-container-org5cdad8f" class="outline-3"&gt;
+&lt;h3 id="org5cdad8f"&gt;dependencies&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org5cdad8f"&gt;
 &lt;p&gt;
 Run &lt;code&gt;brew info python&lt;/code&gt; for required and optional dependencies
 &lt;/p&gt;
@@ -832,9 +832,9 @@ A limited selection of packages - better to use virtualenvs!
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgfd8ca84" class="outline-2"&gt;
-&lt;h2 id="orgfd8ca84"&gt;emacs&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgfd8ca84"&gt;
+&lt;div id="outline-container-orgf6bd661" class="outline-2"&gt;
+&lt;h2 id="orgf6bd661"&gt;emacs&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgf6bd661"&gt;
 &lt;p&gt;
 Install latest emacs binary from &lt;a href="http://emacsformacosx.com/"&gt;http://emacsformacosx.com/&lt;/a&gt;
 &lt;/p&gt;
@@ -872,9 +872,9 @@ Run setup scripts:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org8761260" class="outline-2"&gt;
-&lt;h2 id="org8761260"&gt;zsh&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org8761260"&gt;
+&lt;div id="outline-container-orgaa4318f" class="outline-2"&gt;
+&lt;h2 id="orgaa4318f"&gt;zsh&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgaa4318f"&gt;
 &lt;p&gt;
 Install zsh with Homebrew
 &lt;/p&gt;
@@ -909,9 +909,9 @@ git clone git@bitbucket.org:nhoffman/dotfiles.git
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgf22e3ff" class="outline-2"&gt;
-&lt;h2 id="orgf22e3ff"&gt;R&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgf22e3ff"&gt;
+&lt;div id="outline-container-org988ff10" class="outline-2"&gt;
+&lt;h2 id="org988ff10"&gt;R&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org988ff10"&gt;
 &lt;p&gt;
 I had to give up on installing R with homebrew because it seemed to
 result in an interpreter that always wanted to install packages from
@@ -945,9 +945,9 @@ Also:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org0292527" class="outline-2"&gt;
-&lt;h2 id="org0292527"&gt;postgresql&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org0292527"&gt;
+&lt;div id="outline-container-org84b4b07" class="outline-2"&gt;
+&lt;h2 id="org84b4b07"&gt;postgresql&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org84b4b07"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-sh"&gt;brew cask install postgres
 &lt;/pre&gt;
@@ -965,9 +965,9 @@ path to the CLI for the version you want to use to your PATH, eg:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org9c414e4" class="outline-2"&gt;
-&lt;h2 id="org9c414e4"&gt;X11&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org9c414e4"&gt;
+&lt;div id="outline-container-orgd0f4102" class="outline-2"&gt;
+&lt;h2 id="orgd0f4102"&gt;X11&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgd0f4102"&gt;
 &lt;p&gt;
 install Xquartz
 &lt;/p&gt;
@@ -996,45 +996,45 @@ EOF
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="mac"></category></entry><entry><title>Clean install of MacOS Mojave</title><link href="https://nhoffman.github.io/borborygmi/mac-setup-mojave.html" rel="alternate"></link><published>2019-02-15T00:00:00-08:00</published><updated>2019-02-15T00:00:00-08:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2019-02-15:/borborygmi/mac-setup-mojave.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
+</content><category term="notes"></category><category term="mac"></category></entry><entry><title>Clean install of MacOS Mojave</title><link href="https://nhoffman.github.io/borborygmi/mac-setup-mojave.html" rel="alternate"></link><published>2019-02-15T00:00:00-08:00</published><updated>2019-02-15T00:00:00-08:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2019-02-15:/borborygmi/mac-setup-mojave.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgf1c153d"&gt;system settings&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org338efcd"&gt;system settings&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org1fe1f60"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orga746fbd"&gt;unmap Control + left,right&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org0f4cf96"&gt;Turn on FileVault&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org4fcf043"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orga69f11b"&gt;unmap Control + left,right&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org9b34638"&gt;Turn on FileVault&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgc34ff30"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org37b2a56"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgd5a0bd2"&gt;homebrew&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org8d04c34"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orga122c04"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgdd1e4c8"&gt;homebrew&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgc484dc1"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgb4675ad"&gt;Terminal applications&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgd900b23"&gt;desktop applications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org66d9339"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orge1aafdd"&gt;Terminal applications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org16b30bc"&gt;desktop applications&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#org6943079"&gt;python&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org46b8a76"&gt;python&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgd1c9daa"&gt;dependencies&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org69c1881"&gt;python2&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org9397113"&gt;python3&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org2525648"&gt;dependencies&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org2ec0ec5"&gt;python2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgfdf8097"&gt;python3&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org72536dc"&gt;scons&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgcb3a5cc"&gt;scons&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#org3b2ad85"&gt;emacs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgf532829"&gt;zsh&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org1320fc2"&gt;R&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org95f4942"&gt;postgresql&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org409b626"&gt;X11&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org05aff23"&gt;virtualbox and vagrant&lt;/a&gt;
+&lt;li&gt;&lt;a href="#orgdb4bb78"&gt;emacs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgdae7925"&gt;zsh&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgbead382"&gt;R&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org08f34e9"&gt;postgresql&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgbf72b40"&gt;X11&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgd56999f"&gt;virtualbox and vagrant&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgc601d6e"&gt;install an ubuntu16.04 VM&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgb17752c"&gt;install an ubuntu16.04 VM&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -1045,41 +1045,41 @@ Another installation of my personal …&lt;/p&gt;</summary><content type="html">
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgf1c153d"&gt;system settings&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org338efcd"&gt;system settings&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org1fe1f60"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orga746fbd"&gt;unmap Control + left,right&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org0f4cf96"&gt;Turn on FileVault&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org4fcf043"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orga69f11b"&gt;unmap Control + left,right&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org9b34638"&gt;Turn on FileVault&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgc34ff30"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org37b2a56"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgd5a0bd2"&gt;homebrew&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org8d04c34"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orga122c04"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgdd1e4c8"&gt;homebrew&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgc484dc1"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgb4675ad"&gt;Terminal applications&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgd900b23"&gt;desktop applications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org66d9339"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orge1aafdd"&gt;Terminal applications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org16b30bc"&gt;desktop applications&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#org6943079"&gt;python&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org46b8a76"&gt;python&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgd1c9daa"&gt;dependencies&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org69c1881"&gt;python2&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org9397113"&gt;python3&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org2525648"&gt;dependencies&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org2ec0ec5"&gt;python2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgfdf8097"&gt;python3&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org72536dc"&gt;scons&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgcb3a5cc"&gt;scons&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#org3b2ad85"&gt;emacs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgf532829"&gt;zsh&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org1320fc2"&gt;R&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org95f4942"&gt;postgresql&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org409b626"&gt;X11&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org05aff23"&gt;virtualbox and vagrant&lt;/a&gt;
+&lt;li&gt;&lt;a href="#orgdb4bb78"&gt;emacs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgdae7925"&gt;zsh&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgbead382"&gt;R&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org08f34e9"&gt;postgresql&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgbf72b40"&gt;X11&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgd56999f"&gt;virtualbox and vagrant&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgc601d6e"&gt;install an ubuntu16.04 VM&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgb17752c"&gt;install an ubuntu16.04 VM&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -1109,21 +1109,21 @@ Note that none of these steps require an Apple ID - I held off on
 signing in until the very end just to see if it was possible.
 &lt;/p&gt;
 
-&lt;div id="outline-container-orgf1c153d" class="outline-2"&gt;
-&lt;h2 id="orgf1c153d"&gt;system settings&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgf1c153d"&gt;
+&lt;div id="outline-container-org338efcd" class="outline-2"&gt;
+&lt;h2 id="org338efcd"&gt;system settings&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org338efcd"&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org1fe1f60" class="outline-3"&gt;
-&lt;h3 id="org1fe1f60"&gt;turn off spelling autocorrect&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org1fe1f60"&gt;
+&lt;div id="outline-container-org4fcf043" class="outline-3"&gt;
+&lt;h3 id="org4fcf043"&gt;turn off spelling autocorrect&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org4fcf043"&gt;
 &lt;pre class="example"&gt;
 System Preferences --&amp;gt; Keyboard --&amp;gt; Text tab --&amp;gt; unselect "Correct spelling automatically" and others
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orga746fbd" class="outline-3"&gt;
-&lt;h3 id="orga746fbd"&gt;unmap Control + left,right&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orga746fbd"&gt;
+&lt;div id="outline-container-orga69f11b" class="outline-3"&gt;
+&lt;h3 id="orga69f11b"&gt;unmap Control + left,right&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orga69f11b"&gt;
 &lt;p&gt;
 I use Control plus the left and right arrow keys to move between
 windows in emacs and tmux.
@@ -1135,9 +1135,9 @@ System Preferences --&amp;gt; Keyboard --&amp;gt; Shortcuts --&amp;gt; uncheck m
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org0f4cf96" class="outline-3"&gt;
-&lt;h3 id="org0f4cf96"&gt;Turn on FileVault&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org0f4cf96"&gt;
+&lt;div id="outline-container-org9b34638" class="outline-3"&gt;
+&lt;h3 id="org9b34638"&gt;Turn on FileVault&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org9b34638"&gt;
 &lt;pre class="example"&gt;
 System Preferences --&amp;gt; Security &amp;amp; privacy --&amp;gt; FileVault
 &lt;/pre&gt;
@@ -1150,9 +1150,9 @@ I used a recovery key option rather than iCloud for my work machine, iCloud for 
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgc34ff30" class="outline-2"&gt;
-&lt;h2 id="orgc34ff30"&gt;Developer tools&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgc34ff30"&gt;
+&lt;div id="outline-container-org8d04c34" class="outline-2"&gt;
+&lt;h2 id="org8d04c34"&gt;Developer tools&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org8d04c34"&gt;
 &lt;p&gt;
 Pretty much the first thing that needs to happen. This can be done
 from the command line:
@@ -1165,9 +1165,9 @@ from the command line:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org37b2a56" class="outline-2"&gt;
-&lt;h2 id="org37b2a56"&gt;iTerm2&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org37b2a56"&gt;
+&lt;div id="outline-container-orga122c04" class="outline-2"&gt;
+&lt;h2 id="orga122c04"&gt;iTerm2&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orga122c04"&gt;
 &lt;pre class="example"&gt;
 brew cask install iterm2
 &lt;/pre&gt;
@@ -1196,9 +1196,9 @@ Default appearance:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgd5a0bd2" class="outline-2"&gt;
-&lt;h2 id="orgd5a0bd2"&gt;homebrew&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgd5a0bd2"&gt;
+&lt;div id="outline-container-orgdd1e4c8" class="outline-2"&gt;
+&lt;h2 id="orgdd1e4c8"&gt;homebrew&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgdd1e4c8"&gt;
 &lt;p&gt;
 Homebrew no longer requires user-ownership of /usr/local, so things
 are pretty easy now:
@@ -1211,9 +1211,9 @@ brew doctor
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgc484dc1" class="outline-3"&gt;
-&lt;h3 id="orgc484dc1"&gt;homebrew API token&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgc484dc1"&gt;
+&lt;div id="outline-container-org66d9339" class="outline-3"&gt;
+&lt;h3 id="org66d9339"&gt;homebrew API token&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org66d9339"&gt;
 &lt;p&gt;
 Apparently lots of requests to GutHub via homebrew can hit a rate limit. There's a higher limit if you create an API token. See &lt;a href="https://gist.github.com/christopheranderton/8644743"&gt;https://gist.github.com/christopheranderton/8644743&lt;/a&gt;
 &lt;/p&gt;
@@ -1236,9 +1236,9 @@ export HOMEBREW_GITHUB_API_TOKEN=token_here
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgb4675ad" class="outline-3"&gt;
-&lt;h3 id="orgb4675ad"&gt;Terminal applications&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgb4675ad"&gt;
+&lt;div id="outline-container-orge1aafdd" class="outline-3"&gt;
+&lt;h3 id="orge1aafdd"&gt;Terminal applications&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orge1aafdd"&gt;
 &lt;p&gt;
 Many packages are installed later with additional elaboration or in as
 dependencies for other applications; here are some more or less
@@ -1262,9 +1262,9 @@ brew install xsv
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgd900b23" class="outline-3"&gt;
-&lt;h3 id="orgd900b23"&gt;desktop applications&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgd900b23"&gt;
+&lt;div id="outline-container-org16b30bc" class="outline-3"&gt;
+&lt;h3 id="org16b30bc"&gt;desktop applications&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org16b30bc"&gt;
 &lt;p&gt;
 Homebrew installs desktop apps too!
 &lt;/p&gt;
@@ -1290,9 +1290,9 @@ credentials that must be installed interactively.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org6943079" class="outline-2"&gt;
-&lt;h2 id="org6943079"&gt;python&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org6943079"&gt;
+&lt;div id="outline-container-org46b8a76" class="outline-2"&gt;
+&lt;h2 id="org46b8a76"&gt;python&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org46b8a76"&gt;
 &lt;p&gt;
 Mojave seems to ship with Python 2.7.10 and no python3, so let's use
 homebrew to get recent versions of both.
@@ -1309,9 +1309,9 @@ See
 &lt;/p&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgd1c9daa" class="outline-3"&gt;
-&lt;h3 id="orgd1c9daa"&gt;dependencies&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgd1c9daa"&gt;
+&lt;div id="outline-container-org2525648" class="outline-3"&gt;
+&lt;h3 id="org2525648"&gt;dependencies&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org2525648"&gt;
 &lt;p&gt;
 Run &lt;code&gt;brew info python&lt;/code&gt; for required and optional dependencies
 &lt;/p&gt;
@@ -1323,9 +1323,9 @@ Run &lt;code&gt;brew info python&lt;/code&gt; for required and optional dependen
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org69c1881" class="outline-3"&gt;
-&lt;h3 id="org69c1881"&gt;python2&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org69c1881"&gt;
+&lt;div id="outline-container-org2ec0ec5" class="outline-3"&gt;
+&lt;h3 id="org2ec0ec5"&gt;python2&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org2ec0ec5"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-sh"&gt;brew install python@2
 /usr/local/bin/pip2 install -U pip setuptools virtualenv wheel
@@ -1334,9 +1334,9 @@ Run &lt;code&gt;brew info python&lt;/code&gt; for required and optional dependen
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org9397113" class="outline-3"&gt;
-&lt;h3 id="org9397113"&gt;python3&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org9397113"&gt;
+&lt;div id="outline-container-orgfdf8097" class="outline-3"&gt;
+&lt;h3 id="orgfdf8097"&gt;python3&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgfdf8097"&gt;
 &lt;p&gt;
 Note that "python" corresponds to the python3 homebrew recipe.
 &lt;/p&gt;
@@ -1359,9 +1359,9 @@ pip3 install pgcli
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org72536dc" class="outline-4"&gt;
-&lt;h4 id="org72536dc"&gt;scons&lt;/h4&gt;
-&lt;div class="outline-text-4" id="text-org72536dc"&gt;
+&lt;div id="outline-container-orgcb3a5cc" class="outline-4"&gt;
+&lt;h4 id="orgcb3a5cc"&gt;scons&lt;/h4&gt;
+&lt;div class="outline-text-4" id="text-orgcb3a5cc"&gt;
 &lt;p&gt;
 Note that &lt;code&gt;scons&lt;/code&gt; wants to install man pages to &lt;code&gt;/usr/local/man&lt;/code&gt;, which is owned by root. You'll need to do this first:
 &lt;/p&gt;
@@ -1377,9 +1377,9 @@ pip3 install scons
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org3b2ad85" class="outline-2"&gt;
-&lt;h2 id="org3b2ad85"&gt;emacs&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org3b2ad85"&gt;
+&lt;div id="outline-container-orgdb4bb78" class="outline-2"&gt;
+&lt;h2 id="orgdb4bb78"&gt;emacs&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgdb4bb78"&gt;
 &lt;p&gt;
 Install latest emacs binary from &lt;a href="http://emacsformacosx.com/"&gt;http://emacsformacosx.com/&lt;/a&gt;
 &lt;/p&gt;
@@ -1417,9 +1417,9 @@ bin/venv.sh
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgf532829" class="outline-2"&gt;
-&lt;h2 id="orgf532829"&gt;zsh&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgf532829"&gt;
+&lt;div id="outline-container-orgdae7925" class="outline-2"&gt;
+&lt;h2 id="orgdae7925"&gt;zsh&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgdae7925"&gt;
 &lt;p&gt;
 Install zsh with Homebrew
 &lt;/p&gt;
@@ -1454,9 +1454,9 @@ git clone git@bitbucket.org:nhoffman/dotfiles.git
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org1320fc2" class="outline-2"&gt;
-&lt;h2 id="org1320fc2"&gt;R&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org1320fc2"&gt;
+&lt;div id="outline-container-orgbead382" class="outline-2"&gt;
+&lt;h2 id="orgbead382"&gt;R&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgbead382"&gt;
 &lt;p&gt;
 I had to give up on installing R with homebrew because it seemed to
 result in an interpreter that always wanted to install packages from
@@ -1490,9 +1490,9 @@ Also:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org95f4942" class="outline-2"&gt;
-&lt;h2 id="org95f4942"&gt;postgresql&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org95f4942"&gt;
+&lt;div id="outline-container-org08f34e9" class="outline-2"&gt;
+&lt;h2 id="org08f34e9"&gt;postgresql&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org08f34e9"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-sh"&gt;brew cask install postgres
 &lt;/pre&gt;
@@ -1510,9 +1510,9 @@ path to the CLI for the version you want to use to your PATH, eg:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org409b626" class="outline-2"&gt;
-&lt;h2 id="org409b626"&gt;X11&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org409b626"&gt;
+&lt;div id="outline-container-orgbf72b40" class="outline-2"&gt;
+&lt;h2 id="orgbf72b40"&gt;X11&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgbf72b40"&gt;
 &lt;p&gt;
 install Xquartz
 &lt;/p&gt;
@@ -1542,9 +1542,9 @@ EOF
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org05aff23" class="outline-2"&gt;
-&lt;h2 id="org05aff23"&gt;virtualbox and vagrant&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org05aff23"&gt;
+&lt;div id="outline-container-orgd56999f" class="outline-2"&gt;
+&lt;h2 id="orgd56999f"&gt;virtualbox and vagrant&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgd56999f"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-sh"&gt;brew cask install virtualbox
 brew cask install vagrant
@@ -1571,9 +1571,9 @@ preferences, and change default machine folder to ~/VirtualBox
 &lt;/p&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgc601d6e" class="outline-3"&gt;
-&lt;h3 id="orgc601d6e"&gt;install an ubuntu16.04 VM&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgc601d6e"&gt;
+&lt;div id="outline-container-orgb17752c" class="outline-3"&gt;
+&lt;h3 id="orgb17752c"&gt;install an ubuntu16.04 VM&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgb17752c"&gt;
 &lt;p&gt;
 see &lt;a href="https://app.vagrantup.com/ubuntu/boxes/xenial64"&gt;https://app.vagrantup.com/ubuntu/boxes/xenial64&lt;/a&gt;
 &lt;/p&gt;
@@ -1588,47 +1588,47 @@ vagrant up
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="mac"></category></entry><entry><title>Clean install of MacOS High Sierra</title><link href="https://nhoffman.github.io/borborygmi/mac-setup-high-sierra.html" rel="alternate"></link><published>2017-11-17T00:00:00-08:00</published><updated>2017-11-17T00:00:00-08:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2017-11-17:/borborygmi/mac-setup-high-sierra.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
+</content><category term="notes"></category><category term="mac"></category></entry><entry><title>Clean install of MacOS High Sierra</title><link href="https://nhoffman.github.io/borborygmi/mac-setup-high-sierra.html" rel="alternate"></link><published>2017-11-17T00:00:00-08:00</published><updated>2017-11-17T00:00:00-08:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2017-11-17:/borborygmi/mac-setup-high-sierra.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org314fdd5"&gt;system settings&lt;/a&gt;
+&lt;li&gt;&lt;a href="#orgfbf19cb"&gt;system settings&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org73f4e46"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org5767759"&gt;unmap Control + left,right&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org84efeff"&gt;Turn on FileVault&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgb6722ca"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orge89f476"&gt;unmap Control + left,right&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orge2ac8a9"&gt;Turn on FileVault&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgc9ec672"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org9329acc"&gt;homebrew&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org595fc3b"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orge6e6312"&gt;homebrew&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgd85a0e5"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgefb2131"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgee008ad"&gt;python&lt;/a&gt;
+&lt;li&gt;&lt;a href="#orgee0a724"&gt;python&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgae21357"&gt;dependencies&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgd0c6991"&gt;python2&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org11dab38"&gt;python3&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org28db93b"&gt;dependencies&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgeb90fe0"&gt;python2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgbaba02a"&gt;python3&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orga9afbe0"&gt;scons&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgb57e4ee"&gt;scons&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#org55a39b4"&gt;emacs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org2b5b3eb"&gt;zsh&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orge6a75dc"&gt;desktop apps&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org6d10a35"&gt;emacs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org5e0efe9"&gt;zsh&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org8271ff9"&gt;desktop apps&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org62da570"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org1503b9c"&gt;postgresql&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org5a285cb"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org1815730"&gt;postgresql&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#org2b99622"&gt;R&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgb468d0b"&gt;X11&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgd0ea5a5"&gt;virtualbox and vagrant&lt;/a&gt;
+&lt;li&gt;&lt;a href="#orge664d11"&gt;R&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgc01b3f4"&gt;X11&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org4750705"&gt;virtualbox and vagrant&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org49d206b"&gt;install an ubuntu16.04 VM&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgf0874ee"&gt;install an ubuntu16.04 VM&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -1639,43 +1639,43 @@ I make it a practice to blow …&lt;/p&gt;</summary><content type="html">&lt;div
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org314fdd5"&gt;system settings&lt;/a&gt;
+&lt;li&gt;&lt;a href="#orgfbf19cb"&gt;system settings&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org73f4e46"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org5767759"&gt;unmap Control + left,right&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org84efeff"&gt;Turn on FileVault&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgb6722ca"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orge89f476"&gt;unmap Control + left,right&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orge2ac8a9"&gt;Turn on FileVault&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgc9ec672"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org9329acc"&gt;homebrew&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org595fc3b"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orge6e6312"&gt;homebrew&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgd85a0e5"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgefb2131"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgee008ad"&gt;python&lt;/a&gt;
+&lt;li&gt;&lt;a href="#orgee0a724"&gt;python&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgae21357"&gt;dependencies&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgd0c6991"&gt;python2&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org11dab38"&gt;python3&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org28db93b"&gt;dependencies&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgeb90fe0"&gt;python2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgbaba02a"&gt;python3&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orga9afbe0"&gt;scons&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgb57e4ee"&gt;scons&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#org55a39b4"&gt;emacs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org2b5b3eb"&gt;zsh&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orge6a75dc"&gt;desktop apps&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org6d10a35"&gt;emacs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org5e0efe9"&gt;zsh&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org8271ff9"&gt;desktop apps&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org62da570"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org1503b9c"&gt;postgresql&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org5a285cb"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org1815730"&gt;postgresql&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#org2b99622"&gt;R&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgb468d0b"&gt;X11&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgd0ea5a5"&gt;virtualbox and vagrant&lt;/a&gt;
+&lt;li&gt;&lt;a href="#orge664d11"&gt;R&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgc01b3f4"&gt;X11&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org4750705"&gt;virtualbox and vagrant&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org49d206b"&gt;install an ubuntu16.04 VM&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgf0874ee"&gt;install an ubuntu16.04 VM&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -1721,21 +1721,21 @@ Note that none of these steps require an Apple ID - I held off on
 signing in until the very end just to see if it was possible.
 &lt;/p&gt;
 
-&lt;div id="outline-container-org314fdd5" class="outline-2"&gt;
-&lt;h2 id="org314fdd5"&gt;system settings&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org314fdd5"&gt;
+&lt;div id="outline-container-orgfbf19cb" class="outline-2"&gt;
+&lt;h2 id="orgfbf19cb"&gt;system settings&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgfbf19cb"&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org73f4e46" class="outline-3"&gt;
-&lt;h3 id="org73f4e46"&gt;turn off spelling autocorrect&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org73f4e46"&gt;
+&lt;div id="outline-container-orgb6722ca" class="outline-3"&gt;
+&lt;h3 id="orgb6722ca"&gt;turn off spelling autocorrect&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgb6722ca"&gt;
 &lt;pre class="example"&gt;
 System Preferences --&amp;gt; Keyboard --&amp;gt; Text tab --&amp;gt; unselect "Correct spelling automatically" and others
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org5767759" class="outline-3"&gt;
-&lt;h3 id="org5767759"&gt;unmap Control + left,right&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org5767759"&gt;
+&lt;div id="outline-container-orge89f476" class="outline-3"&gt;
+&lt;h3 id="orge89f476"&gt;unmap Control + left,right&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orge89f476"&gt;
 &lt;p&gt;
 I use Control plus the left and right arrow keys to move between
 windows in emacs and tmux.
@@ -1747,9 +1747,9 @@ System Preferences --&amp;gt; Keyboard --&amp;gt; Shortcuts --&amp;gt; uncheck m
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org84efeff" class="outline-3"&gt;
-&lt;h3 id="org84efeff"&gt;Turn on FileVault&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org84efeff"&gt;
+&lt;div id="outline-container-orge2ac8a9" class="outline-3"&gt;
+&lt;h3 id="orge2ac8a9"&gt;Turn on FileVault&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orge2ac8a9"&gt;
 &lt;pre class="example"&gt;
 System Preferences --&amp;gt; Security &amp;amp; privacy --&amp;gt; FileVault
 &lt;/pre&gt;
@@ -1762,9 +1762,9 @@ I used a recovery key option rather than iCloud for my work machine, iCloud for 
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgc9ec672" class="outline-2"&gt;
-&lt;h2 id="orgc9ec672"&gt;Developer tools&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgc9ec672"&gt;
+&lt;div id="outline-container-org595fc3b" class="outline-2"&gt;
+&lt;h2 id="org595fc3b"&gt;Developer tools&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org595fc3b"&gt;
 &lt;p&gt;
 Pretty much the first thing that needs to happen. This can be done
 from the command line:
@@ -1777,9 +1777,9 @@ from the command line:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org9329acc" class="outline-2"&gt;
-&lt;h2 id="org9329acc"&gt;homebrew&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org9329acc"&gt;
+&lt;div id="outline-container-orge6e6312" class="outline-2"&gt;
+&lt;h2 id="orge6e6312"&gt;homebrew&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orge6e6312"&gt;
 &lt;p&gt;
 Homebrew no longer requires user-ownership of /usr/local, so things
 are pretty easy now:
@@ -1813,9 +1813,9 @@ brew install xsv
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgd85a0e5" class="outline-3"&gt;
-&lt;h3 id="orgd85a0e5"&gt;homebrew API token&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgd85a0e5"&gt;
+&lt;div id="outline-container-orgefb2131" class="outline-3"&gt;
+&lt;h3 id="orgefb2131"&gt;homebrew API token&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgefb2131"&gt;
 &lt;p&gt;
 Apparently lots of requests to GutHub via homebrew can hit a rate limit. There's a higher limit if you create an API token. See &lt;a href="https://gist.github.com/christopheranderton/8644743"&gt;https://gist.github.com/christopheranderton/8644743&lt;/a&gt;
 &lt;/p&gt;
@@ -1839,9 +1839,9 @@ export HOMEBREW_GITHUB_API_TOKEN=token_here
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgee008ad" class="outline-2"&gt;
-&lt;h2 id="orgee008ad"&gt;python&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgee008ad"&gt;
+&lt;div id="outline-container-orgee0a724" class="outline-2"&gt;
+&lt;h2 id="orgee0a724"&gt;python&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgee0a724"&gt;
 &lt;p&gt;
 I'm in the midst of the transition from python2 to python3, so as I
 wrote this it wasn't clear which packages (if any) I would need to
@@ -1856,9 +1856,9 @@ Use homebrew - see
 &lt;/p&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgae21357" class="outline-3"&gt;
-&lt;h3 id="orgae21357"&gt;dependencies&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgae21357"&gt;
+&lt;div id="outline-container-org28db93b" class="outline-3"&gt;
+&lt;h3 id="org28db93b"&gt;dependencies&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org28db93b"&gt;
 &lt;p&gt;
 Run &lt;code&gt;brew info python&lt;/code&gt; for required and optional dependencies
 &lt;/p&gt;
@@ -1870,9 +1870,9 @@ Run &lt;code&gt;brew info python&lt;/code&gt; for required and optional dependen
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgd0c6991" class="outline-3"&gt;
-&lt;h3 id="orgd0c6991"&gt;python2&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgd0c6991"&gt;
+&lt;div id="outline-container-orgeb90fe0" class="outline-3"&gt;
+&lt;h3 id="orgeb90fe0"&gt;python2&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgeb90fe0"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-sh"&gt;brew install python@2 --with-tcl-tk
 /usr/local/bin/pip2 install -U pip setuptools virtualenv wheel
@@ -1881,9 +1881,9 @@ Run &lt;code&gt;brew info python&lt;/code&gt; for required and optional dependen
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org11dab38" class="outline-3"&gt;
-&lt;h3 id="org11dab38"&gt;python3&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org11dab38"&gt;
+&lt;div id="outline-container-orgbaba02a" class="outline-3"&gt;
+&lt;h3 id="orgbaba02a"&gt;python3&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgbaba02a"&gt;
 &lt;p&gt;
 Note that "python" corresponds to the python3 homebrew recipe.
 &lt;/p&gt;
@@ -1906,9 +1906,9 @@ pip3 install pgcli
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orga9afbe0" class="outline-4"&gt;
-&lt;h4 id="orga9afbe0"&gt;scons&lt;/h4&gt;
-&lt;div class="outline-text-4" id="text-orga9afbe0"&gt;
+&lt;div id="outline-container-orgb57e4ee" class="outline-4"&gt;
+&lt;h4 id="orgb57e4ee"&gt;scons&lt;/h4&gt;
+&lt;div class="outline-text-4" id="text-orgb57e4ee"&gt;
 &lt;p&gt;
 Note that &lt;code&gt;scons&lt;/code&gt; wants to install man pages to &lt;code&gt;/usr/local/man&lt;/code&gt;, which is owned by root. You'll need to do this first:
 &lt;/p&gt;
@@ -1924,9 +1924,9 @@ pip3 install scons
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org55a39b4" class="outline-2"&gt;
-&lt;h2 id="org55a39b4"&gt;emacs&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org55a39b4"&gt;
+&lt;div id="outline-container-org6d10a35" class="outline-2"&gt;
+&lt;h2 id="org6d10a35"&gt;emacs&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org6d10a35"&gt;
 &lt;p&gt;
 Install latest emacs binary from &lt;a href="http://emacsformacosx.com/"&gt;http://emacsformacosx.com/&lt;/a&gt;
 &lt;/p&gt;
@@ -1964,9 +1964,9 @@ bin/venv.sh
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org2b5b3eb" class="outline-2"&gt;
-&lt;h2 id="org2b5b3eb"&gt;zsh&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org2b5b3eb"&gt;
+&lt;div id="outline-container-org5e0efe9" class="outline-2"&gt;
+&lt;h2 id="org5e0efe9"&gt;zsh&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org5e0efe9"&gt;
 &lt;p&gt;
 Install zsh with Homebrew
 &lt;/p&gt;
@@ -2001,9 +2001,9 @@ git clone git@bitbucket.org:nhoffman/dotfiles.git
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orge6a75dc" class="outline-2"&gt;
-&lt;h2 id="orge6a75dc"&gt;desktop apps&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orge6a75dc"&gt;
+&lt;div id="outline-container-org8271ff9" class="outline-2"&gt;
+&lt;h2 id="org8271ff9"&gt;desktop apps&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org8271ff9"&gt;
 &lt;p&gt;
 Homebrew installs desktop apps too!
 &lt;/p&gt;
@@ -2029,9 +2029,9 @@ credentials that must be installed interactively.
 &lt;/p&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org62da570" class="outline-3"&gt;
-&lt;h3 id="org62da570"&gt;iTerm2&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org62da570"&gt;
+&lt;div id="outline-container-org5a285cb" class="outline-3"&gt;
+&lt;h3 id="org5a285cb"&gt;iTerm2&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org5a285cb"&gt;
 &lt;pre class="example"&gt;
 brew cask install iterm2
 &lt;/pre&gt;
@@ -2060,9 +2060,9 @@ Default appearance:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org1503b9c" class="outline-3"&gt;
-&lt;h3 id="org1503b9c"&gt;postgresql&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org1503b9c"&gt;
+&lt;div id="outline-container-org1815730" class="outline-3"&gt;
+&lt;h3 id="org1815730"&gt;postgresql&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org1815730"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-sh"&gt;brew cask install postgres
 &lt;/pre&gt;
@@ -2081,9 +2081,9 @@ path to the CLI for the version you want to use to your PATH, eg:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org2b99622" class="outline-2"&gt;
-&lt;h2 id="org2b99622"&gt;R&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org2b99622"&gt;
+&lt;div id="outline-container-orge664d11" class="outline-2"&gt;
+&lt;h2 id="orge664d11"&gt;R&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orge664d11"&gt;
 &lt;p&gt;
 Again, using homebrew.
 &lt;/p&gt;
@@ -2122,9 +2122,9 @@ And while I'm at it:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgb468d0b" class="outline-2"&gt;
-&lt;h2 id="orgb468d0b"&gt;X11&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgb468d0b"&gt;
+&lt;div id="outline-container-orgc01b3f4" class="outline-2"&gt;
+&lt;h2 id="orgc01b3f4"&gt;X11&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgc01b3f4"&gt;
 &lt;p&gt;
 install Xquartz
 &lt;/p&gt;
@@ -2154,9 +2154,9 @@ EOF
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgd0ea5a5" class="outline-2"&gt;
-&lt;h2 id="orgd0ea5a5"&gt;virtualbox and vagrant&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgd0ea5a5"&gt;
+&lt;div id="outline-container-org4750705" class="outline-2"&gt;
+&lt;h2 id="org4750705"&gt;virtualbox and vagrant&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org4750705"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-sh"&gt;brew cask install virtualbox
 brew cask install vagrant
@@ -2181,9 +2181,9 @@ After virtualbox is installed, go to preferences, and change default machine fol
 &lt;/p&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org49d206b" class="outline-3"&gt;
-&lt;h3 id="org49d206b"&gt;install an ubuntu16.04 VM&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org49d206b"&gt;
+&lt;div id="outline-container-orgf0874ee" class="outline-3"&gt;
+&lt;h3 id="orgf0874ee"&gt;install an ubuntu16.04 VM&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgf0874ee"&gt;
 &lt;p&gt;
 see &lt;a href="https://app.vagrantup.com/ubuntu/boxes/xenial64"&gt;https://app.vagrantup.com/ubuntu/boxes/xenial64&lt;/a&gt;
 &lt;/p&gt;
@@ -2198,7 +2198,7 @@ vagrant up
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="mac"></category></entry><entry><title>Using recursive CTEs for calculating taxonomic lineages</title><link href="https://nhoffman.github.io/borborygmi/recursive-cte-for-taxonomy.html" rel="alternate"></link><published>2017-07-07T00:00:00-07:00</published><updated>2017-07-07T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2017-07-07:/borborygmi/recursive-cte-for-taxonomy.html</id><summary type="html">&lt;p&gt;
+</content><category term="notes"></category><category term="mac"></category></entry><entry><title>Using recursive CTEs for calculating taxonomic lineages</title><link href="https://nhoffman.github.io/borborygmi/recursive-cte-for-taxonomy.html" rel="alternate"></link><published>2017-07-07T00:00:00-07:00</published><updated>2017-07-07T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2017-07-07:/borborygmi/recursive-cte-for-taxonomy.html</id><summary type="html">&lt;p&gt;
 This topic falls into the category of "things that I didn't know that
 I didn't know." Many of my projects involve the manipulation of
 taxonomies, particularly the &lt;a href="https://www.ncbi.nlm.nih.gov/taxonomy"&gt;NCBI taxonomy&lt;/a&gt;, but I didn't understand
@@ -3253,40 +3253,40 @@ does not work for sqlite, but you could do something similar by
 concatenating strings (though I doubt that this would be very
 efficient).
 &lt;/p&gt;
-</content><category term="postgresql"></category><category term="taxonomy"></category></entry><entry><title>Setting up a new Mac (Sierra)</title><link href="https://nhoffman.github.io/borborygmi/mac-setup-sierra.html" rel="alternate"></link><published>2017-01-05T00:00:00-08:00</published><updated>2017-01-05T00:00:00-08:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2017-01-05:/borborygmi/mac-setup-sierra.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
+</content><category term="sql"></category><category term="postgresql"></category><category term="taxonomy"></category></entry><entry><title>Setting up a new Mac (Sierra)</title><link href="https://nhoffman.github.io/borborygmi/mac-setup-sierra.html" rel="alternate"></link><published>2017-01-05T00:00:00-08:00</published><updated>2017-01-05T00:00:00-08:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2017-01-05:/borborygmi/mac-setup-sierra.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org5eda289"&gt;system settings&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org9d7a544"&gt;system settings&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org8d6e78e"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org2b553c6"&gt;unmap Control + left,right&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgb158ad6"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgfa8e949"&gt;unmap Control + left,right&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#org1197b73"&gt;First applications&lt;/a&gt;
+&lt;li&gt;&lt;a href="#orga780a3d"&gt;First applications&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org88e863a"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orge347b32"&gt;Dropbox&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgcd2bfdf"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org016dd72"&gt;Junos pulse VPN client&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orge17e434"&gt;Microsoft Office 2016&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orge2224f1"&gt;Others&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org7f08385"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org015ef82"&gt;Dropbox&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org131ecf8"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgbf4ca8f"&gt;Junos pulse VPN client&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org953574e"&gt;Microsoft Office 2016&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org96452db"&gt;Others&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgd563eed"&gt;homebrew&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org3563c9b"&gt;homebrew&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgf0efc79"&gt;X11&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org0ab6fd3"&gt;Desktop apps using Cask&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org6dade2e"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgdb32dab"&gt;zsh&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgae8ea93"&gt;X11&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org5bb016c"&gt;Desktop apps using Cask&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgb26e251"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org756975d"&gt;zsh&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgad3c158"&gt;git&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org3c5b87d"&gt;python&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org263c8a5"&gt;emacs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgad219af"&gt;R&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org1146497"&gt;wkhtmltopdf&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orge617187"&gt;mail&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org11136c1"&gt;git&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org2f4e3e9"&gt;python&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org60d151f"&gt;emacs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgb021eba"&gt;R&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org2a9de1d"&gt;wkhtmltopdf&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgfa3be77"&gt;mail&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -3295,36 +3295,36 @@ efficient).
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org5eda289"&gt;system settings&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org9d7a544"&gt;system settings&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org8d6e78e"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org2b553c6"&gt;unmap Control + left,right&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgb158ad6"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgfa8e949"&gt;unmap Control + left,right&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#org1197b73"&gt;First applications&lt;/a&gt;
+&lt;li&gt;&lt;a href="#orga780a3d"&gt;First applications&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org88e863a"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orge347b32"&gt;Dropbox&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgcd2bfdf"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org016dd72"&gt;Junos pulse VPN client&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orge17e434"&gt;Microsoft Office 2016&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orge2224f1"&gt;Others&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org7f08385"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org015ef82"&gt;Dropbox&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org131ecf8"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgbf4ca8f"&gt;Junos pulse VPN client&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org953574e"&gt;Microsoft Office 2016&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org96452db"&gt;Others&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgd563eed"&gt;homebrew&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org3563c9b"&gt;homebrew&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgf0efc79"&gt;X11&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org0ab6fd3"&gt;Desktop apps using Cask&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org6dade2e"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgdb32dab"&gt;zsh&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgae8ea93"&gt;X11&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org5bb016c"&gt;Desktop apps using Cask&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgb26e251"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org756975d"&gt;zsh&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgad3c158"&gt;git&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org3c5b87d"&gt;python&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org263c8a5"&gt;emacs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgad219af"&gt;R&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org1146497"&gt;wkhtmltopdf&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orge617187"&gt;mail&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org11136c1"&gt;git&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org2f4e3e9"&gt;python&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org60d151f"&gt;emacs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgb021eba"&gt;R&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org2a9de1d"&gt;wkhtmltopdf&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgfa3be77"&gt;mail&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -3365,21 +3365,21 @@ usually I sign in first thing, but this time I held off.
 tar -cf dotfiles.tar .Xmodmap .gitconfig .gnupg .pypirc .ssh
 &lt;/pre&gt;
 
-&lt;div id="outline-container-org5eda289" class="outline-2"&gt;
-&lt;h2 id="org5eda289"&gt;system settings&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org5eda289"&gt;
+&lt;div id="outline-container-org9d7a544" class="outline-2"&gt;
+&lt;h2 id="org9d7a544"&gt;system settings&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org9d7a544"&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org8d6e78e" class="outline-3"&gt;
-&lt;h3 id="org8d6e78e"&gt;turn off spelling autocorrect&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org8d6e78e"&gt;
+&lt;div id="outline-container-orgb158ad6" class="outline-3"&gt;
+&lt;h3 id="orgb158ad6"&gt;turn off spelling autocorrect&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgb158ad6"&gt;
 &lt;pre class="example"&gt;
 System Preferences --&amp;gt; Keyboard --&amp;gt; Text tab --&amp;gt; unselect "Correct spelling automatically" and others
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org2b553c6" class="outline-3"&gt;
-&lt;h3 id="org2b553c6"&gt;unmap Control + left,right&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org2b553c6"&gt;
+&lt;div id="outline-container-orgfa8e949" class="outline-3"&gt;
+&lt;h3 id="orgfa8e949"&gt;unmap Control + left,right&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgfa8e949"&gt;
 &lt;p&gt;
 I use Control plus the left and right arrow keys to move between
 windows in emacs and tmux.
@@ -3392,13 +3392,13 @@ System Preferences --&amp;gt; Keyboard --&amp;gt; Shortcuts --&amp;gt; uncheck m
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org1197b73" class="outline-2"&gt;
-&lt;h2 id="org1197b73"&gt;First applications&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org1197b73"&gt;
+&lt;div id="outline-container-orga780a3d" class="outline-2"&gt;
+&lt;h2 id="orga780a3d"&gt;First applications&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orga780a3d"&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org88e863a" class="outline-3"&gt;
-&lt;h3 id="org88e863a"&gt;iTerm2&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org88e863a"&gt;
+&lt;div id="outline-container-org7f08385" class="outline-3"&gt;
+&lt;h3 id="org7f08385"&gt;iTerm2&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org7f08385"&gt;
 &lt;p&gt;
 Update a few settings.
 &lt;/p&gt;
@@ -3423,18 +3423,18 @@ Default appearance:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orge347b32" class="outline-3"&gt;
-&lt;h3 id="orge347b32"&gt;Dropbox&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orge347b32"&gt;
+&lt;div id="outline-container-org015ef82" class="outline-3"&gt;
+&lt;h3 id="org015ef82"&gt;Dropbox&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org015ef82"&gt;
 &lt;p&gt;
 Install from website
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgcd2bfdf" class="outline-3"&gt;
-&lt;h3 id="orgcd2bfdf"&gt;Developer tools&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgcd2bfdf"&gt;
+&lt;div id="outline-container-org131ecf8" class="outline-3"&gt;
+&lt;h3 id="org131ecf8"&gt;Developer tools&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org131ecf8"&gt;
 &lt;p&gt;
 This can be done from the command line:
 &lt;/p&gt;
@@ -3446,9 +3446,9 @@ This can be done from the command line:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org016dd72" class="outline-3"&gt;
-&lt;h3 id="org016dd72"&gt;Junos pulse VPN client&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org016dd72"&gt;
+&lt;div id="outline-container-orgbf4ca8f" class="outline-3"&gt;
+&lt;h3 id="orgbf4ca8f"&gt;Junos pulse VPN client&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgbf4ca8f"&gt;
 &lt;p&gt;
 There are some &lt;a href="https://forums.developer.apple.com/thread/51184"&gt;reports&lt;/a&gt; of version 5.1 being broken in Sierra. At the
 time I'm writing this, my institution provides 5.1.9 (61653), which is
@@ -3468,9 +3468,9 @@ Instructions for UW are here: &lt;a href="https://networks.uwmedicine.org/conten
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orge17e434" class="outline-3"&gt;
-&lt;h3 id="orge17e434"&gt;Microsoft Office 2016&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orge17e434"&gt;
+&lt;div id="outline-container-org953574e" class="outline-3"&gt;
+&lt;h3 id="org953574e"&gt;Microsoft Office 2016&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org953574e"&gt;
 &lt;p&gt;
 The initial version of Excel (15.11) crashed on startup as widely
 reported - this was fixed by updating to a version (15.29) provided by
@@ -3483,9 +3483,9 @@ Microsoft:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orge2224f1" class="outline-3"&gt;
-&lt;h3 id="orge2224f1"&gt;Others&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orge2224f1"&gt;
+&lt;div id="outline-container-org96452db" class="outline-3"&gt;
+&lt;h3 id="org96452db"&gt;Others&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org96452db"&gt;
 &lt;ul class="org-ul"&gt;
 &lt;li class="on"&gt;&lt;code&gt;[X]&lt;/code&gt; SizeUp - &lt;a href="http://www.irradiatedsoftware.com/"&gt;http://www.irradiatedsoftware.com/&lt;/a&gt; (license in Dropbox/software_licenses)&lt;/li&gt;
 &lt;li class="on"&gt;&lt;code&gt;[X]&lt;/code&gt; HipChat client&lt;/li&gt;
@@ -3497,9 +3497,9 @@ Microsoft:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgd563eed" class="outline-2"&gt;
-&lt;h2 id="orgd563eed"&gt;homebrew&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgd563eed"&gt;
+&lt;div id="outline-container-org3563c9b" class="outline-2"&gt;
+&lt;h2 id="org3563c9b"&gt;homebrew&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org3563c9b"&gt;
 &lt;p&gt;
 Homebrew no longer requires user-ownership of /usr/local, so things are pretty easy now:
 &lt;/p&gt;
@@ -3542,9 +3542,9 @@ Note other packages installed in other sections as well.
 &lt;/p&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgf0efc79" class="outline-3"&gt;
-&lt;h3 id="orgf0efc79"&gt;X11&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgf0efc79"&gt;
+&lt;div id="outline-container-orgae8ea93" class="outline-3"&gt;
+&lt;h3 id="orgae8ea93"&gt;X11&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgae8ea93"&gt;
 &lt;p&gt;
 install Xquartz
 &lt;/p&gt;
@@ -3572,9 +3572,9 @@ EOF
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org0ab6fd3" class="outline-3"&gt;
-&lt;h3 id="org0ab6fd3"&gt;Desktop apps using Cask&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org0ab6fd3"&gt;
+&lt;div id="outline-container-org5bb016c" class="outline-3"&gt;
+&lt;h3 id="org5bb016c"&gt;Desktop apps using Cask&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org5bb016c"&gt;
 &lt;p&gt;
 Homebrew installs desktop apps too!
 &lt;/p&gt;
@@ -3589,9 +3589,9 @@ brew cask install texmaker
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org6dade2e" class="outline-3"&gt;
-&lt;h3 id="org6dade2e"&gt;homebrew API token&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org6dade2e"&gt;
+&lt;div id="outline-container-orgb26e251" class="outline-3"&gt;
+&lt;h3 id="orgb26e251"&gt;homebrew API token&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgb26e251"&gt;
 &lt;p&gt;
 Apparently lots of requests to GutHub via homebrew can hit a rate limit. There's a higher limit if you create an API token. See &lt;a href="https://gist.github.com/christopheranderton/8644743"&gt;https://gist.github.com/christopheranderton/8644743&lt;/a&gt;
 &lt;/p&gt;
@@ -3614,9 +3614,9 @@ export HOMEBREW_GITHUB_API_TOKEN=token_here
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgdb32dab" class="outline-3"&gt;
-&lt;h3 id="orgdb32dab"&gt;zsh&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgdb32dab"&gt;
+&lt;div id="outline-container-org756975d" class="outline-3"&gt;
+&lt;h3 id="org756975d"&gt;zsh&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org756975d"&gt;
 &lt;p&gt;
 Install zsh with Homebrew
 &lt;/p&gt;
@@ -3655,9 +3655,9 @@ done
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgad3c158" class="outline-2"&gt;
-&lt;h2 id="orgad3c158"&gt;git&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgad3c158"&gt;
+&lt;div id="outline-container-org11136c1" class="outline-2"&gt;
+&lt;h2 id="org11136c1"&gt;git&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org11136c1"&gt;
 &lt;pre class="example"&gt;
 git config --global user.name "My Name"
 git config --global user.email me@email.com
@@ -3665,9 +3665,9 @@ git config --global user.email me@email.com
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org3c5b87d" class="outline-2"&gt;
-&lt;h2 id="org3c5b87d"&gt;python&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org3c5b87d"&gt;
+&lt;div id="outline-container-org2f4e3e9" class="outline-2"&gt;
+&lt;h2 id="org2f4e3e9"&gt;python&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org2f4e3e9"&gt;
 &lt;p&gt;
 Use homebrew - see
 &lt;a href="https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Homebrew-and-Python.md"&gt;https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Homebrew-and-Python.md&lt;/a&gt;
@@ -3734,9 +3734,9 @@ Also install python3
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org263c8a5" class="outline-2"&gt;
-&lt;h2 id="org263c8a5"&gt;emacs&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org263c8a5"&gt;
+&lt;div id="outline-container-org60d151f" class="outline-2"&gt;
+&lt;h2 id="org60d151f"&gt;emacs&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org60d151f"&gt;
 &lt;p&gt;
 Install latest emacs binary (25.1) from &lt;a href="http://emacsformacosx.com/"&gt;http://emacsformacosx.com/&lt;/a&gt;
 &lt;/p&gt;
@@ -3777,9 +3777,9 @@ For elpy:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgad219af" class="outline-2"&gt;
-&lt;h2 id="orgad219af"&gt;R&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgad219af"&gt;
+&lt;div id="outline-container-orgb021eba" class="outline-2"&gt;
+&lt;h2 id="orgb021eba"&gt;R&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgb021eba"&gt;
 &lt;p&gt;
 Again, using homebrew.
 &lt;/p&gt;
@@ -3800,9 +3800,9 @@ EOF
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org1146497" class="outline-2"&gt;
-&lt;h2 id="org1146497"&gt;wkhtmltopdf&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org1146497"&gt;
+&lt;div id="outline-container-org2a9de1d" class="outline-2"&gt;
+&lt;h2 id="org2a9de1d"&gt;wkhtmltopdf&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org2a9de1d"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-sh"&gt;cd ~/Downloads
 wget 'http://download.gna.org/wkhtmltopdf/0.12/0.12.4/wkhtmltox-0.12.4_osx-cocoa-x86-64.pkg'
@@ -3815,85 +3815,85 @@ Use installer - binary is &lt;code&gt;/usr/local/bin/wkhtmltopdf&lt;/code&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orge617187" class="outline-2"&gt;
-&lt;h2 id="orge617187"&gt;mail&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orge617187"&gt;
+&lt;div id="outline-container-orgfa3be77" class="outline-2"&gt;
+&lt;h2 id="orgfa3be77"&gt;mail&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgfa3be77"&gt;
 &lt;p&gt;
 &lt;a href="http://www.washington.edu/itconnect/connect/email/uw-email/configuring/os-x-mail6/"&gt;http://www.washington.edu/itconnect/connect/email/uw-email/configuring/os-x-mail6/&lt;/a&gt;
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="mac"></category></entry><entry><title>Setup after clean install of El Capitan</title><link href="https://nhoffman.github.io/borborygmi/mac-setup-el-capitan.html" rel="alternate"></link><published>2015-11-02T00:00:00-08:00</published><updated>2015-11-02T00:00:00-08:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2015-11-02:/borborygmi/mac-setup-el-capitan.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
+</content><category term="notes"></category><category term="mac"></category></entry><entry><title>Setup after clean install of El Capitan</title><link href="https://nhoffman.github.io/borborygmi/mac-setup-el-capitan.html" rel="alternate"></link><published>2015-11-02T00:00:00-08:00</published><updated>2015-11-02T00:00:00-08:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2015-11-02:/borborygmi/mac-setup-el-capitan.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgdad30da"&gt;First applications&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org34cd8ea"&gt;First applications&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org0aeebe2"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org857ee7a"&gt;X11&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org7e67963"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org3fd8c7c"&gt;Others&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org1a38a7a"&gt;UW only&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org54144b7"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org9eae9e6"&gt;X11&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgda662c9"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org7d67593"&gt;Others&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgf4dd6e7"&gt;UW only&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#orged4a13d"&gt;system-level configuration&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org3f32c9a"&gt;system-level configuration&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgd65d651"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org362afb8"&gt;turn off spaces key shortcuts&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org4181852"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org36f2ada"&gt;turn off spaces key shortcuts&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#org08ebe94"&gt;homebrew&lt;/a&gt;
+&lt;li&gt;&lt;a href="#orgffbd0aa"&gt;homebrew&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org55ef503"&gt;packages installed using homebrew&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgb6f97bf"&gt;homebrew cask&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org6f786cb"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org6b75cba"&gt;zsh&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org095b062"&gt;packages installed using homebrew&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgf48854e"&gt;homebrew cask&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orge922baf"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org76600b6"&gt;zsh&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgd6b9eda"&gt;ssh&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org1d59170"&gt;ssh&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgf4b7440"&gt;update /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org05c7ff1"&gt;create $ZSH_INITDIR/ssh-ask-keychain (called from start_ssh_agent.zsh …&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;</summary><content type="html">&lt;div id="table-of-contents"&gt;
+&lt;li&gt;&lt;a href="#org36d3e02"&gt;update /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org26bcc45"&gt;create $ZSH_INITDIR/ssh-ask-keychain (called from start_ssh_agent.zsh …&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;</summary><content type="html">&lt;div id="table-of-contents"&gt;
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgdad30da"&gt;First applications&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org34cd8ea"&gt;First applications&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org0aeebe2"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org857ee7a"&gt;X11&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org7e67963"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org3fd8c7c"&gt;Others&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org1a38a7a"&gt;UW only&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org54144b7"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org9eae9e6"&gt;X11&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgda662c9"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org7d67593"&gt;Others&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgf4dd6e7"&gt;UW only&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#orged4a13d"&gt;system-level configuration&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org3f32c9a"&gt;system-level configuration&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgd65d651"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org362afb8"&gt;turn off spaces key shortcuts&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org4181852"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org36f2ada"&gt;turn off spaces key shortcuts&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#org08ebe94"&gt;homebrew&lt;/a&gt;
+&lt;li&gt;&lt;a href="#orgffbd0aa"&gt;homebrew&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org55ef503"&gt;packages installed using homebrew&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgb6f97bf"&gt;homebrew cask&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org6f786cb"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org6b75cba"&gt;zsh&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org095b062"&gt;packages installed using homebrew&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgf48854e"&gt;homebrew cask&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orge922baf"&gt;homebrew API token&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org76600b6"&gt;zsh&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgd6b9eda"&gt;ssh&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org1d59170"&gt;ssh&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgf4b7440"&gt;update /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org05c7ff1"&gt;create $ZSH_INITDIR/ssh-ask-keychain (called from start_ssh_agent.zsh)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org6a26644"&gt;create $ZSH_INITDIR/start_ssh_agent.zsh&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org36d3e02"&gt;update /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org26bcc45"&gt;create $ZSH_INITDIR/ssh-ask-keychain (called from start_ssh_agent.zsh)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org2cdb4b3"&gt;create $ZSH_INITDIR/start_ssh_agent.zsh&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#org94002a0"&gt;git&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgf83c40b"&gt;emacs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org299bad9"&gt;python&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org239338f"&gt;R&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org042c081"&gt;mail&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org959d975"&gt;sshfs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org84e2e57"&gt;wkhtmltopdf&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org940f26f"&gt;git&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org01406f6"&gt;emacs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org11c9328"&gt;python&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgf362330"&gt;R&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org8c89918"&gt;mail&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orga7d7bc7"&gt;sshfs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org25f9a27"&gt;wkhtmltopdf&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -3903,13 +3903,13 @@ wifi password in the system keychain was the tipping point) that I
 decided to perform a clean install. Here are some notes.
 &lt;/p&gt;
 
-&lt;div id="outline-container-orgdad30da" class="outline-2"&gt;
-&lt;h2 id="orgdad30da"&gt;First applications&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgdad30da"&gt;
+&lt;div id="outline-container-org34cd8ea" class="outline-2"&gt;
+&lt;h2 id="org34cd8ea"&gt;First applications&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org34cd8ea"&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org0aeebe2" class="outline-3"&gt;
-&lt;h3 id="org0aeebe2"&gt;Developer tools&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org0aeebe2"&gt;
+&lt;div id="outline-container-org54144b7" class="outline-3"&gt;
+&lt;h3 id="org54144b7"&gt;Developer tools&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org54144b7"&gt;
 &lt;p&gt;
 Pretty much the first thing any mac needs is the command line tools. This can be done from the command line:
 &lt;/p&gt;
@@ -3921,9 +3921,9 @@ Pretty much the first thing any mac needs is the command line tools. This can be
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org857ee7a" class="outline-3"&gt;
-&lt;h3 id="org857ee7a"&gt;X11&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org857ee7a"&gt;
+&lt;div id="outline-container-org9eae9e6" class="outline-3"&gt;
+&lt;h3 id="org9eae9e6"&gt;X11&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org9eae9e6"&gt;
 &lt;p&gt;
 Download and install Xquartz:
 &lt;/p&gt;
@@ -3958,9 +3958,9 @@ EOF
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org7e67963" class="outline-3"&gt;
-&lt;h3 id="org7e67963"&gt;iTerm2&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org7e67963"&gt;
+&lt;div id="outline-container-orgda662c9" class="outline-3"&gt;
+&lt;h3 id="orgda662c9"&gt;iTerm2&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgda662c9"&gt;
 &lt;p&gt;
 Update a few settings.
 &lt;/p&gt;
@@ -3985,9 +3985,9 @@ Default appearance:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org3fd8c7c" class="outline-3"&gt;
-&lt;h3 id="org3fd8c7c"&gt;Others&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org3fd8c7c"&gt;
+&lt;div id="outline-container-org7d67593" class="outline-3"&gt;
+&lt;h3 id="org7d67593"&gt;Others&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org7d67593"&gt;
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;Dropbox&lt;/li&gt;
 &lt;li&gt;SizeUp - &lt;a href="http://www.irradiatedsoftware.com/"&gt;http://www.irradiatedsoftware.com/&lt;/a&gt; (license in Dropbox/software_licenses)&lt;/li&gt;
@@ -4000,9 +4000,9 @@ Default appearance:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org1a38a7a" class="outline-3"&gt;
-&lt;h3 id="org1a38a7a"&gt;UW only&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org1a38a7a"&gt;
+&lt;div id="outline-container-orgf4dd6e7" class="outline-3"&gt;
+&lt;h3 id="orgf4dd6e7"&gt;UW only&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgf4dd6e7"&gt;
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;Sophos antivirus: &lt;a href="https://softy.cac.washington.edu/sophos/for-staff/"&gt;https://softy.cac.washington.edu/sophos/for-staff/&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Junos Pulse (SSL VPN): &lt;a href="https://networks.uwmedicine.org/content/sslvpn-frequently-asked-questions-14"&gt;https://networks.uwmedicine.org/content/sslvpn-frequently-asked-questions-14&lt;/a&gt;&lt;/li&gt;
@@ -4011,21 +4011,21 @@ Default appearance:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orged4a13d" class="outline-2"&gt;
-&lt;h2 id="orged4a13d"&gt;system-level configuration&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orged4a13d"&gt;
+&lt;div id="outline-container-org3f32c9a" class="outline-2"&gt;
+&lt;h2 id="org3f32c9a"&gt;system-level configuration&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org3f32c9a"&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgd65d651" class="outline-3"&gt;
-&lt;h3 id="orgd65d651"&gt;turn off spelling autocorrect&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgd65d651"&gt;
+&lt;div id="outline-container-org4181852" class="outline-3"&gt;
+&lt;h3 id="org4181852"&gt;turn off spelling autocorrect&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org4181852"&gt;
 &lt;p&gt;
 System Preferences &amp;#x2013;&amp;gt; Language &amp;amp; Text &amp;#x2013;&amp;gt; Text tab &amp;#x2013;&amp;gt; unselect "Correct spelling automatically"
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org362afb8" class="outline-3"&gt;
-&lt;h3 id="org362afb8"&gt;turn off spaces key shortcuts&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org362afb8"&gt;
+&lt;div id="outline-container-org36f2ada" class="outline-3"&gt;
+&lt;h3 id="org36f2ada"&gt;turn off spaces key shortcuts&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org36f2ada"&gt;
 &lt;p&gt;
 System Preferences &amp;#x2013;&amp;gt; Keyboard &amp;#x2013;&amp;gt; Keyboard Shortcuts &amp;#x2013;&amp;gt; unselect C+{&amp;lt;-,-&amp;gt;}
 &lt;/p&gt;
@@ -4033,9 +4033,9 @@ System Preferences &amp;#x2013;&amp;gt; Keyboard &amp;#x2013;&amp;gt; Keyboard S
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org08ebe94" class="outline-2"&gt;
-&lt;h2 id="org08ebe94"&gt;homebrew&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org08ebe94"&gt;
+&lt;div id="outline-container-orgffbd0aa" class="outline-2"&gt;
+&lt;h2 id="orgffbd0aa"&gt;homebrew&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgffbd0aa"&gt;
 &lt;p&gt;
 Note that El Capitan introduced &lt;a href="https://en.wikipedia.org/wiki/System_Integrity_Protection"&gt;System Integrity Protection (SIP)&lt;/a&gt;, which may need to be temporarily disabled during homebrew installation. See &lt;a href="https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/El_Capitan_and_Homebrew.md"&gt;https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/El_Capitan_and_Homebrew.md&lt;/a&gt;
 &lt;/p&gt;
@@ -4056,9 +4056,9 @@ If it becomes necessary to fix permissions:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org55ef503" class="outline-3"&gt;
-&lt;h3 id="org55ef503"&gt;packages installed using homebrew&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org55ef503"&gt;
+&lt;div id="outline-container-org095b062" class="outline-3"&gt;
+&lt;h3 id="org095b062"&gt;packages installed using homebrew&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org095b062"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-sh"&gt;brew install homebrew/dupes/tcl-tk &amp;amp;&amp;amp; \
 brew install aspell &amp;amp;&amp;amp; \
@@ -4084,9 +4084,9 @@ brew install zsh
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgb6f97bf" class="outline-3"&gt;
-&lt;h3 id="orgb6f97bf"&gt;homebrew cask&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgb6f97bf"&gt;
+&lt;div id="outline-container-orgf48854e" class="outline-3"&gt;
+&lt;h3 id="orgf48854e"&gt;homebrew cask&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgf48854e"&gt;
 &lt;p&gt;
 Command line installer for desktop applications. See &lt;a href="https://caskroom.github.io"&gt;https://caskroom.github.io&lt;/a&gt;
 &lt;/p&gt;
@@ -4107,9 +4107,9 @@ Install some applications
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org6f786cb" class="outline-3"&gt;
-&lt;h3 id="org6f786cb"&gt;homebrew API token&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org6f786cb"&gt;
+&lt;div id="outline-container-orge922baf" class="outline-3"&gt;
+&lt;h3 id="orge922baf"&gt;homebrew API token&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orge922baf"&gt;
 &lt;p&gt;
 Apparently lots of requests to GutHub via homebrew can hit a rate limit. There's a higher limit if you create an API token. See &lt;a href="https://gist.github.com/christopheranderton/8644743"&gt;https://gist.github.com/christopheranderton/8644743&lt;/a&gt;
 &lt;/p&gt;
@@ -4132,9 +4132,9 @@ export HOMEBREW_GITHUB_API_TOKEN=token_here
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org6b75cba" class="outline-3"&gt;
-&lt;h3 id="org6b75cba"&gt;zsh&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org6b75cba"&gt;
+&lt;div id="outline-container-org76600b6" class="outline-3"&gt;
+&lt;h3 id="org76600b6"&gt;zsh&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org76600b6"&gt;
 &lt;p&gt;
 Install zsh with Homebrew above
 &lt;/p&gt;
@@ -4165,9 +4165,9 @@ EOF
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgd6b9eda" class="outline-2"&gt;
-&lt;h2 id="orgd6b9eda"&gt;ssh&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgd6b9eda"&gt;
+&lt;div id="outline-container-org1d59170" class="outline-2"&gt;
+&lt;h2 id="org1d59170"&gt;ssh&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org1d59170"&gt;
 &lt;p&gt;
 After installing homebrew's openssh on El Capitan, ssh-agent no longer
 seemed to work (in the sense that after using ssh-add to cache a
@@ -4182,9 +4182,9 @@ plist):
 &lt;/p&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgf4b7440" class="outline-3"&gt;
-&lt;h3 id="orgf4b7440"&gt;update /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgf4b7440"&gt;
+&lt;div id="outline-container-org36d3e02" class="outline-3"&gt;
+&lt;h3 id="org36d3e02"&gt;update /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org36d3e02"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-sh"&gt;sudo /usr/libexec/PlistBuddy /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist&amp;lt;&amp;lt;EOF
 Delete :ProgramArguments
@@ -4202,7 +4202,7 @@ EOF
 This should change the original value of &lt;code&gt;ProgramArguments&lt;/code&gt;:
 &lt;/p&gt;
 
-&lt;pre class="example" id="org4543958"&gt;
+&lt;pre class="example" id="org75283af"&gt;
 &amp;lt;key&amp;gt;ProgramArguments&amp;lt;/key&amp;gt;
 &amp;lt;array&amp;gt;
 	&amp;lt;string&amp;gt;/usr/bin/ssh-agent&amp;lt;/string&amp;gt;
@@ -4214,7 +4214,7 @@ This should change the original value of &lt;code&gt;ProgramArguments&lt;/code&g
 to
 &lt;/p&gt;
 
-&lt;pre class="example" id="org2870a4e"&gt;
+&lt;pre class="example" id="org8399b04"&gt;
 &amp;lt;key&amp;gt;ProgramArguments&amp;lt;/key&amp;gt;
 &amp;lt;array&amp;gt;
 	&amp;lt;string&amp;gt;/usr/local/bin/ssh-agent&amp;lt;/string&amp;gt;
@@ -4236,9 +4236,9 @@ launchctl start org.openbsd.ssh-agent
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org05c7ff1" class="outline-3"&gt;
-&lt;h3 id="org05c7ff1"&gt;create $ZSH_INITDIR/ssh-ask-keychain (called from start_ssh_agent.zsh)&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org05c7ff1"&gt;
+&lt;div id="outline-container-org26bcc45" class="outline-3"&gt;
+&lt;h3 id="org26bcc45"&gt;create $ZSH_INITDIR/ssh-ask-keychain (called from start_ssh_agent.zsh)&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org26bcc45"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-sh"&gt;cat ~/Dropbox/zsh/ssh-ask-keychain
 &lt;/pre&gt;
@@ -4252,9 +4252,9 @@ security find-generic-password -l "SSH: ${HOME}/.ssh/id_rsa" -gw
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org6a26644" class="outline-3"&gt;
-&lt;h3 id="org6a26644"&gt;create $ZSH_INITDIR/start_ssh_agent.zsh&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org6a26644"&gt;
+&lt;div id="outline-container-org2cdb4b3" class="outline-3"&gt;
+&lt;h3 id="org2cdb4b3"&gt;create $ZSH_INITDIR/start_ssh_agent.zsh&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org2cdb4b3"&gt;
 &lt;p&gt;
 (either as a file sourced from .zshrc, or as a code block in a login script)
 &lt;/p&gt;
@@ -4264,7 +4264,7 @@ security find-generic-password -l "SSH: ${HOME}/.ssh/id_rsa" -gw
 &lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;pre class="example" id="orge8a9c3c"&gt;
+&lt;pre class="example" id="org71b8133"&gt;
 export SSH_ASKPASS="$ZSH_INITDIR/ssh-ask-keychain"
 
 if [[ -f $HOME/.ssh-agent-pid ]] &amp;amp;&amp;amp; [[ -f $HOME/.ssh-auth-sock ]] &amp;amp;&amp;amp; \
@@ -4311,9 +4311,9 @@ ssh-reset(){
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org94002a0" class="outline-2"&gt;
-&lt;h2 id="org94002a0"&gt;git&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org94002a0"&gt;
+&lt;div id="outline-container-org940f26f" class="outline-2"&gt;
+&lt;h2 id="org940f26f"&gt;git&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org940f26f"&gt;
 &lt;pre class="example"&gt;
 git config --global user.name "My Name"
 git config --global user.email me@email.com
@@ -4321,9 +4321,9 @@ git config --global user.email me@email.com
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgf83c40b" class="outline-2"&gt;
-&lt;h2 id="orgf83c40b"&gt;emacs&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgf83c40b"&gt;
+&lt;div id="outline-container-org01406f6" class="outline-2"&gt;
+&lt;h2 id="org01406f6"&gt;emacs&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org01406f6"&gt;
 &lt;p&gt;
 Install emacs24 binary from &lt;a href="http://emacsformacosx.com/"&gt;http://emacsformacosx.com/&lt;/a&gt;
 &lt;/p&gt;
@@ -4346,9 +4346,9 @@ git submodule update
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org299bad9" class="outline-2"&gt;
-&lt;h2 id="org299bad9"&gt;python&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org299bad9"&gt;
+&lt;div id="outline-container-org11c9328" class="outline-2"&gt;
+&lt;h2 id="org11c9328"&gt;python&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org11c9328"&gt;
 &lt;p&gt;
 Use homebrew - see
 &lt;a href="https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Homebrew-and-Python.md"&gt;https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Homebrew-and-Python.md&lt;/a&gt;
@@ -4415,9 +4415,9 @@ pip install jinja2
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org239338f" class="outline-2"&gt;
-&lt;h2 id="org239338f"&gt;R&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org239338f"&gt;
+&lt;div id="outline-container-orgf362330" class="outline-2"&gt;
+&lt;h2 id="orgf362330"&gt;R&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgf362330"&gt;
 &lt;p&gt;
 Really doubling down on homebrew this time around:
 &lt;/p&gt;
@@ -4438,18 +4438,18 @@ EOF
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org042c081" class="outline-2"&gt;
-&lt;h2 id="org042c081"&gt;mail&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org042c081"&gt;
+&lt;div id="outline-container-org8c89918" class="outline-2"&gt;
+&lt;h2 id="org8c89918"&gt;mail&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org8c89918"&gt;
 &lt;p&gt;
 &lt;a href="http://www.washington.edu/itconnect/connect/email/uw-email/configuring/os-x-mail6/"&gt;http://www.washington.edu/itconnect/connect/email/uw-email/configuring/os-x-mail6/&lt;/a&gt;
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org959d975" class="outline-2"&gt;
-&lt;h2 id="org959d975"&gt;sshfs&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org959d975"&gt;
+&lt;div id="outline-container-orga7d7bc7" class="outline-2"&gt;
+&lt;h2 id="orga7d7bc7"&gt;sshfs&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orga7d7bc7"&gt;
 &lt;p&gt;
 Provided by the project &lt;a href="http://osxfuse.github.io/"&gt;http://osxfuse.github.io/&lt;/a&gt; - the links below
 are for binaries provided as installers.
@@ -4464,9 +4464,9 @@ wget https://github.com/osxfuse/sshfs/releases/download/osxfuse-sshfs-2.5.0/sshf
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org84e2e57" class="outline-2"&gt;
-&lt;h2 id="org84e2e57"&gt;wkhtmltopdf&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org84e2e57"&gt;
+&lt;div id="outline-container-org25f9a27" class="outline-2"&gt;
+&lt;h2 id="org25f9a27"&gt;wkhtmltopdf&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org25f9a27"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-sh"&gt;cd ~/Downloads
 wget 'http://wkhtmltopdf.googlecode.com/files/wkhtmltopdf.dmg'
@@ -4485,13 +4485,13 @@ Now create an alias:
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="mac"></category></entry><entry><title>Setup for VirtualBox VM running Ubuntu 14.04 on OS X Mavericks</title><link href="https://nhoffman.github.io/borborygmi/virtualbox-setup.html" rel="alternate"></link><published>2015-02-06T00:00:00-08:00</published><updated>2015-02-06T00:00:00-08:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2015-02-06:/borborygmi/virtualbox-setup.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
+</content><category term="notes"></category><category term="mac"></category></entry><entry><title>Setup for VirtualBox VM running Ubuntu 14.04 on OS X Mavericks</title><link href="https://nhoffman.github.io/borborygmi/virtualbox-setup.html" rel="alternate"></link><published>2015-02-06T00:00:00-08:00</published><updated>2015-02-06T00:00:00-08:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2015-02-06:/borborygmi/virtualbox-setup.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org5b0e242"&gt;VirtualBox preferences&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org8de2310"&gt;Create an Ubuntu 14.04 VM&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgf620ab1"&gt;Set up an IP address&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org2b65b81"&gt;VirtualBox preferences&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org4cb175f"&gt;Create an Ubuntu 14.04 VM&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org62c6d45"&gt;Set up an IP address&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -4502,9 +4502,9 @@ I'll err on the side of convenience (at …&lt;/p&gt;</summary><content type="ht
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org5b0e242"&gt;VirtualBox preferences&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org8de2310"&gt;Create an Ubuntu 14.04 VM&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgf620ab1"&gt;Set up an IP address&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org2b65b81"&gt;VirtualBox preferences&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org4cb175f"&gt;Create an Ubuntu 14.04 VM&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org62c6d45"&gt;Set up an IP address&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -4528,9 +4528,9 @@ directory - I wanted to interact with this VM as if it were a remote
 host.
 &lt;/p&gt;
 
-&lt;div id="outline-container-org5b0e242" class="outline-2"&gt;
-&lt;h2 id="org5b0e242"&gt;VirtualBox preferences&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org5b0e242"&gt;
+&lt;div id="outline-container-org2b65b81" class="outline-2"&gt;
+&lt;h2 id="org2b65b81"&gt;VirtualBox preferences&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org2b65b81"&gt;
 &lt;p&gt;
 Install VirtualBox from the vendor's website.
 &lt;/p&gt;
@@ -4575,9 +4575,9 @@ this creates the host-only network &lt;code&gt;vboxnet0&lt;/code&gt;. We'll need
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org8de2310" class="outline-2"&gt;
-&lt;h2 id="org8de2310"&gt;Create an Ubuntu 14.04 VM&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org8de2310"&gt;
+&lt;div id="outline-container-org4cb175f" class="outline-2"&gt;
+&lt;h2 id="org4cb175f"&gt;Create an Ubuntu 14.04 VM&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org4cb175f"&gt;
 &lt;p&gt;
 Download ubuntu-14.04.1-server-amd64.iso &lt;a href="http://www.ubuntu.com/download/server"&gt;here&lt;/a&gt; (we'll move it into
 $VBOXDIR below).
@@ -4714,9 +4714,9 @@ ubuntu ALL= NOPASSWD: ALL
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgf620ab1" class="outline-2"&gt;
-&lt;h2 id="orgf620ab1"&gt;Set up an IP address&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgf620ab1"&gt;
+&lt;div id="outline-container-org62c6d45" class="outline-2"&gt;
+&lt;h2 id="org62c6d45"&gt;Set up an IP address&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org62c6d45"&gt;
 &lt;p&gt;
 I pieced together the following with the help of the following posts:
 &lt;/p&gt;
@@ -4864,14 +4864,14 @@ command line given more time and patience than I have at this point!
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="linux"></category><category term="mac"></category><category term="virtualbox"></category></entry><entry><title>Hold the pie</title><link href="https://nhoffman.github.io/borborygmi/hold-the-pie.html" rel="alternate"></link><published>2014-10-30T00:00:00-07:00</published><updated>2014-10-30T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2014-10-30:/borborygmi/hold-the-pie.html</id><summary type="html">&lt;p&gt;
+</content><category term="notes"></category><category term="linux"></category><category term="mac"></category><category term="virtualbox"></category></entry><entry><title>Hold the pie</title><link href="https://nhoffman.github.io/borborygmi/hold-the-pie.html" rel="alternate"></link><published>2014-10-30T00:00:00-07:00</published><updated>2014-10-30T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2014-10-30:/borborygmi/hold-the-pie.html</id><summary type="html">&lt;p&gt;
 I came across this visualization&lt;sup&gt;&lt;a id="fnr.1" class="footref" href="#fn.1"&gt;1&lt;/a&gt;&lt;/sup&gt; of a very simple data set, and
 it took me a few minutes to fully understand what makes it
 so&amp;#x2026; suboptimal.
 &lt;/p&gt;
 
 
-&lt;div id="org86ccfb7" class="figure"&gt;
+&lt;div id="orged8316d" class="figure"&gt;
 &lt;p&gt;&lt;img src="hold-the-pie/why_pie.png" alt="why_pie.png" /&gt;
 &lt;/p&gt;
 &lt;/div&gt;
@@ -4886,7 +4886,7 @@ so&amp;#x2026; suboptimal.
 &lt;/p&gt;
 
 
-&lt;div id="org86ccfb7" class="figure"&gt;
+&lt;div id="orged8316d" class="figure"&gt;
 &lt;p&gt;&lt;img src="hold-the-pie/why_pie.png" alt="why_pie.png" /&gt;
 &lt;/p&gt;
 &lt;/div&gt;
@@ -4902,7 +4902,7 @@ so&amp;#x2026; suboptimal.
 Even a simple table tells the story much more clearly:
 &lt;/p&gt;
 
-&lt;table id="orgd5f7f46" class="table table-striped table-bordered table-condensed" style="width: auto;"&gt;
+&lt;table id="org1bc5b98" class="table table-striped table-bordered table-condensed" style="width: auto;"&gt;
 
 
 &lt;colgroup&gt;
@@ -4996,12 +4996,12 @@ Kwon JH, Fausone MK, Du H, Robicsek A, and Peterson LR. Impact of laboratory-rep
 
 
 &lt;/div&gt;
-&lt;/div&gt;</content><category term="laboratory"></category></entry><entry><title>Compiling bcl2fastq v2.15 on Ubuntu 12.04 and 14.04</title><link href="https://nhoffman.github.io/borborygmi/compiling-bcl2fastq-on-ubuntu.html" rel="alternate"></link><published>2014-08-27T00:00:00-07:00</published><updated>2014-08-27T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2014-08-27:/borborygmi/compiling-bcl2fastq-on-ubuntu.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
+&lt;/div&gt;</content><category term="visualization"></category><category term="laboratory"></category></entry><entry><title>Compiling bcl2fastq v2.15 on Ubuntu 12.04 and 14.04</title><link href="https://nhoffman.github.io/borborygmi/compiling-bcl2fastq-on-ubuntu.html" rel="alternate"></link><published>2014-08-27T00:00:00-07:00</published><updated>2014-08-27T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2014-08-27:/borborygmi/compiling-bcl2fastq-on-ubuntu.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org5c73891"&gt;Ubuntu 14.04 (Trusty Tahr)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgff20d42"&gt;Ubuntu 12.04 (Precise Pangolin)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org41da4db"&gt;Ubuntu 14.04 (Trusty Tahr)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org72a17cd"&gt;Ubuntu 12.04 (Precise Pangolin)&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -5013,8 +5013,8 @@ no build instructions for Ubuntu. So …&lt;/p&gt;</summary><content type="html"
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org5c73891"&gt;Ubuntu 14.04 (Trusty Tahr)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgff20d42"&gt;Ubuntu 12.04 (Precise Pangolin)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org41da4db"&gt;Ubuntu 14.04 (Trusty Tahr)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org72a17cd"&gt;Ubuntu 12.04 (Precise Pangolin)&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -5025,9 +5025,9 @@ the downside is that they release binaries only for RHEL/CentOS, and
 no build instructions for Ubuntu. So how hard could it be?
 &lt;/p&gt;
 
-&lt;div id="outline-container-org5c73891" class="outline-2"&gt;
-&lt;h2 id="org5c73891"&gt;Ubuntu 14.04 (Trusty Tahr)&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org5c73891"&gt;
+&lt;div id="outline-container-org41da4db" class="outline-2"&gt;
+&lt;h2 id="org41da4db"&gt;Ubuntu 14.04 (Trusty Tahr)&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org41da4db"&gt;
 &lt;p&gt;
 I thought I'd start here since the packages are more up to date (turns
 out it's a good thing I did, see the morass below). There's some
@@ -5098,9 +5098,9 @@ the executable:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgff20d42" class="outline-2"&gt;
-&lt;h2 id="orgff20d42"&gt;Ubuntu 12.04 (Precise Pangolin)&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgff20d42"&gt;
+&lt;div id="outline-container-org72a17cd" class="outline-2"&gt;
+&lt;h2 id="org72a17cd"&gt;Ubuntu 12.04 (Precise Pangolin)&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org72a17cd"&gt;
 &lt;p&gt;
 Emboldened, I went on to 12.04. This was a lot more painful. Lots of
 trail and error. Here's what I came up with. More or less the same as
@@ -5160,7 +5160,7 @@ After all of that, compiling bcl2fasta worked as described for 14.04.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="linux"></category></entry><entry><title>Creating lists containing variables</title><link href="https://nhoffman.github.io/borborygmi/lists-with-variables.html" rel="alternate"></link><published>2014-06-12T00:00:00-07:00</published><updated>2014-06-12T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2014-06-12:/borborygmi/lists-with-variables.html</id><summary type="html">&lt;p&gt;
+</content><category term="notes"></category><category term="linux"></category></entry><entry><title>Creating lists containing variables</title><link href="https://nhoffman.github.io/borborygmi/lists-with-variables.html" rel="alternate"></link><published>2014-06-12T00:00:00-07:00</published><updated>2014-06-12T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2014-06-12:/borborygmi/lists-with-variables.html</id><summary type="html">&lt;p&gt;
 I learned a bit about list creation in elisp today. Here's how you join a list of strings in elisp:
 &lt;/p&gt;
 
@@ -5289,7 +5289,7 @@ Nope.
 &lt;p&gt;
 Much better.
 &lt;/p&gt;
-</content><category term="elisp"></category></entry><entry><title>A practical introduction to databases and data management</title><link href="https://nhoffman.github.io/borborygmi/database-intro.html" rel="alternate"></link><published>2014-06-11T00:00:00-07:00</published><updated>2014-06-11T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2014-06-11:/borborygmi/database-intro.html</id><summary type="html">&lt;ul class="org-ul"&gt;
+</content><category term="notes"></category><category term="elisp"></category></entry><entry><title>A practical introduction to databases and data management</title><link href="https://nhoffman.github.io/borborygmi/database-intro.html" rel="alternate"></link><published>2014-06-11T00:00:00-07:00</published><updated>2014-06-11T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2014-06-11:/borborygmi/database-intro.html</id><summary type="html">&lt;ul class="org-ul"&gt;
 &lt;li&gt;&lt;i&gt;Edit 2015-07-26: added a section on date formatting&lt;/i&gt;&lt;/li&gt;
 &lt;li&gt;&lt;i&gt;Edit 2016-07-11: add reference to Tidy Data&lt;/i&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -5302,12 +5302,12 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org9f3f066"&gt;Objectives&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org274ca15"&gt;Relational database terminology&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org142bf22"&gt;Relations&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org8e4def4"&gt;Objectives&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgf41d829"&gt;Relational database terminology&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org9d02455"&gt;Relations&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgc21fd40"&gt;one to one&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgb9ec290"&gt;one to many …&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;</summary><content type="html">&lt;ul class="org-ul"&gt;
+&lt;li&gt;&lt;a href="#orga5e9418"&gt;one to one&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgd5c8191"&gt;one to many …&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;</summary><content type="html">&lt;ul class="org-ul"&gt;
 &lt;li&gt;&lt;i&gt;Edit 2015-07-26: added a section on date formatting&lt;/i&gt;&lt;/li&gt;
 &lt;li&gt;&lt;i&gt;Edit 2016-07-11: add reference to Tidy Data&lt;/i&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -5320,40 +5320,40 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org9f3f066"&gt;Objectives&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org274ca15"&gt;Relational database terminology&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org142bf22"&gt;Relations&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org8e4def4"&gt;Objectives&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgf41d829"&gt;Relational database terminology&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org9d02455"&gt;Relations&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgc21fd40"&gt;one to one&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgb9ec290"&gt;one to many&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgef23a08"&gt;many to many&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orga5e9418"&gt;one to one&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgd5c8191"&gt;one to many&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org9725462"&gt;many to many&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgef133a6"&gt;Data types&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org4e15119"&gt;SQL&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgb4d4c2d"&gt;Some examples of relational database operations using SQL&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org406174f"&gt;Data types&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org6052c5f"&gt;SQL&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgc36535d"&gt;Some examples of relational database operations using SQL&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org6886566"&gt;select&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgfa00e83"&gt;join&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org72f7d52"&gt;group and aggregate&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org8646145"&gt;select&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgac800b9"&gt;join&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgaec01fa"&gt;group and aggregate&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgedc4bac"&gt;Hierarchical databases&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org9e38838"&gt;Data management patterns and antipatterns&lt;/a&gt;
+&lt;li&gt;&lt;a href="#orge98555c"&gt;Hierarchical databases&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org4509f17"&gt;Data management patterns and antipatterns&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org0e49fc3"&gt;name fields sensibly&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgef8173c"&gt;don't mix data types&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org1797164"&gt;tall, not wide&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orga742ed2"&gt;be consistent&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org4846bda"&gt;use multiple tables (normalize the data)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgff2d85f"&gt;Use a standard format for dates and times&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgc17db0e"&gt;name fields sensibly&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org1d97e81"&gt;don't mix data types&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org0a18766"&gt;tall, not wide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgfa858e2"&gt;be consistent&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org07543dd"&gt;use multiple tables (normalize the data)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org3ee487d"&gt;Use a standard format for dates and times&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;table id="org9b54f3f" class="table table-striped table-bordered table-condensed" style="display: none;"&gt;
+&lt;table id="orge1f35b1" class="table table-striped table-bordered table-condensed" style="display: none;"&gt;
 
 
 &lt;colgroup&gt;
@@ -5394,7 +5394,7 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;table id="org2b54705" class="table table-striped table-bordered table-condensed" style="display: none;"&gt;
+&lt;table id="orgd78fd3e" class="table table-striped table-bordered table-condensed" style="display: none;"&gt;
 
 
 &lt;colgroup&gt;
@@ -5425,7 +5425,7 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;table id="org18d8279" class="table table-striped table-bordered table-condensed" style="display: none;"&gt;
+&lt;table id="org0a5d282" class="table table-striped table-bordered table-condensed" style="display: none;"&gt;
 
 
 &lt;colgroup&gt;
@@ -5461,7 +5461,7 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;table id="orge214765" class="table table-striped table-bordered table-condensed" style="display: none;"&gt;
+&lt;table id="orgd817e4c" class="table table-striped table-bordered table-condensed" style="display: none;"&gt;
 
 
 &lt;colgroup&gt;
@@ -5572,7 +5572,7 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;table id="orgdf9a74c" class="table table-striped table-bordered table-condensed" style="display: none;"&gt;
+&lt;table id="orgdef3cf8" class="table table-striped table-bordered table-condensed" style="display: none;"&gt;
 
 
 &lt;colgroup&gt;
@@ -5613,7 +5613,7 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;table id="org251b988" class="table table-striped table-bordered table-condensed" style="display: none;"&gt;
+&lt;table id="org5da2b15" class="table table-striped table-bordered table-condensed" style="display: none;"&gt;
 
 
 &lt;colgroup&gt;
@@ -5639,7 +5639,7 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;table id="org35beed0" class="table table-striped table-bordered table-condensed" style="display: none;"&gt;
+&lt;table id="org3571a19" class="table table-striped table-bordered table-condensed" style="display: none;"&gt;
 
 
 &lt;colgroup&gt;
@@ -5675,9 +5675,9 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;div id="outline-container-org9f3f066" class="outline-2"&gt;
-&lt;h2 id="org9f3f066"&gt;Objectives&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org9f3f066"&gt;
+&lt;div id="outline-container-org8e4def4" class="outline-2"&gt;
+&lt;h2 id="org8e4def4"&gt;Objectives&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org8e4def4"&gt;
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;be aware that relational databases are a thing and can be described using some terms.&lt;/li&gt;
 &lt;li&gt;get to know the different types of relations.&lt;/li&gt;
@@ -5687,9 +5687,9 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org274ca15" class="outline-2"&gt;
-&lt;h2 id="org274ca15"&gt;Relational database terminology&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org274ca15"&gt;
+&lt;div id="outline-container-orgf41d829" class="outline-2"&gt;
+&lt;h2 id="orgf41d829"&gt;Relational database terminology&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgf41d829"&gt;
 &lt;dl class="org-dl"&gt;
 &lt;dt&gt;relational database&lt;/dt&gt;&lt;dd&gt;a tabular database with defined "relations" (which can be described in terms of &lt;a href="http://en.wikipedia.org/wiki/Relational_algebra"&gt;relational algebra&lt;/a&gt;) among elements within and between tables.&lt;/dd&gt;
 &lt;dt&gt;row&lt;/dt&gt;&lt;dd&gt;contains a &lt;b&gt;tuple&lt;/b&gt; or &lt;b&gt;record&lt;/b&gt; representing a single item.&lt;/dd&gt;
@@ -5698,7 +5698,7 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 &lt;/dl&gt;
 
 
-&lt;div id="orgcd22165" class="figure"&gt;
+&lt;div id="org4a2935f" class="figure"&gt;
 &lt;p&gt;&lt;img src="database-intro/984px-Relational_database_terms.svg.png" alt="984px-Relational_database_terms.svg.png" /&gt;
 &lt;/p&gt;
 &lt;p&gt;&lt;span class="figure-number"&gt;Figure 1: &lt;/span&gt;Components of a table from a relational database. Source: &lt;a href="http://en.wikipedia.org/wiki/Relational_database"&gt;wikipedia&lt;/a&gt;&lt;/p&gt;
@@ -5732,7 +5732,7 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="org-right"&gt;1&lt;/td&gt;
+&lt;td class="org-right"&gt;1.0&lt;/td&gt;
 &lt;td class="org-left"&gt;U123456&lt;/td&gt;
 &lt;td class="org-left"&gt;Roger Rabbit&lt;/td&gt;
 &lt;td class="org-right"&gt;1939-04-01&lt;/td&gt;
@@ -5740,7 +5740,7 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="org-right"&gt;2&lt;/td&gt;
+&lt;td class="org-right"&gt;2.0&lt;/td&gt;
 &lt;td class="org-left"&gt;U654321&lt;/td&gt;
 &lt;td class="org-left"&gt;Jessica Krupnick&lt;/td&gt;
 &lt;td class="org-right"&gt;1924-10-27&lt;/td&gt;
@@ -5756,17 +5756,17 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org142bf22" class="outline-2"&gt;
-&lt;h2 id="org142bf22"&gt;Relations&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org142bf22"&gt;
+&lt;div id="outline-container-org9d02455" class="outline-2"&gt;
+&lt;h2 id="org9d02455"&gt;Relations&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org9d02455"&gt;
 &lt;p&gt;
 For more details, see &lt;a href="http://en.wikipedia.org/wiki/Cardinality_(data_modeling)"&gt;http://en.wikipedia.org/wiki/Cardinality_(data_modeling)&lt;/a&gt;
 &lt;/p&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgc21fd40" class="outline-3"&gt;
-&lt;h3 id="orgc21fd40"&gt;one to one&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgc21fd40"&gt;
+&lt;div id="outline-container-orga5e9418" class="outline-3"&gt;
+&lt;h3 id="orga5e9418"&gt;one to one&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orga5e9418"&gt;
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;describes the relationship between two or more elements in which each element uniquely identifies the other (likely to be true only in a specific context).&lt;/li&gt;
 &lt;li&gt;represented by elements in the same row&lt;/li&gt;
@@ -5778,7 +5778,7 @@ Graphically:
 &lt;/p&gt;
 
 
-&lt;div id="org22fb221" class="figure"&gt;
+&lt;div id="org1e786cf" class="figure"&gt;
 &lt;p&gt;&lt;img src="database-intro/one_to_one.png" alt="one_to_one.png" /&gt;
 &lt;/p&gt;
 &lt;/div&gt;
@@ -5820,15 +5820,15 @@ And in our database:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgb9ec290" class="outline-3"&gt;
-&lt;h3 id="orgb9ec290"&gt;one to many&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgb9ec290"&gt;
+&lt;div id="outline-container-orgd5c8191" class="outline-3"&gt;
+&lt;h3 id="orgd5c8191"&gt;one to many&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgd5c8191"&gt;
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;in the context of a database, is represented by a pair of tables, in which an element or row can be related to multiple rows in another table&lt;/li&gt;
 &lt;/ul&gt;
 
 
-&lt;div id="org51d452d" class="figure"&gt;
+&lt;div id="orgcdb96f6" class="figure"&gt;
 &lt;p&gt;&lt;img src="database-intro/one_to_many.png" alt="one_to_many.png" /&gt;
 &lt;/p&gt;
 &lt;/div&gt;
@@ -5891,9 +5891,9 @@ order by mrn;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgef23a08" class="outline-3"&gt;
-&lt;h3 id="orgef23a08"&gt;many to many&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgef23a08"&gt;
+&lt;div id="outline-container-org9725462" class="outline-3"&gt;
+&lt;h3 id="org9725462"&gt;many to many&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org9725462"&gt;
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;an entity in table A maps to more than one entity in table B, and vice-versa.&lt;/li&gt;
 &lt;li&gt;a many-to-many relation between two tables is represented via a third &lt;b&gt;junction table&lt;/b&gt; or &lt;b&gt;cross-reference table&lt;/b&gt;.&lt;/li&gt;
@@ -5901,7 +5901,7 @@ order by mrn;
 &lt;/ul&gt;
 
 
-&lt;div id="org5c11910" class="figure"&gt;
+&lt;div id="orgb4ceed7" class="figure"&gt;
 &lt;p&gt;&lt;img src="database-intro/many_to_many.png" alt="many_to_many.png" /&gt;
 &lt;/p&gt;
 &lt;/div&gt;
@@ -5934,7 +5934,7 @@ In our relational database, this relation requires three tables, one for each of
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="org-right"&gt;1&lt;/td&gt;
+&lt;td class="org-right"&gt;1.0&lt;/td&gt;
 &lt;td class="org-left"&gt;U123456&lt;/td&gt;
 &lt;td class="org-left"&gt;Roger Rabbit&lt;/td&gt;
 &lt;td class="org-right"&gt;1939-04-01&lt;/td&gt;
@@ -5942,7 +5942,7 @@ In our relational database, this relation requires three tables, one for each of
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="org-right"&gt;2&lt;/td&gt;
+&lt;td class="org-right"&gt;2.0&lt;/td&gt;
 &lt;td class="org-left"&gt;U654321&lt;/td&gt;
 &lt;td class="org-left"&gt;Jessica Krupnick&lt;/td&gt;
 &lt;td class="org-right"&gt;1924-10-27&lt;/td&gt;
@@ -5987,7 +5987,7 @@ And a junction table defining the many-to-many relationships:
 &lt;/p&gt;
 
 &lt;div class="org-src-container"&gt;
-&lt;pre class="src src-sqlite" id="orgcb57287"&gt;select * from physician_patient;
+&lt;pre class="src src-sqlite" id="org03f6e9e"&gt;select * from physician_patient;
 &lt;/pre&gt;
 &lt;/div&gt;
 
@@ -6069,7 +6069,7 @@ join physicians using(doc_id);
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="org-right"&gt;1&lt;/td&gt;
+&lt;td class="org-right"&gt;1.0&lt;/td&gt;
 &lt;td class="org-left"&gt;U123456&lt;/td&gt;
 &lt;td class="org-left"&gt;Roger Rabbit&lt;/td&gt;
 &lt;td class="org-right"&gt;1939-04-01&lt;/td&gt;
@@ -6079,7 +6079,7 @@ join physicians using(doc_id);
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="org-right"&gt;1&lt;/td&gt;
+&lt;td class="org-right"&gt;1.0&lt;/td&gt;
 &lt;td class="org-left"&gt;U123456&lt;/td&gt;
 &lt;td class="org-left"&gt;Roger Rabbit&lt;/td&gt;
 &lt;td class="org-right"&gt;1939-04-01&lt;/td&gt;
@@ -6089,7 +6089,7 @@ join physicians using(doc_id);
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="org-right"&gt;2&lt;/td&gt;
+&lt;td class="org-right"&gt;2.0&lt;/td&gt;
 &lt;td class="org-left"&gt;U654321&lt;/td&gt;
 &lt;td class="org-left"&gt;Jessica Krupnick&lt;/td&gt;
 &lt;td class="org-right"&gt;1924-10-27&lt;/td&gt;
@@ -6099,7 +6099,7 @@ join physicians using(doc_id);
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="org-right"&gt;2&lt;/td&gt;
+&lt;td class="org-right"&gt;2.0&lt;/td&gt;
 &lt;td class="org-left"&gt;U654321&lt;/td&gt;
 &lt;td class="org-left"&gt;Jessica Krupnick&lt;/td&gt;
 &lt;td class="org-right"&gt;1924-10-27&lt;/td&gt;
@@ -6113,9 +6113,9 @@ join physicians using(doc_id);
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgef133a6" class="outline-2"&gt;
-&lt;h2 id="orgef133a6"&gt;Data types&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgef133a6"&gt;
+&lt;div id="outline-container-org406174f" class="outline-2"&gt;
+&lt;h2 id="org406174f"&gt;Data types&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org406174f"&gt;
 &lt;p&gt;
 Most databases and programming languages make a distinction between various &lt;b&gt;data types&lt;/b&gt; (integers, real numbers, text, binary data, etc). Why is this important?
 &lt;/p&gt;
@@ -6136,21 +6136,21 @@ In an SQL database, data types are defined along with the table schema:
 
 &lt;pre class="example"&gt;
 CREATE TABLE results (
-	mrn VARCHAR(7) NOT NULL, 
-	accession VARCHAR(4) NOT NULL, 
+	mrn VARCHAR NOT NULL, 
+	accession VARCHAR NOT NULL, 
 	date DATE NOT NULL, 
-	battery_code VARCHAR(3) NOT NULL, 
-	test_code VARCHAR(3) NOT NULL, 
+	battery_code VARCHAR NOT NULL, 
+	test_code VARCHAR NOT NULL, 
 	value FLOAT NOT NULL, 
-	flag VARCHAR(4)
+	flag VARCHAR
 );
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org4e15119" class="outline-2"&gt;
-&lt;h2 id="org4e15119"&gt;SQL&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org4e15119"&gt;
+&lt;div id="outline-container-org6052c5f" class="outline-2"&gt;
+&lt;h2 id="org6052c5f"&gt;SQL&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org6052c5f"&gt;
 &lt;p&gt;
 SQL (originally SEQUEL for &lt;i&gt;Structured English Query Language&lt;/i&gt;) is a programming language for managing relational databases. Although versions of SQL are defined in internationally-recognized standards, various dialects are used depending on the implementation. Many relational database programs are out there. Some examples of relational database products using SQL that you are likely to come across include:
 &lt;/p&gt;
@@ -6192,7 +6192,7 @@ sqlite3 results.db
 You should see something like this:
 &lt;/p&gt;
 
-&lt;pre class="example" id="orgaa963c3"&gt;
+&lt;pre class="example" id="org47f03d0"&gt;
 SQLite version 3.7.13 2012-07-17 17:46:21
 Enter ".help" for instructions
 Enter SQL statements terminated with a ";"
@@ -6207,13 +6207,13 @@ there.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgb4d4c2d" class="outline-2"&gt;
-&lt;h2 id="orgb4d4c2d"&gt;Some examples of relational database operations using SQL&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgb4d4c2d"&gt;
+&lt;div id="outline-container-orgc36535d" class="outline-2"&gt;
+&lt;h2 id="orgc36535d"&gt;Some examples of relational database operations using SQL&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgc36535d"&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org6886566" class="outline-3"&gt;
-&lt;h3 id="org6886566"&gt;select&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org6886566"&gt;
+&lt;div id="outline-container-org8646145" class="outline-3"&gt;
+&lt;h3 id="org8646145"&gt;select&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org8646145"&gt;
 &lt;p&gt;
 This query returns the entire table named &lt;code&gt;results&lt;/code&gt;.
 &lt;/p&gt;
@@ -6468,9 +6468,9 @@ You can also specify a subset of columns.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgfa00e83" class="outline-3"&gt;
-&lt;h3 id="orgfa00e83"&gt;join&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgfa00e83"&gt;
+&lt;div id="outline-container-orgac800b9" class="outline-3"&gt;
+&lt;h3 id="orgac800b9"&gt;join&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgac800b9"&gt;
 &lt;p&gt;
 Relations between tables are specified using a &lt;code&gt;join&lt;/code&gt; clause. Here's a two-way join between two tables, &lt;code&gt;patients&lt;/code&gt; and &lt;code&gt;results&lt;/code&gt;.
 &lt;/p&gt;
@@ -6522,7 +6522,7 @@ Relations between tables are specified using a &lt;code&gt;join&lt;/code&gt; cla
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="org-right"&gt;1&lt;/td&gt;
+&lt;td class="org-right"&gt;1.0&lt;/td&gt;
 &lt;td class="org-left"&gt;U123456&lt;/td&gt;
 &lt;td class="org-left"&gt;Roger Rabbit&lt;/td&gt;
 &lt;td class="org-right"&gt;1939-04-01&lt;/td&gt;
@@ -6536,7 +6536,7 @@ Relations between tables are specified using a &lt;code&gt;join&lt;/code&gt; cla
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="org-right"&gt;1&lt;/td&gt;
+&lt;td class="org-right"&gt;1.0&lt;/td&gt;
 &lt;td class="org-left"&gt;U123456&lt;/td&gt;
 &lt;td class="org-left"&gt;Roger Rabbit&lt;/td&gt;
 &lt;td class="org-right"&gt;1939-04-01&lt;/td&gt;
@@ -6550,7 +6550,7 @@ Relations between tables are specified using a &lt;code&gt;join&lt;/code&gt; cla
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="org-right"&gt;1&lt;/td&gt;
+&lt;td class="org-right"&gt;1.0&lt;/td&gt;
 &lt;td class="org-left"&gt;U123456&lt;/td&gt;
 &lt;td class="org-left"&gt;Roger Rabbit&lt;/td&gt;
 &lt;td class="org-right"&gt;1939-04-01&lt;/td&gt;
@@ -6564,7 +6564,7 @@ Relations between tables are specified using a &lt;code&gt;join&lt;/code&gt; cla
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="org-right"&gt;1&lt;/td&gt;
+&lt;td class="org-right"&gt;1.0&lt;/td&gt;
 &lt;td class="org-left"&gt;U123456&lt;/td&gt;
 &lt;td class="org-left"&gt;Roger Rabbit&lt;/td&gt;
 &lt;td class="org-right"&gt;1939-04-01&lt;/td&gt;
@@ -6578,7 +6578,7 @@ Relations between tables are specified using a &lt;code&gt;join&lt;/code&gt; cla
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="org-right"&gt;2&lt;/td&gt;
+&lt;td class="org-right"&gt;2.0&lt;/td&gt;
 &lt;td class="org-left"&gt;U654321&lt;/td&gt;
 &lt;td class="org-left"&gt;Jessica Krupnick&lt;/td&gt;
 &lt;td class="org-right"&gt;1924-10-27&lt;/td&gt;
@@ -6592,7 +6592,7 @@ Relations between tables are specified using a &lt;code&gt;join&lt;/code&gt; cla
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="org-right"&gt;2&lt;/td&gt;
+&lt;td class="org-right"&gt;2.0&lt;/td&gt;
 &lt;td class="org-left"&gt;U654321&lt;/td&gt;
 &lt;td class="org-left"&gt;Jessica Krupnick&lt;/td&gt;
 &lt;td class="org-right"&gt;1924-10-27&lt;/td&gt;
@@ -6606,7 +6606,7 @@ Relations between tables are specified using a &lt;code&gt;join&lt;/code&gt; cla
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="org-right"&gt;2&lt;/td&gt;
+&lt;td class="org-right"&gt;2.0&lt;/td&gt;
 &lt;td class="org-left"&gt;U654321&lt;/td&gt;
 &lt;td class="org-left"&gt;Jessica Krupnick&lt;/td&gt;
 &lt;td class="org-right"&gt;1924-10-27&lt;/td&gt;
@@ -6620,7 +6620,7 @@ Relations between tables are specified using a &lt;code&gt;join&lt;/code&gt; cla
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="org-right"&gt;2&lt;/td&gt;
+&lt;td class="org-right"&gt;2.0&lt;/td&gt;
 &lt;td class="org-left"&gt;U654321&lt;/td&gt;
 &lt;td class="org-left"&gt;Jessica Krupnick&lt;/td&gt;
 &lt;td class="org-right"&gt;1924-10-27&lt;/td&gt;
@@ -6702,9 +6702,9 @@ where test_code = 'K';
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org72f7d52" class="outline-3"&gt;
-&lt;h3 id="org72f7d52"&gt;group and aggregate&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org72f7d52"&gt;
+&lt;div id="outline-container-orgaec01fa" class="outline-3"&gt;
+&lt;h3 id="orgaec01fa"&gt;group and aggregate&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgaec01fa"&gt;
 &lt;pre class="example"&gt;
 select name, test_code, min(value)
 from patients join results using(mrn)
@@ -6757,15 +6757,15 @@ group by mrn, test_code;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgedc4bac" class="outline-2"&gt;
-&lt;h2 id="orgedc4bac"&gt;Hierarchical databases&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgedc4bac"&gt;
+&lt;div id="outline-container-orge98555c" class="outline-2"&gt;
+&lt;h2 id="orge98555c"&gt;Hierarchical databases&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orge98555c"&gt;
 &lt;p&gt;
 Hierarchical databases organize data in a tree-like structure. Data is represented as a graph of one-to-many (parent -&amp;gt; child) relations.
 &lt;/p&gt;
 
 
-&lt;div id="org1b5825a" class="figure"&gt;
+&lt;div id="org3b9c5c3" class="figure"&gt;
 &lt;p&gt;&lt;img src="database-intro/hierarchical.png" alt="hierarchical.png" /&gt;
 &lt;/p&gt;
 &lt;/div&gt;
@@ -6780,9 +6780,9 @@ Hierarchical databases organize data in a tree-like structure. Data is represent
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org9e38838" class="outline-2"&gt;
-&lt;h2 id="org9e38838"&gt;Data management patterns and antipatterns&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org9e38838"&gt;
+&lt;div id="outline-container-org4509f17" class="outline-2"&gt;
+&lt;h2 id="org4509f17"&gt;Data management patterns and antipatterns&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org4509f17"&gt;
 &lt;p&gt;
 A basic understanding of database applications, relations, and data
 types can help guide good practices for managing data. It makes
@@ -6796,9 +6796,9 @@ ways in which data can be "tidy" or "messy."
 &lt;/p&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org0e49fc3" class="outline-3"&gt;
-&lt;h3 id="org0e49fc3"&gt;name fields sensibly&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org0e49fc3"&gt;
+&lt;div id="outline-container-orgc17db0e" class="outline-3"&gt;
+&lt;h3 id="orgc17db0e"&gt;name fields sensibly&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgc17db0e"&gt;
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;When naming column headers, stick to lowercase letters and
 underscores only (numbers are ok after the first character).&lt;/li&gt;
@@ -6839,9 +6839,9 @@ underscores only (numbers are ok after the first character).&lt;/li&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgef8173c" class="outline-3"&gt;
-&lt;h3 id="orgef8173c"&gt;don't mix data types&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgef8173c"&gt;
+&lt;div id="outline-container-org1d97e81" class="outline-3"&gt;
+&lt;h3 id="org1d97e81"&gt;don't mix data types&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org1d97e81"&gt;
 &lt;p&gt;
 Values in a column are expected to be the same data type. Some
 databases will produce an error if you try to mix data types (eq,
@@ -6951,9 +6951,9 @@ non-numeric values.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org1797164" class="outline-3"&gt;
-&lt;h3 id="org1797164"&gt;tall, not wide&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org1797164"&gt;
+&lt;div id="outline-container-org0a18766" class="outline-3"&gt;
+&lt;h3 id="org0a18766"&gt;tall, not wide&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org0a18766"&gt;
 &lt;p&gt;
 Excel and EMR applications have made us accustomed to viewing data as
 a square matrix.
@@ -7151,9 +7151,9 @@ data from multiple patients by adding another column.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orga742ed2" class="outline-3"&gt;
-&lt;h3 id="orga742ed2"&gt;be consistent&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orga742ed2"&gt;
+&lt;div id="outline-container-orgfa858e2" class="outline-3"&gt;
+&lt;h3 id="orgfa858e2"&gt;be consistent&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgfa858e2"&gt;
 &lt;p&gt;
 Composing queries will be easier if you are consistent in your representations of the data. I've frequently come across data like this:
 &lt;/p&gt;
@@ -7267,9 +7267,9 @@ Composing queries will be easier if you are consistent in your representations o
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org4846bda" class="outline-3"&gt;
-&lt;h3 id="org4846bda"&gt;use multiple tables (normalize the data)&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org4846bda"&gt;
+&lt;div id="outline-container-org07543dd" class="outline-3"&gt;
+&lt;h3 id="org07543dd"&gt;use multiple tables (normalize the data)&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org07543dd"&gt;
 &lt;p&gt;
 Here's where understanding relations is useful. When I ask for data
 from the laboratory system, I typically get results back that look
@@ -7302,11 +7302,11 @@ to Five Normal Forms in Relational Database Theory&lt;/a&gt;
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgff2d85f" class="outline-3"&gt;
-&lt;h3 id="orgff2d85f"&gt;Use a standard format for dates and times&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgff2d85f"&gt;
+&lt;div id="outline-container-org3ee487d" class="outline-3"&gt;
+&lt;h3 id="org3ee487d"&gt;Use a standard format for dates and times&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org3ee487d"&gt;
 
-&lt;div id="org4fbddfc" class="figure"&gt;
+&lt;div id="org52fbfc0" class="figure"&gt;
 &lt;p&gt;&lt;img src="database-intro/iso_8601.png" alt="iso_8601.png" /&gt;
 &lt;/p&gt;
 &lt;p&gt;&lt;span class="figure-number"&gt;Figure 2: &lt;/span&gt;Obligatory xkcd (&lt;a href="https://xkcd.com/1179/"&gt;https://xkcd.com/1179/&lt;/a&gt;)&lt;/p&gt;
@@ -7337,7 +7337,7 @@ something like 2015-07-23T16:55:02+17:00).
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="laboratory"></category></entry><entry><title>sqlite dict factory</title><link href="https://nhoffman.github.io/borborygmi/dict-factory.html" rel="alternate"></link><published>2014-06-10T00:00:00-07:00</published><updated>2014-06-10T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2014-06-10:/borborygmi/dict-factory.html</id><summary type="html">&lt;p&gt;
+</content><category term="lectures"></category><category term="laboratory"></category></entry><entry><title>sqlite dict factory</title><link href="https://nhoffman.github.io/borborygmi/dict-factory.html" rel="alternate"></link><published>2014-06-10T00:00:00-07:00</published><updated>2014-06-10T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2014-06-10:/borborygmi/dict-factory.html</id><summary type="html">&lt;p&gt;
 Probably not as efficient as using the sqlite3.Row class, but works
 when actual dict objects are required. Adapted from
 &lt;a href="https://docs.python.org/2/library/sqlite3.html"&gt;https://docs.python.org/2/library/sqlite3.html&lt;/a&gt;.
@@ -7368,19 +7368,19 @@ cur.execute("select 1 as a")
 print cur.fetchone()
 &lt;/pre&gt;
 &lt;/div&gt;
-</content><category term="python"></category><category term="sqlite"></category></entry><entry><title>Creating a site with Pelican and org-mode</title><link href="https://nhoffman.github.io/borborygmi/getting-started.html" rel="alternate"></link><published>2014-05-26T00:00:00-07:00</published><updated>2014-05-26T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2014-05-26:/borborygmi/getting-started.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
+</content><category term="notes"></category><category term="python"></category><category term="sqlite"></category></entry><entry><title>Creating a site with Pelican and org-mode</title><link href="https://nhoffman.github.io/borborygmi/getting-started.html" rel="alternate"></link><published>2014-05-26T00:00:00-07:00</published><updated>2014-05-26T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2014-05-26:/borborygmi/getting-started.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgc771736"&gt;org-mode integration&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org0ec7423"&gt;org-mode integration&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgb183ff6"&gt;Arranging content in subdirectories&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgf24ce8a"&gt;Syntax highlighting&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org2a3bb70"&gt;Arranging content in subdirectories&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org4ed5425"&gt;Syntax highlighting&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#org0ad0501"&gt;Choosing a theme&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgf56a56a"&gt;Hosting on github pages&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org5f7e2d4"&gt;Examples&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org8a42975"&gt;Choosing a theme&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgb22831a"&gt;Hosting on github pages&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgfdebff2"&gt;Examples&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7391,15 +7391,15 @@ other content that I have scattered about …&lt;/p&gt;</summary><content type="
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgc771736"&gt;org-mode integration&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org0ec7423"&gt;org-mode integration&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgb183ff6"&gt;Arranging content in subdirectories&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgf24ce8a"&gt;Syntax highlighting&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org2a3bb70"&gt;Arranging content in subdirectories&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org4ed5425"&gt;Syntax highlighting&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#org0ad0501"&gt;Choosing a theme&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgf56a56a"&gt;Hosting on github pages&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org5f7e2d4"&gt;Examples&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org8a42975"&gt;Choosing a theme&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgb22831a"&gt;Hosting on github pages&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgfdebff2"&gt;Examples&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7418,9 +7418,9 @@ site generator could import html and saw &lt;a href="http://msnyder.info/posts/2
 together, I thought I'd give it a shot.
 &lt;/p&gt;
 
-&lt;div id="outline-container-orgc771736" class="outline-2"&gt;
-&lt;h2 id="orgc771736"&gt;org-mode integration&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgc771736"&gt;
+&lt;div id="outline-container-org0ec7423" class="outline-2"&gt;
+&lt;h2 id="org0ec7423"&gt;org-mode integration&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org0ec7423"&gt;
 &lt;p&gt;
 At a basic level, integration with org-mode is pretty simple: Pelican
 can import html content with page metadata provided in the
@@ -7445,7 +7445,7 @@ example:
 &lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;pre class="example" id="orgbc9b8cc"&gt;
+&lt;pre class="example" id="orge8cc268"&gt;
 &amp;lt;html&amp;gt;
     &amp;lt;head&amp;gt;
         &amp;lt;title&amp;gt;Creating a site with Pelican and org-mode&amp;lt;/title&amp;gt;
@@ -7477,9 +7477,9 @@ There were a couple of tricky bits, though.
 &lt;/p&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgb183ff6" class="outline-3"&gt;
-&lt;h3 id="orgb183ff6"&gt;Arranging content in subdirectories&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgb183ff6"&gt;
+&lt;div id="outline-container-org2a3bb70" class="outline-3"&gt;
+&lt;h3 id="org2a3bb70"&gt;Arranging content in subdirectories&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org2a3bb70"&gt;
 &lt;p&gt;
 First, I wanted to be able to create subdirectories containing data or
 images for specific posts (as opposed to lumping them all together in
@@ -7518,7 +7518,6 @@ The org-mode source is here:
 
 &lt;pre class="example"&gt;
 ../org-content/getting-started.org
-../org-content/getting-started.org-e
 ../org-content/getting-started:
 Perameles_gunni.jpg
 plot1.png
@@ -7540,15 +7539,6 @@ are relative to the org-mode source):
 And the final output:
 &lt;/p&gt;
 
-&lt;pre class="example"&gt;
-../output/getting-started.html
-../output/getting-started:
-Perameles_gunni.jpg
-plot1.png
-plot2.png
-&lt;/pre&gt;
-
-
 &lt;p&gt;
 An additional complication is that the files for the index and
 individual posts are at the top level of the output directory, but
@@ -7560,9 +7550,9 @@ fixed things up in the latter files with lxml in the script
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgf24ce8a" class="outline-3"&gt;
-&lt;h3 id="orgf24ce8a"&gt;Syntax highlighting&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgf24ce8a"&gt;
+&lt;div id="outline-container-org4ed5425" class="outline-3"&gt;
+&lt;h3 id="org4ed5425"&gt;Syntax highlighting&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org4ed5425"&gt;
 &lt;p&gt;
 A lot of trial and error was required to export code blocks with
 colorized syntax highlighting, and I still can't say I fully
@@ -7593,9 +7583,9 @@ was enough to produce colorized output. Go figure.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org0ad0501" class="outline-2"&gt;
-&lt;h2 id="org0ad0501"&gt;Choosing a theme&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org0ad0501"&gt;
+&lt;div id="outline-container-org8a42975" class="outline-2"&gt;
+&lt;h2 id="org8a42975"&gt;Choosing a theme&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org8a42975"&gt;
 &lt;p&gt;
 There are plenty of choices over at &lt;a href="https://github.com/getpelican/pelican-themes"&gt;the pelican-themes repository&lt;/a&gt;, and
 there were a number that seemed to work well (for the time being)
@@ -7625,9 +7615,9 @@ I finally settled on tuxlite_tbs (thanks, &lt;a href="https://github.com/chanux"
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgf56a56a" class="outline-2"&gt;
-&lt;h2 id="orgf56a56a"&gt;Hosting on github pages&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgf56a56a"&gt;
+&lt;div id="outline-container-orgb22831a" class="outline-2"&gt;
+&lt;h2 id="orgb22831a"&gt;Hosting on github pages&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgb22831a"&gt;
 &lt;p&gt;
 Thanks to the magical &lt;a href="https://github.com/davisp/ghp-import"&gt;ghp-import&lt;/a&gt;, hosting on GitHub pages is as easy as
 &lt;/p&gt;
@@ -7638,9 +7628,9 @@ ghp-import -p output
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org5f7e2d4" class="outline-2"&gt;
-&lt;h2 id="org5f7e2d4"&gt;Examples&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org5f7e2d4"&gt;
+&lt;div id="outline-container-orgfdebff2" class="outline-2"&gt;
+&lt;h2 id="orgfdebff2"&gt;Examples&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgfdebff2"&gt;
 &lt;table class="table table-striped table-bordered table-condensed" style="width: auto;"&gt;
 &lt;caption class="t-above"&gt;&lt;span class="table-number"&gt;Table 1:&lt;/span&gt; An org-mode table&lt;/caption&gt;
 
@@ -7674,7 +7664,7 @@ ghp-import -p output
 &lt;/table&gt;
 
 
-&lt;div id="org40e514c" class="figure"&gt;
+&lt;div id="orgc2fff38" class="figure"&gt;
 &lt;p&gt;&lt;img src="getting-started/Perameles_gunni.jpg" alt="Perameles_gunni.jpg" /&gt;
 &lt;/p&gt;
 &lt;p&gt;&lt;span class="figure-number"&gt;Figure 1: &lt;/span&gt;Hey, a &lt;a href="http://en.wikipedia.org/wiki/File:Perameles_gunni.jpg"&gt;bandicoot&lt;/a&gt;!&lt;/p&gt;
@@ -7688,7 +7678,7 @@ invisible(dev.off())
 &lt;/div&gt;
 
 
-&lt;div id="org2ac81ea" class="figure"&gt;
+&lt;div id="org9c73614" class="figure"&gt;
 &lt;p&gt;&lt;img src="getting-started/plot1.png" alt="plot1.png" /&gt;
 &lt;/p&gt;
 &lt;/div&gt;
@@ -7740,39 +7730,39 @@ select * from foo;
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="org-mode"></category></entry><entry><title>Setting up a new mac</title><link href="https://nhoffman.github.io/borborygmi/mac-setup.html" rel="alternate"></link><published>2013-10-20T00:00:00-07:00</published><updated>2013-10-20T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2013-10-20:/borborygmi/mac-setup.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
+</content><category term="org-mode"></category><category term="org-mode"></category></entry><entry><title>Setting up a new mac</title><link href="https://nhoffman.github.io/borborygmi/mac-setup.html" rel="alternate"></link><published>2013-10-20T00:00:00-07:00</published><updated>2013-10-20T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2013-10-20:/borborygmi/mac-setup.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgf0675fc"&gt;First applications&lt;/a&gt;
+&lt;li&gt;&lt;a href="#orga605746"&gt;First applications&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orga7dc2d4"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orga2bfae2"&gt;X11&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org6161c8f"&gt;Others&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgff97bf1"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org1a037b6"&gt;X11&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org9b84cd0"&gt;Others&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#org031dbe2"&gt;system-level configuration&lt;/a&gt;
+&lt;li&gt;&lt;a href="#orgd13a957"&gt;system-level configuration&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgf55d8ec"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgf9552fd"&gt;fix scroll direction&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org5b82256"&gt;turn off spaces key shortcuts&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org2521558"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgeeb8c67"&gt;fix scroll direction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org4725bf2"&gt;turn off spaces key shortcuts&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#org7ce77fc"&gt;ssh&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgafaf8f5"&gt;homebrew&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org73a18f1"&gt;ssh&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org8296b95"&gt;homebrew&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org8d055dd"&gt;stuff installed using homebrew&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orga300688"&gt;zsh&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org0667a54"&gt;stuff installed using homebrew&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgc0d67b2"&gt;zsh&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#org787c46b"&gt;git&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org6cee451"&gt;iTerm2 settings&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org6e39fb6"&gt;emacs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgcd050e8"&gt;python&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgb8b8148"&gt;R&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org635dc71"&gt;mail&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org6eee07f"&gt;sshfs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org28b1c0c"&gt;wkhtmltopdf&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org4bdb6b3"&gt;git&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org2b5813a"&gt;iTerm2 settings&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org789edd6"&gt;emacs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org3d6ffcd"&gt;python&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org3187750"&gt;R&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgf2e5f70"&gt;mail&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org6dd388e"&gt;sshfs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgbed9b57"&gt;wkhtmltopdf&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7781,35 +7771,35 @@ These are my notes that I took while setting up a …&lt;/p&gt;</summary><conten
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgf0675fc"&gt;First applications&lt;/a&gt;
+&lt;li&gt;&lt;a href="#orga605746"&gt;First applications&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orga7dc2d4"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orga2bfae2"&gt;X11&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org6161c8f"&gt;Others&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgff97bf1"&gt;Developer tools&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org1a037b6"&gt;X11&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org9b84cd0"&gt;Others&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#org031dbe2"&gt;system-level configuration&lt;/a&gt;
+&lt;li&gt;&lt;a href="#orgd13a957"&gt;system-level configuration&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgf55d8ec"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgf9552fd"&gt;fix scroll direction&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org5b82256"&gt;turn off spaces key shortcuts&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org2521558"&gt;turn off spelling autocorrect&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgeeb8c67"&gt;fix scroll direction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org4725bf2"&gt;turn off spaces key shortcuts&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#org7ce77fc"&gt;ssh&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgafaf8f5"&gt;homebrew&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org73a18f1"&gt;ssh&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org8296b95"&gt;homebrew&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org8d055dd"&gt;stuff installed using homebrew&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orga300688"&gt;zsh&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org0667a54"&gt;stuff installed using homebrew&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgc0d67b2"&gt;zsh&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href="#org787c46b"&gt;git&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org6cee451"&gt;iTerm2 settings&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org6e39fb6"&gt;emacs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgcd050e8"&gt;python&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgb8b8148"&gt;R&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org635dc71"&gt;mail&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org6eee07f"&gt;sshfs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org28b1c0c"&gt;wkhtmltopdf&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org4bdb6b3"&gt;git&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org2b5813a"&gt;iTerm2 settings&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org789edd6"&gt;emacs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org3d6ffcd"&gt;python&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org3187750"&gt;R&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgf2e5f70"&gt;mail&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org6dd388e"&gt;sshfs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgbed9b57"&gt;wkhtmltopdf&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7823,13 +7813,13 @@ them.
 &lt;dt&gt;Oct 2014&lt;/dt&gt;&lt;dd&gt;increment versions of various applications, update for Yoesmite&lt;/dd&gt;
 &lt;/dl&gt;
 
-&lt;div id="outline-container-orgf0675fc" class="outline-2"&gt;
-&lt;h2 id="orgf0675fc"&gt;First applications&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgf0675fc"&gt;
+&lt;div id="outline-container-orga605746" class="outline-2"&gt;
+&lt;h2 id="orga605746"&gt;First applications&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orga605746"&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orga7dc2d4" class="outline-3"&gt;
-&lt;h3 id="orga7dc2d4"&gt;Developer tools&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orga7dc2d4"&gt;
+&lt;div id="outline-container-orgff97bf1" class="outline-3"&gt;
+&lt;h3 id="orgff97bf1"&gt;Developer tools&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgff97bf1"&gt;
 &lt;p&gt;
 Pretty much the first thing any mac needs is the command line tools. These can be installed from within the Xcode application, available as a download from the Apple app store (&lt;a href="https://developer.apple.com/xcode/downloads/"&gt;https://developer.apple.com/xcode/downloads/&lt;/a&gt;). Note that this requires an apple id, even though the download is free. Once Xcode is installed, install the command line tools via the Xcode preferences: &lt;a href="http://slashusr.wordpress.com/2012/07/27/os-x-mountain-lion-need-to-reinstall-xcode-command-line-tools/"&gt;http://slashusr.wordpress.com/2012/07/27/os-x-mountain-lion-need-to-reinstall-xcode-command-line-tools/&lt;/a&gt;
 &lt;/p&gt;
@@ -7858,9 +7848,9 @@ See &lt;a href="http://apple.stackexchange.com/questions/88535/how-to-download-t
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orga2bfae2" class="outline-3"&gt;
-&lt;h3 id="orga2bfae2"&gt;X11&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orga2bfae2"&gt;
+&lt;div id="outline-container-org1a037b6" class="outline-3"&gt;
+&lt;h3 id="org1a037b6"&gt;X11&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org1a037b6"&gt;
 &lt;p&gt;
 Download and install Xquartz &lt;a href="http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.7.dmg"&gt;http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.7.dmg&lt;/a&gt;
 &lt;/p&gt;
@@ -7883,9 +7873,9 @@ EOF
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org6161c8f" class="outline-3"&gt;
-&lt;h3 id="org6161c8f"&gt;Others&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org6161c8f"&gt;
+&lt;div id="outline-container-org9b84cd0" class="outline-3"&gt;
+&lt;h3 id="org9b84cd0"&gt;Others&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org9b84cd0"&gt;
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;Chrome&lt;/li&gt;
 &lt;li&gt;iTerm2 (see settings below)&lt;/li&gt;
@@ -7898,29 +7888,29 @@ EOF
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org031dbe2" class="outline-2"&gt;
-&lt;h2 id="org031dbe2"&gt;system-level configuration&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org031dbe2"&gt;
+&lt;div id="outline-container-orgd13a957" class="outline-2"&gt;
+&lt;h2 id="orgd13a957"&gt;system-level configuration&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgd13a957"&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgf55d8ec" class="outline-3"&gt;
-&lt;h3 id="orgf55d8ec"&gt;turn off spelling autocorrect&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgf55d8ec"&gt;
+&lt;div id="outline-container-org2521558" class="outline-3"&gt;
+&lt;h3 id="org2521558"&gt;turn off spelling autocorrect&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org2521558"&gt;
 &lt;p&gt;
 System Preferences &amp;#x2013;&amp;gt; Language &amp;amp; Text &amp;#x2013;&amp;gt; Text tab &amp;#x2013;&amp;gt; unselect "Correct spelling automatically"
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgf9552fd" class="outline-3"&gt;
-&lt;h3 id="orgf9552fd"&gt;fix scroll direction&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orgf9552fd"&gt;
+&lt;div id="outline-container-orgeeb8c67" class="outline-3"&gt;
+&lt;h3 id="orgeeb8c67"&gt;fix scroll direction&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgeeb8c67"&gt;
 &lt;p&gt;
 System Preferences &amp;#x2013;&amp;gt; Trackpad &amp;#x2013;&amp;gt; Scroll &amp;amp; Zoom &amp;#x2013;&amp;gt; unselect "scroll direction: natural"
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org5b82256" class="outline-3"&gt;
-&lt;h3 id="org5b82256"&gt;turn off spaces key shortcuts&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org5b82256"&gt;
+&lt;div id="outline-container-org4725bf2" class="outline-3"&gt;
+&lt;h3 id="org4725bf2"&gt;turn off spaces key shortcuts&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org4725bf2"&gt;
 &lt;p&gt;
 System Preferences &amp;#x2013;&amp;gt; Keyboard &amp;#x2013;&amp;gt; Keyboard Shortcuts &amp;#x2013;&amp;gt; unselect C+{&amp;lt;-,-&amp;gt;}
 &lt;/p&gt;
@@ -7928,18 +7918,18 @@ System Preferences &amp;#x2013;&amp;gt; Keyboard &amp;#x2013;&amp;gt; Keyboard S
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org7ce77fc" class="outline-2"&gt;
-&lt;h2 id="org7ce77fc"&gt;ssh&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org7ce77fc"&gt;
+&lt;div id="outline-container-org73a18f1" class="outline-2"&gt;
+&lt;h2 id="org73a18f1"&gt;ssh&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org73a18f1"&gt;
 &lt;p&gt;
 Copy my default private key.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgafaf8f5" class="outline-2"&gt;
-&lt;h2 id="orgafaf8f5"&gt;homebrew&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgafaf8f5"&gt;
+&lt;div id="outline-container-org8296b95" class="outline-2"&gt;
+&lt;h2 id="org8296b95"&gt;homebrew&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org8296b95"&gt;
 &lt;p&gt;
 Be bloody, bold, and resolute:
 &lt;/p&gt;
@@ -7960,9 +7950,9 @@ Had to fix permissions:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org8d055dd" class="outline-3"&gt;
-&lt;h3 id="org8d055dd"&gt;stuff installed using homebrew&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-org8d055dd"&gt;
+&lt;div id="outline-container-org0667a54" class="outline-3"&gt;
+&lt;h3 id="org0667a54"&gt;stuff installed using homebrew&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-org0667a54"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-sh"&gt;brew install aspell &amp;amp;&amp;amp; \
 brew install autojump &amp;amp;&amp;amp; \
@@ -7983,9 +7973,9 @@ brew install zsh
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orga300688" class="outline-3"&gt;
-&lt;h3 id="orga300688"&gt;zsh&lt;/h3&gt;
-&lt;div class="outline-text-3" id="text-orga300688"&gt;
+&lt;div id="outline-container-orgc0d67b2" class="outline-3"&gt;
+&lt;h3 id="orgc0d67b2"&gt;zsh&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-orgc0d67b2"&gt;
 &lt;p&gt;
 Install zsh with Homebrew above
 &lt;/p&gt;
@@ -8015,9 +8005,9 @@ EOF
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org787c46b" class="outline-2"&gt;
-&lt;h2 id="org787c46b"&gt;git&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org787c46b"&gt;
+&lt;div id="outline-container-org4bdb6b3" class="outline-2"&gt;
+&lt;h2 id="org4bdb6b3"&gt;git&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org4bdb6b3"&gt;
 &lt;pre class="example"&gt;
 git config --global user.name "Noah Hoffman"
 git config --global user.email noah.hoffman@gmail.com
@@ -8025,9 +8015,9 @@ git config --global user.email noah.hoffman@gmail.com
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org6cee451" class="outline-2"&gt;
-&lt;h2 id="org6cee451"&gt;iTerm2 settings&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org6cee451"&gt;
+&lt;div id="outline-container-org2b5813a" class="outline-2"&gt;
+&lt;h2 id="org2b5813a"&gt;iTerm2 settings&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org2b5813a"&gt;
 &lt;p&gt;
 Preferences &amp;#x2013;&amp;gt; Profiles &amp;#x2013;&amp;gt; Keys and do these things:
 &lt;/p&gt;
@@ -8043,9 +8033,9 @@ Preferences &amp;#x2013;&amp;gt; Profiles &amp;#x2013;&amp;gt; Colors &amp;#x201
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org6e39fb6" class="outline-2"&gt;
-&lt;h2 id="org6e39fb6"&gt;emacs&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org6e39fb6"&gt;
+&lt;div id="outline-container-org789edd6" class="outline-2"&gt;
+&lt;h2 id="org789edd6"&gt;emacs&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org789edd6"&gt;
 &lt;p&gt;
 Install emacs24 binary from &lt;a href="http://emacsformacosx.com/"&gt;http://emacsformacosx.com/&lt;/a&gt;
 &lt;/p&gt;
@@ -8066,9 +8056,9 @@ git clone git@github.com:nhoffman/.emacs.d.git
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgcd050e8" class="outline-2"&gt;
-&lt;h2 id="orgcd050e8"&gt;python&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgcd050e8"&gt;
+&lt;div id="outline-container-org3d6ffcd" class="outline-2"&gt;
+&lt;h2 id="org3d6ffcd"&gt;python&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org3d6ffcd"&gt;
 &lt;p&gt;
 Doesn't work out so well using homebrew, so let's install from source. Note that we did install readline with homebrew above.
 &lt;/p&gt;
@@ -8197,9 +8187,9 @@ pip install ansible
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgb8b8148" class="outline-2"&gt;
-&lt;h2 id="orgb8b8148"&gt;R&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgb8b8148"&gt;
+&lt;div id="outline-container-org3187750" class="outline-2"&gt;
+&lt;h2 id="org3187750"&gt;R&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org3187750"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-sh"&gt;cd ~/src
 wget http://cran.fhcrc.org/bin/macosx/R-3.1.1-mavericks.pkg &amp;amp;&amp;amp; \
@@ -8217,17 +8207,17 @@ EOF
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org635dc71" class="outline-2"&gt;
-&lt;h2 id="org635dc71"&gt;mail&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org635dc71"&gt;
+&lt;div id="outline-container-orgf2e5f70" class="outline-2"&gt;
+&lt;h2 id="orgf2e5f70"&gt;mail&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgf2e5f70"&gt;
 &lt;p&gt;
 &lt;a href="http://www.washington.edu/itconnect/connect/email/uw-email/configuring/os-x-mail6/"&gt;http://www.washington.edu/itconnect/connect/email/uw-email/configuring/os-x-mail6/&lt;/a&gt;
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org6eee07f" class="outline-2"&gt;
-&lt;h2 id="org6eee07f"&gt;sshfs&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org6eee07f"&gt;
+&lt;div id="outline-container-org6dd388e" class="outline-2"&gt;
+&lt;h2 id="org6dd388e"&gt;sshfs&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org6dd388e"&gt;
 &lt;p&gt;
 Now provided by the project &lt;a href="http://osxfuse.github.io/"&gt;http://osxfuse.github.io/&lt;/a&gt; - the links below are for binaries provided as installers.
 &lt;/p&gt;
@@ -8245,9 +8235,9 @@ wget https://github.com/osxfuse/sshfs/releases/download/osxfuse-sshfs-2.5.0/sshf
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org28b1c0c" class="outline-2"&gt;
-&lt;h2 id="org28b1c0c"&gt;wkhtmltopdf&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org28b1c0c"&gt;
+&lt;div id="outline-container-orgbed9b57" class="outline-2"&gt;
+&lt;h2 id="orgbed9b57"&gt;wkhtmltopdf&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgbed9b57"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-sh"&gt;cd ~/src
 wget 'http://wkhtmltopdf.googlecode.com/files/wkhtmltopdf.dmg'
@@ -8266,15 +8256,15 @@ Now create an alias:
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="mac"></category></entry><entry><title>Installing R packages</title><link href="https://nhoffman.github.io/borborygmi/installing-r-packages.html" rel="alternate"></link><published>2010-03-22T00:00:00-07:00</published><updated>2010-03-22T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2010-03-22:/borborygmi/installing-r-packages.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
+</content><category term="notes"></category><category term="mac"></category></entry><entry><title>Installing R packages</title><link href="https://nhoffman.github.io/borborygmi/installing-r-packages.html" rel="alternate"></link><published>2010-03-22T00:00:00-07:00</published><updated>2010-03-22T00:00:00-07:00</updated><author><name>Noah Hoffman</name></author><id>tag:nhoffman.github.io,2010-03-22:/borborygmi/installing-r-packages.html</id><summary type="html">&lt;div id="table-of-contents"&gt;
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgad0e9d5"&gt;Installing from CRAN&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org3d87a5d"&gt;Bioconductor&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org9ed976a"&gt;R-forge&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgd31cbc9"&gt;Installing packages locally&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org5fbd423"&gt;Reloading a package&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org52f5484"&gt;Installing from CRAN&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgc0d8266"&gt;Bioconductor&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgbc47787"&gt;R-forge&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org742f7b7"&gt;Installing packages locally&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org25614a0"&gt;Reloading a package&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -8282,9 +8272,9 @@ Now create an alias:
 Notes to myself about installing R packages.
 &lt;/p&gt;
 
-&lt;div id="outline-container-orgad0e9d5" class="outline-2"&gt;
-&lt;h2 id="orgad0e9d5"&gt;Installing from CRAN&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgad0e9d5"&gt;
+&lt;div id="outline-container-org52f5484" class="outline-2"&gt;
+&lt;h2 id="org52f5484"&gt;Installing from CRAN&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org52f5484"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-R"&gt;install.packages(c("ape","sqldf","ROCR"), repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE)
 &lt;/pre&gt;
@@ -8292,20 +8282,20 @@ Notes to myself about installing R packages.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org3d87a5d" class="outline-2"&gt;
-&lt;h2 id="org3d87a5d"&gt;Bioconductor&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org3d87a5d"&gt;
+&lt;div id="outline-container-orgc0d8266" class="outline-2"&gt;
+&lt;h2 id="orgc0d8266"&gt;Bioconductor&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgc0d8266"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-R"&gt;source("http://bioconductor.org/biocLite.R")
 biocLite(c("Biostrings","BSgenome …&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</summary><content type="html">&lt;div id="table-of-contents"&gt;
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgad0e9d5"&gt;Installing from CRAN&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org3d87a5d"&gt;Bioconductor&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org9ed976a"&gt;R-forge&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgd31cbc9"&gt;Installing packages locally&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org5fbd423"&gt;Reloading a package&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org52f5484"&gt;Installing from CRAN&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgc0d8266"&gt;Bioconductor&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgbc47787"&gt;R-forge&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org742f7b7"&gt;Installing packages locally&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org25614a0"&gt;Reloading a package&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -8313,9 +8303,9 @@ biocLite(c("Biostrings","BSgenome …&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;/di
 Notes to myself about installing R packages.
 &lt;/p&gt;
 
-&lt;div id="outline-container-orgad0e9d5" class="outline-2"&gt;
-&lt;h2 id="orgad0e9d5"&gt;Installing from CRAN&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgad0e9d5"&gt;
+&lt;div id="outline-container-org52f5484" class="outline-2"&gt;
+&lt;h2 id="org52f5484"&gt;Installing from CRAN&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org52f5484"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-R"&gt;install.packages(c("ape","sqldf","ROCR"), repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE)
 &lt;/pre&gt;
@@ -8323,9 +8313,9 @@ Notes to myself about installing R packages.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org3d87a5d" class="outline-2"&gt;
-&lt;h2 id="org3d87a5d"&gt;Bioconductor&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org3d87a5d"&gt;
+&lt;div id="outline-container-orgc0d8266" class="outline-2"&gt;
+&lt;h2 id="orgc0d8266"&gt;Bioconductor&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgc0d8266"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-R"&gt;source("http://bioconductor.org/biocLite.R")
 biocLite(c("Biostrings","BSgenome")) # for example
@@ -8354,9 +8344,9 @@ R CMD INSTALL Biostrings
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org9ed976a" class="outline-2"&gt;
-&lt;h2 id="org9ed976a"&gt;R-forge&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org9ed976a"&gt;
+&lt;div id="outline-container-orgbc47787" class="outline-2"&gt;
+&lt;h2 id="orgbc47787"&gt;R-forge&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgbc47787"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-R"&gt;install.packages("packagename",repos="http://R-Forge.R-project.org")
 &lt;/pre&gt;
@@ -8373,9 +8363,9 @@ Read-only subversion repository may be checked out using
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgd31cbc9" class="outline-2"&gt;
-&lt;h2 id="orgd31cbc9"&gt;Installing packages locally&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgd31cbc9"&gt;
+&lt;div id="outline-container-org742f7b7" class="outline-2"&gt;
+&lt;h2 id="org742f7b7"&gt;Installing packages locally&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org742f7b7"&gt;
 &lt;p&gt;
 If you can't (or don't want to) install packages to the system R location, you can create a local library. For example:
 &lt;/p&gt;
@@ -8389,9 +8379,9 @@ R CMD INSTALL --library=~/R/library somepackage.gz
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org5fbd423" class="outline-2"&gt;
-&lt;h2 id="org5fbd423"&gt;Reloading a package&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org5fbd423"&gt;
+&lt;div id="outline-container-org25614a0" class="outline-2"&gt;
+&lt;h2 id="org25614a0"&gt;Reloading a package&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org25614a0"&gt;
 &lt;p&gt;
 Calling &lt;code&gt;library()&lt;/code&gt; after a package has already been loaded does not update the namespace with updates if the library has changed (eg, during package development). Instead, do something like this:
 &lt;/p&gt;
@@ -8405,4 +8395,4 @@ Calling &lt;code&gt;library()&lt;/code&gt; after a package has already been load
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="R-language"></category></entry></feed>
+</content><category term="notes"></category><category term="R-language"></category></entry></feed>

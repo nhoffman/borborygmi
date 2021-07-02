@@ -62,41 +62,41 @@ Fri 15 February 2019 &#8212;
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgf1c153d">system settings</a>
+<li><a href="#org338efcd">system settings</a>
 <ul>
-<li><a href="#org1fe1f60">turn off spelling autocorrect</a></li>
-<li><a href="#orga746fbd">unmap Control + left,right</a></li>
-<li><a href="#org0f4cf96">Turn on FileVault</a></li>
+<li><a href="#org4fcf043">turn off spelling autocorrect</a></li>
+<li><a href="#orga69f11b">unmap Control + left,right</a></li>
+<li><a href="#org9b34638">Turn on FileVault</a></li>
 </ul>
 </li>
-<li><a href="#orgc34ff30">Developer tools</a></li>
-<li><a href="#org37b2a56">iTerm2</a></li>
-<li><a href="#orgd5a0bd2">homebrew</a>
+<li><a href="#org8d04c34">Developer tools</a></li>
+<li><a href="#orga122c04">iTerm2</a></li>
+<li><a href="#orgdd1e4c8">homebrew</a>
 <ul>
-<li><a href="#orgc484dc1">homebrew API token</a></li>
-<li><a href="#orgb4675ad">Terminal applications</a></li>
-<li><a href="#orgd900b23">desktop applications</a></li>
+<li><a href="#org66d9339">homebrew API token</a></li>
+<li><a href="#orge1aafdd">Terminal applications</a></li>
+<li><a href="#org16b30bc">desktop applications</a></li>
 </ul>
 </li>
-<li><a href="#org6943079">python</a>
+<li><a href="#org46b8a76">python</a>
 <ul>
-<li><a href="#orgd1c9daa">dependencies</a></li>
-<li><a href="#org69c1881">python2</a></li>
-<li><a href="#org9397113">python3</a>
+<li><a href="#org2525648">dependencies</a></li>
+<li><a href="#org2ec0ec5">python2</a></li>
+<li><a href="#orgfdf8097">python3</a>
 <ul>
-<li><a href="#org72536dc">scons</a></li>
+<li><a href="#orgcb3a5cc">scons</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org3b2ad85">emacs</a></li>
-<li><a href="#orgf532829">zsh</a></li>
-<li><a href="#org1320fc2">R</a></li>
-<li><a href="#org95f4942">postgresql</a></li>
-<li><a href="#org409b626">X11</a></li>
-<li><a href="#org05aff23">virtualbox and vagrant</a>
+<li><a href="#orgdb4bb78">emacs</a></li>
+<li><a href="#orgdae7925">zsh</a></li>
+<li><a href="#orgbead382">R</a></li>
+<li><a href="#org08f34e9">postgresql</a></li>
+<li><a href="#orgbf72b40">X11</a></li>
+<li><a href="#orgd56999f">virtualbox and vagrant</a>
 <ul>
-<li><a href="#orgc601d6e">install an ubuntu16.04 VM</a></li>
+<li><a href="#orgb17752c">install an ubuntu16.04 VM</a></li>
 </ul>
 </li>
 </ul>
@@ -126,21 +126,21 @@ Note that none of these steps require an Apple ID - I held off on
 signing in until the very end just to see if it was possible.
 </p>
 
-<div id="outline-container-orgf1c153d" class="outline-2">
-<h2 id="orgf1c153d">system settings</h2>
-<div class="outline-text-2" id="text-orgf1c153d">
+<div id="outline-container-org338efcd" class="outline-2">
+<h2 id="org338efcd">system settings</h2>
+<div class="outline-text-2" id="text-org338efcd">
 </div>
-<div id="outline-container-org1fe1f60" class="outline-3">
-<h3 id="org1fe1f60">turn off spelling autocorrect</h3>
-<div class="outline-text-3" id="text-org1fe1f60">
+<div id="outline-container-org4fcf043" class="outline-3">
+<h3 id="org4fcf043">turn off spelling autocorrect</h3>
+<div class="outline-text-3" id="text-org4fcf043">
 <pre class="example">
 System Preferences --&gt; Keyboard --&gt; Text tab --&gt; unselect "Correct spelling automatically" and others
 </pre>
 </div>
 </div>
-<div id="outline-container-orga746fbd" class="outline-3">
-<h3 id="orga746fbd">unmap Control + left,right</h3>
-<div class="outline-text-3" id="text-orga746fbd">
+<div id="outline-container-orga69f11b" class="outline-3">
+<h3 id="orga69f11b">unmap Control + left,right</h3>
+<div class="outline-text-3" id="text-orga69f11b">
 <p>
 I use Control plus the left and right arrow keys to move between
 windows in emacs and tmux.
@@ -152,9 +152,9 @@ System Preferences --&gt; Keyboard --&gt; Shortcuts --&gt; uncheck mission contr
 </div>
 </div>
 
-<div id="outline-container-org0f4cf96" class="outline-3">
-<h3 id="org0f4cf96">Turn on FileVault</h3>
-<div class="outline-text-3" id="text-org0f4cf96">
+<div id="outline-container-org9b34638" class="outline-3">
+<h3 id="org9b34638">Turn on FileVault</h3>
+<div class="outline-text-3" id="text-org9b34638">
 <pre class="example">
 System Preferences --&gt; Security &amp; privacy --&gt; FileVault
 </pre>
@@ -167,9 +167,9 @@ I used a recovery key option rather than iCloud for my work machine, iCloud for 
 </div>
 </div>
 
-<div id="outline-container-orgc34ff30" class="outline-2">
-<h2 id="orgc34ff30">Developer tools</h2>
-<div class="outline-text-2" id="text-orgc34ff30">
+<div id="outline-container-org8d04c34" class="outline-2">
+<h2 id="org8d04c34">Developer tools</h2>
+<div class="outline-text-2" id="text-org8d04c34">
 <p>
 Pretty much the first thing that needs to happen. This can be done
 from the command line:
@@ -182,9 +182,9 @@ from the command line:
 </div>
 </div>
 
-<div id="outline-container-org37b2a56" class="outline-2">
-<h2 id="org37b2a56">iTerm2</h2>
-<div class="outline-text-2" id="text-org37b2a56">
+<div id="outline-container-orga122c04" class="outline-2">
+<h2 id="orga122c04">iTerm2</h2>
+<div class="outline-text-2" id="text-orga122c04">
 <pre class="example">
 brew cask install iterm2
 </pre>
@@ -213,9 +213,9 @@ Default appearance:
 </div>
 </div>
 
-<div id="outline-container-orgd5a0bd2" class="outline-2">
-<h2 id="orgd5a0bd2">homebrew</h2>
-<div class="outline-text-2" id="text-orgd5a0bd2">
+<div id="outline-container-orgdd1e4c8" class="outline-2">
+<h2 id="orgdd1e4c8">homebrew</h2>
+<div class="outline-text-2" id="text-orgdd1e4c8">
 <p>
 Homebrew no longer requires user-ownership of /usr/local, so things
 are pretty easy now:
@@ -228,9 +228,9 @@ brew doctor
 </div>
 </div>
 
-<div id="outline-container-orgc484dc1" class="outline-3">
-<h3 id="orgc484dc1">homebrew API token</h3>
-<div class="outline-text-3" id="text-orgc484dc1">
+<div id="outline-container-org66d9339" class="outline-3">
+<h3 id="org66d9339">homebrew API token</h3>
+<div class="outline-text-3" id="text-org66d9339">
 <p>
 Apparently lots of requests to GutHub via homebrew can hit a rate limit. There's a higher limit if you create an API token. See <a href="https://gist.github.com/christopheranderton/8644743">https://gist.github.com/christopheranderton/8644743</a>
 </p>
@@ -253,9 +253,9 @@ export HOMEBREW_GITHUB_API_TOKEN=token_here
 </div>
 </div>
 
-<div id="outline-container-orgb4675ad" class="outline-3">
-<h3 id="orgb4675ad">Terminal applications</h3>
-<div class="outline-text-3" id="text-orgb4675ad">
+<div id="outline-container-orge1aafdd" class="outline-3">
+<h3 id="orge1aafdd">Terminal applications</h3>
+<div class="outline-text-3" id="text-orge1aafdd">
 <p>
 Many packages are installed later with additional elaboration or in as
 dependencies for other applications; here are some more or less
@@ -279,9 +279,9 @@ brew install xsv
 </div>
 </div>
 
-<div id="outline-container-orgd900b23" class="outline-3">
-<h3 id="orgd900b23">desktop applications</h3>
-<div class="outline-text-3" id="text-orgd900b23">
+<div id="outline-container-org16b30bc" class="outline-3">
+<h3 id="org16b30bc">desktop applications</h3>
+<div class="outline-text-3" id="text-org16b30bc">
 <p>
 Homebrew installs desktop apps too!
 </p>
@@ -307,9 +307,9 @@ credentials that must be installed interactively.
 </div>
 </div>
 
-<div id="outline-container-org6943079" class="outline-2">
-<h2 id="org6943079">python</h2>
-<div class="outline-text-2" id="text-org6943079">
+<div id="outline-container-org46b8a76" class="outline-2">
+<h2 id="org46b8a76">python</h2>
+<div class="outline-text-2" id="text-org46b8a76">
 <p>
 Mojave seems to ship with Python 2.7.10 and no python3, so let's use
 homebrew to get recent versions of both.
@@ -326,9 +326,9 @@ See
 </p>
 </div>
 
-<div id="outline-container-orgd1c9daa" class="outline-3">
-<h3 id="orgd1c9daa">dependencies</h3>
-<div class="outline-text-3" id="text-orgd1c9daa">
+<div id="outline-container-org2525648" class="outline-3">
+<h3 id="org2525648">dependencies</h3>
+<div class="outline-text-3" id="text-org2525648">
 <p>
 Run <code>brew info python</code> for required and optional dependencies
 </p>
@@ -340,9 +340,9 @@ Run <code>brew info python</code> for required and optional dependencies
 </div>
 </div>
 
-<div id="outline-container-org69c1881" class="outline-3">
-<h3 id="org69c1881">python2</h3>
-<div class="outline-text-3" id="text-org69c1881">
+<div id="outline-container-org2ec0ec5" class="outline-3">
+<h3 id="org2ec0ec5">python2</h3>
+<div class="outline-text-3" id="text-org2ec0ec5">
 <div class="org-src-container">
 <pre class="src src-sh">brew install python@2
 /usr/local/bin/pip2 install -U pip setuptools virtualenv wheel
@@ -351,9 +351,9 @@ Run <code>brew info python</code> for required and optional dependencies
 </div>
 </div>
 
-<div id="outline-container-org9397113" class="outline-3">
-<h3 id="org9397113">python3</h3>
-<div class="outline-text-3" id="text-org9397113">
+<div id="outline-container-orgfdf8097" class="outline-3">
+<h3 id="orgfdf8097">python3</h3>
+<div class="outline-text-3" id="text-orgfdf8097">
 <p>
 Note that "python" corresponds to the python3 homebrew recipe.
 </p>
@@ -376,9 +376,9 @@ pip3 install pgcli
 </div>
 </div>
 
-<div id="outline-container-org72536dc" class="outline-4">
-<h4 id="org72536dc">scons</h4>
-<div class="outline-text-4" id="text-org72536dc">
+<div id="outline-container-orgcb3a5cc" class="outline-4">
+<h4 id="orgcb3a5cc">scons</h4>
+<div class="outline-text-4" id="text-orgcb3a5cc">
 <p>
 Note that <code>scons</code> wants to install man pages to <code>/usr/local/man</code>, which is owned by root. You'll need to do this first:
 </p>
@@ -394,9 +394,9 @@ pip3 install scons
 </div>
 </div>
 
-<div id="outline-container-org3b2ad85" class="outline-2">
-<h2 id="org3b2ad85">emacs</h2>
-<div class="outline-text-2" id="text-org3b2ad85">
+<div id="outline-container-orgdb4bb78" class="outline-2">
+<h2 id="orgdb4bb78">emacs</h2>
+<div class="outline-text-2" id="text-orgdb4bb78">
 <p>
 Install latest emacs binary from <a href="http://emacsformacosx.com/">http://emacsformacosx.com/</a>
 </p>
@@ -434,9 +434,9 @@ bin/venv.sh
 </div>
 </div>
 
-<div id="outline-container-orgf532829" class="outline-2">
-<h2 id="orgf532829">zsh</h2>
-<div class="outline-text-2" id="text-orgf532829">
+<div id="outline-container-orgdae7925" class="outline-2">
+<h2 id="orgdae7925">zsh</h2>
+<div class="outline-text-2" id="text-orgdae7925">
 <p>
 Install zsh with Homebrew
 </p>
@@ -471,9 +471,9 @@ git clone git@bitbucket.org:nhoffman/dotfiles.git
 </div>
 </div>
 
-<div id="outline-container-org1320fc2" class="outline-2">
-<h2 id="org1320fc2">R</h2>
-<div class="outline-text-2" id="text-org1320fc2">
+<div id="outline-container-orgbead382" class="outline-2">
+<h2 id="orgbead382">R</h2>
+<div class="outline-text-2" id="text-orgbead382">
 <p>
 I had to give up on installing R with homebrew because it seemed to
 result in an interpreter that always wanted to install packages from
@@ -507,9 +507,9 @@ Also:
 </div>
 </div>
 
-<div id="outline-container-org95f4942" class="outline-2">
-<h2 id="org95f4942">postgresql</h2>
-<div class="outline-text-2" id="text-org95f4942">
+<div id="outline-container-org08f34e9" class="outline-2">
+<h2 id="org08f34e9">postgresql</h2>
+<div class="outline-text-2" id="text-org08f34e9">
 <div class="org-src-container">
 <pre class="src src-sh">brew cask install postgres
 </pre>
@@ -527,9 +527,9 @@ path to the CLI for the version you want to use to your PATH, eg:
 </div>
 </div>
 
-<div id="outline-container-org409b626" class="outline-2">
-<h2 id="org409b626">X11</h2>
-<div class="outline-text-2" id="text-org409b626">
+<div id="outline-container-orgbf72b40" class="outline-2">
+<h2 id="orgbf72b40">X11</h2>
+<div class="outline-text-2" id="text-orgbf72b40">
 <p>
 install Xquartz
 </p>
@@ -559,9 +559,9 @@ EOF
 </div>
 </div>
 
-<div id="outline-container-org05aff23" class="outline-2">
-<h2 id="org05aff23">virtualbox and vagrant</h2>
-<div class="outline-text-2" id="text-org05aff23">
+<div id="outline-container-orgd56999f" class="outline-2">
+<h2 id="orgd56999f">virtualbox and vagrant</h2>
+<div class="outline-text-2" id="text-orgd56999f">
 <div class="org-src-container">
 <pre class="src src-sh">brew cask install virtualbox
 brew cask install vagrant
@@ -588,9 +588,9 @@ preferences, and change default machine folder to ~/VirtualBox
 </p>
 </div>
 
-<div id="outline-container-orgc601d6e" class="outline-3">
-<h3 id="orgc601d6e">install an ubuntu16.04 VM</h3>
-<div class="outline-text-3" id="text-orgc601d6e">
+<div id="outline-container-orgb17752c" class="outline-3">
+<h3 id="orgb17752c">install an ubuntu16.04 VM</h3>
+<div class="outline-text-3" id="text-orgb17752c">
 <p>
 see <a href="https://app.vagrantup.com/ubuntu/boxes/xenial64">https://app.vagrantup.com/ubuntu/boxes/xenial64</a>
 </p>

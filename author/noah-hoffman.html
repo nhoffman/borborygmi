@@ -67,27 +67,27 @@ Thu 20 May 2021 &#8212;
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orge430839">system settings</a>
+<li><a href="#org4f52105">system settings</a>
 <ul>
-<li><a href="#org95c9859">turn off spelling autocorrect</a></li>
-<li><a href="#org853a6ce">unmap Control + left,right</a></li>
-<li><a href="#orga1fc9ee">Turn on FileVault</a></li>
+<li><a href="#org67a33b3">turn off spelling autocorrect</a></li>
+<li><a href="#orgec1217e">unmap Control + left,right</a></li>
+<li><a href="#org5e591d9">Turn on FileVault</a></li>
 </ul>
 </li>
-<li><a href="#orgb9650f1">Developer tools</a></li>
-<li><a href="#orga754461">homebrew</a>
+<li><a href="#orgd16dd08">Developer tools</a></li>
+<li><a href="#org65fc8f9">homebrew</a>
 <ul>
-<li><a href="#org4f4a973">homebrew API token</a></li>
-<li><a href="#orga8e478c">CLI applications</a></li>
-<li><a href="#org9ad1c13">desktop applications</a></li>
+<li><a href="#org8a736db">homebrew API token</a></li>
+<li><a href="#orgae57dd6">CLI applications</a></li>
+<li><a href="#org87eb953">desktop applications</a></li>
 </ul>
 </li>
-<li><a href="#org4806d84">iTerm2</a></li>
-<li><a href="#org843d9c8">zsh</a></li>
-<li><a href="#org23a5717">python</a></li>
-<li><a href="#org8b18c05">emacs</a></li>
-<li><a href="#org2e05bf8">R</a></li>
-<li><a href="#orgea373c0">postgresql</a></li>
+<li><a href="#org5ddff9f">iTerm2</a></li>
+<li><a href="#org9cf7c1a">zsh</a></li>
+<li><a href="#org784234d">python</a></li>
+<li><a href="#orgbd129b9">emacs</a></li>
+<li><a href="#orgcf63de0">R</a></li>
+<li><a href="#orga1cf366">postgresql</a></li>
 </ul>
 </div>
 </div>
@@ -136,21 +136,21 @@ Note that none of the steps below require an Apple ID - I held off on
 signing in until the very end just to see if it was possible.
 </p>
 
-<div id="outline-container-orge430839" class="outline-2">
-<h2 id="orge430839">system settings</h2>
-<div class="outline-text-2" id="text-orge430839">
+<div id="outline-container-org4f52105" class="outline-2">
+<h2 id="org4f52105">system settings</h2>
+<div class="outline-text-2" id="text-org4f52105">
 </div>
-<div id="outline-container-org95c9859" class="outline-3">
-<h3 id="org95c9859">turn off spelling autocorrect</h3>
-<div class="outline-text-3" id="text-org95c9859">
+<div id="outline-container-org67a33b3" class="outline-3">
+<h3 id="org67a33b3">turn off spelling autocorrect</h3>
+<div class="outline-text-3" id="text-org67a33b3">
 <pre class="example">
 System Preferences --&gt; Keyboard --&gt; Text tab --&gt; unselect "Correct spelling automatically" and others
 </pre>
 </div>
 </div>
-<div id="outline-container-org853a6ce" class="outline-3">
-<h3 id="org853a6ce">unmap Control + left,right</h3>
-<div class="outline-text-3" id="text-org853a6ce">
+<div id="outline-container-orgec1217e" class="outline-3">
+<h3 id="orgec1217e">unmap Control + left,right</h3>
+<div class="outline-text-3" id="text-orgec1217e">
 <p>
 I use Control plus the left and right arrow keys to move between
 windows in emacs and tmux, so I disable the defaults.
@@ -162,9 +162,9 @@ System Preferences --&gt; Keyboard --&gt; Shortcuts --&gt; uncheck mission contr
 </div>
 </div>
 
-<div id="outline-container-orga1fc9ee" class="outline-3">
-<h3 id="orga1fc9ee">Turn on FileVault</h3>
-<div class="outline-text-3" id="text-orga1fc9ee">
+<div id="outline-container-org5e591d9" class="outline-3">
+<h3 id="org5e591d9">Turn on FileVault</h3>
+<div class="outline-text-3" id="text-org5e591d9">
 <pre class="example">
 System Preferences --&gt; Security &amp; privacy --&gt; FileVault
 </pre>
@@ -177,9 +177,9 @@ I used a recovery key option rather than iCloud for my work machine, iCloud for 
 </div>
 </div>
 
-<div id="outline-container-orgb9650f1" class="outline-2">
-<h2 id="orgb9650f1">Developer tools</h2>
-<div class="outline-text-2" id="text-orgb9650f1">
+<div id="outline-container-orgd16dd08" class="outline-2">
+<h2 id="orgd16dd08">Developer tools</h2>
+<div class="outline-text-2" id="text-orgd16dd08">
 <p>
 Pretty much the first thing that needs to happen. This can be done
 from the command line:
@@ -192,9 +192,9 @@ from the command line:
 </div>
 </div>
 
-<div id="outline-container-orga754461" class="outline-2">
-<h2 id="orga754461">homebrew</h2>
-<div class="outline-text-2" id="text-orga754461">
+<div id="outline-container-org65fc8f9" class="outline-2">
+<h2 id="org65fc8f9">homebrew</h2>
+<div class="outline-text-2" id="text-org65fc8f9">
 <p>
 Homebrew no longer requires user-ownership of /usr/local, so things
 are pretty easy now:
@@ -207,9 +207,9 @@ brew doctor
 </div>
 </div>
 
-<div id="outline-container-org4f4a973" class="outline-3">
-<h3 id="org4f4a973">homebrew API token</h3>
-<div class="outline-text-3" id="text-org4f4a973">
+<div id="outline-container-org8a736db" class="outline-3">
+<h3 id="org8a736db">homebrew API token</h3>
+<div class="outline-text-3" id="text-org8a736db">
 <p>
 Apparently lots of requests to GitHub via homebrew can hit a rate limit. There's a higher limit if you create an API token. See <a href="https://gist.github.com/christopheranderton/8644743">https://gist.github.com/christopheranderton/8644743</a>
 </p>
@@ -232,9 +232,9 @@ export HOMEBREW_GITHUB_API_TOKEN=token_here
 </div>
 </div>
 
-<div id="outline-container-orga8e478c" class="outline-3">
-<h3 id="orga8e478c">CLI applications</h3>
-<div class="outline-text-3" id="text-orga8e478c">
+<div id="outline-container-orgae57dd6" class="outline-3">
+<h3 id="orgae57dd6">CLI applications</h3>
+<div class="outline-text-3" id="text-orgae57dd6">
 <p>
 Many packages are installed later with additional elaboration or in as
 dependencies for other applications; here are some more or less
@@ -261,9 +261,9 @@ brew install jq
 </div>
 </div>
 
-<div id="outline-container-org9ad1c13" class="outline-3">
-<h3 id="org9ad1c13">desktop applications</h3>
-<div class="outline-text-3" id="text-org9ad1c13">
+<div id="outline-container-org87eb953" class="outline-3">
+<h3 id="org87eb953">desktop applications</h3>
+<div class="outline-text-3" id="text-org87eb953">
 <p>
 Homebrew installs desktop apps too! (the syntax has changed a bit)
 </p>
@@ -281,9 +281,9 @@ credentials that must be installed interactively.
 </div>
 </div>
 
-<div id="outline-container-org4806d84" class="outline-2">
-<h2 id="org4806d84">iTerm2</h2>
-<div class="outline-text-2" id="text-org4806d84">
+<div id="outline-container-org5ddff9f" class="outline-2">
+<h2 id="org5ddff9f">iTerm2</h2>
+<div class="outline-text-2" id="text-org5ddff9f">
 <p>
 Install using homebrew above. Update a few settings.
 </p>
@@ -326,9 +326,9 @@ curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | bash
 </div>
 </div>
 
-<div id="outline-container-org843d9c8" class="outline-2">
-<h2 id="org843d9c8">zsh</h2>
-<div class="outline-text-2" id="text-org843d9c8">
+<div id="outline-container-org9cf7c1a" class="outline-2">
+<h2 id="org9cf7c1a">zsh</h2>
+<div class="outline-text-2" id="text-org9cf7c1a">
 <p>
 Change shell to zsh. I'll just use the zsh shipped with the OS.
 </p>
@@ -351,9 +351,9 @@ git clone git@bitbucket.org:nhoffman/dotfiles.git
 </div>
 </div>
 
-<div id="outline-container-org23a5717" class="outline-2">
-<h2 id="org23a5717">python</h2>
-<div class="outline-text-2" id="text-org23a5717">
+<div id="outline-container-org784234d" class="outline-2">
+<h2 id="org784234d">python</h2>
+<div class="outline-text-2" id="text-org784234d">
 <p>
 My version of Big Sur provided Python 2.7.16 and 3.9.5. My most recent evolution of managing python interpreters is to use pyenv. See <a href="https://realpython.com/intro-to-pyenv/">https://realpython.com/intro-to-pyenv/</a>
 </p>
@@ -411,9 +411,9 @@ pyenv install -v 3.8.8
 </div>
 </div>
 
-<div id="outline-container-org8b18c05" class="outline-2">
-<h2 id="org8b18c05">emacs</h2>
-<div class="outline-text-2" id="text-org8b18c05">
+<div id="outline-container-orgbd129b9" class="outline-2">
+<h2 id="orgbd129b9">emacs</h2>
+<div class="outline-text-2" id="text-orgbd129b9">
 <p>
 Install latest emacs binary from <a href="http://emacsformacosx.com/">http://emacsformacosx.com/</a>
 </p>
@@ -451,9 +451,9 @@ bin/python-setup.sh
 </div>
 </div>
 
-<div id="outline-container-org2e05bf8" class="outline-2">
-<h2 id="org2e05bf8">R</h2>
-<div class="outline-text-2" id="text-org2e05bf8">
+<div id="outline-container-orgcf63de0" class="outline-2">
+<h2 id="orgcf63de0">R</h2>
+<div class="outline-text-2" id="text-orgcf63de0">
 <p>
 I had to give up on installing R with homebrew because it seemed to
 result in an interpreter that always wanted to install packages from
@@ -487,9 +487,9 @@ Also:
 </div>
 </div>
 
-<div id="outline-container-orgea373c0" class="outline-2">
-<h2 id="orgea373c0">postgresql</h2>
-<div class="outline-text-2" id="text-orgea373c0">
+<div id="outline-container-orga1cf366" class="outline-2">
+<h2 id="orga1cf366">postgresql</h2>
+<div class="outline-text-2" id="text-orga1cf366">
 <p>
 Install from <a href="https://postgresapp.com/downloads.html">https://postgresapp.com/downloads.html</a>
 </p>
@@ -545,37 +545,37 @@ path to the CLI for the version you want to use to your PATH, eg:
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org9270b6f">system settings</a>
+<li><a href="#orgbc4bd4c">system settings</a>
 <ul>
-<li><a href="#orgabf0cbb">turn off spelling autocorrect</a></li>
-<li><a href="#org5af910a">unmap Control + left,right</a></li>
-<li><a href="#org84c17b8">Turn on FileVault</a></li>
+<li><a href="#orgc302056">turn off spelling autocorrect</a></li>
+<li><a href="#org02c61a5">unmap Control + left,right</a></li>
+<li><a href="#orgd1a5911">Turn on FileVault</a></li>
 </ul>
 </li>
-<li><a href="#orgc3a5abf">Developer tools</a></li>
-<li><a href="#orgef1478f">homebrew</a>
+<li><a href="#orgb5cd155">Developer tools</a></li>
+<li><a href="#orgc58f58d">homebrew</a>
 <ul>
-<li><a href="#org14e3bf0">homebrew API token</a></li>
-<li><a href="#orgce8ac28">CLI applications</a></li>
-<li><a href="#org3c40feb">desktop applications</a></li>
-<li><a href="#org3fd0c83">packages in 3rd party taps</a>
+<li><a href="#org099729d">homebrew API token</a></li>
+<li><a href="#org9cc7fad">CLI applications</a></li>
+<li><a href="#orgf3ab1d3">desktop applications</a></li>
+<li><a href="#org27d2ff3">packages in 3rd party taps</a>
 <ul>
-<li><a href="#org2f12351">saml2aws</a></li>
+<li><a href="#org82412ea">saml2aws</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orga7bdc08">iTerm2</a></li>
-<li><a href="#org53e96f9">python</a>
+<li><a href="#org8763dea">iTerm2</a></li>
+<li><a href="#org12e513a">python</a>
 <ul>
-<li><a href="#org1e95918">dependencies</a></li>
+<li><a href="#org5cdad8f">dependencies</a></li>
 </ul>
 </li>
-<li><a href="#orgfd8ca84">emacs</a></li>
-<li><a href="#org8761260">zsh</a></li>
-<li><a href="#orgf22e3ff">R</a></li>
-<li><a href="#org0292527">postgresql</a></li>
-<li><a href="#org9c414e4">X11</a></li>
+<li><a href="#orgf6bd661">emacs</a></li>
+<li><a href="#orgaa4318f">zsh</a></li>
+<li><a href="#org988ff10">R</a></li>
+<li><a href="#org84b4b07">postgresql</a></li>
+<li><a href="#orgd0f4102">X11</a></li>
 </ul>
 </div>
 </div>
@@ -598,41 +598,41 @@ Another installation of my personal notes for setting up a &#8230;</p> </div>
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgf1c153d">system settings</a>
+<li><a href="#org338efcd">system settings</a>
 <ul>
-<li><a href="#org1fe1f60">turn off spelling autocorrect</a></li>
-<li><a href="#orga746fbd">unmap Control + left,right</a></li>
-<li><a href="#org0f4cf96">Turn on FileVault</a></li>
+<li><a href="#org4fcf043">turn off spelling autocorrect</a></li>
+<li><a href="#orga69f11b">unmap Control + left,right</a></li>
+<li><a href="#org9b34638">Turn on FileVault</a></li>
 </ul>
 </li>
-<li><a href="#orgc34ff30">Developer tools</a></li>
-<li><a href="#org37b2a56">iTerm2</a></li>
-<li><a href="#orgd5a0bd2">homebrew</a>
+<li><a href="#org8d04c34">Developer tools</a></li>
+<li><a href="#orga122c04">iTerm2</a></li>
+<li><a href="#orgdd1e4c8">homebrew</a>
 <ul>
-<li><a href="#orgc484dc1">homebrew API token</a></li>
-<li><a href="#orgb4675ad">Terminal applications</a></li>
-<li><a href="#orgd900b23">desktop applications</a></li>
+<li><a href="#org66d9339">homebrew API token</a></li>
+<li><a href="#orge1aafdd">Terminal applications</a></li>
+<li><a href="#org16b30bc">desktop applications</a></li>
 </ul>
 </li>
-<li><a href="#org6943079">python</a>
+<li><a href="#org46b8a76">python</a>
 <ul>
-<li><a href="#orgd1c9daa">dependencies</a></li>
-<li><a href="#org69c1881">python2</a></li>
-<li><a href="#org9397113">python3</a>
+<li><a href="#org2525648">dependencies</a></li>
+<li><a href="#org2ec0ec5">python2</a></li>
+<li><a href="#orgfdf8097">python3</a>
 <ul>
-<li><a href="#org72536dc">scons</a></li>
+<li><a href="#orgcb3a5cc">scons</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org3b2ad85">emacs</a></li>
-<li><a href="#orgf532829">zsh</a></li>
-<li><a href="#org1320fc2">R</a></li>
-<li><a href="#org95f4942">postgresql</a></li>
-<li><a href="#org409b626">X11</a></li>
-<li><a href="#org05aff23">virtualbox and vagrant</a>
+<li><a href="#orgdb4bb78">emacs</a></li>
+<li><a href="#orgdae7925">zsh</a></li>
+<li><a href="#orgbead382">R</a></li>
+<li><a href="#org08f34e9">postgresql</a></li>
+<li><a href="#orgbf72b40">X11</a></li>
+<li><a href="#orgd56999f">virtualbox and vagrant</a>
 <ul>
-<li><a href="#orgc601d6e">install an ubuntu16.04 VM</a></li>
+<li><a href="#orgb17752c">install an ubuntu16.04 VM</a></li>
 </ul>
 </li>
 </ul>
@@ -657,43 +657,43 @@ Another installation of my personal &#8230;</p> </div>
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org314fdd5">system settings</a>
+<li><a href="#orgfbf19cb">system settings</a>
 <ul>
-<li><a href="#org73f4e46">turn off spelling autocorrect</a></li>
-<li><a href="#org5767759">unmap Control + left,right</a></li>
-<li><a href="#org84efeff">Turn on FileVault</a></li>
+<li><a href="#orgb6722ca">turn off spelling autocorrect</a></li>
+<li><a href="#orge89f476">unmap Control + left,right</a></li>
+<li><a href="#orge2ac8a9">Turn on FileVault</a></li>
 </ul>
 </li>
-<li><a href="#orgc9ec672">Developer tools</a></li>
-<li><a href="#org9329acc">homebrew</a>
+<li><a href="#org595fc3b">Developer tools</a></li>
+<li><a href="#orge6e6312">homebrew</a>
 <ul>
-<li><a href="#orgd85a0e5">homebrew API token</a></li>
+<li><a href="#orgefb2131">homebrew API token</a></li>
 </ul>
 </li>
-<li><a href="#orgee008ad">python</a>
+<li><a href="#orgee0a724">python</a>
 <ul>
-<li><a href="#orgae21357">dependencies</a></li>
-<li><a href="#orgd0c6991">python2</a></li>
-<li><a href="#org11dab38">python3</a>
+<li><a href="#org28db93b">dependencies</a></li>
+<li><a href="#orgeb90fe0">python2</a></li>
+<li><a href="#orgbaba02a">python3</a>
 <ul>
-<li><a href="#orga9afbe0">scons</a></li>
+<li><a href="#orgb57e4ee">scons</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org55a39b4">emacs</a></li>
-<li><a href="#org2b5b3eb">zsh</a></li>
-<li><a href="#orge6a75dc">desktop apps</a>
+<li><a href="#org6d10a35">emacs</a></li>
+<li><a href="#org5e0efe9">zsh</a></li>
+<li><a href="#org8271ff9">desktop apps</a>
 <ul>
-<li><a href="#org62da570">iTerm2</a></li>
-<li><a href="#org1503b9c">postgresql</a></li>
+<li><a href="#org5a285cb">iTerm2</a></li>
+<li><a href="#org1815730">postgresql</a></li>
 </ul>
 </li>
-<li><a href="#org2b99622">R</a></li>
-<li><a href="#orgb468d0b">X11</a></li>
-<li><a href="#orgd0ea5a5">virtualbox and vagrant</a>
+<li><a href="#orge664d11">R</a></li>
+<li><a href="#orgc01b3f4">X11</a></li>
+<li><a href="#org4750705">virtualbox and vagrant</a>
 <ul>
-<li><a href="#org49d206b">install an ubuntu16.04 VM</a></li>
+<li><a href="#orgf0874ee">install an ubuntu16.04 VM</a></li>
 </ul>
 </li>
 </ul>
@@ -737,36 +737,36 @@ SQL. I recently revisited the &#8230;</p> </div>
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org5eda289">system settings</a>
+<li><a href="#org9d7a544">system settings</a>
 <ul>
-<li><a href="#org8d6e78e">turn off spelling autocorrect</a></li>
-<li><a href="#org2b553c6">unmap Control + left,right</a></li>
+<li><a href="#orgb158ad6">turn off spelling autocorrect</a></li>
+<li><a href="#orgfa8e949">unmap Control + left,right</a></li>
 </ul>
 </li>
-<li><a href="#org1197b73">First applications</a>
+<li><a href="#orga780a3d">First applications</a>
 <ul>
-<li><a href="#org88e863a">iTerm2</a></li>
-<li><a href="#orge347b32">Dropbox</a></li>
-<li><a href="#orgcd2bfdf">Developer tools</a></li>
-<li><a href="#org016dd72">Junos pulse VPN client</a></li>
-<li><a href="#orge17e434">Microsoft Office 2016</a></li>
-<li><a href="#orge2224f1">Others</a></li>
+<li><a href="#org7f08385">iTerm2</a></li>
+<li><a href="#org015ef82">Dropbox</a></li>
+<li><a href="#org131ecf8">Developer tools</a></li>
+<li><a href="#orgbf4ca8f">Junos pulse VPN client</a></li>
+<li><a href="#org953574e">Microsoft Office 2016</a></li>
+<li><a href="#org96452db">Others</a></li>
 </ul>
 </li>
-<li><a href="#orgd563eed">homebrew</a>
+<li><a href="#org3563c9b">homebrew</a>
 <ul>
-<li><a href="#orgf0efc79">X11</a></li>
-<li><a href="#org0ab6fd3">Desktop apps using Cask</a></li>
-<li><a href="#org6dade2e">homebrew API token</a></li>
-<li><a href="#orgdb32dab">zsh</a></li>
+<li><a href="#orgae8ea93">X11</a></li>
+<li><a href="#org5bb016c">Desktop apps using Cask</a></li>
+<li><a href="#orgb26e251">homebrew API token</a></li>
+<li><a href="#org756975d">zsh</a></li>
 </ul>
 </li>
-<li><a href="#orgad3c158">git</a></li>
-<li><a href="#org3c5b87d">python</a></li>
-<li><a href="#org263c8a5">emacs</a></li>
-<li><a href="#orgad219af">R</a></li>
-<li><a href="#org1146497">wkhtmltopdf</a></li>
-<li><a href="#orge617187">mail</a></li>
+<li><a href="#org11136c1">git</a></li>
+<li><a href="#org2f4e3e9">python</a></li>
+<li><a href="#org60d151f">emacs</a></li>
+<li><a href="#orgb021eba">R</a></li>
+<li><a href="#org2a9de1d">wkhtmltopdf</a></li>
+<li><a href="#orgfa3be77">mail</a></li>
 </ul>
 </div>
 </div>
@@ -789,33 +789,33 @@ SQL. I recently revisited the &#8230;</p> </div>
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgdad30da">First applications</a>
+<li><a href="#org34cd8ea">First applications</a>
 <ul>
-<li><a href="#org0aeebe2">Developer tools</a></li>
-<li><a href="#org857ee7a">X11</a></li>
-<li><a href="#org7e67963">iTerm2</a></li>
-<li><a href="#org3fd8c7c">Others</a></li>
-<li><a href="#org1a38a7a">UW only</a></li>
+<li><a href="#org54144b7">Developer tools</a></li>
+<li><a href="#org9eae9e6">X11</a></li>
+<li><a href="#orgda662c9">iTerm2</a></li>
+<li><a href="#org7d67593">Others</a></li>
+<li><a href="#orgf4dd6e7">UW only</a></li>
 </ul>
 </li>
-<li><a href="#orged4a13d">system-level configuration</a>
+<li><a href="#org3f32c9a">system-level configuration</a>
 <ul>
-<li><a href="#orgd65d651">turn off spelling autocorrect</a></li>
-<li><a href="#org362afb8">turn off spaces key shortcuts</a></li>
+<li><a href="#org4181852">turn off spelling autocorrect</a></li>
+<li><a href="#org36f2ada">turn off spaces key shortcuts</a></li>
 </ul>
 </li>
-<li><a href="#org08ebe94">homebrew</a>
+<li><a href="#orgffbd0aa">homebrew</a>
 <ul>
-<li><a href="#org55ef503">packages installed using homebrew</a></li>
-<li><a href="#orgb6f97bf">homebrew cask</a></li>
-<li><a href="#org6f786cb">homebrew API token</a></li>
-<li><a href="#org6b75cba">zsh</a></li>
+<li><a href="#org095b062">packages installed using homebrew</a></li>
+<li><a href="#orgf48854e">homebrew cask</a></li>
+<li><a href="#orge922baf">homebrew API token</a></li>
+<li><a href="#org76600b6">zsh</a></li>
 </ul>
 </li>
-<li><a href="#orgd6b9eda">ssh</a>
+<li><a href="#org1d59170">ssh</a>
 <ul>
-<li><a href="#orgf4b7440">update /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist</a></li>
-<li><a href="#org05c7ff1">create $ZSH_INITDIR/ssh-ask-keychain (called from start_ssh_agent.zsh &#8230;</a></li></ul></li></ul></div></div> </div>
+<li><a href="#org36d3e02">update /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist</a></li>
+<li><a href="#org26bcc45">create $ZSH_INITDIR/ssh-ask-keychain (called from start_ssh_agent.zsh &#8230;</a></li></ul></li></ul></div></div> </div>
 	</div>
 
 
@@ -833,9 +833,9 @@ SQL. I recently revisited the &#8230;</p> </div>
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org5b0e242">VirtualBox preferences</a></li>
-<li><a href="#org8de2310">Create an Ubuntu 14.04 VM</a></li>
-<li><a href="#orgf620ab1">Set up an IP address</a></li>
+<li><a href="#org2b65b81">VirtualBox preferences</a></li>
+<li><a href="#org4cb175f">Create an Ubuntu 14.04 VM</a></li>
+<li><a href="#org62c6d45">Set up an IP address</a></li>
 </ul>
 </div>
 </div>
@@ -863,7 +863,7 @@ so&#8230; suboptimal.
 </p>
 
 
-<div id="org86ccfb7" class="figure">
+<div id="orged8316d" class="figure">
 <p><img src="../hold-the-pie/why_pie.png" alt="why_pie.png">
 </p>
 </div>
@@ -889,8 +889,8 @@ so&#8230; suboptimal.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org5c73891">Ubuntu 14.04 (Trusty Tahr)</a></li>
-<li><a href="#orgff20d42">Ubuntu 12.04 (Precise Pangolin)</a></li>
+<li><a href="#org41da4db">Ubuntu 14.04 (Trusty Tahr)</a></li>
+<li><a href="#org72a17cd">Ubuntu 12.04 (Precise Pangolin)</a></li>
 </ul>
 </div>
 </div>
