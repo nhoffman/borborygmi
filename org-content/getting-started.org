@@ -1,7 +1,7 @@
 #+TITLE: Creating a site with Pelican and org-mode
 #+DATE: 2014-05-26
 #+CATEGORY: org-mode
-#+PROPERTY: TAGS org-mode, pelican, elisp
+#+FILETAGS: org-mode, pelican, elisp
 
 Never one to pass up the opportunity for yak-shaving, I thought I'd
 finally try to settle on a publishing platform for various notes and

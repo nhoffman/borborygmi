@@ -1,7 +1,7 @@
 #+TITLE: A practical introduction to databases and data management
 #+DATE: 2014-06-11
 #+CATEGORY: lectures
-#+PROPERTY: TAGS laboratory medicine
+#+FILETAGS: laboratory medicine
 #+PROPERTY: header-args:sqlite :db database-intro/results.db :header on :results value
 #+OPTIONS: toc:nil
 

@@ -1,7 +1,7 @@
 #+TITLE: Setup for VirtualBox VM running Ubuntu 14.04 on OS X Mavericks
 #+DATE: 2015-02-06
 #+CATEGORY: notes
-#+PROPERTY: TAGS linux,mac,virtualbox
+#+FILETAGS: linux,mac,virtualbox
 #+PROPERTY: header-args :eval no
 
 Here are my notes for setting up an Ubuntu VM to work on some web

@@ -1,7 +1,7 @@
 #+TITLE: Learning numpy
 #+DATE: 2015-01-26
 #+CATEGORY: notes
-#+PROPERTY: TAGS R,numpy,pandas,python
+#+FILETAGS: R,numpy,pandas,python
 
 As much as I'd like to do so, there's a lot of activation energy to
 learning numpy, since (at this point) I can typically accomplish what

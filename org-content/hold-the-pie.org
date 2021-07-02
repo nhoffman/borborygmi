@@ -1,7 +1,7 @@
 #+TITLE: Hold the pie
 #+DATE: 2014-10-30
 #+CATEGORY: visualization
-#+PROPERTY: TAGS laboratory medicine
+#+FILETAGS: laboratory medicine
 #+PROPERTY: header-args:R :results output :exports results :session
 
 I came across this visualization[fn:1] of a very simple data set, and

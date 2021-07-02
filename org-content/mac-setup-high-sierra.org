@@ -1,7 +1,7 @@
 #+TITLE: Clean install of MacOS High Sierra
 #+DATE: 2017-11-17
 #+CATEGORY: notes
-#+PROPERTY: TAGS mac
+#+FILETAGS: mac
 #+PROPERTY: header-args :eval no
 #+OPTIONS: ^:nil
 

@@ -1,7 +1,7 @@
 #+TITLE: sqlite dict factory
 #+DATE: 2014-06-10
 #+CATEGORY: notes
-#+PROPERTY: TAGS python,sqlite
+#+FILETAGS: python,sqlite
 
 Probably not as efficient as using the sqlite3.Row class, but works
 when actual dict objects are required. Adapted from

@@ -1,7 +1,7 @@
 #+TITLE: Setting up a new mac
 #+DATE: 2013-10-20
 #+CATEGORY: notes
-#+PROPERTY: TAGS mac
+#+FILETAGS: mac
 #+PROPERTY: header-args :eval no
 #+OPTIONS: ^:nil
 

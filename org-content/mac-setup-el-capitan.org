@@ -1,7 +1,7 @@
 #+TITLE: Setup after clean install of El Capitan
 #+DATE: 2015-11-02
 #+CATEGORY: notes
-#+PROPERTY: TAGS mac
+#+FILETAGS: mac
 #+PROPERTY: header-args :eval no
 #+OPTIONS: ^:nil
 

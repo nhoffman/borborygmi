@@ -1,7 +1,7 @@
 #+TITLE: Clean install of MacOS Catalina
 #+DATE: 2020-04-11
 #+CATEGORY: notes
-#+PROPERTY: TAGS mac
+#+FILETAGS: mac
 #+PROPERTY: header-args :eval no
 #+OPTIONS: ^:nil
 

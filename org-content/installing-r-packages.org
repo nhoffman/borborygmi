@@ -1,7 +1,7 @@
 #+TITLE: Installing R packages
 #+DATE: 2010-03-22
 #+CATEGORY: notes
-#+PROPERTY: TAGS R-language
+#+FILETAGS: R-language
 #+PROPERTY: header-args :eval no
 
 Notes to myself about installing R packages.

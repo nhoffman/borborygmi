@@ -1,7 +1,7 @@
 #+TITLE: Compiling bcl2fastq v2.15 on Ubuntu 12.04 and 14.04
 #+DATE: 2014-08-27
 #+CATEGORY: notes
-#+PROPERTY: TAGS linux
+#+FILETAGS: linux
 #+PROPERTY: header-args :eval no
 
 Illumina provides a program for demultiplexing sequencing output

@@ -1,7 +1,7 @@
 #+TITLE: Using recursive CTEs for calculating taxonomic lineages
 #+DATE: 2017-07-07
 #+CATEGORY: sql
-#+PROPERTY: TAGS postgresql,taxonomy
+#+FILETAGS: postgresql,taxonomy
 #+PROPERTY: header-args:sql :engine postgresql :database ncbi_taxonomy :header on :results value :eval no
 
 This topic falls into the category of "things that I didn't know that

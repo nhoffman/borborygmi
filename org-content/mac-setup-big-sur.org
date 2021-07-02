@@ -1,7 +1,7 @@
 #+TITLE: Clean install of MacOS Big Sur
 #+DATE: 2021-05-20
 #+CATEGORY: notes
-#+PROPERTY: TAGS mac
+#+FILETAGS: mac
 #+PROPERTY: header-args :eval no
 #+OPTIONS: ^:nil
 

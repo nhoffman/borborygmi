@@ -1,7 +1,7 @@
 #+TITLE: Creating lists containing variables
 #+DATE: 2014-06-12
 #+CATEGORY: notes
-#+PROPERTY: TAGS elisp
+#+FILETAGS: elisp
 
 I learned a bit about list creation in elisp today. Here's how you join a list of strings in elisp:
 
