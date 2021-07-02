@@ -56,6 +56,67 @@
 
 
 	<div class='article'>
+          <a href="https://nhoffman.github.io/borborygmi/lists-with-variables.html"><h2>Creating lists containing variables</h2></a>
+          <div class= "well small"> Thu 12 June 2014 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/elisp.html">elisp</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/lists-with-variables.html">read more</a> </div>
+          <div class="summary"><p>
+I learned a bit about list creation in elisp today. Here's how you join a list of strings in elisp:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(mapconcat #'identity '("" "path" "to" "someplace") "/")
+</pre>
+</div>
+
+<p>
+But I learned (thanks to <a href="http://stackoverflow.com/users/113848/legoscia">legoscia</a> on <a href="http://stackoverflow.com/questions/24188100">stackoverflow</a>) that simply
+replacing an element in the list with a variable results in an error:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(let ((path …</pre></div> </div>
+	</div>
+
+
+ 
+
+
+	<div class='article'>
+          <a href="https://nhoffman.github.io/borborygmi/database-intro.html"><h2>A practical introduction to databases and data management</h2></a>
+          <div class= "well small"> Wed 11 June 2014 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/lectures.html">lectures</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/laboratory.html">laboratory</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/database-intro.html">read more</a> </div>
+          <div class="summary"><ul class="org-ul">
+<li><i>Edit 2015-07-26: added a section on date formatting</i></li>
+<li><i>Edit 2016-07-11: add reference to Tidy Data</i></li>
+</ul>
+
+<p>
+This post contains the content of a lecture prepared for Laboratory Medicine residents as part of a series on medical informatics.
+</p>
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org9f3f066">Objectives</a></li>
+<li><a href="#org274ca15">Relational database terminology</a></li>
+<li><a href="#org142bf22">Relations</a>
+<ul>
+<li><a href="#orgc21fd40">one to one</a></li>
+<li><a href="#orgb9ec290">one to many …</a></li></ul></li></ul></div></div> </div>
+	</div>
+
+
+ 
+
+
+	<div class='article'>
           <a href="https://nhoffman.github.io/borborygmi/dict-factory.html"><h2>sqlite dict factory</h2></a>
           <div class= "well small"> Tue 10 June 2014 &#8212;
 
@@ -74,7 +135,7 @@ when actual dict objects are required. Adapted from
 def dict_factory(cursor, row):
     return {col[0]: row[idx] for idx, col in enumerate(cursor.description)}
 
-con = sqlite3.connect(":memory ...</pre></div> </div>
+con = sqlite3.connect(":memory …</pre></div> </div>
 	</div>
 
 
@@ -87,27 +148,27 @@ con = sqlite3.connect(":memory ...</pre></div> </div>
 
 
 <em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/org-mode.html">org-mode</a>;
-    tags: <a href="https://nhoffman.github.io/borborygmi/tag/org-mode.html">org-mode,&nbsp;</a><a href="https://nhoffman.github.io/borborygmi/tag/pelican.html">pelican,&nbsp;</a><a href="https://nhoffman.github.io/borborygmi/tag/elisp.html">elisp</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/getting-started.html">read more</a> </div>
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/org-mode.html">org-mode</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/getting-started.html">read more</a> </div>
           <div class="summary"><div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org7e1f983">org-mode integration</a>
+<li><a href="#orgc771736">org-mode integration</a>
 <ul>
-<li><a href="#org2612c62">Arranging content in subdirectories</a></li>
-<li><a href="#orgef5edbf">Syntax highlighting</a></li>
+<li><a href="#orgb183ff6">Arranging content in subdirectories</a></li>
+<li><a href="#orgf24ce8a">Syntax highlighting</a></li>
 </ul>
 </li>
-<li><a href="#org7c4aea6">Choosing a theme</a></li>
-<li><a href="#orga9ffd40">Hosting on github pages</a></li>
-<li><a href="#org84ce0d9">Examples</a></li>
+<li><a href="#org0ad0501">Choosing a theme</a></li>
+<li><a href="#orgf56a56a">Hosting on github pages</a></li>
+<li><a href="#org5f7e2d4">Examples</a></li>
 </ul>
 </div>
 </div>
 <p>
 Never one to pass up the opportunity for yak-shaving, I thought I'd
 finally try to settle on a publishing platform for various notes and
-other content that I have scattered ...</p> </div>
+other content that I have scattered about …</p> </div>
 	</div>
 
 
@@ -125,40 +186,40 @@ other content that I have scattered ...</p> </div>
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org184cd58">First applications</a>
+<li><a href="#orgf0675fc">First applications</a>
 <ul>
-<li><a href="#org52895d2">Developer tools</a></li>
-<li><a href="#org53be261">X11</a></li>
-<li><a href="#org1e0e76e">Others</a></li>
+<li><a href="#orga7dc2d4">Developer tools</a></li>
+<li><a href="#orga2bfae2">X11</a></li>
+<li><a href="#org6161c8f">Others</a></li>
 </ul>
 </li>
-<li><a href="#org8666416">system-level configuration</a>
+<li><a href="#org031dbe2">system-level configuration</a>
 <ul>
-<li><a href="#org97376cb">turn off spelling autocorrect</a></li>
-<li><a href="#org65c73ef">fix scroll direction</a></li>
-<li><a href="#org9a90515">turn off spaces key shortcuts</a></li>
+<li><a href="#orgf55d8ec">turn off spelling autocorrect</a></li>
+<li><a href="#orgf9552fd">fix scroll direction</a></li>
+<li><a href="#org5b82256">turn off spaces key shortcuts</a></li>
 </ul>
 </li>
-<li><a href="#org6a312c0">ssh</a></li>
-<li><a href="#orge5e03ee">homebrew</a>
+<li><a href="#org7ce77fc">ssh</a></li>
+<li><a href="#orgafaf8f5">homebrew</a>
 <ul>
-<li><a href="#org121acc9">stuff installed using homebrew</a></li>
-<li><a href="#orge67283a">zsh</a></li>
+<li><a href="#org8d055dd">stuff installed using homebrew</a></li>
+<li><a href="#orga300688">zsh</a></li>
 </ul>
 </li>
-<li><a href="#orgd96d425">git</a></li>
-<li><a href="#orgfd74248">iTerm2 settings</a></li>
-<li><a href="#orgee3f2bc">emacs</a></li>
-<li><a href="#org6662223">python</a></li>
-<li><a href="#orga277997">R</a></li>
-<li><a href="#org601011f">mail</a></li>
-<li><a href="#org27c01af">sshfs</a></li>
-<li><a href="#orgfa74a27">wkhtmltopdf</a></li>
+<li><a href="#org787c46b">git</a></li>
+<li><a href="#org6cee451">iTerm2 settings</a></li>
+<li><a href="#org6e39fb6">emacs</a></li>
+<li><a href="#orgcd050e8">python</a></li>
+<li><a href="#orgb8b8148">R</a></li>
+<li><a href="#org635dc71">mail</a></li>
+<li><a href="#org6eee07f">sshfs</a></li>
+<li><a href="#org28b1c0c">wkhtmltopdf</a></li>
 </ul>
 </div>
 </div>
 <p>
-These are my notes that I took while setting up a ...</p> </div>
+These are my notes that I took while setting up a …</p> </div>
 	</div>
 
 
@@ -176,11 +237,11 @@ These are my notes that I took while setting up a ...</p> </div>
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org43732a5">Installing from CRAN</a></li>
-<li><a href="#org9bbbb4a">Bioconductor</a></li>
-<li><a href="#org6897968">R-forge</a></li>
-<li><a href="#orgc5aba89">Installing packages locally</a></li>
-<li><a href="#orgb9c60cf">Reloading a package</a></li>
+<li><a href="#orgad0e9d5">Installing from CRAN</a></li>
+<li><a href="#org3d87a5d">Bioconductor</a></li>
+<li><a href="#org9ed976a">R-forge</a></li>
+<li><a href="#orgd31cbc9">Installing packages locally</a></li>
+<li><a href="#org5fbd423">Reloading a package</a></li>
 </ul>
 </div>
 </div>
@@ -188,9 +249,9 @@ These are my notes that I took while setting up a ...</p> </div>
 Notes to myself about installing R packages.
 </p>
 
-<div id="outline-container-org43732a5" class="outline-2">
-<h2 id="org43732a5">Installing from CRAN</h2>
-<div class="outline-text-2" id="text-org43732a5">
+<div id="outline-container-orgad0e9d5" class="outline-2">
+<h2 id="orgad0e9d5">Installing from CRAN</h2>
+<div class="outline-text-2" id="text-orgad0e9d5">
 <div class="org-src-container">
 <pre class="src src-R">install.packages(c("ape","sqldf","ROCR"), repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE)
 </pre>
@@ -198,12 +259,12 @@ Notes to myself about installing R packages.
 </div>
 </div>
 
-<div id="outline-container-org9bbbb4a" class="outline-2">
-<h2 id="org9bbbb4a">Bioconductor</h2>
-<div class="outline-text-2" id="text-org9bbbb4a">
+<div id="outline-container-org3d87a5d" class="outline-2">
+<h2 id="org3d87a5d">Bioconductor</h2>
+<div class="outline-text-2" id="text-org3d87a5d">
 <div class="org-src-container">
 <pre class="src src-R">source("http://bioconductor.org/biocLite.R")
-biocLite(c("Biostrings","BSgenome ...</pre></div></div></div> </div>
+biocLite(c("Biostrings","BSgenome …</pre></div></div></div> </div>
 	</div>
 
 <div class="pagination">
@@ -267,7 +328,7 @@ biocLite(c("Biostrings","BSgenome ...</pre></div></div></div> </div>
         </div>     </div>     </div> 
 <footer>
 <br />
-<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &copy; Noah Hoffman 2019</p>
+<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &copy; Noah Hoffman 2021</p>
 </footer>
 
 </div> <!-- /container -->

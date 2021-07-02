@@ -55,41 +55,12 @@
 
 
 	<div class="article">
-          <a href="https://nhoffman.github.io/borborygmi/lists-with-variables.html"><h2>Creating lists containing variables</h2></a>
-          <div class="well small"> Thu 12 June 2014 &#8212;
-
-
-<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
-    tags: <a href="https://nhoffman.github.io/borborygmi/tag/elisp.html">elisp</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/lists-with-variables.html">read more</a> </div>
-          <div class="summary"><p>
-I learned a bit about list creation in elisp today. Here's how you join a list of strings in elisp:
-</p>
-
-<div class="org-src-container">
-<pre class="src src-elisp">(mapconcat #'identity '("" "path" "to" "someplace") "/")
-</pre>
-</div>
-
-<p>
-But I learned (thanks to <a href="http://stackoverflow.com/users/113848/legoscia">legoscia</a> on <a href="http://stackoverflow.com/questions/24188100">stackoverflow</a>) that simply
-replacing an element in the list with a variable results in an error:
-</p>
-
-<div class="org-src-container">
-<pre class="src src-elisp">(let ((path &#8230;</pre></div> </div>
-	</div>
-
-
- 
-
-
-	<div class="article">
           <a href="https://nhoffman.github.io/borborygmi/database-intro.html"><h2>A practical introduction to databases and data management</h2></a>
           <div class="well small"> Wed 11 June 2014 &#8212;
 
 
-<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/lectures.html">lectures</a>;
-    tags: <a href="https://nhoffman.github.io/borborygmi/tag/laboratory.html">laboratory</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/database-intro.html">read more</a> </div>
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/nil.html">nil</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/nil.html">nil</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/database-intro.html">read more</a> </div>
           <div class="summary"><ul class="org-ul">
 <li><i>Edit 2015-07-26: added a section on date formatting</i></li>
 <li><i>Edit 2016-07-11: add reference to Tidy Data</i></li>
@@ -103,12 +74,12 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org9f3f066">Objectives</a></li>
-<li><a href="#org274ca15">Relational database terminology</a></li>
-<li><a href="#org142bf22">Relations</a>
+<li><a href="#orgb24d024">Objectives</a></li>
+<li><a href="#org0fadc81">Relational database terminology</a></li>
+<li><a href="#orgd56789c">Relations</a>
 <ul>
-<li><a href="#orgc21fd40">one to one</a></li>
-<li><a href="#orgb9ec290">one to many &#8230;</a></li></ul></li></ul></div></div> </div>
+<li><a href="#org6410bbd">one to one</a></li>
+<li><a href="#org1791bca">one to many &#8230;</a></li></ul></li></ul></div></div> </div>
 	</div>
 
 
@@ -120,8 +91,8 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
           <div class="well small"> Tue 10 June 2014 &#8212;
 
 
-<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
-    tags: <a href="https://nhoffman.github.io/borborygmi/tag/python.html">python,&#160;</a><a href="https://nhoffman.github.io/borborygmi/tag/sqlite.html">sqlite</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/dict-factory.html">read more</a> </div>
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/nil.html">nil</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/nil.html">nil</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/dict-factory.html">read more</a> </div>
           <div class="summary"><p>
 Probably not as efficient as using the sqlite3.Row class, but works
 when actual dict objects are required. Adapted from
@@ -146,21 +117,21 @@ con = sqlite3.connect(":memory &#8230;</pre></div> </div>
           <div class="well small"> Mon 26 May 2014 &#8212;
 
 
-<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/org-mode.html">org-mode</a>;
-    tags: <a href="https://nhoffman.github.io/borborygmi/tag/org-mode.html">org-mode</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/getting-started.html">read more</a> </div>
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/nil.html">nil</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/nil.html">nil</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/getting-started.html">read more</a> </div>
           <div class="summary"><div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgc771736">org-mode integration</a>
+<li><a href="#orga40bf0c">org-mode integration</a>
 <ul>
-<li><a href="#orgb183ff6">Arranging content in subdirectories</a></li>
-<li><a href="#orgf24ce8a">Syntax highlighting</a></li>
+<li><a href="#orge1bcb25">Arranging content in subdirectories</a></li>
+<li><a href="#org6f61534">Syntax highlighting</a></li>
 </ul>
 </li>
-<li><a href="#org0ad0501">Choosing a theme</a></li>
-<li><a href="#orgf56a56a">Hosting on github pages</a></li>
-<li><a href="#org5f7e2d4">Examples</a></li>
+<li><a href="#org3a1e3b5">Choosing a theme</a></li>
+<li><a href="#org60a5e28">Hosting on github pages</a></li>
+<li><a href="#orgf4ef5b5">Examples</a></li>
 </ul>
 </div>
 </div>
@@ -179,41 +150,41 @@ other content that I have scattered about &#8230;</p> </div>
           <div class="well small"> Sun 20 October 2013 &#8212;
 
 
-<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
-    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/mac-setup.html">read more</a> </div>
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/nil.html">nil</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/nil.html">nil</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/mac-setup.html">read more</a> </div>
           <div class="summary"><div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgf0675fc">First applications</a>
+<li><a href="#orge48b4ee">First applications</a>
 <ul>
-<li><a href="#orga7dc2d4">Developer tools</a></li>
-<li><a href="#orga2bfae2">X11</a></li>
-<li><a href="#org6161c8f">Others</a></li>
+<li><a href="#org64f043a">Developer tools</a></li>
+<li><a href="#org2990e4e">X11</a></li>
+<li><a href="#org8ef16ba">Others</a></li>
 </ul>
 </li>
-<li><a href="#org031dbe2">system-level configuration</a>
+<li><a href="#org6e961f8">system-level configuration</a>
 <ul>
-<li><a href="#orgf55d8ec">turn off spelling autocorrect</a></li>
-<li><a href="#orgf9552fd">fix scroll direction</a></li>
-<li><a href="#org5b82256">turn off spaces key shortcuts</a></li>
+<li><a href="#orge44053a">turn off spelling autocorrect</a></li>
+<li><a href="#org2722f5d">fix scroll direction</a></li>
+<li><a href="#org5cf27b4">turn off spaces key shortcuts</a></li>
 </ul>
 </li>
-<li><a href="#org7ce77fc">ssh</a></li>
-<li><a href="#orgafaf8f5">homebrew</a>
+<li><a href="#orgcbea5af">ssh</a></li>
+<li><a href="#orga04eb6b">homebrew</a>
 <ul>
-<li><a href="#org8d055dd">stuff installed using homebrew</a></li>
-<li><a href="#orga300688">zsh</a></li>
+<li><a href="#orgcd8c391">stuff installed using homebrew</a></li>
+<li><a href="#orgc63aec5">zsh</a></li>
 </ul>
 </li>
-<li><a href="#org787c46b">git</a></li>
-<li><a href="#org6cee451">iTerm2 settings</a></li>
-<li><a href="#org6e39fb6">emacs</a></li>
-<li><a href="#orgcd050e8">python</a></li>
-<li><a href="#orgb8b8148">R</a></li>
-<li><a href="#org635dc71">mail</a></li>
-<li><a href="#org6eee07f">sshfs</a></li>
-<li><a href="#org28b1c0c">wkhtmltopdf</a></li>
+<li><a href="#orgc220783">git</a></li>
+<li><a href="#orgd722c38">iTerm2 settings</a></li>
+<li><a href="#org490c37b">emacs</a></li>
+<li><a href="#orgeb963f6">python</a></li>
+<li><a href="#org84781b7">R</a></li>
+<li><a href="#orgcca6c0f">mail</a></li>
+<li><a href="#org7abc355">sshfs</a></li>
+<li><a href="#org0cb34f9">wkhtmltopdf</a></li>
 </ul>
 </div>
 </div>
@@ -230,17 +201,17 @@ These are my notes that I took while setting up a &#8230;</p> </div>
           <div class="well small"> Mon 22 March 2010 &#8212;
 
 
-<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
-    tags: <a href="https://nhoffman.github.io/borborygmi/tag/r-language.html">R-language</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/installing-r-packages.html">read more</a> </div>
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/nil.html">nil</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/nil.html">nil</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/installing-r-packages.html">read more</a> </div>
           <div class="summary"><div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgad0e9d5">Installing from CRAN</a></li>
-<li><a href="#org3d87a5d">Bioconductor</a></li>
-<li><a href="#org9ed976a">R-forge</a></li>
-<li><a href="#orgd31cbc9">Installing packages locally</a></li>
-<li><a href="#org5fbd423">Reloading a package</a></li>
+<li><a href="#orgc0caa97">Installing from CRAN</a></li>
+<li><a href="#orgc34a658">Bioconductor</a></li>
+<li><a href="#orgac028b0">R-forge</a></li>
+<li><a href="#org78780a0">Installing packages locally</a></li>
+<li><a href="#org386a5fd">Reloading a package</a></li>
 </ul>
 </div>
 </div>
@@ -248,9 +219,9 @@ These are my notes that I took while setting up a &#8230;</p> </div>
 Notes to myself about installing R packages.
 </p>
 
-<div id="outline-container-orgad0e9d5" class="outline-2">
-<h2 id="orgad0e9d5">Installing from CRAN</h2>
-<div class="outline-text-2" id="text-orgad0e9d5">
+<div id="outline-container-orgc0caa97" class="outline-2">
+<h2 id="orgc0caa97">Installing from CRAN</h2>
+<div class="outline-text-2" id="text-orgc0caa97">
 <div class="org-src-container">
 <pre class="src src-R">install.packages(c("ape","sqldf","ROCR"), repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE)
 </pre>
@@ -258,9 +229,9 @@ Notes to myself about installing R packages.
 </div>
 </div>
 
-<div id="outline-container-org3d87a5d" class="outline-2">
-<h2 id="org3d87a5d">Bioconductor</h2>
-<div class="outline-text-2" id="text-org3d87a5d">
+<div id="outline-container-orgc34a658" class="outline-2">
+<h2 id="orgc34a658">Bioconductor</h2>
+<div class="outline-text-2" id="text-orgc34a658">
 <div class="org-src-container">
 <pre class="src src-R">source("http://bioconductor.org/biocLite.R")
 biocLite(c("Biostrings","BSgenome &#8230;</pre></div></div></div> </div>
@@ -268,10 +239,10 @@ biocLite(c("Biostrings","BSgenome &#8230;</pre></div></div></div> </div>
 
 <div class="pagination">
 <ul>
-    <li class="prev"><a href="https://nhoffman.github.io/borborygmi/author/noah-hoffman.html">&#8592; Previous</a></li>
+    <li class="prev"><a href="https://nhoffman.github.io/borborygmi/tag/nil.html">&#8592; Previous</a></li>
 
-    <li class=""><a href="https://nhoffman.github.io/borborygmi/author/noah-hoffman.html">1</a></li>
-    <li class="active"><a href="https://nhoffman.github.io/borborygmi/author/noah-hoffman2.html">2</a></li>
+    <li class=""><a href="https://nhoffman.github.io/borborygmi/tag/nil.html">1</a></li>
+    <li class="active"><a href="https://nhoffman.github.io/borborygmi/tag/nil2.html">2</a></li>
 
     <li class="next disabled"><a href="#">&#8594; Next</a></li>
 
@@ -302,11 +273,8 @@ biocLite(c("Biostrings","BSgenome &#8230;</pre></div></div></div> </div>
                 Categories
                 </li>
 
-                <li><a href="https://nhoffman.github.io/borborygmi/category/lectures.html">lectures</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/nil.html">nil</a></li>
                 <li><a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a></li>
-                <li><a href="https://nhoffman.github.io/borborygmi/category/org-mode.html">org-mode</a></li>
-                <li><a href="https://nhoffman.github.io/borborygmi/category/sql.html">sql</a></li>
-                <li><a href="https://nhoffman.github.io/borborygmi/category/visualization.html">visualization</a></li>
             </ul>
             </div>
 

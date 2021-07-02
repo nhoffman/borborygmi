@@ -62,11 +62,11 @@ Mon 22 March 2010 &#8212;
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org43732a5">Installing from CRAN</a></li>
-<li><a href="#org9bbbb4a">Bioconductor</a></li>
-<li><a href="#org6897968">R-forge</a></li>
-<li><a href="#orgc5aba89">Installing packages locally</a></li>
-<li><a href="#orgb9c60cf">Reloading a package</a></li>
+<li><a href="#orgad0e9d5">Installing from CRAN</a></li>
+<li><a href="#org3d87a5d">Bioconductor</a></li>
+<li><a href="#org9ed976a">R-forge</a></li>
+<li><a href="#orgd31cbc9">Installing packages locally</a></li>
+<li><a href="#org5fbd423">Reloading a package</a></li>
 </ul>
 </div>
 </div>
@@ -74,9 +74,9 @@ Mon 22 March 2010 &#8212;
 Notes to myself about installing R packages.
 </p>
 
-<div id="outline-container-org43732a5" class="outline-2">
-<h2 id="org43732a5">Installing from CRAN</h2>
-<div class="outline-text-2" id="text-org43732a5">
+<div id="outline-container-orgad0e9d5" class="outline-2">
+<h2 id="orgad0e9d5">Installing from CRAN</h2>
+<div class="outline-text-2" id="text-orgad0e9d5">
 <div class="org-src-container">
 <pre class="src src-R">install.packages(c("ape","sqldf","ROCR"), repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE)
 </pre>
@@ -84,9 +84,9 @@ Notes to myself about installing R packages.
 </div>
 </div>
 
-<div id="outline-container-org9bbbb4a" class="outline-2">
-<h2 id="org9bbbb4a">Bioconductor</h2>
-<div class="outline-text-2" id="text-org9bbbb4a">
+<div id="outline-container-org3d87a5d" class="outline-2">
+<h2 id="org3d87a5d">Bioconductor</h2>
+<div class="outline-text-2" id="text-org3d87a5d">
 <div class="org-src-container">
 <pre class="src src-R">source("http://bioconductor.org/biocLite.R")
 biocLite(c("Biostrings","BSgenome")) # for example
@@ -115,9 +115,9 @@ R CMD INSTALL Biostrings
 </div>
 </div>
 
-<div id="outline-container-org6897968" class="outline-2">
-<h2 id="org6897968">R-forge</h2>
-<div class="outline-text-2" id="text-org6897968">
+<div id="outline-container-org9ed976a" class="outline-2">
+<h2 id="org9ed976a">R-forge</h2>
+<div class="outline-text-2" id="text-org9ed976a">
 <div class="org-src-container">
 <pre class="src src-R">install.packages("packagename",repos="http://R-Forge.R-project.org")
 </pre>
@@ -134,9 +134,9 @@ Read-only subversion repository may be checked out using
 </div>
 </div>
 
-<div id="outline-container-orgc5aba89" class="outline-2">
-<h2 id="orgc5aba89">Installing packages locally</h2>
-<div class="outline-text-2" id="text-orgc5aba89">
+<div id="outline-container-orgd31cbc9" class="outline-2">
+<h2 id="orgd31cbc9">Installing packages locally</h2>
+<div class="outline-text-2" id="text-orgd31cbc9">
 <p>
 If you can't (or don't want to) install packages to the system R location, you can create a local library. For example:
 </p>
@@ -150,9 +150,9 @@ R CMD INSTALL --library=~/R/library somepackage.gz
 </div>
 </div>
 
-<div id="outline-container-orgb9c60cf" class="outline-2">
-<h2 id="orgb9c60cf">Reloading a package</h2>
-<div class="outline-text-2" id="text-orgb9c60cf">
+<div id="outline-container-org5fbd423" class="outline-2">
+<h2 id="org5fbd423">Reloading a package</h2>
+<div class="outline-text-2" id="text-org5fbd423">
 <p>
 Calling <code>library()</code> after a package has already been loaded does not update the namespace with updates if the library has changed (eg, during package development). Instead, do something like this:
 </p>
@@ -238,7 +238,7 @@ Calling <code>library()</code> after a package has already been loaded does not 
         </div>     </div>     </div> 
 <footer>
 <br />
-<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &copy; Noah Hoffman 2019</p>
+<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &copy; Noah Hoffman 2021</p>
 </footer>
 
 </div> <!-- /container -->

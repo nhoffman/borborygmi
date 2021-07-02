@@ -55,63 +55,103 @@
 
 
 	<div class="article">
-          <div class="content-title">
-            <a href="https://nhoffman.github.io/borborygmi/dict-factory.html"><h1>sqlite dict factory</h1></a>
-Tue 10 June 2014 &#8212;
+          <a href="https://nhoffman.github.io/borborygmi/mac-setup.html"><h2>Setting up a new mac</h2></a>
+          <div class="well small"> Sun 20 October 2013 &#8212;
 
 
 <em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
-    tags: <a href="https://nhoffman.github.io/borborygmi/tag/python.html">python,&#160;</a><a href="https://nhoffman.github.io/borborygmi/tag/sqlite.html">sqlite</a></em>          </div>
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/mac-setup.html">read more</a> </div>
+          <div class="summary"><div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgf0675fc">First applications</a>
+<ul>
+<li><a href="#orga7dc2d4">Developer tools</a></li>
+<li><a href="#orga2bfae2">X11</a></li>
+<li><a href="#org6161c8f">Others</a></li>
+</ul>
+</li>
+<li><a href="#org031dbe2">system-level configuration</a>
+<ul>
+<li><a href="#orgf55d8ec">turn off spelling autocorrect</a></li>
+<li><a href="#orgf9552fd">fix scroll direction</a></li>
+<li><a href="#org5b82256">turn off spaces key shortcuts</a></li>
+</ul>
+</li>
+<li><a href="#org7ce77fc">ssh</a></li>
+<li><a href="#orgafaf8f5">homebrew</a>
+<ul>
+<li><a href="#org8d055dd">stuff installed using homebrew</a></li>
+<li><a href="#orga300688">zsh</a></li>
+</ul>
+</li>
+<li><a href="#org787c46b">git</a></li>
+<li><a href="#org6cee451">iTerm2 settings</a></li>
+<li><a href="#org6e39fb6">emacs</a></li>
+<li><a href="#orgcd050e8">python</a></li>
+<li><a href="#orgb8b8148">R</a></li>
+<li><a href="#org635dc71">mail</a></li>
+<li><a href="#org6eee07f">sshfs</a></li>
+<li><a href="#org28b1c0c">wkhtmltopdf</a></li>
+</ul>
+</div>
+</div>
+<p>
+These are my notes that I took while setting up a &#8230;</p> </div>
+	</div>
 
-          <div><p>
-Probably not as efficient as using the sqlite3.Row class, but works
-when actual dict objects are required. Adapted from
-<a href="https://docs.python.org/2/library/sqlite3.html">https://docs.python.org/2/library/sqlite3.html</a>.
+
+ 
+
+
+	<div class="article">
+          <a href="https://nhoffman.github.io/borborygmi/installing-r-packages.html"><h2>Installing R packages</h2></a>
+          <div class="well small"> Mon 22 March 2010 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/r-language.html">R-language</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/installing-r-packages.html">read more</a> </div>
+          <div class="summary"><div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgad0e9d5">Installing from CRAN</a></li>
+<li><a href="#org3d87a5d">Bioconductor</a></li>
+<li><a href="#org9ed976a">R-forge</a></li>
+<li><a href="#orgd31cbc9">Installing packages locally</a></li>
+<li><a href="#org5fbd423">Reloading a package</a></li>
+</ul>
+</div>
+</div>
+<p>
+Notes to myself about installing R packages.
 </p>
 
+<div id="outline-container-orgad0e9d5" class="outline-2">
+<h2 id="orgad0e9d5">Installing from CRAN</h2>
+<div class="outline-text-2" id="text-orgad0e9d5">
 <div class="org-src-container">
-<pre class="src src-python">import sqlite3
-
-def dict_factory(cursor, row):
-    return {col[0]: row[idx] for idx, col in enumerate(cursor.description)}
-
-con = sqlite3.connect(":memory:")
-con.row_factory = dict_factory
-cur = con.cursor()
-cur.execute("select 1 as a")
-print cur.fetchone()
+<pre class="src src-R">install.packages(c("ape","sqldf","ROCR"), repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE)
 </pre>
 </div>
 </div>
-          <hr>
+</div>
 
-            <h2>Comments</h2>
-<div id="disqus_thread"></div>
-
-<script>
-  var disqus_config = function () {
-  this.page.url = 'https://nhoffman.github.io/borborygmi';
-  this.page.identifier = 'sqlite-dict-factory';
-  };
-  (function() { // DON'T EDIT BELOW THIS LINE
-  var d = document, s = d.createElement('script');
-  s.src = 'https://http-nhoffman-github-io-borborygmi.disqus.com/embed.js';
-  s.setAttribute('data-timestamp', +new Date());
-  (d.head || d.body).appendChild(s);
-  })();
-</script>
-
-<noscript>Please enable JavaScript to view the
-  <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-</noscript>
-
+<div id="outline-container-org3d87a5d" class="outline-2">
+<h2 id="org3d87a5d">Bioconductor</h2>
+<div class="outline-text-2" id="text-org3d87a5d">
+<div class="org-src-container">
+<pre class="src src-R">source("http://bioconductor.org/biocLite.R")
+biocLite(c("Biostrings","BSgenome &#8230;</pre></div></div></div> </div>
 	</div>
 
 <div class="pagination">
 <ul>
-    <li class="prev disabled"><a href="#">&#8592; Previous</a></li>
+    <li class="prev"><a href="https://nhoffman.github.io/borborygmi/category/notes.html">&#8592; Previous</a></li>
 
-    <li class="active"><a href="https://nhoffman.github.io/borborygmi/tag/sqlite.html">1</a></li>
+    <li class=""><a href="https://nhoffman.github.io/borborygmi/category/notes.html">1</a></li>
+    <li class="active"><a href="https://nhoffman.github.io/borborygmi/category/notes2.html">2</a></li>
 
     <li class="next disabled"><a href="#">&#8594; Next</a></li>
 

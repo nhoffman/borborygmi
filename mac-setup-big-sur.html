@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -48,22 +49,16 @@
     <div class="row">
 
         <div class="span9">
-
-  <!-- Don't include TOC on the index page -->
-  <style>div#table-of-contents {display: none;}</style>
-
-
-
-	<div class="article">
-          <div class="content-title">
-            <a href="https://nhoffman.github.io/borborygmi/mac-setup-big-sur.html"><h1>Clean install of MacOS Big Sur</h1></a>
+  <div class='article'>
+    <div class="content-title">
+      <h1>Clean install of MacOS Big Sur</h1>
 Thu 20 May 2021 &#8212;
 
 
 <em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
-    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em>          </div>
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em>    </div>
 
-          <div><div id="table-of-contents">
+    <div><div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
@@ -289,12 +284,12 @@ Install using homebrew above. Update a few settings.
 </p>
 
 <p>
-Preferences &#8211;&gt; Profiles &#8211;&gt; Keys and do these things:
+Preferences &#x2013;&gt; Profiles &#x2013;&gt; Keys and do these things:
 </p>
 <ul class="org-ul">
 <li>select "Left/right option key acts as": +Esc</li>
-<li>+ &#8211;&gt; Keyboard shortcut "OPT+&lt;left arrow&gt;": Send Escape sequence "b"</li>
-<li>+ &#8211;&gt; Keyboard shortcut "OPT+&lt;right arrow&gt;": Send Escape sequence "f"</li>
+<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;left arrow&gt;": Send Escape sequence "b"</li>
+<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;right arrow&gt;": Send Escape sequence "f"</li>
 </ul>
 
 <p>
@@ -306,8 +301,8 @@ Default appearance:
 </p>
 
 <ul class="org-ul">
-<li>Preferences &#8211;&gt; Profiles &#8211;&gt; Colors &#8211;&gt; Color Presets &#8211;&gt; Light Background</li>
-<li>Preferences &#8211;&gt; Profiles &#8211;&gt; Text &#8211;&gt; Change Font &#8211;&gt; 14 point</li>
+<li>Preferences &#x2013;&gt; Profiles &#x2013;&gt; Colors &#x2013;&gt; Color Presets &#x2013;&gt; Light Background</li>
+<li>Preferences &#x2013;&gt; Profiles &#x2013;&gt; Text &#x2013;&gt; Change Font &#x2013;&gt; 14 point</li>
 </ul>
 
 <p>
@@ -320,8 +315,8 @@ curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | bash
 
 
 <ul class="org-ul">
-<li>Install python runtime by selecting "Scripts" &#8211;&gt; "Manage" &#8211;&gt; "Install Python Runtime".</li>
-<li>Enable the Python API under "Preferences" &#8211;&gt; "General" &#8211;&gt; "Magic"</li>
+<li>Install python runtime by selecting "Scripts" &#x2013;&gt; "Manage" &#x2013;&gt; "Install Python Runtime".</li>
+<li>Enable the Python API under "Preferences" &#x2013;&gt; "General" &#x2013;&gt; "Magic"</li>
 </ul>
 </div>
 </div>
@@ -506,9 +501,10 @@ path to the CLI for the version you want to use to your PATH, eg:
 </div>
 </div>
 </div>
-          <hr>
 
-            <h2>Comments</h2>
+    <hr>
+
+        <h2>Comments</h2>
 <div id="disqus_thread"></div>
 
 <script>
@@ -527,400 +523,7 @@ path to the CLI for the version you want to use to your PATH, eg:
 <noscript>Please enable JavaScript to view the
   <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
 </noscript>
-
-	</div>
-
-
- 
-
-
-	<div class="article">
-          <a href="https://nhoffman.github.io/borborygmi/mac-setup-catalina.html"><h2>Clean install of MacOS Catalina</h2></a>
-          <div class="well small"> Sat 11 April 2020 &#8212;
-
-
-<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
-    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/mac-setup-catalina.html">read more</a> </div>
-          <div class="summary"><div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#org9270b6f">system settings</a>
-<ul>
-<li><a href="#orgabf0cbb">turn off spelling autocorrect</a></li>
-<li><a href="#org5af910a">unmap Control + left,right</a></li>
-<li><a href="#org84c17b8">Turn on FileVault</a></li>
-</ul>
-</li>
-<li><a href="#orgc3a5abf">Developer tools</a></li>
-<li><a href="#orgef1478f">homebrew</a>
-<ul>
-<li><a href="#org14e3bf0">homebrew API token</a></li>
-<li><a href="#orgce8ac28">CLI applications</a></li>
-<li><a href="#org3c40feb">desktop applications</a></li>
-<li><a href="#org3fd0c83">packages in 3rd party taps</a>
-<ul>
-<li><a href="#org2f12351">saml2aws</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#orga7bdc08">iTerm2</a></li>
-<li><a href="#org53e96f9">python</a>
-<ul>
-<li><a href="#org1e95918">dependencies</a></li>
-</ul>
-</li>
-<li><a href="#orgfd8ca84">emacs</a></li>
-<li><a href="#org8761260">zsh</a></li>
-<li><a href="#orgf22e3ff">R</a></li>
-<li><a href="#org0292527">postgresql</a></li>
-<li><a href="#org9c414e4">X11</a></li>
-</ul>
-</div>
-</div>
-<p>
-Another installation of my personal notes for setting up a &#8230;</p> </div>
-	</div>
-
-
- 
-
-
-	<div class="article">
-          <a href="https://nhoffman.github.io/borborygmi/mac-setup-mojave.html"><h2>Clean install of MacOS Mojave</h2></a>
-          <div class="well small"> Fri 15 February 2019 &#8212;
-
-
-<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
-    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/mac-setup-mojave.html">read more</a> </div>
-          <div class="summary"><div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#orgf1c153d">system settings</a>
-<ul>
-<li><a href="#org1fe1f60">turn off spelling autocorrect</a></li>
-<li><a href="#orga746fbd">unmap Control + left,right</a></li>
-<li><a href="#org0f4cf96">Turn on FileVault</a></li>
-</ul>
-</li>
-<li><a href="#orgc34ff30">Developer tools</a></li>
-<li><a href="#org37b2a56">iTerm2</a></li>
-<li><a href="#orgd5a0bd2">homebrew</a>
-<ul>
-<li><a href="#orgc484dc1">homebrew API token</a></li>
-<li><a href="#orgb4675ad">Terminal applications</a></li>
-<li><a href="#orgd900b23">desktop applications</a></li>
-</ul>
-</li>
-<li><a href="#org6943079">python</a>
-<ul>
-<li><a href="#orgd1c9daa">dependencies</a></li>
-<li><a href="#org69c1881">python2</a></li>
-<li><a href="#org9397113">python3</a>
-<ul>
-<li><a href="#org72536dc">scons</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#org3b2ad85">emacs</a></li>
-<li><a href="#orgf532829">zsh</a></li>
-<li><a href="#org1320fc2">R</a></li>
-<li><a href="#org95f4942">postgresql</a></li>
-<li><a href="#org409b626">X11</a></li>
-<li><a href="#org05aff23">virtualbox and vagrant</a>
-<ul>
-<li><a href="#orgc601d6e">install an ubuntu16.04 VM</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-<p>
-Another installation of my personal &#8230;</p> </div>
-	</div>
-
-
- 
-
-
-	<div class="article">
-          <a href="https://nhoffman.github.io/borborygmi/mac-setup-high-sierra.html"><h2>Clean install of MacOS High Sierra</h2></a>
-          <div class="well small"> Fri 17 November 2017 &#8212;
-
-
-<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
-    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/mac-setup-high-sierra.html">read more</a> </div>
-          <div class="summary"><div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#org314fdd5">system settings</a>
-<ul>
-<li><a href="#org73f4e46">turn off spelling autocorrect</a></li>
-<li><a href="#org5767759">unmap Control + left,right</a></li>
-<li><a href="#org84efeff">Turn on FileVault</a></li>
-</ul>
-</li>
-<li><a href="#orgc9ec672">Developer tools</a></li>
-<li><a href="#org9329acc">homebrew</a>
-<ul>
-<li><a href="#orgd85a0e5">homebrew API token</a></li>
-</ul>
-</li>
-<li><a href="#orgee008ad">python</a>
-<ul>
-<li><a href="#orgae21357">dependencies</a></li>
-<li><a href="#orgd0c6991">python2</a></li>
-<li><a href="#org11dab38">python3</a>
-<ul>
-<li><a href="#orga9afbe0">scons</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#org55a39b4">emacs</a></li>
-<li><a href="#org2b5b3eb">zsh</a></li>
-<li><a href="#orge6a75dc">desktop apps</a>
-<ul>
-<li><a href="#org62da570">iTerm2</a></li>
-<li><a href="#org1503b9c">postgresql</a></li>
-</ul>
-</li>
-<li><a href="#org2b99622">R</a></li>
-<li><a href="#orgb468d0b">X11</a></li>
-<li><a href="#orgd0ea5a5">virtualbox and vagrant</a>
-<ul>
-<li><a href="#org49d206b">install an ubuntu16.04 VM</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-<p>
-I make it a practice to blow &#8230;</p> </div>
-	</div>
-
-
- 
-
-
-	<div class="article">
-          <a href="https://nhoffman.github.io/borborygmi/mac-setup-sierra.html"><h2>Setting up a new Mac (Sierra)</h2></a>
-          <div class="well small"> Thu 05 January 2017 &#8212;
-
-
-<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
-    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/mac-setup-sierra.html">read more</a> </div>
-          <div class="summary"><div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#org5eda289">system settings</a>
-<ul>
-<li><a href="#org8d6e78e">turn off spelling autocorrect</a></li>
-<li><a href="#org2b553c6">unmap Control + left,right</a></li>
-</ul>
-</li>
-<li><a href="#org1197b73">First applications</a>
-<ul>
-<li><a href="#org88e863a">iTerm2</a></li>
-<li><a href="#orge347b32">Dropbox</a></li>
-<li><a href="#orgcd2bfdf">Developer tools</a></li>
-<li><a href="#org016dd72">Junos pulse VPN client</a></li>
-<li><a href="#orge17e434">Microsoft Office 2016</a></li>
-<li><a href="#orge2224f1">Others</a></li>
-</ul>
-</li>
-<li><a href="#orgd563eed">homebrew</a>
-<ul>
-<li><a href="#orgf0efc79">X11</a></li>
-<li><a href="#org0ab6fd3">Desktop apps using Cask</a></li>
-<li><a href="#org6dade2e">homebrew API token</a></li>
-<li><a href="#orgdb32dab">zsh</a></li>
-</ul>
-</li>
-<li><a href="#orgad3c158">git</a></li>
-<li><a href="#org3c5b87d">python</a></li>
-<li><a href="#org263c8a5">emacs</a></li>
-<li><a href="#orgad219af">R</a></li>
-<li><a href="#org1146497">wkhtmltopdf</a></li>
-<li><a href="#orge617187">mail</a></li>
-</ul>
-</div>
-</div>
-<ul class="org-ul">
-<li><i>Edit 2017-01-09: provide upgrade path to Pulse &#8230;</i></li></ul> </div>
-	</div>
-
-
- 
-
-
-	<div class="article">
-          <a href="https://nhoffman.github.io/borborygmi/mac-setup-el-capitan.html"><h2>Setup after clean install of El Capitan</h2></a>
-          <div class="well small"> Mon 02 November 2015 &#8212;
-
-
-<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
-    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/mac-setup-el-capitan.html">read more</a> </div>
-          <div class="summary"><div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#orgdad30da">First applications</a>
-<ul>
-<li><a href="#org0aeebe2">Developer tools</a></li>
-<li><a href="#org857ee7a">X11</a></li>
-<li><a href="#org7e67963">iTerm2</a></li>
-<li><a href="#org3fd8c7c">Others</a></li>
-<li><a href="#org1a38a7a">UW only</a></li>
-</ul>
-</li>
-<li><a href="#orged4a13d">system-level configuration</a>
-<ul>
-<li><a href="#orgd65d651">turn off spelling autocorrect</a></li>
-<li><a href="#org362afb8">turn off spaces key shortcuts</a></li>
-</ul>
-</li>
-<li><a href="#org08ebe94">homebrew</a>
-<ul>
-<li><a href="#org55ef503">packages installed using homebrew</a></li>
-<li><a href="#orgb6f97bf">homebrew cask</a></li>
-<li><a href="#org6f786cb">homebrew API token</a></li>
-<li><a href="#org6b75cba">zsh</a></li>
-</ul>
-</li>
-<li><a href="#orgd6b9eda">ssh</a>
-<ul>
-<li><a href="#orgf4b7440">update /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist</a></li>
-<li><a href="#org05c7ff1">create $ZSH_INITDIR/ssh-ask-keychain (called from start_ssh_agent.zsh &#8230;</a></li></ul></li></ul></div></div> </div>
-	</div>
-
-
- 
-
-
-	<div class="article">
-          <a href="https://nhoffman.github.io/borborygmi/virtualbox-setup.html"><h2>Setup for VirtualBox VM running Ubuntu 14.04 on OS X Mavericks</h2></a>
-          <div class="well small"> Fri 06 February 2015 &#8212;
-
-
-<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
-    tags: <a href="https://nhoffman.github.io/borborygmi/tag/linux.html">linux,&#160;</a><a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac,&#160;</a><a href="https://nhoffman.github.io/borborygmi/tag/virtualbox.html">virtualbox</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/virtualbox-setup.html">read more</a> </div>
-          <div class="summary"><div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#org5b0e242">VirtualBox preferences</a></li>
-<li><a href="#org8de2310">Create an Ubuntu 14.04 VM</a></li>
-<li><a href="#orgf620ab1">Set up an IP address</a></li>
-</ul>
-</div>
-</div>
-<p>
-Here are my notes for setting up an Ubuntu VM to work on some web
-applications. This is intended to be a sandbox for development, so
-I'll err on the side of convenience (at &#8230;</p> </div>
-	</div>
-
-
- 
-
-
-	<div class="article">
-          <a href="https://nhoffman.github.io/borborygmi/compiling-bcl2fastq-on-ubuntu.html"><h2>Compiling bcl2fastq v2.15 on Ubuntu 12.04 and 14.04</h2></a>
-          <div class="well small"> Wed 27 August 2014 &#8212;
-
-
-<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
-    tags: <a href="https://nhoffman.github.io/borborygmi/tag/linux.html">linux</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/compiling-bcl2fastq-on-ubuntu.html">read more</a> </div>
-          <div class="summary"><div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#org5c73891">Ubuntu 14.04 (Trusty Tahr)</a></li>
-<li><a href="#orgff20d42">Ubuntu 12.04 (Precise Pangolin)</a></li>
-</ul>
-</div>
-</div>
-<p>
-Illumina provides a program for demultiplexing sequencing output
-called <code>bcl2fastq</code>. They get a gold star for releasing the source -
-the downside is that they release binaries only for RHEL/CentOS, and
-no build instructions for Ubuntu. So &#8230;</p> </div>
-	</div>
-
-
- 
-
-
-	<div class="article">
-          <a href="https://nhoffman.github.io/borborygmi/lists-with-variables.html"><h2>Creating lists containing variables</h2></a>
-          <div class="well small"> Thu 12 June 2014 &#8212;
-
-
-<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
-    tags: <a href="https://nhoffman.github.io/borborygmi/tag/elisp.html">elisp</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/lists-with-variables.html">read more</a> </div>
-          <div class="summary"><p>
-I learned a bit about list creation in elisp today. Here's how you join a list of strings in elisp:
-</p>
-
-<div class="org-src-container">
-<pre class="src src-elisp">(mapconcat #'identity '("" "path" "to" "someplace") "/")
-</pre>
-</div>
-
-<p>
-But I learned (thanks to <a href="http://stackoverflow.com/users/113848/legoscia">legoscia</a> on <a href="http://stackoverflow.com/questions/24188100">stackoverflow</a>) that simply
-replacing an element in the list with a variable results in an error:
-</p>
-
-<div class="org-src-container">
-<pre class="src src-elisp">(let ((path &#8230;</pre></div> </div>
-	</div>
-
-
- 
-
-
-	<div class="article">
-          <a href="https://nhoffman.github.io/borborygmi/dict-factory.html"><h2>sqlite dict factory</h2></a>
-          <div class="well small"> Tue 10 June 2014 &#8212;
-
-
-<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
-    tags: <a href="https://nhoffman.github.io/borborygmi/tag/python.html">python,&#160;</a><a href="https://nhoffman.github.io/borborygmi/tag/sqlite.html">sqlite</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/dict-factory.html">read more</a> </div>
-          <div class="summary"><p>
-Probably not as efficient as using the sqlite3.Row class, but works
-when actual dict objects are required. Adapted from
-<a href="https://docs.python.org/2/library/sqlite3.html">https://docs.python.org/2/library/sqlite3.html</a>.
-</p>
-
-<div class="org-src-container">
-<pre class="src src-python">import sqlite3
-
-def dict_factory(cursor, row):
-    return {col[0]: row[idx] for idx, col in enumerate(cursor.description)}
-
-con = sqlite3.connect(":memory &#8230;</pre></div> </div>
-	</div>
-
-<div class="pagination">
-<ul>
-    <li class="prev disabled"><a href="#">&#8592; Previous</a></li>
-
-    <li class="active"><a href="https://nhoffman.github.io/borborygmi/category/notes.html">1</a></li>
-    <li class=""><a href="https://nhoffman.github.io/borborygmi/category/notes2.html">2</a></li>
-
-    <li class="next"><a href="https://nhoffman.github.io/borborygmi/category/notes2.html">Next &#8594;</a></li>
-
-</ul>
-</div>
- 
-  
+  </div>
         </div>
 
         <div class="span3">
@@ -932,8 +535,8 @@ con = sqlite3.connect(":memory &#8230;</pre></div> </div>
                 </li>
 
                 <li><a href="https://nhoffman.github.io/borborygmi/">Archives</a>
-                </li><li><a href="https://nhoffman.github.io/borborygmi/tags.html">Tags</a>
-                </li><li><a href="https://nhoffman.github.io/borborygmi/" rel="alternate">Atom feed</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/tags.html">Tags</a>
+                <li><a href="https://nhoffman.github.io/borborygmi/" rel="alternate">Atom feed</a></li>
             </ul>
             </div>
 
@@ -968,8 +571,8 @@ con = sqlite3.connect(":memory &#8230;</pre></div> </div>
 
         </div>     </div>     </div> 
 <footer>
-<br>
-<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &#169; Noah Hoffman 2021</p>
+<br />
+<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &copy; Noah Hoffman 2021</p>
 </footer>
 
 </div> <!-- /container -->

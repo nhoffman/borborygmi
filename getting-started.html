@@ -56,21 +56,21 @@ Mon 26 May 2014 &#8212;
 
 
 <em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/org-mode.html">org-mode</a>;
-    tags: <a href="https://nhoffman.github.io/borborygmi/tag/org-mode.html">org-mode,&nbsp;</a><a href="https://nhoffman.github.io/borborygmi/tag/pelican.html">pelican,&nbsp;</a><a href="https://nhoffman.github.io/borborygmi/tag/elisp.html">elisp</a></em>    </div>
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/org-mode.html">org-mode</a></em>    </div>
 
     <div><div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org7e1f983">org-mode integration</a>
+<li><a href="#orgc771736">org-mode integration</a>
 <ul>
-<li><a href="#org2612c62">Arranging content in subdirectories</a></li>
-<li><a href="#orgef5edbf">Syntax highlighting</a></li>
+<li><a href="#orgb183ff6">Arranging content in subdirectories</a></li>
+<li><a href="#orgf24ce8a">Syntax highlighting</a></li>
 </ul>
 </li>
-<li><a href="#org7c4aea6">Choosing a theme</a></li>
-<li><a href="#orga9ffd40">Hosting on github pages</a></li>
-<li><a href="#org84ce0d9">Examples</a></li>
+<li><a href="#org0ad0501">Choosing a theme</a></li>
+<li><a href="#orgf56a56a">Hosting on github pages</a></li>
+<li><a href="#org5f7e2d4">Examples</a></li>
 </ul>
 </div>
 </div>
@@ -89,9 +89,9 @@ site generator could import html and saw <a href="http://msnyder.info/posts/2013
 together, I thought I'd give it a shot.
 </p>
 
-<div id="outline-container-org7e1f983" class="outline-2">
-<h2 id="org7e1f983">org-mode integration</h2>
-<div class="outline-text-2" id="text-org7e1f983">
+<div id="outline-container-orgc771736" class="outline-2">
+<h2 id="orgc771736">org-mode integration</h2>
+<div class="outline-text-2" id="text-orgc771736">
 <p>
 At a basic level, integration with org-mode is pretty simple: Pelican
 can import html content with page metadata provided in the
@@ -116,7 +116,7 @@ example:
 </pre>
 </div>
 
-<pre class="example">
+<pre class="example" id="orgbc9b8cc">
 &lt;html&gt;
     &lt;head&gt;
         &lt;title&gt;Creating a site with Pelican and org-mode&lt;/title&gt;
@@ -148,9 +148,9 @@ There were a couple of tricky bits, though.
 </p>
 </div>
 
-<div id="outline-container-org2612c62" class="outline-3">
-<h3 id="org2612c62">Arranging content in subdirectories</h3>
-<div class="outline-text-3" id="text-org2612c62">
+<div id="outline-container-orgb183ff6" class="outline-3">
+<h3 id="orgb183ff6">Arranging content in subdirectories</h3>
+<div class="outline-text-3" id="text-orgb183ff6">
 <p>
 First, I wanted to be able to create subdirectories containing data or
 images for specific posts (as opposed to lumping them all together in
@@ -189,8 +189,11 @@ The org-mode source is here:
 
 <pre class="example">
 ../org-content/getting-started.org
+../org-content/getting-started.org-e
 ../org-content/getting-started:
 Perameles_gunni.jpg
+plot1.png
+plot2.png
 </pre>
 
 
@@ -208,6 +211,15 @@ are relative to the org-mode source):
 And the final output:
 </p>
 
+<pre class="example">
+../output/getting-started.html
+../output/getting-started:
+Perameles_gunni.jpg
+plot1.png
+plot2.png
+</pre>
+
+
 <p>
 An additional complication is that the files for the index and
 individual posts are at the top level of the output directory, but
@@ -219,9 +231,9 @@ fixed things up in the latter files with lxml in the script
 </div>
 </div>
 
-<div id="outline-container-orgef5edbf" class="outline-3">
-<h3 id="orgef5edbf">Syntax highlighting</h3>
-<div class="outline-text-3" id="text-orgef5edbf">
+<div id="outline-container-orgf24ce8a" class="outline-3">
+<h3 id="orgf24ce8a">Syntax highlighting</h3>
+<div class="outline-text-3" id="text-orgf24ce8a">
 <p>
 A lot of trial and error was required to export code blocks with
 colorized syntax highlighting, and I still can't say I fully
@@ -252,9 +264,9 @@ was enough to produce colorized output. Go figure.
 </div>
 </div>
 
-<div id="outline-container-org7c4aea6" class="outline-2">
-<h2 id="org7c4aea6">Choosing a theme</h2>
-<div class="outline-text-2" id="text-org7c4aea6">
+<div id="outline-container-org0ad0501" class="outline-2">
+<h2 id="org0ad0501">Choosing a theme</h2>
+<div class="outline-text-2" id="text-org0ad0501">
 <p>
 There are plenty of choices over at <a href="https://github.com/getpelican/pelican-themes">the pelican-themes repository</a>, and
 there were a number that seemed to work well (for the time being)
@@ -284,9 +296,9 @@ I finally settled on tuxlite_tbs (thanks, <a href="https://github.com/chanux">ch
 </div>
 </div>
 
-<div id="outline-container-orga9ffd40" class="outline-2">
-<h2 id="orga9ffd40">Hosting on github pages</h2>
-<div class="outline-text-2" id="text-orga9ffd40">
+<div id="outline-container-orgf56a56a" class="outline-2">
+<h2 id="orgf56a56a">Hosting on github pages</h2>
+<div class="outline-text-2" id="text-orgf56a56a">
 <p>
 Thanks to the magical <a href="https://github.com/davisp/ghp-import">ghp-import</a>, hosting on GitHub pages is as easy as
 </p>
@@ -297,9 +309,9 @@ ghp-import -p output
 </div>
 </div>
 
-<div id="outline-container-org84ce0d9" class="outline-2">
-<h2 id="org84ce0d9">Examples</h2>
-<div class="outline-text-2" id="text-org84ce0d9">
+<div id="outline-container-org5f7e2d4" class="outline-2">
+<h2 id="org5f7e2d4">Examples</h2>
+<div class="outline-text-2" id="text-org5f7e2d4">
 <table class="table table-striped table-bordered table-condensed" style="width: auto;">
 <caption class="t-above"><span class="table-number">Table 1:</span> An org-mode table</caption>
 
@@ -333,7 +345,7 @@ ghp-import -p output
 </table>
 
 
-<div class="figure">
+<div id="org40e514c" class="figure">
 <p><img src="getting-started/Perameles_gunni.jpg" alt="Perameles_gunni.jpg" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Hey, a <a href="http://en.wikipedia.org/wiki/File:Perameles_gunni.jpg">bandicoot</a>!</p>
@@ -347,7 +359,7 @@ invisible(dev.off())
 </div>
 
 
-<div class="figure">
+<div id="org2ac81ea" class="figure">
 <p><img src="getting-started/plot1.png" alt="plot1.png" />
 </p>
 </div>
@@ -357,24 +369,11 @@ invisible(dev.off())
 </pre>
 </div>
 
-
-<div class="figure">
-<p><img src="getting-started/plot2.png" alt="plot2.png" />
-</p>
-</div>
-
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 3: </span>A python code block with output</label><pre class="src src-python">for i in range(3):
     print 'hello' + '!' * i
 </pre>
 </div>
-
-<pre class="example">
-hello
-hello!
-hello!!
-</pre>
-
 
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 4: </span>An sqlite3 code block producing an html-formatted table</label><pre class="src src-sqlite">.header on
@@ -484,7 +483,7 @@ select * from foo;
         </div>     </div>     </div> 
 <footer>
 <br />
-<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &copy; Noah Hoffman 2019</p>
+<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &copy; Noah Hoffman 2021</p>
 </footer>
 
 </div> <!-- /container -->

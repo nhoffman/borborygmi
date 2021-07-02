@@ -57,8 +57,8 @@
 
 	<div class='article'>
           <div class="content-title">
-            <a href="https://nhoffman.github.io/borborygmi/mac-setup-mojave.html"><h1>Clean install of MacOS Mojave</h1></a>
-Fri 15 February 2019 &#8212;
+            <a href="https://nhoffman.github.io/borborygmi/mac-setup-big-sur.html"><h1>Clean install of MacOS Big Sur</h1></a>
+Thu 20 May 2021 &#8212;
 
 
 <em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
@@ -68,88 +68,93 @@ Fri 15 February 2019 &#8212;
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org40988de">system settings</a>
+<li><a href="#orge430839">system settings</a>
 <ul>
-<li><a href="#org1002184">turn off spelling autocorrect</a></li>
-<li><a href="#orgdbfdebb">unmap Control + left,right</a></li>
-<li><a href="#orgea58b0e">Turn on FileVault</a></li>
+<li><a href="#org95c9859">turn off spelling autocorrect</a></li>
+<li><a href="#org853a6ce">unmap Control + left,right</a></li>
+<li><a href="#orga1fc9ee">Turn on FileVault</a></li>
 </ul>
 </li>
-<li><a href="#org4240d28">Developer tools</a></li>
-<li><a href="#orgddcedc5">iTerm2</a></li>
-<li><a href="#org1e505f9">homebrew</a>
+<li><a href="#orgb9650f1">Developer tools</a></li>
+<li><a href="#orga754461">homebrew</a>
 <ul>
-<li><a href="#org598d341">homebrew API token</a></li>
-<li><a href="#org1dfc637">Terminal applications</a></li>
-<li><a href="#org08419fc">desktop applications</a></li>
+<li><a href="#org4f4a973">homebrew API token</a></li>
+<li><a href="#orga8e478c">CLI applications</a></li>
+<li><a href="#org9ad1c13">desktop applications</a></li>
 </ul>
 </li>
-<li><a href="#orgfc36c2c">python</a>
-<ul>
-<li><a href="#org6145493">dependencies</a></li>
-<li><a href="#orgd5205b2">python2</a></li>
-<li><a href="#org9d40dc1">python3</a>
-<ul>
-<li><a href="#org483770a">scons</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#orga59d8cc">emacs</a></li>
-<li><a href="#org50a9cc3">zsh</a></li>
-<li><a href="#org920f1f1">R</a></li>
-<li><a href="#orgff1f0ed">postgresql</a></li>
-<li><a href="#org1cf17ab">X11</a></li>
-<li><a href="#org045d57e">virtualbox and vagrant</a>
-<ul>
-<li><a href="#orgd3cd913">install an ubuntu16.04 VM</a></li>
-</ul>
-</li>
+<li><a href="#org4806d84">iTerm2</a></li>
+<li><a href="#org843d9c8">zsh</a></li>
+<li><a href="#org23a5717">python</a></li>
+<li><a href="#org8b18c05">emacs</a></li>
+<li><a href="#org2e05bf8">R</a></li>
+<li><a href="#orgea373c0">postgresql</a></li>
 </ul>
 </div>
 </div>
 <p>
-Another installation of my personal notes for setting up a new (or
+Yet another installation of my personal notes for setting up a new (or
 cleanly installed) MacOS computer. The process changes just a bit with
-each new OS version. I have made an attempt to record the steps in
-order (for example, even entering commands is somewhat painful until I
-have iTerm with familiar keyboard settings).
+each new OS version. I will try really hard to reproduce the steps in
+an order that make then easiest to execute.
 </p>
 
 <p>
-Somewhat glossed over here are manual steps used to transfer
-non-public dotfiles, credentials, etc. Here's a partial list of files
-and directories that I copied directly from my old laptop:
+This time I need to document some details of the actual clean install
+process: it seems to have become more complicated to boot from a
+startup disk containing the Big Sur installer. It was necessary to
+restart into recovery mode (hold down Command+r) and use the Startup
+Security Utility (under the Utilities menu) to allow booting from
+external media and not to require an internet connection to verify the
+boot media. After this, I was able to select a startup disk by
+restarting while holding down Option. After running that gauntlet, on
+to the actual installation process (after which I restarted again in
+recovery mode and restored the default security settings).
+</p>
+
+<p>
+I do copy some things over from my old computer, but it's pretty
+minimal. Here's the command to gather up what I need to transfer.
 </p>
 
 <pre class="example">
-tar -cf dotfiles.tar .Xmodmap .gitconfig .gnupg .pypirc .ssh
+tar -cf dotfiles.tar .gitconfig .gnupg .pypirc .ssh .aws .saml2aws .psqlrc .zprofile
 </pre>
 
 
 <p>
-Note that none of these steps require an Apple ID - I held off on
+It's also handy to know all of the projects I'm working on:
+</p>
+
+<pre class="example">
+cd ~/src
+for dname in */.git; do git -C $(dirname $dname) remote -v; done &gt; remotes.txt
+</pre>
+
+
+<p>
+Note that none of the steps below require an Apple ID - I held off on
 signing in until the very end just to see if it was possible.
 </p>
 
-<div id="outline-container-org40988de" class="outline-2">
-<h2 id="org40988de">system settings</h2>
-<div class="outline-text-2" id="text-org40988de">
+<div id="outline-container-orge430839" class="outline-2">
+<h2 id="orge430839">system settings</h2>
+<div class="outline-text-2" id="text-orge430839">
 </div>
-<div id="outline-container-org1002184" class="outline-3">
-<h3 id="org1002184">turn off spelling autocorrect</h3>
-<div class="outline-text-3" id="text-org1002184">
+<div id="outline-container-org95c9859" class="outline-3">
+<h3 id="org95c9859">turn off spelling autocorrect</h3>
+<div class="outline-text-3" id="text-org95c9859">
 <pre class="example">
 System Preferences --&gt; Keyboard --&gt; Text tab --&gt; unselect "Correct spelling automatically" and others
 </pre>
 </div>
 </div>
-<div id="outline-container-orgdbfdebb" class="outline-3">
-<h3 id="orgdbfdebb">unmap Control + left,right</h3>
-<div class="outline-text-3" id="text-orgdbfdebb">
+<div id="outline-container-org853a6ce" class="outline-3">
+<h3 id="org853a6ce">unmap Control + left,right</h3>
+<div class="outline-text-3" id="text-org853a6ce">
 <p>
 I use Control plus the left and right arrow keys to move between
-windows in emacs and tmux.
+windows in emacs and tmux, so I disable the defaults.
 </p>
 
 <pre class="example">
@@ -158,9 +163,9 @@ System Preferences --&gt; Keyboard --&gt; Shortcuts --&gt; uncheck mission contr
 </div>
 </div>
 
-<div id="outline-container-orgea58b0e" class="outline-3">
-<h3 id="orgea58b0e">Turn on FileVault</h3>
-<div class="outline-text-3" id="text-orgea58b0e">
+<div id="outline-container-orga1fc9ee" class="outline-3">
+<h3 id="orga1fc9ee">Turn on FileVault</h3>
+<div class="outline-text-3" id="text-orga1fc9ee">
 <pre class="example">
 System Preferences --&gt; Security &amp; privacy --&gt; FileVault
 </pre>
@@ -173,9 +178,9 @@ I used a recovery key option rather than iCloud for my work machine, iCloud for 
 </div>
 </div>
 
-<div id="outline-container-org4240d28" class="outline-2">
-<h2 id="org4240d28">Developer tools</h2>
-<div class="outline-text-2" id="text-org4240d28">
+<div id="outline-container-orgb9650f1" class="outline-2">
+<h2 id="orgb9650f1">Developer tools</h2>
+<div class="outline-text-2" id="text-orgb9650f1">
 <p>
 Pretty much the first thing that needs to happen. This can be done
 from the command line:
@@ -188,40 +193,9 @@ from the command line:
 </div>
 </div>
 
-<div id="outline-container-orgddcedc5" class="outline-2">
-<h2 id="orgddcedc5">iTerm2</h2>
-<div class="outline-text-2" id="text-orgddcedc5">
-<pre class="example">
-brew cask install iterm2
-</pre>
-
-<p>
-Update a few settings.
-</p>
-
-<p>
-Preferences &#x2013;&gt; Profiles &#x2013;&gt; Keys and do these things:
-</p>
-<ul class="org-ul">
-<li>select "Left/right option key acts as": +Esc</li>
-<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;left arrow&gt;": Send Escape sequence "b"</li>
-<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;right arrow&gt;": Send Escape sequence "f"</li>
-</ul>
-
-<p>
-Default appearance:
-</p>
-
-<ul class="org-ul">
-<li>Preferences &#x2013;&gt; Profiles &#x2013;&gt; Colors &#x2013;&gt; Load Presets &#x2013;&gt; Light Background</li>
-<li>Preferences &#x2013;&gt; Profiles &#x2013;&gt; Text &#x2013;&gt; Change Font &#x2013;&gt; 14 point</li>
-</ul>
-</div>
-</div>
-
-<div id="outline-container-org1e505f9" class="outline-2">
-<h2 id="org1e505f9">homebrew</h2>
-<div class="outline-text-2" id="text-org1e505f9">
+<div id="outline-container-orga754461" class="outline-2">
+<h2 id="orga754461">homebrew</h2>
+<div class="outline-text-2" id="text-orga754461">
 <p>
 Homebrew no longer requires user-ownership of /usr/local, so things
 are pretty easy now:
@@ -234,11 +208,11 @@ brew doctor
 </div>
 </div>
 
-<div id="outline-container-org598d341" class="outline-3">
-<h3 id="org598d341">homebrew API token</h3>
-<div class="outline-text-3" id="text-org598d341">
+<div id="outline-container-org4f4a973" class="outline-3">
+<h3 id="org4f4a973">homebrew API token</h3>
+<div class="outline-text-3" id="text-org4f4a973">
 <p>
-Apparently lots of requests to GutHub via homebrew can hit a rate limit. There's a higher limit if you create an API token. See <a href="https://gist.github.com/christopheranderton/8644743">https://gist.github.com/christopheranderton/8644743</a>
+Apparently lots of requests to GitHub via homebrew can hit a rate limit. There's a higher limit if you create an API token. See <a href="https://gist.github.com/christopheranderton/8644743">https://gist.github.com/christopheranderton/8644743</a>
 </p>
 
 <p>
@@ -259,9 +233,9 @@ export HOMEBREW_GITHUB_API_TOKEN=token_here
 </div>
 </div>
 
-<div id="outline-container-org1dfc637" class="outline-3">
-<h3 id="org1dfc637">Terminal applications</h3>
-<div class="outline-text-3" id="text-org1dfc637">
+<div id="outline-container-orga8e478c" class="outline-3">
+<h3 id="orga8e478c">CLI applications</h3>
+<div class="outline-text-3" id="text-orga8e478c">
 <p>
 Many packages are installed later with additional elaboration or in as
 dependencies for other applications; here are some more or less
@@ -279,29 +253,24 @@ brew install pandoc &amp;&amp; \
 brew install tmux &amp;&amp; \
 brew install tree &amp;&amp; \
 brew install fd &amp;&amp; \
-brew install xsv
+brew install xsv &amp;&amp; \
+brew install fzf &amp;&amp; \
+brew install saml2aws &amp;&amp; \
+brew install jq
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org08419fc" class="outline-3">
-<h3 id="org08419fc">desktop applications</h3>
-<div class="outline-text-3" id="text-org08419fc">
+<div id="outline-container-org9ad1c13" class="outline-3">
+<h3 id="org9ad1c13">desktop applications</h3>
+<div class="outline-text-3" id="text-org9ad1c13">
 <p>
-Homebrew installs desktop apps too!
+Homebrew installs desktop apps too! (the syntax has changed a bit)
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">brew cask install dropbox
-brew cask install sizeup
-brew cask install dash
-brew cask install google-chrome
-brew cask install java
-brew cask install mactex
-brew cask install texmaker
-brew cask install firefox
-brew cask install docker
+<pre class="src src-sh">for pkg in dropbox sizeup dash google-chrome mactex iterm2; do brew install --cask $pkg; done
 </pre>
 </div>
 
@@ -313,96 +282,139 @@ credentials that must be installed interactively.
 </div>
 </div>
 
-<div id="outline-container-orgfc36c2c" class="outline-2">
-<h2 id="orgfc36c2c">python</h2>
-<div class="outline-text-2" id="text-orgfc36c2c">
+<div id="outline-container-org4806d84" class="outline-2">
+<h2 id="org4806d84">iTerm2</h2>
+<div class="outline-text-2" id="text-org4806d84">
 <p>
-Mojave seems to ship with Python 2.7.10 and no python3, so let's use
-homebrew to get recent versions of both.
+Install using homebrew above. Update a few settings.
 </p>
 
 <p>
-I try to limit packages installed to the system to utilities that are
-very frequently used outside of the context of a virtualenv.
+Preferences &#x2013;&gt; Profiles &#x2013;&gt; Keys and do these things:
+</p>
+<ul class="org-ul">
+<li>select "Left/right option key acts as": +Esc</li>
+<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;left arrow&gt;": Send Escape sequence "b"</li>
+<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;right arrow&gt;": Send Escape sequence "f"</li>
+</ul>
+
+<p>
+(may have to delete or replace an existing mapping)
 </p>
 
 <p>
-See
-<a href="https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Homebrew-and-Python.md">https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Homebrew-and-Python.md</a>
+Default appearance:
 </p>
+
+<ul class="org-ul">
+<li>Preferences &#x2013;&gt; Profiles &#x2013;&gt; Colors &#x2013;&gt; Color Presets &#x2013;&gt; Light Background</li>
+<li>Preferences &#x2013;&gt; Profiles &#x2013;&gt; Text &#x2013;&gt; Change Font &#x2013;&gt; 14 point</li>
+</ul>
+
+<p>
+Install shell integration:
+</p>
+
+<pre class="example">
+curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | bash
+</pre>
+
+
+<ul class="org-ul">
+<li>Install python runtime by selecting "Scripts" &#x2013;&gt; "Manage" &#x2013;&gt; "Install Python Runtime".</li>
+<li>Enable the Python API under "Preferences" &#x2013;&gt; "General" &#x2013;&gt; "Magic"</li>
+</ul>
+</div>
 </div>
 
-<div id="outline-container-org6145493" class="outline-3">
-<h3 id="org6145493">dependencies</h3>
-<div class="outline-text-3" id="text-org6145493">
+<div id="outline-container-org843d9c8" class="outline-2">
+<h2 id="org843d9c8">zsh</h2>
+<div class="outline-text-2" id="text-org843d9c8">
 <p>
-Run <code>brew info python</code> for required and optional dependencies
+Change shell to zsh. I'll just use the zsh shipped with the OS.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">for pkg in sphinx-doc pkg-config readline sqlite gdbm berkeley-db@4 tcl-tk xz; do brew install $pkg; done
+<pre class="src src-sh">chsh -s /bin/zsh $USER
+</pre>
+</div>
+
+<p>
+Install my dotfiles (relevant only to me)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">cd ~
+git clone git@bitbucket.org:nhoffman/dotfiles.git
+~/dotfiles/mac/install.py
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgd5205b2" class="outline-3">
-<h3 id="orgd5205b2">python2</h3>
-<div class="outline-text-3" id="text-orgd5205b2">
-<div class="org-src-container">
-<pre class="src src-sh">brew install python@2
-/usr/local/bin/pip2 install -U pip setuptools virtualenv wheel
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org9d40dc1" class="outline-3">
-<h3 id="org9d40dc1">python3</h3>
-<div class="outline-text-3" id="text-org9d40dc1">
+<div id="outline-container-org23a5717" class="outline-2">
+<h2 id="org23a5717">python</h2>
+<div class="outline-text-2" id="text-org23a5717">
 <p>
-Note that "python" corresponds to the python3 homebrew recipe.
+My version of Big Sur provided Python 2.7.16 and 3.9.5. My most recent evolution of managing python interpreters is to use pyenv. See <a href="https://realpython.com/intro-to-pyenv/">https://realpython.com/intro-to-pyenv/</a>
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">brew install python
-/usr/local/bin/pip3 install -U pip wheel
+<pre class="src src-sh">brew install zlib
+brew install pyenv
+brew install pyenv-virtualenv
 </pre>
 </div>
 
 <p>
-A limited selection of packages - better to use virtualenvs!
+Install pyenv-update plugin:
 </p>
 
-<div class="org-src-container">
-<pre class="src src-sh">pip3 install ansible
-pip3 install csvkit
-pip3 install pgcli
+<pre class="example">
+git clone https://github.com/pyenv/pyenv-update.git $(pyenv root)/plugins/pyenv-update
 </pre>
-</div>
-</div>
 
-<div id="outline-container-org483770a" class="outline-4">
-<h4 id="org483770a">scons</h4>
-<div class="outline-text-4" id="text-org483770a">
+
 <p>
-Note that <code>scons</code> wants to install man pages to <code>/usr/local/man</code>, which is owned by root. You'll need to do this first:
+added dotfiles/mac/zsh/pyenv.plugin.zsh
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">sudo mkdir -p /usr/local/man
-sudo chown $(whoami) /usr/local/man
-pip3 install scons
+<pre class="src src-sh">if [[ -d "$HOME/.pyenv" ]]; then
+    # echo "using pyenv"
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init --path)"
+fi
+</pre>
+</div>
+
+<p>
+Even though the OS version of python3 (3.9.5) is up to date, also
+install this version via pyenv to avoid installing packages to create
+a strict a separation from the system version as possible.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">pyenv install -v 3.9.5
+pyenv global 3.9.5
+pip3 install -U pip wheel
+</pre>
+</div>
+
+<p>
+Install 3.8.8 for projects expecting python 3.8
+</p>
+
+<pre class="example">
+pyenv install -v 3.8.8
 </pre>
 </div>
 </div>
-</div>
-</div>
-</div>
 
-<div id="outline-container-orga59d8cc" class="outline-2">
-<h2 id="orga59d8cc">emacs</h2>
-<div class="outline-text-2" id="text-orga59d8cc">
+<div id="outline-container-org8b18c05" class="outline-2">
+<h2 id="org8b18c05">emacs</h2>
+<div class="outline-text-2" id="text-org8b18c05">
 <p>
 Install latest emacs binary from <a href="http://emacsformacosx.com/">http://emacsformacosx.com/</a>
 </p>
@@ -424,62 +436,25 @@ Check out my .emacs.d and run setup scripts.
 
 <div class="org-src-container">
 <pre class="src src-sh">cd ~
-git clone --recurse-submodules git@github.com:nhoffman/.emacs.d.git
+git clone git@github.com:nhoffman/emacs-config.git .emacs.d
 </pre>
 </div>
 
 <p>
-For elpy:
+Run setup scripts:
 </p>
 
 <div class="org-src-container">
 <pre class="src src-sh">cd ~/.emacs.d
-bin/venv.sh
+bin/python-setup.sh
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org50a9cc3" class="outline-2">
-<h2 id="org50a9cc3">zsh</h2>
-<div class="outline-text-2" id="text-org50a9cc3">
-<p>
-Install zsh with Homebrew
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh">brew install zsh
-</pre>
-</div>
-
-<p>
-Change shell to zsh
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh">sudo -s
-echo /usr/local/bin/zsh &gt;&gt; /etc/shells
-exit
-chsh -s /usr/local/bin/zsh $USER
-</pre>
-</div>
-
-<p>
-Install my dotfiles (relevant only to me)
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh">cd ~
-git clone git@bitbucket.org:nhoffman/dotfiles.git
-~/dotfiles/mac/install.py
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org920f1f1" class="outline-2">
-<h2 id="org920f1f1">R</h2>
-<div class="outline-text-2" id="text-org920f1f1">
+<div id="outline-container-org2e05bf8" class="outline-2">
+<h2 id="org2e05bf8">R</h2>
+<div class="outline-text-2" id="text-org2e05bf8">
 <p>
 I had to give up on installing R with homebrew because it seemed to
 result in an interpreter that always wanted to install packages from
@@ -507,19 +482,18 @@ Also:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">brew cask install rstudio
+<pre class="src src-sh">brew install --cask rstudio
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgff1f0ed" class="outline-2">
-<h2 id="orgff1f0ed">postgresql</h2>
-<div class="outline-text-2" id="text-orgff1f0ed">
-<div class="org-src-container">
-<pre class="src src-sh">brew cask install postgres
-</pre>
-</div>
+<div id="outline-container-orgea373c0" class="outline-2">
+<h2 id="orgea373c0">postgresql</h2>
+<div class="outline-text-2" id="text-orgea373c0">
+<p>
+Install from <a href="https://postgresapp.com/downloads.html">https://postgresapp.com/downloads.html</a>
+</p>
 
 <p>
 This installs multiple versions of postgres. You'll need to add the
@@ -532,85 +506,6 @@ path to the CLI for the version you want to use to your PATH, eg:
 </div>
 </div>
 </div>
-
-<div id="outline-container-org1cf17ab" class="outline-2">
-<h2 id="org1cf17ab">X11</h2>
-<div class="outline-text-2" id="text-org1cf17ab">
-<p>
-install Xquartz
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh">brew install caskroom/cask/xquartz
-</pre>
-</div>
-
-<p>
-X11 key bindings so that the option key is used for Meta. Not so
-relevant any more now that I rarely use emacs via X11 for remote
-sessions.
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh">cat &gt; ~/.Xmodmap &lt;&lt;EOF
-clear Mod1
-clear Mod2
-keycode 63 = Mode_switch
-keycode 66 = Meta_L
-add Mod1 = Meta_L
-add Mod2 = Mode_switch
-EOF
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org045d57e" class="outline-2">
-<h2 id="org045d57e">virtualbox and vagrant</h2>
-<div class="outline-text-2" id="text-org045d57e">
-<div class="org-src-container">
-<pre class="src src-sh">brew cask install virtualbox
-brew cask install vagrant
-brew cask install vagrant-manager
-</pre>
-</div>
-
-<p>
-The command to install virtualbox will prompt you to allow a kernel
-extension in system preferences.
-</p>
-
-<p>
-After virtualbox is installed, launch the application, go to
-preferences, and change default machine folder to ~/VirtualBox
-</p>
-
-<ul class="org-ul">
-<li>available vagrant images:</li>
-</ul>
-
-<p>
-<a href="https://app.vagrantup.com/boxes/search">https://app.vagrantup.com/boxes/search</a>
-</p>
-</div>
-
-<div id="outline-container-orgd3cd913" class="outline-3">
-<h3 id="orgd3cd913">install an ubuntu16.04 VM</h3>
-<div class="outline-text-3" id="text-orgd3cd913">
-<p>
-see <a href="https://app.vagrantup.com/ubuntu/boxes/xenial64">https://app.vagrantup.com/ubuntu/boxes/xenial64</a>
-</p>
-
-<div class="org-src-container">
-<pre class="src src-sh">mkdir -p ~/vagrant/xenial64
-cd ~/vagrant/xenial64
-vagrant init ubuntu/xenial64
-vagrant up
-</pre>
-</div>
-</div>
-</div>
-</div>
 </div>
           <hr />
 
@@ -620,7 +515,7 @@ vagrant up
 <script>
   var disqus_config = function () {
   this.page.url = 'https://nhoffman.github.io/borborygmi';
-  this.page.identifier = 'clean-install-of-macos-mojave';
+  this.page.identifier = 'clean-install-of-macos-big-sur';
   };
   (function() { // DON'T EDIT BELOW THIS LINE
   var d = document, s = d.createElement('script');
@@ -641,6 +536,118 @@ vagrant up
 
 
 	<div class='article'>
+          <a href="https://nhoffman.github.io/borborygmi/mac-setup-catalina.html"><h2>Clean install of MacOS Catalina</h2></a>
+          <div class= "well small"> Sat 11 April 2020 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/mac-setup-catalina.html">read more</a> </div>
+          <div class="summary"><div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org9270b6f">system settings</a>
+<ul>
+<li><a href="#orgabf0cbb">turn off spelling autocorrect</a></li>
+<li><a href="#org5af910a">unmap Control + left,right</a></li>
+<li><a href="#org84c17b8">Turn on FileVault</a></li>
+</ul>
+</li>
+<li><a href="#orgc3a5abf">Developer tools</a></li>
+<li><a href="#orgef1478f">homebrew</a>
+<ul>
+<li><a href="#org14e3bf0">homebrew API token</a></li>
+<li><a href="#orgce8ac28">CLI applications</a></li>
+<li><a href="#org3c40feb">desktop applications</a></li>
+<li><a href="#org3fd0c83">packages in 3rd party taps</a>
+<ul>
+<li><a href="#org2f12351">saml2aws</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orga7bdc08">iTerm2</a></li>
+<li><a href="#org53e96f9">python</a>
+<ul>
+<li><a href="#org1e95918">dependencies</a></li>
+</ul>
+</li>
+<li><a href="#orgfd8ca84">emacs</a></li>
+<li><a href="#org8761260">zsh</a></li>
+<li><a href="#orgf22e3ff">R</a></li>
+<li><a href="#org0292527">postgresql</a></li>
+<li><a href="#org9c414e4">X11</a></li>
+</ul>
+</div>
+</div>
+<p>
+Another installation of my personal notes for setting up a …</p> </div>
+	</div>
+
+
+ 
+
+
+	<div class='article'>
+          <a href="https://nhoffman.github.io/borborygmi/mac-setup-mojave.html"><h2>Clean install of MacOS Mojave</h2></a>
+          <div class= "well small"> Fri 15 February 2019 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/mac-setup-mojave.html">read more</a> </div>
+          <div class="summary"><div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgf1c153d">system settings</a>
+<ul>
+<li><a href="#org1fe1f60">turn off spelling autocorrect</a></li>
+<li><a href="#orga746fbd">unmap Control + left,right</a></li>
+<li><a href="#org0f4cf96">Turn on FileVault</a></li>
+</ul>
+</li>
+<li><a href="#orgc34ff30">Developer tools</a></li>
+<li><a href="#org37b2a56">iTerm2</a></li>
+<li><a href="#orgd5a0bd2">homebrew</a>
+<ul>
+<li><a href="#orgc484dc1">homebrew API token</a></li>
+<li><a href="#orgb4675ad">Terminal applications</a></li>
+<li><a href="#orgd900b23">desktop applications</a></li>
+</ul>
+</li>
+<li><a href="#org6943079">python</a>
+<ul>
+<li><a href="#orgd1c9daa">dependencies</a></li>
+<li><a href="#org69c1881">python2</a></li>
+<li><a href="#org9397113">python3</a>
+<ul>
+<li><a href="#org72536dc">scons</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org3b2ad85">emacs</a></li>
+<li><a href="#orgf532829">zsh</a></li>
+<li><a href="#org1320fc2">R</a></li>
+<li><a href="#org95f4942">postgresql</a></li>
+<li><a href="#org409b626">X11</a></li>
+<li><a href="#org05aff23">virtualbox and vagrant</a>
+<ul>
+<li><a href="#orgc601d6e">install an ubuntu16.04 VM</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+Another installation of my personal …</p> </div>
+	</div>
+
+
+ 
+
+
+	<div class='article'>
           <a href="https://nhoffman.github.io/borborygmi/mac-setup-high-sierra.html"><h2>Clean install of MacOS High Sierra</h2></a>
           <div class= "well small"> Fri 17 November 2017 &#8212;
 
@@ -651,50 +658,50 @@ vagrant up
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org764fba3">system settings</a>
+<li><a href="#org314fdd5">system settings</a>
 <ul>
-<li><a href="#orgaac259d">turn off spelling autocorrect</a></li>
-<li><a href="#org3d43de9">unmap Control + left,right</a></li>
-<li><a href="#org403d68b">Turn on FileVault</a></li>
+<li><a href="#org73f4e46">turn off spelling autocorrect</a></li>
+<li><a href="#org5767759">unmap Control + left,right</a></li>
+<li><a href="#org84efeff">Turn on FileVault</a></li>
 </ul>
 </li>
-<li><a href="#org87d2f9a">Developer tools</a></li>
-<li><a href="#org0d5cb91">homebrew</a>
+<li><a href="#orgc9ec672">Developer tools</a></li>
+<li><a href="#org9329acc">homebrew</a>
 <ul>
-<li><a href="#org293204f">homebrew API token</a></li>
+<li><a href="#orgd85a0e5">homebrew API token</a></li>
 </ul>
 </li>
-<li><a href="#org3ee7466">python</a>
+<li><a href="#orgee008ad">python</a>
 <ul>
-<li><a href="#org44e1df9">dependencies</a></li>
-<li><a href="#org4cbb2dc">python2</a></li>
-<li><a href="#org9ac2121">python3</a>
+<li><a href="#orgae21357">dependencies</a></li>
+<li><a href="#orgd0c6991">python2</a></li>
+<li><a href="#org11dab38">python3</a>
 <ul>
-<li><a href="#orgd96414d">scons</a></li>
+<li><a href="#orga9afbe0">scons</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgb6ed398">emacs</a></li>
-<li><a href="#org6e32d0c">zsh</a></li>
-<li><a href="#org93416a4">desktop apps</a>
+<li><a href="#org55a39b4">emacs</a></li>
+<li><a href="#org2b5b3eb">zsh</a></li>
+<li><a href="#orge6a75dc">desktop apps</a>
 <ul>
-<li><a href="#org24579c7">iTerm2</a></li>
-<li><a href="#orga85ce19">postgresql</a></li>
+<li><a href="#org62da570">iTerm2</a></li>
+<li><a href="#org1503b9c">postgresql</a></li>
 </ul>
 </li>
-<li><a href="#org4464b11">R</a></li>
-<li><a href="#org6d8fd86">X11</a></li>
-<li><a href="#orge54efe2">virtualbox and vagrant</a>
+<li><a href="#org2b99622">R</a></li>
+<li><a href="#orgb468d0b">X11</a></li>
+<li><a href="#orgd0ea5a5">virtualbox and vagrant</a>
 <ul>
-<li><a href="#org84378e8">install an ubuntu16.04 VM</a></li>
+<li><a href="#org49d206b">install an ubuntu16.04 VM</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 <p>
-I make it a practice to blow ...</p> </div>
+I make it a practice to blow …</p> </div>
 	</div>
 
 
@@ -713,7 +720,7 @@ This topic falls into the category of "things that I didn't know that
 I didn't know." Many of my projects involve the manipulation of
 taxonomies, particularly the <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI taxonomy</a>, but I didn't understand
 the efficiency with which it was possible to calculate a lineage in
-SQL. I ...</p> </div>
+SQL. I recently revisited the …</p> </div>
 	</div>
 
 
@@ -731,41 +738,41 @@ SQL. I ...</p> </div>
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org3712ecb">system settings</a>
+<li><a href="#org5eda289">system settings</a>
 <ul>
-<li><a href="#orgdd80e55">turn off spelling autocorrect</a></li>
-<li><a href="#org6bd1ae9">unmap Control + left,right</a></li>
+<li><a href="#org8d6e78e">turn off spelling autocorrect</a></li>
+<li><a href="#org2b553c6">unmap Control + left,right</a></li>
 </ul>
 </li>
-<li><a href="#org5eefda4">First applications</a>
+<li><a href="#org1197b73">First applications</a>
 <ul>
-<li><a href="#orgd9ad9e1">iTerm2</a></li>
-<li><a href="#orgd71a9cd">Dropbox</a></li>
-<li><a href="#org9f41342">Developer tools</a></li>
-<li><a href="#orgc17732d">Junos pulse VPN client</a></li>
-<li><a href="#orga693f09">Microsoft Office 2016</a></li>
-<li><a href="#org6ef30dd">Others</a></li>
+<li><a href="#org88e863a">iTerm2</a></li>
+<li><a href="#orge347b32">Dropbox</a></li>
+<li><a href="#orgcd2bfdf">Developer tools</a></li>
+<li><a href="#org016dd72">Junos pulse VPN client</a></li>
+<li><a href="#orge17e434">Microsoft Office 2016</a></li>
+<li><a href="#orge2224f1">Others</a></li>
 </ul>
 </li>
-<li><a href="#org9cf1533">homebrew</a>
+<li><a href="#orgd563eed">homebrew</a>
 <ul>
-<li><a href="#orgaa536e2">X11</a></li>
-<li><a href="#org02a7f73">Desktop apps using Cask</a></li>
-<li><a href="#orgffc9776">homebrew API token</a></li>
-<li><a href="#orgb95d81f">zsh</a></li>
+<li><a href="#orgf0efc79">X11</a></li>
+<li><a href="#org0ab6fd3">Desktop apps using Cask</a></li>
+<li><a href="#org6dade2e">homebrew API token</a></li>
+<li><a href="#orgdb32dab">zsh</a></li>
 </ul>
 </li>
-<li><a href="#orgb50bbc7">git</a></li>
-<li><a href="#orgaa7ac34">python</a></li>
-<li><a href="#orgb3ad349">emacs</a></li>
-<li><a href="#org22dc245">R</a></li>
-<li><a href="#org64d467c">wkhtmltopdf</a></li>
-<li><a href="#orga4f1b32">mail</a></li>
+<li><a href="#orgad3c158">git</a></li>
+<li><a href="#org3c5b87d">python</a></li>
+<li><a href="#org263c8a5">emacs</a></li>
+<li><a href="#orgad219af">R</a></li>
+<li><a href="#org1146497">wkhtmltopdf</a></li>
+<li><a href="#orge617187">mail</a></li>
 </ul>
 </div>
 </div>
 <ul class="org-ul">
-<li><i>Edit 2017-01-09: provide upgrade path to Pulse ...</i></li></ul> </div>
+<li><i>Edit 2017-01-09: provide upgrade path to Pulse …</i></li></ul> </div>
 	</div>
 
 
@@ -783,33 +790,33 @@ SQL. I ...</p> </div>
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org192f395">First applications</a>
+<li><a href="#orgdad30da">First applications</a>
 <ul>
-<li><a href="#org8c6d495">Developer tools</a></li>
-<li><a href="#org5a4f78d">X11</a></li>
-<li><a href="#org5a1fd5f">iTerm2</a></li>
-<li><a href="#orgea6d631">Others</a></li>
-<li><a href="#org66d4fa5">UW only</a></li>
+<li><a href="#org0aeebe2">Developer tools</a></li>
+<li><a href="#org857ee7a">X11</a></li>
+<li><a href="#org7e67963">iTerm2</a></li>
+<li><a href="#org3fd8c7c">Others</a></li>
+<li><a href="#org1a38a7a">UW only</a></li>
 </ul>
 </li>
-<li><a href="#org77ee380">system-level configuration</a>
+<li><a href="#orged4a13d">system-level configuration</a>
 <ul>
-<li><a href="#orga98dd2e">turn off spelling autocorrect</a></li>
-<li><a href="#org6c420e4">turn off spaces key shortcuts</a></li>
+<li><a href="#orgd65d651">turn off spelling autocorrect</a></li>
+<li><a href="#org362afb8">turn off spaces key shortcuts</a></li>
 </ul>
 </li>
-<li><a href="#orga25ad4a">homebrew</a>
+<li><a href="#org08ebe94">homebrew</a>
 <ul>
-<li><a href="#orge96a99c">packages installed using homebrew</a></li>
-<li><a href="#orgad60357">homebrew cask</a></li>
-<li><a href="#org628332f">homebrew API token</a></li>
-<li><a href="#orgb9a9f1e">zsh</a></li>
+<li><a href="#org55ef503">packages installed using homebrew</a></li>
+<li><a href="#orgb6f97bf">homebrew cask</a></li>
+<li><a href="#org6f786cb">homebrew API token</a></li>
+<li><a href="#org6b75cba">zsh</a></li>
 </ul>
 </li>
-<li><a href="#orgb460d31">ssh</a>
+<li><a href="#orgd6b9eda">ssh</a>
 <ul>
-<li><a href="#orgb8cf169">update /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist</a></li>
-<li><a href="#org0608c8f">create $ZSH_INITDIR/ssh-ask-keychain (called from start_ssh_agent.zsh ...</a></li></ul></li></ul></div></div> </div>
+<li><a href="#orgf4b7440">update /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist</a></li>
+<li><a href="#org05c7ff1">create $ZSH_INITDIR/ssh-ask-keychain (called from start_ssh_agent.zsh …</a></li></ul></li></ul></div></div> </div>
 	</div>
 
 
@@ -827,16 +834,16 @@ SQL. I ...</p> </div>
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org24d5897">VirtualBox preferences</a></li>
-<li><a href="#org455997a">Create an Ubuntu 14.04 VM</a></li>
-<li><a href="#orge356929">Set up an IP address</a></li>
+<li><a href="#org5b0e242">VirtualBox preferences</a></li>
+<li><a href="#org8de2310">Create an Ubuntu 14.04 VM</a></li>
+<li><a href="#orgf620ab1">Set up an IP address</a></li>
 </ul>
 </div>
 </div>
 <p>
 Here are my notes for setting up an Ubuntu VM to work on some web
 applications. This is intended to be a sandbox for development, so
-I'll err on the side of convenience ...</p> </div>
+I'll err on the side of convenience (at …</p> </div>
 	</div>
 
 
@@ -849,7 +856,7 @@ I'll err on the side of convenience ...</p> </div>
 
 
 <em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/visualization.html">visualization</a>;
-    tags: <a href="https://nhoffman.github.io/borborygmi/tag/laboratory-medicine.html">laboratory medicine</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/hold-the-pie.html">read more</a> </div>
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/laboratory.html">laboratory</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/hold-the-pie.html">read more</a> </div>
           <div class="summary"><p>
 I came across this visualization<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> of a very simple data set, and
 it took me a few minutes to fully understand what makes it
@@ -857,7 +864,7 @@ so&#x2026; suboptimal.
 </p>
 
 
-<div class="figure">
+<div id="org86ccfb7" class="figure">
 <p><img src="hold-the-pie/why_pie.png" alt="why_pie.png" />
 </p>
 </div>
@@ -865,7 +872,7 @@ so&#x2026; suboptimal.
 <ul class="org-ul">
 <li>Ok, first of all, it's <a href="https://blogs.oracle.com/experience/entry/countdown_of_top_10_reasons_to_never_ever_use_a_pie_chart">a</a> <a href="http://en.wikipedia.org/wiki/Pie_chart">pie</a> <a href="http://www.businessinsider.com/pie-charts-are-the-worst-2013-6">chart</a>.</li>
 <li>The labels are separated from the corresponding values.</li>
-<li>The grey scale color map doesn ...</li></ul> </div>
+<li>The grey scale color map doesn't distinguish …</li></ul> </div>
 	</div>
 
 
@@ -883,8 +890,8 @@ so&#x2026; suboptimal.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org22551da">Ubuntu 14.04 (Trusty Tahr)</a></li>
-<li><a href="#orgb3e9d7f">Ubuntu 12.04 (Precise Pangolin)</a></li>
+<li><a href="#org5c73891">Ubuntu 14.04 (Trusty Tahr)</a></li>
+<li><a href="#orgff20d42">Ubuntu 12.04 (Precise Pangolin)</a></li>
 </ul>
 </div>
 </div>
@@ -892,68 +899,7 @@ so&#x2026; suboptimal.
 Illumina provides a program for demultiplexing sequencing output
 called <code>bcl2fastq</code>. They get a gold star for releasing the source -
 the downside is that they release binaries only for RHEL/CentOS, and
-no build instructions for Ubuntu. So ...</p> </div>
-	</div>
-
-
- 
-
-
-	<div class='article'>
-          <a href="https://nhoffman.github.io/borborygmi/lists-with-variables.html"><h2>Creating lists containing variables</h2></a>
-          <div class= "well small"> Thu 12 June 2014 &#8212;
-
-
-<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
-    tags: <a href="https://nhoffman.github.io/borborygmi/tag/elisp.html">elisp</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/lists-with-variables.html">read more</a> </div>
-          <div class="summary"><p>
-I learned a bit about list creation in elisp today. Here's how you join a list of strings in elisp:
-</p>
-
-<div class="org-src-container">
-<pre class="src src-elisp">(mapconcat #'identity '("" "path" "to" "someplace") "/")
-</pre>
-</div>
-
-<p>
-But I learned (thanks to <a href="http://stackoverflow.com/users/113848/legoscia">legoscia</a> on <a href="http://stackoverflow.com/questions/24188100">stackoverflow</a>) that simply
-replacing an element in the list with a variable results in an error:
-</p>
-
-<div class="org-src-container">
-<pre class="src src-elisp">(let ...</pre></div> </div>
-	</div>
-
-
- 
-
-
-	<div class='article'>
-          <a href="https://nhoffman.github.io/borborygmi/database-intro.html"><h2>A practical introduction to databases and data management</h2></a>
-          <div class= "well small"> Wed 11 June 2014 &#8212;
-
-
-<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/lectures.html">lectures</a>;
-    tags: <a href="https://nhoffman.github.io/borborygmi/tag/laboratory-medicine.html">laboratory medicine</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/database-intro.html">read more</a> </div>
-          <div class="summary"><ul class="org-ul">
-<li><i>Edit 2015-07-26: added a section on date formatting</i></li>
-<li><i>Edit 2016-07-11: add reference to Tidy Data</i></li>
-</ul>
-
-<p>
-This post contains the content of a lecture prepared for Laboratory Medicine residents as part of a series on medical informatics.
-</p>
-
-<div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#org70c3fdd">Objectives</a></li>
-<li><a href="#org5e98329">Relational database terminology</a></li>
-<li><a href="#orgeaa4996">Relations</a>
-<ul>
-<li><a href="#org561b2a1">one to one</a></li>
-<li><a href="#orgf8d38c4">one to many ...</a></li></ul></li></ul></div></div> </div>
+no build instructions for Ubuntu. So …</p> </div>
 	</div>
 
 <div class="pagination">
@@ -1017,7 +963,7 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
         </div>     </div>     </div> 
 <footer>
 <br />
-<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &copy; Noah Hoffman 2019</p>
+<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &copy; Noah Hoffman 2021</p>
 </footer>
 
 </div> <!-- /container -->

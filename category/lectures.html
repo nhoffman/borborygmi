@@ -61,7 +61,7 @@ Wed 11 June 2014 &#8212;
 
 
 <em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/lectures.html">lectures</a>;
-    tags: <a href="https://nhoffman.github.io/borborygmi/tag/laboratory-medicine.html">laboratory medicine</a></em>          </div>
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/laboratory.html">laboratory</a></em>          </div>
 
           <div><ul class="org-ul">
 <li><i>Edit 2015-07-26: added a section on date formatting</i></li>
@@ -76,40 +76,40 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org70c3fdd">Objectives</a></li>
-<li><a href="#org5e98329">Relational database terminology</a></li>
-<li><a href="#orgeaa4996">Relations</a>
+<li><a href="#org9f3f066">Objectives</a></li>
+<li><a href="#org274ca15">Relational database terminology</a></li>
+<li><a href="#org142bf22">Relations</a>
 <ul>
-<li><a href="#org561b2a1">one to one</a></li>
-<li><a href="#orgf8d38c4">one to many</a></li>
-<li><a href="#orgdcae421">many to many</a></li>
+<li><a href="#orgc21fd40">one to one</a></li>
+<li><a href="#orgb9ec290">one to many</a></li>
+<li><a href="#orgef23a08">many to many</a></li>
 </ul>
 </li>
-<li><a href="#org2ebb7d6">Data types</a></li>
-<li><a href="#orgb1d6c88">SQL</a></li>
-<li><a href="#org3604719">Some examples of relational database operations using SQL</a>
+<li><a href="#orgef133a6">Data types</a></li>
+<li><a href="#org4e15119">SQL</a></li>
+<li><a href="#orgb4d4c2d">Some examples of relational database operations using SQL</a>
 <ul>
-<li><a href="#orga1917a0">select</a></li>
-<li><a href="#org7d2883f">join</a></li>
-<li><a href="#org4fb2e50">group and aggregate</a></li>
+<li><a href="#org6886566">select</a></li>
+<li><a href="#orgfa00e83">join</a></li>
+<li><a href="#org72f7d52">group and aggregate</a></li>
 </ul>
 </li>
-<li><a href="#org84c14a4">Hierarchical databases</a></li>
-<li><a href="#org1cf2934">Data management patterns and antipatterns</a>
+<li><a href="#orgedc4bac">Hierarchical databases</a></li>
+<li><a href="#org9e38838">Data management patterns and antipatterns</a>
 <ul>
-<li><a href="#orgcebfd5a">name fields sensibly</a></li>
-<li><a href="#org35272b1">don't mix data types</a></li>
-<li><a href="#orge68be21">tall, not wide</a></li>
-<li><a href="#orgb9bc56b">be consistent</a></li>
-<li><a href="#org49ffaa0">use multiple tables (normalize the data)</a></li>
-<li><a href="#org541ec46">Use a standard format for dates and times</a></li>
+<li><a href="#org0e49fc3">name fields sensibly</a></li>
+<li><a href="#orgef8173c">don't mix data types</a></li>
+<li><a href="#org1797164">tall, not wide</a></li>
+<li><a href="#orga742ed2">be consistent</a></li>
+<li><a href="#org4846bda">use multiple tables (normalize the data)</a></li>
+<li><a href="#orgff2d85f">Use a standard format for dates and times</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<table id="orgb93c628" class="table table-striped table-bordered table-condensed" style="display: none;">
+<table id="org9b54f3f" class="table table-striped table-bordered table-condensed" style="display: none;">
 
 
 <colgroup>
@@ -150,7 +150,7 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 </tbody>
 </table>
 
-<table id="org5cb4605" class="table table-striped table-bordered table-condensed" style="display: none;">
+<table id="org2b54705" class="table table-striped table-bordered table-condensed" style="display: none;">
 
 
 <colgroup>
@@ -181,7 +181,7 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 </tbody>
 </table>
 
-<table id="orgb00f3bc" class="table table-striped table-bordered table-condensed" style="display: none;">
+<table id="org18d8279" class="table table-striped table-bordered table-condensed" style="display: none;">
 
 
 <colgroup>
@@ -217,7 +217,7 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 </tbody>
 </table>
 
-<table id="org88a9d35" class="table table-striped table-bordered table-condensed" style="display: none;">
+<table id="orge214765" class="table table-striped table-bordered table-condensed" style="display: none;">
 
 
 <colgroup>
@@ -328,7 +328,7 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 </tbody>
 </table>
 
-<table id="org4503c00" class="table table-striped table-bordered table-condensed" style="display: none;">
+<table id="orgdf9a74c" class="table table-striped table-bordered table-condensed" style="display: none;">
 
 
 <colgroup>
@@ -369,7 +369,7 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 </tbody>
 </table>
 
-<table id="orgb2f1e65" class="table table-striped table-bordered table-condensed" style="display: none;">
+<table id="org251b988" class="table table-striped table-bordered table-condensed" style="display: none;">
 
 
 <colgroup>
@@ -395,7 +395,7 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 </tbody>
 </table>
 
-<table id="org9a962d4" class="table table-striped table-bordered table-condensed" style="display: none;">
+<table id="org35beed0" class="table table-striped table-bordered table-condensed" style="display: none;">
 
 
 <colgroup>
@@ -431,9 +431,9 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 </tbody>
 </table>
 
-<div id="outline-container-org70c3fdd" class="outline-2">
-<h2 id="org70c3fdd">Objectives</h2>
-<div class="outline-text-2" id="text-org70c3fdd">
+<div id="outline-container-org9f3f066" class="outline-2">
+<h2 id="org9f3f066">Objectives</h2>
+<div class="outline-text-2" id="text-org9f3f066">
 <ul class="org-ul">
 <li>be aware that relational databases are a thing and can be described using some terms.</li>
 <li>get to know the different types of relations.</li>
@@ -443,9 +443,9 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 </div>
 </div>
 
-<div id="outline-container-org5e98329" class="outline-2">
-<h2 id="org5e98329">Relational database terminology</h2>
-<div class="outline-text-2" id="text-org5e98329">
+<div id="outline-container-org274ca15" class="outline-2">
+<h2 id="org274ca15">Relational database terminology</h2>
+<div class="outline-text-2" id="text-org274ca15">
 <dl class="org-dl">
 <dt>relational database</dt><dd>a tabular database with defined "relations" (which can be described in terms of <a href="http://en.wikipedia.org/wiki/Relational_algebra">relational algebra</a>) among elements within and between tables.</dd>
 <dt>row</dt><dd>contains a <b>tuple</b> or <b>record</b> representing a single item.</dd>
@@ -454,7 +454,7 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 </dl>
 
 
-<div class="figure">
+<div id="orgcd22165" class="figure">
 <p><img src="../database-intro/984px-Relational_database_terms.svg.png" alt="984px-Relational_database_terms.svg.png">
 </p>
 <p><span class="figure-number">Figure 1: </span>Components of a table from a relational database. Source: <a href="http://en.wikipedia.org/wiki/Relational_database">wikipedia</a></p>
@@ -512,17 +512,17 @@ This post contains the content of a lecture prepared for Laboratory Medicine res
 </div>
 </div>
 
-<div id="outline-container-orgeaa4996" class="outline-2">
-<h2 id="orgeaa4996">Relations</h2>
-<div class="outline-text-2" id="text-orgeaa4996">
+<div id="outline-container-org142bf22" class="outline-2">
+<h2 id="org142bf22">Relations</h2>
+<div class="outline-text-2" id="text-org142bf22">
 <p>
 For more details, see <a href="http://en.wikipedia.org/wiki/Cardinality_(data_modeling)">http://en.wikipedia.org/wiki/Cardinality_(data_modeling)</a>
 </p>
 </div>
 
-<div id="outline-container-org561b2a1" class="outline-3">
-<h3 id="org561b2a1">one to one</h3>
-<div class="outline-text-3" id="text-org561b2a1">
+<div id="outline-container-orgc21fd40" class="outline-3">
+<h3 id="orgc21fd40">one to one</h3>
+<div class="outline-text-3" id="text-orgc21fd40">
 <ul class="org-ul">
 <li>describes the relationship between two or more elements in which each element uniquely identifies the other (likely to be true only in a specific context).</li>
 <li>represented by elements in the same row</li>
@@ -534,7 +534,7 @@ Graphically:
 </p>
 
 
-<div class="figure">
+<div id="org22fb221" class="figure">
 <p><img src="../database-intro/one_to_one.png" alt="one_to_one.png">
 </p>
 </div>
@@ -576,15 +576,15 @@ And in our database:
 </div>
 </div>
 
-<div id="outline-container-orgf8d38c4" class="outline-3">
-<h3 id="orgf8d38c4">one to many</h3>
-<div class="outline-text-3" id="text-orgf8d38c4">
+<div id="outline-container-orgb9ec290" class="outline-3">
+<h3 id="orgb9ec290">one to many</h3>
+<div class="outline-text-3" id="text-orgb9ec290">
 <ul class="org-ul">
 <li>in the context of a database, is represented by a pair of tables, in which an element or row can be related to multiple rows in another table</li>
 </ul>
 
 
-<div class="figure">
+<div id="org51d452d" class="figure">
 <p><img src="../database-intro/one_to_many.png" alt="one_to_many.png">
 </p>
 </div>
@@ -647,9 +647,9 @@ order by mrn;
 </div>
 </div>
 
-<div id="outline-container-orgdcae421" class="outline-3">
-<h3 id="orgdcae421">many to many</h3>
-<div class="outline-text-3" id="text-orgdcae421">
+<div id="outline-container-orgef23a08" class="outline-3">
+<h3 id="orgef23a08">many to many</h3>
+<div class="outline-text-3" id="text-orgef23a08">
 <ul class="org-ul">
 <li>an entity in table A maps to more than one entity in table B, and vice-versa.</li>
 <li>a many-to-many relation between two tables is represented via a third <b>junction table</b> or <b>cross-reference table</b>.</li>
@@ -657,7 +657,7 @@ order by mrn;
 </ul>
 
 
-<div class="figure">
+<div id="org5c11910" class="figure">
 <p><img src="../database-intro/many_to_many.png" alt="many_to_many.png">
 </p>
 </div>
@@ -743,7 +743,7 @@ And a junction table defining the many-to-many relationships:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sqlite" id="org16ff46d">select * from physician_patient;
+<pre class="src src-sqlite" id="orgcb57287">select * from physician_patient;
 </pre>
 </div>
 
@@ -869,9 +869,9 @@ join physicians using(doc_id);
 </div>
 </div>
 
-<div id="outline-container-org2ebb7d6" class="outline-2">
-<h2 id="org2ebb7d6">Data types</h2>
-<div class="outline-text-2" id="text-org2ebb7d6">
+<div id="outline-container-orgef133a6" class="outline-2">
+<h2 id="orgef133a6">Data types</h2>
+<div class="outline-text-2" id="text-orgef133a6">
 <p>
 Most databases and programming languages make a distinction between various <b>data types</b> (integers, real numbers, text, binary data, etc). Why is this important?
 </p>
@@ -904,9 +904,9 @@ CREATE TABLE results (
 </div>
 </div>
 
-<div id="outline-container-orgb1d6c88" class="outline-2">
-<h2 id="orgb1d6c88">SQL</h2>
-<div class="outline-text-2" id="text-orgb1d6c88">
+<div id="outline-container-org4e15119" class="outline-2">
+<h2 id="org4e15119">SQL</h2>
+<div class="outline-text-2" id="text-org4e15119">
 <p>
 SQL (originally SEQUEL for <i>Structured English Query Language</i>) is a programming language for managing relational databases. Although versions of SQL are defined in internationally-recognized standards, various dialects are used depending on the implementation. Many relational database programs are out there. Some examples of relational database products using SQL that you are likely to come across include:
 </p>
@@ -948,7 +948,7 @@ sqlite3 results.db
 You should see something like this:
 </p>
 
-<pre class="example">
+<pre class="example" id="orgaa963c3">
 SQLite version 3.7.13 2012-07-17 17:46:21
 Enter ".help" for instructions
 Enter SQL statements terminated with a ";"
@@ -963,13 +963,13 @@ there.
 </div>
 </div>
 
-<div id="outline-container-org3604719" class="outline-2">
-<h2 id="org3604719">Some examples of relational database operations using SQL</h2>
-<div class="outline-text-2" id="text-org3604719">
+<div id="outline-container-orgb4d4c2d" class="outline-2">
+<h2 id="orgb4d4c2d">Some examples of relational database operations using SQL</h2>
+<div class="outline-text-2" id="text-orgb4d4c2d">
 </div>
-<div id="outline-container-orga1917a0" class="outline-3">
-<h3 id="orga1917a0">select</h3>
-<div class="outline-text-3" id="text-orga1917a0">
+<div id="outline-container-org6886566" class="outline-3">
+<h3 id="org6886566">select</h3>
+<div class="outline-text-3" id="text-org6886566">
 <p>
 This query returns the entire table named <code>results</code>.
 </p>
@@ -1224,9 +1224,9 @@ You can also specify a subset of columns.
 </div>
 </div>
 
-<div id="outline-container-org7d2883f" class="outline-3">
-<h3 id="org7d2883f">join</h3>
-<div class="outline-text-3" id="text-org7d2883f">
+<div id="outline-container-orgfa00e83" class="outline-3">
+<h3 id="orgfa00e83">join</h3>
+<div class="outline-text-3" id="text-orgfa00e83">
 <p>
 Relations between tables are specified using a <code>join</code> clause. Here's a two-way join between two tables, <code>patients</code> and <code>results</code>.
 </p>
@@ -1391,14 +1391,13 @@ Relations between tables are specified using a <code>join</code> clause. Here's 
 </tbody>
 </table>
 
-<div class="org-src-container">
-<pre class="src src-sqlite">select patients.name, results.date, tests.test_name, results.value, results.flag
+<pre class="example">
+select patients.name, results.date, tests.test_name, results.value, results.flag
 from results
 join tests using(test_code)
 join patients using(mrn)
 where test_code = 'K';
 </pre>
-</div>
 
 <table class="table table-striped table-bordered table-condensed" style="width: auto;">
 
@@ -1459,15 +1458,14 @@ where test_code = 'K';
 </div>
 </div>
 
-<div id="outline-container-org4fb2e50" class="outline-3">
-<h3 id="org4fb2e50">group and aggregate</h3>
-<div class="outline-text-3" id="text-org4fb2e50">
-<div class="org-src-container">
-<pre class="src src-sqlite">select name, test_code, min(value)
+<div id="outline-container-org72f7d52" class="outline-3">
+<h3 id="org72f7d52">group and aggregate</h3>
+<div class="outline-text-3" id="text-org72f7d52">
+<pre class="example">
+select name, test_code, min(value)
 from patients join results using(mrn)
 group by mrn, test_code;
 </pre>
-</div>
 
 <table class="table table-striped table-bordered table-condensed" style="width: auto;">
 
@@ -1489,7 +1487,7 @@ group by mrn, test_code;
 <tr>
 <td class="org-left">Roger Rabbit</td>
 <td class="org-left">GLU</td>
-<td class="org-right">90.0</td>
+<td class="org-right">135.0</td>
 </tr>
 
 <tr>
@@ -1515,15 +1513,15 @@ group by mrn, test_code;
 </div>
 </div>
 
-<div id="outline-container-org84c14a4" class="outline-2">
-<h2 id="org84c14a4">Hierarchical databases</h2>
-<div class="outline-text-2" id="text-org84c14a4">
+<div id="outline-container-orgedc4bac" class="outline-2">
+<h2 id="orgedc4bac">Hierarchical databases</h2>
+<div class="outline-text-2" id="text-orgedc4bac">
 <p>
 Hierarchical databases organize data in a tree-like structure. Data is represented as a graph of one-to-many (parent -&gt; child) relations.
 </p>
 
 
-<div class="figure">
+<div id="org1b5825a" class="figure">
 <p><img src="../database-intro/hierarchical.png" alt="hierarchical.png">
 </p>
 </div>
@@ -1538,9 +1536,9 @@ Hierarchical databases organize data in a tree-like structure. Data is represent
 </div>
 </div>
 
-<div id="outline-container-org1cf2934" class="outline-2">
-<h2 id="org1cf2934">Data management patterns and antipatterns</h2>
-<div class="outline-text-2" id="text-org1cf2934">
+<div id="outline-container-org9e38838" class="outline-2">
+<h2 id="org9e38838">Data management patterns and antipatterns</h2>
+<div class="outline-text-2" id="text-org9e38838">
 <p>
 A basic understanding of database applications, relations, and data
 types can help guide good practices for managing data. It makes
@@ -1554,9 +1552,9 @@ ways in which data can be "tidy" or "messy."
 </p>
 </div>
 
-<div id="outline-container-orgcebfd5a" class="outline-3">
-<h3 id="orgcebfd5a">name fields sensibly</h3>
-<div class="outline-text-3" id="text-orgcebfd5a">
+<div id="outline-container-org0e49fc3" class="outline-3">
+<h3 id="org0e49fc3">name fields sensibly</h3>
+<div class="outline-text-3" id="text-org0e49fc3">
 <ul class="org-ul">
 <li>When naming column headers, stick to lowercase letters and
 underscores only (numbers are ok after the first character).</li>
@@ -1597,9 +1595,9 @@ underscores only (numbers are ok after the first character).</li>
 </div>
 </div>
 
-<div id="outline-container-org35272b1" class="outline-3">
-<h3 id="org35272b1">don't mix data types</h3>
-<div class="outline-text-3" id="text-org35272b1">
+<div id="outline-container-orgef8173c" class="outline-3">
+<h3 id="orgef8173c">don't mix data types</h3>
+<div class="outline-text-3" id="text-orgef8173c">
 <p>
 Values in a column are expected to be the same data type. Some
 databases will produce an error if you try to mix data types (eq,
@@ -1709,9 +1707,9 @@ non-numeric values.
 </div>
 </div>
 
-<div id="outline-container-orge68be21" class="outline-3">
-<h3 id="orge68be21">tall, not wide</h3>
-<div class="outline-text-3" id="text-orge68be21">
+<div id="outline-container-org1797164" class="outline-3">
+<h3 id="org1797164">tall, not wide</h3>
+<div class="outline-text-3" id="text-org1797164">
 <p>
 Excel and EMR applications have made us accustomed to viewing data as
 a square matrix.
@@ -1909,9 +1907,9 @@ data from multiple patients by adding another column.
 </div>
 </div>
 
-<div id="outline-container-orgb9bc56b" class="outline-3">
-<h3 id="orgb9bc56b">be consistent</h3>
-<div class="outline-text-3" id="text-orgb9bc56b">
+<div id="outline-container-orga742ed2" class="outline-3">
+<h3 id="orga742ed2">be consistent</h3>
+<div class="outline-text-3" id="text-orga742ed2">
 <p>
 Composing queries will be easier if you are consistent in your representations of the data. I've frequently come across data like this:
 </p>
@@ -2025,158 +2023,20 @@ Composing queries will be easier if you are consistent in your representations o
 </div>
 </div>
 
-<div id="outline-container-org49ffaa0" class="outline-3">
-<h3 id="org49ffaa0">use multiple tables (normalize the data)</h3>
-<div class="outline-text-3" id="text-org49ffaa0">
+<div id="outline-container-org4846bda" class="outline-3">
+<h3 id="org4846bda">use multiple tables (normalize the data)</h3>
+<div class="outline-text-3" id="text-org4846bda">
 <p>
 Here's where understanding relations is useful. When I ask for data
 from the laboratory system, I typically get results back that look
 something like this:
 </p>
 
-<table class="table table-striped table-bordered table-condensed" style="width: auto;">
-
-
-<colgroup>
-<col class="org-left">
-
-<col class="org-left">
-
-<col class="org-right">
-
-<col class="org-left">
-
-<col class="org-left">
-
-<col class="org-right">
-
-<col class="org-left">
-
-<col class="org-left">
-
-<col class="org-left">
-
-<col class="org-left">
-</colgroup>
-<tbody>
-<tr>
-<td class="org-left">mrn</td>
-<td class="org-left">accession</td>
-<td class="org-right">date</td>
-<td class="org-left">battery_code</td>
-<td class="org-left">test_code</td>
-<td class="org-right">value</td>
-<td class="org-left">flag</td>
-<td class="org-left">battery_name</td>
-<td class="org-left">test_name</td>
-<td class="org-left">ref_range</td>
-</tr>
-
-<tr>
-<td class="org-left">U123456</td>
-<td class="org-left">Acc1</td>
-<td class="org-right">2014-06-02</td>
-<td class="org-left">BMP</td>
-<td class="org-left">GLU</td>
-<td class="org-right">135.0</td>
-<td class="org-left">H</td>
-<td class="org-left">Basic Metabolic Panel</td>
-<td class="org-left">Glucose</td>
-<td class="org-left">62 - 125</td>
-</tr>
-
-<tr>
-<td class="org-left">U123456</td>
-<td class="org-left">Acc1</td>
-<td class="org-right">2014-06-02</td>
-<td class="org-left">BMP</td>
-<td class="org-left">K</td>
-<td class="org-right">4.0</td>
-<td class="org-left">&#160;</td>
-<td class="org-left">Basic Metabolic Panel</td>
-<td class="org-left">Potassium</td>
-<td class="org-left">3.7 - 5.2</td>
-</tr>
-
-<tr>
-<td class="org-left">U123456</td>
-<td class="org-left">Acc2</td>
-<td class="org-right">2014-06-03</td>
-<td class="org-left">CMP</td>
-<td class="org-left">GLU</td>
-<td class="org-right">90.0</td>
-<td class="org-left">&#160;</td>
-<td class="org-left">Comprehensive Metabolic Panel</td>
-<td class="org-left">Glucose</td>
-<td class="org-left">62 - 125</td>
-</tr>
-
-<tr>
-<td class="org-left">U123456</td>
-<td class="org-left">Acc2</td>
-<td class="org-right">2014-06-03</td>
-<td class="org-left">CMP</td>
-<td class="org-left">K</td>
-<td class="org-right">2.7</td>
-<td class="org-left">L</td>
-<td class="org-left">Comprehensive Metabolic Panel</td>
-<td class="org-left">Potassium</td>
-<td class="org-left">3.7 - 5.2</td>
-</tr>
-
-<tr>
-<td class="org-left">U654321</td>
-<td class="org-left">Acc3</td>
-<td class="org-right">2014-06-02</td>
-<td class="org-left">CMP</td>
-<td class="org-left">GLU</td>
-<td class="org-right">85.0</td>
-<td class="org-left">&#160;</td>
-<td class="org-left">Comprehensive Metabolic Panel</td>
-<td class="org-left">Glucose</td>
-<td class="org-left">62 - 125</td>
-</tr>
-
-<tr>
-<td class="org-left">U654321</td>
-<td class="org-left">Acc3</td>
-<td class="org-right">2014-06-02</td>
-<td class="org-left">CMP</td>
-<td class="org-left">K</td>
-<td class="org-right">4.1</td>
-<td class="org-left">&#160;</td>
-<td class="org-left">Comprehensive Metabolic Panel</td>
-<td class="org-left">Potassium</td>
-<td class="org-left">3.7 - 5.2</td>
-</tr>
-
-<tr>
-<td class="org-left">U654321</td>
-<td class="org-left">Acc4</td>
-<td class="org-right">2014-06-03</td>
-<td class="org-left">BMP</td>
-<td class="org-left">GLU</td>
-<td class="org-right">75.0</td>
-<td class="org-left">&#160;</td>
-<td class="org-left">Basic Metabolic Panel</td>
-<td class="org-left">Glucose</td>
-<td class="org-left">62 - 125</td>
-</tr>
-
-<tr>
-<td class="org-left">U654321</td>
-<td class="org-left">Acc4</td>
-<td class="org-right">2014-06-03</td>
-<td class="org-left">BMP</td>
-<td class="org-left">K</td>
-<td class="org-right">4.2</td>
-<td class="org-left">&#160;</td>
-<td class="org-left">Basic Metabolic Panel</td>
-<td class="org-left">Potassium</td>
-<td class="org-left">3.7 - 5.2</td>
-</tr>
-</tbody>
-</table>
+<pre class="example">
+select results.*, b.battery_name, t.test_name, t.ref_range from results
+join tests t using(test_code)
+join batteries b using(battery_code);
+</pre>
 
 <p>
 (The data isn't actually stored like this in the database, but when
@@ -2198,14 +2058,14 @@ to Five Normal Forms in Relational Database Theory</a>
 </p>
 </div>
 </div>
-<div id="outline-container-org541ec46" class="outline-3">
-<h3 id="org541ec46">Use a standard format for dates and times</h3>
-<div class="outline-text-3" id="text-org541ec46">
+<div id="outline-container-orgff2d85f" class="outline-3">
+<h3 id="orgff2d85f">Use a standard format for dates and times</h3>
+<div class="outline-text-3" id="text-orgff2d85f">
 
-<div class="figure">
+<div id="org4fbddfc" class="figure">
 <p><img src="../database-intro/iso_8601.png" alt="iso_8601.png">
 </p>
-<p><span class="figure-number">Figure 6: </span>Obligatory xkcd (<a href="https://xkcd.com/1179/">https://xkcd.com/1179/</a>)</p>
+<p><span class="figure-number">Figure 2: </span>Obligatory xkcd (<a href="https://xkcd.com/1179/">https://xkcd.com/1179/</a>)</p>
 </div>
 
 <p>
@@ -2318,7 +2178,7 @@ something like 2015-07-23T16:55:02+17:00).
         </div>     </div>     </div> 
 <footer>
 <br>
-<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &#169; Noah Hoffman 2019</p>
+<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &#169; Noah Hoffman 2021</p>
 </footer>
 
 </div> <!-- /container -->

@@ -62,43 +62,43 @@ Fri 17 November 2017 &#8212;
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org764fba3">system settings</a>
+<li><a href="#org314fdd5">system settings</a>
 <ul>
-<li><a href="#orgaac259d">turn off spelling autocorrect</a></li>
-<li><a href="#org3d43de9">unmap Control + left,right</a></li>
-<li><a href="#org403d68b">Turn on FileVault</a></li>
+<li><a href="#org73f4e46">turn off spelling autocorrect</a></li>
+<li><a href="#org5767759">unmap Control + left,right</a></li>
+<li><a href="#org84efeff">Turn on FileVault</a></li>
 </ul>
 </li>
-<li><a href="#org87d2f9a">Developer tools</a></li>
-<li><a href="#org0d5cb91">homebrew</a>
+<li><a href="#orgc9ec672">Developer tools</a></li>
+<li><a href="#org9329acc">homebrew</a>
 <ul>
-<li><a href="#org293204f">homebrew API token</a></li>
+<li><a href="#orgd85a0e5">homebrew API token</a></li>
 </ul>
 </li>
-<li><a href="#org3ee7466">python</a>
+<li><a href="#orgee008ad">python</a>
 <ul>
-<li><a href="#org44e1df9">dependencies</a></li>
-<li><a href="#org4cbb2dc">python2</a></li>
-<li><a href="#org9ac2121">python3</a>
+<li><a href="#orgae21357">dependencies</a></li>
+<li><a href="#orgd0c6991">python2</a></li>
+<li><a href="#org11dab38">python3</a>
 <ul>
-<li><a href="#orgd96414d">scons</a></li>
+<li><a href="#orga9afbe0">scons</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgb6ed398">emacs</a></li>
-<li><a href="#org6e32d0c">zsh</a></li>
-<li><a href="#org93416a4">desktop apps</a>
+<li><a href="#org55a39b4">emacs</a></li>
+<li><a href="#org2b5b3eb">zsh</a></li>
+<li><a href="#orge6a75dc">desktop apps</a>
 <ul>
-<li><a href="#org24579c7">iTerm2</a></li>
-<li><a href="#orga85ce19">postgresql</a></li>
+<li><a href="#org62da570">iTerm2</a></li>
+<li><a href="#org1503b9c">postgresql</a></li>
 </ul>
 </li>
-<li><a href="#org4464b11">R</a></li>
-<li><a href="#org6d8fd86">X11</a></li>
-<li><a href="#orge54efe2">virtualbox and vagrant</a>
+<li><a href="#org2b99622">R</a></li>
+<li><a href="#orgb468d0b">X11</a></li>
+<li><a href="#orgd0ea5a5">virtualbox and vagrant</a>
 <ul>
-<li><a href="#org84378e8">install an ubuntu16.04 VM</a></li>
+<li><a href="#org49d206b">install an ubuntu16.04 VM</a></li>
 </ul>
 </li>
 </ul>
@@ -144,21 +144,21 @@ Note that none of these steps require an Apple ID - I held off on
 signing in until the very end just to see if it was possible.
 </p>
 
-<div id="outline-container-org764fba3" class="outline-2">
-<h2 id="org764fba3">system settings</h2>
-<div class="outline-text-2" id="text-org764fba3">
+<div id="outline-container-org314fdd5" class="outline-2">
+<h2 id="org314fdd5">system settings</h2>
+<div class="outline-text-2" id="text-org314fdd5">
 </div>
-<div id="outline-container-orgaac259d" class="outline-3">
-<h3 id="orgaac259d">turn off spelling autocorrect</h3>
-<div class="outline-text-3" id="text-orgaac259d">
+<div id="outline-container-org73f4e46" class="outline-3">
+<h3 id="org73f4e46">turn off spelling autocorrect</h3>
+<div class="outline-text-3" id="text-org73f4e46">
 <pre class="example">
 System Preferences --&gt; Keyboard --&gt; Text tab --&gt; unselect "Correct spelling automatically" and others
 </pre>
 </div>
 </div>
-<div id="outline-container-org3d43de9" class="outline-3">
-<h3 id="org3d43de9">unmap Control + left,right</h3>
-<div class="outline-text-3" id="text-org3d43de9">
+<div id="outline-container-org5767759" class="outline-3">
+<h3 id="org5767759">unmap Control + left,right</h3>
+<div class="outline-text-3" id="text-org5767759">
 <p>
 I use Control plus the left and right arrow keys to move between
 windows in emacs and tmux.
@@ -170,9 +170,9 @@ System Preferences --&gt; Keyboard --&gt; Shortcuts --&gt; uncheck mission contr
 </div>
 </div>
 
-<div id="outline-container-org403d68b" class="outline-3">
-<h3 id="org403d68b">Turn on FileVault</h3>
-<div class="outline-text-3" id="text-org403d68b">
+<div id="outline-container-org84efeff" class="outline-3">
+<h3 id="org84efeff">Turn on FileVault</h3>
+<div class="outline-text-3" id="text-org84efeff">
 <pre class="example">
 System Preferences --&gt; Security &amp; privacy --&gt; FileVault
 </pre>
@@ -185,9 +185,9 @@ I used a recovery key option rather than iCloud for my work machine, iCloud for 
 </div>
 </div>
 
-<div id="outline-container-org87d2f9a" class="outline-2">
-<h2 id="org87d2f9a">Developer tools</h2>
-<div class="outline-text-2" id="text-org87d2f9a">
+<div id="outline-container-orgc9ec672" class="outline-2">
+<h2 id="orgc9ec672">Developer tools</h2>
+<div class="outline-text-2" id="text-orgc9ec672">
 <p>
 Pretty much the first thing that needs to happen. This can be done
 from the command line:
@@ -200,9 +200,9 @@ from the command line:
 </div>
 </div>
 
-<div id="outline-container-org0d5cb91" class="outline-2">
-<h2 id="org0d5cb91">homebrew</h2>
-<div class="outline-text-2" id="text-org0d5cb91">
+<div id="outline-container-org9329acc" class="outline-2">
+<h2 id="org9329acc">homebrew</h2>
+<div class="outline-text-2" id="text-org9329acc">
 <p>
 Homebrew no longer requires user-ownership of /usr/local, so things
 are pretty easy now:
@@ -236,9 +236,9 @@ brew install xsv
 </div>
 </div>
 
-<div id="outline-container-org293204f" class="outline-3">
-<h3 id="org293204f">homebrew API token</h3>
-<div class="outline-text-3" id="text-org293204f">
+<div id="outline-container-orgd85a0e5" class="outline-3">
+<h3 id="orgd85a0e5">homebrew API token</h3>
+<div class="outline-text-3" id="text-orgd85a0e5">
 <p>
 Apparently lots of requests to GutHub via homebrew can hit a rate limit. There's a higher limit if you create an API token. See <a href="https://gist.github.com/christopheranderton/8644743">https://gist.github.com/christopheranderton/8644743</a>
 </p>
@@ -262,9 +262,9 @@ export HOMEBREW_GITHUB_API_TOKEN=token_here
 </div>
 </div>
 
-<div id="outline-container-org3ee7466" class="outline-2">
-<h2 id="org3ee7466">python</h2>
-<div class="outline-text-2" id="text-org3ee7466">
+<div id="outline-container-orgee008ad" class="outline-2">
+<h2 id="orgee008ad">python</h2>
+<div class="outline-text-2" id="text-orgee008ad">
 <p>
 I'm in the midst of the transition from python2 to python3, so as I
 wrote this it wasn't clear which packages (if any) I would need to
@@ -279,9 +279,9 @@ Use homebrew - see
 </p>
 </div>
 
-<div id="outline-container-org44e1df9" class="outline-3">
-<h3 id="org44e1df9">dependencies</h3>
-<div class="outline-text-3" id="text-org44e1df9">
+<div id="outline-container-orgae21357" class="outline-3">
+<h3 id="orgae21357">dependencies</h3>
+<div class="outline-text-3" id="text-orgae21357">
 <p>
 Run <code>brew info python</code> for required and optional dependencies
 </p>
@@ -293,9 +293,9 @@ Run <code>brew info python</code> for required and optional dependencies
 </div>
 </div>
 
-<div id="outline-container-org4cbb2dc" class="outline-3">
-<h3 id="org4cbb2dc">python2</h3>
-<div class="outline-text-3" id="text-org4cbb2dc">
+<div id="outline-container-orgd0c6991" class="outline-3">
+<h3 id="orgd0c6991">python2</h3>
+<div class="outline-text-3" id="text-orgd0c6991">
 <div class="org-src-container">
 <pre class="src src-sh">brew install python@2 --with-tcl-tk
 /usr/local/bin/pip2 install -U pip setuptools virtualenv wheel
@@ -304,9 +304,9 @@ Run <code>brew info python</code> for required and optional dependencies
 </div>
 </div>
 
-<div id="outline-container-org9ac2121" class="outline-3">
-<h3 id="org9ac2121">python3</h3>
-<div class="outline-text-3" id="text-org9ac2121">
+<div id="outline-container-org11dab38" class="outline-3">
+<h3 id="org11dab38">python3</h3>
+<div class="outline-text-3" id="text-org11dab38">
 <p>
 Note that "python" corresponds to the python3 homebrew recipe.
 </p>
@@ -329,9 +329,9 @@ pip3 install pgcli
 </div>
 </div>
 
-<div id="outline-container-orgd96414d" class="outline-4">
-<h4 id="orgd96414d">scons</h4>
-<div class="outline-text-4" id="text-orgd96414d">
+<div id="outline-container-orga9afbe0" class="outline-4">
+<h4 id="orga9afbe0">scons</h4>
+<div class="outline-text-4" id="text-orga9afbe0">
 <p>
 Note that <code>scons</code> wants to install man pages to <code>/usr/local/man</code>, which is owned by root. You'll need to do this first:
 </p>
@@ -347,9 +347,9 @@ pip3 install scons
 </div>
 </div>
 
-<div id="outline-container-orgb6ed398" class="outline-2">
-<h2 id="orgb6ed398">emacs</h2>
-<div class="outline-text-2" id="text-orgb6ed398">
+<div id="outline-container-org55a39b4" class="outline-2">
+<h2 id="org55a39b4">emacs</h2>
+<div class="outline-text-2" id="text-org55a39b4">
 <p>
 Install latest emacs binary from <a href="http://emacsformacosx.com/">http://emacsformacosx.com/</a>
 </p>
@@ -387,9 +387,9 @@ bin/venv.sh
 </div>
 </div>
 
-<div id="outline-container-org6e32d0c" class="outline-2">
-<h2 id="org6e32d0c">zsh</h2>
-<div class="outline-text-2" id="text-org6e32d0c">
+<div id="outline-container-org2b5b3eb" class="outline-2">
+<h2 id="org2b5b3eb">zsh</h2>
+<div class="outline-text-2" id="text-org2b5b3eb">
 <p>
 Install zsh with Homebrew
 </p>
@@ -424,9 +424,9 @@ git clone git@bitbucket.org:nhoffman/dotfiles.git
 </div>
 </div>
 
-<div id="outline-container-org93416a4" class="outline-2">
-<h2 id="org93416a4">desktop apps</h2>
-<div class="outline-text-2" id="text-org93416a4">
+<div id="outline-container-orge6a75dc" class="outline-2">
+<h2 id="orge6a75dc">desktop apps</h2>
+<div class="outline-text-2" id="text-orge6a75dc">
 <p>
 Homebrew installs desktop apps too!
 </p>
@@ -452,9 +452,9 @@ credentials that must be installed interactively.
 </p>
 </div>
 
-<div id="outline-container-org24579c7" class="outline-3">
-<h3 id="org24579c7">iTerm2</h3>
-<div class="outline-text-3" id="text-org24579c7">
+<div id="outline-container-org62da570" class="outline-3">
+<h3 id="org62da570">iTerm2</h3>
+<div class="outline-text-3" id="text-org62da570">
 <pre class="example">
 brew cask install iterm2
 </pre>
@@ -483,9 +483,9 @@ Default appearance:
 </div>
 </div>
 
-<div id="outline-container-orga85ce19" class="outline-3">
-<h3 id="orga85ce19">postgresql</h3>
-<div class="outline-text-3" id="text-orga85ce19">
+<div id="outline-container-org1503b9c" class="outline-3">
+<h3 id="org1503b9c">postgresql</h3>
+<div class="outline-text-3" id="text-org1503b9c">
 <div class="org-src-container">
 <pre class="src src-sh">brew cask install postgres
 </pre>
@@ -504,9 +504,9 @@ path to the CLI for the version you want to use to your PATH, eg:
 </div>
 </div>
 
-<div id="outline-container-org4464b11" class="outline-2">
-<h2 id="org4464b11">R</h2>
-<div class="outline-text-2" id="text-org4464b11">
+<div id="outline-container-org2b99622" class="outline-2">
+<h2 id="org2b99622">R</h2>
+<div class="outline-text-2" id="text-org2b99622">
 <p>
 Again, using homebrew.
 </p>
@@ -545,9 +545,9 @@ And while I'm at it:
 </div>
 </div>
 
-<div id="outline-container-org6d8fd86" class="outline-2">
-<h2 id="org6d8fd86">X11</h2>
-<div class="outline-text-2" id="text-org6d8fd86">
+<div id="outline-container-orgb468d0b" class="outline-2">
+<h2 id="orgb468d0b">X11</h2>
+<div class="outline-text-2" id="text-orgb468d0b">
 <p>
 install Xquartz
 </p>
@@ -577,9 +577,9 @@ EOF
 </div>
 </div>
 
-<div id="outline-container-orge54efe2" class="outline-2">
-<h2 id="orge54efe2">virtualbox and vagrant</h2>
-<div class="outline-text-2" id="text-orge54efe2">
+<div id="outline-container-orgd0ea5a5" class="outline-2">
+<h2 id="orgd0ea5a5">virtualbox and vagrant</h2>
+<div class="outline-text-2" id="text-orgd0ea5a5">
 <div class="org-src-container">
 <pre class="src src-sh">brew cask install virtualbox
 brew cask install vagrant
@@ -604,9 +604,9 @@ After virtualbox is installed, go to preferences, and change default machine fol
 </p>
 </div>
 
-<div id="outline-container-org84378e8" class="outline-3">
-<h3 id="org84378e8">install an ubuntu16.04 VM</h3>
-<div class="outline-text-3" id="text-org84378e8">
+<div id="outline-container-org49d206b" class="outline-3">
+<h3 id="org49d206b">install an ubuntu16.04 VM</h3>
+<div class="outline-text-3" id="text-org49d206b">
 <p>
 see <a href="https://app.vagrantup.com/ubuntu/boxes/xenial64">https://app.vagrantup.com/ubuntu/boxes/xenial64</a>
 </p>
@@ -693,7 +693,7 @@ vagrant up
         </div>     </div>     </div> 
 <footer>
 <br />
-<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &copy; Noah Hoffman 2019</p>
+<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &copy; Noah Hoffman 2021</p>
 </footer>
 
 </div> <!-- /container -->
