@@ -2,13 +2,13 @@ import sys
 import re
 import glob
 from os import path, environ
-from itertools import chain
 
-if not 'VIRTUAL_ENV' in environ:
+if 'VIRTUAL_ENV' not in environ:
     sys.exit('No virtualenv is actuve')
 
 import SCons
 from SCons.Script import (Variables, Depends, Environment, ARGUMENTS, Flatten)
+
 
 def check_filename(filename):
     fail = filename.startswith('.') or re.search(r'[_<>:"/\\|?*^% ]', filename)
@@ -16,6 +16,7 @@ def check_filename(filename):
         print(('The name "{}" contains illegal characters '
                '(should be alphanumeric or "-")').format(filename))
         sys.exit(1)
+
 
 # variables defining destination for output files; can be redefined
 # from the command line, eg "scons site=path/to/output"
