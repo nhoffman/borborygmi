@@ -28,13 +28,12 @@ vars.Add('content', 'compiled org-mode output',
 vars.Add('output', 'site contents', ARGUMENTS.get('output', 'output'))
 vars.Add('theme', 'theme name', ARGUMENTS.get('theme', 'theme'))
 
-paths = ['org-export',
-         path.join(environ['VIRTUAL_ENV'], 'bin'),
-         '/usr/local/bin', '/usr/local/sbin', '/usr/bin', '/bin',
-         '/usr/sbin', '/sbin', '/opt/X11/bin', '/usr/texbin']
-
-env = Environment(ENV=dict(environ, PATH=':'.join(paths)),
-                  variables=vars)
+env = Environment(
+    ENV=dict(
+        environ,
+        PATH=':'.join(['org-export', environ['PATH']])
+    ),
+    variables=vars)
 
 Help(vars.GenerateHelpText(env))
 
