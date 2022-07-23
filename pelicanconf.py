@@ -34,5 +34,4 @@ DEFAULT_PAGINATION = 10
 # RELATIVE_URLS = True
 
 GOOGLE_ANALYTICS = "UA-16886766-2"
-
-DISQUS_SITENAME = 'http-nhoffman-github-io-borborygmi'
+# DISQUS_SITENAME = 'http-nhoffman-github-io-borborygmi'
