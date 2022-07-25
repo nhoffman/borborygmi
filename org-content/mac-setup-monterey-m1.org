@@ -90,6 +90,7 @@ brew install graphviz && \
 brew install latex2rtf && \
 brew install mcfly && \
 brew install pandoc && \
+brew install pngpaste && \
 brew install tmux && \
 brew install tree && \
 brew install fd && \
