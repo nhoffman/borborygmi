@@ -98,7 +98,8 @@ brew install xsv && \
 brew install fzf && \
 brew install saml2aws && \
 brew install jq && \
-brew install duckdb
+brew install duckdb && \
+brew install fswatch
 #+END_SRC
 
 ** desktop applications
