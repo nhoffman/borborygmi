@@ -1,7 +1,7 @@
 #+TITLE: Remap keys for emacs on a remote Windows machine
 #+DATE: 2023-04-02
 #+CATEGORY: notes
-#+PROPERTY: TAGS
+#+FILETAGS: emacs,windows
 
 I have been working on a Windows machine via remote desktop, and am
 gradually making it bearable. Emacs is miraculously easy to install to
