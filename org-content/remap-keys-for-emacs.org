@@ -25,7 +25,12 @@ with the following contents:
         {
           "type": "basic",
           "from": {
-            "key_code": "left_option"
+            "key_code": "left_option",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
           },
           "to": [
             {
