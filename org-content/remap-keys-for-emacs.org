@@ -1,0 +1,78 @@
+#+TITLE: Remap keys for emacs on a remote Windows machine
+#+DATE: 2023-04-02
+#+CATEGORY: notes
+#+PROPERTY: TAGS
+
+I have been working on a Windows machine via remote desktop, and am
+gradually making it bearable. Emacs is miraculously easy to install to
+my user's account, but it was not immediately obvious how to reproduce
+my usual configuration of mapping Option to ESC. One solution is
+provided by [[https://karabiner-elements.pqrs.org][Karabiner-Elements]], which supports complex rules for
+keyboard remapping. Crucially, it's possible to remap keys only in the
+context of a specific application. There are many community-provided
+rules to use as a starting point: I adapted [[https://ke-complex-modifications.pqrs.org/json/virtual_machine.json][this one]] to simply remap
+left option to ESC. I created
+=~/.config/karabiner/assets/complex_modifications/rdp_option_to_esc.json=
+with the following contents:
+
+#+begin_src json
+{
+  "title": "Remote Desktop - Left Option sends ESC",
+  "rules": [
+    {
+      "description": "Left option key sends ESC in remote desktop only",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "left_option"
+          },
+          "to": [
+            {
+              "key_code": "escape"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.microsoft\\.rdc$",
+                "^com\\.microsoft\\.rdc\\.",
+                "^net\\.sf\\.cord$",
+                "^com\\.thinomenon\\.RemoteDesktopConnection$",
+                "^com\\.itap-mobile\\.qmote$",
+                "^com\\.nulana\\.remotixmac$",
+                "^com\\.p5sys\\.jump\\.mac\\.viewer$",
+                "^com\\.p5sys\\.jump\\.mac\\.viewer\\.",
+                "^com\\.teamviewer\\.TeamViewer$",
+                "^com\\.vmware\\.horizon$",
+                "^com\\.2X\\.Client\\.Mac$",
+                "^com\\.OpenText\\.Exceed-TurboX-Client$",
+                "^com\\.realvnc\\.vncviewer$",
+                "^com\\.vmware\\.fusion$",
+                "^com\\.vmware\\.horizon$",
+                "^com\\.vmware\\.view$",
+                "^com\\.parallels\\.desktop$",
+                "^com\\.parallels\\.vm$",
+                "^com\\.parallels\\.desktop\\.console$",
+                "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
+                "^com\\.citrix\\.XenAppViewer$",
+                "^com\\.vmware\\.proxyApp\\.",
+                "^com\\.parallels\\.winapp\\.",
+                "^com\\.geekspiff\\.chickenofthevnc$",
+                "^net\\.sourceforge\\.chicken$",
+                "^de\\.jinx\\.JollysFastVNC\\.",
+                "^com\\.realvnc\\.vncviewer\\."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+#+end_src
+
+After adding the file, open the Karabiner-Elements settings from menu
+bar icon, choose "Complex Modification", and enable "Remote Desktop -
+Left Option sends ESC".
