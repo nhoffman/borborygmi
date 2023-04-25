@@ -1,4 +1,4 @@
-#+TITLE: Mac M2 Venturs setup
+#+TITLE: Mac M2 Ventura setup
 #+DATE: 2023-04-19
 #+CATEGORY: notes
 #+FILETAGS: mac
@@ -6,10 +6,9 @@
 #+OPTIONS: ^:nil
 
 Yet another installation of my personal notes for setting up a new (or
-cleanly installed) MacOS computer. The process changes just a bit with
-each new OS version. Not too many changes since Monterey. I will try
-really hard to reproduce the steps in an order that make then easiest
-to execute.
+cleanly installed) MacOS computer. Not too many changes since
+Monterey. I will try really hard to reproduce the steps in an order
+that make then easiest to execute.
 
 Note that none of the steps below require an Apple ID - I held off on
 signing in until the very end just to see if it was possible.
@@ -225,12 +224,7 @@ pipx install pgcli
 
 * emacs
 
-This required a bit of a change. For a long time I have been installing binaries
-from http://emacsformacosx.com/. This project provides universal binaries, and
-the command line executables are found within the Emacs.app application bundle.
-Unfortunately I ran into some errors in which magit seemed to load precompiled
-code for the wrong architecture - this seemed like too much effort to figure out
-given that there are alternatives out there. I wound up using the [[https://github.com/d12frosted/homebrew-emacs-plus][Homebrew
+Since I moved off of Intel macs, I have been using the [[https://github.com/d12frosted/homebrew-emacs-plus][Homebrew
 emacs-plus]] project, which seems great so far.
 
 #+BEGIN_SRC sh
@@ -255,8 +249,8 @@ cd ~/.emacs.d
 bin/python-setup.sh
 #+END_SRC
 
-The main inconvenience was having to adapt my startup script to juggle M1 Mac,
-x86 Mac, and linux:
+The main inconvenience was having to adapt my [[https://github.com/nhoffman/emacs-config/blob/master/init.bash][startup script]] to juggle M1 Mac,
+x86 Mac, and linux. Here's the relevant portion.
 
 #+BEGIN_SRC sh
 if [[ $(uname) == 'Darwin' ]]; then
