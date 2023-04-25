@@ -7,13 +7,14 @@
 
 Yet another installation of my personal notes for setting up a new (or
 cleanly installed) MacOS computer. The process changes just a bit with
-each new OS version. I will try really hard to reproduce the steps in
-an order that make then easiest to execute.
+each new OS version. Not too many changes since Monterey. I will try
+really hard to reproduce the steps in an order that make then easiest
+to execute.
 
-This was not a re-installation (new laptop!), so no need to jump through the
-hoops of downloading an installer, etc. Note that none of the steps below
-require an Apple ID - I held off on signing in until the very end just to see if
-it was possible.
+Note that none of the steps below require an Apple ID - I held off on
+signing in until the very end just to see if it was possible.
+
+* bootstrapping from another system
 
 I do copy some things over from my previous computer, but it's pretty
 minimal. Here's the command to gather up what I need to transfer.
@@ -40,18 +41,21 @@ xcode-select --install
 
 * system settings
 
+The new iOS-style System Settings takes a bit of getting used to.
+
 ** turn off spelling autocorrect
-: System Preferences --> Keyboard --> Text tab --> unselect "Correct spelling automatically" and others
+: Search for "spelling" --> Keyboard --> Text tab --> unselect "Correct spelling automatically" and others
 ** unmap Control + left,right
 
 I use Control plus the left and right arrow keys to move between
-windows in emacs and tmux. Disable the default mapping to mission control:
+windows in emacs and tmux. Disable the default mapping to mission
+control:
 
 : System Settings --> Keyboard Shortcuts pane --> Keyboard Shortcuts button --> uncheck mission control: move left/right a space
 
 ** Turn on FileVault
 
-: System Preferences --> Security & privacy --> FileVault
+: System Settings --> Security & privacy --> FileVault
 
 I used a recovery key option rather than iCloud for my work machine, iCloud for personal
 
@@ -64,7 +68,9 @@ Still a one-liner, now bash rather than ruby:
 brew doctor
 #+END_SRC
 
-Homebrew is installed to =/opt/local= on an M1 Mac. This required updating my PATH configuration. I added the following to my login profile:
+Homebrew is installed to =/opt/local= on an M1 Mac. This required
+updating my PATH configuration. I added the following to my login
+profile:
 
 #+BEGIN_SRC sh
 if [[ -d /opt/homebrew ]]; then
@@ -100,7 +106,8 @@ brew install saml2aws && \
 brew install jq && \
 brew install duckdb && \
 brew install fswatch && \
-brew install node
+brew install node && \
+brew install htop
 #+END_SRC
 
 ** desktop applications
@@ -151,8 +158,8 @@ git clone git@github.com:nhoffman/dotfiles.git
 
 * python
 
-Ventura ships with Python 3.9.6 as ==/usr/bin/python3== with no
-==python== executable (or maybe it's installed with xcode tools - I forgot to check). That's nice, but I avoid using the system python for the most part.
+Ventura ships with Python 3.9.6 as =/usr/bin/python3= with no
+=python= executable (or maybe it's installed with xcode tools - I forgot to check). That's nice, but I avoid using the system python for the most part.
 
 ** pyvenv
 
@@ -205,7 +212,9 @@ pipx recommends installation from homebrew, so that's what we'll go with:
 brew install pipx
 #+end_src
 
-The installation instructions include running ==pipx ensurepath==, but this appears not to be necessary if ==~/.local/bin== is already added to your PATH.
+The installation instructions include running =pipx ensurepath=, but
+this appears not to be necessary if =~/.local/bin= is already added to
+your PATH.
 
 Install some globally useful packages:
 
@@ -269,11 +278,7 @@ fi
 
 * R
 
-I had to give up on installing R with homebrew because it seemed to result in an
-interpreter that always wanted to install packages from source. So I used the
-arm64 binary from https://cran.r-project.org/bin/macosx/
-
-For next time: pretty sure ==brew install --cask r== is equivalent.
+Installed with =brew install --cask r=.
 
 Some packages that I know I'll need:
 
@@ -302,3 +307,9 @@ to the CLI for the latest version, eg:
 #+BEGIN_SRC sh
 PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 #+END_SRC
+
+* Docker desktop
+
+Use Homebrew.
+
+: brew install --cask docker
