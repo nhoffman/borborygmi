@@ -1,7 +1,8 @@
 name: Build and push Docker image
 
 on:
-  - push
+  - workflow_dispatch
+  # - push
 
 jobs:
   build_image:
@@ -24,7 +25,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          cache-from: type=gha
+          cache-from: type=registry,ref=ghcr.io/${{ github.repository_owner }}/borborygmi:latest
+          cache-to: type=inline
           context: .
           push: true
           tags: |

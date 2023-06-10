@@ -1,11 +1,14 @@
 name: Build Pages
 
-on: push
+on:
+  - workflow_dispatch
+  # - push
 
 jobs:
   build:
     runs-on: ghcr.io/nhoffman/borborygmi
-
+    strategy:
+      fail-fast: true
     steps:
     - uses: actions/checkout@v3
 
