@@ -28,7 +28,7 @@ jobs:
         key: ${{ runner.os }}-pages
 
     - name: print env
-      run: env
+      run: pwd && env && ls
 
     - name: Build Pages
       run: source /opt/build/venv/bin/activate && scons
