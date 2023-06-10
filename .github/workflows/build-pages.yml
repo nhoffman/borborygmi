@@ -1,0 +1,31 @@
+name: Build Pages
+
+on: push
+
+jobs:
+  build:
+    runs-on: ghcr.io/nhoffman/borborygmi
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Restore previously build pages
+      id: pages-restore
+      uses: actions/cache/restore@v3
+      with:
+        path: |
+          content
+          output
+        key: ${{ runner.os }}-pages
+
+    - name: Build Pages
+      run: scons
+
+    - name: Save Primes
+      id: pages-save
+      uses: actions/cache/save@v3
+      with:
+        path: |
+          content
+          output
+        key: ${{ steps.pages-restore.outputs.cache-primary-key }}
