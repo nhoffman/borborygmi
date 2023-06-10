@@ -3,6 +3,5 @@ lxml
 pelican
 Pygments
 pygments-pprint-sql
-csvkit
 numpy
 scons

@@ -52,15 +52,6 @@ for post_name in posts:
 
     check_filename(post_name)
 
-    # html, = e.Command(
-    #     target='$content/${post}.html',
-    #     source='$org_content/${post}.org',
-    #     action=('org-export pelican --infile $SOURCE --outfile $TARGET && '
-    #             'bin/colorize.py $TARGET')
-    # )
-    # Depends(html, 'colorize.py')
-    # content.append(html)
-
     html, = e.Command(
         target='$content/${post}.html',
         source='$org_content/${post}.org',
