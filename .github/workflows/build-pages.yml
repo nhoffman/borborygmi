@@ -31,7 +31,7 @@ jobs:
       run: env
 
     - name: Build Pages
-      run: scons
+      run: source /opt/build/venv/bin/activate && scons
 
     - name: Save pages
       id: pages-save
