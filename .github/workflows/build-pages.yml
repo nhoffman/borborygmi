@@ -6,7 +6,13 @@ on:
 
 jobs:
   build:
-    runs-on: ghcr.io/nhoffman/borborygmi
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/nhoffman/borborygmi:latest
+      options:
+        --user 1001:1001
+        -v "${{github.workspace}}":"${{github.workspace}}"
+        -w "${{github.workspace}}"
     strategy:
       fail-fast: true
     steps:
