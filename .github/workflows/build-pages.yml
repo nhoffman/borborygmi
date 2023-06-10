@@ -32,6 +32,7 @@ jobs:
 
     - name: Build Pages
       run: source /opt/build/venv/bin/activate && scons
+      shell: bash
 
     - name: Save pages
       id: pages-save
