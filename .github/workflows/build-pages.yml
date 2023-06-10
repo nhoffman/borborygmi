@@ -27,10 +27,13 @@ jobs:
           output
         key: ${{ runner.os }}-pages
 
+    - name: print env
+      run: env
+
     - name: Build Pages
       run: scons
 
-    - name: Save Primes
+    - name: Save pages
       id: pages-save
       uses: actions/cache/save@v3
       with:
