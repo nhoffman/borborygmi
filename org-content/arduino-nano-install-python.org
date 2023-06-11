@@ -1,7 +1,7 @@
 #+TITLE: Python on an Arduino Nano RP2040 Connect
 #+DATE: 2023-06-10
 #+CATEGORY: projects
-#+PROPERTY: TAGS python,arduino
+#+FILETAGS: python,arduino
 
 I recently purchased an [[https://store-usa.arduino.cc/products/arduino-nano-rp2040-connect-with-headers][Arduino Nano RP2040 Connect]] with the hope of
 running [[https://micropython.org][MicroPython]] (one of the useful side effects of having kids is

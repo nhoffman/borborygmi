@@ -26,9 +26,12 @@ def main(arguments):
     parser = argparse.ArgumentParser(
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('--org-content', help = "Path to content dir [%(default)s]",
+    parser.add_argument('--org-content',
+                        help = """Path to content dir [%(default)s]""",
                         default='org-content', metavar='PATH')
-    parser.add_argument('-o', '--outfile', help='Name of the output file. Should end with ".org" default: stdout')
+    parser.add_argument('-o', '--outfile',
+                        help="""Name of the output file. Should end
+                        with ".org" default: stdout""")
     parser.add_argument('-d', '--create-dir', help='create data dir',
                         default=False, action='store_true')
 
@@ -47,7 +50,7 @@ def main(arguments):
     fstr = """#+TITLE: {title}
 #+DATE: {date}
 #+CATEGORY: {category}
-#+PROPERTY: TAGS {tags}
+#+FILETAGS: {tags}
 """
 
     if args.outfile is None:
