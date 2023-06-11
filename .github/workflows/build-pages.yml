@@ -22,9 +22,19 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Restore previously build pages
-      id: pages-restore
-      uses: actions/cache/restore@v3
+    # - name: Restore pages from cache
+    #   id: pages-restore
+    #   uses: actions/cache/restore@v3
+    #   with:
+    #     path: |
+    #       content
+    #       output
+    #       .sconsign.dblite
+    #     key: ${{ runner.os }}-pages
+
+    - name: Restore pages from cache
+      id: pages-cache
+      uses: actions/cache@v3
       with:
         path: |
           content
@@ -36,16 +46,16 @@ jobs:
       run: source /opt/build/venv/bin/activate && scons
       shell: bash
 
-    - name: Deploy to GH Pages
-      run: source /opt/build/venv/bin/activate && scons publish
-      shell: bash
+    # - name: Deploy to GH Pages
+    #   run: source /opt/build/venv/bin/activate && scons publish
+    #   shell: bash
 
-    - name: Save pages
-      id: pages-save
-      uses: actions/cache/save@v3
-      with:
-        path: |
-          content
-          output
-          .sconsign.dblite
-        key: ${{ steps.pages-restore.outputs.cache-primary-key }}
+    # - name: Save pages to cache
+    #   id: pages-save
+    #   uses: actions/cache/save@v3
+    #   with:
+    #     path: |
+    #       content
+    #       output
+    #       .sconsign.dblite
+    #     key: ${{ steps.pages-restore.outputs.cache-primary-key }}
