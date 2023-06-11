@@ -28,11 +28,8 @@ jobs:
           .sconsign.dblite
         key: ${{ runner.os }}-pages
 
-    - name: print env
-      run: pwd && env && ls
-
-    - name: Publish to GitHub Pages
-      run: source /opt/build/venv/bin/activate && scons publish
+    - name: Build Pages
+      run: source /opt/build/venv/bin/activate && scons
       shell: bash
 
     - name: Save pages
@@ -45,7 +42,7 @@ jobs:
           .sconsign.dblite
         key: ${{ steps.pages-restore.outputs.cache-primary-key }}
 
-   # https://github.com/actions/deploy-pages
+  # https://github.com/actions/deploy-pages
   deploy:
     needs: build
 
