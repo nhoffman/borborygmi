@@ -40,7 +40,9 @@ jobs:
           content
           output
           .sconsign.dblite
-        key: ${{ runner.os }}-pages
+        # key: ${{ runner.os }}-pages
+        key: ${{ runner.os }}-pages-${{ hashFiles('org-content/*.org') }}
+        restore-keys: ${{ runner.os }}-pages-
 
     - name: Build Pages
       run: source /opt/build/venv/bin/activate && scons
