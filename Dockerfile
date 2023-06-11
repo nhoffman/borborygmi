@@ -13,6 +13,7 @@ WORKDIR /opt/build
 
 COPY requirements.txt .
 RUN python3 -m venv venv
+RUN /opt/build/venv/bin/python3 -m pip install -U 'pip==23.1.2' 'wheel==0.40.0'
 RUN /opt/build/venv/bin/python3 -m pip install -r requirements.txt
 
 COPY org-export /opt/build/org-export
