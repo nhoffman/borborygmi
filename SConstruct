@@ -81,7 +81,7 @@ Default(index)
 publish_log, = env.Command(
     target='publish_log.txt',
     source='$output',
-    action='ghp-import -p $SOURCE > $TARGET'
+    action='ghp-import -p --force $SOURCE > $TARGET'
 )
 Depends(publish_log, [content, index])
 Alias('publish', publish_log)
