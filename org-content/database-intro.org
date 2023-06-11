@@ -83,17 +83,9 @@ for name, rows in tables:
 
 #+NAME: create_database
 #+BEGIN_SRC sh :eval yes :results output :exports results
-
-# apparently something very strange is going on in the execution
-# environment of this code block: when called normally, csvsql seems
-# to be receiving data via stdin. The only way to prevent an error is
-# to write explicitly to stdin.
-
 rm -f database-intro/results.db
 for csv in database-intro/*.csv; do
-    # csvsql --db sqlite:///database-intro/results.db $csv --insert
-    cat $csv | csvsql --db sqlite:///database-intro/results.db --insert \
-        --tables $(basename ${csv%.csv})
+    sqlite3 -csv database-intro/results.db ".import $csv $(basename ${csv%.csv})"
 done
 #+END_SRC
 
@@ -116,6 +108,7 @@ done
 
 - primary key :: a field (or multiple fields in combination) that uniquely identify a row. Can either be *natural* (i.e., consisting of attributes that already exist in the table), or *surrogate* (i.e., a new attribute with no "real world" meaning created for the purpose). An example of a combination of attributes serving as a primary key: name + DOB
 
+#+NAME: show_patients
 #+BEGIN_SRC sqlite :exports results
 select * from patients;
 #+END_SRC
