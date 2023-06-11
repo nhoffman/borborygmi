@@ -25,6 +25,7 @@ jobs:
         path: |
           content
           output
+          .sconsign.dblite
         key: ${{ runner.os }}-pages
 
     - name: print env
@@ -41,4 +42,5 @@ jobs:
         path: |
           content
           output
+          .sconsign.dblite
         key: ${{ steps.pages-restore.outputs.cache-primary-key }}
