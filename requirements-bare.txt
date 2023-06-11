@@ -1,0 +1,7 @@
+ghp-import
+lxml
+pelican
+Pygments
+pygments-pprint-sql
+numpy
+scons
