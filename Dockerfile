@@ -1,6 +1,13 @@
 FROM debian:bookworm-slim
 RUN apt-get -y update
-RUN apt-get -y install python3 emacs python3.11-venv rsync git sqlite3
+RUN apt-get -y install \
+    emacs \
+    git \
+    graphviz \
+    python3 \
+    python3.11-venv \
+    rsync \
+    sqlite3
 
 WORKDIR /opt/build
 
