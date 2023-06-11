@@ -1,0 +1,40 @@
+#+TITLE: Python on an Arduino Nano RP2040 Connect
+#+DATE: 2023-06-10
+#+CATEGORY: projects
+#+PROPERTY: TAGS python,arduino
+
+I recently purchased an [[https://store-usa.arduino.cc/products/arduino-nano-rp2040-connect-with-headers][Arduino Nano RP2040 Connect]] with the hope of
+running [[https://micropython.org][MicroPython]] (one of the useful side effect of kids is an
+excuse to buy stuff for projects). It's worth noting a couple of the
+issues that came up.
+
+* Installing the .u2f file
+
+First, there appears to be a known problem with the documented method
+for copying .uf2 files to a connected board from a Mac running MacOS
+13 Ventura. This involves placing the board into boot mode, and simply
+dropping the .uf2 into the mounted volume in the Finder. The problem
+(and the solution that I'll mention below) is documented in the
+[[https://blog.smittytone.net/2022/11/12/how-to-copy-files-to-a-pico-on-a-ventura-mac-error-free][smittytone blog]]. Actually, the author offers a few possible solutions,
+but the one I used was to run the command
+
+: stty -f /dev/cu.usbmodem1101 1200
+
+Where =/dev/cu.usbmodem1101= was the file that appeared when the board
+was connected. After I ran this command, a volume appeared in the
+finder, and I was simply able to copy the .u2f file from the command
+line:
+
+: cp ~/Downloads/adafruit-circuitpython-arduino_nano_rp2040_connect-en_US-8.1.0.uf2 /Volumes/RPI-RP2
+
+* s/MicroPython/CircuitPython
+
+You may notice from the command above that I'm not installing
+MicroPython at all. Well, after many attempts to connect to the python
+interpreter after installing MicroPython, I found various reports of
+difficulties getting it to run on the RP2040. Luckily, AdaFruit
+maintains a project derived from MicroPython called [[https://learn.adafruit.com/welcome-to-circuitpython][CircuitPython]], and
+provides a build for many boards, including [[https://circuitpython.org/board/arduino_nano_rp2040_connect/][mine]]. So after downloading and installing this build as described above, I was able to connect!
+
+So far so good... hopefully in the next post will I'll be able to
+describe doing something interesting.
