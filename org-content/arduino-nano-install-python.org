@@ -13,17 +13,17 @@ the issues that came up.
 First, there appears to be a known problem with the documented method
 for copying .uf2 files to a connected board from a Mac running MacOS
 13 Ventura. This involves placing the board into boot mode, and simply
-dropping the .uf2 into the mounted volume in the Finder. The problem
-(and the solution that I'll mention below) is documented in the
-[[https://blog.smittytone.net/2022/11/12/how-to-copy-files-to-a-pico-on-a-ventura-mac-error-free][smittytone blog]]. Actually, the author offers a few possible solutions,
-but the one I used was to run the command
+dropping the .uf2 file into the mounted volume in the Finder. The
+problem (and the solution that I'll mention below) is documented in
+the [[https://blog.smittytone.net/2022/11/12/how-to-copy-files-to-a-pico-on-a-ventura-mac-error-free][smittytone blog]]. Actually, the author offers a few possible
+solutions, but the one I used was to run the command
 
 : stty -f /dev/cu.usbmodem1101 1200
 
-Where =/dev/cu.usbmodem1101= was the file that appeared when the board
-was connected. After I ran this command, a volume appeared in the
-finder, and I was simply able to copy the .u2f file from the command
-line:
+Where =/dev/cu.usbmodem1101= was the file matching the expected
+pattern that appeared when the board was connected. After I ran this
+command, a volume appeared in the Finder, and I was simply able to
+copy the .u2f file from the command line:
 
 : cp ~/Downloads/adafruit-circuitpython-arduino_nano_rp2040_connect-en_US-8.1.0.uf2 /Volumes/RPI-RP2
 
