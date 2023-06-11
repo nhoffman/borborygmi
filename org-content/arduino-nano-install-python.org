@@ -4,9 +4,9 @@
 #+PROPERTY: TAGS python,arduino
 
 I recently purchased an [[https://store-usa.arduino.cc/products/arduino-nano-rp2040-connect-with-headers][Arduino Nano RP2040 Connect]] with the hope of
-running [[https://micropython.org][MicroPython]] (one of the useful side effect of kids is an
-excuse to buy stuff for projects). It's worth noting a couple of the
-issues that came up.
+running [[https://micropython.org][MicroPython]] (one of the useful side effect of having kids is
+an excuse to buy stuff for projects). It's worth noting a couple of
+the issues that came up.
 
 * Installing the .u2f file
 
