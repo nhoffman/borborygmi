@@ -1,0 +1,620 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>borborygmi</title>
+    <meta name="description" content="">
+    <meta name="author" content="Noah Hoffman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="https://nhoffman.github.io/borborygmi/theme/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="https://nhoffman.github.io/borborygmi/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/local.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/pygments.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="https://nhoffman.github.io/borborygmi">borborygmi</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+
+        </ul>
+        </div>
+
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+
+  <!-- Don't include TOC on the index page -->
+  <style>div#table-of-contents {display: none;}</style>
+
+
+
+	<div class="article">
+          <div class="content-title">
+            <a href="https://nhoffman.github.io/borborygmi/arduino-nano-install-python.html"><h1>Python on an Arduino Nano RP2040 Connect</h1></a>
+Sat 10 June 2023 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/projects.html">projects</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/python.html">python,&#160;</a><a href="https://nhoffman.github.io/borborygmi/tag/arduino.html">arduino</a></em>          </div>
+
+          <div><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgf3b8576">Installing the .u2f file</a></li>
+<li><a href="#orgcd6cab0">s/MicroPython/CircuitPython</a></li>
+</ul>
+</div>
+</div>
+<p>
+I recently purchased an <a href="https://store-usa.arduino.cc/products/arduino-nano-rp2040-connect-with-headers">Arduino Nano RP2040 Connect</a> with the hope of
+running <a href="https://micropython.org">MicroPython</a> (one of the useful side effects of having kids is
+an excuse to buy stuff for projects). It's worth noting a couple of
+the issues that came up.
+</p>
+
+<div id="outline-container-orgf3b8576" class="outline-2">
+<h2 id="orgf3b8576">Installing the .u2f file</h2>
+<div class="outline-text-2" id="text-orgf3b8576">
+<p>
+First, there appears to be a known problem with the documented method
+for copying .uf2 files to a connected board from a Mac running MacOS
+13 Ventura. This involves placing the board into boot mode, and simply
+dropping the .uf2 file into the mounted volume in the Finder. The
+problem (and the solution that I'll mention below) is documented in
+the <a href="https://blog.smittytone.net/2022/11/12/how-to-copy-files-to-a-pico-on-a-ventura-mac-error-free">smittytone blog</a>. Actually, the author offers a few possible
+solutions, but the one I used was to run the command
+</p>
+
+<pre class="example">
+stty -f /dev/cu.usbmodem1101 1200
+</pre>
+
+
+<p>
+Where <code>/dev/cu.usbmodem1101</code> was the file matching the expected
+pattern that appeared when the board was connected. After I ran this
+command, a volume appeared in the Finder, and I was simply able to
+copy the .u2f file from the command line:
+</p>
+
+<pre class="example">
+cp ~/Downloads/adafruit-circuitpython-arduino_nano_rp2040_connect-en_US-8.1.0.uf2 /Volumes/RPI-RP2
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgcd6cab0" class="outline-2">
+<h2 id="orgcd6cab0">s/MicroPython/CircuitPython</h2>
+<div class="outline-text-2" id="text-orgcd6cab0">
+<p>
+You may notice from the command above that I'm not installing
+MicroPython at all. Well, after many attempts to connect to the python
+interpreter after installing MicroPython, I found various reports of
+difficulties getting it to run on the RP2040. Luckily, AdaFruit
+maintains a project derived from MicroPython called <a href="https://learn.adafruit.com/welcome-to-circuitpython">CircuitPython</a>, and
+provides a build for many boards, including <a href="https://circuitpython.org/board/arduino_nano_rp2040_connect/">mine</a>. So after downloading and installing this build as described above, I was able to connect!
+</p>
+
+<p>
+So far so good&#8230; hopefully in the next post will I'll be able to
+describe doing something interesting.
+</p>
+</div>
+</div>
+</div>
+          <hr>
+
+
+	</div>
+
+
+ 
+
+
+	<div class="article">
+          <a href="https://nhoffman.github.io/borborygmi/mac-setup-ventura.html"><h2>Mac M2 Ventura setup</h2></a>
+          <div class="well small"> Wed 19 April 2023 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/mac-setup-ventura.html">read more</a> </div>
+          <div class="summary"><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgf113fb8">bootstrapping from another system</a></li>
+<li><a href="#org08eb9a8">system update</a></li>
+<li><a href="#org1e4c733">Developer tools</a></li>
+<li><a href="#org2520c67">system settings</a>
+<ul>
+<li><a href="#org322b67d">turn off spelling autocorrect</a></li>
+<li><a href="#orgf0c593f">unmap Control + left,right</a></li>
+<li><a href="#orgc28c1e2">Turn on FileVault</a></li>
+</ul>
+</li>
+<li><a href="#org498dc59">homebrew</a>
+<ul>
+<li><a href="#orgb994b9d">CLI applications</a></li>
+<li><a href="#orgc05afbe">desktop applications</a></li>
+</ul>
+</li>
+<li><a href="#orgf616f63">iTerm2</a></li>
+<li><a href="#org68120c0">zsh</a></li>
+<li><a href="#orgbae9e42">python</a>
+<ul>
+<li><a href="#org004c236">pyvenv</a></li>
+<li><a href="#org4e66bd7">pipx</a></li>
+</ul>
+</li>
+<li><a href="#org0431393">emacs</a></li>
+<li><a href="#orge904f48">R</a></li>
+<li><a href="#orgfb74195">postgresql</a></li>
+<li><a href="#org5ca1003">Docker desktop</a></li>
+</ul>
+</div>
+</div>
+<p>
+Yet another installation of my personal notes for setting up a &#8230;</p> </div>
+	</div>
+
+
+ 
+
+
+	<div class="article">
+          <a href="https://nhoffman.github.io/borborygmi/remap-keys-for-emacs.html"><h2>Remap keys for emacs on a remote Windows machine</h2></a>
+          <div class="well small"> Sun 02 April 2023 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/emacs.html">emacs,&#160;</a><a href="https://nhoffman.github.io/borborygmi/tag/windows.html">windows</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/remap-keys-for-emacs.html">read more</a> </div>
+          <div class="summary"><p>
+I have been working on a Windows machine via remote desktop, and am
+gradually making it bearable. Emacs is miraculously easy to install to
+my user's account, but it was not immediately obvious how to reproduce
+my usual configuration of mapping Option to ESC. One solution is
+provided by <a href="https://karabiner-elements.pqrs.org">Karabiner-Elements &#8230;</a></p> </div>
+	</div>
+
+
+ 
+
+
+	<div class="article">
+          <a href="https://nhoffman.github.io/borborygmi/mac-setup-monterey-m1.html"><h2>Mac M1 Monterey setup</h2></a>
+          <div class="well small"> Sat 23 July 2022 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/mac-setup-monterey-m1.html">read more</a> </div>
+          <div class="summary"><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgf5cedc4">system update</a></li>
+<li><a href="#orgafc53c6">Developer tools</a></li>
+<li><a href="#org4defc8e">system settings</a>
+<ul>
+<li><a href="#orga21ecce">turn off spelling autocorrect</a></li>
+<li><a href="#org6d3b3f4">unmap Control + left,right</a></li>
+<li><a href="#org30e175b">Turn on FileVault</a></li>
+</ul>
+</li>
+<li><a href="#orga047214">homebrew</a>
+<ul>
+<li><a href="#org9f364ee">CLI applications</a></li>
+<li><a href="#orge96e703">desktop applications</a></li>
+</ul>
+</li>
+<li><a href="#orgc6bfc23">iTerm2</a></li>
+<li><a href="#org7f40ed1">zsh</a></li>
+<li><a href="#org55b7d2e">python</a>
+<ul>
+<li><a href="#org9b34db0">pyvenv</a></li>
+<li><a href="#org36f9b08">pipx</a></li>
+</ul>
+</li>
+<li><a href="#orgdb22f2f">emacs</a></li>
+<li><a href="#orgdca674e">R</a></li>
+<li><a href="#org00a6202">postgresql</a></li>
+</ul>
+</div>
+</div>
+<p>
+Yet another installation of my personal notes for setting up a new (or
+cleanly installed) MacOS computer &#8230;</p> </div>
+	</div>
+
+
+ 
+
+
+	<div class="article">
+          <a href="https://nhoffman.github.io/borborygmi/mac-setup-big-sur.html"><h2>Clean install of MacOS Big Sur</h2></a>
+          <div class="well small"> Thu 20 May 2021 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/mac-setup-big-sur.html">read more</a> </div>
+          <div class="summary"><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org34483d8">system settings</a>
+<ul>
+<li><a href="#org2ad67a8">turn off spelling autocorrect</a></li>
+<li><a href="#org4e84a66">unmap Control + left,right</a></li>
+<li><a href="#org3e957c4">Turn on FileVault</a></li>
+</ul>
+</li>
+<li><a href="#org4067676">Developer tools</a></li>
+<li><a href="#org16db3cc">homebrew</a>
+<ul>
+<li><a href="#org806ecd9">homebrew API token</a></li>
+<li><a href="#orgca3f5c7">CLI applications</a></li>
+<li><a href="#orgc035713">desktop applications</a></li>
+</ul>
+</li>
+<li><a href="#org33df50c">iTerm2</a></li>
+<li><a href="#orgf262d1c">zsh</a></li>
+<li><a href="#org8fa4251">python</a></li>
+<li><a href="#org02526c0">emacs</a></li>
+<li><a href="#orge07c47f">R</a></li>
+<li><a href="#orgd3d0d6a">postgresql</a></li>
+</ul>
+</div>
+</div>
+<p>
+Yet another installation of my personal notes for setting up a new (or
+cleanly installed) MacOS computer. The &#8230;</p> </div>
+	</div>
+
+
+ 
+
+
+	<div class="article">
+          <a href="https://nhoffman.github.io/borborygmi/mac-setup-catalina.html"><h2>Clean install of MacOS Catalina</h2></a>
+          <div class="well small"> Sat 11 April 2020 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/mac-setup-catalina.html">read more</a> </div>
+          <div class="summary"><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org01c30af">system settings</a>
+<ul>
+<li><a href="#org1b95636">turn off spelling autocorrect</a></li>
+<li><a href="#orgab3da11">unmap Control + left,right</a></li>
+<li><a href="#org860c982">Turn on FileVault</a></li>
+</ul>
+</li>
+<li><a href="#org68cf8d1">Developer tools</a></li>
+<li><a href="#orgffce906">homebrew</a>
+<ul>
+<li><a href="#org8b20598">homebrew API token</a></li>
+<li><a href="#org67deed1">CLI applications</a></li>
+<li><a href="#org8cae388">desktop applications</a></li>
+<li><a href="#org702629d">packages in 3rd party taps</a>
+<ul>
+<li><a href="#orgf8bbb7f">saml2aws</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org58b493c">iTerm2</a></li>
+<li><a href="#org5e1d828">python</a>
+<ul>
+<li><a href="#org88922ab">dependencies</a></li>
+</ul>
+</li>
+<li><a href="#org0f1b49b">emacs</a></li>
+<li><a href="#org3eec3b4">zsh</a></li>
+<li><a href="#org3ec3ed6">R</a></li>
+<li><a href="#orgc922a3c">postgresql</a></li>
+<li><a href="#org701bff0">X11</a></li>
+</ul>
+</div>
+</div>
+<p>
+Another installation of my personal notes for setting up a &#8230;</p> </div>
+	</div>
+
+
+ 
+
+
+	<div class="article">
+          <a href="https://nhoffman.github.io/borborygmi/mac-setup-mojave.html"><h2>Clean install of MacOS Mojave</h2></a>
+          <div class="well small"> Fri 15 February 2019 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/mac-setup-mojave.html">read more</a> </div>
+          <div class="summary"><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org16adb33">system settings</a>
+<ul>
+<li><a href="#orge870e3f">turn off spelling autocorrect</a></li>
+<li><a href="#orge3101d0">unmap Control + left,right</a></li>
+<li><a href="#org60c3ba2">Turn on FileVault</a></li>
+</ul>
+</li>
+<li><a href="#org20dd120">Developer tools</a></li>
+<li><a href="#org5f49e66">iTerm2</a></li>
+<li><a href="#orgc1fbd87">homebrew</a>
+<ul>
+<li><a href="#orgc6c3e87">homebrew API token</a></li>
+<li><a href="#orgb26051d">Terminal applications</a></li>
+<li><a href="#org75b9c3b">desktop applications</a></li>
+</ul>
+</li>
+<li><a href="#org185fcfd">python</a>
+<ul>
+<li><a href="#org715dab9">dependencies</a></li>
+<li><a href="#org726c875">python2</a></li>
+<li><a href="#orgdf159b9">python3</a>
+<ul>
+<li><a href="#orgab0417e">scons</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org73f50bb">emacs</a></li>
+<li><a href="#org2aa0fd7">zsh</a></li>
+<li><a href="#orge7e7def">R</a></li>
+<li><a href="#org59997b1">postgresql</a></li>
+<li><a href="#org531c8fe">X11</a></li>
+<li><a href="#org1de524e">virtualbox and vagrant</a>
+<ul>
+<li><a href="#orgfc610bb">install an ubuntu16.04 VM</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+Another installation of my personal &#8230;</p> </div>
+	</div>
+
+
+ 
+
+
+	<div class="article">
+          <a href="https://nhoffman.github.io/borborygmi/mac-setup-high-sierra.html"><h2>Clean install of MacOS High Sierra</h2></a>
+          <div class="well small"> Fri 17 November 2017 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/mac-setup-high-sierra.html">read more</a> </div>
+          <div class="summary"><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org864d51d">system settings</a>
+<ul>
+<li><a href="#org882f3e4">turn off spelling autocorrect</a></li>
+<li><a href="#org8d4fc41">unmap Control + left,right</a></li>
+<li><a href="#org9e7970b">Turn on FileVault</a></li>
+</ul>
+</li>
+<li><a href="#org98fa881">Developer tools</a></li>
+<li><a href="#org770e014">homebrew</a>
+<ul>
+<li><a href="#org7401044">homebrew API token</a></li>
+</ul>
+</li>
+<li><a href="#org380ed96">python</a>
+<ul>
+<li><a href="#org9d0c300">dependencies</a></li>
+<li><a href="#org82a748d">python2</a></li>
+<li><a href="#orgee6d0e5">python3</a>
+<ul>
+<li><a href="#orgb3e25ea">scons</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org3a4527f">emacs</a></li>
+<li><a href="#orgbb61e5c">zsh</a></li>
+<li><a href="#orgfe46c0b">desktop apps</a>
+<ul>
+<li><a href="#orgad960c6">iTerm2</a></li>
+<li><a href="#org82c8665">postgresql</a></li>
+</ul>
+</li>
+<li><a href="#org2b3a278">R</a></li>
+<li><a href="#orgada615c">X11</a></li>
+<li><a href="#orgc32155d">virtualbox and vagrant</a>
+<ul>
+<li><a href="#org1b2e623">install an ubuntu16.04 VM</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+I make it a practice to blow &#8230;</p> </div>
+	</div>
+
+
+ 
+
+
+	<div class="article">
+          <a href="https://nhoffman.github.io/borborygmi/recursive-cte-for-taxonomy.html"><h2>Using recursive CTEs for calculating taxonomic lineages</h2></a>
+          <div class="well small"> Fri 07 July 2017 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/sql.html">sql</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/postgresql.html">postgresql,&#160;</a><a href="https://nhoffman.github.io/borborygmi/tag/taxonomy.html">taxonomy</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/recursive-cte-for-taxonomy.html">read more</a> </div>
+          <div class="summary"><p>
+This topic falls into the category of "things that I didn't know that
+I didn't know." Many of my projects involve the manipulation of
+taxonomies, particularly the <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI taxonomy</a>, but I didn't understand
+the efficiency with which it was possible to calculate a lineage in
+SQL. I recently revisited the &#8230;</p> </div>
+	</div>
+
+
+ 
+
+
+	<div class="article">
+          <a href="https://nhoffman.github.io/borborygmi/mac-setup-sierra.html"><h2>Setting up a new Mac (Sierra)</h2></a>
+          <div class="well small"> Thu 05 January 2017 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/mac-setup-sierra.html">read more</a> </div>
+          <div class="summary"><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org38a2fc6">system settings</a>
+<ul>
+<li><a href="#org6e19d31">turn off spelling autocorrect</a></li>
+<li><a href="#orgfc09c30">unmap Control + left,right</a></li>
+</ul>
+</li>
+<li><a href="#org6f44b7f">First applications</a>
+<ul>
+<li><a href="#org37aa457">iTerm2</a></li>
+<li><a href="#org36f9bd7">Dropbox</a></li>
+<li><a href="#orgfa0780d">Developer tools</a></li>
+<li><a href="#org41350f2">Junos pulse VPN client</a></li>
+<li><a href="#org4f2ef35">Microsoft Office 2016</a></li>
+<li><a href="#org9e1e8bd">Others</a></li>
+</ul>
+</li>
+<li><a href="#org74c53fa">homebrew</a>
+<ul>
+<li><a href="#org49f875e">X11</a></li>
+<li><a href="#org0318a70">Desktop apps using Cask</a></li>
+<li><a href="#org9fcd7c4">homebrew API token</a></li>
+<li><a href="#org31fc83b">zsh</a></li>
+</ul>
+</li>
+<li><a href="#orge838792">git</a></li>
+<li><a href="#org15cefd9">python</a></li>
+<li><a href="#orgf82d6d5">emacs</a></li>
+<li><a href="#org7a668a9">R</a></li>
+<li><a href="#org8a9c0aa">wkhtmltopdf</a></li>
+<li><a href="#orgbaa8cab">mail</a></li>
+</ul>
+</div>
+</div>
+<ul class="org-ul">
+<li><i>Edit 2017-01-09: provide upgrade path to Pulse &#8230;</i></li></ul> </div>
+	</div>
+
+<div class="pagination">
+<ul>
+    <li class="prev disabled"><a href="#">&#8592; Previous</a></li>
+
+    <li class="active"><a href="https://nhoffman.github.io/borborygmi/author/unknown.html">1</a></li>
+    <li class=""><a href="https://nhoffman.github.io/borborygmi/author/unknown2.html">2</a></li>
+
+    <li class="next"><a href="https://nhoffman.github.io/borborygmi/author/unknown2.html">Next &#8594;</a></li>
+
+</ul>
+</div>
+ 
+  
+        </div>
+
+        <div class="span3">
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Site
+                </li>
+
+                <li><a href="https://nhoffman.github.io/borborygmi/">Archives</a>
+                </li><li><a href="https://nhoffman.github.io/borborygmi/tags.html">Tags</a>
+                </li><li><a href="https://nhoffman.github.io/borborygmi/" rel="alternate">Atom feed</a></li>
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Categories
+                </li>
+
+                <li><a href="https://nhoffman.github.io/borborygmi/category/lectures.html">lectures</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/org-mode.html">org-mode</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/projects.html">projects</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/sql.html">sql</a></li>
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Links
+                </li>
+
+                <li><a href="https://github.com/nhoffman">GitHub account</a></li>
+                <li><a href="https://github.com/nhoffman/borborygmi">site source</a></li>
+            </ul>
+            </div>
+
+
+
+        </div>     </div>     </div> 
+<footer>
+<br>
+<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &#169; Noah Hoffman 2023</p>
+</footer>
+
+</div> <!-- /container -->
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-16886766-2', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>
