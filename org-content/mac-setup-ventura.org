@@ -235,6 +235,11 @@ brew tap d12frosted/emacs-plus
 brew install emacs-plus
 #+END_SRC
 
+Edit: after emacs 39.1 came out, I updated with:
+
+: brew uninstall emacs-plus
+: brew install emacs-plus@29 --with-imagemagick --with-native-comp
+
 Check out my .emacs.d and run setup scripts.
 
 #+BEGIN_SRC sh
