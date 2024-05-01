@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>borborygmi</title>
+    <meta name="description" content="">
+    <meta name="author" content="Noah Hoffman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="https://nhoffman.github.io/borborygmi/theme/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="https://nhoffman.github.io/borborygmi/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/local.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/pygments.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="https://nhoffman.github.io/borborygmi">borborygmi</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+
+        </ul>
+        </div>
+
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+
+  <!-- Don't include TOC on the index page -->
+  <style>div#table-of-contents {display: none;}</style>
+
+
+
+	<div class='article'>
+          <a href="https://nhoffman.github.io/borborygmi/mac-setup-sierra.html"><h2>Setting up a new Mac (Sierra)</h2></a>
+          <div class= "well small"> Thu 05 January 2017 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/mac-setup-sierra.html">read more</a> </div>
+          <div class="summary"><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgffcc3c4">system settings</a>
+<ul>
+<li><a href="#orga392f01">turn off spelling autocorrect</a></li>
+<li><a href="#org58afecd">unmap Control + left,right</a></li>
+</ul>
+</li>
+<li><a href="#org8521a57">First applications</a>
+<ul>
+<li><a href="#orge60d56d">iTerm2</a></li>
+<li><a href="#org7d9611d">Dropbox</a></li>
+<li><a href="#org47073af">Developer tools</a></li>
+<li><a href="#org77fb4c6">Junos pulse VPN client</a></li>
+<li><a href="#orgdade504">Microsoft Office 2016</a></li>
+<li><a href="#orge869bc6">Others</a></li>
+</ul>
+</li>
+<li><a href="#org5d55fcc">homebrew</a>
+<ul>
+<li><a href="#orgfe78dd3">X11</a></li>
+<li><a href="#org7bcae54">Desktop apps using Cask</a></li>
+<li><a href="#org99b505d">homebrew API token</a></li>
+<li><a href="#org88a52d5">zsh</a></li>
+</ul>
+</li>
+<li><a href="#org243f0b4">git</a></li>
+<li><a href="#orgd0597c4">python</a></li>
+<li><a href="#orgeeaee67">emacs</a></li>
+<li><a href="#org4bc07ba">R</a></li>
+<li><a href="#org38b2689">wkhtmltopdf</a></li>
+<li><a href="#org738bb8c">mail</a></li>
+</ul>
+</div>
+</div>
+<ul class="org-ul">
+<li><i>Edit 2017-01-09: provide upgrade path to Pulse …</i></li></ul> </div>
+	</div>
+
+
+ 
+
+
+	<div class='article'>
+          <a href="https://nhoffman.github.io/borborygmi/mac-setup-el-capitan.html"><h2>Setup after clean install of El Capitan</h2></a>
+          <div class= "well small"> Mon 02 November 2015 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/mac-setup-el-capitan.html">read more</a> </div>
+          <div class="summary"><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org13b2c6e">First applications</a>
+<ul>
+<li><a href="#org3f078e9">Developer tools</a></li>
+<li><a href="#org9bd8a45">X11</a></li>
+<li><a href="#org4673cd8">iTerm2</a></li>
+<li><a href="#org67e58a9">Others</a></li>
+<li><a href="#orgb3ff2c8">UW only</a></li>
+</ul>
+</li>
+<li><a href="#org2857323">system-level configuration</a>
+<ul>
+<li><a href="#org7c83a21">turn off spelling autocorrect</a></li>
+<li><a href="#orgfc4b74f">turn off spaces key shortcuts</a></li>
+</ul>
+</li>
+<li><a href="#orge97098c">homebrew</a>
+<ul>
+<li><a href="#org5b7feba">packages installed using homebrew</a></li>
+<li><a href="#orga93b51f">homebrew cask</a></li>
+<li><a href="#org35056ef">homebrew API token</a></li>
+<li><a href="#org0575d5c">zsh</a></li>
+</ul>
+</li>
+<li><a href="#org507cdcc">ssh</a>
+<ul>
+<li><a href="#orgfe865f9">update /System/Library/LaunchAgents/org.openbsd.ssh-agent.plist</a></li>
+<li><a href="#org28898e0">create $ZSH_INITDIR/ssh-ask-keychain (called from start_ssh_agent.zsh …</a></li></ul></li></ul></div></div> </div>
+	</div>
+
+
+ 
+
+
+	<div class='article'>
+          <a href="https://nhoffman.github.io/borborygmi/virtualbox-setup.html"><h2>Setup for VirtualBox VM running Ubuntu 14.04 on OS X Mavericks</h2></a>
+          <div class= "well small"> Fri 06 February 2015 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/linux.html">linux,&nbsp;</a><a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac,&nbsp;</a><a href="https://nhoffman.github.io/borborygmi/tag/virtualbox.html">virtualbox</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/virtualbox-setup.html">read more</a> </div>
+          <div class="summary"><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgfec6e82">VirtualBox preferences</a></li>
+<li><a href="#orgca74bd5">Create an Ubuntu 14.04 VM</a></li>
+<li><a href="#orgc7445d8">Set up an IP address</a></li>
+</ul>
+</div>
+</div>
+<p>
+Here are my notes for setting up an Ubuntu VM to work on some web
+applications. This is intended to be a sandbox for development, so
+I'll err on the side of convenience (at …</p> </div>
+	</div>
+
+
+ 
+
+
+	<div class='article'>
+          <a href="https://nhoffman.github.io/borborygmi/compiling-bcl2fastq-on-ubuntu.html"><h2>Compiling bcl2fastq v2.15 on Ubuntu 12.04 and 14.04</h2></a>
+          <div class= "well small"> Wed 27 August 2014 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/linux.html">linux</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/compiling-bcl2fastq-on-ubuntu.html">read more</a> </div>
+          <div class="summary"><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orge483577">Ubuntu 14.04 (Trusty Tahr)</a></li>
+<li><a href="#orgf051b3b">Ubuntu 12.04 (Precise Pangolin)</a></li>
+</ul>
+</div>
+</div>
+<p>
+Illumina provides a program for demultiplexing sequencing output
+called <code>bcl2fastq</code>. They get a gold star for releasing the source -
+the downside is that they release binaries only for RHEL/CentOS, and
+no build instructions for Ubuntu. So …</p> </div>
+	</div>
+
+
+ 
+
+
+	<div class='article'>
+          <a href="https://nhoffman.github.io/borborygmi/lists-with-variables.html"><h2>Creating lists containing variables</h2></a>
+          <div class= "well small"> Thu 12 June 2014 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/elisp.html">elisp</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/lists-with-variables.html">read more</a> </div>
+          <div class="summary"><p>
+I learned a bit about list creation in elisp today. Here's how you join a list of strings in elisp:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(mapconcat #'identity '("" "path" "to" "someplace") "/")
+</pre>
+</div>
+
+<p>
+But I learned (thanks to <a href="http://stackoverflow.com/users/113848/legoscia">legoscia</a> on <a href="http://stackoverflow.com/questions/24188100">stackoverflow</a>) that simply
+replacing an element in the list with a variable results in an error:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(let ((path …</pre></div> </div>
+	</div>
+
+
+ 
+
+
+	<div class='article'>
+          <a href="https://nhoffman.github.io/borborygmi/database-intro.html"><h2>A practical introduction to databases and data management</h2></a>
+          <div class= "well small"> Wed 11 June 2014 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/lectures.html">lectures</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/laboratory.html">laboratory</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/database-intro.html">read more</a> </div>
+          <div class="summary"><ul class="org-ul">
+<li><i>Edit 2015-07-26: added a section on date formatting</i></li>
+<li><i>Edit 2016-07-11: add reference to Tidy Data</i></li>
+</ul>
+
+<p>
+This post contains the content of a lecture prepared for Laboratory Medicine residents as part of a series on medical informatics.
+</p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgd404ed5">Objectives</a></li>
+<li><a href="#org3aa8abf">Relational database terminology</a></li>
+<li><a href="#org7c513a4">Relations</a>
+<ul>
+<li><a href="#orgdf691ef">one to one</a></li>
+<li><a href="#orgd8ad2f8">one to many …</a></li></ul></li></ul></div></div> </div>
+	</div>
+
+
+ 
+
+
+	<div class='article'>
+          <a href="https://nhoffman.github.io/borborygmi/dict-factory.html"><h2>sqlite dict factory</h2></a>
+          <div class= "well small"> Tue 10 June 2014 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/python.html">python,&nbsp;</a><a href="https://nhoffman.github.io/borborygmi/tag/sqlite.html">sqlite</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/dict-factory.html">read more</a> </div>
+          <div class="summary"><p>
+Probably not as efficient as using the sqlite3.Row class, but works
+when actual dict objects are required. Adapted from
+<a href="https://docs.python.org/2/library/sqlite3.html">https://docs.python.org/2/library/sqlite3.html</a>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">import sqlite3
+
+def dict_factory(cursor, row):
+    return {col[0]: row[idx] for idx, col in enumerate(cursor.description)}
+
+con = sqlite3.connect(":memory …</pre></div> </div>
+	</div>
+
+
+ 
+
+
+	<div class='article'>
+          <a href="https://nhoffman.github.io/borborygmi/getting-started.html"><h2>Creating a site with Pelican and org-mode</h2></a>
+          <div class= "well small"> Mon 26 May 2014 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/org-mode.html">org-mode</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/org-mode.html">org-mode</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/getting-started.html">read more</a> </div>
+          <div class="summary"><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgfe5fd06">org-mode integration</a>
+<ul>
+<li><a href="#org1189f31">Arranging content in subdirectories</a></li>
+<li><a href="#org000fde9">Syntax highlighting</a></li>
+</ul>
+</li>
+<li><a href="#org3690f11">Choosing a theme</a></li>
+<li><a href="#org1428b9a">Hosting on github pages</a></li>
+<li><a href="#org975dd6e">Examples</a></li>
+</ul>
+</div>
+</div>
+<p>
+Never one to pass up the opportunity for yak-shaving, I thought I'd
+finally try to settle on a publishing platform for various notes and
+other content that I have scattered about …</p> </div>
+	</div>
+
+
+ 
+
+
+	<div class='article'>
+          <a href="https://nhoffman.github.io/borborygmi/mac-setup.html"><h2>Setting up a new mac</h2></a>
+          <div class= "well small"> Sun 20 October 2013 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/mac-setup.html">read more</a> </div>
+          <div class="summary"><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgda1264b">First applications</a>
+<ul>
+<li><a href="#org1e2c36b">Developer tools</a></li>
+<li><a href="#org3134df0">X11</a></li>
+<li><a href="#org7282277">Others</a></li>
+</ul>
+</li>
+<li><a href="#org4c7edd0">system-level configuration</a>
+<ul>
+<li><a href="#org008b97b">turn off spelling autocorrect</a></li>
+<li><a href="#org8cf1c3a">fix scroll direction</a></li>
+<li><a href="#org0f17bdb">turn off spaces key shortcuts</a></li>
+</ul>
+</li>
+<li><a href="#orgc98d5d4">ssh</a></li>
+<li><a href="#org3204525">homebrew</a>
+<ul>
+<li><a href="#org6f4945c">stuff installed using homebrew</a></li>
+<li><a href="#orga0a81b2">zsh</a></li>
+</ul>
+</li>
+<li><a href="#org1b1f517">git</a></li>
+<li><a href="#org2426369">iTerm2 settings</a></li>
+<li><a href="#org04412c9">emacs</a></li>
+<li><a href="#orgbd3980a">python</a></li>
+<li><a href="#org0a3a2aa">R</a></li>
+<li><a href="#orgc15c975">mail</a></li>
+<li><a href="#orgce5f7e5">sshfs</a></li>
+<li><a href="#orgc6b6c00">wkhtmltopdf</a></li>
+</ul>
+</div>
+</div>
+<p>
+These are my notes that I took while setting up a …</p> </div>
+	</div>
+
+
+ 
+
+
+	<div class='article'>
+          <a href="https://nhoffman.github.io/borborygmi/installing-r-packages.html"><h2>Installing R packages</h2></a>
+          <div class= "well small"> Mon 22 March 2010 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/r-language.html">R-language</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/installing-r-packages.html">read more</a> </div>
+          <div class="summary"><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org6d887ed">Installing from CRAN</a></li>
+<li><a href="#org94f7d60">Bioconductor</a></li>
+<li><a href="#orgaed4bbb">R-forge</a></li>
+<li><a href="#org62a994d">Installing packages locally</a></li>
+<li><a href="#orgb314c58">Reloading a package</a></li>
+</ul>
+</div>
+</div>
+<p>
+Notes to myself about installing R packages.
+</p>
+
+<div id="outline-container-org6d887ed" class="outline-2">
+<h2 id="org6d887ed">Installing from CRAN</h2>
+<div class="outline-text-2" id="text-org6d887ed">
+<div class="org-src-container">
+<pre class="src src-R">install.packages(c("ape","sqldf","ROCR"), repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org94f7d60" class="outline-2">
+<h2 id="org94f7d60">Bioconductor</h2>
+<div class="outline-text-2" id="text-org94f7d60">
+<div class="org-src-container">
+<pre class="src src-R">source("http://bioconductor.org/biocLite.R")
+biocLite(c("Biostrings","BSgenome …</pre></div></div></div> </div>
+	</div>
+
+<div class="pagination">
+<ul>
+    <li class="prev"><a href="https://nhoffman.github.io/borborygmi/index.html">&larr; Previous</a></li>
+
+    <li class=""><a href="https://nhoffman.github.io/borborygmi/index.html">1</a></li>
+    <li class="active"><a href="https://nhoffman.github.io/borborygmi/index2.html">2</a></li>
+
+    <li class="next disabled"><a href="#">&rarr; Next</a></li>
+
+</ul>
+</div>
+ 
+  
+        </div>
+
+        <div class="span3">
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Site
+                </li>
+
+                <li><a href="https://nhoffman.github.io/borborygmi/">Archives</a>
+                <li><a href="https://nhoffman.github.io/borborygmi/tags.html">Tags</a>
+                <li><a href="https://nhoffman.github.io/borborygmi/" rel="alternate">Atom feed</a></li>
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Categories
+                </li>
+
+                <li><a href="https://nhoffman.github.io/borborygmi/category/lectures.html">lectures</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/org-mode.html">org-mode</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/projects.html">projects</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/sql.html">sql</a></li>
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Links
+                </li>
+
+                <li><a href="https://github.com/nhoffman">GitHub account</a></li>
+                <li><a href="https://github.com/nhoffman/borborygmi">site source</a></li>
+            </ul>
+            </div>
+
+
+
+        </div>     </div>     </div> 
+<footer>
+<br />
+<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &copy; Noah Hoffman 2024</p>
+</footer>
+
+</div> <!-- /container -->
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-16886766-2', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>
