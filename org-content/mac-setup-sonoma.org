@@ -1,0 +1,315 @@
+#+TITLE: Mac M2 Sonoma setup
+#+DATE: 2024-04-17
+#+CATEGORY: notes
+#+FILETAGS: mac
+#+PROPERTY: header-args :eval no
+#+OPTIONS: ^:nil
+
+Yet another installation of my personal notes for setting up a new (or
+cleanly installed) MacOS computer. Not too many changes since
+Ventura. I will try really hard to reproduce the steps in an order
+that make then easiest to execute.
+
+Note that none of the steps below require an Apple ID, but I did sign
+in from the start to make it easier to transfer links etc from a
+laptop during setup.
+
+* bootstrapping from another system
+
+I do copy some things over from my previous computer, but it's pretty
+minimal. Here's the command to gather up what I need to transfer.
+
+: tar --exclude '.gnupg/S.*' -cf dotfiles.tar .aws .gitconfig .gnupg .netrc .pypirc .saml2aws .ssh
+
+It's also handy to know all of the projects I'm working on:
+
+: cd ~/src
+: for dname in */.git; do git -C $(dirname $dname) remote -v; done > remotes.txt
+
+* system update
+
+The first thing I did this time around was to perform a system software update
+to get all of that waiting out of the way.
+
+* Developer tools
+
+Also takes a while. This can be done from the command line:
+
+#+BEGIN_SRC sh
+xcode-select --install
+#+END_SRC
+
+* system settings
+
+The new iOS-style System Settings takes a bit of getting used to.
+
+** turn off spelling autocorrect
+: Search for "spelling" --> Keyboard --> Text tab --> unselect "Correct spelling automatically" and others
+** unmap Control + left,right
+
+I use Control plus the left and right arrow keys to move between
+windows in emacs and tmux. Disable the default mapping to mission
+control:
+
+: System Settings --> Keyboard Shortcuts pane --> Keyboard Shortcuts button --> uncheck mission control: move left/right a space
+
+** Turn on FileVault
+
+: System Settings --> Security & privacy --> FileVault
+
+I used a recovery key option rather than iCloud for my work machine, iCloud for personal
+
+* homebrew
+
+Still a one-liner, now bash rather than ruby:
+
+#+BEGIN_SRC sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew doctor
+#+END_SRC
+
+Homebrew is installed to =/opt/local= on an M1 Mac. This required
+updating my PATH configuration. I added the following to my login
+profile:
+
+#+BEGIN_SRC sh
+if [[ -d /opt/homebrew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+#+END_SRC
+
+The new location required a number of changes to various login steps configuring
+homebrew-installed components.
+
+** CLI applications
+
+Many packages are installed later with additional elaboration or in as
+dependencies for other applications; here are some more or less
+standalone packages that I routinely install up front.
+
+#+BEGIN_SRC sh
+brew install git && \
+brew install wget && \
+brew install autojump && \
+brew install gcc && \
+brew install graphviz && \
+brew install latex2rtf && \
+brew install mcfly && \
+brew install pandoc && \
+brew install pngpaste && \
+brew install tmux && \
+brew install tree && \
+brew install fd && \
+brew install xsv && \
+brew install fzf && \
+brew install saml2aws && \
+brew install jq && \
+brew install duckdb && \
+brew install fswatch && \
+brew install node && \
+brew install htop
+#+END_SRC
+
+** desktop applications
+
+Homebrew installs desktop apps too! (the syntax has changed a bit)
+
+#+BEGIN_SRC sh
+for pkg in iterm2 rectangle dash google-chrome mactex; do brew install --cask $pkg; done
+#+END_SRC
+
+Some applications (eg, dash) require licenses and credentials that
+must be installed interactively.
+
+* iTerm2
+
+Install using homebrew above. Update a few settings.
+
+Settings --> Profiles --> Keys and do these things:
+- General: select "Left/right option key acts as": +Esc
+- Key Mappings: + --> Keyboard shortcut "OPT+<left arrow>": Send Escape sequence "b"
+- Key Mappings: + --> Keyboard shortcut "OPT+<right arrow>": Send Escape sequence "f"
+
+(may have to delete or replace an existing mapping)
+
+Default appearance:
+
+- Settings --> Profiles --> Colors --> Color Presets --> Light Background
+- Settings --> Profiles --> Text --> Change Font --> 14 point
+
+Tabs on left:
+
+- Settings --> Appearance --> Tab Bar Location --> Left
+
+Install shell integration:
+
+: curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | bash
+
+- Install python runtime by selecting "Scripts" --> "Manage" --> "Install Python Runtime".
+- Enable the Python API under "Preferences" --> "General" --> "Magic"
+
+* zsh
+
+zsh is the default shell on MacOS.
+
+Install my dotfiles.
+
+#+BEGIN_SRC sh
+cd ~
+git clone git@github.com:nhoffman/dotfiles.git
+dotfiles/mac/bin/install_dotfiles.zsh
+#+END_SRC
+
+* python
+
+Sonoma ships with Python 3.9.6 as =/usr/bin/python3= with no =python=
+executable (or maybe it's installed with xcode tools - I forgot to
+check). I avoid using the system python for the most part.
+
+** pyvenv
+
+My current method for managing python interpreters is to
+use pyenv. See https://realpython.com/intro-to-pyenv/
+
+#+begin_src sh
+brew install zlib
+brew install pyenv
+brew install pyenv-virtualenv
+#+end_src
+
+Install pyenv-update plugin:
+
+: git clone https://github.com/pyenv/pyenv-update.git $(pyenv root)/plugins/pyenv-update
+
+added dotfiles/mac/zsh/pyenv.plugin.zsh
+
+#+begin_src sh
+if [[ -d "$HOME/.pyenv" ]]; then
+    # echo "using pyenv"
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init --path)"
+fi
+#+end_src
+
+Install the most recent versions of 3.8, 3.9 and 3.10 and set 3.10 as the default.
+
+#+begin_src sh
+pyenv install $(pyenv install -l | grep '^  3.9' | tail -n1)
+pyenv install $(pyenv install -l | grep '^  3.10' | tail -n1)
+pyenv install $(pyenv install -l | grep '^  3.11' | tail -n1)
+pyenv global $(pyenv install -l | grep '^  3.11' | tail -n1)
+python3 -m pip install -U pip wheel
+#+end_src
+
+pyenv seems not to install a =python= entrypoint. I'll see how it goes with
+=python3= only.
+
+** pipx
+
+[[https://github.com/pypa/pipx][pipx]] is great for installing standalone python-language commands
+outside of project-level virtual environments.
+
+Last time I installed pipx using homebrew, but at this time homebrew
+python is at 3.12 and I am primarily using 3.11. So I installed pipx
+into the pyenv global environment:
+
+#+begin_src shell
+python3 -m pip install pipx
+#+end_src
+
+Install some globally useful packages:
+
+#+begin_src shell
+pipx install awscli
+pipx install pgcli
+#+end_src
+
+* emacs
+
+Since I moved off of Intel macs, I have been using the [[https://github.com/d12frosted/homebrew-emacs-plus][Homebrew
+emacs-plus]] project, which seems great so far.
+
+#+BEGIN_SRC sh
+brew install libressl
+brew install aspell
+brew install gpg
+brew tap d12frosted/emacs-plus
+brew install emacs-plus
+#+END_SRC
+
+Edit: after emacs 39.1 came out, I updated with:
+
+: brew uninstall emacs-plus
+: brew install emacs-plus@29 --with-imagemagick --with-native-comp
+
+Check out my .emacs.d and run setup scripts.
+
+#+BEGIN_SRC sh
+cd ~
+git clone git@github.com:nhoffman/emacs-config.git .emacs.d
+#+END_SRC
+
+Run setup scripts:
+
+#+BEGIN_SRC sh
+cd ~/.emacs.d
+bin/python-setup.sh
+#+END_SRC
+
+The main inconvenience was having to adapt my [[https://github.com/nhoffman/emacs-config/blob/master/init.bash][startup script]] to juggle M1 Mac,
+x86 Mac, and linux. Here's the relevant portion.
+
+#+BEGIN_SRC sh
+if [[ $(uname) == 'Darwin' ]]; then
+    if [[ $(uname -m) == 'arm64' ]]; then
+        # assume we are using emacs-plus
+        EMACS=/opt/homebrew/bin/emacs
+        EMACS_BIN=/opt/homebrew/bin/emacsclient
+    else
+        EMACS=/Applications/Emacs.app/Contents/MacOS/Emacs
+        EMACS_BIN=/Applications/Emacs.app/Contents/MacOS/bin
+    fi
+    alias emacs="$EMACS"
+    # provides emacsclient
+    export PATH=$EMACS_BIN:$PATH
+else
+    EMACS=$(readlink -f emacs)
+fi
+#+END_SRC
+
+* R
+
+Installed the arm64 package from https://cran.r-project.org/bin/macosx/
+
+Some packages that I know I'll need:
+
+#+BEGIN_SRC sh
+R --slave << EOF
+packages <- c("lattice", "RSQLite", "latticeExtra", "argparse", "data.table", "tidyverse")
+install.packages(packages, repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE, Ncpus=4)
+EOF
+#+END_SRC
+
+Also:
+
+#+BEGIN_SRC sh
+brew install --cask rstudio
+#+END_SRC
+
+* postgresql
+
+Install from https://postgresapp.com/downloads.html
+
+This installs multiple versions of postgres. My zsh profiile includes the path
+to the CLI for the latest version, eg:
+
+#+BEGIN_SRC sh
+PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
+#+END_SRC
+
+* Docker desktop
+
+Use Homebrew.
+
+: brew install --cask docker
