@@ -51,7 +51,7 @@ I use Control plus the left and right arrow keys to move between
 windows in emacs and tmux. Disable the default mapping to mission
 control:
 
-: System Settings --> Keyboard Shortcuts pane --> Keyboard Shortcuts button --> uncheck mission control: move left/right a space
+: System Settings --> Keyboard Shortcuts pane --> Keyboard Shortcuts button --> Mission Control -> uncheck mission control: move left/right a space
 
 ** Turn on FileVault
 
@@ -88,26 +88,25 @@ dependencies for other applications; here are some more or less
 standalone packages that I routinely install up front.
 
 #+BEGIN_SRC sh
-brew install git && \
-brew install wget && \
-brew install autojump && \
+brew install duckdb && \
+brew install fd && \
+brew install fswatch && \
+brew install fzf && \
 brew install gcc && \
+brew install git && \
 brew install graphviz && \
+brew install htop && \
+brew install jq && \
 brew install latex2rtf && \
 brew install mcfly && \
+brew install node && \
 brew install pandoc && \
 brew install pngpaste && \
+brew install rg && \
 brew install tmux && \
 brew install tree && \
-brew install fd && \
-brew install xsv && \
-brew install fzf && \
-brew install saml2aws && \
-brew install jq && \
-brew install duckdb && \
-brew install fswatch && \
-brew install node && \
-brew install htop
+brew install wget && \
+brew install xsv
 #+END_SRC
 
 ** desktop applications
