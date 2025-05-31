@@ -177,7 +177,7 @@ Install pyenv-update plugin:
 
 added dotfiles/mac/zsh/pyenv.plugin.zsh
 
-#+begin_src sh
+#+begin_src bash
 if [[ -d "$HOME/.pyenv" ]]; then
     # echo "using pyenv"
     export PYENV_ROOT="$HOME/.pyenv"
