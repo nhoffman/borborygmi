@@ -1,0 +1,20 @@
+#+TITLE: Notes on Pelican hosting with GitHub Pages
+#+DATE: 2024-12-25
+#+CATEGORY: python
+#+FILETAGS: python, pelican, github
+#+PROPERTY: header-args :eval no
+
+I've set up several Pelican sites on GitHub Pages and each time I seem
+to run into way more trouble than seems necessary. Here are a few details that I seem to need to rediscover each time.
+
+** Add themes as git submodules
+
+For example, to use Flex:
+
+#+begin_src sh
+git submodule add https://github.com/alexandrevicenzi/Flex.git Flex
+git commit -am "Added Flex submodule"
+git push origin main
+#+end_src
+
+** Use nelsonjchen/gh-pages-pelican-action
