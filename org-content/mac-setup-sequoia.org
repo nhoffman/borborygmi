@@ -81,18 +81,13 @@ Still a one-liner, now bash rather than ruby:
 brew doctor
 #+END_SRC
 
-Homebrew is installed to =/opt/local= on an M1 Mac. This required
-updating my PATH configuration. I added the following to my login
-profile:
+Homebrew is installed to =/opt/local= on an Apple Silicon Mac. I add the path in my zsh profile like this:
 
 #+BEGIN_SRC sh
 if [[ -d /opt/homebrew ]]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 #+END_SRC
-
-The new location required a number of changes to various login steps configuring
-homebrew-installed components.
 
 ** CLI applications
 
@@ -122,18 +117,17 @@ brew install wget && \
 brew install xsv
 #+END_SRC
 
-** desktop applications
-
-Homebrew installs desktop apps too! (the syntax has changed a bit)
+*** mactex (takes forever)
 
 #+BEGIN_SRC sh
-for pkg in iterm2 rectangle dash google-chrome mactex; do brew install --cask $pkg; done
+brew install --cask mactex
 #+END_SRC
 
-Some applications (eg, dash) require licenses and credentials that
-must be installed interactively.
-
 * iTerm2
+
+#+BEGIN_SRC sh
+brew install --cask iterm2
+#+END_SRC
 
 Install using homebrew above. Update a few settings.
 
