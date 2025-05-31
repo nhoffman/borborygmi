@@ -1,0 +1,1199 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>borborygmi</title>
+    <meta name="description" content="">
+    <meta name="author" content="Noah Hoffman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="https://nhoffman.github.io/borborygmi/theme/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="https://nhoffman.github.io/borborygmi/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/local.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/pygments.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="https://nhoffman.github.io/borborygmi">borborygmi</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+
+        </ul>
+        </div>
+
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+
+  <!-- Don't include TOC on the index page -->
+  <style>div#table-of-contents {display: none;}</style>
+
+
+
+	<div class="article">
+          <div class="content-title">
+            <a href="https://nhoffman.github.io/borborygmi/recursive-cte-for-taxonomy.html"><h1>Using recursive CTEs for calculating taxonomic lineages</h1></a>
+Fri 07 July 2017 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/sql.html">sql</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/postgresql.html">postgresql,&#160;</a><a href="https://nhoffman.github.io/borborygmi/tag/taxonomy.html">taxonomy</a></em>          </div>
+
+          <div><p>
+This topic falls into the category of "things that I didn't know that
+I didn't know." Many of my projects involve the manipulation of
+taxonomies, particularly the <a href="https://www.ncbi.nlm.nih.gov/taxonomy">NCBI taxonomy</a>, but I didn't understand
+the efficiency with which it was possible to calculate a lineage in
+SQL. I recently revisited the issue, and here's what I learned.
+</p>
+
+<p>
+The NCBI taxonomy is provided as a collection of tables that can be
+downloaded in its entirety <a href="ftp://ftp.ncbi.nih.gov/pub/taxonomy">by FTP</a>. There are two tables in the
+taxonomy database that we care about for the purposes of this
+post. The first is <code>nodes</code>. The table from the NCBI taxonomy contains
+some additional fields that aren't important in this context, but at
+its core, it looks something like this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql">create table nodes (
+       tax_id integer,
+       parent integer,
+       rank text
+);
+</pre>
+</div>
+
+<p>
+The second table that we will use later is called <code>names</code>, with a
+schema that (in its simplified form) looks like this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql">create table names (
+       tax_id integer,
+       tax_name text,
+       is_primary boolean
+);
+</pre>
+</div>
+
+<p>
+Multiple synonyms are allowed for each <code>tax_id</code>; the column
+<code>names.is_primary</code> indicates which is the definitive name for the
+organism (this isn't present in the table downloaded from NCBI but is
+derived from other attributes).
+</p>
+
+<p>
+The taxonomic hierarchy is defined in <code>nodes</code> using an <a href="https://en.wikipedia.org/wiki/Adjacency_list">adjacency list</a>
+model. It turns out that relational databases supporting recursive
+queries can easily traverse the graph defined by the model for a given
+node. This is well-described <a href="http://gbif.blogspot.com/2012/06/taxonomic-trees-in-postgresql.html">elsewhere</a> (the linked post compares the
+adjacency model with other representations of trees in sql).
+</p>
+
+<p>
+The query that we will use is called a <a href="https://www.postgresql.org/docs/current/static/queries-with.html">recursive CTE</a> (common table
+expression):
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql">WITH RECURSIVE a AS (
+ SELECT tax_id, parent_id, rank
+  FROM nodes
+  WHERE tax_id = '1280'
+UNION ALL
+ SELECT p.tax_id, p.parent_id, p.rank
+  FROM a JOIN nodes p ON a.parent_id = p.tax_id
+)
+SELECT * FROM a;
+</pre>
+</div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-right">
+
+<col class="org-right">
+
+<col class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">tax_id</th>
+<th scope="col" class="org-right">parent_id</th>
+<th scope="col" class="org-left">rank</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1280</td>
+<td class="org-right">1279</td>
+<td class="org-left">species</td>
+</tr>
+
+<tr>
+<td class="org-right">1279</td>
+<td class="org-right">90964</td>
+<td class="org-left">genus</td>
+</tr>
+
+<tr>
+<td class="org-right">90964</td>
+<td class="org-right">1385</td>
+<td class="org-left">family</td>
+</tr>
+
+<tr>
+<td class="org-right">1385</td>
+<td class="org-right">91061</td>
+<td class="org-left">order</td>
+</tr>
+
+<tr>
+<td class="org-right">91061</td>
+<td class="org-right">1239</td>
+<td class="org-left">class</td>
+</tr>
+
+<tr>
+<td class="org-right">1239</td>
+<td class="org-right">1783272</td>
+<td class="org-left">phylum</td>
+</tr>
+
+<tr>
+<td class="org-right">1783272</td>
+<td class="org-right">2</td>
+<td class="org-left">below_superkingdom</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-right">131567</td>
+<td class="org-left">superkingdom</td>
+</tr>
+
+<tr>
+<td class="org-right">131567</td>
+<td class="org-right">1</td>
+<td class="org-left">below_root</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-right">&#160;</td>
+<td class="org-left">root</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+And voila: we have traversed the tree from leaf to root, and in doing
+so, the lineage is defined. I'm using postgresql for this example, but
+sqlite supports recursive CTEs as well, and an identical query can be
+used with both databases.
+</p>
+
+<p>
+At this point, we can easily add taxonomic names as well:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql">WITH RECURSIVE a AS (
+ SELECT tax_id, parent_id, rank
+  FROM nodes
+  WHERE tax_id = '1280'
+UNION ALL
+ SELECT p.tax_id, p.parent_id, p.rank
+  FROM a JOIN nodes p ON a.parent_id = p.tax_id
+)
+SELECT a.tax_id, a.rank, names.tax_name
+  FROM a JOIN names USING(tax_id)
+  WHERE is_primary;
+</pre>
+</div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-right">
+
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">tax_id</th>
+<th scope="col" class="org-left">rank</th>
+<th scope="col" class="org-left">tax_name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1280</td>
+<td class="org-left">species</td>
+<td class="org-left">Staphylococcus aureus</td>
+</tr>
+
+<tr>
+<td class="org-right">1279</td>
+<td class="org-left">genus</td>
+<td class="org-left">Staphylococcus</td>
+</tr>
+
+<tr>
+<td class="org-right">90964</td>
+<td class="org-left">family</td>
+<td class="org-left">Staphylococcaceae</td>
+</tr>
+
+<tr>
+<td class="org-right">1385</td>
+<td class="org-left">order</td>
+<td class="org-left">Bacillales</td>
+</tr>
+
+<tr>
+<td class="org-right">91061</td>
+<td class="org-left">class</td>
+<td class="org-left">Bacilli</td>
+</tr>
+
+<tr>
+<td class="org-right">1239</td>
+<td class="org-left">phylum</td>
+<td class="org-left">Firmicutes</td>
+</tr>
+
+<tr>
+<td class="org-right">1783272</td>
+<td class="org-left">below_superkingdom</td>
+<td class="org-left">Terrabacteria group</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">superkingdom</td>
+<td class="org-left">Bacteria</td>
+</tr>
+
+<tr>
+<td class="org-right">131567</td>
+<td class="org-left">below_root</td>
+<td class="org-left">cellular organisms</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">root</td>
+<td class="org-left">root</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+It's worth pausing to point out an important feature of the
+representation of the adjacency list model of the <code>nodes</code> table
+downloaded from NCBI: the root is identified as the node for which
+<code>tax_id = 1</code>, but the value of <code>parent_id</code> for the root node is also
+1! The recursive CTE as written expects a value of NULL in the
+<code>parent_id</code> field of the root node; with a value of 1, it will never
+terminate, and your laptop will get quite hot! So do yourself a favor
+and execute the following before trying this as home:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql">UPDATE nodes set parent_id = NULL where tax_id = 1;
+</pre>
+</div>
+
+<p>
+As I mentioned, all of this is pretty well documented (as I learned
+once I bothered to look). But what about a query for multiple tax_ids
+at once? Is it as easy as including more than one in the query?
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql">WITH RECURSIVE a AS (
+ SELECT tax_id, parent_id, rank
+  FROM nodes
+  WHERE tax_id in ('562', '1280')
+UNION ALL
+ SELECT p.tax_id, p.parent_id, p.rank
+  FROM a JOIN nodes p ON a.parent_id = p.tax_id
+)
+SELECT a.tax_id, a.rank, names.tax_name
+  FROM a JOIN names USING(tax_id)
+  WHERE is_primary;
+</pre>
+</div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-right">
+
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">tax_id</th>
+<th scope="col" class="org-left">rank</th>
+<th scope="col" class="org-left">tax_name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1280</td>
+<td class="org-left">species</td>
+<td class="org-left">Staphylococcus aureus</td>
+</tr>
+
+<tr>
+<td class="org-right">562</td>
+<td class="org-left">species</td>
+<td class="org-left">Escherichia coli</td>
+</tr>
+
+<tr>
+<td class="org-right">1279</td>
+<td class="org-left">genus</td>
+<td class="org-left">Staphylococcus</td>
+</tr>
+
+<tr>
+<td class="org-right">561</td>
+<td class="org-left">genus</td>
+<td class="org-left">Escherichia</td>
+</tr>
+
+<tr>
+<td class="org-right">90964</td>
+<td class="org-left">family</td>
+<td class="org-left">Staphylococcaceae</td>
+</tr>
+
+<tr>
+<td class="org-right">543</td>
+<td class="org-left">family</td>
+<td class="org-left">Enterobacteriaceae</td>
+</tr>
+
+<tr>
+<td class="org-right">1385</td>
+<td class="org-left">order</td>
+<td class="org-left">Bacillales</td>
+</tr>
+
+<tr>
+<td class="org-right">91347</td>
+<td class="org-left">order</td>
+<td class="org-left">Enterobacterales</td>
+</tr>
+
+<tr>
+<td class="org-right">91061</td>
+<td class="org-left">class</td>
+<td class="org-left">Bacilli</td>
+</tr>
+
+<tr>
+<td class="org-right">1236</td>
+<td class="org-left">class</td>
+<td class="org-left">Gammaproteobacteria</td>
+</tr>
+
+<tr>
+<td class="org-right">1239</td>
+<td class="org-left">phylum</td>
+<td class="org-left">Firmicutes</td>
+</tr>
+
+<tr>
+<td class="org-right">1224</td>
+<td class="org-left">phylum</td>
+<td class="org-left">Proteobacteria</td>
+</tr>
+
+<tr>
+<td class="org-right">1783272</td>
+<td class="org-left">below_superkingdom</td>
+<td class="org-left">Terrabacteria group</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">superkingdom</td>
+<td class="org-left">Bacteria</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">superkingdom</td>
+<td class="org-left">Bacteria</td>
+</tr>
+
+<tr>
+<td class="org-right">131567</td>
+<td class="org-left">below_root</td>
+<td class="org-left">cellular organisms</td>
+</tr>
+
+<tr>
+<td class="org-right">131567</td>
+<td class="org-left">below_root</td>
+<td class="org-left">cellular organisms</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">root</td>
+<td class="org-left">root</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">root</td>
+<td class="org-left">root</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Hmm, no, that doesn't work so well. Even if the ordering was right, we
+would find it difficult to keep track of the individual lineages. So
+maybe we can keep track?
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql">WITH RECURSIVE a AS (
+ SELECT tax_id as tid, 1 as ord, tax_id, parent_id, rank
+  FROM nodes
+  WHERE tax_id in ('562', '1280')
+UNION ALL
+ SELECT a.tid, a.ord + 1, p.tax_id, p.parent_id, p.rank
+  FROM a JOIN nodes p ON a.parent_id = p.tax_id
+)
+SELECT a.tid, a.ord, a.tax_id, a.rank, names.tax_name
+  FROM a JOIN names USING(tax_id)
+  WHERE is_primary
+  ORDER BY tid, ord;
+</pre>
+</div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-right">
+
+<col class="org-right">
+
+<col class="org-right">
+
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">tid</th>
+<th scope="col" class="org-right">ord</th>
+<th scope="col" class="org-right">tax_id</th>
+<th scope="col" class="org-left">rank</th>
+<th scope="col" class="org-left">tax_name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1280</td>
+<td class="org-right">1</td>
+<td class="org-right">1280</td>
+<td class="org-left">species</td>
+<td class="org-left">Staphylococcus aureus</td>
+</tr>
+
+<tr>
+<td class="org-right">1280</td>
+<td class="org-right">2</td>
+<td class="org-right">1279</td>
+<td class="org-left">genus</td>
+<td class="org-left">Staphylococcus</td>
+</tr>
+
+<tr>
+<td class="org-right">1280</td>
+<td class="org-right">3</td>
+<td class="org-right">90964</td>
+<td class="org-left">family</td>
+<td class="org-left">Staphylococcaceae</td>
+</tr>
+
+<tr>
+<td class="org-right">1280</td>
+<td class="org-right">4</td>
+<td class="org-right">1385</td>
+<td class="org-left">order</td>
+<td class="org-left">Bacillales</td>
+</tr>
+
+<tr>
+<td class="org-right">1280</td>
+<td class="org-right">5</td>
+<td class="org-right">91061</td>
+<td class="org-left">class</td>
+<td class="org-left">Bacilli</td>
+</tr>
+
+<tr>
+<td class="org-right">1280</td>
+<td class="org-right">6</td>
+<td class="org-right">1239</td>
+<td class="org-left">phylum</td>
+<td class="org-left">Firmicutes</td>
+</tr>
+
+<tr>
+<td class="org-right">1280</td>
+<td class="org-right">7</td>
+<td class="org-right">1783272</td>
+<td class="org-left">below_superkingdom</td>
+<td class="org-left">Terrabacteria group</td>
+</tr>
+
+<tr>
+<td class="org-right">1280</td>
+<td class="org-right">8</td>
+<td class="org-right">2</td>
+<td class="org-left">superkingdom</td>
+<td class="org-left">Bacteria</td>
+</tr>
+
+<tr>
+<td class="org-right">1280</td>
+<td class="org-right">9</td>
+<td class="org-right">131567</td>
+<td class="org-left">below_root</td>
+<td class="org-left">cellular organisms</td>
+</tr>
+
+<tr>
+<td class="org-right">1280</td>
+<td class="org-right">10</td>
+<td class="org-right">1</td>
+<td class="org-left">root</td>
+<td class="org-left">root</td>
+</tr>
+
+<tr>
+<td class="org-right">562</td>
+<td class="org-right">1</td>
+<td class="org-right">562</td>
+<td class="org-left">species</td>
+<td class="org-left">Escherichia coli</td>
+</tr>
+
+<tr>
+<td class="org-right">562</td>
+<td class="org-right">2</td>
+<td class="org-right">561</td>
+<td class="org-left">genus</td>
+<td class="org-left">Escherichia</td>
+</tr>
+
+<tr>
+<td class="org-right">562</td>
+<td class="org-right">3</td>
+<td class="org-right">543</td>
+<td class="org-left">family</td>
+<td class="org-left">Enterobacteriaceae</td>
+</tr>
+
+<tr>
+<td class="org-right">562</td>
+<td class="org-right">4</td>
+<td class="org-right">91347</td>
+<td class="org-left">order</td>
+<td class="org-left">Enterobacterales</td>
+</tr>
+
+<tr>
+<td class="org-right">562</td>
+<td class="org-right">5</td>
+<td class="org-right">1236</td>
+<td class="org-left">class</td>
+<td class="org-left">Gammaproteobacteria</td>
+</tr>
+
+<tr>
+<td class="org-right">562</td>
+<td class="org-right">6</td>
+<td class="org-right">1224</td>
+<td class="org-left">phylum</td>
+<td class="org-left">Proteobacteria</td>
+</tr>
+
+<tr>
+<td class="org-right">562</td>
+<td class="org-right">7</td>
+<td class="org-right">2</td>
+<td class="org-left">superkingdom</td>
+<td class="org-left">Bacteria</td>
+</tr>
+
+<tr>
+<td class="org-right">562</td>
+<td class="org-right">8</td>
+<td class="org-right">131567</td>
+<td class="org-left">below_root</td>
+<td class="org-left">cellular organisms</td>
+</tr>
+
+<tr>
+<td class="org-right">562</td>
+<td class="org-right">9</td>
+<td class="org-right">1</td>
+<td class="org-left">root</td>
+<td class="org-left">root</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Ok, that's better! If we like, we can group and aggregate the lineages:
+</p>
+
+<p>
+(The results are shown using the equivalent of <code>psql -x</code>; the first
+line just provides a header row.)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql">SELECT 'value' as key;
+WITH RECURSIVE a AS (
+ SELECT tax_id as tid, 1 as ord, tax_id, parent_id, rank
+  FROM nodes
+  WHERE tax_id in ('562', '1280')
+UNION ALL
+ SELECT a.tid, a.ord + 1, p.tax_id, p.parent_id, p.rank
+  FROM a JOIN nodes p ON a.parent_id = p.tax_id
+)
+SELECT a.tid, array_agg(a.tax_id), array_agg(a.rank), array_agg(names.tax_name)
+  FROM a JOIN names USING(tax_id)
+  WHERE is_primary
+  GROUP BY tid;
+</pre>
+</div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">key</th>
+<th scope="col" class="org-left">value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">tid</td>
+<td class="org-left">1280</td>
+</tr>
+
+<tr>
+<td class="org-left">array_agg</td>
+<td class="org-left">{1280,1279,90964,1385,91061,1239,1783272,2,131567,1}</td>
+</tr>
+
+<tr>
+<td class="org-left">array_agg</td>
+<td class="org-left">{species,genus,family,order,class,phylum,below_superkingdom,superkingdom,below_root,root}</td>
+</tr>
+
+<tr>
+<td class="org-left">array_agg</td>
+<td class="org-left">{"Staphylococcus aureus",Staphylococcus,Staphylococcaceae,Bacillales,Bacilli,Firmicutes,"Terrabacteria group",Bacteria,"cellular organisms",root}</td>
+</tr>
+
+<tr>
+<td class="org-left">&#160;</td>
+<td class="org-left">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-left">tid</td>
+<td class="org-left">562</td>
+</tr>
+
+<tr>
+<td class="org-left">array_agg</td>
+<td class="org-left">{562,1,561,1224,543,131567,91347,2,1236}</td>
+</tr>
+
+<tr>
+<td class="org-left">array_agg</td>
+<td class="org-left">{species,root,genus,phylum,family,below_root,order,superkingdom,class}</td>
+</tr>
+
+<tr>
+<td class="org-left">array_agg</td>
+<td class="org-left">{"Escherichia coli",root,Escherichia,Proteobacteria,Enterobacteriaceae,"cellular organisms",Enterobacterales,Bacteria,Gammaproteobacteria}</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Here's another approach: accumulate values in an array in the
+recursive expression, and then use the first value in the array to
+identify the first tax_id in each lineage.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql">WITH RECURSIVE a AS (
+ SELECT tax_id as tid,
+	parent_id as pid,
+	rank,
+	tax_id,
+	ARRAY[tax_id] as lineage
+  FROM nodes
+  WHERE tax_id = '1280'
+UNION ALL
+  SELECT p.tax_id,
+	 p.parent_id,
+	 p.rank,
+	 lineage[1],
+	 lineage || ARRAY[p.tax_id]
+  FROM a JOIN nodes p ON a.pid = p.tax_id
+)
+SELECT * FROM a;
+</pre>
+</div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-right">
+
+<col class="org-right">
+
+<col class="org-left">
+
+<col class="org-right">
+
+<col class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">tid</th>
+<th scope="col" class="org-right">pid</th>
+<th scope="col" class="org-left">rank</th>
+<th scope="col" class="org-right">tax_id</th>
+<th scope="col" class="org-left">lineage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1280</td>
+<td class="org-right">1279</td>
+<td class="org-left">species</td>
+<td class="org-right">1280</td>
+<td class="org-left">{1280}</td>
+</tr>
+
+<tr>
+<td class="org-right">1279</td>
+<td class="org-right">90964</td>
+<td class="org-left">genus</td>
+<td class="org-right">1280</td>
+<td class="org-left">{1280,1279}</td>
+</tr>
+
+<tr>
+<td class="org-right">90964</td>
+<td class="org-right">1385</td>
+<td class="org-left">family</td>
+<td class="org-right">1280</td>
+<td class="org-left">{1280,1279,90964}</td>
+</tr>
+
+<tr>
+<td class="org-right">1385</td>
+<td class="org-right">91061</td>
+<td class="org-left">order</td>
+<td class="org-right">1280</td>
+<td class="org-left">{1280,1279,90964,1385}</td>
+</tr>
+
+<tr>
+<td class="org-right">91061</td>
+<td class="org-right">1239</td>
+<td class="org-left">class</td>
+<td class="org-right">1280</td>
+<td class="org-left">{1280,1279,90964,1385,91061}</td>
+</tr>
+
+<tr>
+<td class="org-right">1239</td>
+<td class="org-right">1783272</td>
+<td class="org-left">phylum</td>
+<td class="org-right">1280</td>
+<td class="org-left">{1280,1279,90964,1385,91061,1239}</td>
+</tr>
+
+<tr>
+<td class="org-right">1783272</td>
+<td class="org-right">2</td>
+<td class="org-left">below_superkingdom</td>
+<td class="org-right">1280</td>
+<td class="org-left">{1280,1279,90964,1385,91061,1239,1783272}</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-right">131567</td>
+<td class="org-left">superkingdom</td>
+<td class="org-right">1280</td>
+<td class="org-left">{1280,1279,90964,1385,91061,1239,1783272,2}</td>
+</tr>
+
+<tr>
+<td class="org-right">131567</td>
+<td class="org-right">1</td>
+<td class="org-left">below_root</td>
+<td class="org-right">1280</td>
+<td class="org-left">{1280,1279,90964,1385,91061,1239,1783272,2,131567}</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-right">&#160;</td>
+<td class="org-left">root</td>
+<td class="org-right">1280</td>
+<td class="org-left">{1280,1279,90964,1385,91061,1239,1783272,2,131567,1}</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+We only actually care about the final lineage when it terminates at
+the root node.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql">WITH RECURSIVE a AS (
+ SELECT tax_id as tid,
+	parent_id as pid,
+	rank,
+	tax_id,
+	ARRAY[tax_id] as lineage
+  FROM nodes
+  WHERE tax_id = '1280'
+UNION ALL
+  SELECT p.tax_id,
+	 p.parent_id,
+	 p.rank,
+	 lineage[1],
+	 lineage || ARRAY[p.tax_id]
+  FROM a JOIN nodes p ON a.pid = p.tax_id
+)
+SELECT tax_id, lineage FROM a
+WHERE a.rank = 'root';
+</pre>
+</div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-right">
+
+<col class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">tax_id</th>
+<th scope="col" class="org-left">lineage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1280</td>
+<td class="org-left">{1280,1279,90964,1385,91061,1239,1783272,2,131567,1}</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+With some embellishment, we can see how this strategy can be used to
+retrieve lineages plus additional annotation for multiple tax_ids (at
+arbitrary ranks) as once.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql">SELECT 'value' as key;
+WITH RECURSIVE a AS (
+ SELECT tax_id as tid,
+	parent_id as pid,
+	rank,
+	tax_id,
+	ARRAY[tax_id] as lineage,
+	ARRAY[rank] as ranks
+  FROM nodes
+  WHERE tax_id in ('1279', '1280', '562')
+UNION ALL
+  SELECT p.tax_id,
+	 p.parent_id,
+	 p.rank,
+	 lineage[1],
+	 lineage || ARRAY[p.tax_id],
+	 ranks || ARRAY[p.rank]
+  FROM a JOIN nodes p ON a.pid = p.tax_id
+)
+SELECT tax_id, tax_name, nodes.rank, lineage, ranks
+FROM a
+JOIN nodes USING(tax_id)
+JOIN names USING(tax_id)
+WHERE a.rank = 'root'
+AND names.is_primary;
+</pre>
+</div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">key</th>
+<th scope="col" class="org-left">value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">tax_id</td>
+<td class="org-left">1279</td>
+</tr>
+
+<tr>
+<td class="org-left">tax_name</td>
+<td class="org-left">Staphylococcus</td>
+</tr>
+
+<tr>
+<td class="org-left">rank</td>
+<td class="org-left">genus</td>
+</tr>
+
+<tr>
+<td class="org-left">lineage</td>
+<td class="org-left">{1279,90964,1385,91061,1239,1783272,2,131567,1}</td>
+</tr>
+
+<tr>
+<td class="org-left">ranks</td>
+<td class="org-left">{genus,family,order,class,phylum,below_superkingdom,superkingdom,below_root,root}</td>
+</tr>
+
+<tr>
+<td class="org-left">&#160;</td>
+<td class="org-left">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-left">tax_id</td>
+<td class="org-left">562</td>
+</tr>
+
+<tr>
+<td class="org-left">tax_name</td>
+<td class="org-left">Escherichia coli</td>
+</tr>
+
+<tr>
+<td class="org-left">rank</td>
+<td class="org-left">species</td>
+</tr>
+
+<tr>
+<td class="org-left">lineage</td>
+<td class="org-left">{562,561,543,91347,1236,1224,2,131567,1}</td>
+</tr>
+
+<tr>
+<td class="org-left">ranks</td>
+<td class="org-left">{species,genus,family,order,class,phylum,superkingdom,below_root,root}</td>
+</tr>
+
+<tr>
+<td class="org-left">&#160;</td>
+<td class="org-left">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-left">tax_id</td>
+<td class="org-left">1280</td>
+</tr>
+
+<tr>
+<td class="org-left">tax_name</td>
+<td class="org-left">Staphylococcus aureus</td>
+</tr>
+
+<tr>
+<td class="org-left">rank</td>
+<td class="org-left">species</td>
+</tr>
+
+<tr>
+<td class="org-left">lineage</td>
+<td class="org-left">{1280,1279,90964,1385,91061,1239,1783272,2,131567,1}</td>
+</tr>
+
+<tr>
+<td class="org-left">ranks</td>
+<td class="org-left">{species,genus,family,order,class,phylum,below_superkingdom,superkingdom,below_root,root}</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+How well does this scale? Both of the approaches executed in less than
+one second for 1000 tax_id's, but took more like 40s for 2000, so not
+fantastically well. But I expect the some optimization is possible.
+</p>
+
+<p>
+Unfortunately, in the absence of an ARRAY data type, this approach
+does not work for sqlite, but you could do something similar by
+concatenating strings (though I doubt that this would be very
+efficient).
+</p>
+</div>
+          <hr>
+
+
+	</div>
+
+<div class="pagination">
+<ul>
+    <li class="prev disabled"><a href="#">&#8592; Previous</a></li>
+
+    <li class="active"><a href="https://nhoffman.github.io/borborygmi/tag/taxonomy.html">1</a></li>
+
+    <li class="next disabled"><a href="#">&#8594; Next</a></li>
+
+</ul>
+</div>
+ 
+  
+        </div>
+
+        <div class="span3">
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Site
+                </li>
+
+                <li><a href="https://nhoffman.github.io/borborygmi/">Archives</a>
+                </li><li><a href="https://nhoffman.github.io/borborygmi/tags.html">Tags</a>
+                </li><li><a href="https://nhoffman.github.io/borborygmi/" rel="alternate">Atom feed</a></li>
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Categories
+                </li>
+
+                <li><a href="https://nhoffman.github.io/borborygmi/category/lectures.html">lectures</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/org-mode.html">org-mode</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/projects.html">projects</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/python.html">python</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/sql.html">sql</a></li>
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Links
+                </li>
+
+                <li><a href="https://github.com/nhoffman">GitHub account</a></li>
+                <li><a href="https://github.com/nhoffman/borborygmi">site source</a></li>
+            </ul>
+            </div>
+
+
+
+        </div>     </div>     </div> 
+<footer>
+<br>
+<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &#169; Noah Hoffman 2025</p>
+</footer>
+
+</div> <!-- /container -->
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-16886766-2', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>
