@@ -43,8 +43,10 @@ xcode-select --install
 The new iOS-style System Settings takes a bit of getting used to.
 
 ** turn off spelling autocorrect
-: Search for "spelling" --> Keyboard --> Text tab --> unselect "Correct spelling automatically" and others
+: Search for "spelling" --> Spelling and Prediction --> unselect "Correct spelling automatically" and others
 ** unmap Control + left,right
+
+TODO: still necessary?
 
 I use Control plus the left and right arrow keys to move between
 windows in emacs and tmux. Disable the default mapping to mission
@@ -56,7 +58,19 @@ control:
 
 : System Settings --> Security & privacy --> FileVault
 
-I used a recovery key option rather than iCloud for my work machine, iCloud for personal
+(this was actually enabled by work IT, but leaving here as a reminder)
+
+** Window management
+
+Remove the default window margins
+
+: Desktop & Dock --> unselect "tiled windows have margins"
+
+I have Ccontrol-Option-Command-m in muscle memory to maximize a window, so add a keyboard shortcut:
+
+: Keyboard --> Keyboard Shortcuts --> App Shortcuts --> + 
+: Menu title: Fill
+: Shortcut: ⌃⌥⌘M
 
 * homebrew
 
