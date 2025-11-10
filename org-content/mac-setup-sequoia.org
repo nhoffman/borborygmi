@@ -39,14 +39,9 @@ xcode-select --install
 #+END_SRC
 
 * system settings
-
-The new iOS-style System Settings takes a bit of getting used to.
-
 ** turn off spelling autocorrect
 : Search for "spelling" --> Spelling and Prediction --> unselect "Correct spelling automatically" and others
 ** unmap Control + left,right
-
-TODO: still necessary?
 
 I use Control plus the left and right arrow keys to move between
 windows in emacs and tmux. Disable the default mapping to mission
@@ -68,7 +63,7 @@ Remove the default window margins
 
 I have Ccontrol-Option-Command-m in muscle memory to maximize a window, so add a keyboard shortcut:
 
-: Keyboard --> Keyboard Shortcuts --> App Shortcuts --> + 
+: Keyboard --> Keyboard Shortcuts --> App Shortcuts --> +
 : Menu title: Fill
 : Shortcut: ⌃⌥⌘M
 
@@ -108,6 +103,7 @@ brew install jq && \
 brew install latex2rtf && \
 brew install mcfly && \
 brew install node && \
+brew install npm && \
 brew install pandoc && \
 brew install pngpaste && \
 brew install rg && \
@@ -123,37 +119,6 @@ brew install xsv
 brew install --cask mactex
 #+END_SRC
 
-* iTerm2
-
-#+BEGIN_SRC sh
-brew install --cask iterm2
-#+END_SRC
-
-Install using homebrew above. Update a few settings.
-
-Settings --> Profiles --> Keys and do these things:
-- General: select "Left/right option key acts as": +Esc
-- Key Mappings: + --> Keyboard shortcut "OPT+<left arrow>": Send Escape sequence "b"
-- Key Mappings: + --> Keyboard shortcut "OPT+<right arrow>": Send Escape sequence "f"
-
-(may have to delete or replace an existing mapping)
-
-Default appearance:
-
-- Settings --> Profiles --> Colors --> Color Presets --> Light Background
-- Settings --> Profiles --> Text --> Change Font --> 14 point
-
-Tabs on left:
-
-- Settings --> Appearance --> Tab Bar Location --> Left
-
-Install shell integration:
-
-: curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | bash
-
-- Install python runtime by selecting "Scripts" --> "Manage" --> "Install Python Runtime".
-- Enable the Python API under "Preferences" --> "General" --> "Magic"
-
 * zsh
 
 zsh is the default shell on MacOS.
@@ -166,123 +131,121 @@ git clone git@github.com:nhoffman/dotfiles.git
 dotfiles/mac/bin/install_dotfiles.zsh
 #+END_SRC
 
-* python
-
-Sonoma ships with Python 3.9.6 as =/usr/bin/python3= with no =python=
-executable (or maybe it's installed with xcode tools - I forgot to
-check). I avoid using the system python for the most part.
-
-** pyvenv
-
-My current method for managing python interpreters is to
-use pyenv. See https://realpython.com/intro-to-pyenv/
-
-#+begin_src sh
-brew install zlib
-brew install pyenv
-brew install pyenv-virtualenv
-#+end_src
-
-Install pyenv-update plugin:
-
-: git clone https://github.com/pyenv/pyenv-update.git $(pyenv root)/plugins/pyenv-update
-
-added dotfiles/mac/zsh/pyenv.plugin.zsh
-
-#+begin_src sh
-if [[ -d "$HOME/.pyenv" ]]; then
-    # echo "using pyenv"
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init --path)"
-fi
-#+end_src
-
-Install the most recent versions of 3.8, 3.9 and 3.10 and set 3.10 as the default.
-
-#+begin_src sh
-pyenv install $(pyenv install -l | grep '^  3.9' | tail -n1)
-pyenv install $(pyenv install -l | grep '^  3.10' | tail -n1)
-pyenv install $(pyenv install -l | grep '^  3.11' | tail -n1)
-pyenv global $(pyenv install -l | grep '^  3.11' | tail -n1)
-python3 -m pip install -U pip wheel
-#+end_src
-
-pyenv seems not to install a =python= entrypoint. I'll see how it goes with
-=python3= only.
-
-** pipx
-
-[[https://github.com/pypa/pipx][pipx]] is great for installing standalone python-language commands
-outside of project-level virtual environments.
-
-Last time I installed pipx using homebrew, but at this time homebrew
-python is at 3.12 and I am primarily using 3.11. So I installed pipx
-into the pyenv global environment:
-
-#+begin_src shell
-python3 -m pip install pipx
-#+end_src
-
-Install some globally useful packages:
-
-#+begin_src shell
-pipx install awscli
-pipx install pgcli
-#+end_src
-
 * emacs
 
-Since I moved off of Intel macs, I have been using the [[https://github.com/d12frosted/homebrew-emacs-plus][Homebrew
-emacs-plus]] project, which seems great so far.
+I install emacs using https://emacsformacosx.com
 
-#+BEGIN_SRC sh
-brew install libressl
-brew install aspell
-brew install gpg
-brew tap d12frosted/emacs-plus
-brew install emacs-plus
-#+END_SRC
-
-Edit: after emacs 39.1 came out, I updated with:
-
-: brew uninstall emacs-plus
-: brew install emacs-plus@29 --with-imagemagick --with-native-comp
-
-Check out my .emacs.d and run setup scripts.
+Install my emacs configuration:
 
 #+BEGIN_SRC sh
 cd ~
 git clone git@github.com:nhoffman/emacs-config.git .emacs.d
 #+END_SRC
 
-Run setup scripts:
+Run setup scripts (come back and do this after python is set up):
 
 #+BEGIN_SRC sh
 cd ~/.emacs.d
 bin/python-setup.sh
 #+END_SRC
 
-The main inconvenience was having to adapt my [[https://github.com/nhoffman/emacs-config/blob/master/init.bash][startup script]] to juggle M1 Mac,
-x86 Mac, and linux. Here's the relevant portion.
+* iTerm2
 
 #+BEGIN_SRC sh
-if [[ $(uname) == 'Darwin' ]]; then
-    if [[ $(uname -m) == 'arm64' ]]; then
-        # assume we are using emacs-plus
-        EMACS=/opt/homebrew/bin/emacs
-        EMACS_BIN=/opt/homebrew/bin/emacsclient
-    else
-        EMACS=/Applications/Emacs.app/Contents/MacOS/Emacs
-        EMACS_BIN=/Applications/Emacs.app/Contents/MacOS/bin
-    fi
-    alias emacs="$EMACS"
-    # provides emacsclient
-    export PATH=$EMACS_BIN:$PATH
-else
-    EMACS=$(readlink -f emacs)
-fi
+brew install --cask iterm2
 #+END_SRC
+
+Install using homebrew above. Update a few settings.
+
+Settings --> Profiles --> Keys and do these things:
+- General: select "Left/right option key acts as": +Esc
+- Key Bindings: + --> Keyboard shortcut "OPT+<left arrow>": Send Escape sequence "b"
+- Key Bindings: + --> Keyboard shortcut "OPT+<right arrow>": Send Escape sequence "f"
+
+(may have to delete or replace an existing mapping)
+
+Default appearance (I use 15 point on a 15" monitor, 14 on a 13"):
+
+- Settings --> Profiles --> Colors --> Color Presets --> Light Background
+- Settings --> Profiles --> Text --> Change Font --> 15 point
+
+Tabs on left:
+
+- Settings --> Appearance --> Tab Bar Location --> Left
+
+Install shell integration:
+
+: curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | bash
+
+- Install python runtime by selecting "Scripts" --> "Manage" --> "Install Python Runtime".
+- Enable the Python API under "Settings" --> "General" --> "Magic"
+
+* python
+
+I avoid using the system python for anything, and I'm all in on uv. It
+can be installed using homebrew, but I've settled on using the
+standalone installer to take advantage of the self update.
+
+#+begin_src bash
+curl -LsSf https://astral.sh/uv/install.sh | env INSTALLER_NO_MODIFY_PATH=1 sh
+uv python install 3.13
+uv python pin 3.13
+#+end_src
+
+The path for uv and installed tools is managed in my dotfiles.
+
+** llm
+
+I use Simon Willison's =llm= quite a bit, so might as well set it up here.
+
+#+begin_src bash
+uv tool install llm
+llm install llm-anthropic
+llm install llm-cmd
+llm keys set claude --value "$(netrc api.anthropic.com)"
+llm keys set litellm --value "$(netrc litellm.dlmp.uw.edu)"
+#+end_src
+
+Configure access to a litellm query router.
+
+#+begin_src bash
+cat > "$(dirname "$(llm logs path)")/extra-openai-models.yaml"<<EOF
+- model_id: litellm-gpt-4o
+  model_name: gpt-4o-2024-11-20
+  api_base: "https://litellm.dlmp.uw.edu"
+  api_key_name: litellm
+- model_id: litellm-gpt-4o-mini
+  model_name: gpt-4o-mini
+  api_base: "https://litellm.dlmp.uw.edu"
+  api_key_name: litellm
+- model_id: litellm-gpt-4.1
+  model_name: gpt-4.1
+  api_base: "https://litellm.dlmp.uw.edu"
+  api_key_name: litellm
+- model_id: litellm-gpt-4.1-mini
+  model_name: gpt-4.1-mini
+  api_base: "https://litellm.dlmp.uw.edu"
+  api_key_name: litellm
+- model_id: litellm-o3
+  model_name: o3
+  api_base: "https://litellm.dlmp.uw.edu"
+  api_key_name: litellm
+- model_id: litellm-o4-mini
+  model_name: o4-mini
+  api_base: "https://litellm.dlmp.uw.edu"
+  api_key_name: litellm
+EOF
+#+end_src
+
+# set litellm-gpt-4.1 as the default
+llm models default litellm-gpt-4.1
+
+** other python packages
+
+#+begin_src bash
+uv tool install awscli
+uv tool install git+https://gitlab.labmed.uw.edu/ngh2/awx.git
+#+end_src
 
 * R
 
@@ -293,7 +256,7 @@ Some packages that I know I'll need:
 #+BEGIN_SRC sh
 R --slave << EOF
 packages <- c("lattice", "RSQLite", "latticeExtra", "argparse", "data.table", "tidyverse")
-install.packages(packages, repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE, Ncpus=4)
+install.packages(packages, repos="https://ftp.osuosl.org/pub/cran/", dependencies=TRUE, clean=TRUE, Ncpus=4)
 EOF
 #+END_SRC
 
@@ -319,3 +282,4 @@ PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 Use Homebrew.
 
 : brew install --cask docker
+
