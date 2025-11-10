@@ -192,7 +192,55 @@ uv python install 3.13
 uv python pin 3.13
 #+end_src
 
-The path for uv and installed tools is managed in my dotfiles.
+The path for uv and installed tools is managed in my dotfiles. Here's the relevant excerpt:
+
+#+begin_src bash
+# assumes installation using `brew install uv`
+
+if [[ -d "$HOME/.local/share/uv" ]]; then
+    export UV_VENV_HOME="$HOME/.local/share/uv/venv"
+    export UV_PYTHON_PREFERENCE=only-managed
+
+    # pinned version stored in ~/.python-version
+    local python_version=3.13
+    local python_pinned="$(uv python pin 2> /dev/null)"
+    if [[ -z $python_pinned ]]; then
+        uv python pin "$python_version"
+    elif [[ "$python_pinned" != "$python_version" ]]; then
+        echo "desired python version is $python_version but $(uv python pin) is pinned"
+    fi
+
+    mkdir -p "$UV_VENV_HOME"
+
+    mkvenv(){
+        local pth=$1
+        if [[ -n $VIRTUAL_ENV ]]; then
+            deactivate
+        fi
+
+        if [[ -z "$pth" ]]; then
+            uv venv && source ".venv/bin/activate"
+        else
+            uv venv "$pth" && source "$pth/bin/activate"
+        fi
+    }
+
+    select-env(){
+        fd -I --hidden -p -d 3 --regex 'bin/activate$' "${1-.}" | \
+            awk -F'/' '{print $(NF-2) ":" $0}' | \
+            fzf --delimiter=":" --with-nth=1 --preview="echo {}" | \
+            cut -d':' -f 2-
+    }
+
+    venv(){
+        local target="$(select-env .)"
+        if [[ -f "$target" ]]; then
+            echo "$target"
+            source "$target"
+        fi
+    }
+fi
+#+end_src
 
 ** llm
 
