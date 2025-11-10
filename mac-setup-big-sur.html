@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>borborygmi</title>
+    <meta name="description" content="">
+    <meta name="author" content="Noah Hoffman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="https://nhoffman.github.io/borborygmi/theme/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="https://nhoffman.github.io/borborygmi/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/local.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/pygments.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="https://nhoffman.github.io/borborygmi">borborygmi</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+
+        </ul>
+        </div>
+
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+  <div class='article'>
+    <div class="content-title">
+      <h1>Clean install of MacOS Big Sur</h1>
+Thu 20 May 2021 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em>    </div>
+
+    <div><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org2d02461">system settings</a>
+<ul>
+<li><a href="#org46fd279">turn off spelling autocorrect</a></li>
+<li><a href="#org61aa335">unmap Control + left,right</a></li>
+<li><a href="#org5cec255">Turn on FileVault</a></li>
+</ul>
+</li>
+<li><a href="#orgf108da6">Developer tools</a></li>
+<li><a href="#org13a6e8e">homebrew</a>
+<ul>
+<li><a href="#org77a7090">homebrew API token</a></li>
+<li><a href="#org808f1bd">CLI applications</a></li>
+<li><a href="#org153200a">desktop applications</a></li>
+</ul>
+</li>
+<li><a href="#orgc32d2ba">iTerm2</a></li>
+<li><a href="#orge136f60">zsh</a></li>
+<li><a href="#org5873b44">python</a></li>
+<li><a href="#org46adb55">emacs</a></li>
+<li><a href="#org21334f7">R</a></li>
+<li><a href="#org85fbc00">postgresql</a></li>
+</ul>
+</div>
+</div>
+<p>
+Yet another installation of my personal notes for setting up a new (or
+cleanly installed) MacOS computer. The process changes just a bit with
+each new OS version. I will try really hard to reproduce the steps in
+an order that make then easiest to execute.
+</p>
+
+<p>
+This time I need to document some details of the actual clean install
+process: it seems to have become more complicated to boot from a
+startup disk containing the Big Sur installer. It was necessary to
+restart into recovery mode (hold down Command+r) and use the Startup
+Security Utility (under the Utilities menu) to allow booting from
+external media and not to require an internet connection to verify the
+boot media. After this, I was able to select a startup disk by
+restarting while holding down Option. After running that gauntlet, on
+to the actual installation process (after which I restarted again in
+recovery mode and restored the default security settings).
+</p>
+
+<p>
+I do copy some things over from my old computer, but it's pretty
+minimal. Here's the command to gather up what I need to transfer.
+</p>
+
+<pre class="example">
+tar -cf dotfiles.tar .gitconfig .gnupg .pypirc .ssh .aws .saml2aws .psqlrc .zprofile
+</pre>
+
+
+<p>
+It's also handy to know all of the projects I'm working on:
+</p>
+
+<pre class="example">
+cd ~/src
+for dname in */.git; do git -C $(dirname $dname) remote -v; done &gt; remotes.txt
+</pre>
+
+
+<p>
+Note that none of the steps below require an Apple ID - I held off on
+signing in until the very end just to see if it was possible.
+</p>
+
+<div id="outline-container-org2d02461" class="outline-2">
+<h2 id="org2d02461">system settings</h2>
+<div class="outline-text-2" id="text-org2d02461">
+</div>
+<div id="outline-container-org46fd279" class="outline-3">
+<h3 id="org46fd279">turn off spelling autocorrect</h3>
+<div class="outline-text-3" id="text-org46fd279">
+<pre class="example">
+System Preferences --&gt; Keyboard --&gt; Text tab --&gt; unselect "Correct spelling automatically" and others
+</pre>
+</div>
+</div>
+<div id="outline-container-org61aa335" class="outline-3">
+<h3 id="org61aa335">unmap Control + left,right</h3>
+<div class="outline-text-3" id="text-org61aa335">
+<p>
+I use Control plus the left and right arrow keys to move between
+windows in emacs and tmux, so I disable the defaults.
+</p>
+
+<pre class="example">
+System Preferences --&gt; Keyboard --&gt; Shortcuts --&gt; uncheck mission control: move left/right a space
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org5cec255" class="outline-3">
+<h3 id="org5cec255">Turn on FileVault</h3>
+<div class="outline-text-3" id="text-org5cec255">
+<pre class="example">
+System Preferences --&gt; Security &amp; privacy --&gt; FileVault
+</pre>
+
+
+<p>
+I used a recovery key option rather than iCloud for my work machine, iCloud for personal
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf108da6" class="outline-2">
+<h2 id="orgf108da6">Developer tools</h2>
+<div class="outline-text-2" id="text-orgf108da6">
+<p>
+Pretty much the first thing that needs to happen. This can be done
+from the command line:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">xcode-select --install
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org13a6e8e" class="outline-2">
+<h2 id="org13a6e8e">homebrew</h2>
+<div class="outline-text-2" id="text-org13a6e8e">
+<p>
+Homebrew no longer requires user-ownership of /usr/local, so things
+are pretty easy now:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew doctor
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org77a7090" class="outline-3">
+<h3 id="org77a7090">homebrew API token</h3>
+<div class="outline-text-3" id="text-org77a7090">
+<p>
+Apparently lots of requests to GitHub via homebrew can hit a rate limit. There's a higher limit if you create an API token. See <a href="https://gist.github.com/christopheranderton/8644743">https://gist.github.com/christopheranderton/8644743</a>
+</p>
+
+<p>
+Here's the url for the token creation dialog:
+</p>
+
+<p>
+<a href="https://github.com/settings/tokens/new?scopes=&amp;description=Homebrew">https://github.com/settings/tokens/new?scopes=&amp;description=Homebrew</a>
+</p>
+
+<p>
+Make sure that all 'scopes' are unchecked. Once you generate the token, add to your shell profile:
+</p>
+
+<pre class="example">
+export HOMEBREW_GITHUB_API_TOKEN=token_here
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org808f1bd" class="outline-3">
+<h3 id="org808f1bd">CLI applications</h3>
+<div class="outline-text-3" id="text-org808f1bd">
+<p>
+Many packages are installed later with additional elaboration or in as
+dependencies for other applications; here are some more or less
+standalone packages that I routinely install.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">brew install git &amp;&amp; \
+brew install wget &amp;&amp; \
+brew install autojump &amp;&amp; \
+brew install gcc &amp;&amp; \
+brew install graphviz &amp;&amp; \
+brew install latex2rtf &amp;&amp; \
+brew install pandoc &amp;&amp; \
+brew install tmux &amp;&amp; \
+brew install tree &amp;&amp; \
+brew install fd &amp;&amp; \
+brew install xsv &amp;&amp; \
+brew install fzf &amp;&amp; \
+brew install saml2aws &amp;&amp; \
+brew install jq
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org153200a" class="outline-3">
+<h3 id="org153200a">desktop applications</h3>
+<div class="outline-text-3" id="text-org153200a">
+<p>
+Homebrew installs desktop apps too! (the syntax has changed a bit)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">for pkg in dropbox sizeup dash google-chrome mactex iterm2; do brew install --cask $pkg; done
+</pre>
+</div>
+
+<p>
+Some of the above (eg, sizeup, dropbox, dash) require licenses and
+credentials that must be installed interactively.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc32d2ba" class="outline-2">
+<h2 id="orgc32d2ba">iTerm2</h2>
+<div class="outline-text-2" id="text-orgc32d2ba">
+<p>
+Install using homebrew above. Update a few settings.
+</p>
+
+<p>
+Preferences &#x2013;&gt; Profiles &#x2013;&gt; Keys and do these things:
+</p>
+<ul class="org-ul">
+<li>select "Left/right option key acts as": +Esc</li>
+<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;left arrow&gt;": Send Escape sequence "b"</li>
+<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;right arrow&gt;": Send Escape sequence "f"</li>
+</ul>
+
+<p>
+(may have to delete or replace an existing mapping)
+</p>
+
+<p>
+Default appearance:
+</p>
+
+<ul class="org-ul">
+<li>Preferences &#x2013;&gt; Profiles &#x2013;&gt; Colors &#x2013;&gt; Color Presets &#x2013;&gt; Light Background</li>
+<li>Preferences &#x2013;&gt; Profiles &#x2013;&gt; Text &#x2013;&gt; Change Font &#x2013;&gt; 14 point</li>
+</ul>
+
+<p>
+Install shell integration:
+</p>
+
+<pre class="example">
+curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | bash
+</pre>
+
+
+<ul class="org-ul">
+<li>Install python runtime by selecting "Scripts" &#x2013;&gt; "Manage" &#x2013;&gt; "Install Python Runtime".</li>
+<li>Enable the Python API under "Preferences" &#x2013;&gt; "General" &#x2013;&gt; "Magic"</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge136f60" class="outline-2">
+<h2 id="orge136f60">zsh</h2>
+<div class="outline-text-2" id="text-orge136f60">
+<p>
+Change shell to zsh. I'll just use the zsh shipped with the OS.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">chsh -s /bin/zsh $USER
+</pre>
+</div>
+
+<p>
+Install my dotfiles (relevant only to me)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">cd ~
+git clone git@bitbucket.org:nhoffman/dotfiles.git
+~/dotfiles/mac/install.py
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5873b44" class="outline-2">
+<h2 id="org5873b44">python</h2>
+<div class="outline-text-2" id="text-org5873b44">
+<p>
+My version of Big Sur provided Python 2.7.16 and 3.9.5. My most recent evolution of managing python interpreters is to use pyenv. See <a href="https://realpython.com/intro-to-pyenv/">https://realpython.com/intro-to-pyenv/</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">brew install zlib
+brew install pyenv
+brew install pyenv-virtualenv
+</pre>
+</div>
+
+<p>
+Install pyenv-update plugin:
+</p>
+
+<pre class="example">
+git clone https://github.com/pyenv/pyenv-update.git $(pyenv root)/plugins/pyenv-update
+</pre>
+
+
+<p>
+added dotfiles/mac/zsh/pyenv.plugin.zsh
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">if [[ -d "$HOME/.pyenv" ]]; then
+    # echo "using pyenv"
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init --path)"
+fi
+</pre>
+</div>
+
+<p>
+Even though the OS version of python3 (3.9.5) is up to date, also
+install this version via pyenv to avoid installing packages to create
+a strict a separation from the system version as possible.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">pyenv install -v 3.9.5
+pyenv global 3.9.5
+pip3 install -U pip wheel
+</pre>
+</div>
+
+<p>
+Install 3.8.8 for projects expecting python 3.8
+</p>
+
+<pre class="example">
+pyenv install -v 3.8.8
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org46adb55" class="outline-2">
+<h2 id="org46adb55">emacs</h2>
+<div class="outline-text-2" id="text-org46adb55">
+<p>
+Install latest emacs binary from <a href="http://emacsformacosx.com/">http://emacsformacosx.com/</a>
+</p>
+
+<p>
+Emacs needs a few homebrew packages
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">brew install libressl
+brew install aspell
+brew install gpg
+</pre>
+</div>
+
+<p>
+Check out my .emacs.d and run setup scripts.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">cd ~
+git clone git@github.com:nhoffman/emacs-config.git .emacs.d
+</pre>
+</div>
+
+<p>
+Run setup scripts:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">cd ~/.emacs.d
+bin/python-setup.sh
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org21334f7" class="outline-2">
+<h2 id="org21334f7">R</h2>
+<div class="outline-text-2" id="text-org21334f7">
+<p>
+I had to give up on installing R with homebrew because it seemed to
+result in an interpreter that always wanted to install packages from
+source. So I used the binary from <a href="https://cran.r-project.org/bin/macosx/">https://cran.r-project.org/bin/macosx/</a>
+</p>
+
+<p>
+Some packages that I know I'll need:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">R --slave &lt;&lt; EOF
+packages &lt;- c("lattice", "RSQLite", "latticeExtra", "argparse", "data.table", "tidyverse")
+install.packages(packages, repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE, Ncpus=4)
+EOF
+</pre>
+</div>
+
+<p>
+Wow, this takes a long time!
+</p>
+
+<p>
+Also:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">brew install --cask rstudio
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org85fbc00" class="outline-2">
+<h2 id="org85fbc00">postgresql</h2>
+<div class="outline-text-2" id="text-org85fbc00">
+<p>
+Install from <a href="https://postgresapp.com/downloads.html">https://postgresapp.com/downloads.html</a>
+</p>
+
+<p>
+This installs multiple versions of postgres. You'll need to add the
+path to the CLI for the version you want to use to your PATH, eg:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">export PATH=/Applications/Postgres.app/Contents/Versions/9.6/bin:$PATH
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+    <hr>
+
+  </div>
+        </div>
+
+        <div class="span3">
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Site
+                </li>
+
+                <li><a href="https://nhoffman.github.io/borborygmi/">Archives</a>
+                <li><a href="https://nhoffman.github.io/borborygmi/tags.html">Tags</a>
+                <li><a href="https://nhoffman.github.io/borborygmi/" rel="alternate">Atom feed</a></li>
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Categories
+                </li>
+
+                <li><a href="https://nhoffman.github.io/borborygmi/category/lectures.html">lectures</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/org-mode.html">org-mode</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/projects.html">projects</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/python.html">python</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/sql.html">sql</a></li>
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Links
+                </li>
+
+                <li><a href="https://github.com/nhoffman">GitHub account</a></li>
+                <li><a href="https://github.com/nhoffman/borborygmi">site source</a></li>
+            </ul>
+            </div>
+
+
+
+        </div>     </div>     </div> 
+<footer>
+<br />
+<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &copy; Noah Hoffman 2025</p>
+</footer>
+
+</div> <!-- /container -->
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-16886766-2', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

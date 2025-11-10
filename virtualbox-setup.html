@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>borborygmi</title>
+    <meta name="description" content="">
+    <meta name="author" content="Noah Hoffman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="https://nhoffman.github.io/borborygmi/theme/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="https://nhoffman.github.io/borborygmi/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/local.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/pygments.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="https://nhoffman.github.io/borborygmi">borborygmi</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+
+        </ul>
+        </div>
+
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+  <div class='article'>
+    <div class="content-title">
+      <h1>Setup for VirtualBox VM running Ubuntu 14.04 on OS X Mavericks</h1>
+Fri 06 February 2015 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/linux.html">linux,&nbsp;</a><a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac,&nbsp;</a><a href="https://nhoffman.github.io/borborygmi/tag/virtualbox.html">virtualbox</a></em>    </div>
+
+    <div><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgd69ae6b">VirtualBox preferences</a></li>
+<li><a href="#org889e276">Create an Ubuntu 14.04 VM</a></li>
+<li><a href="#org0604678">Set up an IP address</a></li>
+</ul>
+</div>
+</div>
+<p>
+Here are my notes for setting up an Ubuntu VM to work on some web
+applications. This is intended to be a sandbox for development, so
+I'll err on the side of convenience (at the expense of security, since
+the VM should never be accessible from outside of the host
+machine). I'm doing this on a machine running OS X Mavericks. Much of
+the content was adapted from this really excellent post:
+</p>
+
+<p>
+<a href="https://leemendelowitz.github.io/blog/ubuntu-server-virtualbox.html">https://leemendelowitz.github.io/blog/ubuntu-server-virtualbox.html</a>
+</p>
+
+<p>
+I also went on to provide local network access via a static IP
+address. I chose not to include the guest additions or a shared
+directory - I wanted to interact with this VM as if it were a remote
+host.
+</p>
+
+<div id="outline-container-orgd69ae6b" class="outline-2">
+<h2 id="orgd69ae6b">VirtualBox preferences</h2>
+<div class="outline-text-2" id="text-orgd69ae6b">
+<p>
+Install VirtualBox from the vendor's website.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">vboxmanage --version
+</pre>
+</div>
+
+<pre class="example">
+4.3.20r96996
+</pre>
+
+
+<p>
+First, there are some application-level settings that should be
+modified right off the bat.
+</p>
+
+<p>
+Rename the default location for VirtualBox resources to something sensible.
+</p>
+
+<pre class="example">
+VirtualBox -&gt; Preferences -&gt; Default Machine Folder -&gt; ~/VirtualBox
+</pre>
+
+
+<p>
+Create a host-only network. Go to
+</p>
+
+<pre class="example">
+VirtualBox -&gt; Preferences -&gt; Network -&gt; Host Only Networks
+</pre>
+
+
+<p>
+and from here, click on the little green icon with a plus on the right -
+this creates the host-only network <code>vboxnet0</code>. We'll need this later.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org889e276" class="outline-2">
+<h2 id="org889e276">Create an Ubuntu 14.04 VM</h2>
+<div class="outline-text-2" id="text-org889e276">
+<p>
+Download ubuntu-14.04.1-server-amd64.iso <a href="http://www.ubuntu.com/download/server">here</a> (we'll move it into
+$VBOXDIR below).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">VBOXDIR="$HOME/VirtualBox"
+VM_NAME="Ubuntu14.04-1"
+UBUNTU_ISO_PATH="${VBOXDIR:?}/ubuntu-14.04.1-server-amd64.iso"
+VM_HD_PATH="${VBOXDIR:?}/${VM_NAME:?}.vdi"
+mkdir -p "${VBOXDIR:?}"
+mv ~/Downloads/ubuntu-14.04.1-server-amd64.iso "${VBOXDIR:?}"
+</pre>
+</div>
+
+<p>
+Create the VM.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">vboxmanage createvm --name ${VM_NAME:?} --ostype Ubuntu_64 --register
+</pre>
+</div>
+
+<pre class="example">
+Virtual machine 'Ubuntu14.04-1' is created and registered.
+UUID: 58826a23-fceb-4a03-b7c3-cc22c975ccec
+Settings file: '/Users/nhoffman/VirtualBox/Ubuntu14.04-1/Ubuntu14.04-1.vbox'
+</pre>
+
+
+<p>
+I have to confess that I never could have figured these command out
+without the post above. The ones defining HD and memory allocations
+seemed pretty obvious. The last three lines will allow us to ssh into
+the VM once the OS is installed (see below). If I could wish for one
+thing from the VirtualBox application, it would be to generate the
+corresponding <code>vboxmanage</code> command from a menu action.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">vboxmanage createhd --filename ${VM_HD_PATH:?} --size 12288 # size in MB (12GB)
+vboxmanage storagectl ${VM_NAME:?} --name "SATA Controller" --add sata --controller IntelAHCI
+vboxmanage storageattach ${VM_NAME:?} --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium ${VM_HD_PATH:?}
+vboxmanage storagectl ${VM_NAME:?} --name "IDE Controller" --add ide
+vboxmanage storageattach ${VM_NAME:?} --storagectl "IDE Controller" --port 0 --device 0 --type dvddrive --medium ${UBUNTU_ISO_PATH:?}
+vboxmanage modifyvm ${VM_NAME:?} --ioapic on
+vboxmanage modifyvm ${VM_NAME:?} --memory 1024 --vram 128
+vboxmanage modifyvm ${VM_NAME:?} --nic1 nat
+vboxmanage modifyvm ${VM_NAME:?} --natpf1 "guestssh,tcp,,2222,,22"
+vboxmanage modifyvm ${VM_NAME:?} --natdnshostresolver1 on
+</pre>
+</div>
+
+<p>
+Ok! This should result in a bootable VM. Here goes the first boot.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">vboxmanage startvm ${VM_NAME:?}
+</pre>
+</div>
+
+<p>
+Now we let Ubuntu install itself. I chose the default for each option
+and provided some extremely boring and insecure host settings:
+</p>
+
+<ul class="org-ul">
+<li>hostname: ubuntu</li>
+<li>full name: ubuntu</li>
+<li>username: ubuntu</li>
+<li>password: ubuntu</li>
+</ul>
+
+<p>
+Obviously this would be a terrible idea for a real system (as are an
+ssh key without a passphrase, and allowing sudo without a password,
+both of which I will be guilty of below).
+</p>
+
+<p>
+Once the system is installed, perform an upgrade and install the bare
+essentials that will allow us to ssh in.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">sudo apt-get update &amp;&amp; sudo apt-get -y upgrade
+sudo apt-get install -y openssh-server
+sudo shutdown -h now
+</pre>
+</div>
+
+<p>
+This is a good time to make a snapshot ("clean-image"). From now on,
+I'll run the VM "headless" and ssh in to avoid having to use the
+horrible VirtualBox terminal.
+</p>
+
+<pre class="example">
+vboxmanage startvm Ubuntu14.04-1 --type headless
+</pre>
+
+
+<p>
+For now, we can ssh in using port 2222 redirected to localhost, but in
+a minute, we'll give the VM an IP address.
+</p>
+
+<pre class="example">
+ssh -p 2222 ubuntu@localhost
+</pre>
+
+
+<p>
+Now I'll degrade the security of my little VM sandbox even further by
+allowing the ubuntu user to sudo without a password. Edit the sudoers
+file:
+</p>
+
+<pre class="example">
+sudo visudo
+</pre>
+
+
+<p>
+And add the following lines:
+</p>
+
+<pre class="example">
+# ubuntu user can sudo without password
+ubuntu ALL= NOPASSWD: ALL
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org0604678" class="outline-2">
+<h2 id="org0604678">Set up an IP address</h2>
+<div class="outline-text-2" id="text-org0604678">
+<p>
+I pieced together the following with the help of the following posts:
+</p>
+
+<ul class="org-ul">
+<li><a href="http://www.websightdesigns.com/posts/view/how-to-set-up-a-local-web-server-with-virtualbox-on-mac-os-x">http://www.websightdesigns.com/posts/view/how-to-set-up-a-local-web-server-with-virtualbox-on-mac-os-x</a></li>
+<li><a href="http://anupriti.blogspot.com/2014/10/invalid-settings-detected-virtualbox.html">http://anupriti.blogspot.com/2014/10/invalid-settings-detected-virtualbox.html</a></li>
+<li><a href="https://www.virtualbox.org/manual/ch06.html">https://www.virtualbox.org/manual/ch06.html</a></li>
+</ul>
+
+<p>
+First power off the VM.
+</p>
+
+<pre class="example">
+vboxmanage controlvm Ubuntu14.04-1 poweroff
+</pre>
+
+
+<p>
+Now we need to create host-only network. I would have loved to know how to do this using vboxmanage. Go to the Setting for this VM:
+</p>
+
+<pre class="example">
+Settings -&gt; Network -&gt; Adapter2 -&gt; Enable Network Adapter
+</pre>
+
+
+<ul class="org-ul">
+<li>Attached to: Host-only Adapter</li>
+<li>Name: vboxnet0</li>
+</ul>
+
+<p>
+(remember, we created <code>vboxnet0</code> in the application-level
+configuration settings at the top).
+</p>
+
+<p>
+Power the VM back on and ssh in as above, then modify
+<code>/etc/network/interfaces</code> as shown.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">sudo -s
+cat &gt;&gt; /etc/network/interfaces &lt;&lt;EOF
+
+auto eth1
+iface eth1 inet static
+address 192.168.56.101
+netmask 255.255.255.0
+EOF
+</pre>
+</div>
+
+<p>
+After a restart, you should be able to ping the VM at <code>192.168.56.101</code>
+</p>
+
+<p>
+This should work, too:
+</p>
+
+<pre class="example">
+ssh ubuntu@192.168.56.101
+</pre>
+
+
+<p>
+And if you run this from the VM
+</p>
+
+<pre class="example">
+python -m SimpleHTTPServer
+</pre>
+
+
+<p>
+you should be able to point your browser to
+<code>http://192.168.56.101:8000</code> and see a directory listing of <code>$HOME</code>!
+Better yet, add an entry to <code>/etc/hosts</code> on the host machine:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">sudo -s
+cp /etc/hosts /etc/hosts.bak
+cat &gt;&gt; /etc/hosts &lt;&lt;EOF
+
+# for VirtualBox VM Ubuntu14.04-1
+192.168.56.101 ubuntu1
+EOF
+</pre>
+</div>
+
+<p>
+and browse to the following address:
+</p>
+
+<pre class="example">
+http://ubuntu1:8000
+</pre>
+
+
+<p>
+Now make a ssh key pair for this VM and install the public key.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">cd ~/.ssh
+ssh-keygen -f vm-unsafe
+ssh ubuntu@192.168.56.101 'mkdir -p -m 700 ~/.ssh; cat - &gt; ~/.ssh/authorized_keys; chmod 600 ~/.ssh/*' &lt; ~/.ssh/vm-unsafe.pub
+</pre>
+</div>
+
+<p>
+Finally, create an entry in <code>~/.ssh/config</code> (on the host machine, of
+course) to create an alias for the VM:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">Host ubuntu1
+     HostName 192.168.56.101
+     User ubuntu
+     IdentityFile ~/.ssh/vm-unsafe
+</pre>
+</div>
+
+<p>
+Now you can ssh in without a prompt for a password:
+</p>
+
+<pre class="example">
+ssh ubuntu1
+</pre>
+
+
+<p>
+Time for another snapshot! ("ssh-ok")
+</p>
+
+<p>
+That's enough for now. It kills me that there are so many manual steps
+in this process - more of them could probably be performed via the
+command line given more time and patience than I have at this point!
+</p>
+</div>
+</div>
+</div>
+
+    <hr>
+
+  </div>
+        </div>
+
+        <div class="span3">
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Site
+                </li>
+
+                <li><a href="https://nhoffman.github.io/borborygmi/">Archives</a>
+                <li><a href="https://nhoffman.github.io/borborygmi/tags.html">Tags</a>
+                <li><a href="https://nhoffman.github.io/borborygmi/" rel="alternate">Atom feed</a></li>
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Categories
+                </li>
+
+                <li><a href="https://nhoffman.github.io/borborygmi/category/lectures.html">lectures</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/org-mode.html">org-mode</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/projects.html">projects</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/python.html">python</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/sql.html">sql</a></li>
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Links
+                </li>
+
+                <li><a href="https://github.com/nhoffman">GitHub account</a></li>
+                <li><a href="https://github.com/nhoffman/borborygmi">site source</a></li>
+            </ul>
+            </div>
+
+
+
+        </div>     </div>     </div> 
+<footer>
+<br />
+<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &copy; Noah Hoffman 2025</p>
+</footer>
+
+</div> <!-- /container -->
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-16886766-2', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

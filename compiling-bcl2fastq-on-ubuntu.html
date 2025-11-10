@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>borborygmi</title>
+    <meta name="description" content="">
+    <meta name="author" content="Noah Hoffman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="https://nhoffman.github.io/borborygmi/theme/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="https://nhoffman.github.io/borborygmi/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/local.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/pygments.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="https://nhoffman.github.io/borborygmi">borborygmi</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+
+        </ul>
+        </div>
+
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+  <div class='article'>
+    <div class="content-title">
+      <h1>Compiling bcl2fastq v2.15 on Ubuntu 12.04 and 14.04</h1>
+Wed 27 August 2014 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/linux.html">linux</a></em>    </div>
+
+    <div><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgb01854f">Ubuntu 14.04 (Trusty Tahr)</a></li>
+<li><a href="#orgd3d81aa">Ubuntu 12.04 (Precise Pangolin)</a></li>
+</ul>
+</div>
+</div>
+<p>
+Illumina provides a program for demultiplexing sequencing output
+called <code>bcl2fastq</code>. They get a gold star for releasing the source -
+the downside is that they release binaries only for RHEL/CentOS, and
+no build instructions for Ubuntu. So how hard could it be?
+</p>
+
+<div id="outline-container-orgb01854f" class="outline-2">
+<h2 id="orgb01854f">Ubuntu 14.04 (Trusty Tahr)</h2>
+<div class="outline-text-2" id="text-orgb01854f">
+<p>
+I thought I'd start here since the packages are more up to date (turns
+out it's a good thing I did, see the morass below). There's some
+documentation from Illumina for compiling from source <a href="http://supportres.illumina.com/documents/documentation/software_documentation/bcl2fastq/bcl2fastq-v2-0-user-guide-15051736-a.pdf">here</a>. There's
+not a lot to go on, other than a list of dependencies, which boils
+down to:
+</p>
+
+<ul class="org-ul">
+<li>zlib</li>
+<li>librt</li>
+<li>libpthread</li>
+<li>gcc 4.1.2 (with c++)</li>
+<li>boost 1.54 (with its dependencies)</li>
+<li>cmake 2.8.9</li>
+</ul>
+
+<p>
+Really the only tricky part was figuring out the required packages,
+which didn't correspond particularly well to the list of dependencies
+above. I didn't bother trying to install specific version of any of
+the dependencies other than boost 1.54.
+</p>
+
+<p>
+On an Amazon AWS EC2 instance (m3.medium, ubuntu-trusty-14.04-amd64-server-20140607.1 ami-e7b8c0d7):
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install zlibc
+sudo apt-get install libc6 # provides librt and libpthread
+sudo apt-get install gcc
+sudo apt-get install g++
+sudo apt-get install libboost1.54-all-dev
+sudo apt-get install cmake
+</pre>
+</div>
+
+<p>
+From there, compilation more or less works as advertised:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">wget ftp://webdata2:webdata2@ussd-ftp.illumina.com/downloads/Software/bcl2fastq/bcl2fastq2-v2.15.0.4.tar.gz
+tar -xf bcl2fastq2-v2.15.0.4.tar.gz
+cd bcl2fastq
+mkdir build
+cd build
+PREFIX=/usr/local
+sudo mkdir -p ${PREFIX:?}
+../src/configure --prefix=${PREFIX:?}
+make
+sudo make install
+</pre>
+</div>
+
+<p>
+We wanted this version to coexist with an older one, so I renamed
+the executable:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">sudo mv $PREFIX/bin/bcl2fastq $PREFIX/bin/bcl2fastq2
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd3d81aa" class="outline-2">
+<h2 id="orgd3d81aa">Ubuntu 12.04 (Precise Pangolin)</h2>
+<div class="outline-text-2" id="text-orgd3d81aa">
+<p>
+Emboldened, I went on to 12.04. This was a lot more painful. Lots of
+trail and error. Here's what I came up with. More or less the same as
+above at first (m3.medium, ubuntu-precise-12.04-amd64-server-20140717
+ami-23f78e13):
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install zlibc
+sudo apt-get install libc6 # provides librt and libpthread
+sudo apt-get install gcc
+sudo apt-get install g++
+</pre>
+</div>
+
+<p>
+We'll also need libboost version 1.54; to do this, we need to add a
+third-party ppa (<a href="https://launchpad.net/~boost-latest/+archive/ubuntu/ppa">https://launchpad.net/~boost-latest/+archive/ubuntu/ppa</a>).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">sudo apt-get install python-software-properties
+sudo add-apt-repository ppa:boost-latest/ppa
+sudo apt-get update
+sudo apt-get install libboost1.54-all-dev
+</pre>
+</div>
+
+<p>
+I tried to install cmake 2.8.9 from various ppa's but kept getting
+errors when I compiled <code>bcl2fastq</code>. So, source it is.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">sudo apt-get build-dep cmake
+wget http://www.cmake.org/files/v2.8/cmake-2.8.9.tar.gz
+tar -xf cmake-2.8.9.tar.gz
+cd cmake-2.8.9
+./configure &amp;&amp; make &amp;&amp; sudo make install
+</pre>
+</div>
+
+<p>
+Finally, an error complaining about the absence of <code>sys/stat.h</code>. I found good advice <a href="http://askubuntu.com/questions/414110/wheres-my-usr-include-sys-directory">here</a>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">sudo mkdir -p /usr/include/sys
+sudo ln -s /usr/include/x86_64-linux-gnu/sys/stat.h /usr/include/sys/stat.h
+</pre>
+</div>
+
+<p>
+After all of that, compiling bcl2fasta worked as described for 14.04.
+</p>
+</div>
+</div>
+</div>
+
+    <hr>
+
+  </div>
+        </div>
+
+        <div class="span3">
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Site
+                </li>
+
+                <li><a href="https://nhoffman.github.io/borborygmi/">Archives</a>
+                <li><a href="https://nhoffman.github.io/borborygmi/tags.html">Tags</a>
+                <li><a href="https://nhoffman.github.io/borborygmi/" rel="alternate">Atom feed</a></li>
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Categories
+                </li>
+
+                <li><a href="https://nhoffman.github.io/borborygmi/category/lectures.html">lectures</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/org-mode.html">org-mode</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/projects.html">projects</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/python.html">python</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/sql.html">sql</a></li>
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Links
+                </li>
+
+                <li><a href="https://github.com/nhoffman">GitHub account</a></li>
+                <li><a href="https://github.com/nhoffman/borborygmi">site source</a></li>
+            </ul>
+            </div>
+
+
+
+        </div>     </div>     </div> 
+<footer>
+<br />
+<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &copy; Noah Hoffman 2025</p>
+</footer>
+
+</div> <!-- /container -->
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-16886766-2', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

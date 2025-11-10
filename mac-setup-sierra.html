@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>borborygmi</title>
+    <meta name="description" content="">
+    <meta name="author" content="Noah Hoffman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="https://nhoffman.github.io/borborygmi/theme/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="https://nhoffman.github.io/borborygmi/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/local.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/pygments.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="https://nhoffman.github.io/borborygmi">borborygmi</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+
+        </ul>
+        </div>
+
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+  <div class='article'>
+    <div class="content-title">
+      <h1>Setting up a new Mac (Sierra)</h1>
+Thu 05 January 2017 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em>    </div>
+
+    <div><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgd5f11f0">system settings</a>
+<ul>
+<li><a href="#orgef9d7e7">turn off spelling autocorrect</a></li>
+<li><a href="#org9222155">unmap Control + left,right</a></li>
+</ul>
+</li>
+<li><a href="#org5cd9bca">First applications</a>
+<ul>
+<li><a href="#orgab8c296">iTerm2</a></li>
+<li><a href="#orgea1b652">Dropbox</a></li>
+<li><a href="#org9ee01eb">Developer tools</a></li>
+<li><a href="#orgd265114">Junos pulse VPN client</a></li>
+<li><a href="#org0d0c5b7">Microsoft Office 2016</a></li>
+<li><a href="#orgc824f5b">Others</a></li>
+</ul>
+</li>
+<li><a href="#org728797f">homebrew</a>
+<ul>
+<li><a href="#orgde8c107">X11</a></li>
+<li><a href="#org3d80c5e">Desktop apps using Cask</a></li>
+<li><a href="#org35b877c">homebrew API token</a></li>
+<li><a href="#orgec8a357">zsh</a></li>
+</ul>
+</li>
+<li><a href="#org8f81a4f">git</a></li>
+<li><a href="#org90d0e58">python</a></li>
+<li><a href="#org50be97f">emacs</a></li>
+<li><a href="#org7c21f63">R</a></li>
+<li><a href="#org0464643">wkhtmltopdf</a></li>
+<li><a href="#orgea50933">mail</a></li>
+</ul>
+</div>
+</div>
+<ul class="org-ul">
+<li><i>Edit 2017-01-09: provide upgrade path to Pulse Secure client v5.1</i></li>
+</ul>
+
+<p>
+This post describes the steps that I followed to set up a new mac
+running MacOS Sierra (10.12.2), in as close to the order in which I
+did things as I could reproduce. The primary purpose is to document
+what I did for when I perform a clean install of other machines;
+hopefully others will also find it useful.
+</p>
+
+<p>
+This time around I really went all in on <a href="http://brew.sh/">homebrew</a>: I used homebrew to
+install not only command line programs and languages (python, R), but
+also as many desktop apps as I could (Chrome, x11) that would
+otherwise have been installed manually by hunting down an
+installer. When it wasn't entirely clear (to me) whether there might
+be some advantage of getting a program from another project (Emacs,
+Postgres.app), I did it the old fashioned way.
+</p>
+
+<p>
+Somewhat glossed over here are manual steps used to transfer
+non-public dotfiles, credentials, etc. Here's a partial list of files
+and directories that I copied directly from my old laptop:
+</p>
+
+<p>
+It's interesting that all none of these steps require an Apple ID -
+usually I sign in first thing, but this time I held off.
+</p>
+
+<pre class="example">
+tar -cf dotfiles.tar .Xmodmap .gitconfig .gnupg .pypirc .ssh
+</pre>
+
+<div id="outline-container-orgd5f11f0" class="outline-2">
+<h2 id="orgd5f11f0">system settings</h2>
+<div class="outline-text-2" id="text-orgd5f11f0">
+</div>
+<div id="outline-container-orgef9d7e7" class="outline-3">
+<h3 id="orgef9d7e7">turn off spelling autocorrect</h3>
+<div class="outline-text-3" id="text-orgef9d7e7">
+<pre class="example">
+System Preferences --&gt; Keyboard --&gt; Text tab --&gt; unselect "Correct spelling automatically" and others
+</pre>
+</div>
+</div>
+<div id="outline-container-org9222155" class="outline-3">
+<h3 id="org9222155">unmap Control + left,right</h3>
+<div class="outline-text-3" id="text-org9222155">
+<p>
+I use Control plus the left and right arrow keys to move between
+windows in emacs and tmux.
+</p>
+
+<pre class="example">
+System Preferences --&gt; Keyboard --&gt; Shortcuts --&gt; uncheck mission control: move left/right a space
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5cd9bca" class="outline-2">
+<h2 id="org5cd9bca">First applications</h2>
+<div class="outline-text-2" id="text-org5cd9bca">
+</div>
+<div id="outline-container-orgab8c296" class="outline-3">
+<h3 id="orgab8c296">iTerm2</h3>
+<div class="outline-text-3" id="text-orgab8c296">
+<p>
+Update a few settings.
+</p>
+
+<p>
+Preferences &#x2013;&gt; Profiles &#x2013;&gt; Keys and do these things:
+</p>
+<ul class="org-ul">
+<li>select "Left/right option key acts as": +Esc</li>
+<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;left arrow&gt;": Send Escape sequence "b"</li>
+<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;right arrow&gt;": Send Escape sequence "f"</li>
+</ul>
+
+<p>
+Default appearance:
+</p>
+
+<ul class="org-ul">
+<li>Preferences &#x2013;&gt; Profiles &#x2013;&gt; Colors &#x2013;&gt; Load Presets &#x2013;&gt; Light Background</li>
+<li>Preferences &#x2013;&gt; Profiles &#x2013;&gt; Text &#x2013;&gt; Change Font &#x2013;&gt; 14 point</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgea1b652" class="outline-3">
+<h3 id="orgea1b652">Dropbox</h3>
+<div class="outline-text-3" id="text-orgea1b652">
+<p>
+Install from website
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9ee01eb" class="outline-3">
+<h3 id="org9ee01eb">Developer tools</h3>
+<div class="outline-text-3" id="text-org9ee01eb">
+<p>
+This can be done from the command line:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">xcode-select --install
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd265114" class="outline-3">
+<h3 id="orgd265114">Junos pulse VPN client</h3>
+<div class="outline-text-3" id="text-orgd265114">
+<p>
+There are some <a href="https://forums.developer.apple.com/thread/51184">reports</a> of version 5.1 being broken in Sierra. At the
+time I'm writing this, my institution provides 5.1.9 (61653), which is
+indeed broken. The internet helpfully provides a link to an older
+version (we're trusting the University of South Florida, here):
+<a href="https://www.net.usf.edu/vpn/MacOS/JunosPulse.dmg">https://www.net.usf.edu/vpn/MacOS/JunosPulse.dmg</a>
+</p>
+
+<p>
+Installing this, and then running the updater provides 5.1.10 (61733),
+which seems to work.
+</p>
+
+<p>
+Instructions for UW are here: <a href="https://networks.uwmedicine.org/content/sslvpn-frequently-asked-questions-14">https://networks.uwmedicine.org/content/sslvpn-frequently-asked-questions-14</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0d0c5b7" class="outline-3">
+<h3 id="org0d0c5b7">Microsoft Office 2016</h3>
+<div class="outline-text-3" id="text-org0d0c5b7">
+<p>
+The initial version of Excel (15.11) crashed on startup as widely
+reported - this was fixed by updating to a version (15.29) provided by
+Microsoft:
+</p>
+
+<p>
+<a href="https://support.microsoft.com/en-us/kb/3187505">https://support.microsoft.com/en-us/kb/3187505</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc824f5b" class="outline-3">
+<h3 id="orgc824f5b">Others</h3>
+<div class="outline-text-3" id="text-orgc824f5b">
+<ul class="org-ul">
+<li class="on"><code>[X]</code> SizeUp - <a href="http://www.irradiatedsoftware.com/">http://www.irradiatedsoftware.com/</a> (license in Dropbox/software_licenses)</li>
+<li class="on"><code>[X]</code> HipChat client</li>
+<li class="on"><code>[X]</code> Dash 2</li>
+<li class="on"><code>[X]</code> Postgres.app <a href="https://postgresapp.com">https://postgresapp.com</a></li>
+<li class="on"><code>[X]</code> PgAdmin <a href="https://www.pgadmin.org">https://www.pgadmin.org</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org728797f" class="outline-2">
+<h2 id="org728797f">homebrew</h2>
+<div class="outline-text-2" id="text-org728797f">
+<p>
+Homebrew no longer requires user-ownership of /usr/local, so things are pretty easy now:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew doctor
+</pre>
+</div>
+
+<p>
+Some packages I'll need off the bat to do just about anything
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">brew install git
+brew install wget
+</pre>
+</div>
+
+<p>
+A number of packages are installed in the context of other
+applications; here are additional packages that I know I'll use.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">brew install autojump &amp;&amp; \
+brew install gcc &amp;&amp; \
+brew install graphviz &amp;&amp; \
+brew install htop-osx &amp;&amp; \
+brew install latex2rtf &amp;&amp; \
+brew install pandoc &amp;&amp; \
+brew install tmux &amp;&amp; \
+brew install tree
+</pre>
+</div>
+
+<p>
+Note other packages installed in other sections as well.
+</p>
+</div>
+
+<div id="outline-container-orgde8c107" class="outline-3">
+<h3 id="orgde8c107">X11</h3>
+<div class="outline-text-3" id="text-orgde8c107">
+<p>
+install Xquartz
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">brew install Caskroom/cask/xquartz
+</pre>
+</div>
+
+<p>
+X11 key bindings so that the option key is used for Meta..
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">cat &gt; ~/.Xmodmap &lt;&lt;EOF
+clear Mod1
+clear Mod2
+keycode 63 = Mode_switch
+keycode 66 = Meta_L
+add Mod1 = Meta_L
+add Mod2 = Mode_switch
+EOF
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3d80c5e" class="outline-3">
+<h3 id="org3d80c5e">Desktop apps using Cask</h3>
+<div class="outline-text-3" id="text-org3d80c5e">
+<p>
+Homebrew installs desktop apps too!
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">brew cask install google-chrome
+brew cask install java
+brew cask install mactex
+brew cask install texmaker
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org35b877c" class="outline-3">
+<h3 id="org35b877c">homebrew API token</h3>
+<div class="outline-text-3" id="text-org35b877c">
+<p>
+Apparently lots of requests to GutHub via homebrew can hit a rate limit. There's a higher limit if you create an API token. See <a href="https://gist.github.com/christopheranderton/8644743">https://gist.github.com/christopheranderton/8644743</a>
+</p>
+
+<p>
+Here's the url for the token creation dialog:
+</p>
+
+<p>
+<a href="https://github.com/settings/tokens/new?scopes=&amp;description=Homebrew">https://github.com/settings/tokens/new?scopes=&amp;description=Homebrew</a>
+</p>
+
+<p>
+Make sure that all 'scopes' are unchecked. Once you generate the token, add to your shell profile:
+</p>
+
+<pre class="example">
+export HOMEBREW_GITHUB_API_TOKEN=token_here
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgec8a357" class="outline-3">
+<h3 id="orgec8a357">zsh</h3>
+<div class="outline-text-3" id="text-orgec8a357">
+<p>
+Install zsh with Homebrew
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">brew install zsh
+</pre>
+</div>
+
+<p>
+Change shell to zsh
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">sudo -s
+echo /usr/local/bin/zsh &gt;&gt; /etc/shells
+exit
+chsh -s /usr/local/bin/zsh $USER
+</pre>
+</div>
+
+<p>
+zsh init files are in Dropbox/zsh. <code>~/.zshenv</code> contains the following:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">for pth in $HOME/Dropbox $HOME/src $HOME; do
+    if [[ -f $pth/zsh/zstartup ]]; then
+	. $pth/zsh/zstartup
+	break
+    fi
+done
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8f81a4f" class="outline-2">
+<h2 id="org8f81a4f">git</h2>
+<div class="outline-text-2" id="text-org8f81a4f">
+<pre class="example">
+git config --global user.name "My Name"
+git config --global user.email me@email.com
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org90d0e58" class="outline-2">
+<h2 id="org90d0e58">python</h2>
+<div class="outline-text-2" id="text-org90d0e58">
+<p>
+Use homebrew - see
+<a href="https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Homebrew-and-Python.md">https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/Homebrew-and-Python.md</a>
+</p>
+
+<p>
+Run <code>brew info python</code> for required and optional dependencies
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">for pkg in sphinx-doc pkg-config readline sqlite homebrew/dupes/tcl-tk berkeley-db4; do brew install $pkg; done
+brew install python --with-berkeley-db4 --with-tcl-tk
+brew linkapps python
+pip install -U pip
+pip install -U setuptools
+pip install -U virtualenv
+</pre>
+</div>
+
+<p>
+Install some python packages using homebrew - these are time consuming to install otherwise.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">brew install numpy
+</pre>
+</div>
+
+<p>
+And a few packages that I usually like to have around.
+</p>
+
+<p>
+Note that <code>scons</code> wants to install man pages to <code>/usr/local/man</code>, which is owned by root. You'll need to do this first:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">sudo mkdir -p /usr/local/man
+sudo sudo chown $(whoami) /usr/local/man
+</pre>
+</div>
+
+<p>
+Now install the actual packages:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">pip install ansible
+pip install csvkit
+pip install reportlab
+pip install scons
+pip install jinja2
+</pre>
+</div>
+
+<p>
+Also install python3
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">brew install python3 --with-tcl-tk
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org50be97f" class="outline-2">
+<h2 id="org50be97f">emacs</h2>
+<div class="outline-text-2" id="text-org50be97f">
+<p>
+Install latest emacs binary (25.1) from <a href="http://emacsformacosx.com/">http://emacsformacosx.com/</a>
+</p>
+
+<p>
+Emacs needs a few homebrew packages
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">brew install libressl
+brew install aspell
+brew install gpg
+</pre>
+</div>
+
+<p>
+Check out my .emacs.d and run setup scripts.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">cd ~
+git clone git@github.com:nhoffman/.emacs.d.git
+cd .emacs.d
+git submodule init
+git submodule update
+bin/venv.sh
+</pre>
+</div>
+
+<p>
+For elpy:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">pip install -r requirements.txt
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7c21f63" class="outline-2">
+<h2 id="org7c21f63">R</h2>
+<div class="outline-text-2" id="text-org7c21f63">
+<p>
+Again, using homebrew.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">brew tap homebrew/science
+brew install r
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">R --slave &lt;&lt; EOF
+packages &lt;- c("ape", "sqldf", "ROCR", "lattice", "RSQLite", "latticeExtra", "argparse", "data.table")
+install.packages(packages, repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE)
+EOF
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0464643" class="outline-2">
+<h2 id="org0464643">wkhtmltopdf</h2>
+<div class="outline-text-2" id="text-org0464643">
+<div class="org-src-container">
+<pre class="src src-sh">cd ~/Downloads
+wget 'http://download.gna.org/wkhtmltopdf/0.12/0.12.4/wkhtmltox-0.12.4_osx-cocoa-x86-64.pkg'
+</pre>
+</div>
+
+<p>
+Use installer - binary is <code>/usr/local/bin/wkhtmltopdf</code>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgea50933" class="outline-2">
+<h2 id="orgea50933">mail</h2>
+<div class="outline-text-2" id="text-orgea50933">
+<p>
+<a href="http://www.washington.edu/itconnect/connect/email/uw-email/configuring/os-x-mail6/">http://www.washington.edu/itconnect/connect/email/uw-email/configuring/os-x-mail6/</a>
+</p>
+</div>
+</div>
+</div>
+
+    <hr>
+
+  </div>
+        </div>
+
+        <div class="span3">
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Site
+                </li>
+
+                <li><a href="https://nhoffman.github.io/borborygmi/">Archives</a>
+                <li><a href="https://nhoffman.github.io/borborygmi/tags.html">Tags</a>
+                <li><a href="https://nhoffman.github.io/borborygmi/" rel="alternate">Atom feed</a></li>
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Categories
+                </li>
+
+                <li><a href="https://nhoffman.github.io/borborygmi/category/lectures.html">lectures</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/org-mode.html">org-mode</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/projects.html">projects</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/python.html">python</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/sql.html">sql</a></li>
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Links
+                </li>
+
+                <li><a href="https://github.com/nhoffman">GitHub account</a></li>
+                <li><a href="https://github.com/nhoffman/borborygmi">site source</a></li>
+            </ul>
+            </div>
+
+
+
+        </div>     </div>     </div> 
+<footer>
+<br />
+<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &copy; Noah Hoffman 2025</p>
+</footer>
+
+</div> <!-- /container -->
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-16886766-2', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

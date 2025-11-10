@@ -1,0 +1,2132 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>borborygmi</title>
+    <meta name="description" content="">
+    <meta name="author" content="Noah Hoffman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="https://nhoffman.github.io/borborygmi/theme/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="https://nhoffman.github.io/borborygmi/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/local.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/pygments.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="https://nhoffman.github.io/borborygmi">borborygmi</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+
+        </ul>
+        </div>
+
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+
+  <!-- Don't include TOC on the index page -->
+  <style>div#table-of-contents {display: none;}</style>
+
+
+
+	<div class="article">
+          <div class="content-title">
+            <a href="https://nhoffman.github.io/borborygmi/database-intro.html"><h1>A practical introduction to databases and data management</h1></a>
+Wed 11 June 2014 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/lectures.html">lectures</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/laboratory.html">laboratory</a></em>          </div>
+
+          <div><ul class="org-ul">
+<li><i>Edit 2015-07-26: added a section on date formatting</i></li>
+<li><i>Edit 2016-07-11: add reference to Tidy Data</i></li>
+</ul>
+
+<p>
+This post contains the content of a lecture prepared for Laboratory Medicine residents as part of a series on medical informatics.
+</p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org41aeb3c">Objectives</a></li>
+<li><a href="#orgb6e2d3f">Relational database terminology</a></li>
+<li><a href="#org95be606">Relations</a>
+<ul>
+<li><a href="#org0f668f0">one to one</a></li>
+<li><a href="#org67537a8">one to many</a></li>
+<li><a href="#org9240895">many to many</a></li>
+</ul>
+</li>
+<li><a href="#orgeef7a9e">Data types</a></li>
+<li><a href="#org5fa1c5e">SQL</a></li>
+<li><a href="#org5e016fd">Some examples of relational database operations using SQL</a>
+<ul>
+<li><a href="#org8c9ed9b">select</a></li>
+<li><a href="#org2a21640">join</a></li>
+<li><a href="#org344226b">group and aggregate</a></li>
+</ul>
+</li>
+<li><a href="#org52538a6">Hierarchical databases</a></li>
+<li><a href="#orgd7d928e">Data management patterns and antipatterns</a>
+<ul>
+<li><a href="#org72b0f3d">name fields sensibly</a></li>
+<li><a href="#org7048e15">don't mix data types</a></li>
+<li><a href="#org83a39ed">tall, not wide</a></li>
+<li><a href="#org02c7c1c">be consistent</a></li>
+<li><a href="#org4691034">use multiple tables (normalize the data)</a></li>
+<li><a href="#org2ca09d5">Use a standard format for dates and times</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<table id="orgc03b27e" class="table table-striped table-bordered table-condensed" style="display: none;">
+
+
+<colgroup>
+<col class="org-right">
+
+<col class="org-left">
+
+<col class="org-left">
+
+<col class="org-right">
+
+<col class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">pkey</td>
+<td class="org-left">mrn</td>
+<td class="org-left">name</td>
+<td class="org-right">dob</td>
+<td class="org-left">sex</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">U123456</td>
+<td class="org-left">Roger Rabbit</td>
+<td class="org-right">1939-04-01</td>
+<td class="org-left">M</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">U654321</td>
+<td class="org-left">Jessica Krupnick</td>
+<td class="org-right">1924-10-27</td>
+<td class="org-left">F</td>
+</tr>
+</tbody>
+</table>
+
+<table id="org6fd4860" class="table table-striped table-bordered table-condensed" style="display: none;">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">doc_id</td>
+<td class="org-left">doc_name</td>
+</tr>
+
+<tr>
+<td class="org-left">P01</td>
+<td class="org-left">Dr. Spock</td>
+</tr>
+
+<tr>
+<td class="org-left">P02</td>
+<td class="org-left">Dr. Horrible</td>
+</tr>
+
+<tr>
+<td class="org-left">P03</td>
+<td class="org-left">Dr. Strangelove</td>
+</tr>
+</tbody>
+</table>
+
+<table id="org53501ad" class="table table-striped table-bordered table-condensed" style="display: none;">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">doc_id</td>
+<td class="org-left">mrn</td>
+</tr>
+
+<tr>
+<td class="org-left">P01</td>
+<td class="org-left">U123456</td>
+</tr>
+
+<tr>
+<td class="org-left">P01</td>
+<td class="org-left">U654321</td>
+</tr>
+
+<tr>
+<td class="org-left">P02</td>
+<td class="org-left">U654321</td>
+</tr>
+
+<tr>
+<td class="org-left">P03</td>
+<td class="org-left">U123456</td>
+</tr>
+</tbody>
+</table>
+
+<table id="org88d14d3" class="table table-striped table-bordered table-condensed" style="display: none;">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-left">
+
+<col class="org-right">
+
+<col class="org-left">
+
+<col class="org-left">
+
+<col class="org-right">
+
+<col class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">mrn</td>
+<td class="org-left">accession</td>
+<td class="org-right">date</td>
+<td class="org-left">battery_code</td>
+<td class="org-left">test_code</td>
+<td class="org-right">value</td>
+<td class="org-left">flag</td>
+</tr>
+
+<tr>
+<td class="org-left">U123456</td>
+<td class="org-left">Acc1</td>
+<td class="org-right">2014-06-02</td>
+<td class="org-left">BMP</td>
+<td class="org-left">GLU</td>
+<td class="org-right">135.0</td>
+<td class="org-left">H</td>
+</tr>
+
+<tr>
+<td class="org-left">U123456</td>
+<td class="org-left">Acc1</td>
+<td class="org-right">2014-06-02</td>
+<td class="org-left">BMP</td>
+<td class="org-left">K</td>
+<td class="org-right">4.0</td>
+<td class="org-left">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-left">U123456</td>
+<td class="org-left">Acc2</td>
+<td class="org-right">2014-06-03</td>
+<td class="org-left">CMP</td>
+<td class="org-left">GLU</td>
+<td class="org-right">90.0</td>
+<td class="org-left">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-left">U123456</td>
+<td class="org-left">Acc2</td>
+<td class="org-right">2014-06-03</td>
+<td class="org-left">CMP</td>
+<td class="org-left">K</td>
+<td class="org-right">2.7</td>
+<td class="org-left">L</td>
+</tr>
+
+<tr>
+<td class="org-left">U654321</td>
+<td class="org-left">Acc3</td>
+<td class="org-right">2014-06-02</td>
+<td class="org-left">CMP</td>
+<td class="org-left">GLU</td>
+<td class="org-right">85.0</td>
+<td class="org-left">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-left">U654321</td>
+<td class="org-left">Acc3</td>
+<td class="org-right">2014-06-02</td>
+<td class="org-left">CMP</td>
+<td class="org-left">K</td>
+<td class="org-right">4.1</td>
+<td class="org-left">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-left">U654321</td>
+<td class="org-left">Acc4</td>
+<td class="org-right">2014-06-03</td>
+<td class="org-left">BMP</td>
+<td class="org-left">GLU</td>
+<td class="org-right">75.0</td>
+<td class="org-left">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-left">U654321</td>
+<td class="org-left">Acc4</td>
+<td class="org-right">2014-06-03</td>
+<td class="org-left">BMP</td>
+<td class="org-left">K</td>
+<td class="org-right">4.2</td>
+<td class="org-left">&#160;</td>
+</tr>
+</tbody>
+</table>
+
+<table id="orgac34a42" class="table table-striped table-bordered table-condensed" style="display: none;">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-left">
+
+<col class="org-left">
+
+<col class="org-right">
+
+<col class="org-right">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">test_name</td>
+<td class="org-left">test_code</td>
+<td class="org-left">ref_range</td>
+<td class="org-right">range_low</td>
+<td class="org-right">range_hi</td>
+</tr>
+
+<tr>
+<td class="org-left">Glucose</td>
+<td class="org-left">GLU</td>
+<td class="org-left">62 - 125</td>
+<td class="org-right">62</td>
+<td class="org-right">125</td>
+</tr>
+
+<tr>
+<td class="org-left">Potassium</td>
+<td class="org-left">K</td>
+<td class="org-left">3.7 - 5.2</td>
+<td class="org-right">3.7</td>
+<td class="org-right">5.2</td>
+</tr>
+</tbody>
+</table>
+
+<table id="orgc8c372f" class="table table-striped table-bordered table-condensed" style="display: none;">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">battery_code</td>
+<td class="org-left">battery_name</td>
+</tr>
+
+<tr>
+<td class="org-left">CMP</td>
+<td class="org-left">Comprehensive Metabolic Panel</td>
+</tr>
+
+<tr>
+<td class="org-left">BMP</td>
+<td class="org-left">Basic Metabolic Panel</td>
+</tr>
+</tbody>
+</table>
+
+<table id="org336ef12" class="table table-striped table-bordered table-condensed" style="display: none;">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">battery_code</td>
+<td class="org-left">test_code</td>
+</tr>
+
+<tr>
+<td class="org-left">CMP</td>
+<td class="org-left">GLU</td>
+</tr>
+
+<tr>
+<td class="org-left">CMP</td>
+<td class="org-left">K</td>
+</tr>
+
+<tr>
+<td class="org-left">BMP</td>
+<td class="org-left">GLU</td>
+</tr>
+
+<tr>
+<td class="org-left">BMP</td>
+<td class="org-left">K</td>
+</tr>
+</tbody>
+</table>
+
+<div id="outline-container-org41aeb3c" class="outline-2">
+<h2 id="org41aeb3c">Objectives</h2>
+<div class="outline-text-2" id="text-org41aeb3c">
+<ul class="org-ul">
+<li>be aware that relational databases are a thing and can be described using some terms.</li>
+<li>get to know the different types of relations.</li>
+<li>see some examples of SQL in action.</li>
+<li>make a connection between the above and some useful habits (and harmful anti-patterns) for organizing laboratory and experimental data.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgb6e2d3f" class="outline-2">
+<h2 id="orgb6e2d3f">Relational database terminology</h2>
+<div class="outline-text-2" id="text-orgb6e2d3f">
+<dl class="org-dl">
+<dt>relational database</dt><dd>a tabular database with defined "relations" (which can be described in terms of <a href="http://en.wikipedia.org/wiki/Relational_algebra">relational algebra</a>) among elements within and between tables.</dd>
+<dt>row</dt><dd>contains a <b>tuple</b> or <b>record</b> representing a single item.</dd>
+<dt>column</dt><dd>represents an <b>attribute</b> or <b>field</b> and corresponds to a labeled element of a record; all elements within a column are of the same data type.</dd>
+<dt>table</dt><dd>a set of rows and columns.</dd>
+</dl>
+
+
+<div id="orgfee1ef4" class="figure">
+<p><img src="../database-intro/984px-Relational_database_terms.svg.png" alt="984px-Relational_database_terms.svg.png">
+</p>
+<p><span class="figure-number">Figure 1: </span>Components of a table from a relational database. Source: <a href="http://en.wikipedia.org/wiki/Relational_database">wikipedia</a></p>
+</div>
+
+<dl class="org-dl">
+<dt>primary key</dt><dd>a field (or multiple fields in combination) that uniquely identify a row. Can either be <b>natural</b> (i.e., consisting of attributes that already exist in the table), or <b>surrogate</b> (i.e., a new attribute with no "real world" meaning created for the purpose). An example of a combination of attributes serving as a primary key: name + DOB</dd>
+</dl>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-right">
+
+<col class="org-left">
+
+<col class="org-left">
+
+<col class="org-right">
+
+<col class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">pkey</td>
+<td class="org-left">mrn</td>
+<td class="org-left">name</td>
+<td class="org-right">dob</td>
+<td class="org-left">sex</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">U123456</td>
+<td class="org-left">Roger Rabbit</td>
+<td class="org-right">1939-04-01</td>
+<td class="org-left">M</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">U654321</td>
+<td class="org-left">Jessica Krupnick</td>
+<td class="org-right">1924-10-27</td>
+<td class="org-left">F</td>
+</tr>
+</tbody>
+</table>
+
+<dl class="org-dl">
+<dt>index</dt><dd>a data structure that improves the efficiency of data manipulation by reorganizing or clustering elements, typically as a tree.</dd>
+<dt>normalization</dt><dd>when data is arranged to eliminate redundancy by dividing fields into separate tables, a database is said to be <b><a href="http://en.wikipedia.org/wiki/Database_normalization">normalized</a></b>. There is a tradeoff between normalization and complexity: a database may not be fully normalized to make queries simpler or more efficient (eg, by requiring fewer joins).</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-org95be606" class="outline-2">
+<h2 id="org95be606">Relations</h2>
+<div class="outline-text-2" id="text-org95be606">
+<p>
+For more details, see <a href="http://en.wikipedia.org/wiki/Cardinality_(data_modeling)">http://en.wikipedia.org/wiki/Cardinality_(data_modeling)</a>
+</p>
+</div>
+
+<div id="outline-container-org0f668f0" class="outline-3">
+<h3 id="org0f668f0">one to one</h3>
+<div class="outline-text-3" id="text-org0f668f0">
+<ul class="org-ul">
+<li>describes the relationship between two or more elements in which each element uniquely identifies the other (likely to be true only in a specific context).</li>
+<li>represented by elements in the same row</li>
+<li>eg, name &lt;&#8211;&gt; mrn (but think about whether this is always true!)</li>
+</ul>
+
+<p>
+Graphically:
+</p>
+
+
+<div id="orgf80b52d" class="figure">
+<p><img src="../database-intro/one_to_one.png" alt="one_to_one.png">
+</p>
+</div>
+
+<p>
+And in our database:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sqlite">select mrn, name from patients;
+</pre>
+</div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">mrn</td>
+<td class="org-left">name</td>
+</tr>
+
+<tr>
+<td class="org-left">U123456</td>
+<td class="org-left">Roger Rabbit</td>
+</tr>
+
+<tr>
+<td class="org-left">U654321</td>
+<td class="org-left">Jessica Krupnick</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org67537a8" class="outline-3">
+<h3 id="org67537a8">one to many</h3>
+<div class="outline-text-3" id="text-org67537a8">
+<ul class="org-ul">
+<li>in the context of a database, is represented by a pair of tables, in which an element or row can be related to multiple rows in another table</li>
+</ul>
+
+
+<div id="org03ec23a" class="figure">
+<p><img src="../database-intro/one_to_many.png" alt="one_to_many.png">
+</p>
+</div>
+
+<p>
+In our database:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sqlite">select name, mrn, accession
+from patients
+join results using(mrn)
+group by accession
+order by mrn;
+</pre>
+</div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">name</td>
+<td class="org-left">mrn</td>
+<td class="org-left">accession</td>
+</tr>
+
+<tr>
+<td class="org-left">Roger Rabbit</td>
+<td class="org-left">U123456</td>
+<td class="org-left">Acc1</td>
+</tr>
+
+<tr>
+<td class="org-left">Roger Rabbit</td>
+<td class="org-left">U123456</td>
+<td class="org-left">Acc2</td>
+</tr>
+
+<tr>
+<td class="org-left">Jessica Krupnick</td>
+<td class="org-left">U654321</td>
+<td class="org-left">Acc3</td>
+</tr>
+
+<tr>
+<td class="org-left">Jessica Krupnick</td>
+<td class="org-left">U654321</td>
+<td class="org-left">Acc4</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org9240895" class="outline-3">
+<h3 id="org9240895">many to many</h3>
+<div class="outline-text-3" id="text-org9240895">
+<ul class="org-ul">
+<li>an entity in table A maps to more than one entity in table B, and vice-versa.</li>
+<li>a many-to-many relation between two tables is represented via a third <b>junction table</b> or <b>cross-reference table</b>.</li>
+<li>for example, each patient may see more than one physician, and each physician sees many patients.</li>
+</ul>
+
+
+<div id="org00316e1" class="figure">
+<p><img src="../database-intro/many_to_many.png" alt="many_to_many.png">
+</p>
+</div>
+
+<p>
+In our relational database, this relation requires three tables, one for each of patients and physicians:
+</p>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">doc_id</td>
+<td class="org-left">doc_name</td>
+</tr>
+
+<tr>
+<td class="org-left">P01</td>
+<td class="org-left">Dr. Spock</td>
+</tr>
+
+<tr>
+<td class="org-left">P02</td>
+<td class="org-left">Dr. Horrible</td>
+</tr>
+
+<tr>
+<td class="org-left">P03</td>
+<td class="org-left">Dr. Strangelove</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+And a junction table defining the many-to-many relationships:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sqlite" id="org8c4b861">select * from physician_patient;
+</pre>
+</div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">doc_id</td>
+<td class="org-left">mrn</td>
+</tr>
+
+<tr>
+<td class="org-left">P01</td>
+<td class="org-left">U123456</td>
+</tr>
+
+<tr>
+<td class="org-left">P01</td>
+<td class="org-left">U654321</td>
+</tr>
+
+<tr>
+<td class="org-left">P02</td>
+<td class="org-left">U654321</td>
+</tr>
+
+<tr>
+<td class="org-left">P03</td>
+<td class="org-left">U123456</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Now we can view all physician-patient relationships using a three-way join
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sqlite">select *
+from patients
+join physician_patient using(mrn)
+join physicians using(doc_id);
+</pre>
+</div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-right">
+
+<col class="org-left">
+
+<col class="org-left">
+
+<col class="org-right">
+
+<col class="org-left">
+
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">pkey</td>
+<td class="org-left">mrn</td>
+<td class="org-left">name</td>
+<td class="org-right">dob</td>
+<td class="org-left">sex</td>
+<td class="org-left">doc_id</td>
+<td class="org-left">doc_name</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">U123456</td>
+<td class="org-left">Roger Rabbit</td>
+<td class="org-right">1939-04-01</td>
+<td class="org-left">M</td>
+<td class="org-left">P01</td>
+<td class="org-left">Dr. Spock</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">U123456</td>
+<td class="org-left">Roger Rabbit</td>
+<td class="org-right">1939-04-01</td>
+<td class="org-left">M</td>
+<td class="org-left">P03</td>
+<td class="org-left">Dr. Strangelove</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">U654321</td>
+<td class="org-left">Jessica Krupnick</td>
+<td class="org-right">1924-10-27</td>
+<td class="org-left">F</td>
+<td class="org-left">P01</td>
+<td class="org-left">Dr. Spock</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">U654321</td>
+<td class="org-left">Jessica Krupnick</td>
+<td class="org-right">1924-10-27</td>
+<td class="org-left">F</td>
+<td class="org-left">P02</td>
+<td class="org-left">Dr. Horrible</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgeef7a9e" class="outline-2">
+<h2 id="orgeef7a9e">Data types</h2>
+<div class="outline-text-2" id="text-orgeef7a9e">
+<p>
+Most databases and programming languages make a distinction between various <b>data types</b> (integers, real numbers, text, binary data, etc). Why is this important?
+</p>
+
+<ul class="org-ul">
+<li>Operations may be defined for some data types but not others (eg, division makes sense for real numbers but not text).</li>
+<li>Different data types require different amounts of space for storage. For example, in MySQL, a column containing an integer representation of true/false (eg, a <b>boolean</b>) requires only 1 byte per element, whereas the string "True" will typically occupy at least 4 bytes. This can become important when anticipating database requirements or managing large amounts of data.</li>
+</ul>
+
+<p>
+In an SQL database, data types are defined along with the table schema:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sqlite">.schema results
+</pre>
+</div>
+
+<pre class="example">
+CREATE TABLE IF NOT EXISTS "results"(
+"mrn" TEXT, "accession" TEXT, "date" TEXT, "battery_code" TEXT,
+ "test_code" TEXT, "value" TEXT, "flag" TEXT);
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org5fa1c5e" class="outline-2">
+<h2 id="org5fa1c5e">SQL</h2>
+<div class="outline-text-2" id="text-org5fa1c5e">
+<p>
+SQL (originally SEQUEL for <i>Structured English Query Language</i>) is a programming language for managing relational databases. Although versions of SQL are defined in internationally-recognized standards, various dialects are used depending on the implementation. Many relational database programs are out there. Some examples of relational database products using SQL that you are likely to come across include:
+</p>
+
+<ul class="org-ul">
+<li><a href="http://www.postgresql.org/">PostgreSQL</a> (free/open source)</li>
+<li><a href="http://www.sqlite.org/">SQLite</a> (free/open source)</li>
+<li><a href="http://www.mysql.com/">MySQL</a> (free/open source)</li>
+<li><a href="http://www.microsoft.com/en-us/server-cloud/products/sql-server/default.aspx">SQL Server</a> (Microsoft, one of its flagship products)</li>
+<li>Various <a href="http://www.oracle.com">Oracle</a> products (expensive and enterprise-y)</li>
+</ul>
+
+<p>
+SQL was designed to be accessible to non-technical users!
+</p>
+
+<p>
+Of these database engines, SQLite is probably the easiest to try out -
+unlike the others, the database consists of a single, portable file
+that can be accessed using either a command line interface or various
+GUI's available for your favorite platform (SQLite is found <a href="http://www.sqlite.org/mostdeployed.html">pretty
+much everywhere</a>). For example, <a href="../database-intro/results.db">here</a> is the SQLite database used for
+the examples in this post. If you're on a Mac, try this after
+downloading to your Downloads folder:
+</p>
+
+<ul class="org-ul">
+<li>open Terminal.app (press CMD+SPACE and type Term&#8230;)</li>
+<li>type this:</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-sh">cd ~/Downloads
+sqlite3 results.db
+</pre>
+</div>
+
+<p>
+You should see something like this:
+</p>
+
+<pre class="example" id="org72246cf">
+SQLite version 3.7.13 2012-07-17 17:46:21
+Enter ".help" for instructions
+Enter SQL statements terminated with a ";"
+sqlite&gt;
+</pre>
+
+<p>
+Go ahead and try out some of the examples above. You can also download
+a GUI database browser (<a href="http://en.wikipedia.org/wiki/SQLite">Wikipedia</a> has a list) and try out your queries
+there.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5e016fd" class="outline-2">
+<h2 id="org5e016fd">Some examples of relational database operations using SQL</h2>
+<div class="outline-text-2" id="text-org5e016fd">
+</div>
+<div id="outline-container-org8c9ed9b" class="outline-3">
+<h3 id="org8c9ed9b">select</h3>
+<div class="outline-text-3" id="text-org8c9ed9b">
+<p>
+This query returns the entire table named <code>results</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sqlite">select * from results;
+</pre>
+</div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-left">
+
+<col class="org-right">
+
+<col class="org-left">
+
+<col class="org-left">
+
+<col class="org-right">
+
+<col class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">mrn</td>
+<td class="org-left">accession</td>
+<td class="org-right">date</td>
+<td class="org-left">battery_code</td>
+<td class="org-left">test_code</td>
+<td class="org-right">value</td>
+<td class="org-left">flag</td>
+</tr>
+
+<tr>
+<td class="org-left">U123456</td>
+<td class="org-left">Acc1</td>
+<td class="org-right">2014-06-02</td>
+<td class="org-left">BMP</td>
+<td class="org-left">GLU</td>
+<td class="org-right">135.0</td>
+<td class="org-left">H</td>
+</tr>
+
+<tr>
+<td class="org-left">U123456</td>
+<td class="org-left">Acc1</td>
+<td class="org-right">2014-06-02</td>
+<td class="org-left">BMP</td>
+<td class="org-left">K</td>
+<td class="org-right">4.0</td>
+<td class="org-left">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-left">U123456</td>
+<td class="org-left">Acc2</td>
+<td class="org-right">2014-06-03</td>
+<td class="org-left">CMP</td>
+<td class="org-left">GLU</td>
+<td class="org-right">90.0</td>
+<td class="org-left">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-left">U123456</td>
+<td class="org-left">Acc2</td>
+<td class="org-right">2014-06-03</td>
+<td class="org-left">CMP</td>
+<td class="org-left">K</td>
+<td class="org-right">2.7</td>
+<td class="org-left">L</td>
+</tr>
+
+<tr>
+<td class="org-left">U654321</td>
+<td class="org-left">Acc3</td>
+<td class="org-right">2014-06-02</td>
+<td class="org-left">CMP</td>
+<td class="org-left">GLU</td>
+<td class="org-right">85.0</td>
+<td class="org-left">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-left">U654321</td>
+<td class="org-left">Acc3</td>
+<td class="org-right">2014-06-02</td>
+<td class="org-left">CMP</td>
+<td class="org-left">K</td>
+<td class="org-right">4.1</td>
+<td class="org-left">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-left">U654321</td>
+<td class="org-left">Acc4</td>
+<td class="org-right">2014-06-03</td>
+<td class="org-left">BMP</td>
+<td class="org-left">GLU</td>
+<td class="org-right">75.0</td>
+<td class="org-left">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-left">U654321</td>
+<td class="org-left">Acc4</td>
+<td class="org-right">2014-06-03</td>
+<td class="org-left">BMP</td>
+<td class="org-left">K</td>
+<td class="org-right">4.2</td>
+<td class="org-left">&#160;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Use a <code>where</code> clause to specify a subset of rows.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sqlite">select * from results where test_code = 'GLU' order by date;
+</pre>
+</div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-left">
+
+<col class="org-right">
+
+<col class="org-left">
+
+<col class="org-left">
+
+<col class="org-right">
+
+<col class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">mrn</td>
+<td class="org-left">accession</td>
+<td class="org-right">date</td>
+<td class="org-left">battery_code</td>
+<td class="org-left">test_code</td>
+<td class="org-right">value</td>
+<td class="org-left">flag</td>
+</tr>
+
+<tr>
+<td class="org-left">U123456</td>
+<td class="org-left">Acc1</td>
+<td class="org-right">2014-06-02</td>
+<td class="org-left">BMP</td>
+<td class="org-left">GLU</td>
+<td class="org-right">135.0</td>
+<td class="org-left">H</td>
+</tr>
+
+<tr>
+<td class="org-left">U654321</td>
+<td class="org-left">Acc3</td>
+<td class="org-right">2014-06-02</td>
+<td class="org-left">CMP</td>
+<td class="org-left">GLU</td>
+<td class="org-right">85.0</td>
+<td class="org-left">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-left">U123456</td>
+<td class="org-left">Acc2</td>
+<td class="org-right">2014-06-03</td>
+<td class="org-left">CMP</td>
+<td class="org-left">GLU</td>
+<td class="org-right">90.0</td>
+<td class="org-left">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-left">U654321</td>
+<td class="org-left">Acc4</td>
+<td class="org-right">2014-06-03</td>
+<td class="org-left">BMP</td>
+<td class="org-left">GLU</td>
+<td class="org-right">75.0</td>
+<td class="org-left">&#160;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+You can also specify a subset of columns.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sqlite">select mrn, date, value from results where test_code = 'GLU' order by date;
+</pre>
+</div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-right">
+
+<col class="org-right">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">mrn</td>
+<td class="org-right">date</td>
+<td class="org-right">value</td>
+</tr>
+
+<tr>
+<td class="org-left">U123456</td>
+<td class="org-right">2014-06-02</td>
+<td class="org-right">135.0</td>
+</tr>
+
+<tr>
+<td class="org-left">U654321</td>
+<td class="org-right">2014-06-02</td>
+<td class="org-right">85.0</td>
+</tr>
+
+<tr>
+<td class="org-left">U123456</td>
+<td class="org-right">2014-06-03</td>
+<td class="org-right">90.0</td>
+</tr>
+
+<tr>
+<td class="org-left">U654321</td>
+<td class="org-right">2014-06-03</td>
+<td class="org-right">75.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org2a21640" class="outline-3">
+<h3 id="org2a21640">join</h3>
+<div class="outline-text-3" id="text-org2a21640">
+<p>
+Relations between tables are specified using a <code>join</code> clause. Here's a two-way join between two tables, <code>patients</code> and <code>results</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sqlite">select * from patients join results using(mrn);
+</pre>
+</div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-right">
+
+<col class="org-left">
+
+<col class="org-left">
+
+<col class="org-right">
+
+<col class="org-left">
+
+<col class="org-left">
+
+<col class="org-right">
+
+<col class="org-left">
+
+<col class="org-left">
+
+<col class="org-right">
+
+<col class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">pkey</td>
+<td class="org-left">mrn</td>
+<td class="org-left">name</td>
+<td class="org-right">dob</td>
+<td class="org-left">sex</td>
+<td class="org-left">accession</td>
+<td class="org-right">date</td>
+<td class="org-left">battery_code</td>
+<td class="org-left">test_code</td>
+<td class="org-right">value</td>
+<td class="org-left">flag</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">U123456</td>
+<td class="org-left">Roger Rabbit</td>
+<td class="org-right">1939-04-01</td>
+<td class="org-left">M</td>
+<td class="org-left">Acc1</td>
+<td class="org-right">2014-06-02</td>
+<td class="org-left">BMP</td>
+<td class="org-left">GLU</td>
+<td class="org-right">135.0</td>
+<td class="org-left">H</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">U123456</td>
+<td class="org-left">Roger Rabbit</td>
+<td class="org-right">1939-04-01</td>
+<td class="org-left">M</td>
+<td class="org-left">Acc1</td>
+<td class="org-right">2014-06-02</td>
+<td class="org-left">BMP</td>
+<td class="org-left">K</td>
+<td class="org-right">4.0</td>
+<td class="org-left">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">U123456</td>
+<td class="org-left">Roger Rabbit</td>
+<td class="org-right">1939-04-01</td>
+<td class="org-left">M</td>
+<td class="org-left">Acc2</td>
+<td class="org-right">2014-06-03</td>
+<td class="org-left">CMP</td>
+<td class="org-left">GLU</td>
+<td class="org-right">90.0</td>
+<td class="org-left">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">U123456</td>
+<td class="org-left">Roger Rabbit</td>
+<td class="org-right">1939-04-01</td>
+<td class="org-left">M</td>
+<td class="org-left">Acc2</td>
+<td class="org-right">2014-06-03</td>
+<td class="org-left">CMP</td>
+<td class="org-left">K</td>
+<td class="org-right">2.7</td>
+<td class="org-left">L</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">U654321</td>
+<td class="org-left">Jessica Krupnick</td>
+<td class="org-right">1924-10-27</td>
+<td class="org-left">F</td>
+<td class="org-left">Acc3</td>
+<td class="org-right">2014-06-02</td>
+<td class="org-left">CMP</td>
+<td class="org-left">GLU</td>
+<td class="org-right">85.0</td>
+<td class="org-left">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">U654321</td>
+<td class="org-left">Jessica Krupnick</td>
+<td class="org-right">1924-10-27</td>
+<td class="org-left">F</td>
+<td class="org-left">Acc3</td>
+<td class="org-right">2014-06-02</td>
+<td class="org-left">CMP</td>
+<td class="org-left">K</td>
+<td class="org-right">4.1</td>
+<td class="org-left">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">U654321</td>
+<td class="org-left">Jessica Krupnick</td>
+<td class="org-right">1924-10-27</td>
+<td class="org-left">F</td>
+<td class="org-left">Acc4</td>
+<td class="org-right">2014-06-03</td>
+<td class="org-left">BMP</td>
+<td class="org-left">GLU</td>
+<td class="org-right">75.0</td>
+<td class="org-left">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">U654321</td>
+<td class="org-left">Jessica Krupnick</td>
+<td class="org-right">1924-10-27</td>
+<td class="org-left">F</td>
+<td class="org-left">Acc4</td>
+<td class="org-right">2014-06-03</td>
+<td class="org-left">BMP</td>
+<td class="org-left">K</td>
+<td class="org-right">4.2</td>
+<td class="org-left">&#160;</td>
+</tr>
+</tbody>
+</table>
+
+<pre class="example">
+select patients.name, results.date, tests.test_name, results.value, results.flag
+from results
+join tests using(test_code)
+join patients using(mrn)
+where test_code = 'K';
+</pre>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-right">
+
+<col class="org-left">
+
+<col class="org-right">
+
+<col class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">name</td>
+<td class="org-right">date</td>
+<td class="org-left">test_name</td>
+<td class="org-right">value</td>
+<td class="org-left">flag</td>
+</tr>
+
+<tr>
+<td class="org-left">Roger Rabbit</td>
+<td class="org-right">2014-06-02</td>
+<td class="org-left">Potassium</td>
+<td class="org-right">4.0</td>
+<td class="org-left">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-left">Roger Rabbit</td>
+<td class="org-right">2014-06-03</td>
+<td class="org-left">Potassium</td>
+<td class="org-right">2.7</td>
+<td class="org-left">L</td>
+</tr>
+
+<tr>
+<td class="org-left">Jessica Krupnick</td>
+<td class="org-right">2014-06-02</td>
+<td class="org-left">Potassium</td>
+<td class="org-right">4.1</td>
+<td class="org-left">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-left">Jessica Krupnick</td>
+<td class="org-right">2014-06-03</td>
+<td class="org-left">Potassium</td>
+<td class="org-right">4.2</td>
+<td class="org-left">&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org344226b" class="outline-3">
+<h3 id="org344226b">group and aggregate</h3>
+<div class="outline-text-3" id="text-org344226b">
+<pre class="example">
+select name, test_code, min(value)
+from patients join results using(mrn)
+group by mrn, test_code;
+</pre>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-left">
+
+<col class="org-right">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">name</td>
+<td class="org-left">test_code</td>
+<td class="org-right">min(value)</td>
+</tr>
+
+<tr>
+<td class="org-left">Roger Rabbit</td>
+<td class="org-left">GLU</td>
+<td class="org-right">135.0</td>
+</tr>
+
+<tr>
+<td class="org-left">Roger Rabbit</td>
+<td class="org-left">K</td>
+<td class="org-right">2.7</td>
+</tr>
+
+<tr>
+<td class="org-left">Jessica Krupnick</td>
+<td class="org-left">GLU</td>
+<td class="org-right">75.0</td>
+</tr>
+
+<tr>
+<td class="org-left">Jessica Krupnick</td>
+<td class="org-left">K</td>
+<td class="org-right">4.1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org52538a6" class="outline-2">
+<h2 id="org52538a6">Hierarchical databases</h2>
+<div class="outline-text-2" id="text-org52538a6">
+<p>
+Hierarchical databases organize data in a tree-like structure. Data is represented as a graph of one-to-many (parent -&gt; child) relations.
+</p>
+
+
+<div id="orgbe04af0" class="figure">
+<p><img src="../database-intro/hierarchical.png" alt="hierarchical.png">
+</p>
+</div>
+
+<ul class="org-ul">
+<li>hierarchical databases are arguably <a href="http://healthcaresecurity.wordpress.com/2010/10/12/why-are-hierarchical-databases-like-mumps-still-popular-in-healthcare/">extremely well-suited for modeling healthcare data</a>.</li>
+<li>can be used to efficiently represent data that would otherwise require many tables in a well-normalized relational database.</li>
+<li>depending on the structure of the hierarchy, certain queries can be extremely efficient: eg, all orders for Patient 1 can be found by traversing only the subtree containing data for that patient, which might represent only a tiny fraction of the entire database.</li>
+<li>other sorts of queries can be extremely inefficient: eg, finding all results of a certain type might require traversal of the entire tree!</li>
+<li>guess what: major healthcare applications such as the VA system (VistA), Sunquest FlexiLab, and many Epic products use a hierarchical database implemented using the <a href="http://en.wikipedia.org/wiki/MUMPS">MUMPS</a> language.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd7d928e" class="outline-2">
+<h2 id="orgd7d928e">Data management patterns and antipatterns</h2>
+<div class="outline-text-2" id="text-orgd7d928e">
+<p>
+A basic understanding of database applications, relations, and data
+types can help guide good practices for managing data. It makes
+perfect sense to organize and collect (limited amounts of) data in a
+spreadsheet, but it helps a lot to anticipate that you may want to
+transfer that data into a database or use software for statistical
+analysis or producing graphical output (such as R). This is a lot
+easier if you keep a few rules in mind. Here are some tips. Note that
+<a href="http://vita.had.co.nz/papers/tidy-data.pdf">Tidy Data</a> by Hadley Wickham provides an excellent discussion of the
+ways in which data can be "tidy" or "messy."
+</p>
+</div>
+
+<div id="outline-container-org72b0f3d" class="outline-3">
+<h3 id="org72b0f3d">name fields sensibly</h3>
+<div class="outline-text-3" id="text-org72b0f3d">
+<ul class="org-ul">
+<li>When naming column headers, stick to lowercase letters and
+underscores only (numbers are ok after the first character).</li>
+</ul>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">bad</th>
+<th scope="col" class="org-left">good</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Patient #</td>
+<td class="org-left">patient_id</td>
+</tr>
+
+<tr>
+<td class="org-left">infection?</td>
+<td class="org-left">is_infected</td>
+</tr>
+</tbody>
+</table>
+
+<ul class="org-ul">
+<li>If you have multiple tables, be careful to name fields consistently
+(don't use "DOB" in one place and "birth_date" in another).</li>
+<li>If possible, don't use <a href="http://en.wikipedia.org/wiki/Category:SQL_keywords">SQL keywords</a> for column names.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org7048e15" class="outline-3">
+<h3 id="org7048e15">don't mix data types</h3>
+<div class="outline-text-3" id="text-org7048e15">
+<p>
+Values in a column are expected to be the same data type. Some
+databases will produce an error if you try to mix data types (eq,
+putting a string in a column identified as an integer type). Others
+may attempt to <b>coerce</b> data to the same type, producing unexpected
+results. Even without an error, mixing data types greatly complicates
+writing queries. For example, how can we find values greater than 10
+in this table?
+</p>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-right">
+
+<col class="org-right">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">run_id</th>
+<th scope="col" class="org-right">value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1</td>
+<td class="org-right">5</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-right">cancelled</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-right">11</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-right">&lt; 2</td>
+</tr>
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-right">4</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+In this case, it's better to create another column to contain the
+non-numeric values.
+</p>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-right">
+
+<col class="org-right">
+
+<col class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">run_id</th>
+<th scope="col" class="org-right">value</th>
+<th scope="col" class="org-left">comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1</td>
+<td class="org-right">5</td>
+<td class="org-left">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-right">&#160;</td>
+<td class="org-left">cancelled</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-right">11</td>
+<td class="org-left">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-right">&#160;</td>
+<td class="org-left">&lt; 2</td>
+</tr>
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-right">4</td>
+<td class="org-left">&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org83a39ed" class="outline-3">
+<h3 id="org83a39ed">tall, not wide</h3>
+<div class="outline-text-3" id="text-org83a39ed">
+<p>
+Excel and EMR applications have made us accustomed to viewing data as
+a square matrix.
+</p>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-right">
+
+<col class="org-right">
+
+<col class="org-right">
+
+<col class="org-right">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">test_name</th>
+<th scope="col" class="org-right">2014-01-01</th>
+<th scope="col" class="org-right">2014-01-02</th>
+<th scope="col" class="org-right">2014-01-03</th>
+<th scope="col" class="org-right">2014-01-04</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Sodium</td>
+<td class="org-right">135.0</td>
+<td class="org-right">137.0</td>
+<td class="org-right">&#160;</td>
+<td class="org-right">150.0</td>
+</tr>
+
+<tr>
+<td class="org-left">Potassium</td>
+<td class="org-right">&#160;</td>
+<td class="org-right">3.5</td>
+<td class="org-right">4.0</td>
+<td class="org-right">3.7</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+This is great for some purposes: it allows us to easily compare the
+values of these two tests for this one patient over time. Or perhaps
+the square is transposed:
+</p>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-right">
+
+<col class="org-right">
+
+<col class="org-right">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">date</th>
+<th scope="col" class="org-right">Sodium</th>
+<th scope="col" class="org-right">Potassium</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">2014-01-01</td>
+<td class="org-right">135.0</td>
+<td class="org-right">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-right">2014-01-02</td>
+<td class="org-right">137.0</td>
+<td class="org-right">3.5</td>
+</tr>
+
+<tr>
+<td class="org-right">2014-01-03</td>
+<td class="org-right">&#160;</td>
+<td class="org-right">4.0</td>
+</tr>
+
+<tr>
+<td class="org-right">2014-01-04</td>
+<td class="org-right">150.0</td>
+<td class="org-right">3.7</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+However, both of these are lousy formats for storing or manipulating
+data:
+</p>
+
+<ul class="org-ul">
+<li>they are likely to be <b>sparse</b>, where many cells are missing data,
+and requiring as many columns as there are dates (first table) or
+tests (second table) in the entire data set.</li>
+<li>adding data for an addition test or patient is cumbersome.</li>
+<li>it is not possible to associate additional attributes with each value.</li>
+</ul>
+
+<p>
+Here's an improved representation of the above data:
+</p>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-right">
+
+<col class="org-right">
+
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">test_name</th>
+<th scope="col" class="org-right">date</th>
+<th scope="col" class="org-right">value</th>
+<th scope="col" class="org-left">method</th>
+<th scope="col" class="org-left">comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Sodium</td>
+<td class="org-right">2014-01-01</td>
+<td class="org-right">135.0</td>
+<td class="org-left">serum</td>
+<td class="org-left">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-left">Sodium</td>
+<td class="org-right">2014-01-02</td>
+<td class="org-right">137.0</td>
+<td class="org-left">ABG</td>
+<td class="org-left">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-left">Sodium</td>
+<td class="org-right">2014-01-04</td>
+<td class="org-right">150.0</td>
+<td class="org-left">serum</td>
+<td class="org-left">confirmed in duplicate</td>
+</tr>
+
+<tr>
+<td class="org-left">Potassium</td>
+<td class="org-right">2014-01-02</td>
+<td class="org-right">3.5</td>
+<td class="org-left">ABG</td>
+<td class="org-left">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-left">Potassium</td>
+<td class="org-right">2014-01-03</td>
+<td class="org-right">4.0</td>
+<td class="org-left">serum</td>
+<td class="org-left">&#160;</td>
+</tr>
+
+<tr>
+<td class="org-left">Potassium</td>
+<td class="org-right">2014-01-04</td>
+<td class="org-right">3.7</td>
+<td class="org-left">serum</td>
+<td class="org-left">&#160;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+This table has a fixed number of columns. Adding new data is as simple
+as tacking rows onto the bottom. We can annotate values with arbitrary
+attributes, such as methods or comments. It's even easy to aggregate
+data from multiple patients by adding another column.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org02c7c1c" class="outline-3">
+<h3 id="org02c7c1c">be consistent</h3>
+<div class="outline-text-3" id="text-org02c7c1c">
+<p>
+Composing queries will be easier if you are consistent in your representations of the data. I've frequently come across data like this:
+</p>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-right">
+
+<col class="org-left">
+
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">subject</th>
+<th scope="col" class="org-left">antibiotics</th>
+<th scope="col" class="org-left">growth</th>
+<th scope="col" class="org-left">antibiotic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">Y</td>
+<td class="org-left">+</td>
+<td class="org-left">azith.</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">N</td>
+<td class="org-left">-</td>
+<td class="org-left">azithromycin</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-left">yes</td>
+<td class="org-left">+</td>
+<td class="org-left">penicillin</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-left">n</td>
+<td class="org-left">+</td>
+<td class="org-left">Penicillin</td>
+</tr>
+</tbody>
+</table>
+
+<ul class="org-ul">
+<li>within a column, pick a value and stick with it - it's awfully hard to write a query that accommodates multiple variants of the same term or concept.</li>
+<li>be consistent from column to column, as well. In the example above, we see both yes/no and +/- used as boolean values. How about this instead:</li>
+</ul>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-right">
+
+<col class="org-left">
+
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">subject</th>
+<th scope="col" class="org-left">antibiotics</th>
+<th scope="col" class="org-left">growth</th>
+<th scope="col" class="org-left">antibiotic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">yes</td>
+<td class="org-left">yes</td>
+<td class="org-left">azithromycin</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">no</td>
+<td class="org-left">no</td>
+<td class="org-left">azithromycin</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-left">yes</td>
+<td class="org-left">yes</td>
+<td class="org-left">penicillin</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-left">no</td>
+<td class="org-left">yes</td>
+<td class="org-left">penicillin</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org4691034" class="outline-3">
+<h3 id="org4691034">use multiple tables (normalize the data)</h3>
+<div class="outline-text-3" id="text-org4691034">
+<p>
+Here's where understanding relations is useful. When I ask for data
+from the laboratory system, I typically get results back that look
+something like this:
+</p>
+
+<pre class="example">
+select results.*, b.battery_name, t.test_name, t.ref_range from results
+join tests t using(test_code)
+join batteries b using(battery_code);
+</pre>
+
+<p>
+(The data isn't actually stored like this in the database, but when
+the request for data includes all of the above fields, it winds up
+denormalized in the process of fitting it into a single output table).
+</p>
+
+<p>
+In this table, test_code uniquely identifies test_name and ref_range,
+and battery_code uniquely identifies battery_name, so there's no need
+to include the last three columns in our table of results (imagine
+having millions of rows like this) - we can store these test and
+battery attributes in separate tables and perform joins as necessary.
+</p>
+
+<p>
+It's worth having a look at the classic short article <a href="http://www.bkent.net/Doc/simple5.htm">A Simple Guide
+to Five Normal Forms in Relational Database Theory</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org2ca09d5" class="outline-3">
+<h3 id="org2ca09d5">Use a standard format for dates and times</h3>
+<div class="outline-text-3" id="text-org2ca09d5">
+
+<div id="org8a7299d" class="figure">
+<p><img src="../database-intro/iso_8601.png" alt="iso_8601.png">
+</p>
+<p><span class="figure-number">Figure 2: </span>Obligatory xkcd (<a href="https://xkcd.com/1179/">https://xkcd.com/1179/</a>)</p>
+</div>
+
+<p>
+American humans might write today's date as 7/23/15, or perhaps
+07/23/2015 or July 23, 2015; European humans might write it as 23 July
+2015 or 23/7/15.
+</p>
+
+<p>
+None of these formats are&#8230; (trying to be polite here) exactly
+optimal. For one thing, neither format results in alphanumeric sorting
+in chronological order. But much worse, it's hard to guess exactly
+what format the date is actually in, so parsing is a chore.
+</p>
+
+<p>
+It turns out that there's a standard for representing dates and times
+that addresses these issues, and also allows the representation of
+time zone (which we won't get into right now): this standard is called
+<a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>. Using this standard, today would be written
+2015-07-23. Please be nice and write dates like this. Follow the link
+to read more (you will learn that right now the ISO 8601 timestamp is
+something like 2015-07-23T16:55:02+17:00).
+</p>
+</div>
+</div>
+</div>
+</div>
+          <hr>
+
+
+	</div>
+
+<div class="pagination">
+<ul>
+    <li class="prev disabled"><a href="#">&#8592; Previous</a></li>
+
+    <li class="active"><a href="https://nhoffman.github.io/borborygmi/category/lectures.html">1</a></li>
+
+    <li class="next disabled"><a href="#">&#8594; Next</a></li>
+
+</ul>
+</div>
+ 
+  
+        </div>
+
+        <div class="span3">
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Site
+                </li>
+
+                <li><a href="https://nhoffman.github.io/borborygmi/">Archives</a>
+                </li><li><a href="https://nhoffman.github.io/borborygmi/tags.html">Tags</a>
+                </li><li><a href="https://nhoffman.github.io/borborygmi/" rel="alternate">Atom feed</a></li>
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Categories
+                </li>
+
+                <li><a href="https://nhoffman.github.io/borborygmi/category/lectures.html">lectures</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/org-mode.html">org-mode</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/projects.html">projects</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/python.html">python</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/sql.html">sql</a></li>
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Links
+                </li>
+
+                <li><a href="https://github.com/nhoffman">GitHub account</a></li>
+                <li><a href="https://github.com/nhoffman/borborygmi">site source</a></li>
+            </ul>
+            </div>
+
+
+
+        </div>     </div>     </div> 
+<footer>
+<br>
+<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &#169; Noah Hoffman 2025</p>
+</footer>
+
+</div> <!-- /container -->
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-16886766-2', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

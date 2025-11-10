@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>borborygmi</title>
+    <meta name="description" content="">
+    <meta name="author" content="Noah Hoffman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="https://nhoffman.github.io/borborygmi/theme/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="https://nhoffman.github.io/borborygmi/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/local.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/pygments.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="https://nhoffman.github.io/borborygmi">borborygmi</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+
+        </ul>
+        </div>
+
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+  <div class='article'>
+    <div class="content-title">
+      <h1>Creating lists containing variables</h1>
+Thu 12 June 2014 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/elisp.html">elisp</a></em>    </div>
+
+    <div><p>
+I learned a bit about list creation in elisp today. Here's how you join a list of strings in elisp:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(mapconcat #'identity '("" "path" "to" "someplace") "/")
+</pre>
+</div>
+
+<p>
+But I learned (thanks to <a href="http://stackoverflow.com/users/113848/legoscia">legoscia</a> on <a href="http://stackoverflow.com/questions/24188100">stackoverflow</a>) that simply
+replacing an element in the list with a variable results in an error:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(let ((path "someplace"))
+  (mapconcat #'identity '("" "path" "to" path) "/"))
+</pre>
+</div>
+
+<pre class="example">
+Wrong type argument: sequencep, path
+</pre>
+
+
+<p>
+It turns out that a list constructed using a single quote includes
+symbols (and not the corresponding values) in the list.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(let ((path "someplace"))
+  (print '("" "path" "to" path)))
+</pre>
+</div>
+
+<pre class="example">
+
+("" "path" "to" path)
+</pre>
+
+
+<p>
+Instead, create the list either using the <code>list</code> function, or with a
+backquote and a comma:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(let ((path "someplace"))
+  (print (list "" "path" "to" path))
+  (print `("" "path" "to" ,path)))
+</pre>
+</div>
+
+<pre class="example">
+
+("" "path" "to" "someplace")
+
+("" "path" "to" "someplace")
+</pre>
+
+
+<p>
+Yikes, that second syntax is&#x2026; not intuitive. It turns out that the <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Backquote.html">backquote</a> syntax exists just for this purpose:
+</p>
+
+<blockquote>
+<p>
+Backquote constructs allow you to quote a list, but selectively
+evaluate elements of that list&#x2026; The special marker ',' inside of the
+argument to backquote indicates a value that isn't constant. The Emacs
+Lisp evaluator evaluates the argument of ',', and puts the value in
+the list structure.
+</p>
+</blockquote>
+
+<p>
+Well, that's good to know. I needed to take it a step further, because
+I was actually trying to store the value of a variable in an
+<code>alist</code>. Again, the familiar syntax for defining an alist stored the
+symbol instead of the value:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(let ((path "someplace"))
+  (print '((:prologue . path))))
+</pre>
+</div>
+
+<pre class="example">
+
+((:prologue . path))
+</pre>
+
+
+<p>
+Nope.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(let ((path "someplace"))
+  (print (list `(:prologue . ,path))))
+</pre>
+</div>
+
+<pre class="example">
+
+((:prologue . "someplace"))
+</pre>
+
+
+<p>
+Much better.
+</p>
+</div>
+
+    <hr>
+
+  </div>
+        </div>
+
+        <div class="span3">
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Site
+                </li>
+
+                <li><a href="https://nhoffman.github.io/borborygmi/">Archives</a>
+                <li><a href="https://nhoffman.github.io/borborygmi/tags.html">Tags</a>
+                <li><a href="https://nhoffman.github.io/borborygmi/" rel="alternate">Atom feed</a></li>
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Categories
+                </li>
+
+                <li><a href="https://nhoffman.github.io/borborygmi/category/lectures.html">lectures</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/org-mode.html">org-mode</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/projects.html">projects</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/python.html">python</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/sql.html">sql</a></li>
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Links
+                </li>
+
+                <li><a href="https://github.com/nhoffman">GitHub account</a></li>
+                <li><a href="https://github.com/nhoffman/borborygmi">site source</a></li>
+            </ul>
+            </div>
+
+
+
+        </div>     </div>     </div> 
+<footer>
+<br />
+<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &copy; Noah Hoffman 2025</p>
+</footer>
+
+</div> <!-- /container -->
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-16886766-2', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

@@ -1,0 +1,1073 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>borborygmi</title>
+    <meta name="description" content="">
+    <meta name="author" content="Noah Hoffman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="https://nhoffman.github.io/borborygmi/theme/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="https://nhoffman.github.io/borborygmi/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/local.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/pygments.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="https://nhoffman.github.io/borborygmi">borborygmi</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+
+        </ul>
+        </div>
+
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+
+  <!-- Don't include TOC on the index page -->
+  <style>div#table-of-contents {display: none;}</style>
+
+
+
+	<div class="article">
+          <div class="content-title">
+            <a href="https://nhoffman.github.io/borborygmi/mac-setup-sequoia.html"><h1>Mac Sequoia setup</h1></a>
+Fri 30 May 2025 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em>          </div>
+
+          <div><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org1814f3c">bootstrapping from another system</a></li>
+<li><a href="#org513a14f">system update</a></li>
+<li><a href="#orgbe4cc8b">Developer tools</a></li>
+<li><a href="#org62f5e8c">system settings</a>
+<ul>
+<li><a href="#org01c9c1a">turn off spelling autocorrect</a></li>
+<li><a href="#org0af38fb">unmap Control + left,right</a></li>
+<li><a href="#org16d15e9">Turn on FileVault</a></li>
+<li><a href="#org6933b69">Window management</a></li>
+</ul>
+</li>
+<li><a href="#org6e19c78">homebrew</a>
+<ul>
+<li><a href="#orgcfd63b1">CLI applications</a>
+<ul>
+<li><a href="#orge556f17">mactex (takes forever)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org6930365">zsh</a></li>
+<li><a href="#org4a565ce">emacs</a></li>
+<li><a href="#orgb55ed08">iTerm2</a></li>
+<li><a href="#org7d4705f">python</a>
+<ul>
+<li><a href="#orgf0d2e80">llm</a></li>
+<li><a href="#org5b0d0b7">other python packages</a></li>
+</ul>
+</li>
+<li><a href="#org88ac2e3">R</a></li>
+<li><a href="#orgb209e8c">postgresql</a></li>
+<li><a href="#org760f09e">Docker desktop</a></li>
+</ul>
+</div>
+</div>
+<p>
+Yet another installation of my personal notes for setting up a new (or
+cleanly installed) MacOS computer. I will try really hard to reproduce
+the steps in an order that make then easiest to execute.
+</p>
+
+<p>
+Note that none of the steps below require an Apple ID, but I did sign
+in from the start to make it easier to transfer links etc from a
+laptop during setup.
+</p>
+
+<div id="outline-container-org1814f3c" class="outline-2">
+<h2 id="org1814f3c">bootstrapping from another system</h2>
+<div class="outline-text-2" id="text-org1814f3c">
+<p>
+I do copy some things over from my previous computer, but it's pretty
+minimal. Here's the command to gather up what I need to transfer.
+</p>
+
+<pre class="example">
+tar --exclude '.gnupg/S.*' -cf dotfiles.tar .aws .gitconfig .gnupg .netrc .pypirc .saml2aws .ssh
+</pre>
+
+
+<p>
+It's also handy to know all of the projects I'm working on:
+</p>
+
+<pre class="example">
+cd ~/src
+for dname in */.git; do git -C $(dirname $dname) remote -v; done &gt; ~/remotes.txt
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org513a14f" class="outline-2">
+<h2 id="org513a14f">system update</h2>
+<div class="outline-text-2" id="text-org513a14f">
+<p>
+The first thing I did this time around was to perform a system software update
+to get all of that waiting out of the way.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbe4cc8b" class="outline-2">
+<h2 id="orgbe4cc8b">Developer tools</h2>
+<div class="outline-text-2" id="text-orgbe4cc8b">
+<p>
+Also takes a while. This can be done from the command line:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">xcode-select --install
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org62f5e8c" class="outline-2">
+<h2 id="org62f5e8c">system settings</h2>
+<div class="outline-text-2" id="text-org62f5e8c">
+</div>
+<div id="outline-container-org01c9c1a" class="outline-3">
+<h3 id="org01c9c1a">turn off spelling autocorrect</h3>
+<div class="outline-text-3" id="text-org01c9c1a">
+<pre class="example">
+Search for "spelling" --&gt; Spelling and Prediction --&gt; unselect "Correct spelling automatically" and others
+</pre>
+</div>
+</div>
+<div id="outline-container-org0af38fb" class="outline-3">
+<h3 id="org0af38fb">unmap Control + left,right</h3>
+<div class="outline-text-3" id="text-org0af38fb">
+<p>
+I use Control plus the left and right arrow keys to move between
+windows in emacs and tmux. Disable the default mapping to mission
+control:
+</p>
+
+<pre class="example">
+System Settings --&gt; Keyboard Shortcuts pane --&gt; Keyboard Shortcuts button --&gt; Mission Control -&gt; uncheck mission control: move left/right a space
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org16d15e9" class="outline-3">
+<h3 id="org16d15e9">Turn on FileVault</h3>
+<div class="outline-text-3" id="text-org16d15e9">
+<pre class="example">
+System Settings --&gt; Security &amp; privacy --&gt; FileVault
+</pre>
+
+
+<p>
+(this was actually enabled by work IT, but leaving here as a reminder)
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6933b69" class="outline-3">
+<h3 id="org6933b69">Window management</h3>
+<div class="outline-text-3" id="text-org6933b69">
+<p>
+Remove the default window margins
+</p>
+
+<pre class="example">
+Desktop &amp; Dock --&gt; unselect "tiled windows have margins"
+</pre>
+
+
+<p>
+I have Ccontrol-Option-Command-m in muscle memory to maximize a window, so add a keyboard shortcut:
+</p>
+
+<pre class="example">
+Keyboard --&gt; Keyboard Shortcuts --&gt; App Shortcuts --&gt; +
+Menu title: Fill
+Shortcut: &#8963;&#8997;&#8984;M
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6e19c78" class="outline-2">
+<h2 id="org6e19c78">homebrew</h2>
+<div class="outline-text-2" id="text-org6e19c78">
+<p>
+Still a one-liner, now bash rather than ruby:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew doctor
+</pre>
+</div>
+
+<p>
+Homebrew is installed to <code>/opt/local</code> on an Apple Silicon Mac. I add the path in my zsh profile like this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">if [[ -d /opt/homebrew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgcfd63b1" class="outline-3">
+<h3 id="orgcfd63b1">CLI applications</h3>
+<div class="outline-text-3" id="text-orgcfd63b1">
+<p>
+Many packages are installed later with additional elaboration or in as
+dependencies for other applications; here are some more or less
+standalone packages that I routinely install up front.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">brew install duckdb &amp;&amp; \
+brew install fd &amp;&amp; \
+brew install fswatch &amp;&amp; \
+brew install fzf &amp;&amp; \
+brew install gcc &amp;&amp; \
+brew install git &amp;&amp; \
+brew install graphviz &amp;&amp; \
+brew install htop &amp;&amp; \
+brew install jq &amp;&amp; \
+brew install latex2rtf &amp;&amp; \
+brew install mcfly &amp;&amp; \
+brew install node &amp;&amp; \
+brew install npm &amp;&amp; \
+brew install pandoc &amp;&amp; \
+brew install pngpaste &amp;&amp; \
+brew install rg &amp;&amp; \
+brew install tmux &amp;&amp; \
+brew install tree &amp;&amp; \
+brew install wget &amp;&amp; \
+brew install xsv
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orge556f17" class="outline-4">
+<h4 id="orge556f17">mactex (takes forever)</h4>
+<div class="outline-text-4" id="text-orge556f17">
+<div class="org-src-container">
+<pre class="src src-sh">brew install --cask mactex
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6930365" class="outline-2">
+<h2 id="org6930365">zsh</h2>
+<div class="outline-text-2" id="text-org6930365">
+<p>
+zsh is the default shell on MacOS.
+</p>
+
+<p>
+Install my dotfiles.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">cd ~
+git clone git@github.com:nhoffman/dotfiles.git
+dotfiles/mac/bin/install_dotfiles.zsh
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4a565ce" class="outline-2">
+<h2 id="org4a565ce">emacs</h2>
+<div class="outline-text-2" id="text-org4a565ce">
+<p>
+I install emacs using <a href="https://emacsformacosx.com">https://emacsformacosx.com</a>
+</p>
+
+<p>
+Install my emacs configuration:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">cd ~
+git clone git@github.com:nhoffman/emacs-config.git .emacs.d
+</pre>
+</div>
+
+<p>
+Run setup scripts (come back and do this after python is set up):
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">cd ~/.emacs.d
+bin/python-setup.sh
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb55ed08" class="outline-2">
+<h2 id="orgb55ed08">iTerm2</h2>
+<div class="outline-text-2" id="text-orgb55ed08">
+<div class="org-src-container">
+<pre class="src src-sh">brew install --cask iterm2
+</pre>
+</div>
+
+<p>
+Install using homebrew above. Update a few settings.
+</p>
+
+<p>
+Settings &#8211;&gt; Profiles &#8211;&gt; Keys and do these things:
+</p>
+<ul class="org-ul">
+<li>General: select "Left/right option key acts as": +Esc</li>
+<li>Key Bindings: + &#8211;&gt; Keyboard shortcut "OPT+&lt;left arrow&gt;": Send Escape sequence "b"</li>
+<li>Key Bindings: + &#8211;&gt; Keyboard shortcut "OPT+&lt;right arrow&gt;": Send Escape sequence "f"</li>
+</ul>
+
+<p>
+(may have to delete or replace an existing mapping)
+</p>
+
+<p>
+Default appearance (I use 15 point on a 15" monitor, 14 on a 13"):
+</p>
+
+<ul class="org-ul">
+<li>Settings &#8211;&gt; Profiles &#8211;&gt; Colors &#8211;&gt; Color Presets &#8211;&gt; Light Background</li>
+<li>Settings &#8211;&gt; Profiles &#8211;&gt; Text &#8211;&gt; Change Font &#8211;&gt; 15 point</li>
+</ul>
+
+<p>
+Tabs on left:
+</p>
+
+<ul class="org-ul">
+<li>Settings &#8211;&gt; Appearance &#8211;&gt; Tab Bar Location &#8211;&gt; Left</li>
+</ul>
+
+<p>
+Install shell integration:
+</p>
+
+<pre class="example">
+curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | bash
+</pre>
+
+
+<ul class="org-ul">
+<li>Install python runtime by selecting "Scripts" &#8211;&gt; "Manage" &#8211;&gt; "Install Python Runtime".</li>
+<li>Enable the Python API under "Settings" &#8211;&gt; "General" &#8211;&gt; "Magic"</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org7d4705f" class="outline-2">
+<h2 id="org7d4705f">python</h2>
+<div class="outline-text-2" id="text-org7d4705f">
+<p>
+I avoid using the system python for anything, and I'm all in on uv. It
+can be installed using homebrew, but I've settled on using the
+standalone installer to take advantage of the self update.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">curl -LsSf https://astral.sh/uv/install.sh | env INSTALLER_NO_MODIFY_PATH=1 sh
+uv python install 3.13
+uv python pin 3.13
+</pre>
+</div>
+
+<p>
+The path for uv and installed tools is managed in my dotfiles. Here's the relevant excerpt:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash"># assumes installation using `brew install uv`
+
+if [[ -d "$HOME/.local/share/uv" ]]; then
+    export UV_VENV_HOME="$HOME/.local/share/uv/venv"
+    export UV_PYTHON_PREFERENCE=only-managed
+
+    # pinned version stored in ~/.python-version
+    local python_version=3.13
+    local python_pinned="$(uv python pin 2&gt; /dev/null)"
+    if [[ -z $python_pinned ]]; then
+	uv python pin "$python_version"
+    elif [[ "$python_pinned" != "$python_version" ]]; then
+	echo "desired python version is $python_version but $(uv python pin) is pinned"
+    fi
+
+    mkdir -p "$UV_VENV_HOME"
+
+    mkvenv(){
+	local pth=$1
+	if [[ -n $VIRTUAL_ENV ]]; then
+	    deactivate
+	fi
+
+	if [[ -z "$pth" ]]; then
+	    uv venv &amp;&amp; source ".venv/bin/activate"
+	else
+	    uv venv "$pth" &amp;&amp; source "$pth/bin/activate"
+	fi
+    }
+
+    select-env(){
+	fd -I --hidden -p -d 3 --regex 'bin/activate$' "${1-.}" | \
+	    awk -F'/' '{print $(NF-2) ":" $0}' | \
+	    fzf --delimiter=":" --with-nth=1 --preview="echo {}" | \
+	    cut -d':' -f 2-
+    }
+
+    venv(){
+	local target="$(select-env .)"
+	if [[ -f "$target" ]]; then
+	    echo "$target"
+	    source "$target"
+	fi
+    }
+fi
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgf0d2e80" class="outline-3">
+<h3 id="orgf0d2e80">llm</h3>
+<div class="outline-text-3" id="text-orgf0d2e80">
+<p>
+I use Simon Willison's <code>llm</code> quite a bit, so might as well set it up here.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">uv tool install llm
+llm install llm-anthropic
+llm install llm-cmd
+llm keys set claude --value "$(netrc api.anthropic.com)"
+llm keys set litellm --value "$(netrc litellm.dlmp.uw.edu)"
+</pre>
+</div>
+
+<p>
+Configure access to a litellm query router.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">cat &gt; "$(dirname "$(llm logs path)")/extra-openai-models.yaml"&lt;&lt;EOF
+- model_id: litellm-gpt-4o
+  model_name: gpt-4o-2024-11-20
+  api_base: "https://litellm.dlmp.uw.edu"
+  api_key_name: litellm
+- model_id: litellm-gpt-4o-mini
+  model_name: gpt-4o-mini
+  api_base: "https://litellm.dlmp.uw.edu"
+  api_key_name: litellm
+- model_id: litellm-gpt-4.1
+  model_name: gpt-4.1
+  api_base: "https://litellm.dlmp.uw.edu"
+  api_key_name: litellm
+- model_id: litellm-gpt-4.1-mini
+  model_name: gpt-4.1-mini
+  api_base: "https://litellm.dlmp.uw.edu"
+  api_key_name: litellm
+- model_id: litellm-o3
+  model_name: o3
+  api_base: "https://litellm.dlmp.uw.edu"
+  api_key_name: litellm
+- model_id: litellm-o4-mini
+  model_name: o4-mini
+  api_base: "https://litellm.dlmp.uw.edu"
+  api_key_name: litellm
+EOF
+</pre>
+</div>
+
+<p>
+llm models default litellm-gpt-4.1
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5b0d0b7" class="outline-3">
+<h3 id="org5b0d0b7">other python packages</h3>
+<div class="outline-text-3" id="text-org5b0d0b7">
+<div class="org-src-container">
+<pre class="src src-bash">uv tool install awscli
+uv tool install git+https://gitlab.labmed.uw.edu/ngh2/awx.git
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org88ac2e3" class="outline-2">
+<h2 id="org88ac2e3">R</h2>
+<div class="outline-text-2" id="text-org88ac2e3">
+<p>
+Installed the arm64 package from <a href="https://cran.r-project.org/bin/macosx/">https://cran.r-project.org/bin/macosx/</a>
+</p>
+
+<p>
+Some packages that I know I'll need:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">R --slave &lt;&lt; EOF
+packages &lt;- c("lattice", "RSQLite", "latticeExtra", "argparse", "data.table", "tidyverse")
+install.packages(packages, repos="https://ftp.osuosl.org/pub/cran/", dependencies=TRUE, clean=TRUE, Ncpus=4)
+EOF
+</pre>
+</div>
+
+<p>
+Also:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">brew install --cask rstudio
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb209e8c" class="outline-2">
+<h2 id="orgb209e8c">postgresql</h2>
+<div class="outline-text-2" id="text-orgb209e8c">
+<p>
+Install from <a href="https://postgresapp.com/downloads.html">https://postgresapp.com/downloads.html</a>
+</p>
+
+<p>
+This installs multiple versions of postgres. My zsh profiile includes the path
+to the CLI for the latest version, eg:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org760f09e" class="outline-2">
+<h2 id="org760f09e">Docker desktop</h2>
+<div class="outline-text-2" id="text-org760f09e">
+<p>
+Use Homebrew.
+</p>
+
+<pre class="example">
+brew install --cask docker
+</pre>
+</div>
+</div>
+</div>
+          <hr>
+
+
+	</div>
+
+
+ 
+
+
+	<div class="article">
+          <a href="https://nhoffman.github.io/borborygmi/pelican-gh-pages.html"><h2>Notes on Pelican hosting with GitHub Pages</h2></a>
+          <div class="well small"> Wed 25 December 2024 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/python.html">python</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/python.html">python</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/pelican-gh-pages.html">read more</a> </div>
+          <div class="summary"><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgb5a5306">Add themes as git submodules</a></li>
+<li><a href="#org7686636">Use nelsonjchen/gh-pages-pelican-action</a></li>
+</ul>
+</div>
+</div>
+<p>
+I've set up several Pelican sites on GitHub Pages and each time I seem
+to run into way more trouble than seems necessary. Here are a few details that I seem to need to rediscover each time.
+</p>
+
+<div id="outline-container-orgb5a5306" class="outline-2">
+<h2 id="orgb5a5306">Add themes &#8230;</h2></div> </div>
+	</div>
+
+
+ 
+
+
+	<div class="article">
+          <a href="https://nhoffman.github.io/borborygmi/mac-setup-sonoma.html"><h2>Mac M2 Sonoma setup</h2></a>
+          <div class="well small"> Wed 17 April 2024 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/mac-setup-sonoma.html">read more</a> </div>
+          <div class="summary"><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org89263a7">bootstrapping from another system</a></li>
+<li><a href="#org9d39ece">system update</a></li>
+<li><a href="#org0d11466">Developer tools</a></li>
+<li><a href="#orga3d8c1b">system settings</a>
+<ul>
+<li><a href="#org939509c">turn off spelling autocorrect</a></li>
+<li><a href="#org5681ce0">unmap Control + left,right</a></li>
+<li><a href="#org6b490fb">Turn on FileVault</a></li>
+</ul>
+</li>
+<li><a href="#org58dba0f">homebrew</a>
+<ul>
+<li><a href="#org1569b2c">CLI applications</a></li>
+<li><a href="#org0d01683">desktop applications</a></li>
+</ul>
+</li>
+<li><a href="#orgd879d9a">iTerm2</a></li>
+<li><a href="#org941d5c4">zsh</a></li>
+<li><a href="#org1f46cd4">python</a>
+<ul>
+<li><a href="#org8ec9f12">pyvenv</a></li>
+<li><a href="#org1ee0c1f">pipx</a></li>
+</ul>
+</li>
+<li><a href="#org45742a7">emacs</a></li>
+<li><a href="#org520e8de">R</a></li>
+<li><a href="#org05b2887">postgresql</a></li>
+<li><a href="#org0e07751">Docker desktop</a></li>
+</ul>
+</div>
+</div>
+<p>
+Yet another installation of my personal notes for setting up a &#8230;</p> </div>
+	</div>
+
+
+ 
+
+
+	<div class="article">
+          <a href="https://nhoffman.github.io/borborygmi/arduino-nano-install-python.html"><h2>Python on an Arduino Nano RP2040 Connect</h2></a>
+          <div class="well small"> Sat 10 June 2023 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/projects.html">projects</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/python.html">python,&#160;</a><a href="https://nhoffman.github.io/borborygmi/tag/arduino.html">arduino</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/arduino-nano-install-python.html">read more</a> </div>
+          <div class="summary"><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgbf86744">Installing the .u2f file</a></li>
+<li><a href="#org9af4891">s/MicroPython/CircuitPython</a></li>
+</ul>
+</div>
+</div>
+<p>
+I recently purchased an <a href="https://store-usa.arduino.cc/products/arduino-nano-rp2040-connect-with-headers">Arduino Nano RP2040 Connect</a> with the hope of
+running <a href="https://micropython.org">MicroPython</a> (one of the useful side effects of having kids is
+an excuse to buy stuff for projects). It's worth noting a couple of
+the issues that &#8230;</p> </div>
+	</div>
+
+
+ 
+
+
+	<div class="article">
+          <a href="https://nhoffman.github.io/borborygmi/mac-setup-ventura.html"><h2>Mac M2 Ventura setup</h2></a>
+          <div class="well small"> Wed 19 April 2023 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/mac-setup-ventura.html">read more</a> </div>
+          <div class="summary"><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org82f6beb">bootstrapping from another system</a></li>
+<li><a href="#org4d3cabd">system update</a></li>
+<li><a href="#orgb742391">Developer tools</a></li>
+<li><a href="#org8ea1971">system settings</a>
+<ul>
+<li><a href="#org3a0b0cd">turn off spelling autocorrect</a></li>
+<li><a href="#orge1704a8">unmap Control + left,right</a></li>
+<li><a href="#orgcd1a25f">Turn on FileVault</a></li>
+</ul>
+</li>
+<li><a href="#orga958833">homebrew</a>
+<ul>
+<li><a href="#org3a6ae0f">CLI applications</a></li>
+<li><a href="#org1b7b463">desktop applications</a></li>
+</ul>
+</li>
+<li><a href="#org35b94f8">iTerm2</a></li>
+<li><a href="#orga55ba23">zsh</a></li>
+<li><a href="#orgd2d628a">python</a>
+<ul>
+<li><a href="#org34cba24">pyvenv</a></li>
+<li><a href="#org18b1a93">pipx</a></li>
+</ul>
+</li>
+<li><a href="#orga807d52">emacs</a></li>
+<li><a href="#org53fabc9">R</a></li>
+<li><a href="#orgdd99f43">postgresql</a></li>
+<li><a href="#org232311f">Docker desktop</a></li>
+</ul>
+</div>
+</div>
+<p>
+Yet another installation of my personal notes for setting up a &#8230;</p> </div>
+	</div>
+
+
+ 
+
+
+	<div class="article">
+          <a href="https://nhoffman.github.io/borborygmi/remap-keys-for-emacs.html"><h2>Remap keys for emacs on a remote Windows machine</h2></a>
+          <div class="well small"> Sun 02 April 2023 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/emacs.html">emacs,&#160;</a><a href="https://nhoffman.github.io/borborygmi/tag/windows.html">windows</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/remap-keys-for-emacs.html">read more</a> </div>
+          <div class="summary"><p>
+I have been working on a Windows machine via remote desktop, and am
+gradually making it bearable. Emacs is miraculously easy to install to
+my user's account, but it was not immediately obvious how to reproduce
+my usual configuration of mapping Option to ESC. One solution is
+provided by <a href="https://karabiner-elements.pqrs.org">Karabiner-Elements &#8230;</a></p> </div>
+	</div>
+
+
+ 
+
+
+	<div class="article">
+          <a href="https://nhoffman.github.io/borborygmi/mac-setup-monterey-m1.html"><h2>Mac M1 Monterey setup</h2></a>
+          <div class="well small"> Sat 23 July 2022 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/mac-setup-monterey-m1.html">read more</a> </div>
+          <div class="summary"><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org367539c">system update</a></li>
+<li><a href="#orga39a0ca">Developer tools</a></li>
+<li><a href="#org10aed06">system settings</a>
+<ul>
+<li><a href="#org2488925">turn off spelling autocorrect</a></li>
+<li><a href="#org01692b7">unmap Control + left,right</a></li>
+<li><a href="#orgcd7f1fb">Turn on FileVault</a></li>
+</ul>
+</li>
+<li><a href="#orgbe176c8">homebrew</a>
+<ul>
+<li><a href="#org70a8be1">CLI applications</a></li>
+<li><a href="#org8c8c034">desktop applications</a></li>
+</ul>
+</li>
+<li><a href="#org69d6169">iTerm2</a></li>
+<li><a href="#orgef680fd">zsh</a></li>
+<li><a href="#org6e67fda">python</a>
+<ul>
+<li><a href="#org3bf6645">pyvenv</a></li>
+<li><a href="#org29038d5">pipx</a></li>
+</ul>
+</li>
+<li><a href="#org74d496f">emacs</a></li>
+<li><a href="#orgff35534">R</a></li>
+<li><a href="#org4e10faa">postgresql</a></li>
+</ul>
+</div>
+</div>
+<p>
+Yet another installation of my personal notes for setting up a new (or
+cleanly installed) MacOS computer &#8230;</p> </div>
+	</div>
+
+
+ 
+
+
+	<div class="article">
+          <a href="https://nhoffman.github.io/borborygmi/mac-setup-big-sur.html"><h2>Clean install of MacOS Big Sur</h2></a>
+          <div class="well small"> Thu 20 May 2021 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/mac-setup-big-sur.html">read more</a> </div>
+          <div class="summary"><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org2d02461">system settings</a>
+<ul>
+<li><a href="#org46fd279">turn off spelling autocorrect</a></li>
+<li><a href="#org61aa335">unmap Control + left,right</a></li>
+<li><a href="#org5cec255">Turn on FileVault</a></li>
+</ul>
+</li>
+<li><a href="#orgf108da6">Developer tools</a></li>
+<li><a href="#org13a6e8e">homebrew</a>
+<ul>
+<li><a href="#org77a7090">homebrew API token</a></li>
+<li><a href="#org808f1bd">CLI applications</a></li>
+<li><a href="#org153200a">desktop applications</a></li>
+</ul>
+</li>
+<li><a href="#orgc32d2ba">iTerm2</a></li>
+<li><a href="#orge136f60">zsh</a></li>
+<li><a href="#org5873b44">python</a></li>
+<li><a href="#org46adb55">emacs</a></li>
+<li><a href="#org21334f7">R</a></li>
+<li><a href="#org85fbc00">postgresql</a></li>
+</ul>
+</div>
+</div>
+<p>
+Yet another installation of my personal notes for setting up a new (or
+cleanly installed) MacOS computer. The &#8230;</p> </div>
+	</div>
+
+
+ 
+
+
+	<div class="article">
+          <a href="https://nhoffman.github.io/borborygmi/mac-setup-catalina.html"><h2>Clean install of MacOS Catalina</h2></a>
+          <div class="well small"> Sat 11 April 2020 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/mac-setup-catalina.html">read more</a> </div>
+          <div class="summary"><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org4f71bc3">system settings</a>
+<ul>
+<li><a href="#org41888fd">turn off spelling autocorrect</a></li>
+<li><a href="#org2b9257e">unmap Control + left,right</a></li>
+<li><a href="#org0d2017a">Turn on FileVault</a></li>
+</ul>
+</li>
+<li><a href="#org676fd4e">Developer tools</a></li>
+<li><a href="#org81b3452">homebrew</a>
+<ul>
+<li><a href="#org9e8eaa6">homebrew API token</a></li>
+<li><a href="#orge188534">CLI applications</a></li>
+<li><a href="#org6c0a0a5">desktop applications</a></li>
+<li><a href="#orge9166a9">packages in 3rd party taps</a>
+<ul>
+<li><a href="#org0d1dbbf">saml2aws</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgc292f60">iTerm2</a></li>
+<li><a href="#org691ccfc">python</a>
+<ul>
+<li><a href="#org4368632">dependencies</a></li>
+</ul>
+</li>
+<li><a href="#org073cf3a">emacs</a></li>
+<li><a href="#orgb6cc8a6">zsh</a></li>
+<li><a href="#orgdef57a8">R</a></li>
+<li><a href="#orged656f4">postgresql</a></li>
+<li><a href="#org1a628ba">X11</a></li>
+</ul>
+</div>
+</div>
+<p>
+Another installation of my personal notes for setting up a &#8230;</p> </div>
+	</div>
+
+
+ 
+
+
+	<div class="article">
+          <a href="https://nhoffman.github.io/borborygmi/mac-setup-mojave.html"><h2>Clean install of MacOS Mojave</h2></a>
+          <div class="well small"> Fri 15 February 2019 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em> <a class="btn btn-info xsmall" href="https://nhoffman.github.io/borborygmi/mac-setup-mojave.html">read more</a> </div>
+          <div class="summary"><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgccf70c6">system settings</a>
+<ul>
+<li><a href="#org30304fb">turn off spelling autocorrect</a></li>
+<li><a href="#orgad892d4">unmap Control + left,right</a></li>
+<li><a href="#org9d7ec5a">Turn on FileVault</a></li>
+</ul>
+</li>
+<li><a href="#orgeb5546e">Developer tools</a></li>
+<li><a href="#org9ab1301">iTerm2</a></li>
+<li><a href="#org2c227cc">homebrew</a>
+<ul>
+<li><a href="#org9916736">homebrew API token</a></li>
+<li><a href="#orgc16bd70">Terminal applications</a></li>
+<li><a href="#orgdac7ccf">desktop applications</a></li>
+</ul>
+</li>
+<li><a href="#org19d2303">python</a>
+<ul>
+<li><a href="#org56b6984">dependencies</a></li>
+<li><a href="#org9781a18">python2</a></li>
+<li><a href="#orgfebc4a1">python3</a>
+<ul>
+<li><a href="#orga533c6d">scons</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org59aad16">emacs</a></li>
+<li><a href="#org28a4067">zsh</a></li>
+<li><a href="#orgdc1c722">R</a></li>
+<li><a href="#org13c8905">postgresql</a></li>
+<li><a href="#orgbd4f238">X11</a></li>
+<li><a href="#orga22ebfd">virtualbox and vagrant</a>
+<ul>
+<li><a href="#org4709d26">install an ubuntu16.04 VM</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+Another installation of my personal &#8230;</p> </div>
+	</div>
+
+<div class="pagination">
+<ul>
+    <li class="prev disabled"><a href="#">&#8592; Previous</a></li>
+
+    <li class="active"><a href="https://nhoffman.github.io/borborygmi/author/unknown.html">1</a></li>
+    <li class=""><a href="https://nhoffman.github.io/borborygmi/author/unknown2.html">2</a></li>
+    <li class=""><a href="https://nhoffman.github.io/borborygmi/author/unknown3.html">3</a></li>
+
+    <li class="next"><a href="https://nhoffman.github.io/borborygmi/author/unknown2.html">Next &#8594;</a></li>
+
+</ul>
+</div>
+ 
+  
+        </div>
+
+        <div class="span3">
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Site
+                </li>
+
+                <li><a href="https://nhoffman.github.io/borborygmi/">Archives</a>
+                </li><li><a href="https://nhoffman.github.io/borborygmi/tags.html">Tags</a>
+                </li><li><a href="https://nhoffman.github.io/borborygmi/" rel="alternate">Atom feed</a></li>
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Categories
+                </li>
+
+                <li><a href="https://nhoffman.github.io/borborygmi/category/lectures.html">lectures</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/org-mode.html">org-mode</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/projects.html">projects</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/python.html">python</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/sql.html">sql</a></li>
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Links
+                </li>
+
+                <li><a href="https://github.com/nhoffman">GitHub account</a></li>
+                <li><a href="https://github.com/nhoffman/borborygmi">site source</a></li>
+            </ul>
+            </div>
+
+
+
+        </div>     </div>     </div> 
+<footer>
+<br>
+<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &#169; Noah Hoffman 2025</p>
+</footer>
+
+</div> <!-- /container -->
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-16886766-2', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

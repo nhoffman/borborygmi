@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>borborygmi</title>
+    <meta name="description" content="">
+    <meta name="author" content="Noah Hoffman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="https://nhoffman.github.io/borborygmi/theme/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="https://nhoffman.github.io/borborygmi/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/local.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/pygments.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="https://nhoffman.github.io/borborygmi">borborygmi</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+
+        </ul>
+        </div>
+
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+  <div class='article'>
+    <div class="content-title">
+      <h1>Mac M2 Sonoma setup</h1>
+Wed 17 April 2024 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em>    </div>
+
+    <div><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org89263a7">bootstrapping from another system</a></li>
+<li><a href="#org9d39ece">system update</a></li>
+<li><a href="#org0d11466">Developer tools</a></li>
+<li><a href="#orga3d8c1b">system settings</a>
+<ul>
+<li><a href="#org939509c">turn off spelling autocorrect</a></li>
+<li><a href="#org5681ce0">unmap Control + left,right</a></li>
+<li><a href="#org6b490fb">Turn on FileVault</a></li>
+</ul>
+</li>
+<li><a href="#org58dba0f">homebrew</a>
+<ul>
+<li><a href="#org1569b2c">CLI applications</a></li>
+<li><a href="#org0d01683">desktop applications</a></li>
+</ul>
+</li>
+<li><a href="#orgd879d9a">iTerm2</a></li>
+<li><a href="#org941d5c4">zsh</a></li>
+<li><a href="#org1f46cd4">python</a>
+<ul>
+<li><a href="#org8ec9f12">pyvenv</a></li>
+<li><a href="#org1ee0c1f">pipx</a></li>
+</ul>
+</li>
+<li><a href="#org45742a7">emacs</a></li>
+<li><a href="#org520e8de">R</a></li>
+<li><a href="#org05b2887">postgresql</a></li>
+<li><a href="#org0e07751">Docker desktop</a></li>
+</ul>
+</div>
+</div>
+<p>
+Yet another installation of my personal notes for setting up a new (or
+cleanly installed) MacOS computer. Not too many changes since
+Ventura. I will try really hard to reproduce the steps in an order
+that make then easiest to execute.
+</p>
+
+<p>
+Note that none of the steps below require an Apple ID, but I did sign
+in from the start to make it easier to transfer links etc from a
+laptop during setup.
+</p>
+
+<div id="outline-container-org89263a7" class="outline-2">
+<h2 id="org89263a7">bootstrapping from another system</h2>
+<div class="outline-text-2" id="text-org89263a7">
+<p>
+I do copy some things over from my previous computer, but it's pretty
+minimal. Here's the command to gather up what I need to transfer.
+</p>
+
+<pre class="example">
+tar --exclude '.gnupg/S.*' -cf dotfiles.tar .aws .gitconfig .gnupg .netrc .pypirc .saml2aws .ssh
+</pre>
+
+
+<p>
+It's also handy to know all of the projects I'm working on:
+</p>
+
+<pre class="example">
+cd ~/src
+for dname in */.git; do git -C $(dirname $dname) remote -v; done &gt; remotes.txt
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org9d39ece" class="outline-2">
+<h2 id="org9d39ece">system update</h2>
+<div class="outline-text-2" id="text-org9d39ece">
+<p>
+The first thing I did this time around was to perform a system software update
+to get all of that waiting out of the way.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0d11466" class="outline-2">
+<h2 id="org0d11466">Developer tools</h2>
+<div class="outline-text-2" id="text-org0d11466">
+<p>
+Also takes a while. This can be done from the command line:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">xcode-select --install
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga3d8c1b" class="outline-2">
+<h2 id="orga3d8c1b">system settings</h2>
+<div class="outline-text-2" id="text-orga3d8c1b">
+<p>
+The new iOS-style System Settings takes a bit of getting used to.
+</p>
+</div>
+
+<div id="outline-container-org939509c" class="outline-3">
+<h3 id="org939509c">turn off spelling autocorrect</h3>
+<div class="outline-text-3" id="text-org939509c">
+<pre class="example">
+Search for "spelling" --&gt; Keyboard --&gt; Text tab --&gt; unselect "Correct spelling automatically" and others
+</pre>
+</div>
+</div>
+<div id="outline-container-org5681ce0" class="outline-3">
+<h3 id="org5681ce0">unmap Control + left,right</h3>
+<div class="outline-text-3" id="text-org5681ce0">
+<p>
+I use Control plus the left and right arrow keys to move between
+windows in emacs and tmux. Disable the default mapping to mission
+control:
+</p>
+
+<pre class="example">
+System Settings --&gt; Keyboard Shortcuts pane --&gt; Keyboard Shortcuts button --&gt; Mission Control -&gt; uncheck mission control: move left/right a space
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org6b490fb" class="outline-3">
+<h3 id="org6b490fb">Turn on FileVault</h3>
+<div class="outline-text-3" id="text-org6b490fb">
+<pre class="example">
+System Settings --&gt; Security &amp; privacy --&gt; FileVault
+</pre>
+
+
+<p>
+I used a recovery key option rather than iCloud for my work machine, iCloud for personal
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org58dba0f" class="outline-2">
+<h2 id="org58dba0f">homebrew</h2>
+<div class="outline-text-2" id="text-org58dba0f">
+<p>
+Still a one-liner, now bash rather than ruby:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew doctor
+</pre>
+</div>
+
+<p>
+Homebrew is installed to <code>/opt/local</code> on an M1 Mac. This required
+updating my PATH configuration. I added the following to my login
+profile:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">if [[ -d /opt/homebrew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+</pre>
+</div>
+
+<p>
+The new location required a number of changes to various login steps configuring
+homebrew-installed components.
+</p>
+</div>
+
+<div id="outline-container-org1569b2c" class="outline-3">
+<h3 id="org1569b2c">CLI applications</h3>
+<div class="outline-text-3" id="text-org1569b2c">
+<p>
+Many packages are installed later with additional elaboration or in as
+dependencies for other applications; here are some more or less
+standalone packages that I routinely install up front.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">brew install duckdb &amp;&amp; \
+brew install fd &amp;&amp; \
+brew install fswatch &amp;&amp; \
+brew install fzf &amp;&amp; \
+brew install gcc &amp;&amp; \
+brew install git &amp;&amp; \
+brew install graphviz &amp;&amp; \
+brew install htop &amp;&amp; \
+brew install jq &amp;&amp; \
+brew install latex2rtf &amp;&amp; \
+brew install mcfly &amp;&amp; \
+brew install node &amp;&amp; \
+brew install pandoc &amp;&amp; \
+brew install pngpaste &amp;&amp; \
+brew install rg &amp;&amp; \
+brew install tmux &amp;&amp; \
+brew install tree &amp;&amp; \
+brew install wget &amp;&amp; \
+brew install xsv
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0d01683" class="outline-3">
+<h3 id="org0d01683">desktop applications</h3>
+<div class="outline-text-3" id="text-org0d01683">
+<p>
+Homebrew installs desktop apps too! (the syntax has changed a bit)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">for pkg in iterm2 rectangle dash google-chrome mactex; do brew install --cask $pkg; done
+</pre>
+</div>
+
+<p>
+Some applications (eg, dash) require licenses and credentials that
+must be installed interactively.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd879d9a" class="outline-2">
+<h2 id="orgd879d9a">iTerm2</h2>
+<div class="outline-text-2" id="text-orgd879d9a">
+<p>
+Install using homebrew above. Update a few settings.
+</p>
+
+<p>
+Settings &#x2013;&gt; Profiles &#x2013;&gt; Keys and do these things:
+</p>
+<ul class="org-ul">
+<li>General: select "Left/right option key acts as": +Esc</li>
+<li>Key Mappings: + &#x2013;&gt; Keyboard shortcut "OPT+&lt;left arrow&gt;": Send Escape sequence "b"</li>
+<li>Key Mappings: + &#x2013;&gt; Keyboard shortcut "OPT+&lt;right arrow&gt;": Send Escape sequence "f"</li>
+</ul>
+
+<p>
+(may have to delete or replace an existing mapping)
+</p>
+
+<p>
+Default appearance:
+</p>
+
+<ul class="org-ul">
+<li>Settings &#x2013;&gt; Profiles &#x2013;&gt; Colors &#x2013;&gt; Color Presets &#x2013;&gt; Light Background</li>
+<li>Settings &#x2013;&gt; Profiles &#x2013;&gt; Text &#x2013;&gt; Change Font &#x2013;&gt; 14 point</li>
+</ul>
+
+<p>
+Tabs on left:
+</p>
+
+<ul class="org-ul">
+<li>Settings &#x2013;&gt; Appearance &#x2013;&gt; Tab Bar Location &#x2013;&gt; Left</li>
+</ul>
+
+<p>
+Install shell integration:
+</p>
+
+<pre class="example">
+curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | bash
+</pre>
+
+
+<ul class="org-ul">
+<li>Install python runtime by selecting "Scripts" &#x2013;&gt; "Manage" &#x2013;&gt; "Install Python Runtime".</li>
+<li>Enable the Python API under "Preferences" &#x2013;&gt; "General" &#x2013;&gt; "Magic"</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org941d5c4" class="outline-2">
+<h2 id="org941d5c4">zsh</h2>
+<div class="outline-text-2" id="text-org941d5c4">
+<p>
+zsh is the default shell on MacOS.
+</p>
+
+<p>
+Install my dotfiles.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">cd ~
+git clone git@github.com:nhoffman/dotfiles.git
+dotfiles/mac/bin/install_dotfiles.zsh
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1f46cd4" class="outline-2">
+<h2 id="org1f46cd4">python</h2>
+<div class="outline-text-2" id="text-org1f46cd4">
+<p>
+Sonoma ships with Python 3.9.6 as <code>/usr/bin/python3</code> with no <code>python</code>
+executable (or maybe it's installed with xcode tools - I forgot to
+check). I avoid using the system python for the most part.
+</p>
+</div>
+
+<div id="outline-container-org8ec9f12" class="outline-3">
+<h3 id="org8ec9f12">pyvenv</h3>
+<div class="outline-text-3" id="text-org8ec9f12">
+<p>
+My current method for managing python interpreters is to
+use pyenv. See <a href="https://realpython.com/intro-to-pyenv/">https://realpython.com/intro-to-pyenv/</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">brew install zlib
+brew install pyenv
+brew install pyenv-virtualenv
+</pre>
+</div>
+
+<p>
+Install pyenv-update plugin:
+</p>
+
+<pre class="example">
+git clone https://github.com/pyenv/pyenv-update.git $(pyenv root)/plugins/pyenv-update
+</pre>
+
+
+<p>
+added dotfiles/mac/zsh/pyenv.plugin.zsh
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">if [[ -d "$HOME/.pyenv" ]]; then
+    # echo "using pyenv"
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init --path)"
+fi
+</pre>
+</div>
+
+<p>
+Install the most recent versions of 3.8, 3.9 and 3.10 and set 3.10 as the default.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">pyenv install $(pyenv install -l | grep '^  3.9' | tail -n1)
+pyenv install $(pyenv install -l | grep '^  3.10' | tail -n1)
+pyenv install $(pyenv install -l | grep '^  3.11' | tail -n1)
+pyenv global $(pyenv install -l | grep '^  3.11' | tail -n1)
+python3 -m pip install -U pip wheel
+</pre>
+</div>
+
+<p>
+pyenv seems not to install a <code>python</code> entrypoint. I'll see how it goes with
+<code>python3</code> only.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1ee0c1f" class="outline-3">
+<h3 id="org1ee0c1f">pipx</h3>
+<div class="outline-text-3" id="text-org1ee0c1f">
+<p>
+<a href="https://github.com/pypa/pipx">pipx</a> is great for installing standalone python-language commands
+outside of project-level virtual environments.
+</p>
+
+<p>
+Last time I installed pipx using homebrew, but at this time homebrew
+python is at 3.12 and I am primarily using 3.11. So I installed pipx
+into the pyenv global environment:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">python3 -m pip install pipx
+</pre>
+</div>
+
+<p>
+Install some globally useful packages:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">pipx install awscli
+pipx install pgcli
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org45742a7" class="outline-2">
+<h2 id="org45742a7">emacs</h2>
+<div class="outline-text-2" id="text-org45742a7">
+<p>
+Since I moved off of Intel macs, I have been using the <a href="https://github.com/d12frosted/homebrew-emacs-plus">Homebrew
+emacs-plus</a> project, which seems great so far.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">brew install libressl
+brew install aspell
+brew install gpg
+brew tap d12frosted/emacs-plus
+brew install emacs-plus
+</pre>
+</div>
+
+<p>
+Edit: after emacs 39.1 came out, I updated with:
+</p>
+
+<pre class="example">
+brew uninstall emacs-plus
+brew install emacs-plus@29 --with-imagemagick --with-native-comp
+</pre>
+
+
+<p>
+Check out my .emacs.d and run setup scripts.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">cd ~
+git clone git@github.com:nhoffman/emacs-config.git .emacs.d
+</pre>
+</div>
+
+<p>
+Run setup scripts:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">cd ~/.emacs.d
+bin/python-setup.sh
+</pre>
+</div>
+
+<p>
+The main inconvenience was having to adapt my <a href="https://github.com/nhoffman/emacs-config/blob/master/init.bash">startup script</a> to juggle M1 Mac,
+x86 Mac, and linux. Here's the relevant portion.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">if [[ $(uname) == 'Darwin' ]]; then
+    if [[ $(uname -m) == 'arm64' ]]; then
+	# assume we are using emacs-plus
+	EMACS=/opt/homebrew/bin/emacs
+	EMACS_BIN=/opt/homebrew/bin/emacsclient
+    else
+	EMACS=/Applications/Emacs.app/Contents/MacOS/Emacs
+	EMACS_BIN=/Applications/Emacs.app/Contents/MacOS/bin
+    fi
+    alias emacs="$EMACS"
+    # provides emacsclient
+    export PATH=$EMACS_BIN:$PATH
+else
+    EMACS=$(readlink -f emacs)
+fi
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org520e8de" class="outline-2">
+<h2 id="org520e8de">R</h2>
+<div class="outline-text-2" id="text-org520e8de">
+<p>
+Installed the arm64 package from <a href="https://cran.r-project.org/bin/macosx/">https://cran.r-project.org/bin/macosx/</a>
+</p>
+
+<p>
+Some packages that I know I'll need:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">R --slave &lt;&lt; EOF
+packages &lt;- c("lattice", "RSQLite", "latticeExtra", "argparse", "data.table", "tidyverse")
+install.packages(packages, repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE, Ncpus=4)
+EOF
+</pre>
+</div>
+
+<p>
+Also:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">brew install --cask rstudio
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org05b2887" class="outline-2">
+<h2 id="org05b2887">postgresql</h2>
+<div class="outline-text-2" id="text-org05b2887">
+<p>
+Install from <a href="https://postgresapp.com/downloads.html">https://postgresapp.com/downloads.html</a>
+</p>
+
+<p>
+This installs multiple versions of postgres. My zsh profiile includes the path
+to the CLI for the latest version, eg:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0e07751" class="outline-2">
+<h2 id="org0e07751">Docker desktop</h2>
+<div class="outline-text-2" id="text-org0e07751">
+<p>
+Use Homebrew.
+</p>
+
+<pre class="example">
+brew install --cask docker
+</pre>
+</div>
+</div>
+</div>
+
+    <hr>
+
+  </div>
+        </div>
+
+        <div class="span3">
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Site
+                </li>
+
+                <li><a href="https://nhoffman.github.io/borborygmi/">Archives</a>
+                <li><a href="https://nhoffman.github.io/borborygmi/tags.html">Tags</a>
+                <li><a href="https://nhoffman.github.io/borborygmi/" rel="alternate">Atom feed</a></li>
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Categories
+                </li>
+
+                <li><a href="https://nhoffman.github.io/borborygmi/category/lectures.html">lectures</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/org-mode.html">org-mode</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/projects.html">projects</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/python.html">python</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/sql.html">sql</a></li>
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Links
+                </li>
+
+                <li><a href="https://github.com/nhoffman">GitHub account</a></li>
+                <li><a href="https://github.com/nhoffman/borborygmi">site source</a></li>
+            </ul>
+            </div>
+
+
+
+        </div>     </div>     </div> 
+<footer>
+<br />
+<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &copy; Noah Hoffman 2025</p>
+</footer>
+
+</div> <!-- /container -->
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-16886766-2', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

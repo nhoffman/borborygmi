@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>borborygmi</title>
+    <meta name="description" content="">
+    <meta name="author" content="Noah Hoffman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="https://nhoffman.github.io/borborygmi/theme/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="https://nhoffman.github.io/borborygmi/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/local.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/pygments.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="https://nhoffman.github.io/borborygmi">borborygmi</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+
+        </ul>
+        </div>
+
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+  <div class='article'>
+    <div class="content-title">
+      <h1>Setting up a new mac</h1>
+Sun 20 October 2013 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/mac.html">mac</a></em>    </div>
+
+    <div><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org918df33">First applications</a>
+<ul>
+<li><a href="#org5a10c04">Developer tools</a></li>
+<li><a href="#orged30e96">X11</a></li>
+<li><a href="#orgd08f0a3">Others</a></li>
+</ul>
+</li>
+<li><a href="#org8a1df23">system-level configuration</a>
+<ul>
+<li><a href="#org9f50086">turn off spelling autocorrect</a></li>
+<li><a href="#orgea4c590">fix scroll direction</a></li>
+<li><a href="#orgbb04551">turn off spaces key shortcuts</a></li>
+</ul>
+</li>
+<li><a href="#org277d84e">ssh</a></li>
+<li><a href="#orgd8faaf4">homebrew</a>
+<ul>
+<li><a href="#orgdd78d97">stuff installed using homebrew</a></li>
+<li><a href="#org87d8dc2">zsh</a></li>
+</ul>
+</li>
+<li><a href="#orge150bdf">git</a></li>
+<li><a href="#org8e89bcb">iTerm2 settings</a></li>
+<li><a href="#orgcefd13b">emacs</a></li>
+<li><a href="#orgfa71cc1">python</a></li>
+<li><a href="#orge2880e1">R</a></li>
+<li><a href="#org7d73276">mail</a></li>
+<li><a href="#orgb622b1f">sshfs</a></li>
+<li><a href="#org08c8fdf">wkhtmltopdf</a></li>
+</ul>
+</div>
+</div>
+<p>
+These are my notes that I took while setting up a macbook Air near the
+end of 2013, with incremental updates when I remember to add
+them.
+</p>
+
+<dl class="org-dl">
+<dt>Oct 2014</dt><dd>increment versions of various applications, update for Yoesmite</dd>
+</dl>
+
+<div id="outline-container-org918df33" class="outline-2">
+<h2 id="org918df33">First applications</h2>
+<div class="outline-text-2" id="text-org918df33">
+</div>
+<div id="outline-container-org5a10c04" class="outline-3">
+<h3 id="org5a10c04">Developer tools</h3>
+<div class="outline-text-3" id="text-org5a10c04">
+<p>
+Pretty much the first thing any mac needs is the command line tools. These can be installed from within the Xcode application, available as a download from the Apple app store (<a href="https://developer.apple.com/xcode/downloads/">https://developer.apple.com/xcode/downloads/</a>). Note that this requires an apple id, even though the download is free. Once Xcode is installed, install the command line tools via the Xcode preferences: <a href="http://slashusr.wordpress.com/2012/07/27/os-x-mountain-lion-need-to-reinstall-xcode-command-line-tools/">http://slashusr.wordpress.com/2012/07/27/os-x-mountain-lion-need-to-reinstall-xcode-command-line-tools/</a>
+</p>
+
+<p>
+Edit: there appears to be another way to install the developer tools that does not require an apple ID - just run the following command:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">xcode-select --install
+</pre>
+</div>
+
+<p>
+Looks like you can even agree to the license from the command line using
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">sudo xcodebuild -license
+</pre>
+</div>
+
+<p>
+See <a href="http://apple.stackexchange.com/questions/88535/how-to-download-the-command-line-tools-for-xcode-without-the-downloads-for-devel">http://apple.stackexchange.com/questions/88535/how-to-download-the-command-line-tools-for-xcode-without-the-downloads-for-devel</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orged30e96" class="outline-3">
+<h3 id="orged30e96">X11</h3>
+<div class="outline-text-3" id="text-orged30e96">
+<p>
+Download and install Xquartz <a href="http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.7.dmg">http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.7.dmg</a>
+</p>
+
+<p>
+X11 key bindings so that the option key is used for Meta..
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">cat &gt; ~/.Xmodmap &lt;&lt;EOF
+clear Mod1
+clear Mod2
+keycode 63 = Mode_switch
+keycode 66 = Meta_L
+add Mod1 = Meta_L
+add Mod2 = Mode_switch
+EOF
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd08f0a3" class="outline-3">
+<h3 id="orgd08f0a3">Others</h3>
+<div class="outline-text-3" id="text-orgd08f0a3">
+<ul class="org-ul">
+<li>Chrome</li>
+<li>iTerm2 (see settings below)</li>
+<li>Dropbox</li>
+<li>SizeUp - <a href="http://www.irradiatedsoftware.com/">http://www.irradiatedsoftware.com/</a> (license in Dropbox/software_licenses)</li>
+<li>MacTex - download from <a href="http://tug.org/mactex/">http://tug.org/mactex/</a>
+<a href="http://mirror.ctan.org/systems/mac/mactex/MacTeX.pkg">http://mirror.ctan.org/systems/mac/mactex/MacTeX.pkg</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8a1df23" class="outline-2">
+<h2 id="org8a1df23">system-level configuration</h2>
+<div class="outline-text-2" id="text-org8a1df23">
+</div>
+<div id="outline-container-org9f50086" class="outline-3">
+<h3 id="org9f50086">turn off spelling autocorrect</h3>
+<div class="outline-text-3" id="text-org9f50086">
+<p>
+System Preferences &#x2013;&gt; Language &amp; Text &#x2013;&gt; Text tab &#x2013;&gt; unselect "Correct spelling automatically"
+</p>
+</div>
+</div>
+<div id="outline-container-orgea4c590" class="outline-3">
+<h3 id="orgea4c590">fix scroll direction</h3>
+<div class="outline-text-3" id="text-orgea4c590">
+<p>
+System Preferences &#x2013;&gt; Trackpad &#x2013;&gt; Scroll &amp; Zoom &#x2013;&gt; unselect "scroll direction: natural"
+</p>
+</div>
+</div>
+<div id="outline-container-orgbb04551" class="outline-3">
+<h3 id="orgbb04551">turn off spaces key shortcuts</h3>
+<div class="outline-text-3" id="text-orgbb04551">
+<p>
+System Preferences &#x2013;&gt; Keyboard &#x2013;&gt; Keyboard Shortcuts &#x2013;&gt; unselect C+{&lt;-,-&gt;}
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org277d84e" class="outline-2">
+<h2 id="org277d84e">ssh</h2>
+<div class="outline-text-2" id="text-org277d84e">
+<p>
+Copy my default private key.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd8faaf4" class="outline-2">
+<h2 id="orgd8faaf4">homebrew</h2>
+<div class="outline-text-2" id="text-orgd8faaf4">
+<p>
+Be bloody, bold, and resolute:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew doctor
+</pre>
+</div>
+
+<p>
+Had to fix permissions:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">sudo chown -R $(whoami) /usr/local
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgdd78d97" class="outline-3">
+<h3 id="orgdd78d97">stuff installed using homebrew</h3>
+<div class="outline-text-3" id="text-orgdd78d97">
+<div class="org-src-container">
+<pre class="src src-sh">brew install aspell &amp;&amp; \
+brew install autojump &amp;&amp; \
+brew install gcc &amp;&amp; \
+brew install git &amp;&amp; \
+brew install gpg &amp;&amp; \
+brew install graphviz &amp;&amp; \
+brew install htop-osx &amp;&amp; \
+brew install latex2rtf &amp;&amp; \
+brew install pandoc &amp;&amp; \
+brew install readline &amp;&amp; \
+brew install tmux &amp;&amp; \
+brew install tree &amp;&amp; \
+brew install wget &amp;&amp; \
+brew install zsh
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org87d8dc2" class="outline-3">
+<h3 id="org87d8dc2">zsh</h3>
+<div class="outline-text-3" id="text-org87d8dc2">
+<p>
+Install zsh with Homebrew above
+</p>
+
+<p>
+Note that zsh files are in Dropbox/zsh
+</p>
+
+<p>
+Change shell to zsh
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">sudo -s
+echo /usr/local/bin/zsh &gt;&gt; /etc/shells
+mv /etc/zshenv /etc/zprofile
+exit
+chsh -s /usr/local/bin/zsh $USER
+
+cat &gt; .zshrc &lt;&lt;EOF
+export USR_ZSH_INITDIR=~/Dropbox/zsh
+. ~/Dropbox/zsh/zshrc
+EOF
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge150bdf" class="outline-2">
+<h2 id="orge150bdf">git</h2>
+<div class="outline-text-2" id="text-orge150bdf">
+<pre class="example">
+git config --global user.name "Noah Hoffman"
+git config --global user.email noah.hoffman@gmail.com
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org8e89bcb" class="outline-2">
+<h2 id="org8e89bcb">iTerm2 settings</h2>
+<div class="outline-text-2" id="text-org8e89bcb">
+<p>
+Preferences &#x2013;&gt; Profiles &#x2013;&gt; Keys and do these things:
+</p>
+<ul class="org-ul">
+<li>select "Left/right option key acts as": +Esc</li>
+<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;left arrow&gt;": Send Escape sequence "b"</li>
+<li>+ &#x2013;&gt; Keyboard shortcut "OPT+&lt;right arrow&gt;": Send Escape sequence "f"</li>
+</ul>
+
+<p>
+Preferences &#x2013;&gt; Profiles &#x2013;&gt; Colors &#x2013;&gt; Load Presets &#x2013;&gt; Light Background
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgcefd13b" class="outline-2">
+<h2 id="orgcefd13b">emacs</h2>
+<div class="outline-text-2" id="text-orgcefd13b">
+<p>
+Install emacs24 binary from <a href="http://emacsformacosx.com/">http://emacsformacosx.com/</a>
+</p>
+
+<p>
+<a href="http://emacsformacosx.com/emacs-builds/Emacs-24.3-universal-10.6.8.dmg">http://emacsformacosx.com/emacs-builds/Emacs-24.3-universal-10.6.8.dmg</a>
+</p>
+
+<p>
+Check out my .emacs.d
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">cd ~
+git clone git@github.com:nhoffman/.emacs.d.git
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfa71cc1" class="outline-2">
+<h2 id="orgfa71cc1">python</h2>
+<div class="outline-text-2" id="text-orgfa71cc1">
+<p>
+Doesn't work out so well using homebrew, so let's install from source. Note that we did install readline with homebrew above.
+</p>
+
+<p>
+Here's a nice reference: <a href="http://arvinderkang.com/2012/07/06/a-virtualized-python-setup-on-os-x-lion/">http://arvinderkang.com/2012/07/06/a-virtualized-python-setup-on-os-x-lion/</a>
+</p>
+
+<p>
+To remove all user-installed packages:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">rm -r /usr/local/lib/python2.7/site-packages
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">mkdir -p ~/src
+cd ~/src &amp;&amp; \
+wget http://www.python.org/ftp/python/2.7.9/Python-2.7.9.tgz &amp;&amp; \
+tar -xf Python-2.7.9.tgz &amp;&amp; \
+cd Python-2.7.9 &amp;&amp; \
+export LDFLAGS=-L/usr/local/opt/readline/lib &amp;&amp; \
+export CPPFLAGS=-I/usr/local/opt/readline/include &amp;&amp; \
+./configure &amp;&amp; make &amp;&amp; make install
+</pre>
+</div>
+
+<p>
+Note that installation does not require sudo because now I own /usr/local according to homebrew's preferences.
+</p>
+
+<p>
+Install pip (see <a href="http://www.pip-installer.org/en/latest/installing.html">http://www.pip-installer.org/en/latest/installing.html</a>)
+</p>
+
+<p>
+(Beginning with pip v1.5.1, get-pip.py provides setuptools and no longer requires setuptools to be installed first.)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">cd ~/src
+wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py
+chmod +x get-pip.py
+./get-pip.py --force-reinstall
+</pre>
+</div>
+
+<p>
+Even better: starting with python 2.7.9, you can bootstrap install pip
+directly from the standard library:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">python -m ensurepip --upgrade
+</pre>
+</div>
+
+<p>
+And install some python packages. Some of these packages take a while
+to compile, and it's nice to save compiled versions of wheels so that
+they can be included in a virtualenv - the <code>bioy</code> package includes a
+script that help set this up. First, we'll need some requirements.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">cd ~/src
+wget -N https://raw.githubusercontent.com/jorgenschaefer/elpy/master/requirements.txt
+cat &gt;&gt; requirements.txt &lt;&lt;EOF
+numpy
+pandas
+csvkit
+pep8
+autopep8
+# pygraphviz
+reportlab
+jinja2
+EOF
+</pre>
+</div>
+
+<p>
+Now create the wheels for these packages and save them in a system-level directory.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">cd ~/src
+git clone git@github.com:nhoffman/bioy.git
+bioy/dev/build_wheels.sh --wheelstreet /usr/local/share/python/wheels --requirements requirements.txt
+</pre>
+</div>
+
+<p>
+Now these packages can be quickly be installed to the system or a virtualenv using these wheels:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">pip install --use-wheel --find-links=/usr/local/share/python/wheels/2.7.8 -r requirements.txt
+</pre>
+</div>
+
+<p>
+scons doesn't work with pip
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">cd ~/src
+wget -N http://prdownloads.sourceforge.net/scons/scons-2.3.4.tar.gz &amp;&amp; \
+tar -xf scons-2.3.4.tar.gz &amp;&amp; \
+cd scons-2.3.4 &amp;&amp; \
+python setup.py install
+</pre>
+</div>
+
+<p>
+ansible
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">sudo mkdir /usr/share/ansible
+sudo chown -R $(whoami) /usr/share/ansible
+pip install ansible
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge2880e1" class="outline-2">
+<h2 id="orge2880e1">R</h2>
+<div class="outline-text-2" id="text-orge2880e1">
+<div class="org-src-container">
+<pre class="src src-sh">cd ~/src
+wget http://cran.fhcrc.org/bin/macosx/R-3.1.1-mavericks.pkg &amp;&amp; \
+sudo installer -pkg R-3.1.1-mavericks.pkg -target /
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">sudo R --slave &lt;&lt; EOF
+packages &lt;- c("ape", "sqldf", "ROCR", "lattice", "RSQLite", "latticeExtra", "argparse", "data.table")
+install.packages(packages, repos="http://cran.fhcrc.org/", dependencies=TRUE, clean=TRUE)
+EOF
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7d73276" class="outline-2">
+<h2 id="org7d73276">mail</h2>
+<div class="outline-text-2" id="text-org7d73276">
+<p>
+<a href="http://www.washington.edu/itconnect/connect/email/uw-email/configuring/os-x-mail6/">http://www.washington.edu/itconnect/connect/email/uw-email/configuring/os-x-mail6/</a>
+</p>
+</div>
+</div>
+<div id="outline-container-orgb622b1f" class="outline-2">
+<h2 id="orgb622b1f">sshfs</h2>
+<div class="outline-text-2" id="text-orgb622b1f">
+<p>
+Now provided by the project <a href="http://osxfuse.github.io/">http://osxfuse.github.io/</a> - the links below are for binaries provided as installers.
+</p>
+
+<p>
+Edit 11/2014: updated versions for yosemite
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">cd ~/Downloads
+wget http://sourceforge.net/projects/osxfuse/files/osxfuse-2.7.2/osxfuse-2.7.2.dmg
+wget https://github.com/osxfuse/sshfs/releases/download/osxfuse-sshfs-2.5.0/sshfs-2.5.0.pkg
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org08c8fdf" class="outline-2">
+<h2 id="org08c8fdf">wkhtmltopdf</h2>
+<div class="outline-text-2" id="text-org08c8fdf">
+<div class="org-src-container">
+<pre class="src src-sh">cd ~/src
+wget 'http://wkhtmltopdf.googlecode.com/files/wkhtmltopdf.dmg'
+open wkhtmltopdf.dmg
+cp -r /Volumes/wkhtmltopdf/wkhtmltopdf.app /Applications
+</pre>
+</div>
+
+<p>
+Now create an alias:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">alias wkhtmltopdf='/Applications/wkhtmltopdf.app/Contents/MacOS/wkhtmltopdf'
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+    <hr>
+
+  </div>
+        </div>
+
+        <div class="span3">
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Site
+                </li>
+
+                <li><a href="https://nhoffman.github.io/borborygmi/">Archives</a>
+                <li><a href="https://nhoffman.github.io/borborygmi/tags.html">Tags</a>
+                <li><a href="https://nhoffman.github.io/borborygmi/" rel="alternate">Atom feed</a></li>
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Categories
+                </li>
+
+                <li><a href="https://nhoffman.github.io/borborygmi/category/lectures.html">lectures</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/org-mode.html">org-mode</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/projects.html">projects</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/python.html">python</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/sql.html">sql</a></li>
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Links
+                </li>
+
+                <li><a href="https://github.com/nhoffman">GitHub account</a></li>
+                <li><a href="https://github.com/nhoffman/borborygmi">site source</a></li>
+            </ul>
+            </div>
+
+
+
+        </div>     </div>     </div> 
+<footer>
+<br />
+<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &copy; Noah Hoffman 2025</p>
+</footer>
+
+</div> <!-- /container -->
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-16886766-2', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

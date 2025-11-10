@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>borborygmi</title>
+    <meta name="description" content="">
+    <meta name="author" content="Noah Hoffman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="https://nhoffman.github.io/borborygmi/theme/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="https://nhoffman.github.io/borborygmi/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/local.css" rel="stylesheet">
+    <link href="https://nhoffman.github.io/borborygmi/theme/pygments.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="https://nhoffman.github.io/borborygmi">borborygmi</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+
+        </ul>
+        </div>
+
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+  <div class='article'>
+    <div class="content-title">
+      <h1>Creating a site with Pelican and org-mode</h1>
+Mon 26 May 2014 &#8212;
+
+
+<em>Filed under <a href="https://nhoffman.github.io/borborygmi/category/org-mode.html">org-mode</a>;
+    tags: <a href="https://nhoffman.github.io/borborygmi/tag/org-mode.html">org-mode</a></em>    </div>
+
+    <div><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org6944d41">org-mode integration</a>
+<ul>
+<li><a href="#orgfefc4d5">Arranging content in subdirectories</a></li>
+<li><a href="#org23e9960">Syntax highlighting</a></li>
+</ul>
+</li>
+<li><a href="#org0883544">Choosing a theme</a></li>
+<li><a href="#org6d11b13">Hosting on github pages</a></li>
+<li><a href="#org8f3980e">Examples</a></li>
+</ul>
+</div>
+</div>
+<p>
+Never one to pass up the opportunity for yak-shaving, I thought I'd
+finally try to settle on a publishing platform for various notes and
+other content that I have scattered about on the web. The repository
+is <a href="https://github.com/nhoffman/borborygmi">on GitHub.</a>
+</p>
+
+<p>
+I much prefer to generate content in org-mode, but I couldn't manage
+to get org-publish to organize content in the way I wanted, or to be
+easily compiled in batch mode. When I learned that the <a href="http://docs.getpelican.com/en/latest/index.html">Pelican</a> static
+site generator could import html and saw <a href="http://msnyder.info/posts/2013/12/introducing-pelicorg/">another effort</a> to use the two
+together, I thought I'd give it a shot.
+</p>
+
+<div id="outline-container-org6944d41" class="outline-2">
+<h2 id="org6944d41">org-mode integration</h2>
+<div class="outline-text-2" id="text-org6944d41">
+<p>
+At a basic level, integration with org-mode is pretty simple: Pelican
+can import html content with page metadata provided in the
+header. Since I already have some tools for exporting org-mode from
+the command line (the project is named <a href="https://github.com/nhoffman/org-export">org-export</a>), it was pretty easy
+to write a utility for this purpose.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">org-export pelican -h
+</pre>
+</div>
+
+<pre class="example">
+Command line options:
+
+ --infile     path to input .org file
+ --outfile    path to output .html file (use base name of infile by
+              default)
+ --add-langs  comma-delimited list of additional languages to enable
+              in code blocks
+
+</pre>
+
+
+<p>
+The utility renders the just body of the page (leaving all of the
+styling, etc to Pelican) and provides page metadata in the header, for
+example:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">head ../content/getting-started.html
+</pre>
+</div>
+
+<pre class="example" id="org343849f">
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Creating a site with Pelican and org-mode&lt;/title&gt;
+        &lt;meta name="authors" content="Noah Hoffman"&gt;
+        &lt;meta name="date" content="2014-05-26"&gt;
+        &lt;meta name="category" content="org-mode"&gt;
+        &lt;meta name="tags" content="org-mode, pelican, elisp"&gt;
+        &lt;meta name="save_as" content="getting-started.html"&gt;
+        &lt;meta name="url" content="getting-started.html"&gt;
+    &lt;/head&gt;
+</pre>
+
+<p>
+Specifying "save_as" and "url" was more convenient than trying to
+guess how Pelican would name the page.
+</p>
+
+<p>
+The org-mode source for each post is compiled to html and placed in
+pelican's <code>content</code> directory, where it is subsequently added to the
+site using <code>pelican content</code>. I liked that compiling each org-mode
+file to html is performed separately from rendering the content with
+Pelican: the former step is relatively slow, and a build tool can
+easily be used to render only pages that have changed (I use <a href="http://www.scons.org/">scons</a>).
+</p>
+
+<p>
+There were a couple of tricky bits, though.
+</p>
+</div>
+
+<div id="outline-container-orgfefc4d5" class="outline-3">
+<h3 id="orgfefc4d5">Arranging content in subdirectories</h3>
+<div class="outline-text-3" id="text-orgfefc4d5">
+<p>
+First, I wanted to be able to create subdirectories containing data or
+images for specific posts (as opposed to lumping them all together in
+a single directory). Pelican doesn't seem to support this. So the
+SConstruct file manages the creation of subdirectories in Pelican's
+output directory and also copes page data and images there.
+</p>
+
+<p>
+Then, when writing posts, you just need to remain aware of the
+location of the data directory for a post relative to the org-mode
+source; this relationship is preserved in the final output. Note that
+the output of plotting operations should also be saved to the post's
+subdirectory (eg, <code>plot1.png</code>).
+</p>
+
+<p>
+Let's look at the organization of content and intermediate files for
+this post. Here's the working directory when the org-mode source is
+evaluated:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">pwd
+</pre>
+</div>
+
+<pre class="example">
+/__w/borborygmi/borborygmi/org-content
+</pre>
+
+
+<p>
+The org-mode source is here:
+</p>
+
+<pre class="example">
+../org-content/getting-started.org
+../org-content/getting-started:
+Perameles_gunni.jpg
+</pre>
+
+
+<p>
+Here is the intermediate html body for the post (note that these paths
+are relative to the org-mode source):
+</p>
+
+<pre class="example">
+../content/getting-started.html
+</pre>
+
+
+<p>
+And the final output:
+</p>
+
+<p>
+An additional complication is that the files for the index and
+individual posts are at the top level of the output directory, but
+other pages (in categories, tags, etc) are in subdirectories. Rather
+than muck around with modifying linking behavior in Pelican, I just
+fixed things up in the latter files with lxml in the script
+<code>fix_urls.py</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org23e9960" class="outline-3">
+<h3 id="org23e9960">Syntax highlighting</h3>
+<div class="outline-text-3" id="text-org23e9960">
+<p>
+A lot of trial and error was required to export code blocks with
+colorized syntax highlighting, and I still can't say I fully
+understand why the final configuration seems to work when others I
+tried didn't. But here are a few of the bits of magic that were required.
+</p>
+
+<p>
+Requiring the <code>htmlize</code> package alone seems to be sufficient to
+produce colorized syntax highlighting when exporting interactively
+from within emacs. But an identical configuration did not result in
+colorized output when exporting in batch mode using <code>org-export
+pelican</code>. I finally came across advice someplace to use the
+<code>color-theme</code> package along with some custom themes. Turns out that
+after installing <code>color-theme</code> along with <code>color-theme-github</code>, simply
+adding
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(require 'color-theme-github)
+</pre>
+</div>
+
+<p>
+was enough to produce colorized output. Go figure.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0883544" class="outline-2">
+<h2 id="org0883544">Choosing a theme</h2>
+<div class="outline-text-2" id="text-org0883544">
+<p>
+There are plenty of choices over at <a href="https://github.com/getpelican/pelican-themes">the pelican-themes repository</a>, and
+there were a number that seemed to work well (for the time being)
+without any modification at all.
+</p>
+
+<p>
+For convenience, I just added the themes repository as a git submodule.
+</p>
+
+<p>
+Here are some I liked at first glance:
+</p>
+
+<ul class="org-ul">
+<li>bootstrap</li>
+<li>bootlex</li>
+<li>dev-random2 (though I'd have to do some translation)</li>
+<li>tuxlite_tbs</li>
+<li>tuxlite_zf (although I prefer more contrast between text and code)</li>
+<li>zurb-F5-basic</li>
+</ul>
+
+<p>
+I finally settled on tuxlite_tbs (thanks, <a href="https://github.com/chanux">chanux</a>), and made a local version, which I've modified minimally thus far.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6d11b13" class="outline-2">
+<h2 id="org6d11b13">Hosting on github pages</h2>
+<div class="outline-text-2" id="text-org6d11b13">
+<p>
+Thanks to the magical <a href="https://github.com/davisp/ghp-import">ghp-import</a>, hosting on GitHub pages is as easy as
+</p>
+
+<pre class="example">
+ghp-import -p output
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org8f3980e" class="outline-2">
+<h2 id="org8f3980e">Examples</h2>
+<div class="outline-text-2" id="text-org8f3980e">
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+<caption class="t-above"><span class="table-number">Table 1:</span> An org-mode table</caption>
+
+<colgroup>
+<col class="org-left" />
+
+<col class="org-left" />
+
+<col class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">here's</th>
+<th scope="col" class="org-left">a</th>
+<th scope="col" class="org-left">table</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">with</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">values</td>
+</tr>
+
+<tr>
+<td class="org-left">in</td>
+<td class="org-left">some</td>
+<td class="org-left">cells</td>
+</tr>
+</tbody>
+</table>
+
+
+<div id="org7034782" class="figure">
+<p><img src="getting-started/Perameles_gunni.jpg" alt="Perameles_gunni.jpg" />
+</p>
+<p><span class="figure-number">Figure 1: </span>Hey, a <a href="http://en.wikipedia.org/wiki/File:Perameles_gunni.jpg">bandicoot</a>!</p>
+</div>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 1: </span>Example of an R plot, output file specified in the code block.</label><pre class="src src-R">png('getting-started/plot1.png')
+plot(qnorm)
+invisible(dev.off())
+</pre>
+</div>
+
+
+<div id="orgaa788ce" class="figure">
+<p><img src="getting-started/plot1.png" alt="plot1.png" />
+</p>
+</div>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 2: </span>Example of an R plot, output file specified in the header.</label><pre class="src src-R">plot(1:10)
+</pre>
+</div>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 3: </span>A python code block with output</label><pre class="src src-python">for i in range(3):
+    print 'hello' + '!' * i
+</pre>
+</div>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 4: </span>An sqlite3 code block producing an html-formatted table</label><pre class="src src-sqlite">.header on
+create table foo (bar, baz);
+insert into foo values('a', 1);
+insert into foo values('b', 2);
+select * from foo;
+</pre>
+</div>
+
+<table class="table table-striped table-bordered table-condensed" style="width: auto;">
+
+
+<colgroup>
+<col class="org-left" />
+
+<col class="org-right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">bar</td>
+<td class="org-right">baz</td>
+</tr>
+
+<tr>
+<td class="org-left">a</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-left">b</td>
+<td class="org-right">2</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+    <hr>
+
+  </div>
+        </div>
+
+        <div class="span3">
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Site
+                </li>
+
+                <li><a href="https://nhoffman.github.io/borborygmi/">Archives</a>
+                <li><a href="https://nhoffman.github.io/borborygmi/tags.html">Tags</a>
+                <li><a href="https://nhoffman.github.io/borborygmi/" rel="alternate">Atom feed</a></li>
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Categories
+                </li>
+
+                <li><a href="https://nhoffman.github.io/borborygmi/category/lectures.html">lectures</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/notes.html">notes</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/org-mode.html">org-mode</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/projects.html">projects</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/python.html">python</a></li>
+                <li><a href="https://nhoffman.github.io/borborygmi/category/sql.html">sql</a></li>
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                Links
+                </li>
+
+                <li><a href="https://github.com/nhoffman">GitHub account</a></li>
+                <li><a href="https://github.com/nhoffman/borborygmi">site source</a></li>
+            </ul>
+            </div>
+
+
+
+        </div>     </div>     </div> 
+<footer>
+<br />
+<p><a href="https://nhoffman.github.io/borborygmi">borborygmi</a> &copy; Noah Hoffman 2025</p>
+</footer>
+
+</div> <!-- /container -->
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-16886766-2', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>
